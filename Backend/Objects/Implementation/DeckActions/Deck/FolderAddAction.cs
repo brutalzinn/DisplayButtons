@@ -45,8 +45,7 @@ namespace NickAc.Backend.Objects.Implementation.DeckActions.General
         public override void OnButtonUp(DeckDevice deckDevice)
         {
 
-            deckDevice.CurrentFolder.Add(deckDevice.CurrentFolder);
-            deckDevice.CurrentFolder = deckDevice.CurrentFolder;
+           
         }
     }
 }
