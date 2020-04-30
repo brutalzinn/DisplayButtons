@@ -72,6 +72,7 @@ namespace ButtonDeck.Forms
             this.appBar1.TabIndex = 0;
             this.appBar1.Text = "ButtonDeck";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.appBar1.Click += new System.EventHandler(this.appBar1_Click);
             // 
             // modernButton1
             // 

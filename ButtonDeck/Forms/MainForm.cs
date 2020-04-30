@@ -223,11 +223,15 @@ namespace ButtonDeck.Forms
                         }
                     };
                     mb.DragDrop += (s, ee) => {
-                        if (ee.Data.GetData(typeof(DeckActionHelper)) is DeckActionHelper action) {
-                            if (ee.Effect == DragDropEffects.Copy) {
-                                if (mb.Tag != null && mb.Tag is IDeckItem item) {
+                        if (ee.Data.GetData(typeof(DeckActionHelper)) is DeckActionHelper action)
+                        {
+                            if (ee.Effect == DragDropEffects.Copy)
+                            {
+                                if (mb.Tag != null && mb.Tag is IDeckItem item)
+                                {
                                     if (CurrentDevice.CurrentFolder.GetParent() != null && mb.CurrentSlot == 1) return;
-                                    if (item is IDeckFolder deckFolder) {
+                                    if (item is IDeckFolder deckFolder)
+                                    {
                                         var deckItemToAdd = new DynamicDeckItem
                                         {
                                             DeckAction = action.DeckAction.CloneAction()
@@ -268,7 +272,9 @@ namespace ButtonDeck.Forms
                                     mb.Image = Resources.img_folder;
                                     CurrentDevice.CurrentFolder = folder;
                                     RefreshAllButtons();
-                                } else {
+                                }
+                                else
+                                {
                                     mb.Tag = new DynamicDeckItem
                                     {
                                         DeckAction = action.DeckAction.CloneAction()
@@ -278,47 +284,85 @@ namespace ButtonDeck.Forms
                                     FocusItem(mb, mb.Tag as IDeckItem);
                                 }
                             }
-                        } else if (ee.Data.GetDataPresent(typeof(DeckItemMoveHelper))) {
+                        }
+                        else if (ee.Data.GetDataPresent(typeof(DeckItemMoveHelper)))
+                        {
                             var action1 = ee.Data.GetData(typeof(DeckItemMoveHelper)) as DeckItemMoveHelper;
                             bool shouldMove = ee.Effect == DragDropEffects.Move;
-                            if (shouldMove) {
+                            if (shouldMove)
+                            {
                                 action1.OldFolder.Remove(action1.OldSlot);
-                                if (action1.OldFolder.GetParent() != null) {
+                                if (action1.OldFolder.GetParent() != null)
+                                {
                                     var oldItems = action1.OldFolder.GetDeckItems();
                                     bool isEmpty = action1.OldFolder.GetParent() != null ? oldItems.Count == 1 : oldItems.Count == 0;
                                     int slot = action1.OldFolder.GetParent().GetItemIndex(action1.OldFolder);
-                                    if (isEmpty) {
+                                    if (isEmpty)
+                                    {
                                         action1.OldFolder.GetParent().Remove(slot);
                                         RefreshButton(slot);
                                     }
                                 }
                             }
                             IDeckItem item1 = shouldMove ? action1.DeckItem : action1.DeckItem.DeepClone();
-                            if (item1 is IDeckFolder folder && !shouldMove) {
+                            if (item1 is IDeckFolder folder && !shouldMove)
+                            {
                                 FixFolders(folder, false, CurrentDevice.CurrentFolder);
                             }
-                            if (CurrentDevice.CurrentFolder.GetDeckItems().Any(cItem => CurrentDevice.CurrentFolder.GetItemIndex(cItem) == mb.CurrentSlot)) {
-                                //We must create a folder if there is an item
-                                var oldItem = action1.OldFolder.GetDeckItems().First(cItem => action1.OldFolder.GetItemIndex(cItem) == mb.CurrentSlot);
-
-                                var newFolder = new DynamicDeckFolder
+                            //alterando agora
+                          
+                                if (CurrentDevice.CurrentFolder.GetDeckItems().Any(cItem => CurrentDevice.CurrentFolder.GetItemIndex(cItem) == mb.CurrentSlot))
                                 {
-                                    DeckImage = new DeckImage(Resources.img_folder)
-                                };
-                                //Create a new folder instance
-                                CurrentDevice.CheckCurrentFolder();
-                                newFolder.ParentFolder = CurrentDevice.CurrentFolder;
-                                newFolder.Add(1, folderUpItem);
-                                newFolder.Add(oldItem);
-                                newFolder.Add(action1.DeckItem);
-                                CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
-                                CurrentDevice.CurrentFolder = newFolder;
-                                RefreshAllButtons(true);
-                            } else {
-                                CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, item1);
-                                RefreshButton(action1.OldSlot, true);
-                                RefreshButton(mb.CurrentSlot, true);
-                            }
+                                    //We must create a folder if there is an item
+                                    var oldItem = action1.OldFolder.GetDeckItems().First(cItem => action1.OldFolder.GetItemIndex(cItem) == mb.CurrentSlot);
+
+                                    var newFolder = new DynamicDeckFolder
+                                    {
+                                        DeckImage = new DeckImage(Resources.img_folder)
+                                    };
+                                    //Create a new folder instance
+                                   
+
+                           
+                                //parei aqui
+
+                                      if(oldItem is IDeckFolder deckFolder)
+                                    {
+                                    CurrentDevice.CheckCurrentFolder();
+                                    Debug.WriteLine("Mesclagem de pasta.");
+                                    deckFolder.Add(action1.DeckItem);
+                                    CurrentDevice.CurrentFolder = deckFolder;
+                                    //   mb.DoDragDrop(new DeckItemMoveHelper(action1.DeckItem, deckFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
+
+
+                                }
+                                else
+                                {
+
+                                    CurrentDevice.CheckCurrentFolder();
+                                    newFolder.ParentFolder = CurrentDevice.CurrentFolder;
+                                    newFolder.Add(1, folderUpItem);
+                                  
+                                  newFolder.Add(oldItem);
+                                  newFolder.Add(action1.DeckItem);
+                                    CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
+                                    CurrentDevice.CurrentFolder = newFolder;
+                                    Debug.WriteLine("Dois itens.");
+                                }
+                              
+
+
+                               
+                                    RefreshAllButtons(true);
+
+                                }
+                                else
+                                {
+                                    CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, item1);
+                                    RefreshButton(action1.OldSlot, true);
+                                    RefreshButton(mb.CurrentSlot, true);
+                                }
+                            
                         }
                     };
                     mb.Text = string.Empty;
@@ -733,12 +777,6 @@ namespace ButtonDeck.Forms
 
             var popupMenu = new ContextMenuStrip();
 
-popupMenu.Items.Add("Add Folder").Click += (s, ee) => {
-                   // if (senderB != null)
-                   // {
-                  //  }
-                };
-
 
             if (sender is ImageModernButton senderB) {
                 if (e.Button == MouseButtons.Left && DevicePersistManager.IsVirtualDeviceConnected && ModifierKeys == Keys.Shift) {
@@ -748,9 +786,6 @@ popupMenu.Items.Add("Add Folder").Click += (s, ee) => {
                  return;
                 }
 
- 
-
-                
                 if (!senderB.DisplayRectangle.Contains(e.Location)) return;
                 if (e.Button == MouseButtons.Right && CurrentDevice.CurrentFolder.GetDeckItems().Any(c => CurrentDevice.CurrentFolder.GetItemIndex(c) == senderB.CurrentSlot)) {
                    
@@ -936,7 +971,7 @@ popupMenu.Items.Add("Add Folder").Click += (s, ee) => {
                         bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
                         if (isDoubleClick) return;
                         if ((CurrentDevice.CurrentFolder.GetParent() != null && (mb.CurrentSlot == 1))) return;
-                        mb.DoDragDrop(new DeckItemMoveHelper(act, CurrentDevice.CurrentFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
+                     mb.DoDragDrop(new DeckItemMoveHelper(act, CurrentDevice.CurrentFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
                     }
                 }
             }
@@ -948,6 +983,11 @@ popupMenu.Items.Add("Add Folder").Click += (s, ee) => {
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void appBar1_Click(object sender, EventArgs e)
         {
 
         }

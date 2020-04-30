@@ -77,6 +77,7 @@
     <Compile Include="Objects\IDeckDevice.cs" />
     <Compile Include="Objects\IDeckFolder.cs" />
     <Compile Include="Objects\IDeckItem.cs" />
+    <Compile Include="Objects\Implementation\DeckActions\Deck\FolderAddAction.cs" />
     <Compile Include="Objects\Implementation\DeckActions\General\ExecutableRunAction.cs" />
     <Compile Include="Objects\Implementation\DeckActions\General\KeyPressAction.cs" />
     <Compile Include="Objects\Implementation\DeckActions\General\KeyToggleAction.cs" />

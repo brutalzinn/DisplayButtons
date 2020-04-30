@@ -60,11 +60,9 @@ namespace NickAc.Backend.Objects.Implementation.DeckActions.OBS
 
         public override void OnButtonDown(DeckDevice deckDevice)
         {
-        }
 
-        public override void OnButtonUp(DeckDevice deckDevice)
-        {
-            if (OBSUtils.IsConnected) {
+
+ if (OBSUtils.IsConnected) {
                 switch (RecordAction) {
                     case RecordingState.Start:
                         OBSUtils.StartRecording();
@@ -74,6 +72,17 @@ namespace NickAc.Backend.Objects.Implementation.DeckActions.OBS
                         break;
                 }
             }
+
+
+
+
+
+
+        }
+
+        public override void OnButtonUp(DeckDevice deckDevice)
+        {
+           
         }
     }
 }
