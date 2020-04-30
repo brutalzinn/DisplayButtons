@@ -766,25 +766,26 @@ namespace ButtonDeck.Forms
                 lastClick.Reset();
                 lastClick.Start();
             }
+
         }
 
         private void ItemButton_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
-
-
-
-
             var popupMenu = new ContextMenuStrip();
+  
+
+
 
 
             if (sender is ImageModernButton senderB) {
                 if (e.Button == MouseButtons.Left && DevicePersistManager.IsVirtualDeviceConnected && ModifierKeys == Keys.Shift) {
                     if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item) {
-                        item.DeckAction?.OnButtonUp(CurrentDevice);
+                       item.DeckAction?.OnButtonUp(CurrentDevice);
                     }
                  return;
                 }
+         
 
                 if (!senderB.DisplayRectangle.Contains(e.Location)) return;
                 if (e.Button == MouseButtons.Right && CurrentDevice.CurrentFolder.GetDeckItems().Any(c => CurrentDevice.CurrentFolder.GetItemIndex(c) == senderB.CurrentSlot)) {
@@ -812,8 +813,14 @@ namespace ButtonDeck.Forms
                         }
                     };
 
+                  
                     popupMenu.Show(sender as Control, e.Location);
+             
+
+
                 }
+
+
                 return;
             }
         }
@@ -954,6 +961,41 @@ namespace ButtonDeck.Forms
             }
             mouseDown = e.Button == MouseButtons.Left;
             mouseDownLoc = Cursor.Position;
+            if (e.Button == MouseButtons.Right )
+            {
+
+                if (sender is ImageModernButton senderT)
+                {
+                    if (senderT.Tag is DynamicDeckItem == false)
+                    {
+                        ContextMenuStrip menu = new ContextMenuStrip();
+                        menu.Items.Add("Adicionar pasta").Click += (s, ee) =>
+                        {
+
+                            if (sender is ImageModernButton mb)
+                            {
+                                Debug.WriteLine("Adicionando pasta...");
+                                CurrentDevice.CheckCurrentFolder();
+                                var newFolder = new DynamicDeckFolder
+                                {
+                                    DeckImage = new DeckImage(Resources.img_folder)
+                                };
+                                newFolder.ParentFolder = CurrentDevice.CurrentFolder;
+                                newFolder.Add(1, folderUpItem);
+
+                                CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
+                            //CurrentDevice.CurrentFolder = newFolder;
+                            RefreshAllButtons(true);
+
+                            }
+                        };
+
+                     
+                        menu.Show(sender as Control, e.Location);
+                    }
+                }
+            }
+
         }
 
         private void ItemButton_MouseMove(object sender, MouseEventArgs e)
