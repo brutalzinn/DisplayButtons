@@ -85,6 +85,8 @@ namespace ButtonDeck.Forms
             this.modernButton1.Size = new System.Drawing.Size(100, 100);
             this.modernButton1.TabIndex = 1;
             this.modernButton1.Text = "modernButton1";
+            this.modernButton1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton1.UseVisualStyleBackColor = true;
             this.modernButton1.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -102,6 +104,8 @@ namespace ButtonDeck.Forms
             this.modernButton2.Size = new System.Drawing.Size(100, 100);
             this.modernButton2.TabIndex = 1;
             this.modernButton2.Text = "modernButton1";
+            this.modernButton2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton2.UseVisualStyleBackColor = true;
             this.modernButton2.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -119,6 +123,8 @@ namespace ButtonDeck.Forms
             this.modernButton3.Size = new System.Drawing.Size(100, 100);
             this.modernButton3.TabIndex = 1;
             this.modernButton3.Text = "modernButton1";
+            this.modernButton3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton3.UseVisualStyleBackColor = true;
             this.modernButton3.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -136,6 +142,8 @@ namespace ButtonDeck.Forms
             this.modernButton4.Size = new System.Drawing.Size(100, 100);
             this.modernButton4.TabIndex = 1;
             this.modernButton4.Text = "modernButton1";
+            this.modernButton4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton4.UseVisualStyleBackColor = true;
             this.modernButton4.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -153,6 +161,8 @@ namespace ButtonDeck.Forms
             this.modernButton5.Size = new System.Drawing.Size(100, 100);
             this.modernButton5.TabIndex = 1;
             this.modernButton5.Text = "modernButton1";
+            this.modernButton5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton5.UseVisualStyleBackColor = true;
             this.modernButton5.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -195,7 +205,9 @@ namespace ButtonDeck.Forms
             this.modernButton15.Size = new System.Drawing.Size(100, 100);
             this.modernButton15.TabIndex = 1;
             this.modernButton15.Text = "modernButton1";
-            this.modernButton15.UseVisualStyleBackColor = true;
+            this.modernButton15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton15.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.modernButton15.UseVisualStyleBackColor = false;
             this.modernButton15.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
             this.modernButton15.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseMove);
@@ -212,6 +224,8 @@ namespace ButtonDeck.Forms
             this.modernButton10.Size = new System.Drawing.Size(100, 100);
             this.modernButton10.TabIndex = 1;
             this.modernButton10.Text = "modernButton1";
+            this.modernButton10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton10.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton10.UseVisualStyleBackColor = true;
             this.modernButton10.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -229,6 +243,8 @@ namespace ButtonDeck.Forms
             this.modernButton11.Size = new System.Drawing.Size(100, 100);
             this.modernButton11.TabIndex = 1;
             this.modernButton11.Text = "modernButton1";
+            this.modernButton11.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton11.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton11.UseVisualStyleBackColor = true;
             this.modernButton11.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -246,6 +262,8 @@ namespace ButtonDeck.Forms
             this.modernButton6.Size = new System.Drawing.Size(100, 100);
             this.modernButton6.TabIndex = 1;
             this.modernButton6.Text = "modernButton1";
+            this.modernButton6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton6.UseVisualStyleBackColor = true;
             this.modernButton6.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -263,6 +281,8 @@ namespace ButtonDeck.Forms
             this.modernButton14.Size = new System.Drawing.Size(100, 100);
             this.modernButton14.TabIndex = 1;
             this.modernButton14.Text = "modernButton1";
+            this.modernButton14.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton14.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton14.UseVisualStyleBackColor = true;
             this.modernButton14.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -280,6 +300,8 @@ namespace ButtonDeck.Forms
             this.modernButton9.Size = new System.Drawing.Size(100, 100);
             this.modernButton9.TabIndex = 1;
             this.modernButton9.Text = "modernButton1";
+            this.modernButton9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton9.UseVisualStyleBackColor = true;
             this.modernButton9.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -297,6 +319,8 @@ namespace ButtonDeck.Forms
             this.modernButton12.Size = new System.Drawing.Size(100, 100);
             this.modernButton12.TabIndex = 1;
             this.modernButton12.Text = "modernButton1";
+            this.modernButton12.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton12.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton12.UseVisualStyleBackColor = true;
             this.modernButton12.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -314,6 +338,8 @@ namespace ButtonDeck.Forms
             this.modernButton7.Size = new System.Drawing.Size(100, 100);
             this.modernButton7.TabIndex = 1;
             this.modernButton7.Text = "modernButton1";
+            this.modernButton7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton7.UseVisualStyleBackColor = true;
             this.modernButton7.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -331,6 +357,8 @@ namespace ButtonDeck.Forms
             this.modernButton13.Size = new System.Drawing.Size(100, 100);
             this.modernButton13.TabIndex = 1;
             this.modernButton13.Text = "modernButton1";
+            this.modernButton13.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton13.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton13.UseVisualStyleBackColor = true;
             this.modernButton13.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -348,6 +376,8 @@ namespace ButtonDeck.Forms
             this.modernButton8.Size = new System.Drawing.Size(100, 100);
             this.modernButton8.TabIndex = 1;
             this.modernButton8.Text = "modernButton1";
+            this.modernButton8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.modernButton8.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.modernButton8.UseVisualStyleBackColor = true;
             this.modernButton8.Click += new System.EventHandler(this.ItemButton_MouseClick);
             this.modernButton8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ItemButton_MouseDown);
@@ -359,7 +389,7 @@ namespace ButtonDeck.Forms
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(251, 261);
+            this.label1.Location = new System.Drawing.Point(118, 499);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(424, 69);
             this.label1.TabIndex = 3;
@@ -439,6 +469,7 @@ namespace ButtonDeck.Forms
             this.Name = "MainForm";
             this.Tag = "";
             this.Text = "ButtonDeck";
+            this.TransparencyKey = System.Drawing.Color.Magenta;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.panel1.ResumeLayout(false);

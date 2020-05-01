@@ -11,6 +11,13 @@ namespace NickAc.Backend.Objects.Implementation.DeckActions.General
 {
     public class ExecutableRunAction : AbstractDeckAction
     {
+
+
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("name")]
+        public string name { get; set; } = "To execute";
+
+
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
@@ -37,7 +44,7 @@ namespace NickAc.Backend.Objects.Implementation.DeckActions.General
 
         public override DeckActionCategory GetActionCategory() => DeckActionCategory.General;
 
-        public override string GetActionName() => "Run Executable";
+        public override string GetActionName() => name;
 
         public static string GetExecutable(string command)
         {

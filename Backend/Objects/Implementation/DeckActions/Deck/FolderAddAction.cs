@@ -32,8 +32,7 @@ namespace NickAc.Backend.Objects.Implementation.DeckActions.General
 
         public override string GetActionName() => "Adicionar pasta";
 
-    
-
+     
         public override void OnButtonDown(DeckDevice deckDevice)
         {
            
