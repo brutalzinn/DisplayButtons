@@ -51,6 +51,8 @@ namespace NickAc.Backend.Objects
             Misc,
             Deck,
         }
+
+     
         public abstract DeckActionCategory GetActionCategory();
         public abstract string GetActionName();
         [Obsolete]
