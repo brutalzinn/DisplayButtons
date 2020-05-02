@@ -74,6 +74,7 @@
     <Compile Include="Networking\TcpLib\TcpLib.cs" />
     <Compile Include="Objects\AbstractDeckAction.cs" />
     <Compile Include="Objects\DeckImage.cs" />
+    <Compile Include="Objects\DeckImplementation.cs" />
     <Compile Include="Objects\IDeckDevice.cs" />
     <Compile Include="Objects\IDeckFolder.cs" />
     <Compile Include="Objects\IDeckItem.cs" />

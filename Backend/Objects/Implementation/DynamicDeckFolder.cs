@@ -14,11 +14,14 @@ namespace NickAc.Backend.Objects.Implementation
         public DeckImage DeckImage { get; set; }
         SerializableDictionary<int, IDeckItem> items = new SerializableDictionary<int, IDeckItem>();
 
-        public SerializableDictionary<int, IDeckItem> Items {
-            get {
+        public SerializableDictionary<int, IDeckItem> Items
+        {
+            get
+            {
                 return items;
             }
-            set {
+            set
+            {
                 items = value;
             }
         }
@@ -55,13 +58,16 @@ namespace NickAc.Backend.Objects.Implementation
         public override int Add(IDeckItem item)
         {
             int addToSlot = -1;
-            for (int i = 15 - 1; i >= 0; i--) {
-                if (items.ContainsKey(i)) {
+            for (int i = 15 - 1; i >= 0; i--)
+            {
+                if (items.ContainsKey(i))
+                {
                     addToSlot = i + 1;
                     break;
                 }
             }
-            if (addToSlot != -1) {
+            if (addToSlot != -1)
+            {
                 Add(addToSlot, item);
             }
             return addToSlot;
@@ -76,5 +82,36 @@ namespace NickAc.Backend.Objects.Implementation
         {
             return DeckImage;
         }
+        [XmlIgnore]
+        public string folder_name { get; set; }
+
+
+      [XmlElement("name")]
+        public string name
+        {
+
+
+            get
+            { // serialize
+                if (folder_name == null) return null;
+                return folder_name;
+            }
+            set
+            { // deserialize
+                if (value == null)
+                {
+                    folder_name = null;
+                }
+                else
+                {
+                    folder_name = value;
+
+                }
+
+            }
+
+
+        }
+
     }
-}
+    }
