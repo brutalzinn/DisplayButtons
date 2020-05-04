@@ -15,7 +15,8 @@ namespace NickAc.Backend.Objects
 
         public abstract DeckImage GetItemImage();
 
-        public virtual DeckImage GetDefaultImage() {
+        public virtual DeckImage GetDefaultImage()
+        {
             return null;
         }
     }

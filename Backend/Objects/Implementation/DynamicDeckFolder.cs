@@ -47,6 +47,8 @@ namespace NickAc.Backend.Objects.Implementation
         public IDeckFolder ParentFolder { get; set; }
         public override IDeckFolder GetParent()
         {
+         
+  
             return ParentFolder;
         }
 
@@ -84,9 +86,36 @@ namespace NickAc.Backend.Objects.Implementation
         }
         [XmlIgnore]
         public string folder_name { get; set; }
+        public int folder_father { get; set; }
+        [XmlIgnore]
+        public int father
+        {
 
 
-      [XmlElement("name")]
+            get
+            { // serialize
+                if (folder_father == 0) return 0;
+                return folder_father;
+            }
+            set
+            { // deserialize
+                if (value == 0)
+                {
+                    folder_father = 0;
+                }
+                else
+                {
+                    folder_father = value;
+
+                }
+
+            }
+
+
+        }
+
+
+        [XmlElement("name")]
         public string name
         {
 

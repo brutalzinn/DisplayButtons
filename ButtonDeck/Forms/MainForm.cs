@@ -414,26 +414,37 @@ namespace ButtonDeck.Forms
                         //item.GetItemImage().BitmapSerialized = converterDemo( AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White)); 
                         //   Write_name_Image("testeee", item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
 
+                    }else if (item is DynamicDeckFolder FO)
+                    {
+                        AddWatermark(FO.folder_name, item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+
+
+
                     }
-                    
-                   
-                      
+                    else
+                    {
+                        control.NormalImage = item?.GetItemImage().Bitmap;
 
-
-                
-                                        
-
-                //title_control.Text = dI.DeckAction.GetActionName();
-                //    Debug.WriteLine("Clicando no " + dI.DeckAction.GetActionName());
+                    }
 
 
 
 
-                //   control.NormalImage =  item?.GetItemImage().Bitmap;
 
 
-                //  control.NormalImage = null
-                control.Tag = item;
+
+
+                    //title_control.Text = dI.DeckAction.GetActionName();
+                    //    Debug.WriteLine("Clicando no " + dI.DeckAction.GetActionName());
+
+
+
+
+                    //   control.NormalImage =  item?.GetItemImage().Bitmap;
+
+
+                    //  control.NormalImage = null
+                    control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
 
 
@@ -480,15 +491,39 @@ namespace ButtonDeck.Forms
 
 
 
-                control.Image = item?.GetItemImage().Bitmap;
+               
+
+                    if (item is DynamicDeckItem DI && DI.DeckAction != null)
+                    {
+
+
+                        //     item.GetItemImage().BitmapSerialized = converterDemo(AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White,item));
+                        //  item.GetItemImage().BitmapSerialized = converterDemo(item?.GetItemImage().Bitmap);
+                        //     var ser = item.GetItemImage().BitmapSerialized;
+                        //    item.BitmapSerialized = item?.GetItemImage().Bitmap;
+                        AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                        //item.GetItemImage().BitmapSerialized = converterDemo( AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White)); 
+                        //   Write_name_Image("testeee", item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
+
+                    }
+                    else if (item is DynamicDeckFolder FO)
+                    {
+                        AddWatermark(FO.folder_name, item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
 
 
 
+                    }
+                    else
+                    {
+                        control.NormalImage = item?.GetItemImage().Bitmap;
 
-                //control.NormalImage = item?.GetItemImage().Bitmap; //Write_name_Image(dI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
+                    }
 
 
-                control.Tag = item;
+                    //control.NormalImage = item?.GetItemImage().Bitmap; //Write_name_Image(dI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
+
+
+                    control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
 
 
@@ -655,8 +690,32 @@ namespace ButtonDeck.Forms
             ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
             var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
             var seri = image.BitmapSerialized;
+                if (item is DynamicDeckItem DI && DI.DeckAction != null)
+                {
 
-            control.Image = image.Bitmap;
+
+                    //     item.GetItemImage().BitmapSerialized = converterDemo(AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White,item));
+                    //  item.GetItemImage().BitmapSerialized = converterDemo(item?.GetItemImage().Bitmap);
+                    //     var ser = item.GetItemImage().BitmapSerialized;
+                    //    item.BitmapSerialized = item?.GetItemImage().Bitmap;
+                    AddWatermark(DI.DeckAction.GetActionName(), image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                    //item.GetItemImage().BitmapSerialized = converterDemo( AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White)); 
+                    //   Write_name_Image("testeee", item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
+
+                }
+                else if (item is DynamicDeckFolder FO)
+                {
+                    AddWatermark(FO.folder_name, image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+
+
+
+                }
+                else
+                {
+                    control.NormalImage = image.Bitmap;
+
+                }
+              
 
 
 
@@ -738,6 +797,166 @@ namespace ButtonDeck.Forms
 
         e.Device.ButtonInteraction -= Device_ButtonInteraction;
     }
+        public class folders
+        {
+            private string name;
+            private IDeckFolder parent;
+            private int id;
+
+            public folders(string name, IDeckFolder parent, int id)
+            {
+                this.name = name;
+                this.parent = parent;
+                this.id = id;
+
+            }
+
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+
+            public IDeckFolder Parent
+            {
+                get { return parent; }
+                set { parent = value; }
+            }
+            public int Id
+            {
+                get { return id; }
+                set { id = value; }
+            }
+           
+        }
+        public static List<folders> folder_list = new List<folders>();
+        public static List<IDeckFolder> folder_mode = new List<IDeckFolder>();
+        public static  List<DynamicDeckFolder> ListFolders(DynamicDeckFolder initialFolder)
+        {
+            var folders = new List<DynamicDeckFolder>();
+            folders.Add(initialFolder);
+            foreach (var f in initialFolder.GetSubFolders())
+            {
+                if(f is DynamicDeckFolder DF)
+                {
+
+  folders.AddRange(ListFolders(DF));
+
+                }
+              
+            }
+            return folders;
+        }
+        public static string pasta = "";
+
+        public static List<int> additems_fold = new List<int>();
+        public static List<IDeckFolder> items_fold = new List<IDeckFolder>();
+        bool canskip = false;
+        int root = 0;
+        private void NextFolder()
+        {
+     
+
+        }
+
+        private void AddFolderInPanelList(Control parent)
+        {
+
+
+            Padding categoryPadding = new Padding(5, 0, 0, 0);
+            Font categoryFont = new Font(parent.Font.FontFamily, 13, FontStyle.Bold);
+            Padding itemPadding = new Padding(25, 0, 0, 0);
+            Font itemFont = new Font(parent.Font.FontFamily, 12);
+
+            if (item is DynamicDeckFolder DF)
+            {
+
+                Label folder_name = new Label()
+                {
+                    Padding = itemPadding,
+                    TextAlign = ContentAlignment.MiddleLeft,
+
+                    Font = itemFont,
+
+                    Dock = DockStyle.Top,
+                    Text = DF.folder_name,
+                    Tag = "folder_name",
+                    Height = TextRenderer.MeasureText("Pastas", itemFont).Height,
+
+                };
+                folder_name.Click += (s, ee) =>
+                {
+
+                    CurrentDevice.CurrentFolder = DF;
+
+                    Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
+                    RefreshAllButtons(true);
+
+                };
+
+                toFolders.Add(folder_name);
+
+            }
+        }
+        private void GetAllFolders(IDeckFolder folder)
+        {
+            // var pasta_mae = folder.GetSubFolders()[root];
+
+
+            if(CurrentDevice.MainFolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
+            {
+
+            Debug.WriteLine("PASTA PAI: " + pastapai.folder_name);
+
+
+
+            }
+
+                foreach(var abacate in folder.GetSubFolders())
+                {
+
+if(abacate is DynamicDeckFolder PP)
+                {
+
+   Debug.WriteLine(PP.folder_name + "CC:" + PP.GetSubFolders().Count);             
+
+                 if(abacate.GetSubFolders().Count == 0)
+                    {
+                        if(CurrentDevice.MainFolder.GetSubFolders().Count - 1 > root)
+                        {
+
+
+                          
+                            root++;
+                        }
+                        else
+                        {
+                            root = 0;
+                          goto fim;
+                        }
+                         // Debug.WriteLine("NUMINDEX:" + root);
+                        GetAllFolders(CurrentDevice.MainFolder.GetSubFolders()[root]);
+                    }
+                    else
+                    {
+                       
+
+                        GetAllFolders(abacate);
+                    }
+
+                }
+                     
+
+                }
+
+
+
+            fim:;
+
+
+               
+
+        }
 
 
         private void GenerateFolderList(Control parent)
@@ -746,25 +965,27 @@ namespace ButtonDeck.Forms
             Font categoryFont = new Font(parent.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
             Font itemFont = new Font(parent.Font.FontFamily, 12);
-            List<Control> toAdd = new List<Control>();
-         
+
+            List<Control> toFolders = new List<Control>();
+            List<Control> toSubFolders = new List<Control>();
+            ApplicationColorScheme appTheme = ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme);
+
 
 
             try
             {
 
-                Label pastar_father = new Label()
+                Label header_folder = new Label()
                 {
                     Padding = categoryPadding,
                     TextAlign = ContentAlignment.MiddleLeft,
                     Font = categoryFont,
-                    Dock = DockStyle.Top,
-
-                    Text = "PASTA",
+                    BackColor = appTheme.SecondaryColor,
+                    ForeColor = appTheme.ForegroundColor,
+                Dock = DockStyle.Top,
+                    Text = "Pastas",
                     Tag = "header",
-                    Height = TextRenderer.MeasureText("PASTA", categoryFont).Height
-
-
+                     Height = TextRenderer.MeasureText("Pastas", categoryFont).Height
                 };
 
 
@@ -778,75 +999,86 @@ namespace ButtonDeck.Forms
 
                     Dock = DockStyle.Top,
                     Text = "MAIN ROOT",
+                    Tag = "Main_Folder",
                     Height = TextRenderer.MeasureText("MAIN ROOT", itemFont).Height,
-                    Tag = "MAIN ROOT",
 
                 };
-                
+                folder_root.Click += (s, ee) => {
 
+                    CurrentDevice.CurrentFolder = CurrentDevice.MainFolder;
 
-    IDeckFolder folder = CurrentDevice?.CurrentFolder;
-            
-         
+                  //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
+                    RefreshAllButtons(true);
 
-                for (int i = 0; i < folder.GetDeckItems().Count; i++)
-                {
-                    IDeckItem item = null;
-                    item = folder.GetDeckItems()[i];
-                    //ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+                };
+              
 
-                    if (item != null)
-                    {
+                IDeckFolder folder = CurrentDevice.MainFolder;
 
-                        if (item is DynamicDeckFolder DI)
-                        {
-                          
-
-                            Label folder_name = new Label()
-                            {
-                                Padding = itemPadding,
-                                TextAlign = ContentAlignment.MiddleLeft,
-
-                                Font = itemFont,
-
-                                Dock = DockStyle.Top,
-                                Text =DI.folder_name,
-                                Height = TextRenderer.MeasureText("Pastas", itemFont).Height,
-                                Tag = "Pastas",
-
-                            };
-                            folder_name.Click += (s, ee) => {
-
-
-
-                                Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
-
-
-                            };
-                            pastar_father.Controls.Add(folder_root);
-                            pastar_father.Controls.Add(folder_name);
-                            
-
-                            
-                           parent.Controls.Add(folder_name);
-
-
-                        }
-
-                    }
-                }
 
               
-                parent.Controls.Add(pastar_father);
-           
+              // if(folder is DynamicDeckFolder DF)
+                GetAllFolders(folder.GetSubFolders()[root]);
+          
+
+              
+
+
+                //ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+                // List<DynamicDeckFolder> items =  folder.GetSubFolders();
+
+
+
+
+
+
+
+
+
+                //pastar_father.Controls.Add(folder_name);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 //                pastar_father.Controls.Add(folder_name);
 
 
-        
+                //pastar_father.Controls.Add(folder_root);
 
 
 
 
+                foreach (var item in toFolders)
+                {
+
+parent.Controls.Add(item);
+
+
+                }
+              
+                    
+                    
+               
+                parent.Controls.Add(folder_root);
+                parent.Controls.Add(header_folder);
             }
 
             catch (Exception e)
