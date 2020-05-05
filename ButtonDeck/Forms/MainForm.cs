@@ -801,14 +801,18 @@ namespace ButtonDeck.Forms
         {
             private string name;
             private IDeckFolder parent;
-            private int id;
+   
+            private bool is_father;
 
-            public folders(string name, IDeckFolder parent, int id)
+            private int folder_id;
+
+            public folders(string name, IDeckFolder parent,bool is_father, int folder_id)
             {
                 this.name = name;
                 this.parent = parent;
-                this.id = id;
-
+    
+                this.is_father = is_father;
+                this.folder_id = folder_id;
             }
 
             public string Name
@@ -817,19 +821,27 @@ namespace ButtonDeck.Forms
                 set { name = value; }
             }
 
+            public bool Is_father
+            {
+                get { return is_father; }
+                set { is_father = value; }
+            }
+
+            public int Folder_id
+            {
+                get { return folder_id; }
+                set { folder_id = value; }
+            }
+
             public IDeckFolder Parent
             {
                 get { return parent; }
                 set { parent = value; }
             }
-            public int Id
-            {
-                get { return id; }
-                set { id = value; }
-            }
+     
            
         }
-        public static List<folders> folder_list = new List<folders>();
+        public static List<folders> folder_form = new List<folders>();
         public static List<IDeckFolder> folder_mode = new List<IDeckFolder>();
         public static  List<DynamicDeckFolder> ListFolders(DynamicDeckFolder initialFolder)
         {
@@ -851,6 +863,7 @@ namespace ButtonDeck.Forms
 
         public static List<int> additems_fold = new List<int>();
         public static List<IDeckFolder> items_fold = new List<IDeckFolder>();
+ 
         bool canskip = false;
         int root = 0;
         private void NextFolder()
@@ -859,58 +872,133 @@ namespace ButtonDeck.Forms
 
         }
 
-        private void AddFolderInPanelList(Control parent)
+        private void AddFolderInPanelList(int value)
         {
-
+            Control parent = shadedPanel1;
 
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(parent.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
             Font itemFont = new Font(parent.Font.FontFamily, 12);
 
-            if (item is DynamicDeckFolder DF)
+
+
+           ApplicationColorScheme appTheme = ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme);
+
+
+
+            Label folder_root = new Label()
             {
 
-                Label folder_name = new Label()
-                {
-                    Padding = itemPadding,
-                    TextAlign = ContentAlignment.MiddleLeft,
+            Padding = categoryPadding,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Font = categoryFont,
+                Dock = DockStyle.Top,
+       
+     
+                Height = TextRenderer.MeasureText("Pastas", categoryFont).Height
+            };
 
-                    Font = itemFont,
+         
 
-                    Dock = DockStyle.Top,
-                    Text = DF.folder_name,
-                    Tag = "folder_name",
-                    Height = TextRenderer.MeasureText("Pastas", itemFont).Height,
+            Label folder_child = new Label()
+            {
 
-                };
-                folder_name.Click += (s, ee) =>
-                {
+                Padding = categoryPadding,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Font = categoryFont,
+                Dock = DockStyle.Top,
 
-                    CurrentDevice.CurrentFolder = DF;
 
-                    Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
-                    RefreshAllButtons(true);
+                //Height = TextRenderer.MeasureText("Pastas", categoryFont).Height
+            };
 
-                };
+            folder_root.Click += (s, ee) => {
 
-                toFolders.Add(folder_name);
 
+
+
+
+                RefreshAllButtons(true);
+
+            };
+
+
+            foreach (var item in folder_form)
+            {
+                
+ if(item.Folder_id == value)
+                    if (item.Is_father == true)
+                    {
+                        folder_root.Text = item.Name;
+                        parent.Controls.Add(folder_root);
+
+                        folder_root.Click += (s, ee) => {
+
+
+
+                            CurrentDevice.CurrentFolder = item.Parent;
+
+                            RefreshAllButtons(true);
+
+                        };
+                    }
+
+                    else
+                    {
+                    Label folder_children = new Label()
+                    {
+
+                        Padding = categoryPadding,
+                        TextAlign = ContentAlignment.MiddleLeft,
+                        Font = categoryFont,
+                        Dock = DockStyle.Top,
+
+                    };
+                    folder_children.Text = "............" + item.Name;
+                    parent.Controls.Add(folder_children);
+            
+    Debug.WriteLine(item.Name + "/" + item.Folder_id);
+
+                        folder_children.Click += (s, ee) => {
+
+
+
+                            CurrentDevice.CurrentFolder = item.Parent;
+
+                            RefreshAllButtons(true);
+
+                        };
+                    }
+                
+                
+               
+                
+               
             }
+
+
+
+             parent.Refresh();
+
+
+
         }
         private void GetAllFolders(IDeckFolder folder)
         {
             // var pasta_mae = folder.GetSubFolders()[root];
 
 
-            if(CurrentDevice.MainFolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
-            {
+            //if(CurrentDevice.MainFolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
+          //  {
 
-            Debug.WriteLine("PASTA PAI: " + pastapai.folder_name);
+          //    folder_form.Add(new folders(pastapai.folder_name, pastapai, true, root));
+               //AddFolderInPanelList(shadedPanel1, pastapai.folder_name, pastapai, root, true, root);
+            //    Debug.WriteLine("PASTA PAI: " + pastapai.folder_name);
+                
 
-
-
-            }
+//
+           
 
                 foreach(var abacate in folder.GetSubFolders())
                 {
@@ -918,30 +1006,48 @@ namespace ButtonDeck.Forms
 if(abacate is DynamicDeckFolder PP)
                 {
 
-   Debug.WriteLine(PP.folder_name + "CC:" + PP.GetSubFolders().Count);             
+
+
+                 folder_form.Add(new folders(PP.folder_name, PP, false, root));
+                    // AddFolderInPanelList(shadedPanel1, PP.folder_name, PP, root, false, root);
+             //   Debug.WriteLine(PP.folder_name + "CC:" + PP.GetSubFolders().Count);             
 
                  if(abacate.GetSubFolders().Count == 0)
                     {
                         if(CurrentDevice.MainFolder.GetSubFolders().Count - 1 > root)
                         {
 
-
-                          
+                            if (CurrentDevice.MainFolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
+                            {
+                                folder_form.Add(new folders(pastapai.folder_name, pastapai, true, root));
+                            }
+                            AddFolderInPanelList(root);
                             root++;
                         }
                         else
                         {
+                            if (CurrentDevice.MainFolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
+                            {
+                                folder_form.Add(new folders(pastapai.folder_name, pastapai, true, root));
+                            }
+                            Debug.WriteLine("ROOT: " + root);
+                            AddFolderInPanelList(root);
                             root = 0;
-                          goto fim;
+                         
+                       
+                            goto fim;
                         }
-                         // Debug.WriteLine("NUMINDEX:" + root);
+                        //  Debug.WriteLine("NUMINDEX:" + root);
+                      
                         GetAllFolders(CurrentDevice.MainFolder.GetSubFolders()[root]);
+                       
                     }
                     else
                     {
                        
 
                         GetAllFolders(abacate);
+                      
                     }
 
                 }
@@ -953,8 +1059,8 @@ if(abacate is DynamicDeckFolder PP)
 
             fim:;
 
+         
 
-               
 
         }
 
