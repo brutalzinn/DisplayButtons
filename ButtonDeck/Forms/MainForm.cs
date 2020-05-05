@@ -133,7 +133,7 @@ namespace ButtonDeck.Forms
 
         #endregion
 
-        #region Methods
+#region Methods
 
         protected override void OnLoad(EventArgs e)
         {
