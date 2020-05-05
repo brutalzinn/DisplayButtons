@@ -26,7 +26,7 @@ namespace ScribeBot.Interface
 
             InfoVersion.Text = Core.Version;
 
-            ConsoleOutput.Font = new System.Drawing.Font(Core.Fonts.Families[0], 10f);
+            ConsoleOutput.Font = new System.Drawing.Font("Arial", 10f);
 
             Package[] installedPackages = Workshop.GetInstalled();
 
@@ -72,12 +72,12 @@ namespace ScribeBot.Interface
                     CursorPosDisplay.Text = $"X: {cursorPos.X} Y: {cursorPos.Y}";
                 }));
             };
-            timer.Start();
+          timer.Start();
         }
 
         private void scriptStop_Click(object sender, EventArgs e)
         {
-            Scripter.Stop();
+           // Scripter.Stop();
         }
 
         private void consoleRun_Click(object sender, EventArgs e)
@@ -319,6 +319,16 @@ namespace ScribeBot.Interface
             Process.Start($"Updater {Core.Version}.exe");
 
             Core.Close();
+        }
+
+        private void Window_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

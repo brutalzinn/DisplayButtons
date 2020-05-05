@@ -364,7 +364,9 @@
     <None Include="Data\Packages\ExamplePackage\info.json" />
     <None Include="Data\Packages\ExamplePackage\main.lua" />
     <None Include="Data\User Data\.gitignore" />
-    <None Include="info.json" />
+    <Content Include="info.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Library Data\Tessdata\eng.traineddata" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -440,19 +442,45 @@
     <Content Include="Data\Graphics\scribebot_logo.png" />
     <Content Include="Library Data\ChromeDriver\chromedriver.exe" />
     <Content Include="Updater.exe" />
-    <None Include="Resources\Stop_grey_16x.png" />
-    <None Include="Resources\Script_16x.png" />
-    <None Include="Resources\SaveAll_16x.png" />
-    <None Include="Resources\Save_16x.png" />
-    <None Include="Resources\Run_grey_16x.png" />
-    <None Include="Resources\Package_16x.png" />
-    <None Include="Resources\Import_16x.png" />
-    <None Include="Resources\Folder_grey_16x.png" />
-    <None Include="Resources\Export_16x.png" />
-    <None Include="Resources\Execute_16x.png" />
-    <None Include="Resources\Edit_grey_16x.png" />
-    <None Include="Resources\Close_16x.png" />
-    <None Include="Resources\CleanData_16x.png" />
+    <Resource Include="Resources\Stop_grey_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Script_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\SaveAll_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Save_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Run_grey_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Package_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Import_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Folder_grey_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Export_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Execute_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Edit_grey_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Close_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\CleanData_16x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

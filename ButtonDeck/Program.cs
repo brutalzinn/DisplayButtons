@@ -3,6 +3,7 @@
 using ButtonDeck.Forms;
 using ButtonDeck.Misc;
 using NickAc.Backend.Utils;
+using ScribeBot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,9 +28,9 @@ namespace ButtonDeck
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        static void Main(string[] args) 
         {
-
+         Core.Initialize();
             Trace.Listeners.Add(new TextWriterTraceListener(errorFileName));
             Trace.AutoFlush = true;
 

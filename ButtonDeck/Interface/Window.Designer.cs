@@ -258,6 +258,7 @@ namespace ScribeBot.Interface
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutPanel.Size = new System.Drawing.Size(784, 561);
             this.layoutPanel.TabIndex = 1;
+            this.layoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.LayoutPanel_Paint);
             // 
             // optionsPanel
             // 
@@ -741,6 +742,7 @@ namespace ScribeBot.Interface
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ScribeBot";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Window_FormClosing);
+            this.Load += new System.EventHandler(this.Window_Load);
             this.consolePanel.ResumeLayout(false);
             this.consolePanel.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -778,7 +780,6 @@ namespace ScribeBot.Interface
 
         private System.Windows.Forms.GroupBox consolePanel;
         private System.Windows.Forms.TableLayoutPanel layoutPanel;
-        private RichTextBox consoleOutput;
         private TextBox consoleInput;
         private Button consoleRun;
         private Panel consoleContainer;
@@ -824,6 +825,7 @@ namespace ScribeBot.Interface
         private Button downloadUpdate;
         public Label CursorPosDisplay;
         public Label ColorDisplay;
+        public RichTextBox consoleOutput;
 
         public RichTextBox ConsoleOutput { get => consoleOutput; set => consoleOutput = value; }
         public TextBox ConsoleInput { get => consoleInput; set => consoleInput = value; }
