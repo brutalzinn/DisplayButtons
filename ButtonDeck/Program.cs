@@ -22,7 +22,7 @@ namespace ButtonDeck
         private const string errorFileName = "errors.log";
         public static ServerThread ServerThread { get; set; }
         public static bool SuccessfulServerStart { get; set; } = false;
-        
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -33,11 +33,14 @@ namespace ButtonDeck
             Trace.Listeners.Add(new TextWriterTraceListener(errorFileName));
             Trace.AutoFlush = true;
 
-            if (args.Any(c => c.ToLower() == "/armobs")) {
-                if (args.Length == 1) {
+            if (args.Any(c => c.ToLower() == "/armobs"))
+            {
+                if (args.Length == 1)
+                {
                     var obs32List = Process.GetProcessesByName("obs32");
                     var obs64List = Process.GetProcessesByName("obs64");
-                    if (obs32List.Length == 0 && obs64List.Length == 0) {
+                    if (obs32List.Length == 0 && obs64List.Length == 0)
+                    {
                         //No OBS found. Cancel operation.
                         File.Delete(OBSUtils.obswszip);
                         return;
@@ -46,7 +49,8 @@ namespace ButtonDeck
                     obsProcesses.AddRange(obs32List);
                     obsProcesses.AddRange(obs64List);
 
-                    if (obsProcesses.Count != 1) {
+                    if (obsProcesses.Count != 1)
+                    {
                         //Multiple OBS instances found. Cancel operation.
                         File.Delete(OBSUtils.obswszip);
                         return;
@@ -62,9 +66,11 @@ namespace ButtonDeck
                     Directory.Delete(zipTempPath, true);
 
                     var obsGlobalFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "obs-studio", "global.ini");
-                    if (File.Exists(obsGlobalFilePath) && !File.ReadAllText(obsGlobalFilePath).Contains("[WebsocketAPI]")) {
+                    if (File.Exists(obsGlobalFilePath) && !File.ReadAllText(obsGlobalFilePath).Contains("[WebsocketAPI]"))
+                    {
 
-                        while (!obsProcess.HasExited) {
+                        while (!obsProcess.HasExited)
+                        {
 
                             StringBuilder sb = new StringBuilder();
                             sb.AppendLine("OBS plugin install completed!");
@@ -73,7 +79,8 @@ namespace ButtonDeck
                             MessageBox.Show(sb.ToString());
                         }
 
-                        using (StreamWriter outputFile = new StreamWriter(obsGlobalFilePath)) {
+                        using (StreamWriter outputFile = new StreamWriter(obsGlobalFilePath))
+                        {
                             outputFile.WriteLine("");
                             outputFile.WriteLine("[WebsocketAPI]");
                             outputFile.WriteLine("ServerPort=4444");
@@ -83,7 +90,8 @@ namespace ButtonDeck
                         }
 
                         bool shouldRepeat = true;
-                        while (shouldRepeat) {
+                        while (shouldRepeat)
+                        {
                             var obs32List2 = Process.GetProcessesByName("obs32");
                             var obs64List2 = Process.GetProcessesByName("obs64");
 
@@ -120,7 +128,8 @@ namespace ButtonDeck
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (ApplicationSettingsManager.Settings.FirstRun) {
+            if (ApplicationSettingsManager.Settings.FirstRun)
+            {
                 FirstSetupForm firstRunForm = new FirstSetupForm();
                 Application.Run(firstRunForm);
                 if (!firstRunForm.FinishedSetup) return;
@@ -156,7 +165,8 @@ namespace ButtonDeck
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            if (e.ExceptionObject is Exception ex) {
+            if (e.ExceptionObject is Exception ex)
+            {
                 MessageBox.Show(errorText);
                 Trace.WriteLine("An error occured.");
                 Trace.WriteLine($"Timestamp: [Local:{DateTime.Now}; UTC: {DateTime.UtcNow}].");

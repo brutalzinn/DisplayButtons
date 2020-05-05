@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -27,6 +28,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,24 +57,87 @@
     <StartupObject>ButtonDeck.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.16.1.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
       <HintPath>..\packages\Magick.NET-Q16-AnyCPU.7.16.1\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
     </Reference>
     <Reference Include="ModernUIDoneRight">
       <HintPath>..\ModernUIDoneRight.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
+    <Reference Include="MoonSharp.Interpreter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=921e73ce94aa17f8, processorArchitecture=MSIL">
+      <HintPath>..\packages\MoonSharp.2.0.0.0\lib\net40-client\MoonSharp.Interpreter.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.112.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.2\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.112.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.112.2\lib\net40\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.112.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.112.2\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Tesseract, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tesseract.3.3.0\lib\net45\Tesseract.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ColorSchemePreviewControl.cs">
@@ -89,6 +155,21 @@
     <Compile Include="Controls\PlaceHolderTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Core.cs" />
+    <Compile Include="Engine\Containers\ColorContainer.cs" />
+    <Compile Include="Engine\Containers\PointContainer.cs" />
+    <Compile Include="Engine\Containers\SizeContainer.cs" />
+    <Compile Include="Engine\Proxies\AudioDeviceProxy.cs" />
+    <Compile Include="Engine\Proxies\WebDriverProxy.cs" />
+    <Compile Include="Engine\Proxies\WebElementProxy.cs" />
+    <Compile Include="Engine\Wrappers\AudioWrapper.cs" />
+    <Compile Include="Engine\Wrappers\BitWrapper.cs" />
+    <Compile Include="Engine\Wrappers\CoreWrapper.cs" />
+    <Compile Include="Engine\Wrappers\DatabaseWrapper.cs" />
+    <Compile Include="Engine\Wrappers\InputWrapper.cs" />
+    <Compile Include="Engine\Wrappers\InterfaceWrapper.cs" />
+    <Compile Include="Engine\Wrappers\ScreenWrapper.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Forms\ActionHelperForms\ExecutableRunHelper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,13 +245,48 @@
     <Compile Include="Forms\TemplateForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interface\PackageEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\PackageEditor.Designer.cs">
+      <DependentUpon>PackageEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\PackageInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\PackageInfo.Designer.cs">
+      <DependentUpon>PackageInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\PackageInfoMinimal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interface\PackageInfoMinimal.Designer.cs">
+      <DependentUpon>PackageInfoMinimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Prompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Prompt.Designer.cs">
+      <DependentUpon>Prompt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Window.Designer.cs">
+      <DependentUpon>Window.cs</DependentUpon>
+    </Compile>
     <Compile Include="Misc\ApplicationColorScheme.cs" />
     <Compile Include="Misc\ColorSchemeCentral.cs" />
     <Compile Include="Misc\DevicesTitlebarButton.cs" />
     <Compile Include="Misc\IDeckDeviceExtensions.cs" />
     <Compile Include="Misc\ServerThread.cs" />
+    <Compile Include="Native\API.cs" />
+    <Compile Include="Native\Native.cs" />
+    <Compile Include="Package.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripter.cs" />
+    <Compile Include="Workshop.cs" />
     <EmbeddedResource Include="Controls\ColorSchemePreviewControl.resx">
       <DependentUpon>ColorSchemePreviewControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +323,21 @@
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interface\PackageEditor.resx">
+      <DependentUpon>PackageEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\PackageInfo.resx">
+      <DependentUpon>PackageInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\PackageInfoMinimal.resx">
+      <DependentUpon>PackageInfoMinimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Prompt.resx">
+      <DependentUpon>Prompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Window.resx">
+      <DependentUpon>Window.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -217,6 +348,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Data\Extensions\table.lua" />
+    <None Include="Data\Extensions\wait.lua" />
+    <None Include="Data\Fonts\OfficeCodePro-Bold.ttf" />
+    <None Include="Data\Fonts\OfficeCodePro-BoldItalic.ttf" />
+    <None Include="Data\Fonts\OfficeCodePro-Light.ttf" />
+    <None Include="Data\Fonts\OfficeCodePro-LightItalic.ttf" />
+    <None Include="Data\Fonts\officecodepro-medium.otf" />
+    <None Include="Data\Fonts\OfficeCodePro-Medium.ttf" />
+    <None Include="Data\Fonts\OfficeCodePro-MediumItalic.ttf" />
+    <None Include="Data\Fonts\OfficeCodePro-Regular.ttf" />
+    <None Include="Data\Fonts\OfficeCodePro-RegularItalic.ttf" />
+    <None Include="Data\Logs\.gitignore" />
+    <None Include="Data\Packages\.gitignore" />
+    <None Include="Data\Packages\ExamplePackage\info.json" />
+    <None Include="Data\Packages\ExamplePackage\main.lua" />
+    <None Include="Data\User Data\.gitignore" />
+    <None Include="info.json" />
+    <None Include="Library Data\Tessdata\eng.traineddata" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -286,6 +435,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="button-deck.ico" />
+    <Content Include="Data\Fonts\Officecodepro - SIL Open Font License.txt" />
+    <Content Include="Data\Graphics\scribebot.ico" />
+    <Content Include="Data\Graphics\scribebot_logo.png" />
+    <Content Include="Library Data\ChromeDriver\chromedriver.exe" />
+    <Content Include="Updater.exe" />
+    <None Include="Resources\Stop_grey_16x.png" />
+    <None Include="Resources\Script_16x.png" />
+    <None Include="Resources\SaveAll_16x.png" />
+    <None Include="Resources\Save_16x.png" />
+    <None Include="Resources\Run_grey_16x.png" />
+    <None Include="Resources\Package_16x.png" />
+    <None Include="Resources\Import_16x.png" />
+    <None Include="Resources\Folder_grey_16x.png" />
+    <None Include="Resources\Export_16x.png" />
+    <None Include="Resources\Execute_16x.png" />
+    <None Include="Resources\Edit_grey_16x.png" />
+    <None Include="Resources\Close_16x.png" />
+    <None Include="Resources\CleanData_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -299,4 +466,16 @@ libz instrument -a $(TargetFileName) --libz-file dependencies.libz</PostBuildEve
   <PropertyGroup>
     <PreBuildEvent>del "dependencies.libz" &gt;nul 2&gt;&amp;1</PreBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\Tesseract.3.3.0\build\Tesseract.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Tesseract.3.3.0\build\Tesseract.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets')" />
+  <Import Project="..\packages\Tesseract.3.3.0\build\Tesseract.targets" Condition="Exists('..\packages\Tesseract.3.3.0\build\Tesseract.targets')" />
 </Project>
