@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NLua;
-using ReferenceFunctions;
-using System.Collections;
 using KeraLua;
-using System.Threading;
 
+using System.Threading;
 namespace LuaJITNet
 {
     public partial class Form1 : Form
@@ -33,9 +28,9 @@ namespace LuaJITNet
 
                 NLua.Lua state = new NLua.Lua();
 
-                state["Funcs"] = new ReferenceFunctions.References(state);
+              state["Funcs"] = new ReferenceFunctions.References(state);
                 state.DebugHook += this.luaBreakHook;
-                state.SetDebugHook(NLua.Event.EventMasks.LUA_MASKLINE, 0);
+              //  state.SetDebugHook(NLua.Event.DebugHookEventArgs.Empty, 0);
 
                 //state.LoadCLRPackage();
                 //state.DoString(@" import ('ReferenceFunctions.dll', 'Funcs') 

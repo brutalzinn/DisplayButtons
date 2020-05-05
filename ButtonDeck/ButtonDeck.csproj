@@ -26,6 +26,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,6 +49,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>button-deck.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ButtonDeck.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.16.1.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
@@ -233,10 +237,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ic_settings_black_48dp_2x.png" />
+    <Resource Include="Resources\ic_settings_black_48dp_2x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ic_settings_white_48dp_2x.png" />
+    <Resource Include="Resources\ic_settings_white_48dp_2x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -251,19 +259,29 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\img_folder.png" />
+    <Resource Include="Resources\img_folder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\img_item_default.png" />
+    <Resource Include="Resources\img_item_default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\img_folder_up.png" />
+    <Resource Include="Resources\img_folder_up.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ic_delete_white_48dp_2x.png" />
+    <Resource Include="Resources\ic_delete_white_48dp_2x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ic_delete_black_48dp_2x.png" />
+    <Resource Include="Resources\ic_delete_black_48dp_2x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="button-deck.ico" />
