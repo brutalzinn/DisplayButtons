@@ -172,6 +172,12 @@ namespace ButtonDeck.Forms
             itemMagnetite.Click += (s, ee) => {
                 new MagnetiteForm().ShowDialog();
             };
+
+            AppAction itemPlugins = new AppAction();
+
+            itemPlugins.Click += (s, ee) => {
+                new MagnetiteForm().ShowDialog();
+            };
             appBar1.Actions.Add(itemMagnetite);
 
             ApplyTheme(panel1);
