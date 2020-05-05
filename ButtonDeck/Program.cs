@@ -30,7 +30,7 @@ namespace ButtonDeck
         [STAThread]
         static void Main(string[] args) 
         {
-         Core.Initialize();
+  
             Trace.Listeners.Add(new TextWriterTraceListener(errorFileName));
             Trace.AutoFlush = true;
 
@@ -146,7 +146,7 @@ namespace ButtonDeck
             ServerThread.Start();
 
             Application.Run(new MainForm());
-
+            
             OBSUtils.Disconnect();
 
             ServerThread.Stop();
@@ -155,6 +155,7 @@ namespace ButtonDeck
             ApplicationSettingsManager.SaveSettings();
             DevicePersistManager.SaveDevices();
             Trace.Flush();
+            
         }
 
         private static void NetworkChange_NetworkAddressChanged(object sender, EventArgs e)

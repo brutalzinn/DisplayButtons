@@ -197,7 +197,19 @@ namespace ScribeBot
 
             Log.Append(value + Environment.NewLine);
         }
+        /// <summary>
+        /// Write a string of text and append it with a linebreak.
+        /// </summary>
+        /// <param name="value">String to write</param>
+        public static void testando()
+        {
+            MainWindow?.Invoke(new Action(() =>
+            {
+                MainWindow.ConsoleOutput.AppendText("Já acabou, jéssica??" + Environment.NewLine);
+            }));
 
+            Log.Append("CHAMOU, meu consagrado?" + Environment.NewLine);
+        }
         /// <summary>
         /// Write a multi-color string of text and append it with a linebreak.
         /// </summary>

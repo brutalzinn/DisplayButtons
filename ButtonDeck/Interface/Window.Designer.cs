@@ -154,7 +154,7 @@ namespace ScribeBot.Interface
             this.consoleRun.Name = "consoleRun";
             this.consoleRun.Size = new System.Drawing.Size(130, 21);
             this.consoleRun.TabIndex = 2;
-            this.consoleRun.Text = "Run";
+            this.consoleRun.Text = "EXECUTAR";
             this.consoleRun.UseVisualStyleBackColor = true;
             this.consoleRun.Click += new System.EventHandler(this.consoleRun_Click);
             // 
@@ -283,7 +283,7 @@ namespace ScribeBot.Interface
             this.scriptsPage.Padding = new System.Windows.Forms.Padding(10);
             this.scriptsPage.Size = new System.Drawing.Size(274, 525);
             this.scriptsPage.TabIndex = 0;
-            this.scriptsPage.Text = "Packages";
+            this.scriptsPage.Text = "PACOTES";
             this.scriptsPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel5
@@ -627,7 +627,7 @@ namespace ScribeBot.Interface
             this.settingsPage.Padding = new System.Windows.Forms.Padding(10);
             this.settingsPage.Size = new System.Drawing.Size(274, 525);
             this.settingsPage.TabIndex = 2;
-            this.settingsPage.Text = "Settings";
+            this.settingsPage.Text = "Opções";
             this.settingsPage.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -740,7 +740,7 @@ namespace ScribeBot.Interface
             this.MaximizeBox = false;
             this.Name = "Window";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ScribeBot";
+            this.Text = "GERENCIADOR DE PLUGINS";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Window_FormClosing);
             this.Load += new System.EventHandler(this.Window_Load);
             this.consolePanel.ResumeLayout(false);

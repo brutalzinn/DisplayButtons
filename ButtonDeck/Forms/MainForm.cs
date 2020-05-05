@@ -9,6 +9,7 @@ using NickAc.Backend.Objects.Implementation;
 using NickAc.Backend.Utils;
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Objects;
+using ScribeBot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -180,8 +181,10 @@ namespace ButtonDeck.Forms
         };
           
             itemPlugins.Click += (s, ee) => {
-                new ScribeBot.Interface.Window().Show();
+                Core.Initialize();
+           //     new ScribeBot.Interface.Window().Show();
             };
+            
             appBar1.Actions.Add(itemMagnetite);
             appBar1.Actions.Add(itemPlugins);
             ApplyTheme(panel1);
