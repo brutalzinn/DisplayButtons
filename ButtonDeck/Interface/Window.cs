@@ -43,7 +43,7 @@ namespace ScribeBot.Interface
                 p.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
 
                 InstalledPackagesList.Controls.Add(p);
-
+                x.Run(true);
                 p.RunButton.Click += (o, e) =>
                 {
                     x.Run(true);

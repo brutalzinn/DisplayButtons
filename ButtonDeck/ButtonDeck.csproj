@@ -245,6 +245,7 @@
     <Compile Include="Forms\TemplateForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Globals.cs" />
     <Compile Include="Interface\PackageEditor.cs">
       <SubType>Form</SubType>
     </Compile>

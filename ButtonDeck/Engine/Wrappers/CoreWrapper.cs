@@ -16,7 +16,7 @@ namespace ScribeBot.Engine.Wrappers
     static class CoreWrapper
     {
         public static string Version => Core.Version;
-        public static void testando() => Core.testando();
+        public static void testando(string name) => Core.ADD_DECK(name);
         public static void ProcessConsoleInput() => Core.ProcessConsoleInput();
 
         public static void Write(string text) => Core.Write(text);
