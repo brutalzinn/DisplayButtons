@@ -10,6 +10,7 @@ using NickAc.Backend.Utils;
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Objects;
 using ScribeBot;
+using ScribeBot.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -193,6 +194,47 @@ namespace ButtonDeck.Forms
             shadedPanel2.Hide();
             shadedPanel1.Hide();
             Refresh();
+           
+         
+
+
+            Package[] installedPackages = Workshop.GetInstalled();
+
+            installedPackages.ToList().ForEach(x =>
+            {
+                Dictionary<string, string> packageInfo = x.GetInfo();
+
+                PackageInfo p = new PackageInfo();
+                p.NameLabel.Text = packageInfo["Name"];
+                p.AuthorLabel.Text = packageInfo["Authors"];
+                p.DescLabel.Text = packageInfo["Description"];
+                p.Package = x;
+
+                p.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
+
+           //     InstalledPackagesList.Controls.Add(p);
+                x.Run(true);
+              
+            });
+
+
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             label1.ForeColor = ColorScheme.SecondaryColor;
         }
@@ -1078,7 +1120,7 @@ if(abacate is DynamicDeckFolder PP)
         }
 
 
-        private void GenerateFolderList(Control parent)
+        public void GenerateFolderList(Control parent)
         {
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(parent.Font.FontFamily, 13, FontStyle.Bold);
@@ -1681,7 +1723,31 @@ parent.Controls.Add(item);
 
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
+        public static string testando(string name)
+        {
 
+            Control parent =  instance.Controls.Find("shadedPanel1", true).FirstOrDefault() as ShadedPanel;
+
+            Padding categoryPadding = new Padding(5, 0, 0, 0);
+            Font categoryFont = new Font(parent.Font.FontFamily, 13, FontStyle.Bold);
+            Padding itemPadding = new Padding(25, 0, 0, 0);
+            Font itemFont = new Font(parent.Font.FontFamily, 12);
+
+
+            Label teste = new Label()
+            {
+                Padding = categoryPadding,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Font = categoryFont,
+                Dock = DockStyle.Top,
+                Text = name + " ...............",
+
+            };
+            parent.Controls.Add(teste);
+            parent.Refresh();
+            Debug.WriteLine("GRANDO SIDEBAR " + name);
+            return "";
+        }
         private void UpdateIcon(bool shouldUpdateIcon)
         {
             if (shouldUpdateIcon) {

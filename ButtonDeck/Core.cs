@@ -18,6 +18,7 @@ using ScribeBot.Engine.Wrappers;
 using static NickAc.Backend.Objects.AbstractDeckAction;
 using NickAc.Backend.Objects;
 using NickAc.Backend.Utils;
+using NickAc.Backend.Objects.Implementation.DeckActions.General;
 
 namespace ScribeBot
 {
@@ -201,65 +202,14 @@ namespace ScribeBot
 
             Log.Append(value + Environment.NewLine);
         }
-        public class FolderAddAction : AbstractDeckAction
-        {
-            [ActionPropertyInclude]
-            [ActionPropertyDescription("name")]
-            public string name { get; set; } = "";
-
-
-
-            public void ToExecuteHelper()
-            {
-
-            }
-
-            public override AbstractDeckAction CloneAction()
-            {
-                return new FolderAddAction();
-            }
-
-            public override DeckActionCategory GetActionCategory() => DeckActionCategory.Deck;
-
-            public override string GetActionName() => name;
-
-
-            public override void OnButtonDown(DeckDevice deckDevice)
-            {
-
-
-
-
-            }
-
-            public override void OnButtonUp(DeckDevice deckDevice)
-            {
-
-
-            }
-
-        }
+      
         /// <summary>
         /// Write a string of text and append it with a linebreak.
         /// </summary>
         /// <param name="value">String to write</param>
         /// 
 
-        public static void ADD_DECK(string name)
-        {
-            // var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
-
-            FolderAddAction teste = new FolderAddAction();
-            teste.name = name;
-            Forms.
-
-                       MainWindow?.Invoke(new Action(() =>
-            {
-                MainWindow.ConsoleOutput.AppendText(name + Environment.NewLine);
-            }));
-
-            Log.Append(name + Environment.NewLine);
-        }
+       
         /// <summary>
         /// Write a multi-color string of text and append it with a linebreak.
         /// </summary>

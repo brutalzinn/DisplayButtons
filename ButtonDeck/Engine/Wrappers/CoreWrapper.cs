@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MoonSharp.Interpreter;
+using NickAc.Backend.Objects.Implementation.DeckActions.General;
 using ScribeBot.Engine.Containers;
 
 namespace ScribeBot.Engine.Wrappers
@@ -12,11 +13,26 @@ namespace ScribeBot.Engine.Wrappers
     /// <summary>
     /// Wrapper containing all core functionality exposed to Lua environment.
     /// </summary>
+    ///     [MoonSharpUserData]
+    ///         [MoonSharpUserData]
+
+   
+       
+   
     [MoonSharpUserData]
     static class CoreWrapper
     {
+
+        public static void testando(string value)
+           
+        {
+            ButtonDeck.Forms.MainForm.testando(value);
+            
+
+
+        }
         public static string Version => Core.Version;
-        public static void testando(string name) => Core.ADD_DECK(name);
+      
         public static void ProcessConsoleInput() => Core.ProcessConsoleInput();
 
         public static void Write(string text) => Core.Write(text);

@@ -14,9 +14,15 @@ namespace NickAc.Backend.Objects.Implementation.DeckActions.General
 
         [ActionPropertyInclude]
         [ActionPropertyDescription("name")]
-        public string name { get; set; } = "";
+        public static string name { get; set; } = "teste";
 
+        public  void update(string result)
+        {
+            Debug.WriteLine("ATUALIZANDO.. " + result);
+            name = result;
 
+     
+        }
 
         public void ToExecuteHelper()
         {
@@ -30,9 +36,12 @@ namespace NickAc.Backend.Objects.Implementation.DeckActions.General
 
         public override DeckActionCategory GetActionCategory() => DeckActionCategory.Deck;
 
-        public override string GetActionName() => "Adicionar pasta";
-
+        public override string GetActionName()
+        {
      
+            return name;
+        }
+
         public override void OnButtonDown(DeckDevice deckDevice)
         {
            

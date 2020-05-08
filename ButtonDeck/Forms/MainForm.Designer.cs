@@ -499,10 +499,12 @@ namespace ButtonDeck.Forms
         private ImageModernButton modernButton13;
         private ImageModernButton modernButton8;
         private System.Windows.Forms.Label label1;
-        private ShadedPanel shadedPanel1;
         private ShadedPanel shadedPanel2;
         private ImageModernButton imageModernButton1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private ShadedPanel shadedPanel1;
+
+        internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }
 }

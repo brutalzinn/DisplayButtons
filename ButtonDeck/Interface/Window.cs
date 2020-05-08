@@ -72,7 +72,7 @@ namespace ScribeBot.Interface
                     CursorPosDisplay.Text = $"X: {cursorPos.X} Y: {cursorPos.Y}";
                 }));
             };
-          timer.Start();
+        //  timer.Start();
         }
 
         private void scriptStop_Click(object sender, EventArgs e)
