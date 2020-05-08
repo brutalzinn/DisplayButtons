@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ButtonDeck
 {
-   public class Globals
+    class Globals
     {
 
        public static  Forms.MainForm launcher_principal;

@@ -6,6 +6,7 @@ using NickAc.Backend.Networking;
 using NickAc.Backend.Networking.Implementation;
 using NickAc.Backend.Objects;
 using NickAc.Backend.Objects.Implementation;
+using NickAc.Backend.Objects.Implementation.DeckActions.General;
 using NickAc.Backend.Utils;
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Objects;
@@ -45,8 +46,11 @@ namespace ButtonDeck.Forms
 
         public MainForm()
         {
+
+         
             instance = this;
             InitializeComponent();
+            Globals.launcher_principal = this;
             panel1.Freeze();
             DevicesTitlebarButton item = new DevicesTitlebarButton(this);
             TitlebarButtons.Add(item);
@@ -1723,30 +1727,90 @@ parent.Controls.Add(item);
 
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public static string testando(string name)
+        public static  void testando(string name)
         {
 
-            Control parent =  instance.Controls.Find("shadedPanel1", true).FirstOrDefault() as ShadedPanel;
-
             Padding categoryPadding = new Padding(5, 0, 0, 0);
-            Font categoryFont = new Font(parent.Font.FontFamily, 13, FontStyle.Bold);
+            Font categoryFont = new Font(Globals.launcher_principal.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
-            Font itemFont = new Font(parent.Font.FontFamily, 12);
-
-
+            Font itemFont = new Font(Globals.launcher_principal.ShadedPanel1.Font.FontFamily, 12);
+            IList<FolderAddAction> list = new List<FolderAddAction>();
+            // ButtonDeck.Forms.MainForm.testando(value);
+            Globals.launcher_principal.ShadedPanel1.Invoke((MethodInvoker)delegate {
+            //Globals.launcher_principal.ShadedPanel1.Controls.Clear();
             Label teste = new Label()
             {
                 Padding = categoryPadding,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = categoryFont,
                 Dock = DockStyle.Top,
-                Text = name + " ...............",
+                Text = name,
+                Tag = "header",
 
             };
-            parent.Controls.Add(teste);
-            parent.Refresh();
-            Debug.WriteLine("GRANDO SIDEBAR " + name);
-            return "";
+
+
+                FolderAddAction testando = new FolderAddAction();
+                FolderAddAction.name = name;
+             
+               Debug.WriteLine("RRR" + testando.GetActionName());
+                
+                // Globals.launcher_principal.ShadedPanel1.Controls.Add(teste);
+               Globals.launcher_principal.ShadedPanel1.Refresh();
+
+                var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
+
+                List<Control> toAdd = new List<Control>();
+
+
+
+
+                foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory)))
+                {
+                    var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i.IsPlugin() == true);
+                    if (enumItems.Any())
+                    {
+                        toAdd.Add(new Label()
+                        {
+                            Padding = categoryPadding,
+                            TextAlign = ContentAlignment.MiddleLeft,
+                            Font = categoryFont,
+                            Dock = DockStyle.Top,
+                            Text = enumItem.ToString(),
+                            Tag = "header",
+                            Height = TextRenderer.MeasureText(enumItem.ToString(), categoryFont).Height
+                        });
+
+
+                        foreach (var i2 in enumItems)
+                        {
+                            Label item = new Label()
+                            {
+                                Padding = itemPadding,
+                                TextAlign = ContentAlignment.MiddleLeft,
+                                Font = itemFont,
+                                Dock = DockStyle.Top,
+                                Text = i2.GetActionName(),
+                                Height = TextRenderer.MeasureText(i2.GetActionName(), itemFont).Height,
+                                Tag = i2,
+
+                            };
+                            //    Debug.WriteLine("TAG VINDO: " + i2);
+                            item.MouseDown += (s, ee) => {
+                                if (item.Tag is AbstractDeckAction act)
+                                    item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
+                            };
+                            toAdd.Add(item);
+                        }
+                    }
+                }
+                toAdd.AsEnumerable().Reverse().All(m => {
+                    Globals.launcher_principal.ShadedPanel1.Controls.Add(m);
+                    return true;
+                });
+                Debug.WriteLine("GRANDO SIDEBAR " + name);
+            });
+            //   return "";
         }
         private void UpdateIcon(bool shouldUpdateIcon)
         {

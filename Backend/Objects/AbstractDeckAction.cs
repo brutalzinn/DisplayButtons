@@ -55,6 +55,11 @@ namespace NickAc.Backend.Objects
      
         public abstract DeckActionCategory GetActionCategory();
         public abstract string GetActionName();
+        public virtual bool IsPlugin()
+        {
+
+            return false ;
+        }
         [Obsolete]
         public virtual bool OnButtonClick(DeckDevice deckDevice) {
             return false;

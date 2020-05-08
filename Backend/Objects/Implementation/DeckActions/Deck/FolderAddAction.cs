@@ -6,24 +6,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace NickAc.Backend.Objects.Implementation.DeckActions.General
 {
     public class FolderAddAction : AbstractDeckAction
     {
+      
+   [XmlIgnore]
+        public static string UniqueIdentifier { get; private set; }
+
+        public override bool IsPlugin()
+        {
+            return true;
+        }
+        public FolderAddAction()
+        {
+            UniqueIdentifier = new Guid().ToString();
+           // name = input;
+        }
+       
 
         [ActionPropertyInclude]
         [ActionPropertyDescription("name")]
-        public static string name { get; set; } = "teste";
-
-        public  void update(string result)
-        {
-            Debug.WriteLine("ATUALIZANDO.. " + result);
-            name = result;
-
-     
-        }
-
+          public static string name { get; set; } = "teste";
         public void ToExecuteHelper()
         {
         
