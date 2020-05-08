@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\Fonts\Officecodepro - SIL Open Font License.txt" />
+    <None Remove="Data\Graphics\scribebot.ico" />
+    <None Remove="Data\Graphics\scribebot_logo.png" />
+    <None Remove="Library Data\ChromeDriver\chromedriver.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\Fonts\Officecodepro - SIL Open Font License.txt" />
+    <Content Include="Data\Graphics\scribebot.ico" />
+    <Content Include="Data\Graphics\scribebot_logo.png" />
+    <Content Include="Library Data\ChromeDriver\chromedriver.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Interface\PackageEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Interface\PackageEditor.Designer.cs">
+      <DependentUpon>PackageEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Interface\PackageInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Interface\PackageInfo.Designer.cs">
+      <DependentUpon>PackageInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Interface\PackageInfoMinimal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Interface\PackageInfoMinimal.Designer.cs">
+      <DependentUpon>PackageInfoMinimal.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Interface\Prompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Interface\Prompt.Designer.cs">
+      <DependentUpon>Prompt.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Interface\Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Interface\Window.Designer.cs">
+      <DependentUpon>Window.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Interface\PackageEditor.resx">
+      <DependentUpon>PackageEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Interface\PackageInfo.resx">
+      <DependentUpon>PackageInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Interface\PackageInfoMinimal.resx">
+      <DependentUpon>PackageInfoMinimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Interface\Prompt.resx">
+      <DependentUpon>Prompt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Interface\Window.resx">
+      <DependentUpon>Window.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
