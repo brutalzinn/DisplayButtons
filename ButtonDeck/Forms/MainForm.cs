@@ -1119,7 +1119,7 @@ if(abacate is DynamicDeckFolder PP)
 
 
             fim:;
-
+            root = 0;
          
 
 
@@ -1271,7 +1271,7 @@ parent.Controls.Add(item);
 
 
             foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory))) {
-            var enumItems = items.Where(i => i.GetActionCategory() == enumItem);
+            var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i.IsPlugin() == false);
             if (enumItems.Any()) {
                 toAdd.Add(new Label()
                 {
@@ -1729,7 +1729,7 @@ parent.Controls.Add(item);
 
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public static  void button_creator(string name_button, String[] buttondowm, String[] buttonup, string category)
+        public static  void button_creator(string name_button, MoonSharp.Interpreter.ScriptFunctionDelegate buttondowm, string buttonup, string category)
         {
 
             Padding categoryPadding = new Padding(5, 0, 0, 0);
@@ -1754,7 +1754,9 @@ parent.Controls.Add(item);
 
                 FolderAddAction testando = new FolderAddAction();
                 FolderAddAction.name = name_button;
+
                 FolderAddAction.LuaExecuteButtonDown = buttondowm;
+              //  FolderAddAction.LuaExecuteButtonDown = //buttondowm;
                 FolderAddAction.DeckActionCategory_string = category;
 
 

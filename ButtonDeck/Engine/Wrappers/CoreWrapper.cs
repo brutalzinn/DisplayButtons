@@ -23,19 +23,32 @@ namespace ScribeBot.Engine.Wrappers
    
        
    
+  [MoonSharpUserData]
+     class coreEvents
+    {
+
+        public event EventHandler SomethingHappened;
+
+        public void RaiseTheEvent()
+        {
+            if (SomethingHappened != null)
+                SomethingHappened(this, EventArgs.Empty);
+        }
+
+    }
     [MoonSharpUserData]
     static class CoreWrapper
     {
 
-        public static void creator_button(string name_button,  String[] buttondowm, String[] buttonup,string category)
+        public static void creator_button(string name_button, MoonSharp.Interpreter.ScriptFunctionDelegate buttondowm, string buttonup,string category)
            
         {
             ButtonDeck.Forms.MainForm.button_creator(name_button, buttondowm, buttonup,category);
 
 
         }
-      
 
+    
         public static string Version => Core.Version;
       
         public static void ProcessConsoleInput() => Core.ProcessConsoleInput();
