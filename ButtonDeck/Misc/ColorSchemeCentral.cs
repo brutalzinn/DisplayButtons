@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static NickAc.Backend.Utils.AppSettings;
+using static ButtonDeck.Backend.Utils.AppSettings;
 
 namespace ButtonDeck.Misc
 {

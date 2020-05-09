@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ButtonDeck.Misc;
 using ButtonDeck.Controls;
-using NickAc.Backend.Utils;
+using ButtonDeck.Backend.Utils;
 using NickAc.ModernUIDoneRight.Utils;
 
 namespace ButtonDeck.Forms.FirstSetup

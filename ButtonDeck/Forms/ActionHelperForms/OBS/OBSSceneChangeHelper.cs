@@ -1,5 +1,6 @@
-﻿using NickAc.Backend.Objects.Implementation.DeckActions.OBS;
-using NickAc.Backend.Utils;
+﻿using ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS;
+using ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS;
+using ButtonDeck.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

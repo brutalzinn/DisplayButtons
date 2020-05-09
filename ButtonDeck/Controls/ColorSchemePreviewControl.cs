@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static NickAc.Backend.Utils.AppSettings;
+using static ButtonDeck.Backend.Utils.AppSettings;
 using ButtonDeck.Misc;
 
 namespace ButtonDeck.Controls
@@ -68,7 +68,7 @@ namespace ButtonDeck.Controls
         }
 
         private ApplicationColorScheme _appTheme = ColorSchemeCentral.Neptune;
-        private AppTheme _underlyingAppTheme = NickAc.Backend.Utils.AppSettings.AppTheme.Neptune;
+        private AppTheme _underlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
 
         protected override void OnLoad(EventArgs e)
         {

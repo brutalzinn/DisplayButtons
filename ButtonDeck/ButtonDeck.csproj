@@ -40,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +50,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>button-deck.ico</ApplicationIcon>
@@ -63,8 +65,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.16.1.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\packages\Magick.NET-Q16-AnyCPU.7.16.1\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
+    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.17.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET-Q16-AnyCPU.7.17.0\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ModernUIDoneRight">
       <HintPath>..\ModernUIDoneRight.dll</HintPath>
@@ -77,6 +80,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="obs-websocket-dotnet, Version=4.2.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\obs-websocket-dotnet.4.2.0-beta3\lib\net40\obs-websocket-dotnet.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
@@ -102,6 +108,7 @@
     <Reference Include="System.IO.Compression.FileSystem">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq">
       <Private>True</Private>
     </Reference>
@@ -135,11 +142,63 @@
     <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
+    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase">
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\Networking\Attributes\ArchitectureAttribute.cs" />
+    <Compile Include="Backend\Networking\Attributes\PacketArchitecture.cs" />
+    <Compile Include="Backend\Networking\Implementation\AlternativeHello.cs" />
+    <Compile Include="Backend\Networking\Implementation\ButtonInteractPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\DesktopDisconnectPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\DeviceIdentityPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\HeathbeatPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\HelloPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\SingleSlotImageChangePacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\SlotImageChangeChunkPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\SlotImageClearChunkPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\SlotImageClearPacket.cs" />
+    <Compile Include="Backend\Networking\INetworkPacket.cs" />
+    <Compile Include="Backend\Networking\IO\DataInputStream.cs" />
+    <Compile Include="Backend\Networking\IO\DataOutputStream.cs" />
+    <Compile Include="Backend\Networking\TcpLib\DeckServiceProvider.cs" />
+    <Compile Include="Backend\Networking\TcpLib\TcpLib.cs" />
+    <Compile Include="Backend\Objects\AbstractDeckAction.cs" />
+    <Compile Include="Backend\Objects\DeckImage.cs" />
+    <Compile Include="Backend\Objects\DeckImplementation.cs" />
+    <Compile Include="Backend\Objects\IDeckDevice.cs" />
+    <Compile Include="Backend\Objects\IDeckFolder.cs" />
+    <Compile Include="Backend\Objects\IDeckItem.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\Deck\FolderAddAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\General\ExecutableRunAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\General\KeyPressAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\General\KeyToggleAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\General\MediaKeyAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\Misc\IFTTTEventAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\SceneItemVisibilityAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\StartStopRecordingAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\StartStopStreamingAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\SwitchSceneAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\TestSceneMultiSwitch.cs" />
+    <Compile Include="Backend\Objects\Implementation\DynamicDeckFolder.cs" />
+    <Compile Include="Backend\Objects\Implementation\DynamicDeckItem.cs" />
+    <Compile Include="Backend\Utils\EnumUtils.cs" />
+    <Compile Include="Backend\Utils\Helper\DeckActionHelper.cs" />
+    <Compile Include="Backend\Utils\Helper\DeckItemHelper.cs" />
+    <Compile Include="Backend\Utils\Helper\SerializableDictionary.cs" />
+    <Compile Include="Backend\Utils\IFTTTWebHookClient.cs" />
+    <Compile Include="Backend\Utils\Misc\AppSettings.cs" />
+    <Compile Include="Backend\Utils\Misc\Constants.cs" />
+    <Compile Include="Backend\Utils\Misc\DevicePersistManager.cs" />
+    <Compile Include="Backend\Utils\Misc\IFTTTWebhookProperties.cs" />
+    <Compile Include="Backend\Utils\Misc\ReflectiveEnumerator.cs" />
+    <Compile Include="Backend\Utils\Native\NativeKeyHandler.cs" />
+    <Compile Include="Backend\Utils\OBSUtils.cs" />
+    <Compile Include="Backend\Utils\XMLUtils.cs" />
     <Compile Include="Controls\ColorSchemePreviewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -365,6 +424,19 @@
     <None Include="Data\Packages\ExamplePackage\info.json" />
     <None Include="Data\Packages\ExamplePackage\main.lua" />
     <None Include="Data\User Data\.gitignore" />
+    <None Include="Backend\Resources\img_item_media_back.png" />
+    <None Include="Backend\Resources\img_item_media_next.png" />
+    <None Include="Backend\Resources\img_item_media_pause.png" />
+    <None Include="Backend\Resources\img_item_media_play.png" />
+    <None Include="Backend\Resources\img_item_media_playpause.png" />
+    <None Include="Backend\Resources\img_item_media_stop.png" />
+    <None Include="Backend\Resources\img_item_media_volumedown.png" />
+    <None Include="Backend\Resources\img_item_media_volumeoff.png" />
+    <None Include="Backend\Resources\img_item_media_volumeup.png" />
+    <None Include="Backend\Resources\img_item_start_recording.png" />
+    <None Include="Backend\Resources\img_item_start_stream.png" />
+    <None Include="Backend\Resources\img_item_stop_recording.png" />
+    <None Include="Backend\Resources\img_item_stop_stream.png" />
     <Content Include="info.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -382,12 +454,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Backend\Backend.csproj">
-      <Project>{44d6ff4b-95d7-40a1-9934-dbe27157e6bb}</Project>
-      <Name>Backend</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ic_settings_black_48dp_2x.png">
@@ -442,6 +508,19 @@
     <Content Include="Data\Graphics\scribebot.ico" />
     <Content Include="Data\Graphics\scribebot_logo.png" />
     <Content Include="Library Data\ChromeDriver\chromedriver.exe" />
+    <None Include="Resources\img_item_stop_stream.png" />
+    <None Include="Resources\img_item_media_back.png" />
+    <None Include="Resources\img_item_media_next.png" />
+    <None Include="Resources\img_item_media_pause.png" />
+    <None Include="Resources\img_item_media_play.png" />
+    <None Include="Resources\img_item_media_playpause.png" />
+    <None Include="Resources\img_item_media_stop.png" />
+    <None Include="Resources\img_item_media_volumedown.png" />
+    <None Include="Resources\img_item_media_volumeoff.png" />
+    <None Include="Resources\img_item_media_volumeup.png" />
+    <None Include="Resources\img_item_start_recording.png" />
+    <None Include="Resources\img_item_start_stream.png" />
+    <None Include="Resources\img_item_stop_recording.png" />
     <Content Include="Updater.exe" />
     <Resource Include="Resources\Stop_grey_16x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

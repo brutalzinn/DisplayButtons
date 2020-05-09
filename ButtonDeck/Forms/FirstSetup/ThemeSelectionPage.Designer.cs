@@ -85,7 +85,7 @@
             this.colorSchemePreviewControl2.Name = "colorSchemePreviewControl2";
             this.colorSchemePreviewControl2.Size = new System.Drawing.Size(177, 167);
             this.colorSchemePreviewControl2.TabIndex = 1;
-            this.colorSchemePreviewControl2.UnderlyingAppTheme = NickAc.Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl2.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
             this.colorSchemePreviewControl2.Click += new System.EventHandler(this.ColorSchemePreviewControl2_Click);
             // 
             // colorSchemePreviewControl1
@@ -97,7 +97,7 @@
             this.colorSchemePreviewControl1.Name = "colorSchemePreviewControl1";
             this.colorSchemePreviewControl1.Size = new System.Drawing.Size(177, 167);
             this.colorSchemePreviewControl1.TabIndex = 1;
-            this.colorSchemePreviewControl1.UnderlyingAppTheme = NickAc.Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl1.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
             this.colorSchemePreviewControl1.Click += new System.EventHandler(this.ColorSchemePreviewControl2_Click);
             // 
             // colorSchemePreviewControl3
@@ -109,7 +109,7 @@
             this.colorSchemePreviewControl3.Name = "colorSchemePreviewControl3";
             this.colorSchemePreviewControl3.Size = new System.Drawing.Size(177, 167);
             this.colorSchemePreviewControl3.TabIndex = 1;
-            this.colorSchemePreviewControl3.UnderlyingAppTheme = NickAc.Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl3.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
             this.colorSchemePreviewControl3.Click += new System.EventHandler(this.ColorSchemePreviewControl2_Click);
             // 
             // ThemeSelectionPage

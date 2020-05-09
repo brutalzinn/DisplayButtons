@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NickAc.Backend.Utils;
+using ButtonDeck.Backend.Utils;
 using Microsoft.Win32;
 
 namespace ButtonDeck.Forms.FirstSetup

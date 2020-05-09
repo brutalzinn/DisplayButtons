@@ -1,6 +1,8 @@
-﻿using ButtonDeck.Misc;
-using NickAc.Backend.Objects;
-using NickAc.Backend.Utils;
+﻿using ButtonDeck.Backend.Objects;
+using ButtonDeck.Backend.Utils;
+using ButtonDeck.Misc;
+using ButtonDeck.Backend.Objects;
+using ButtonDeck.Backend.Utils;
 using NickAc.ModernUIDoneRight.Objects;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static NickAc.Backend.Utils.DevicePersistManager;
+using static ButtonDeck.Backend.Utils.DevicePersistManager;
 
 namespace ButtonDeck.Forms
 {

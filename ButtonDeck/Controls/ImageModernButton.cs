@@ -1,8 +1,8 @@
 ﻿using ButtonDeck.Forms;
-using NickAc.Backend.Networking;
-using NickAc.Backend.Networking.TcpLib;
-using NickAc.Backend.Objects;
-using NickAc.Backend.Utils;
+using ButtonDeck.Backend.Networking;
+using ButtonDeck.Backend.Networking.TcpLib;
+using ButtonDeck.Backend.Objects;
+using ButtonDeck.Backend.Utils;
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
@@ -12,8 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NickAc.Backend.Networking.Implementation;
-using NickAc.Backend.Objects.Implementation;
+using ButtonDeck.Backend.Networking.Implementation;
+using ButtonDeck.Backend.Objects.Implementation;
+
 
 namespace ButtonDeck.Controls
 {

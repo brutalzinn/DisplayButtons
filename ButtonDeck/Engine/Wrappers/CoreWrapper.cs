@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ButtonDeck;
 using MoonSharp.Interpreter;
-using NickAc.Backend.Objects.Implementation.DeckActions.General;
+using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
 using ScribeBot.Engine.Containers;
 
 namespace ScribeBot.Engine.Wrappers
@@ -27,13 +27,15 @@ namespace ScribeBot.Engine.Wrappers
     static class CoreWrapper
     {
 
-        public static void testando(string value)
+        public static void creator_button(string name_button,  String[] buttondowm, String[] buttonup,string category)
            
         {
-            ButtonDeck.Forms.MainForm.testando(value);
+            ButtonDeck.Forms.MainForm.button_creator(name_button, buttondowm, buttonup,category);
 
 
         }
+      
+
         public static string Version => Core.Version;
       
         public static void ProcessConsoleInput() => Core.ProcessConsoleInput();

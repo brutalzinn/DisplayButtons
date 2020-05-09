@@ -1,8 +1,8 @@
 ﻿using ButtonDeck.Forms;
-using NickAc.Backend.Networking;
-using NickAc.Backend.Networking.Implementation;
-using NickAc.Backend.Networking.TcpLib;
-using NickAc.Backend.Utils;
+using ButtonDeck.Backend.Networking;
+using ButtonDeck.Backend.Networking.Implementation;
+using ButtonDeck.Backend.Networking.TcpLib;
+using ButtonDeck.Backend.Utils;
 using NickAc.ModernUIDoneRight.Forms;
 using System;
 using System.Collections.Generic;

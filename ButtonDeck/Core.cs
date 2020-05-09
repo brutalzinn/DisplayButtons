@@ -15,10 +15,10 @@ using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
 using Newtonsoft.Json;
 using ScribeBot.Engine.Wrappers;
-using static NickAc.Backend.Objects.AbstractDeckAction;
-using NickAc.Backend.Objects;
-using NickAc.Backend.Utils;
-using NickAc.Backend.Objects.Implementation.DeckActions.General;
+using static ButtonDeck.Backend.Objects.AbstractDeckAction;
+using ButtonDeck.Backend.Objects;
+using ButtonDeck.Backend.Utils;
+using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
 
 namespace ScribeBot
 {
@@ -175,10 +175,10 @@ namespace ScribeBot
         /// <param name="args">Strings prepended by colors ex: Color.Red, "text", Color.Yellow, "text2".</param>
         public static void Write(params object[] args)
         {
-            MainWindow?.Invoke(new Action(() =>
-            {
-                MainWindow.ConsoleOutput.AppendText(args);
-            }));
+         //   MainWindow?.Invoke(new Action(() =>
+         //   {
+               Debug.WriteLine(args);
+         //   }));
 
             var text = new StringBuilder();
             for (int i = 0; i < args.Length; i += 2)

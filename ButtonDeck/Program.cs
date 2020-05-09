@@ -2,7 +2,7 @@
 
 using ButtonDeck.Forms;
 using ButtonDeck.Misc;
-using NickAc.Backend.Utils;
+using ButtonDeck.Backend.Utils;
 using ScribeBot;
 using System;
 using System.Collections.Generic;

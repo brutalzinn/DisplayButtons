@@ -1,13 +1,14 @@
-﻿using ButtonDeck.Controls;
+﻿using ButtonDeck.Backend.Networking.Implementation;
+using ButtonDeck.Backend.Objects;
+using ButtonDeck.Backend.Objects.Implementation;
+using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
+using ButtonDeck.Backend.Utils;
+using ButtonDeck.Controls;
 using ButtonDeck.Misc;
 using ButtonDeck.Properties;
 using ImageMagick;
-using NickAc.Backend.Networking;
-using NickAc.Backend.Networking.Implementation;
-using NickAc.Backend.Objects;
-using NickAc.Backend.Objects.Implementation;
-using NickAc.Backend.Objects.Implementation.DeckActions.General;
-using NickAc.Backend.Utils;
+using ButtonDeck.Backend.Networking;
+
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Objects;
 using ScribeBot;
@@ -24,7 +25,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using static NickAc.Backend.Objects.AbstractDeckAction;
+using static ButtonDeck.Backend.Objects.AbstractDeckAction;
+
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -1727,7 +1729,7 @@ parent.Controls.Add(item);
 
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public static  void testando(string name)
+        public static  void button_creator(string name_button, String[] buttondowm, String[] buttonup, string category)
         {
 
             Padding categoryPadding = new Padding(5, 0, 0, 0);
@@ -1744,16 +1746,19 @@ parent.Controls.Add(item);
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = categoryFont,
                 Dock = DockStyle.Top,
-                Text = name,
+                Text = name_button,
                 Tag = "header",
 
             };
 
 
                 FolderAddAction testando = new FolderAddAction();
-                FolderAddAction.name = name;
-             
-               Debug.WriteLine("RRR" + testando.GetActionName());
+                FolderAddAction.name = name_button;
+                FolderAddAction.LuaExecuteButtonDown = buttondowm;
+                FolderAddAction.DeckActionCategory_string = category;
+
+
+                Debug.WriteLine("RRR" + testando.GetActionName());
                 
                 // Globals.launcher_principal.ShadedPanel1.Controls.Add(teste);
                Globals.launcher_principal.ShadedPanel1.Refresh();
@@ -1808,7 +1813,7 @@ parent.Controls.Add(item);
                     Globals.launcher_principal.ShadedPanel1.Controls.Add(m);
                     return true;
                 });
-                Debug.WriteLine("GRANDO SIDEBAR " + name);
+                Debug.WriteLine("GRANDO SIDEBAR " + name_button);
             });
             //   return "";
         }
