@@ -43,7 +43,7 @@ namespace ScribeBot.Engine.Wrappers
         public static void creator_button(string name_button, MoonSharp.Interpreter.ScriptFunctionDelegate buttondowm, string buttonup,string category)
            
         {
-            ButtonDeck.Forms.MainForm.button_creator(name_button, buttondowm, buttonup,category);
+         //   ButtonDeck.Forms.MainForm.button_creator(name_button, buttondowm, buttonup,category);
 
 
         }

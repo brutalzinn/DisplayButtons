@@ -214,12 +214,13 @@ namespace ButtonDeck.Forms
                 p.NameLabel.Text = packageInfo["Name"];
                 p.AuthorLabel.Text = packageInfo["Authors"];
                 p.DescLabel.Text = packageInfo["Description"];
+               p.Namespace.Text = packageInfo["Namespace"];
                 p.Package = x;
 
                 p.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
 
            //     InstalledPackagesList.Controls.Add(p);
-                x.Run(true);
+               x.Run(true);
               
             });
 
@@ -1729,8 +1730,11 @@ parent.Controls.Add(item);
 
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public static  void button_creator(string name_button, MoonSharp.Interpreter.ScriptFunctionDelegate buttondowm, string buttonup, string category)
+        public static  void button_creator(string name,string name_space, string script)
         {
+            FolderAddAction testando = new FolderAddAction();
+            FolderAddAction.name = name;
+            FolderAddAction.script = script;
 
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(Globals.launcher_principal.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
@@ -1746,18 +1750,18 @@ parent.Controls.Add(item);
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = categoryFont,
                 Dock = DockStyle.Top,
-                Text = name_button,
+                Text = name,
                 Tag = "header",
 
             };
 
 
-                FolderAddAction testando = new FolderAddAction();
-                FolderAddAction.name = name_button;
+              //  FolderAddAction testando = new FolderAddAction();
+              //  FolderAddAction.name = name_button;
 
-                FolderAddAction.LuaExecuteButtonDown = buttondowm;
+           //     FolderAddAction.LuaExecuteButtonDown = buttondowm;
               //  FolderAddAction.LuaExecuteButtonDown = //buttondowm;
-                FolderAddAction.DeckActionCategory_string = category;
+           //     FolderAddAction.DeckActionCategory_string = category;
 
 
                 Debug.WriteLine("RRR" + testando.GetActionName());
@@ -1815,7 +1819,7 @@ parent.Controls.Add(item);
                     Globals.launcher_principal.ShadedPanel1.Controls.Add(m);
                     return true;
                 });
-                Debug.WriteLine("GRANDO SIDEBAR " + name_button);
+                Debug.WriteLine("GRANDO SIDEBAR " + name);
             });
             //   return "";
         }

@@ -38,6 +38,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.runButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
+            this.NamespaceLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -56,12 +57,15 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 100);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 121);
             this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // tableLayoutPanel2
             // 
@@ -134,6 +138,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.runButton, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.editButton, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.NamespaceLabel, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(1, 67);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -170,6 +175,19 @@ namespace ScribeBot.Interface
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
+            // NamespaceLabel
+            // 
+            this.NamespaceLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NamespaceLabel.AutoSize = true;
+            this.NamespaceLabel.Location = new System.Drawing.Point(67, 0);
+            this.NamespaceLabel.Name = "NamespaceLabel";
+            this.NamespaceLabel.Size = new System.Drawing.Size(130, 32);
+            this.NamespaceLabel.TabIndex = 1;
+            this.NamespaceLabel.Text = "label1";
+            this.NamespaceLabel.Click += new System.EventHandler(this.label1_Click);
+            // 
             // PackageInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -181,12 +199,13 @@ namespace ScribeBot.Interface
             this.Margin = new System.Windows.Forms.Padding(5);
             this.MinimumSize = new System.Drawing.Size(150, 50);
             this.Name = "PackageInfo";
-            this.Size = new System.Drawing.Size(202, 100);
+            this.Size = new System.Drawing.Size(202, 121);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,14 +218,19 @@ namespace ScribeBot.Interface
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label authorLabel;
         private System.Windows.Forms.Label descLabel;
+        
+
         private TableLayoutPanel tableLayoutPanel3;
         private Button runButton;
         private Button editButton;
         private Package package;
+        private System.Windows.Forms.Label NamespaceLabel;
 
         public Label NameLabel { get => nameLabel; set => nameLabel = value; }
         public Label AuthorLabel { get => authorLabel; set => authorLabel = value; }
         public Label DescLabel { get => descLabel; set => descLabel = value; }
+
+        public Label Namespace { get => NamespaceLabel; set => NamespaceLabel = value; }
         public Button RunButton { get => runButton; set => runButton = value; }
         public Package Package { get => package; set => package = value; }
     }

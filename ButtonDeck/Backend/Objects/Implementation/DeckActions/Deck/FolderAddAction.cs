@@ -1,4 +1,5 @@
 ﻿using ButtonDeck.Backend.Utils;
+using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,7 +29,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
           public static string name { get; set; } = "teste";
 
         public static MoonSharp.Interpreter.ScriptFunctionDelegate LuaExecuteButtonDown { get; set; } = null;
-        public static string LuaExecuteButtonUP { get; set; } = "";
+        public static string script { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
         public void ToExecuteHelper()
         {
@@ -57,14 +58,20 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public override void OnButtonDown(DeckDevice deckDevice)
         {
-           // ScribeBot.Scripter.Environment.Call(ScribeBot.Scripter.Environment.Globals["ButtonDown"]);
-    
+
+            ScribeBot.Scripter.Execute(script);
+            DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
+
+            ScribeBot.Scripter.Environment.Call(luaFactFunction);
+            
         }
 
         public override void OnButtonUp(DeckDevice deckDevice)
         {
-            ScribeBot.Scripter.InjectLine(@LuaExecuteButtonUP.ToString());
+            ScribeBot.Scripter.Execute(script);
+           DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonUP");
 
+            ScribeBot.Scripter.Environment.Call(luaFactFunction);
         }
     }
 }

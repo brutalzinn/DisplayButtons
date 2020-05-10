@@ -38,12 +38,13 @@ namespace ScribeBot.Interface
                 p.NameLabel.Text = packageInfo["Name"];
                 p.AuthorLabel.Text = packageInfo["Authors"];
                 p.DescLabel.Text = packageInfo["Description"];
+               p.Namespace.Text = packageInfo["Namespace"];
                 p.Package = x;
 
                 p.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
 
                 InstalledPackagesList.Controls.Add(p);
-                x.Run(true);
+             //   x.Run(true);
                 p.RunButton.Click += (o, e) =>
                 {
                     x.Run(true);

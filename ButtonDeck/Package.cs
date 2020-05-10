@@ -9,6 +9,7 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
+using ButtonDeck.Backend.Objects;
 
 //TO-DO: Remake this entire class
 namespace ScribeBot
@@ -147,7 +148,27 @@ namespace ScribeBot
         /// Execute a package at specified entry point (defined inside info.json).
         /// </summary>
         /// <param name="silent">Defines whether console shouldn't output the executed code.</param>
-        public void Run(bool silent = true) => Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), silent);
+        //    public void Run(bool silent = true) => Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), silent);
+        public void Run(bool tt) {
+
+            
+         string pack = ReadFileContents(GetInfo()["EntryPoint"]);
+
+
+
+            DeckImplementation.packages.plugins_list.Add(new DeckImplementation.packages(GetInfo()["Name"], GetInfo()["Namespace"], GetInfo()["EntryPoint"]));
+           
+            
+            
+            }
+        
+
+
+
+        
+            
+            
+            
 
         /// <summary>
         /// Get files inside a package.
