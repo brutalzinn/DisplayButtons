@@ -27,8 +27,6 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [ActionPropertyInclude]
         [ActionPropertyDescription("name")]
           public static string name { get; set; } = "teste";
-
-        public static MoonSharp.Interpreter.ScriptFunctionDelegate LuaExecuteButtonDown { get; set; } = null;
         public static string script { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
         public void ToExecuteHelper()
@@ -58,20 +56,25 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public override void OnButtonDown(DeckDevice deckDevice)
         {
+ Debug.WriteLine("CONTINENTE");
+          
 
-            ScribeBot.Scripter.Execute(script);
-            DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
-
-            ScribeBot.Scripter.Environment.Call(luaFactFunction);
+           
+          //      ScribeBot.Scripter.Execute(script,false);
+        //    object functiontable = ScribeBot.Scripter.Environment.Globals["buttondown"];
+         //   ScribeBot.Scripter.Environment.Call(functiontable);
+            //  ScribeBot.Scripter.Environment.Call(DynValue.NewString("buttondown"));
             
+          
         }
 
         public override void OnButtonUp(DeckDevice deckDevice)
         {
-            ScribeBot.Scripter.Execute(script);
-           DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonUP");
+        //    ScribeBot.Scripter.Execute(script);
+       //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
 
-            ScribeBot.Scripter.Environment.Call(luaFactFunction);
+        //    DynValue res = ScribeBot.Scripter.Environment.Call(luaFactFunction);
+         //   ScribeBot.Scripter.Execute(res.tos);
         }
     }
 }

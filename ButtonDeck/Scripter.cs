@@ -60,10 +60,10 @@ namespace ScribeBot
             Environment.Globals["webdriver"] = typeof(WebDriverProxy);
             Environment.Globals["bit"] = typeof(BitWrapper);
             Environment.Globals["teste"] = typeof(coreEvents);
-
-            //    Environment.Globals["teste"] = typeof(CoreWrapperVoid);
-            //Types
-            Environment.Globals["Color"] = new ColorContainer();
+     //       Environment.Globals["teste"] = typeof(functio)
+         //    Environment.Globals["teste"] = typeof(CoreWrapperVoid);
+         //Types
+         Environment.Globals["Color"] = new ColorContainer();
             Environment.Globals["Point"] = new PointContainer();
             Environment.Globals["Size"] = new SizeContainer();
 

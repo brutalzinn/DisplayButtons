@@ -38,7 +38,7 @@ namespace ScribeBot.Interface
                 p.NameLabel.Text = packageInfo["Name"];
                 p.AuthorLabel.Text = packageInfo["Authors"];
                 p.DescLabel.Text = packageInfo["Description"];
-               p.Namespace.Text = packageInfo["Namespace"];
+        //       p.Namespace.Text = packageInfo["Namespace"];
                 p.Package = x;
 
                 p.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
