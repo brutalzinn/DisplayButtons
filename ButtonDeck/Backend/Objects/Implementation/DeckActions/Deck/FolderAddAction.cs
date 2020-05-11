@@ -29,9 +29,24 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
           public static string name { get; set; } = "teste";
         public static string script { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
+        public string ToExecute { get; set; } = "";
+
         public void ToExecuteHelper()
         {
-        
+            var originalToExec = new String(ToExecute.ToCharArray());
+            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ExecutableRunHelper")) as Form;
+            var execAction = CloneAction() as ExecutableRunAction;
+            execAction.ToExecute = ToExecute;
+            form.ModifiableAction = execAction;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ToExecute = form.ModifiableAction.ToExecute;
+            }
+            else
+            {
+                ToExecute = originalToExec;
+            }
         }
 
         public override AbstractDeckAction CloneAction()
@@ -60,9 +75,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
           
 
            
-          //      ScribeBot.Scripter.Execute(script,false);
-        //    object functiontable = ScribeBot.Scripter.Environment.Globals["buttondown"];
-         //   ScribeBot.Scripter.Environment.Call(functiontable);
+                ScribeBot.Scripter.Execute(script,false);
+           object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
+          ScribeBot.Scripter.Environment.Call(functiontable);
             //  ScribeBot.Scripter.Environment.Call(DynValue.NewString("buttondown"));
             
           
@@ -70,11 +85,13 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public override void OnButtonUp(DeckDevice deckDevice)
         {
-        //    ScribeBot.Scripter.Execute(script);
-       //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
-
-        //    DynValue res = ScribeBot.Scripter.Environment.Call(luaFactFunction);
-         //   ScribeBot.Scripter.Execute(res.tos);
+            //    ScribeBot.Scripter.Execute(script);
+            //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
+            ScribeBot.Scripter.Execute(script, false);
+            object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonUP"];
+            ScribeBot.Scripter.Environment.Call(functiontable);
+            //    DynValue res = ScribeBot.Scripter.Environment.Call(luaFactFunction);
+            //   ScribeBot.Scripter.Execute(res.tos);
         }
     }
 }

@@ -177,8 +177,8 @@ namespace ScribeBot
         {
             MainWindow?.Invoke(new Action(() =>
             {
-               Debug.WriteLine(args);
-          }));
+                MainWindow.ConsoleOutput.AppendText(args);
+            }));
 
             var text = new StringBuilder();
             for (int i = 0; i < args.Length; i += 2)

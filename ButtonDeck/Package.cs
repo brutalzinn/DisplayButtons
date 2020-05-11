@@ -149,8 +149,8 @@ namespace ScribeBot
         /// Execute a package at specified entry point (defined inside info.json).
         /// </summary>
         /// <param name="silent">Defines whether console shouldn't output the executed code.</param>
-         public void Run(bool silent = true) => Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), silent);
-        public void tttt(bool tt = true) {
+     //    public void Run(bool silent = true) => Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), silent);
+        public void Run(bool tt = true) {
 
 
    //         Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), tt);
@@ -158,7 +158,7 @@ namespace ScribeBot
 
 
             // DeckImplementation.packages.plugins_list.Add(new DeckImplementation.packages(GetInfo()["Name"], GetInfo()["Namespace"], ReadFileContents(GetInfo()["EntryPoint"])));
-          //  MainForm.button_creator(GetInfo()["Name"], GetInfo()["Namespace"], $"{ReadFileContents(GetInfo()["EntryPoint"])}");
+         MainForm.button_creator(GetInfo()["Name"], GetInfo()["Namespace"], $"{ReadFileContents(GetInfo()["EntryPoint"])}");
           //  Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), false);
        //     Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), tt);
 
