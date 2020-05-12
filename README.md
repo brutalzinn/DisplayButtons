@@ -2,7 +2,7 @@
 Uma forma simples de executar macros utilizando o celular.
 
 
-Esse projeto é um fork do projeto de [MatthewHaskett](https://www.github.com/MatthewHaskett/)
+Esse projeto é um fork do projeto de [NickAcPT](https://github.com/NickAcPT)
 
 
 
