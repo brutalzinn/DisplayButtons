@@ -1,9 +1,17 @@
 # ButtonDeck-Windows
-An open-source replacement for the StreamDeck by Elgato.
+Uma forma simples de executar macros utilizando o celular.
 
 
-Esse projeto é um fork do projeto de MatthewHaskett
-This project uses [TcpLib](https://www.codeproject.com/Articles/13232/A-very-basic-TCP-server-written-in-C) by [edrazy](https://www.codeproject.com/Members/edrazy) 
+Esse projeto é um fork do projeto de [MatthewHaskett](https://www.github.com/MatthewHaskett/)
 
-## Contributors
+
+
+
+
+
+
+
+
+
+## Contribuidores
  - [MatthewHaskett](https://www.github.com/MatthewHaskett/) - Helped with the protocol side of the app.
