@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ButtonDeck.Engine.Wrappers
 {
@@ -18,7 +19,28 @@ namespace ButtonDeck.Engine.Wrappers
             myLists.Add(key, value);
 
         }
-        
+        public void setFormControl(string name, string value, int posX, int posY, string type)
+        {
+
+            switch (type)
+            {
+                case "textbox":
+                    Forms.ActionHelperForms.ActionPlugin teste = new Forms.ActionHelperForms.ActionPlugin();
+                    System.Windows.Forms.TextBox txt = new System.Windows.Forms.TextBox();
+
+                    txt.Text = value;
+                    teste.Controls.Add(txt);
+
+
+                        break;
+
+
+
+            }
+
+
+        }
+           
             public static string getPlayerString(string key, bool keyorpair)
         {
             try

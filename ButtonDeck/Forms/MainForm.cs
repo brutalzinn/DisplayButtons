@@ -511,11 +511,17 @@ namespace ButtonDeck.Forms
 
 
 
-
             }
             CurrentDevice.CheckCurrentFolder();
             if (sendToDevice)
-                SendItemsToDevice(CurrentDevice, folder);
+                {
+                //    MagickImage img_teste = new MagickImage(item?.GetItemImage().Bitmap);
+
+
+SendItemsToDevice(CurrentDevice, folder);
+
+                }
+
         }
 
     }
@@ -700,7 +706,7 @@ namespace ButtonDeck.Forms
         SendItemsToDevice(device, device.CurrentFolder);
     }
 
-    private static void SendItemsToDevice(DeckDevice device, IDeckFolder folder)
+    private static void SendItemsToDevice(DeckDevice device, IDeckFolder folder, IMagickImage image_receivd = null)
     {
         var con = device.GetConnection();
         if (con != null) {
@@ -716,22 +722,28 @@ namespace ButtonDeck.Forms
                     item = items[i];
                     addedItems.Add(folder.GetItemIndex(item));
                 }
-                if (item == null) continue;
+                    if (image_receivd == null) break;
+                    if (item == null) continue;
 
-                bool isFolder = item is IDeckFolder;
-                var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
-                var seri = image.BitmapSerialized;
-                ///     ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+                    var teste = new DeckImage(image_receivd.ToBitmap());
 
+                    //     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
+                    // var seri = image.BitmapSerialized;
+                    ///     ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+                    //  IDeckFolder folder_t = CurrentDevice?.CurrentFolder;
+                   // var seri = teste.BitmapSerialized;
 
+                        packet.AddToQueue(folder.GetItemIndex(item), teste);
+                      //  con.SendPacket(packet);
+                    
 
-                //   teste.modernButton1.NormalImage;
+                    //   teste.modernButton1.NormalImage;
 
-                //     packet.AddToQueue(folder.GetItemIndex(item), image);
-            }
-            con.SendPacket(packet);
+                    //     packet.AddToQueue(folder.GetItemIndex(item), image);
+                }
 
-            var clearPacket = new SlotImageClearChunkPacket();
+                con.SendPacket(packet);
+                var clearPacket = new SlotImageClearChunkPacket();
             for (int i = 1; i < 16; i++) {
                 if (addedItems.Contains(i)) continue;
                 clearPacket.AddToQueue(i);
@@ -1184,13 +1196,16 @@ if(abacate is DynamicDeckFolder PP)
                 IDeckFolder folder = CurrentDevice.MainFolder;
 
 
-              
-              // if(folder is DynamicDeckFolder DF)
-                GetAllFolders(folder.GetSubFolders()[root]);
-          
+              if(folder != null)
+                {
 
-              
+                    GetAllFolders(folder.GetSubFolders()[root]);
 
+                }
+                    // if(folder is DynamicDeckFolder DF)
+
+
+            
 
                 //ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
                 // List<DynamicDeckFolder> items =  folder.GetSubFolders();
@@ -1526,27 +1541,27 @@ parent.Controls.Add(item);
                 //  item.GetItemImage().BitmapSerialized = converterDemo( image.ToBitmap());
 
 
-                var con = CurrentDevice.GetConnection();
-                if (con != null)
-                {
-                    var packet = new SlotImageChangeChunkPacket();
-                    var teste = new DeckImage(image.ToBitmap());
-                    //   image.Annotate("caption:This is gergerga test.", Gravity.South); // caption:"This is a test."
-                    // write the image to the appropriate directory
-                    // image.Write(@"D:\testimage.jpg");
+                /// var con = CurrentDevice.GetConnection();
+                // if (con != null)
+                // {
+                //  var packet = new SlotImageChangeChunkPacket();
+                var teste = new DeckImage(image.ToBitmap());
+                //   image.Annotate("caption:This is gergerga test.", Gravity.South); // caption:"This is a test."
+                // write the image to the appropriate directory
+                // image.Write(@"D:\testimage.jpg");
+                SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentFolder, image);
+                //    packet.AddToQueue(folder.GetItemIndex(item), teste);
 
-                    packet.AddToQueue(folder.GetItemIndex(item), teste);
-
-                    con.SendPacket(packet);
+                //    con.SendPacket(packet);
 
 
-                }
+                //    }
+                //  }
+
+                //  m.WriteTo(Response.OutputStream);
+
+
             }
- 
-            //  m.WriteTo(Response.OutputStream);
-
-
-
         }
 
         private void Write_name_Image( string text, Bitmap imageFilePath, float x, float y, string font, int size)
