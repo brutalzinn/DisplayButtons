@@ -227,8 +227,15 @@
     <Compile Include="Engine\Wrappers\DatabaseWrapper.cs" />
     <Compile Include="Engine\Wrappers\InputWrapper.cs" />
     <Compile Include="Engine\Wrappers\InterfaceWrapper.cs" />
+    <Compile Include="Engine\Wrappers\PluginWrapper.cs" />
     <Compile Include="Engine\Wrappers\ScreenWrapper.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Forms\ActionHelperForms\ActionPlugin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ActionHelperForms\ActionPlugin.Designer.cs">
+      <DependentUpon>ActionPlugin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ActionHelperForms\ExecutableRunHelper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -349,6 +356,9 @@
     <Compile Include="Workshop.cs" />
     <EmbeddedResource Include="Controls\ColorSchemePreviewControl.resx">
       <DependentUpon>ColorSchemePreviewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ActionHelperForms\ActionPlugin.resx">
+      <DependentUpon>ActionPlugin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\ExecutableRunHelper.resx">
       <DependentUpon>ExecutableRunHelper.cs</DependentUpon>

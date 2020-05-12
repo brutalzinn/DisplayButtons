@@ -150,15 +150,25 @@ namespace ScribeBot
         /// </summary>
         /// <param name="silent">Defines whether console shouldn't output the executed code.</param>
      //    public void Run(bool silent = true) => Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), silent);
-        public void Run(bool tt = true) {
+        public void Run(bool type = false) {
+
+            if (type)
+            {
+              Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), false);
 
 
-   //         Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), tt);
 
+            }
+            else
+            {
+
+
+         MainForm.button_creator(GetInfo()["Name"], GetInfo()["Namespace"], $"{ReadFileContents(GetInfo()["EntryPoint"])}");
+
+            }
 
 
             // DeckImplementation.packages.plugins_list.Add(new DeckImplementation.packages(GetInfo()["Name"], GetInfo()["Namespace"], ReadFileContents(GetInfo()["EntryPoint"])));
-         MainForm.button_creator(GetInfo()["Name"], GetInfo()["Namespace"], $"{ReadFileContents(GetInfo()["EntryPoint"])}");
           //  Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), false);
        //     Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), tt);
 

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
 using ScribeBot.Engine.Proxies;
+using ButtonDeck.Engine.Wrappers;
 
 namespace ScribeBot
 {
@@ -60,10 +61,11 @@ namespace ScribeBot
             Environment.Globals["webdriver"] = typeof(WebDriverProxy);
             Environment.Globals["bit"] = typeof(BitWrapper);
             Environment.Globals["teste"] = typeof(coreEvents);
-     //       Environment.Globals["teste"] = typeof(functio)
-         //    Environment.Globals["teste"] = typeof(CoreWrapperVoid);
-         //Types
-         Environment.Globals["Color"] = new ColorContainer();
+            Environment.Globals["design"] =  new PluginWrapper();
+            //       Environment.Globals["teste"] = typeof(functio)
+            //    Environment.Globals["teste"] = typeof(CoreWrapperVoid);
+            //Types
+            Environment.Globals["Color"] = new ColorContainer();
             Environment.Globals["Point"] = new PointContainer();
             Environment.Globals["Size"] = new SizeContainer();
 

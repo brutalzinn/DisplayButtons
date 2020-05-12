@@ -3,6 +3,7 @@ using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -47,6 +48,9 @@ namespace ScribeBot.Interface
              //   x.Run(true);
                 p.RunButton.Click += (o, e) =>
                 {
+                    
+                    ///  Execute(ScribeBot.Package.ReadFileContents(ScribeBot.Package.GetInfo()["EntryPoint"]));
+                
                     x.Run(true);
                 };
             });
@@ -274,7 +278,8 @@ namespace ScribeBot.Interface
 
                     i.RunButton.Click += (ob, ed) =>
                     {
-                        x.Run(true);
+                        Scripter.Execute(packageInfo["EntryPoint"],false);
+                       // x.Run(true,true);
                     };
                 });
             }

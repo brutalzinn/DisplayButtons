@@ -29,13 +29,16 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
           public static string name { get; set; } = "teste";
         public static string script { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
-
+  
         public void ToExecuteHelper()
         {
+
             var originalToExec = new String(ToExecute.ToCharArray());
-            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ExecutableRunHelper")) as Form;
-            var execAction = CloneAction() as ExecutableRunAction;
+            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
+            var execAction = CloneAction() as FolderAddAction;
             execAction.ToExecute = ToExecute;
             form.ModifiableAction = execAction;
 

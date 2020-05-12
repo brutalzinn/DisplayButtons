@@ -220,7 +220,7 @@ namespace ButtonDeck.Forms
            //     p.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
 
            //     InstalledPackagesList.Controls.Add(p);
-              x.Run(true);
+              x.Run(false);
               
             });
 
