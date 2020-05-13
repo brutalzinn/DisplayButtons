@@ -1,5 +1,5 @@
 # ButtonDeck-Windows
-Uma forma simples de executar macros utilizando o celular.
+Uma forma simples de executar macros utilizando o celular. Projeto privado para auxílio aos desenvolvedores.
 
 
 Esse projeto é um fork do projeto de [NickAcPT](https://github.com/NickAcPT)
@@ -13,5 +13,10 @@ Esse projeto é um fork do projeto de [NickAcPT](https://github.com/NickAcPT)
 
 
 
+
+
+
 ## Contribuidores
- - [MatthewHaskett](https://www.github.com/MatthewHaskett/) - Helped with the protocol side of the app.
+ - [brutalzinn](https://www.github.com/brutalzinn/)  Colaborador.
+ - [LucasSpalado](https://www.github.com/LucasSpalado/)  Colaborador.
+ - [MatthewHaskett](https://www.github.com/MatthewHaskett/) - Ajudou com o protocolo TCP.
