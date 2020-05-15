@@ -1,5 +1,4 @@
-﻿using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
-using MoonSharp.Interpreter;
+﻿using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,66 +12,80 @@ namespace ButtonDeck.Engine.Wrappers
     class PluginWrapper
     {
 
+        public static Dictionary<string, string> myLists =
+        new Dictionary<string, string>();
+        public void  setPlayerString(string key, string value)
+        {
+            myLists.Add(key, value);
 
-<<<<<<< HEAD
         }
-        public static Forms.ActionHelperForms.ActionPlugin MainWindow { get; private set; }
         public void setFormControl(string name, string value, int posX, int posY, string type)
         {
-=======
-        public static Dictionary<string, string> users = new Dictionary<string, string>();
->>>>>>> ac0a79332a789253b59848561cc0d72763a4c710
 
-        public static void Set(string key, string value)
-        {
-            if (users.ContainsKey(key))
+            switch (type)
             {
-<<<<<<< HEAD
                 case "textbox":
-                   // Forms.ActionHelperForms.ActionPlugin teste = new Forms.ActionHelperForms.ActionPlugin();
+                    Forms.ActionHelperForms.ActionPlugin teste = new Forms.ActionHelperForms.ActionPlugin();
                     System.Windows.Forms.TextBox txt = new System.Windows.Forms.TextBox();
 
                     txt.Text = value;
-                    MainWindow?.Invoke(new Action(() =>
-                    {
-                        MainWindow.Controls.Add(txt);
-
-                    }));
-              
+                    teste.Controls.Add(txt);
 
 
                         break;
 
 
 
-=======
-                users[key] = value;
             }
-            else
-            {
-                users.Add(key, value);
->>>>>>> ac0a79332a789253b59848561cc0d72763a4c710
-            }
-        }
 
-        public static string Get(string key)
+
+        }
+           
+            public static string getPlayerString(string key, bool keyorpair)
         {
-            string result = null;
-
-            if (users.ContainsKey(key))
+            try
             {
-                result = users[key];
+
+           
+            foreach (KeyValuePair<string, string> keyparrr in myLists)
+            {
+              //  Console.WriteLine("Key: {0}, Value: {1}",
+            
+              if(keyorpair == true)
+                {
+  if(key == keyparrr.Key)
+                {
+
+
+                  return  keyparrr.Value;
+
+                }
+
+
+                }
+                else
+                {
+                    if (key == keyparrr.Value)
+                    {
+
+
+                        return keyparrr.Key;
+
+                    }
+
+
+                }
+            }
             }
 
-            return result;
+
+
+            catch (Exception e)
+            {
+
+                return "";
+            }
+            return "";
         }
-
-    
-           
-           
-
-
-
-          
     }
 }
