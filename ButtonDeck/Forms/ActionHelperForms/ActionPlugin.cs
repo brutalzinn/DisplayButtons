@@ -32,6 +32,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
 
             }
         }
+
  
         public string ToExecuteFileName
         {
@@ -41,15 +42,32 @@ namespace ButtonDeck.Forms.ActionHelperForms
                 _toExecuteFileName = value;
                 UpdateFinal(ModifiableAction);
             }
+
         }
+
         private void UpdateFinal(FolderAddAction act)
         {
-            act.ToExecute = (_toExecuteFileName + "#" + _toExecuteArguments + "#" + _toExecuteAsk);
+      //      act.ToExecute = (_toExecuteFileName + "#" + _toExecuteArguments + "#" + _toExecuteAsk);
 
         }
     
         private void ActionPlugin_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void modernButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void CloseWithResult(DialogResult result)
+        {
+            DialogResult = result;
+            Close();
+        }
+        private void modernButton3_Click(object sender, EventArgs e)
+        {
+            CloseWithResult(DialogResult.Cancel);
 
         }
     }
