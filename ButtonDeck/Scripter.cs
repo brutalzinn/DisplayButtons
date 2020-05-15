@@ -61,7 +61,7 @@ namespace ScribeBot
             Environment.Globals["webdriver"] = typeof(WebDriverProxy);
             Environment.Globals["bit"] = typeof(BitWrapper);
             Environment.Globals["teste"] = typeof(coreEvents);
-            Environment.Globals["design"] =  new PluginWrapper();
+            Environment.Globals["data"] =  new PluginWrapper();
             //       Environment.Globals["teste"] = typeof(functio)
             //    Environment.Globals["teste"] = typeof(CoreWrapperVoid);
             //Types

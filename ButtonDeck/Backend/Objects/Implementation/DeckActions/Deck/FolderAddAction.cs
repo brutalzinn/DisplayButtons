@@ -24,19 +24,53 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
   
 
+      
+        public static string script { get; set; } = "";
+        public static string name_space { get; set; } = "";
+        public static string DeckActionCategory_string { get; set; } = "Deck";
         [ActionPropertyInclude]
         [ActionPropertyDescription("name")]
-          public static string name { get; set; } = "teste";
-        public static string script { get; set; } = "";
-        public static string DeckActionCategory_string { get; set; } = "Deck";
+        public static string name { get; set; } = "teste";
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
-
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("dictionary")]
+        public static string dictionary_name { get; set; } = "";
        public static dynamic form;
         [MoonSharpUserData]
-        class formcontrol
+
+        public class formcontrol
         {
+           
+      
+        
+            public static Dictionary<string, string> users = new Dictionary<string, string>();
+
+            public static void Set(string key, string value)
+            {
+                if (users.ContainsKey(key))
+                {
+                    users[key] = value;
+                }
+                else
+                {
+                    users.Add(key, value);
+                }
+            }
+
+            public static string Get(string key)
+            {
+                string result = null;
+
+                if (users.ContainsKey(key))
+                {
+                    result = users[key];
+                }
+
+                return result;
+            }
+
             public static void setFormControl(string name, string value, string type)
             {
 
@@ -49,6 +83,15 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         //       FolderAddAction.form.Controls.Add(txt);
 
                         form.Controls.Add(txt);
+
+                        break;
+                    case "label":
+                        Label labeled = new Label();
+                        labeled.Text = value;
+                        labeled.Name = name;
+                        //       FolderAddAction.form.Controls.Add(txt);
+
+                        form.Controls.Add(labeled);
 
                         break;
 
@@ -67,7 +110,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
              form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
             ScribeBot.Scripter.Execute(script, false);
             ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
-            object functiontable = ScribeBot.Scripter.Environment.Globals["testando"];
+            object functiontable = ScribeBot.Scripter.Environment.Globals["menu"];
             ScribeBot.Scripter.Environment.Call(functiontable);
             var execAction = CloneAction() as FolderAddAction;
             execAction.ToExecute = ToExecute;
@@ -88,7 +131,13 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public override AbstractDeckAction CloneAction()
         {
-           return new FolderAddAction();
+            Debug.WriteLine("CHEGOU A CHAMAR O NAMESPACE" + name_space);
+        //    DynValue obj = UserData.Create(name_space);
+            //  ScribeBot.Scripter.Execute(script, false);
+       //     ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
+
+          ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
+            return new FolderAddAction();
         }
       
 

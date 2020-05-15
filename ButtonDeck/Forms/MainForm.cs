@@ -1750,7 +1750,7 @@ parent.Controls.Add(item);
             FolderAddAction testando = new FolderAddAction();
             FolderAddAction.name = name;
             FolderAddAction.script = script;
-
+            FolderAddAction.name_space = name_space;
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(Globals.launcher_principal.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
