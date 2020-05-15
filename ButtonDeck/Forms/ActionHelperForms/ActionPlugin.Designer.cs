@@ -28,42 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.modernButton3 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.SuspendLayout();
-            // 
-            // modernButton3
-            // 
-            this.modernButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.modernButton3.CustomColorScheme = false;
-            this.modernButton3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.modernButton3.Location = new System.Drawing.Point(163, 160);
-            this.modernButton3.Name = "modernButton3";
-            this.modernButton3.Size = new System.Drawing.Size(117, 39);
-            this.modernButton3.TabIndex = 8;
-            this.modernButton3.Text = "Cancel";
-            this.modernButton3.UseVisualStyleBackColor = true;
-            this.modernButton3.Click += new System.EventHandler(this.modernButton3_Click);
-            // 
-            // modernButton2
-            // 
-            this.modernButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.modernButton2.CustomColorScheme = false;
-            this.modernButton2.Location = new System.Drawing.Point(286, 160);
-            this.modernButton2.Name = "modernButton2";
-            this.modernButton2.Size = new System.Drawing.Size(117, 39);
-            this.modernButton2.TabIndex = 9;
-            this.modernButton2.Text = "OK";
-            this.modernButton2.UseVisualStyleBackColor = true;
-            this.modernButton2.Click += new System.EventHandler(this.modernButton2_Click);
             // 
             // ActionPlugin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 211);
-            this.Controls.Add(this.modernButton3);
-            this.Controls.Add(this.modernButton2);
+            this.ClientSize = new System.Drawing.Size(343, 173);
             this.Name = "ActionPlugin";
             this.Text = "ActionPlugin";
             this.Load += new System.EventHandler(this.ActionPlugin_Load);
@@ -72,8 +43,5 @@
         }
 
         #endregion
-
-        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton3;
-        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton2;
     }
 }
