@@ -20,6 +20,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public override bool IsPlugin()
         {
+            ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
             return true;
         }
   
@@ -136,7 +137,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             //  ScribeBot.Scripter.Execute(script, false);
        //     ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
 
-          ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
+         
             return new FolderAddAction();
         }
       
@@ -151,7 +152,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public override string GetActionName()
         {
-     
+
             return name;
         }
 
