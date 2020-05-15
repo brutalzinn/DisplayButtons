@@ -15,10 +15,14 @@ namespace ButtonDeck.Engine.Wrappers
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         }
         public static Forms.ActionHelperForms.ActionPlugin MainWindow { get; private set; }
         public void setFormControl(string name, string value, int posX, int posY, string type)
         {
+=======
+        public static Dictionary<string, string> users = new Dictionary<string, string>();
+>>>>>>> ac0a79332a789253b59848561cc0d72763a4c710
 =======
         public static Dictionary<string, string> users = new Dictionary<string, string>();
 >>>>>>> ac0a79332a789253b59848561cc0d72763a4c710
@@ -27,6 +31,7 @@ namespace ButtonDeck.Engine.Wrappers
         {
             if (users.ContainsKey(key))
             {
+<<<<<<< HEAD
 <<<<<<< HEAD
                 case "textbox":
                    // Forms.ActionHelperForms.ActionPlugin teste = new Forms.ActionHelperForms.ActionPlugin();
@@ -46,11 +51,16 @@ namespace ButtonDeck.Engine.Wrappers
 
 
 =======
+=======
+>>>>>>> ac0a79332a789253b59848561cc0d72763a4c710
                 users[key] = value;
             }
             else
             {
                 users.Add(key, value);
+<<<<<<< HEAD
+>>>>>>> ac0a79332a789253b59848561cc0d72763a4c710
+=======
 >>>>>>> ac0a79332a789253b59848561cc0d72763a4c710
             }
         }
