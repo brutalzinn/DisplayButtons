@@ -32,72 +32,43 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
-        public string list_vars { get; set; }
-        public string dic_get
+
+       public static dynamic form;
+        [MoonSharpUserData]
+        class formcontrol
         {
+            public static void setFormControl(string name, string value, string type)
+            {
 
-
-            get
-            { // serialize
-                if (LIST.Get(list_vars) == null) return null;
-                return LIST.Get(list_vars);
-            }
-            set
-            { // deserialize
-                if (value == null)
+                switch (type)
                 {
-                 //   LIST.Get(list_vars) = null;
-                }
-                else
-                {
-              //      LIST.Set(list_vars) = value;
+                    case "textbox":
+                      TextBox txt = new TextBox();
+                        txt.Text = value;
+                        txt.Name = name;
+                        //       FolderAddAction.form.Controls.Add(txt);
+
+                        form.Controls.Add(txt);
+
+                        break;
+
+
 
                 }
+
 
             }
         }
-        public class LIST
-        {
-
-
-
-            public static Dictionary<string, string> users = new Dictionary<string, string>();
-
-            public static void Set(string key, string value)
-            {
-                if (users.ContainsKey(key))
-                {
-                    users[key] = value;
-                }
-                else
-                {
-                    users.Add(key, value);
-                }
-            }
-
-            public static string Get(string key)
-            {
-                string result = null;
-
-                if (users.ContainsKey(key))
-                {
-                    result = users[key];
-                }
-
-                return result;
-            }
-
-
-
-
-
-        }
-        
         public void ToExecuteHelper()
         {
-            ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
+          
+            //          ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
             var originalToExec = new String(ToExecute.ToCharArray());
-            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
+             form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
+            ScribeBot.Scripter.Execute(script, false);
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
+            object functiontable = ScribeBot.Scripter.Environment.Globals["testando"];
+            ScribeBot.Scripter.Environment.Call(functiontable);
             var execAction = CloneAction() as FolderAddAction;
             execAction.ToExecute = ToExecute;
             form.ModifiableAction = execAction;
@@ -138,7 +109,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public override void OnButtonDown(DeckDevice deckDevice)
         {
  Debug.WriteLine("CONTINENTE");
-            ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
+    //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
 
             ScribeBot.Scripter.Execute(script,false);
@@ -148,10 +119,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             
           
         }
-
+      
         public override void OnButtonUp(DeckDevice deckDevice)
         {
-            ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
+        //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
             //    ScribeBot.Scripter.Execute(script);
             //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");

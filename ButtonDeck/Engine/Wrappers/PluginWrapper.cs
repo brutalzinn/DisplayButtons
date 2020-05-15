@@ -1,4 +1,5 @@
-﻿using MoonSharp.Interpreter;
+﻿using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
+using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,80 +13,39 @@ namespace ButtonDeck.Engine.Wrappers
     class PluginWrapper
     {
 
-        public static Dictionary<string, string> myLists =
-        new Dictionary<string, string>();
-        public void  setPlayerString(string key, string value)
-        {
-            myLists.Add(key, value);
 
-        }
-        public void setFormControl(string name, string value, int posX, int posY, string type)
-        {
+        public static Dictionary<string, string> users = new Dictionary<string, string>();
 
-            switch (type)
+        public static void Set(string key, string value)
+        {
+            if (users.ContainsKey(key))
             {
-                case "textbox":
-                    Forms.ActionHelperForms.ActionPlugin teste = new Forms.ActionHelperForms.ActionPlugin();
-                    System.Windows.Forms.TextBox txt = new System.Windows.Forms.TextBox();
+                users[key] = value;
+            }
+            else
+            {
+                users.Add(key, value);
+            }
+        }
 
-                    txt.Text = value;
-                    teste.Controls.Add(txt);
+        public static string Get(string key)
+        {
+            string result = null;
 
-
-                        break;
-
-
-
+            if (users.ContainsKey(key))
+            {
+                result = users[key];
             }
 
-
+            return result;
         }
+
+    
            
-            public static string getPlayerString(string key, bool keyorpair)
-        {
-            try
-            {
-
            
-            foreach (KeyValuePair<string, string> keyparrr in myLists)
-            {
-              //  Console.WriteLine("Key: {0}, Value: {1}",
-            
-              if(keyorpair == true)
-                {
-  if(key == keyparrr.Key)
-                {
-
-
-                  return  keyparrr.Value;
-
-                }
-
-
-                }
-                else
-                {
-                    if (key == keyparrr.Value)
-                    {
-
-
-                        return keyparrr.Key;
-
-                    }
-
-
-                }
-            }
-            }
 
 
 
-            catch (Exception e)
-            {
-
-                return "";
-            }
-            return "";
-        }
+          
     }
 }
