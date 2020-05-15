@@ -1747,9 +1747,13 @@ parent.Controls.Add(item);
         }
         public static  void button_creator(string name,string name_space, string script)
         {
-            FolderAddAction testando = new FolderAddAction();
+            //FolderAddAction testando = new FolderAddAction();
             FolderAddAction.name = name;
             FolderAddAction.script = script;
+           // testando.script = script;
+
+
+
             FolderAddAction.name_space = name_space;
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(Globals.launcher_principal.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
@@ -1779,7 +1783,7 @@ parent.Controls.Add(item);
            //     FolderAddAction.DeckActionCategory_string = category;
 
 
-                Debug.WriteLine("RRR" + testando.GetActionName());
+            //    Debug.WriteLine("RRR" + testando.GetActionName());
                 
                 // Globals.launcher_principal.ShadedPanel1.Controls.Add(teste);
                Globals.launcher_principal.ShadedPanel1.Refresh();

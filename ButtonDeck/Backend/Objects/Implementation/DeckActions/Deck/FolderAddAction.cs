@@ -23,10 +23,12 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
             return true;
         }
-  
 
-      
+
+
+        //     public static string script { get; set; } = "";
         public static string script { get; set; } = "";
+        public  string script_to_form { get; set; } = "";
         public static string name_space { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
         [ActionPropertyInclude]
@@ -105,24 +107,32 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
         public void ToExecuteHelper()
         {
-          
+            ScribeBot.Scripter.Execute(script, false);
+
             //          ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
             var originalToExec = new String(ToExecute.ToCharArray());
              form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
-            ScribeBot.Scripter.Execute(script, false);
+           
             ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
-            object functiontable = ScribeBot.Scripter.Environment.Globals["menu"];
+            object functiontable = ScribeBot.Scripter.Environment.Globals["form_menu"];
             ScribeBot.Scripter.Environment.Call(functiontable);
-            var execAction = CloneAction() as FolderAddAction;
-            execAction.ToExecute = ToExecute;
-            form.ModifiableAction = execAction;
-            
+          //  var execAction = CloneAction() as FolderAddAction;
+     
+        //    execAction.ToExecute = ToExecute;
+
+         //   form.ModifiableAction = execAction;
+
+
+            form.scripter = script;
             if (form.ShowDialog() == DialogResult.OK)
             {
 
+                ScribeBot.Scripter.Execute(script, false);
 
-              ToExecute = form.ModifiableAction.toExecute;  
-               // oExecute = form.ModifiableAction;
+                object functioncall = ScribeBot.Scripter.Environment.Globals["menu_ok"];
+                ScribeBot.Scripter.Environment.Call(functioncall);
+                // ToExecute = form.ModifiableAction.toExecute;  
+                // oExecute = form.ModifiableAction;
             }
             else
         {

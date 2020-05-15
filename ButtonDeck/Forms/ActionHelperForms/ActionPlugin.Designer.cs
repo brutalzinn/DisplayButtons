@@ -37,29 +37,31 @@
             this.modernButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.modernButton3.CustomColorScheme = false;
             this.modernButton3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.modernButton3.Location = new System.Drawing.Point(91, 122);
+            this.modernButton3.Location = new System.Drawing.Point(133, 183);
             this.modernButton3.Name = "modernButton3";
             this.modernButton3.Size = new System.Drawing.Size(117, 39);
             this.modernButton3.TabIndex = 8;
             this.modernButton3.Text = "Cancel";
             this.modernButton3.UseVisualStyleBackColor = true;
+            this.modernButton3.Click += new System.EventHandler(this.ModernButton3_Click);
             // 
             // modernButton2
             // 
             this.modernButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.modernButton2.CustomColorScheme = false;
-            this.modernButton2.Location = new System.Drawing.Point(214, 122);
+            this.modernButton2.Location = new System.Drawing.Point(256, 183);
             this.modernButton2.Name = "modernButton2";
             this.modernButton2.Size = new System.Drawing.Size(117, 39);
             this.modernButton2.TabIndex = 9;
             this.modernButton2.Text = "OK";
             this.modernButton2.UseVisualStyleBackColor = true;
+            this.modernButton2.Click += new System.EventHandler(this.ModernButton2_Click);
             // 
             // ActionPlugin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 173);
+            this.ClientSize = new System.Drawing.Size(385, 234);
             this.Controls.Add(this.modernButton3);
             this.Controls.Add(this.modernButton2);
             this.Name = "ActionPlugin";

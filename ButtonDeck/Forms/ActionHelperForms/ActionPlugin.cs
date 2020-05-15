@@ -17,11 +17,11 @@ namespace ButtonDeck.Forms.ActionHelperForms
         {
             InitializeComponent();
         }
-        private string _toExecuteArguments;
+    
         private string _toExecuteFileName;
-        private string _toExecuteAsk;
-        private FolderAddAction _modifiableAction;
 
+        private FolderAddAction _modifiableAction;
+        private static string scripter_form;
         public FolderAddAction ModifiableAction
         {
             get { return _modifiableAction; }
@@ -32,7 +32,16 @@ namespace ButtonDeck.Forms.ActionHelperForms
 
             }
         }
- 
+        public string scripter
+        {
+            get { return scripter_form; }
+            set
+            {
+                scripter_form = value;
+
+
+            }
+        }
         public string ToExecuteFileName
         {
             get { return _toExecuteFileName; }
@@ -44,12 +53,35 @@ namespace ButtonDeck.Forms.ActionHelperForms
         }
         private void UpdateFinal(FolderAddAction act)
         {
-            act.ToExecute = (_toExecuteFileName + "#" + _toExecuteArguments + "#" + _toExecuteAsk);
+         //   act.ToExecute = (_toExecuteFileName + "#" + _toExecuteArguments + "#" + _toExecuteAsk);
 
         }
-    
+
+        private void CloseWithResult(DialogResult result)
+        {
+            DialogResult = result;
+            Close();
+        }
         private void ActionPlugin_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void ModernButton2_Click(object sender, EventArgs e)
+        {
+    
+
+            CloseWithResult(DialogResult.OK);
+        }
+
+        private void ModernButton3_Click(object sender, EventArgs e)
+        {
+            ScribeBot.Scripter.Execute(scripter_form, false);
+
+            object functiontable = ScribeBot.Scripter.Environment.Globals["menu_cancel"];
+
+            ScribeBot.Scripter.Environment.Call(functiontable);
+            CloseWithResult(DialogResult.Cancel);
 
         }
     }
