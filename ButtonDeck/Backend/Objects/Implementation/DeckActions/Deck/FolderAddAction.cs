@@ -37,8 +37,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
-        [ActionPropertyInclude]
-        [ActionPropertyDescription("dictionary")]
+   
         public static string dictionary_name { get; set; } = "";
        public static dynamic form;
         [MoonSharpUserData]
@@ -74,15 +73,19 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 return result;
             }
 
-            public static void setFormControl(string name, string value, string type)
+            public static void setFormControl(string name,int x ,int y, int tam_x, int tam_y, string value, string type)
             {
 
                 switch (type)
                 {
                     case "textbox":
-                      TextBox txt = new TextBox();
+                        TextBox txt = new TextBox();
                         txt.Text = value;
                         txt.Name = name;
+                        txt.Width = tam_x;
+                        txt.Height = tam_y;
+                        txt.Location = new System.Drawing.Point (x,y);
+                      
                         //       FolderAddAction.form.Controls.Add(txt);
 
                         form.Controls.Add(txt);
@@ -93,11 +96,46 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         labeled.Text = value;
                         labeled.Name = name;
                         //       FolderAddAction.form.Controls.Add(txt);
-
+                        labeled.Width = tam_x;
+                        labeled.Height = tam_y;
+                        labeled.Location = new System.Drawing.Point(x, y);
                         form.Controls.Add(labeled);
 
                         break;
+                    case "file":
+                        TextBox file_text = new TextBox();
+                        OpenFileDialog file_search = new OpenFileDialog();
+                        Button file_button = new Button();
+                        TableLayoutPanel file_table_layout = new TableLayoutPanel();
+                        file_text.Name = name;
+                     //   file_text.Dock = DockStyle.Left;
+                        file_button.Name = name + "_button";
+                   //     file_button.Anchor = AnchorStyles.Left;
+                        //  file_button.Dock = DockStyle.Right;
+                        file_table_layout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize, 2f));
+                        file_table_layout.RowStyles.Add(new RowStyle(SizeType.AutoSize, 2f));
+                        file_button.Click += (s, ee) =>
+                        {
+                            file_search.ShowDialog();
 
+                           file_text.Text = file_search.FileName;
+
+                        };
+                        //       FolderAddAction.form.Controls.Add(txt);
+
+                     file_text.Width = tam_x;
+                        file_table_layout.Width = tam_x + 90;
+                        //     file_text.Height = tam_y;
+                        file_table_layout.Location = new System.Drawing.Point(x, y);
+                  //     form.Controls.Add(file_search);
+
+                        file_table_layout.Controls.Add(file_text, 0, 0);
+                        file_table_layout.Controls.Add(file_button, 1 , 0);
+
+                        form.Controls.Add(file_table_layout);
+                       
+
+                        break;
 
 
                 }
@@ -142,10 +180,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public override AbstractDeckAction CloneAction()
         {
-            Debug.WriteLine("CHEGOU A CHAMAR O NAMESPACE" + name_space);
-        //    DynValue obj = UserData.Create(name_space);
+          //  Debug.WriteLine("CHEGOU A CHAMAR O NAMESPACE" + name_space);
+           // DynValue obj = UserData.Create(name_space);
             //  ScribeBot.Scripter.Execute(script, false);
-       //     ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
+          //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
 
          
             return new FolderAddAction();
