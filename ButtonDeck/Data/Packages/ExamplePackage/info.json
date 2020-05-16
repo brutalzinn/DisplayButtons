@@ -3,5 +3,6 @@
 	"Description": "Don't turn this into package, just drop to your packages folder!",
 	"Authors": "JonekCode",
 	"Contact": "",
+	"Namespace": "",
 	"EntryPoint": "main.lua"
 }
