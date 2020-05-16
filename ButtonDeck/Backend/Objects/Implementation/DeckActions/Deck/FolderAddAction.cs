@@ -3,6 +3,7 @@ using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public static string script { get; set; } = "";
         public  string script_to_form { get; set; } = "";
         public static string name_space { get; set; } = "";
+        public static string name_img { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
         [ActionPropertyInclude]
         [ActionPropertyDescription("name")]
@@ -72,7 +74,25 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
                 return result;
             }
+            public static void setButtonImg(string nameimg)
+            {
 
+                if(Directory.Exists(Application.StartupPath + @"\Data\imgs") == false)
+                {
+
+                    Directory.CreateDirectory(Application.StartupPath + @"\Data\imgs\");
+                }
+                if (File.Exists(Application.StartupPath + @"\Data\imgs\" + nameimg))
+                {
+
+
+ name_img = nameimg;
+
+                }
+
+               
+
+            }
             public static void setFormControl(string name,int x ,int y, int tam_x, int tam_y, string value, string type)
             {
 
@@ -177,7 +197,26 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 ToExecute = originalToExec;
             }
         }
+        public override DeckImage GetDefaultItemImage()
+        {
+        // string image_name = ScribeBot.Scripter.Environment.Globals["set_image"];
+         //   DynValue obj = UserData.Create(name_space);
+            //  ScribeBot.Scripter.Execute(script, false);
+  if(name_img == "")
+            {
 
+
+                return base.GetDefaultItemImage();
+            }
+            else
+            {
+
+var bitmap = new Bitmap(Application.StartupPath + @"\Data\imgs\" + name_img);
+            return new DeckImage(bitmap);
+
+            }
+            
+        }
         public override AbstractDeckAction CloneAction()
         {
           //  Debug.WriteLine("CHEGOU A CHAMAR O NAMESPACE" + name_space);

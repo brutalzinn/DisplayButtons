@@ -5,12 +5,14 @@ function menu_ok()
 
 print("button ok pressionado.")
 end
+
+
 function menu_cancel()
 print("button cancel menu pressionado")
 
 end
 
-function menu()
+function form_menu()
 print("button menu pressionado.")
 
 end
