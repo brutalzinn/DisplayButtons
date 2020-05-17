@@ -1,4 +1,5 @@
 ﻿using ButtonDeck.Backend.Utils;
+using ButtonDeck.Forms;
 using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,27 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public static string dictionary_name { get; set; } = "";
        public static dynamic form;
         [MoonSharpUserData]
+        class Formvoid
+        {
+            public string getFormControl(string name, string type)
+            {
+
+                string result = "";
+                foreach (Control c in form.Controls)
+                {
+                    if (c.Name == name)
+                    {
+                      result = c.Text;
+
+                    }
+                }
+                return result;
+               
+            }
+
+
+        }
+        [MoonSharpUserData]
 
         public class formcontrol
         {
@@ -77,11 +99,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             public static void setButtonImg(string nameimg)
             {
 
-                if(Directory.Exists(Application.StartupPath + @"\Data\imgs") == false)
-                {
+                if (!Directory.Exists(Application.StartupPath + @"\Data\imgs"))
 
-                    Directory.CreateDirectory(Application.StartupPath + @"\Data\imgs\");
-                }
+                { 
+                    Directory.CreateDirectory(Application.StartupPath + @"\Data\imgs");
+                 }
                 if (File.Exists(Application.StartupPath + @"\Data\imgs\" + nameimg))
                 {
 
@@ -93,7 +115,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                
 
             }
-            public static void setFormControl(string name,int x ,int y, int tam_x, int tam_y, string value, string type)
+           
+                public static void setFormControl(string name, string value, string type, int x ,int y, int tam_x, int tam_y)
             {
 
                 switch (type)
@@ -165,13 +188,14 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
         public void ToExecuteHelper()
         {
-            ScribeBot.Scripter.Execute(script, false);
+            ScribeBot.Scripter.Execute(script, true);
 
             //          ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
             var originalToExec = new String(ToExecute.ToCharArray());
              form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
            
             ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
+            ScribeBot.Scripter.Environment.Globals["formdesignvoid"] = new Formvoid();
             object functiontable = ScribeBot.Scripter.Environment.Globals["form_menu"];
             ScribeBot.Scripter.Environment.Call(functiontable);
           //  var execAction = CloneAction() as FolderAddAction;
@@ -185,7 +209,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             if (form.ShowDialog() == DialogResult.OK)
             {
 
-                ScribeBot.Scripter.Execute(script, false);
+                ScribeBot.Scripter.Execute(script, true);
 
                 object functioncall = ScribeBot.Scripter.Environment.Globals["menu_ok"];
                 ScribeBot.Scripter.Environment.Call(functioncall);
@@ -210,8 +234,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             }
             else
             {
-
-var bitmap = new Bitmap(Application.StartupPath + @"\Data\imgs\" + name_img);
+                ScribeBot.Scripter.Execute(script, true);
+                var bitmap = new Bitmap(Application.StartupPath + @"\Data\imgs\" + name_img);
             return new DeckImage(bitmap);
 
             }
@@ -249,7 +273,7 @@ var bitmap = new Bitmap(Application.StartupPath + @"\Data\imgs\" + name_img);
     //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
 
-            ScribeBot.Scripter.Execute(script,false);
+            ScribeBot.Scripter.Execute(script,true);
            object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
           ScribeBot.Scripter.Environment.Call(functiontable);
             //  ScribeBot.Scripter.Environment.Call(DynValue.NewString("buttondown"));
@@ -263,7 +287,7 @@ var bitmap = new Bitmap(Application.StartupPath + @"\Data\imgs\" + name_img);
 
             //    ScribeBot.Scripter.Execute(script);
             //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
-            ScribeBot.Scripter.Execute(script, false);
+            ScribeBot.Scripter.Execute(script, true);
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonUP"];
             ScribeBot.Scripter.Environment.Call(functiontable);
             //    DynValue res = ScribeBot.Scripter.Environment.Call(luaFactFunction);
