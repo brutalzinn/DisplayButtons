@@ -152,6 +152,8 @@ namespace ButtonDeck.Forms
             var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
             var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
             var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
+            var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.Folder_grey_16x : Resources.Folder_grey_16x;
+
             AppAction item = new AppAction()
             {
                 Image = image
@@ -191,9 +193,20 @@ namespace ButtonDeck.Forms
                 Core.Initialize();
            //     new ScribeBot.Interface.Window().Show();
             };
-            
+
+            AppAction itemBiblioteca = new AppAction()
+            {
+                Image = imageBiblioteca
+            };
+
+            itemBiblioteca.Click += (s, ee) => {
+                new ImageListForm().ShowDialog();
+                //     new ScribeBot.Interface.Window().Show();
+            };
+
             appBar1.Actions.Add(itemMagnetite);
             appBar1.Actions.Add(itemPlugins);
+            appBar1.Actions.Add(itemBiblioteca);
             ApplyTheme(panel1);
             GenerateSidebar(shadedPanel1);
             ApplySidebarTheme(shadedPanel1);

@@ -28,18 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listViewFile = new System.Windows.Forms.ListView();
+            this.radioButtonSmall = new System.Windows.Forms.RadioButton();
+            this.radioButtonList = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButtonLarge = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // modernButton1
             // 
@@ -51,6 +47,7 @@
             this.modernButton1.TabIndex = 4;
             this.modernButton1.Text = "Adicionar imagem";
             this.modernButton1.UseVisualStyleBackColor = true;
+            this.modernButton1.Click += new System.EventHandler(this.ModernButton1_Click);
             // 
             // modernButton2
             // 
@@ -62,37 +59,91 @@
             this.modernButton2.TabIndex = 5;
             this.modernButton2.Text = "Remover imagem";
             this.modernButton2.UseVisualStyleBackColor = true;
+            this.modernButton2.Click += new System.EventHandler(this.ModernButton2_Click);
             // 
-            // listView1
+            // listViewFile
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.listViewFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(-5, -1);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(744, 253);
-            this.listView1.TabIndex = 6;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listViewFile.HideSelection = false;
+            this.listViewFile.Location = new System.Drawing.Point(-5, -1);
+            this.listViewFile.Name = "listViewFile";
+            this.listViewFile.Size = new System.Drawing.Size(744, 253);
+            this.listViewFile.TabIndex = 6;
+            this.listViewFile.UseCompatibleStateImageBehavior = false;
+            this.listViewFile.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.ListViewFile_AfterLabelEdit);
+            // 
+            // radioButtonSmall
+            // 
+            this.radioButtonSmall.AutoSize = true;
+            this.radioButtonSmall.Location = new System.Drawing.Point(161, 279);
+            this.radioButtonSmall.Name = "radioButtonSmall";
+            this.radioButtonSmall.Size = new System.Drawing.Size(104, 17);
+            this.radioButtonSmall.TabIndex = 7;
+            this.radioButtonSmall.TabStop = true;
+            this.radioButtonSmall.Text = "radioButtonSmall";
+            this.radioButtonSmall.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonList
+            // 
+            this.radioButtonList.AutoSize = true;
+            this.radioButtonList.Location = new System.Drawing.Point(271, 279);
+            this.radioButtonList.Name = "radioButtonList";
+            this.radioButtonList.Size = new System.Drawing.Size(95, 17);
+            this.radioButtonList.TabIndex = 8;
+            this.radioButtonList.TabStop = true;
+            this.radioButtonList.Text = "radioButtonList";
+            this.radioButtonList.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(386, 279);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(85, 17);
+            this.radioButton3.TabIndex = 9;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "radioButton3";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonLarge
+            // 
+            this.radioButtonLarge.AutoSize = true;
+            this.radioButtonLarge.Location = new System.Drawing.Point(49, 279);
+            this.radioButtonLarge.Name = "radioButtonLarge";
+            this.radioButtonLarge.Size = new System.Drawing.Size(106, 17);
+            this.radioButtonLarge.TabIndex = 10;
+            this.radioButtonLarge.TabStop = true;
+            this.radioButtonLarge.Text = "radioButtonLarge";
+            this.radioButtonLarge.UseVisualStyleBackColor = true;
             // 
             // ImageListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(739, 322);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.radioButtonLarge);
+            this.Controls.Add(this.radioButton3);
+            this.Controls.Add(this.radioButtonList);
+            this.Controls.Add(this.radioButtonSmall);
+            this.Controls.Add(this.listViewFile);
             this.Controls.Add(this.modernButton2);
             this.Controls.Add(this.modernButton1);
             this.Name = "ImageListForm";
             this.Text = "ImageListForm";
+            this.Load += new System.EventHandler(this.ImageListForm_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ImageList imageList1;
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton1;
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewFile;
+        private System.Windows.Forms.RadioButton radioButtonSmall;
+        private System.Windows.Forms.RadioButton radioButtonList;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButtonLarge;
     }
 }

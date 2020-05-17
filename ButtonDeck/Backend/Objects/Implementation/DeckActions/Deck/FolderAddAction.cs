@@ -104,10 +104,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 { 
                     Directory.CreateDirectory(Application.StartupPath + @"\Data\imgs");
                  }
+                Debug.WriteLine("CHEGOU QAUI 1"); 
                 if (File.Exists(Application.StartupPath + @"\Data\imgs\" + nameimg))
                 {
 
-
+                    Debug.WriteLine("CHEGOU aqui 2");
  name_img = nameimg;
 
                 }
