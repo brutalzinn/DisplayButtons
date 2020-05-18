@@ -1855,7 +1855,7 @@ parent.Controls.Add(item);
             });
             //   return "";
         }
-        private void UpdateIcon(bool shouldUpdateIcon)
+        public void UpdateIcon(bool shouldUpdateIcon)
         {
             if (shouldUpdateIcon) {
 

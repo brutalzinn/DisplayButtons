@@ -31,9 +31,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public static string name_space { get; set; } = "";
 
-        [ActionPropertyInclude]
-        [ActionPropertyDescription("Action")]
-        [ActionPropertyUpdateImageOnChanged]
+        
 
         public  static string name_img { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
@@ -61,7 +59,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 {
                     
                     name_img = nameimg;
-                    
+                    MainForm.Instance.UpdateIcon(true);
                 }
 
 
