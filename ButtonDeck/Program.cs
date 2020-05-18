@@ -16,14 +16,25 @@ using System.Windows.Forms;
 
 namespace ButtonDeck
 {
+
+    
     static class Program
     {
+        
+
         public static bool Silent { get; set; } = false;
         private static string errorText = "";
         private const string errorFileName = "errors.log";
         public static ServerThread ServerThread { get; set; }
         public static bool SuccessfulServerStart { get; set; } = false;
-
+        public static Type FindType(string fullName)
+        {
+            return
+                AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(a => !a.IsDynamic)
+                    .SelectMany(a => a.GetTypes())
+                    .FirstOrDefault(t => t.FullName.Equals(fullName));
+        }
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -141,9 +152,16 @@ namespace ButtonDeck
 
             NetworkChange.NetworkAddressChanged += NetworkChange_NetworkAddressChanged;
             NetworkChange.NetworkAvailabilityChanged += NetworkChange_NetworkAddressChanged;
+            // começo da implementação do host usb
+           //    dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
 
+          //  if (form.ShowDialog() == DialogResult.OK)
+        //    {
+
+ 
+       //     }
             ServerThread = new ServerThread();
-            ServerThread.Start();
+            ServerThread.Start();   
 
             Application.Run(new MainForm());
             

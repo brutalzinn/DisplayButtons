@@ -178,6 +178,7 @@
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\KeyPressAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\KeyToggleAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\MediaKeyAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\Media\SpotifyMediaAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\Misc\IFTTTEventAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\SceneItemVisibilityAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\StartStopRecordingAction.cs" />
@@ -308,6 +309,12 @@
     <Compile Include="Controls\ShadedPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\ActionHelperForms\MainFormMenuOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ActionHelperForms\MainFormMenuOption.Designer.cs">
+      <DependentUpon>MainFormMenuOption.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -371,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\KeyInfoHelper.resx">
       <DependentUpon>KeyInfoHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ActionHelperForms\MainFormMenuOption.resx">
+      <DependentUpon>MainFormMenuOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\OBS\OBSSceneChangeHelper.resx">
       <DependentUpon>OBSSceneChangeHelper.cs</DependentUpon>

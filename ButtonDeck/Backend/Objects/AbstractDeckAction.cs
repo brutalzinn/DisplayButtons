@@ -50,6 +50,7 @@ namespace ButtonDeck.Backend.Objects
             OBS,
             Misc,
             Deck,
+            Spotify,
         }
 
      

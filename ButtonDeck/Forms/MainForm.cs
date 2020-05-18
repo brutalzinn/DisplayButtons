@@ -477,7 +477,7 @@ namespace ButtonDeck.Forms
                     //  control.NormalImage = null;
 
                     // control.NormalImage = item?.GetItemImage().Bitmap;
-                    if (item is DynamicDeckItem DI && DI.DeckAction != null)
+                    if (item is DynamicDeckItem DI)
                     {
 
 
@@ -498,7 +498,7 @@ namespace ButtonDeck.Forms
                     }
                     else
                     {
-                        control.NormalImage = item?.GetItemImage().Bitmap;
+                  control.NormalImage = item?.GetItemImage().Bitmap;
 
                     }
 
@@ -531,7 +531,7 @@ namespace ButtonDeck.Forms
                 //    MagickImage img_teste = new MagickImage(item?.GetItemImage().Bitmap);
 
 
-SendItemsToDevice(CurrentDevice, folder);
+//SendItemsToDevice(CurrentDevice, folder);
 
                 }
 
@@ -622,7 +622,11 @@ SendItemsToDevice(CurrentDevice, folder);
         }
         CurrentDevice.CheckCurrentFolder();
         if (sendToDevice)
-            SendItemsToDevice(CurrentDevice, folder);
+            {
+
+
+            }
+           // SendItemsToDevice(CurrentDevice, folder);
     }
 
     private ImageModernButton GetButtonControl(int id)
@@ -655,7 +659,7 @@ SendItemsToDevice(CurrentDevice, folder);
             if (CurrentDevice == null) {
                 ChangeToDevice(e.Device);
             }
-            SendItemsToDevice(CurrentDevice, true);
+          //  SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
             }));
 
@@ -718,6 +722,65 @@ SendItemsToDevice(CurrentDevice, folder);
         device.CheckCurrentFolder();
         SendItemsToDevice(device, device.CurrentFolder);
     }
+        private static void SendoneItemToDevice(DeckDevice device, IDeckFolder folder, IMagickImage image_receivd = null, IDeckItem item = null)
+        {
+
+
+            var con = device.GetConnection();
+            if (con != null)
+            {
+                bool isFolder = false;
+                var packet = new SlotImageChangeChunkPacket();
+                List<IDeckItem> items = folder.GetDeckItems();
+
+                List<int> addedItems = new List<int>();
+
+                for (int i = 0; i < 15; i++)
+                {
+                    
+                    if (items.ElementAtOrDefault(i) != null)
+                    {
+                       // item = items[i];
+                        addedItems.Add(folder.GetItemIndex(item));
+                    }
+                    if (image_receivd == null) break;
+                    if (item == null) continue;
+
+
+                    if(item is DynamicDeckFolder)
+                    {
+
+                        isFolder = true;
+                    }
+                       var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
+
+
+                    // var seri = image.BitmapSerialized;
+                    ///     ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+                    //  IDeckFolder folder_t = CurrentDevice?.CurrentFolder;
+                    // var seri = teste.BitmapSerialized;
+
+                    packet.AddToQueue(folder.GetItemIndex(item), ReceiveWaterMark(image.Bitmap, "","Arial",7,10f,67f,Brushes.White));
+                    //  con.SendPacket(packet);
+
+
+                    //   teste.modernButton1.NormalImage;
+
+                    //     packet.AddToQueue(folder.GetItemIndex(item), image);
+                }
+                con.SendPacket(packet);
+                var clearPacket = new SlotImageClearChunkPacket();
+                for (int i = 1; i < 16; i++)
+                {
+                    if (addedItems.Contains(i)) continue;
+                    clearPacket.AddToQueue(i);
+                }
+
+                con.SendPacket(clearPacket);
+            }
+
+
+        }
 
     private static void SendItemsToDevice(DeckDevice device, IDeckFolder folder, IMagickImage image_receivd = null)
     {
@@ -728,27 +791,37 @@ SendItemsToDevice(CurrentDevice, folder);
             List<IDeckItem> items = folder.GetDeckItems();
 
             List<int> addedItems = new List<int>();
-
+                bool isFolder = false;
             for (int i = 0; i < 15; i++) {
                 IDeckItem item = null;
                 if (items.ElementAtOrDefault(i) != null) {
                     item = items[i];
                     addedItems.Add(folder.GetItemIndex(item));
                 }
-                    if (image_receivd == null) break;
-                    if (item == null) continue;
+            
+                    if (item == null) break ; 
+                    if(item is DynamicDeckFolder)
+                    {
 
-                    var teste = new DeckImage(image_receivd.ToBitmap());
+                        isFolder = true;
+                    }
+                    //var teste = new DeckImage(image_receivd.ToBitmap());
 
-                    //     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
+                    var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                     // var seri = image.BitmapSerialized;
                     ///     ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
                     //  IDeckFolder folder_t = CurrentDevice?.CurrentFolder;
-                   // var seri = teste.BitmapSerialized;
+                    //        var seri = teste.BitmapSerialized;
+                    if(item is DynamicDeckItem TT)
+                    {
 
-                        packet.AddToQueue(folder.GetItemIndex(item), teste);
-                      //  con.SendPacket(packet);
-                    
+                    packet.AddToQueue(folder.GetItemIndex(item), ReceiveWaterMark(image.Bitmap, TT.DeckAction.GetActionName(), "Arial", 7, 10f, 67f, Brushes.White));
+
+                    }
+
+                    //    packet.AddToQueue(folder.GetItemIndex(item), image);
+                    //  con.SendPacket(packet);
+
 
                     //   teste.modernButton1.NormalImage;
 
@@ -1496,12 +1569,64 @@ parent.Controls.Add(item);
             byte[] xByte = (byte[])_imageConverter.ConvertTo(x, typeof(byte[]));
             return xByte;
         }
+        public static DeckImage ReceiveWaterMark(Bitmap image_receivd, string watermark, string font, int size, float x, float y, Brush color)
+        {
+
+            if (String.IsNullOrEmpty(watermark))
+            {
+
+                watermark = "Pasta";
+            }
+
+            Image baseImage = image_receivd;
+
+
+            Image modifiedImage = (Image)baseImage.Clone();
+            var fC = new FontConverter();
+            var PrintFont = fC.ConvertFromString(font) as Font;
+
+            var tempimage = new MagickImage((Bitmap)modifiedImage);
+            int textWidth = tempimage.Width - 10;
+
+
+
+            //    tempimage.Dispose();
+
+            using (var image = new MagickImage((Bitmap)modifiedImage))
+            {
+                var readSettings = new MagickReadSettings
+                {
+                    Font = "Arial",
+                    FillColor = MagickColors.White,
+                    BackgroundColor = MagickColors.Transparent,
+                    TextGravity = Gravity.South,
+                    // This determines the size of the area where the text will be drawn in
+                    Width = tempimage.Width,
+                    Height = tempimage.Height
+                };
+
+
+                // Only need this with a transparent background in the readSettings
+                image.Alpha(AlphaOption.Opaque);
+
+                using (var label = new MagickImage("label:" + watermark, readSettings))
+                {
+                    image.Composite(label, 0, 0, CompositeOperator.Over);
+
+
+                }
+
+                return new DeckImage (image.ToBitmap());
+
+
+            }
+        }
         public void AddWatermark(string watermarkText, Bitmap imageFilePath, string font, int size, float x, float y, Brush color, IDeckItem item, IDeckFolder folder) // pass string
         {
             // item.GetItemImage().BitmapSerialized = null;
 
           
-             ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+ ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
 
 
             if (String.IsNullOrEmpty(watermarkText)) {
@@ -1550,19 +1675,19 @@ parent.Controls.Add(item);
                 //    MainForm teste = new MainForm();
                 //   teste.imageModernButton1.Image = image.ToBitmap();
 
-                control.NormalImage = image.ToBitmap();
-                //  item.GetItemImage().BitmapSerialized = converterDemo( image.ToBitmap());
+            control.NormalImage = image.ToBitmap();
+            //  item.GetItemImage().BitmapSerialized = converterDemo( image.ToBitmap());
 
-
+             
                 /// var con = CurrentDevice.GetConnection();
                 // if (con != null)
                 // {
                 //  var packet = new SlotImageChangeChunkPacket();
-                var teste = new DeckImage(image.ToBitmap());
+
                 //   image.Annotate("caption:This is gergerga test.", Gravity.South); // caption:"This is a test."
                 // write the image to the appropriate directory
                 // image.Write(@"D:\testimage.jpg");
-                SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentFolder, image);
+                SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentFolder);
                 //    packet.AddToQueue(folder.GetItemIndex(item), teste);
 
                 //    con.SendPacket(packet);
@@ -1857,10 +1982,21 @@ parent.Controls.Add(item);
         }
         private void UpdateIcon(bool shouldUpdateIcon)
         {
+           // IDeckFolder folder = CurrentDevice?.CurrentFolder;
             if (shouldUpdateIcon) {
 
+               // IDeckItem item = null;
+                // item = folder.GetDeckItems()[i];
 
-          imageModernButton1.Image = ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
+               // AddWatermark("RWER", ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                
+              imageModernButton1.Image = ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
+             //   var teste = new MagickImage((Bitmap)imageModernButton1.Image);
+                //   image.Annotate("caption:This is gergerga test.", Gravity.South); // caption:"This is a test."
+                // write the image to the appropriate directory
+                // image.Write(@"D:\testimage.jpg");
+               // SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentFolder,teste);
+
                 imageModernButton1.Refresh();
             }
         }
