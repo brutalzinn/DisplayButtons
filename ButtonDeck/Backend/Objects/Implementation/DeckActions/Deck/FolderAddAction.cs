@@ -59,7 +59,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 {
                     
                     name_img = nameimg;
-                    MainForm.Instance.UpdateIcon(true);
+                    MainForm.Instance.UpdatePluginImg();
                 }
 
 

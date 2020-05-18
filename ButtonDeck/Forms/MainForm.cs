@@ -1855,7 +1855,7 @@ parent.Controls.Add(item);
             });
             //   return "";
         }
-        public void UpdateIcon(bool shouldUpdateIcon)
+        private void UpdateIcon(bool shouldUpdateIcon)
         {
             if (shouldUpdateIcon) {
 
@@ -1864,7 +1864,47 @@ parent.Controls.Add(item);
                 imageModernButton1.Refresh();
             }
         }
+        public void UpdatePluginImg()
+        {
+            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+           
+            if (folder == null) return;
+            for (int i = 0; i < folder.GetDeckItems().Count; i++)
+            {
+                IDeckItem item = null;
 
+                item = folder.GetDeckItems()[i];
+             ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+
+                if (item != null)
+                {
+                    if (item is DynamicDeckItem DI && DI.DeckAction != null)
+                    {
+                        AddWatermark(DI.DeckAction.GetActionName(), ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+
+
+                        //imageModernButton1.Refresh();
+
+                    }
+                   
+
+  control.Tag = item;
+                    control.Invoke(new Action(control.Refresh));
+              
+
+                }
+                CurrentDevice.CheckCurrentFolder();
+               
+                //     imageModernButton1.Image = ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap ?? Resources.img_item_default;
+                //    imageModernButton1.Refresh();
+
+            }
+                
+                
+            
+                
+            
+        }
         private string GetPropertyDescription(PropertyInfo prop)
         {
             if (Attribute.IsDefined(prop, typeof(ActionPropertyDescriptionAttribute))) {
