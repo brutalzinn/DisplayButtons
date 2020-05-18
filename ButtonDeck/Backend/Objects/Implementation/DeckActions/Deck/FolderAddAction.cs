@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,19 +21,21 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
    
 
-        public override bool IsPlugin()
-        {
-            ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
-            return true;
-        }
+
 
 
 
         //     public static string script { get; set; } = "";
         public static string script { get; set; } = "";
         public  string script_to_form { get; set; } = "";
+
         public static string name_space { get; set; } = "";
-        public static string name_img { get; set; } = "";
+
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("Action")]
+        [ActionPropertyUpdateImageOnChanged]
+
+        public  static string name_img { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
         [ActionPropertyInclude]
         [ActionPropertyDescription("name")]
@@ -46,6 +49,24 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [MoonSharpUserData]
         class Formvoid
         {
+            public static void setButtonImg(string nameimg)
+            {
+
+                if (Directory.Exists(Application.StartupPath + @"\Data\imgs") == false)
+                {
+                    Directory.CreateDirectory(Application.StartupPath + @"\Data\imgs");
+                }
+                string path = Application.StartupPath + @"\Data\imgs\" + nameimg;
+                if (File.Exists(path))
+                {
+                    
+                    name_img = nameimg;
+                    
+                }
+
+
+
+            }
             public string getFormControl(string name, string type)
             {
 
@@ -96,26 +117,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
                 return result;
             }
-            public static void setButtonImg(string nameimg)
-            {
-
-                if (!Directory.Exists(Application.StartupPath + @"\Data\imgs"))
-
-                { 
-                    Directory.CreateDirectory(Application.StartupPath + @"\Data\imgs");
-                 }
-                Debug.WriteLine("CHEGOU QAUI 1"); 
-                if (File.Exists(Application.StartupPath + @"\Data\imgs\" + nameimg))
-                {
-
-                    Debug.WriteLine("CHEGOU aqui 2");
- name_img = nameimg;
-
-                }
-
-               
-
-            }
+          
            
                 public static void setFormControl(string name, string value, string type, int x ,int y, int tam_x, int tam_y)
             {
@@ -187,6 +189,15 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             }
         }
+        public override bool IsPlugin()
+        {
+            ScribeBot.Scripter.Execute(script,true);
+
+            ScribeBot.Scripter.Environment.Globals["formdesignvoid"] = typeof(Formvoid);
+
+           // ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
+            return true;
+        }
         public void ToExecuteHelper()
         {
             ScribeBot.Scripter.Execute(script, true);
@@ -196,7 +207,6 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
              form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
            
             ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
-            ScribeBot.Scripter.Environment.Globals["formdesignvoid"] = new Formvoid();
             object functiontable = ScribeBot.Scripter.Environment.Globals["form_menu"];
             ScribeBot.Scripter.Environment.Call(functiontable);
           //  var execAction = CloneAction() as FolderAddAction;
@@ -235,7 +245,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             }
             else
             {
-                ScribeBot.Scripter.Execute(script, true);
+             //   ScribeBot.Scripter.Execute(script, true);
                 var bitmap = new Bitmap(Application.StartupPath + @"\Data\imgs\" + name_img);
             return new DeckImage(bitmap);
 
