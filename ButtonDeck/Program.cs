@@ -153,17 +153,16 @@ namespace ButtonDeck
             NetworkChange.NetworkAddressChanged += NetworkChange_NetworkAddressChanged;
             NetworkChange.NetworkAvailabilityChanged += NetworkChange_NetworkAddressChanged;
             // começo da implementação do host usb
-           //    dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
+            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
+  if (form.ShowDialog() == DialogResult.OK)
+            {
+     ServerThread = new ServerThread();
+            ServerThread.Start();
+                Application.Run(new MainForm());
+          
+       
 
-          //  if (form.ShowDialog() == DialogResult.OK)
-        //    {
-
- 
-       //     }
-            ServerThread = new ServerThread();
-            ServerThread.Start();   
-
-            Application.Run(new MainForm());
+       //     Application.Run(new MainForm());
             
             OBSUtils.Disconnect();
 
@@ -173,9 +172,22 @@ namespace ButtonDeck
             ApplicationSettingsManager.SaveSettings();
             DevicePersistManager.SaveDevices();
             Trace.Flush();
-            
-        }
+            }
+            else
+            {
+                while(true)
+                {
+                    ButtonDeck.Backend.Usb.ReadWriteAsync.Main();
 
+
+                }
+
+
+
+
+            }
+        }
+      
         private static void NetworkChange_NetworkAddressChanged(object sender, EventArgs e)
         {
             ServerThread.Stop();
