@@ -105,7 +105,11 @@ namespace ButtonDeck.Misc
 
         private void UpdateConnectedDevices()
         {
-            List<Guid> toRemove = new List<Guid>();
+
+            if(Program.mode == 0)
+            {
+
+  List<Guid> toRemove = new List<Guid>();
             DevicePersistManager.DeckDevicesFromConnection.All(c => {
                 if (!Program.ServerThread.TcpServer.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key)) {
                     toRemove.Add(c.Key);
@@ -113,6 +117,30 @@ namespace ButtonDeck.Misc
                 return true;
             });
             toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+
+
+            }
+            else
+            {
+
+                List<Guid> toRemove = new List<Guid>();
+                DevicePersistManager.DeckDevicesFromConnection.All(c => {
+                    if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
+                    {
+                        toRemove.Add(c.Key);
+                    }
+                    return true;
+                });
+                toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+
+
+
+
+
+
+
+
+            }
         }
 
         public override int Width { get => TextRenderer.MeasureText(Text, Font).Width + 16; set => base.Width = value; }

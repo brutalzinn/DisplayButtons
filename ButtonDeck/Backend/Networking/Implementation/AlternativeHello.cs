@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
@@ -16,6 +17,12 @@ namespace ButtonDeck.Backend.Networking.Implementation
     {
         public override void Execute(ConnectionState state)
         {
+            state.SendPacket(new AlternativeHello());
+            //state.EndConnection();
+        }
+        public override void Execute_server(ConnectionState state)
+        {
+            Debug.WriteLine("DEBUG DMOD");
             state.SendPacket(new AlternativeHello());
             //state.EndConnection();
         }

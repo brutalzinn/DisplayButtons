@@ -164,12 +164,12 @@ namespace ButtonDeck
      ServerThread = new ServerThread();
             ServerThread.Start();
                 Application.Run(new MainForm());
-          
-       
+                ServerThread.Stop();
 
-       //     Application.Run(new MainForm());
-            
-        
+
+                //     Application.Run(new MainForm());
+
+
             }
             else
             {
@@ -178,7 +178,7 @@ namespace ButtonDeck
                 ClientThread.Start();
                 Application.Run(new MainForm());
 
-
+  ClientThread.Stop();
 
                 //     Application.Run(new MainForm());
 
@@ -187,8 +187,8 @@ namespace ButtonDeck
             }
                 OBSUtils.Disconnect();
 
-                ServerThread.Stop();
-                ClientThread.Stop();
+                
+              
                 NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
                 NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
                 ApplicationSettingsManager.SaveSettings();
@@ -198,9 +198,21 @@ namespace ButtonDeck
       
         private static void NetworkChange_NetworkAddressChanged(object sender, EventArgs e)
         {
-            ServerThread.Stop();
+            if(Program.mode ==0)
+            {
+   ServerThread.Stop();
             ServerThread = new ServerThread();
             ServerThread.Start();
+
+            }
+            else
+            {
+                ClientThread.Stop();
+                ClientThread = new ClientThread();
+                ClientThread.Start();
+
+            }
+         
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

@@ -27,9 +27,10 @@ namespace ButtonDeck.Backend.Networking
 
         public static bool TryHeartbeat(this ConnectionState con)
         {
+            //invertando lógica
             try {
                 Debug.WriteLine("Trying to send heartbeat to client!");
-                var result = con.SendPacket(new HeartbeatPacket());
+                var result = con.SendPacket(new HelloPacket());
                 if (result) Debug.WriteLine("Heartbeat success!");
                 return result;
             } catch (Exception) {
@@ -53,7 +54,7 @@ namespace ButtonDeck.Backend.Networking
         public static bool SendPacket(this ConnectionState con, INetworkPacket packet)
         {
             if (!packet.CanClientReceive()) {
-                throw new Exception($"Client can't receive NetworkPacket[ID: {packet.GetPacketNumber()}].");
+               // throw new Exception($"Client can't receive NetworkPacket[ID: {packet.GetPacketNumber()}].");
             }
             byte[] bytesToSend = null;
             using (var memoryStream = new MemoryStream()) {
@@ -104,6 +105,7 @@ namespace ButtonDeck.Backend.Networking
         public abstract void FromInputStream(DataInputStream reader);
         public abstract void ToOutputStream(DataOutputStream writer);
         public virtual void Execute(ConnectionState state) { }
+        public virtual void Execute_server(ConnectionState state) { }
 
         public virtual object Clone()
         {

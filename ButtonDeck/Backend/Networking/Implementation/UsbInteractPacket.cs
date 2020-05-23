@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace ButtonDeck.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ServerToClient)]
-    public class HelloPacket : INetworkPacket
+    public class UsbInteractPacket : INetworkPacket
     {
         public int ProtocolVersion { get; set; }
 
@@ -25,19 +25,22 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         public override void Execute(ConnectionState state)
         {
-            if (ProtocolVersion != Constants.PROTOCOL_VERSION) {
+            if (ProtocolVersion != Constants.PROTOCOL_VERSION)
+            {
                 state.EndConnection();
-            } else {
+            }
+            else
+            {
                 state.SendPacket(new DeviceIdentityPacket(HasDeviceGuid));
             }
         }
         public override void Execute_server(ConnectionState state)
         {
-         Debug.WriteLine("CHAMOU");
+            Debug.WriteLine("CHAMOU");
             state.SendPacket(new DeviceIdentityPacket(HasDeviceGuid));
             if (ProtocolVersion != Constants.PROTOCOL_VERSION)
             {
-            // state.EndConnection();
+                // state.EndConnection();
             }
             else
             {
@@ -52,12 +55,8 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         public override void FromInputStream(DataInputStream reader)
         {
-            ProtocolVersion = reader.ReadInt();
-            HasDeviceGuid = reader.ReadBoolean();
-            if (HasDeviceGuid) {
-                //We have a device GUID
-                DeviceGuid = Guid.Parse(reader.ReadUTF().ToUpper());
-            }
+            Debug.WriteLine("RODOU, BARTOLOMEU!");
+           
         }
 
         public override void ToOutputStream(DataOutputStream writer)

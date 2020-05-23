@@ -4,6 +4,9 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Text;
 using System.Collections;
+using System.ServiceModel;
+using ButtonDeck.Backend.Networking.Implementation;
+using System.Diagnostics;
 
 namespace ButtonDeck.Backend.Networking.TcpLib
 {
@@ -86,6 +89,15 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                 _conn.Close();
             }
             _server.DropConnection(this);
+        }
+        public void EndConnection_Client()
+        {
+            if (_conn != null && _conn.Connected)
+            {
+                _conn.Shutdown(SocketShutdown.Both);
+                _conn.Close();
+            }
+            _client.DropConnection(this);
         }
     }
 
@@ -214,6 +226,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         /// </summary>
         private void AcceptConnection_Handler(object state)
         {
+            Debug.WriteLine("CALL WHEN STEPED");
             ConnectionState st = state as ConnectionState;
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
             try { st._provider.OnAcceptConnection(st); } catch {
@@ -319,6 +332,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
     public class TcpClient
     {
         private int _port;
+
         private Socket _listener;
         private TcpServiceProvider _provider;
         private readonly ArrayList _connections;
@@ -340,20 +354,20 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         /// <summary>
         /// Initializes server. To start accepting connections call Start method.
         /// </summary>
-        public TcpClient(string ip, int port)
+        public TcpClient(TcpServiceProvider provider, int port)
         {
+            _provider = provider;
             _port = port;
-            //   _provider = provider;
-            IPAddress ip_usable = IPAddress.Parse(ip);
-            _listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _listener.Connect(new IPEndPoint(ip_usable, _port)); // 配置服务器IP与端口
+          //  _ip = ip;
 
-        
-           // _listener = new System.Net.Sockets.TcpClient("127.0.0.1", _port);
+            _listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
             _connections = new ArrayList();
-            ConnectionReady = new AsyncCallback(ConnectionReady_Handler);
+           ConnectionReady = new AsyncCallback(ConnectionReady_Handler);
             AcceptConnection = new WaitCallback(AcceptConnection_Handler);
-            ReceivedDataReady = new AsyncCallback(ReceivedDataReady_Handler);
+
+            //  AcceptConnection = new WaitCallback(AcceptConnection_Handler);
+            //   ReceivedDataReady = new AsyncCallback(ReceivedDataReady_Handler);
         }
 
 
@@ -365,10 +379,15 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         {
             try
             {
-                _listener.Connect(new IPEndPoint(IPAddress.Any, _port));
-               // _listener.Bind(new IPEndPoint(IPAddress.Any, _port));
-               // _listener.Listen(100);
-               // _listener.BeginAccept(ConnectionReady, null);
+           IPAddress ip_usable = IPAddress.Parse("127.0.0.1");
+          _listener.Connect(ip_usable, _port);
+                _listener.BeginAccept(ConnectionReady, null);
+
+                //  NetworkPacketExtensions.SendPacket(_listener.,new UsbInteractPacket());
+                //  _listener.send
+                //      _listener.Bind(new IPEndPoint(IPAddress.Any, _port));
+                // _listener.Listen(100);
+                //   _listener.BeginAccept(ConnectionReady, null);
                 return true;
             }
             catch (Exception)
@@ -383,10 +402,16 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         /// </summary>
         private void ConnectionReady_Handler(IAsyncResult ar)
         {
+            Debug.WriteLine("HANDLED CALLED");
             lock (this)
             {
+            
                 if (_listener == null) return;
-                Socket conn = _listener.EndAccept(ar);
+
+         
+    
+               Socket conn = _listener.EndAccept(ar);
+
                 if (_connections.Count >= _maxConnections)
                 {
                     //Max number of connections reached.
@@ -410,7 +435,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     ThreadPool.QueueUserWorkItem(AcceptConnection, st);
                 }
                 //Resume the listening callback loop
-                _listener.Connect("127.0.0.1",_port);
+                _listener.BeginAccept(ConnectionReady, null);
             }
         }
 

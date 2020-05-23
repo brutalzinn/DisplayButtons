@@ -58,7 +58,22 @@ namespace ButtonDeck.Backend.Networking.Implementation
             DevicePersistManager.OnDeviceConnected(this, deckDevice);
         }
 
+        public override void Execute_server(ConnectionState state)
+        {
+            DeckDevice deckDevice = new DeckDevice(DeviceGuid, DeviceName);
 
+            DevicePersistManager.PersistDevice(deckDevice);
+            DevicePersistManager.ChangeConnectedState(state, deckDevice);
+            /*
+            var deckImage = new DeckImage(new System.Drawing.Bitmap("streamdeck_key.png"));
+            var packet = new SlotImageChangeChunkPacket();
+            packet.AddToQueue(1, deckImage);
+            packet.AddToQueue(3, deckImage);
+            packet.AddToQueue(5, deckImage);
+            packet.AddToQueue(15, deckImage);
+            state.SendPacket(packet);*/
+            DevicePersistManager.OnDeviceConnected(this, deckDevice);
+        }
         public override void ToOutputStream(DataOutputStream writer)
         {
             //From server to client

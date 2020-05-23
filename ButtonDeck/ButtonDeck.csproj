@@ -127,6 +127,7 @@
     </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq">
       <Private>True</Private>
     </Reference>
@@ -180,6 +181,7 @@
     <Compile Include="Backend\Networking\Implementation\SlotImageChangeChunkPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\SlotImageClearChunkPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\SlotImageClearPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\UsbInteractPacket.cs" />
     <Compile Include="Backend\Networking\INetworkPacket.cs" />
     <Compile Include="Backend\Networking\IO\DataInputStream.cs" />
     <Compile Include="Backend\Networking\IO\DataOutputStream.cs" />

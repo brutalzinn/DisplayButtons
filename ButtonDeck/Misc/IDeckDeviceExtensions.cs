@@ -14,14 +14,41 @@ namespace ButtonDeck.Misc
     {
         public static Guid GetConnectionGuidFromDeckDevice(DeckDevice device)
         {
-            var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+            if(Program.mode == 0)
+            {
+ var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
             return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
+
+
+            }
+            else
+            {
+                var connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
+
+
+
+            }
         }
         public static ConnectionState GetConnection(this DeckDevice device)
         {
-            var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+            if(Program.mode == 0)
+            {
+
+    var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
             var stateID = GetConnectionGuidFromDeckDevice(device);
             return connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
+
+            }
+            else
+            {
+
+                var connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                var stateID = GetConnectionGuidFromDeckDevice(device);
+                return connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
+
+
+            }
         }
 
     }
