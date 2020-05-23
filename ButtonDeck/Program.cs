@@ -13,6 +13,8 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAudio.CoreAudioApi;
+using Managed.Adb;
 
 namespace ButtonDeck
 {
@@ -26,6 +28,8 @@ namespace ButtonDeck
         private static string errorText = "";
         private const string errorFileName = "errors.log";
         public static ServerThread ServerThread { get; set; }
+        public static ClientThread ClientThread { get; set; }
+        public static int mode { get; set; }
         public static bool SuccessfulServerStart { get; set; } = false;
         public static Type FindType(string fullName)
         {
@@ -156,6 +160,7 @@ namespace ButtonDeck
             dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
   if (form.ShowDialog() == DialogResult.OK)
             {
+                mode = 0;
      ServerThread = new ServerThread();
             ServerThread.Start();
                 Application.Run(new MainForm());
@@ -164,28 +169,31 @@ namespace ButtonDeck
 
        //     Application.Run(new MainForm());
             
-            OBSUtils.Disconnect();
-
-            ServerThread.Stop();
-            NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
-            NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
-            ApplicationSettingsManager.SaveSettings();
-            DevicePersistManager.SaveDevices();
-            Trace.Flush();
+        
             }
             else
             {
-                while(true)
-                {
-                    ButtonDeck.Backend.Usb.ReadWriteAsync.Main();
+                mode = 1;
+                 ClientThread = new ClientThread();
+                ClientThread.Start();
+                Application.Run(new MainForm());
 
 
-                }
 
+                //     Application.Run(new MainForm());
 
 
 
             }
+                OBSUtils.Disconnect();
+
+                ServerThread.Stop();
+                ClientThread.Stop();
+                NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
+                NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
+                ApplicationSettingsManager.SaveSettings();
+                DevicePersistManager.SaveDevices();
+                Trace.Flush();
         }
       
         private static void NetworkChange_NetworkAddressChanged(object sender, EventArgs e)

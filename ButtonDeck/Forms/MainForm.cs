@@ -136,7 +136,24 @@ namespace ButtonDeck.Forms
 
         #region Properties
 
-        public int ConnectedDevices { get => Program.ServerThread.TcpServer.CurrentConnections; }
+        public static int ConnectedDevices {
+            get
+            {
+
+
+                if(Program.mode == 0)
+                {
+
+return Program.ServerThread.TcpServer.CurrentConnections;
+
+                }
+                else
+                {
+
+                    return Program.ClientThread.TcpClient.CurrentConnections;
+                }
+            }
+           }
         public DeckDevice CurrentDevice { get; set; }
 
         #endregion

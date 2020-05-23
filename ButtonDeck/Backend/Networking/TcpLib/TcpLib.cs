@@ -24,6 +24,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
 
         internal Socket _conn;
         internal TcpServer _server;
+        internal TcpClient _client;
         internal TcpServiceProvider _provider;
         internal byte[] _buffer;
 
@@ -310,6 +311,233 @@ namespace ButtonDeck.Backend.Networking.TcpLib
 
         public int CurrentConnections {
             get {
+                lock (this) { return _connections.Count; }
+            }
+        }
+    }
+
+    public class TcpClient
+    {
+        private int _port;
+        private Socket _listener;
+        private TcpServiceProvider _provider;
+        private readonly ArrayList _connections;
+
+        public ArrayList Connections
+        {
+            get
+            {
+                return _connections;
+            }
+        }
+
+        private int _maxConnections = 100;
+
+        private AsyncCallback ConnectionReady;
+        private WaitCallback AcceptConnection;
+        private AsyncCallback ReceivedDataReady;
+
+        /// <summary>
+        /// Initializes server. To start accepting connections call Start method.
+        /// </summary>
+        public TcpClient(string ip, int port)
+        {
+            _port = port;
+            //   _provider = provider;
+            IPAddress ip_usable = IPAddress.Parse(ip);
+            _listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _listener.Connect(new IPEndPoint(ip_usable, _port)); // 配置服务器IP与端口
+
+        
+           // _listener = new System.Net.Sockets.TcpClient("127.0.0.1", _port);
+            _connections = new ArrayList();
+            ConnectionReady = new AsyncCallback(ConnectionReady_Handler);
+            AcceptConnection = new WaitCallback(AcceptConnection_Handler);
+            ReceivedDataReady = new AsyncCallback(ReceivedDataReady_Handler);
+        }
+
+
+        /// <summary>
+        /// Start accepting connections.
+        /// A false return value tell you that the port is not available.
+        /// </summary>
+        public bool Start()
+        {
+            try
+            {
+                _listener.Connect(new IPEndPoint(IPAddress.Any, _port));
+               // _listener.Bind(new IPEndPoint(IPAddress.Any, _port));
+               // _listener.Listen(100);
+               // _listener.BeginAccept(ConnectionReady, null);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+        /// <summary>
+        /// Callback function: A new connection is waiting.
+        /// </summary>
+        private void ConnectionReady_Handler(IAsyncResult ar)
+        {
+            lock (this)
+            {
+                if (_listener == null) return;
+                Socket conn = _listener.EndAccept(ar);
+                if (_connections.Count >= _maxConnections)
+                {
+                    //Max number of connections reached.
+                    string msg = "SE001: Server busy";
+                    conn.Send(Encoding.UTF8.GetBytes(msg), 0, msg.Length, SocketFlags.None);
+                    conn.Shutdown(SocketShutdown.Both);
+                    conn.Close();
+                }
+                else
+                {
+                    //Start servicing a new connection
+                    ConnectionState st = new ConnectionState
+                    {
+                        _conn = conn,
+                        _client = this,
+                        _provider = (TcpServiceProvider)_provider.Clone(),
+                        _buffer = new byte[4]
+                    };
+                    _connections.Add(st);
+                    //Queue the rest of the job to be executed latter
+                    ThreadPool.QueueUserWorkItem(AcceptConnection, st);
+                }
+                //Resume the listening callback loop
+                _listener.Connect("127.0.0.1",_port);
+            }
+        }
+
+
+        /// <summary>
+        /// Executes OnAcceptConnection method from the service provider.
+        /// </summary>
+        private void AcceptConnection_Handler(object state)
+        {
+            ConnectionState st = state as ConnectionState;
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+            try { st._provider.OnAcceptConnection(st); }
+            catch
+            {
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+                //report error in provider... Probably to the EventLog
+            }
+            //Starts the ReceiveData callback loop
+            if (st._conn.Connected)
+                st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
+                ReceivedDataReady, st);
+        }
+
+
+        /// <summary>
+        /// Executes OnReceiveData method from the service provider.
+        /// </summary>
+        private void ReceivedDataReady_Handler(IAsyncResult ar)
+        {
+            try
+            {
+                ConnectionState st = ar.AsyncState as ConnectionState;
+                st._conn.EndReceive(ar);
+                //Im considering the following condition as a signal that the
+                //remote host droped the connection.
+                if (st._conn.Available == 0) DropConnection(st);
+                else
+                {
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+                    try { st._provider.OnReceiveData(st); }
+                    catch (Exception)
+                    {
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+                        //report error in the provider
+                    }
+                    //Resume ReceivedData callback loop
+                    if (st._conn.Connected)
+                        st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
+                        ReceivedDataReady, st);
+                }
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+            }
+            catch (Exception)
+            {
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+            }
+        }
+
+
+        /// <summary>
+        /// Shutsdown the server
+        /// </summary>
+        public void Stop()
+        {
+            lock (this)
+            {
+                _listener.Close();
+                _listener = null;
+                //Close all active connections
+                foreach (object obj in _connections)
+                {
+                    ConnectionState st = obj as ConnectionState;
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+                    try { st._provider.OnDropConnection(st); }
+                    catch
+                    {
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+                        //some error in the provider
+                    }
+                    try
+                    {
+                        st._conn.Shutdown(SocketShutdown.Both);
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+                    }
+                    catch (Exception)
+                    {
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+                    }
+                    st._conn.Close();
+                }
+                _connections.Clear();
+            }
+        }
+
+
+        /// <summary>
+        /// Removes a connection from the list
+        /// </summary>
+        internal void DropConnection(ConnectionState st)
+        {
+            lock (this)
+            {
+                st._conn.Shutdown(SocketShutdown.Both);
+                st._conn.Close();
+                if (_connections.Contains(st))
+                    _connections.Remove(st);
+            }
+        }
+
+
+        public int MaxConnections
+        {
+            get
+            {
+                return _maxConnections;
+            }
+            set
+            {
+                _maxConnections = value;
+            }
+        }
+
+
+        public int CurrentConnections
+        {
+            get
+            {
                 lock (this) { return _connections.Count; }
             }
         }

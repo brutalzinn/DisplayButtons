@@ -79,7 +79,18 @@ namespace ButtonDeck.Misc
 
         public int CurrentConnections {
             get {
+                if(Program.mode == 0)
+                {
+
                 return Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+
+                }
+                else
+                {
+                    return Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+
+
+                }
             }
         }
         public override string Text {

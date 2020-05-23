@@ -60,6 +60,9 @@
     <StartupObject>ButtonDeck.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Camalot.Common, Version=1.0.5937.17275, Culture=neutral, PublicKeyToken=02434577b8ec3216, processorArchitecture=MSIL">
+      <HintPath>..\packages\Camalot.Common.1.0.5937.17275\lib\net45\Camalot.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
     </Reference>
@@ -76,17 +79,23 @@
       <HintPath>..\packages\Magick.NET-Q16-AnyCPU.7.17.0\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Managed.Adb, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ed3761c9cde2a680, processorArchitecture=x86">
+      <HintPath>..\packages\Managed.Adb.2.0.131.13916\lib\net45\Managed.Adb.dll</HintPath>
+    </Reference>
     <Reference Include="ModernUIDoneRight">
       <HintPath>..\ModernUIDoneRight.dll</HintPath>
     </Reference>
     <Reference Include="MoonSharp.Interpreter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=921e73ce94aa17f8, processorArchitecture=MSIL">
       <HintPath>..\packages\MoonSharp.2.0.0.0\lib\net40-client\MoonSharp.Interpreter.dll</HintPath>
     </Reference>
+    <Reference Include="MoreLinq, Version=3.3.2.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.3.3.2\lib\net451\MoreLinq.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="obs-websocket-dotnet, Version=4.2.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\obs-websocket-dotnet.4.2.0-beta3\lib\net40\obs-websocket-dotnet.dll</HintPath>
@@ -97,6 +106,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <Private>True</Private>
     </Reference>
@@ -116,6 +126,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Xml.Linq">
       <Private>True</Private>
     </Reference>
@@ -364,10 +375,10 @@
       <DependentUpon>Window.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\ApplicationColorScheme.cs" />
+    <Compile Include="Misc\ClientThread.cs" />
     <Compile Include="Misc\ColorSchemeCentral.cs" />
     <Compile Include="Misc\DevicesTitlebarButton.cs" />
     <Compile Include="Misc\IDeckDeviceExtensions.cs" />
-    <Compile Include="Misc\UsbThread.cs" />
     <Compile Include="Misc\ServerThread.cs" />
     <Compile Include="Native\API.cs" />
     <Compile Include="Native\Native.cs" />
