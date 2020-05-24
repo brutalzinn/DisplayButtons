@@ -165,7 +165,7 @@ namespace ButtonDeck
             ServerThread.Start();
                 Application.Run(new MainForm());
                 ServerThread.Stop();
-
+                Debug.WriteLine("MODO SOCKET CLIENT");
 
                 //     Application.Run(new MainForm());
 
@@ -173,6 +173,7 @@ namespace ButtonDeck
             }
             else
             {
+                Debug.WriteLine("MODO USB");
                 mode = 1;
                  ClientThread = new ClientThread();
                 ClientThread.Start();

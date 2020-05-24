@@ -216,7 +216,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     ThreadPool.QueueUserWorkItem(AcceptConnection, st);
                 }
                 //Resume the listening callback loop
-                _listener.BeginAccept(ConnectionReady, null);
+               _listener.BeginAccept(ConnectionReady, null);
             }
         }
 
@@ -236,7 +236,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             //Starts the ReceiveData callback loop
             if (st._conn.Connected)
                 st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
-                ReceivedDataReady, st);
+                 new AsyncCallback(ReceivedDataReady_Handler), st);
         }
 
 
@@ -363,11 +363,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             _listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             _connections = new ArrayList();
-         //  ConnectionReady = new AsyncCallback(ConnectionReady_Handler);
-            AcceptConnection = new WaitCallback(AcceptConnection_Handler);
-
-           //AcceptConnection = new WaitCallback(AcceptConnection_Handler);
-              ReceivedDataReady = new AsyncCallback(ReceivedDataReady_Handler);
+      
         }
 
 
@@ -383,10 +379,10 @@ namespace ButtonDeck.Backend.Networking.TcpLib
              //   IPAddress ipAddress = ipHostInfo.AddressList[0];  
            IPEndPoint remoteEP = new IPEndPoint(ip_usable, _port);
                 // _listener.Connect(ip_usable, _port);
-         
+                //   _listener.Listen(1000) ;   
+             //   _listener.Listen(100);
                 _listener.BeginConnect(remoteEP,
                        new AsyncCallback(ConnectionReady_Handler), _listener);
-               _listener.Listen(1000) ;   
                 //  NetworkPacketExtensions.SendPacket(_listener.,new UsbInteractPacket());
                 //  _listener.send
                 //      _listener.Bind(new IPEndPoint(IPAddress.Any, _port));
@@ -438,11 +434,10 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     };
                     _connections.Add(st);
                     //Queue the rest of the job to be executed latter
-                    ThreadPool.QueueUserWorkItem(AcceptConnection, st);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(AcceptConnection_Handler), st);
                 }
                 //Resume the listening callback loop
-                _listener.BeginConnect(remoteEP,
-                     new AsyncCallback(ConnectionReady_Handler), _listener);
+         // _listener.BeginAccept(new AsyncCallback(ConnectionReady_Handler), null);
             }
         }
 
@@ -452,6 +447,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         /// </summary>
         private void AcceptConnection_Handler(object state)
         {
+            Debug.WriteLine("Calling accept connection handler");
    
             ConnectionState st = state as ConnectionState;
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -464,7 +460,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             //Starts the ReceiveData callback loop
             if (st._conn.Connected)
                 st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
-                ReceivedDataReady, st);
+                new AsyncCallback(ReceivedDataReady_Handler), st);
         }
 
 
@@ -475,11 +471,16 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         {
             try
             {
+                Debug.WriteLine("REICEIVED DATRA READY");
                 ConnectionState st = ar.AsyncState as ConnectionState;
-                st._conn.EndReceive(ar);
+        //        st._conn.EndReceive(ar);
                 //Im considering the following condition as a signal that the
                 //remote host droped the connection.
-                if (st._conn.Available == 0) DropConnection(st);
+                if (st._conn.Available == 0)
+                {
+                    Debug.WriteLine("drop connection");
+                    DropConnection(st);
+                }
                 else
                 {
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -492,7 +493,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     //Resume ReceivedData callback loop
                     if (st._conn.Connected)
                         st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
-                        ReceivedDataReady, st);
+                        new AsyncCallback(ReceivedDataReady_Handler), st);
                 }
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
             }

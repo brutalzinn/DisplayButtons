@@ -676,7 +676,7 @@ return Program.ServerThread.TcpServer.CurrentConnections;
             if (CurrentDevice == null) {
                 ChangeToDevice(e.Device);
             }
-          //  SendItemsToDevice(CurrentDevice, true);
+      //   SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
             }));
 
@@ -707,8 +707,10 @@ return Program.ServerThread.TcpServer.CurrentConnections;
                             if (e.PerformedAction != ButtonInteractPacket.ButtonAction.ButtonUp) return;
                             //Navigate one up!
                             device.CurrentFolder = device.CurrentFolder.GetParent();
-                            SendItemsToDevice(CurrentDevice, device.CurrentFolder);
-                            RefreshAllButtons(false);
+                        //    SendItemsToDevice(CurrentDevice, device.CurrentFolder);
+                                AddWatermark(deckItem.DeckAction.GetActionName(), ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, device.CurrentFolder.GetParent());
+
+                                RefreshAllButtons(false);
                             return;
                         }
                     }
@@ -725,9 +727,10 @@ return Program.ServerThread.TcpServer.CurrentConnections;
                     }
                 } else if (item is DynamicDeckFolder deckFolder && e.PerformedAction == ButtonInteractPacket.ButtonAction.ButtonUp) {
                     device.CurrentFolder = deckFolder;
-                    //ignoreOnce.Add(new Tuple<Guid, int>(device.DeviceGuid, e.SlotID));
-                    SendItemsToDevice(CurrentDevice, deckFolder);
-                    RefreshAllButtons(false);
+                        //ignoreOnce.Add(new Tuple<Guid, int>(device.DeviceGuid, e.SlotID));
+                        // SendItemsToDevice(CurrentDevice, deckFolder);
+                        AddWatermark(deckFolder.folder_name, ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, deckFolder);
+                        RefreshAllButtons(false);
                 }
             }
         }
@@ -739,65 +742,7 @@ return Program.ServerThread.TcpServer.CurrentConnections;
         device.CheckCurrentFolder();
         SendItemsToDevice(device, device.CurrentFolder);
     }
-        private static void SendoneItemToDevice(DeckDevice device, IDeckFolder folder, IMagickImage image_receivd = null, IDeckItem item = null)
-        {
-
-
-            var con = device.GetConnection();
-            if (con != null)
-            {
-                bool isFolder = false;
-                var packet = new SlotImageChangeChunkPacket();
-                List<IDeckItem> items = folder.GetDeckItems();
-
-                List<int> addedItems = new List<int>();
-
-                for (int i = 0; i < 15; i++)
-                {
-                    
-                    if (items.ElementAtOrDefault(i) != null)
-                    {
-                       // item = items[i];
-                        addedItems.Add(folder.GetItemIndex(item));
-                    }
-                    if (image_receivd == null) break;
-                    if (item == null) continue;
-
-
-                    if(item is DynamicDeckFolder)
-                    {
-
-                        isFolder = true;
-                    }
-                       var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
-
-
-                    // var seri = image.BitmapSerialized;
-                    ///     ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-                    //  IDeckFolder folder_t = CurrentDevice?.CurrentFolder;
-                    // var seri = teste.BitmapSerialized;
-
-                    packet.AddToQueue(folder.GetItemIndex(item), ReceiveWaterMark(image.Bitmap, "","Arial",7,10f,67f,Brushes.White));
-                    //  con.SendPacket(packet);
-
-
-                    //   teste.modernButton1.NormalImage;
-
-                    //     packet.AddToQueue(folder.GetItemIndex(item), image);
-                }
-                con.SendPacket(packet);
-                var clearPacket = new SlotImageClearChunkPacket();
-                for (int i = 1; i < 16; i++)
-                {
-                    if (addedItems.Contains(i)) continue;
-                    clearPacket.AddToQueue(i);
-                }
-
-                con.SendPacket(clearPacket);
-            }
-
-
-        }
+       
 
     private static void SendItemsToDevice(DeckDevice device, IDeckFolder folder, IMagickImage image_receivd = null)
     {
@@ -875,24 +820,24 @@ return Program.ServerThread.TcpServer.CurrentConnections;
                     //  item.GetItemImage().BitmapSerialized = converterDemo(item?.GetItemImage().Bitmap);
                     //     var ser = item.GetItemImage().BitmapSerialized;
                     //    item.BitmapSerialized = item?.GetItemImage().Bitmap;
-                    AddWatermark(DI.DeckAction.GetActionName(), image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                  AddWatermark(DI.DeckAction.GetActionName(), image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
                     //item.GetItemImage().BitmapSerialized = converterDemo( AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White)); 
                     //   Write_name_Image("testeee", item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
 
                 }
                 else if (item is DynamicDeckFolder FO)
                 {
-                    AddWatermark(FO.folder_name, image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                   AddWatermark(FO.folder_name, image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
 
 
 
                 }
                 else
                 {
-                    control.NormalImage = image.Bitmap;
-
+                   //
+control.NormalImage = image.Bitmap;
                 }
-              
+               
 
 
 
@@ -1305,51 +1250,7 @@ if(abacate is DynamicDeckFolder PP)
                     GetAllFolders(folder.GetSubFolders()[root]);
 
                 }
-                    // if(folder is DynamicDeckFolder DF)
-
-
-            
-
-                //ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-                // List<DynamicDeckFolder> items =  folder.GetSubFolders();
-
-
-
-
-
-
-
-
-
-                //pastar_father.Controls.Add(folder_name);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                //                pastar_father.Controls.Add(folder_name);
-
-
-                //pastar_father.Controls.Add(folder_root);
-
-
+                 
 
 
                 foreach (var item in toFolders)

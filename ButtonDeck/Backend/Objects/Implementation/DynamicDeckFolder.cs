@@ -86,6 +86,7 @@ namespace ButtonDeck.Backend.Objects.Implementation
         }
         [XmlIgnore]
         public string folder_name { get; set; }
+        [XmlIgnore]
         public int folder_father { get; set; }
         [XmlIgnore]
         public int father
