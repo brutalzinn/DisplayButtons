@@ -25,25 +25,14 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         public override void Execute(ConnectionState state)
         {
+            Debug.WriteLine("EXECUTE  ");
             if (ProtocolVersion != Constants.PROTOCOL_VERSION) {
                 state.EndConnection();
             } else {
                 state.SendPacket(new DeviceIdentityPacket(HasDeviceGuid));
             }
         }
-        public override void Execute_server(ConnectionState state)
-        {
-         Debug.WriteLine("CHAMOU");
-            state.SendPacket(new DeviceIdentityPacket(HasDeviceGuid));
-            if (ProtocolVersion != Constants.PROTOCOL_VERSION)
-            {
-            // state.EndConnection();
-            }
-            else
-            {
-                state.SendPacket(new DeviceIdentityPacket(HasDeviceGuid));
-            }
-        }
+  
 
         public override object Clone()
         {

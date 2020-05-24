@@ -20,13 +20,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
             state.SendPacket(new AlternativeHello());
             //state.EndConnection();
         }
-        public override void Execute_server(ConnectionState state)
-        {
-            Debug.WriteLine("DEBUG DMOD");
-            state.SendPacket(new AlternativeHello());
-            //state.EndConnection();
-        }
-
+   
         public override void FromInputStream(DataInputStream reader)
         {
             //From client

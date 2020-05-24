@@ -42,12 +42,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
             if (PerformedAction != ButtonAction.ButtonClick)
                 device.OnButtonInteraction(PerformedAction, SlotID);
         }
-        public override void Execute_server(ConnectionState state)
-        {
-            var device = DevicePersistManager.GetDeckDeviceFromConnectionGuid(state.ConnectionGuid);
-            if (PerformedAction != ButtonAction.ButtonClick)
-                device.OnButtonInteraction(PerformedAction, SlotID);
-        }
+  
         public override long GetPacketNumber() => 8;
 
         public override void ToOutputStream(DataOutputStream writer)

@@ -363,11 +363,11 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             _listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             _connections = new ArrayList();
-           ConnectionReady = new AsyncCallback(ConnectionReady_Handler);
+         //  ConnectionReady = new AsyncCallback(ConnectionReady_Handler);
             AcceptConnection = new WaitCallback(AcceptConnection_Handler);
 
-            //  AcceptConnection = new WaitCallback(AcceptConnection_Handler);
-            //   ReceivedDataReady = new AsyncCallback(ReceivedDataReady_Handler);
+           //AcceptConnection = new WaitCallback(AcceptConnection_Handler);
+              ReceivedDataReady = new AsyncCallback(ReceivedDataReady_Handler);
         }
 
 
@@ -380,9 +380,13 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             try
             {
            IPAddress ip_usable = IPAddress.Parse("127.0.0.1");
-          _listener.Connect(ip_usable, _port);
-                _listener.BeginAccept(ConnectionReady, null);
-
+             //   IPAddress ipAddress = ipHostInfo.AddressList[0];  
+           IPEndPoint remoteEP = new IPEndPoint(ip_usable, _port);
+                // _listener.Connect(ip_usable, _port);
+         
+                _listener.BeginConnect(remoteEP,
+                       new AsyncCallback(ConnectionReady_Handler), _listener);
+               _listener.Listen(1000) ;   
                 //  NetworkPacketExtensions.SendPacket(_listener.,new UsbInteractPacket());
                 //  _listener.send
                 //      _listener.Bind(new IPEndPoint(IPAddress.Any, _port));
@@ -396,26 +400,28 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             }
         }
 
-
+      
         /// <summary>
         /// Callback function: A new connection is waiting.
         /// </summary>
         private void ConnectionReady_Handler(IAsyncResult ar)
         {
-            Debug.WriteLine("HANDLED CALLED");
+        
             lock (this)
             {
             
                 if (_listener == null) return;
+                IPAddress ip_usable = IPAddress.Parse("127.0.0.1");
 
-         
-    
-               Socket conn = _listener.EndAccept(ar);
+                IPEndPoint remoteEP = new IPEndPoint(ip_usable, _port);
+
+                Socket conn = (Socket)ar.AsyncState;
 
                 if (_connections.Count >= _maxConnections)
                 {
                     //Max number of connections reached.
                     string msg = "SE001: Server busy";
+                    Debug.WriteLine("SERVER BUSY");
                     conn.Send(Encoding.UTF8.GetBytes(msg), 0, msg.Length, SocketFlags.None);
                     conn.Shutdown(SocketShutdown.Both);
                     conn.Close();
@@ -435,7 +441,8 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     ThreadPool.QueueUserWorkItem(AcceptConnection, st);
                 }
                 //Resume the listening callback loop
-                _listener.BeginAccept(ConnectionReady, null);
+                _listener.BeginConnect(remoteEP,
+                     new AsyncCallback(ConnectionReady_Handler), _listener);
             }
         }
 
@@ -445,6 +452,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         /// </summary>
         private void AcceptConnection_Handler(object state)
         {
+   
             ConnectionState st = state as ConnectionState;
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
             try { st._provider.OnAcceptConnection(st); }
