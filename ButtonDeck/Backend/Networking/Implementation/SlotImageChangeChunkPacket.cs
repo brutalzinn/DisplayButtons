@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
-    [Architecture(PacketArchitecture.ServerToClient)]
+    [Architecture(PacketArchitecture.ClientToServer)]
     public class SlotImageChangeChunkPacket : INetworkPacket
     {
         IDictionary<int, DeckImage> toSend = new Dictionary<int, DeckImage>();

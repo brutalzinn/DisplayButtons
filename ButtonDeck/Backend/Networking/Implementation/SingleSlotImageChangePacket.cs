@@ -9,7 +9,7 @@ using ButtonDeck.Backend.Objects;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
-    [Architecture(PacketArchitecture.ServerToClient)]
+    [Architecture(PacketArchitecture.ClientToServer)]
     public class SingleSlotImageChangePacket : INetworkPacket
     {
         public SingleSlotImageChangePacket()

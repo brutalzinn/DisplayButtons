@@ -37,8 +37,10 @@ namespace ButtonDeck.Backend.Networking.Implementation
         public override void FromInputStream(DataInputStream reader)
         {
             string receivedGuid = reader.ReadUTF().ToUpperInvariant();
-            DeviceGuid = new Guid(receivedGuid);
-            DeviceName = reader.ReadUTF();
+            // DeviceGuid = new Guid(receivedGuid);
+            //  DeviceName = reader.ReadUTF();
+           DeviceGuid = new Guid(receivedGuid);
+              DeviceName = reader.ReadUTF();
         }
 
         public override void Execute(ConnectionState state)

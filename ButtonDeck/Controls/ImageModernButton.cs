@@ -35,10 +35,22 @@ namespace ButtonDeck.Controls
 
         public static Guid GetConnectionGuidFromDeckDevice(DeckDevice device)
         {
-            var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
-            return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
-        }
+            if (Program.mode == 0)
+            {
 
+                var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
+
+            }
+            else
+            {
+                var connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
+
+            }
+
+        }
+    
 
 
         public string ExtractNumber(string original)
@@ -73,7 +85,20 @@ namespace ButtonDeck.Controls
                 if (Parent != null && Parent.Parent != null && Parent.Parent is MainForm frm) {
                     if (frm.CurrentDevice != null) {
                         int slot = int.Parse(ExtractNumber(Name));
-                        var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                        IEnumerable<ConnectionState> connections;
+                        if (Program.mode == 0)
+                        {
+
+                         connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+
+
+                        }
+                        else
+                        {
+                             connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+
+
+                        }
                         var stateID = GetConnectionGuidFromDeckDevice(frm.CurrentDevice);
                         var state = connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
                         if (value == null) {

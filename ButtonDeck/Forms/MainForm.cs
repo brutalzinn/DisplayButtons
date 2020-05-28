@@ -1247,7 +1247,7 @@ if(abacate is DynamicDeckFolder PP)
               if(folder != null)
                 {
 
-                    GetAllFolders(folder.GetSubFolders()[root]);
+                 //   GetAllFolders(folder.GetSubFolders()[root]);
 
                 }
                  
@@ -1256,7 +1256,7 @@ if(abacate is DynamicDeckFolder PP)
                 foreach (var item in toFolders)
                 {
 
-parent.Controls.Add(item);
+//parent.Controls.Add(item);
 
 
                 }
@@ -1264,8 +1264,8 @@ parent.Controls.Add(item);
                     
                     
                
-                parent.Controls.Add(folder_root);
-                parent.Controls.Add(header_folder);
+       //         parent.Controls.Add(folder_root);
+       //         parent.Controls.Add(header_folder);
             }
 
             catch (Exception e)
@@ -1435,12 +1435,16 @@ parent.Controls.Add(item);
 
 
                 if (!senderB.DisplayRectangle.Contains(e.Location)) return;
-                if (e.Button == MouseButtons.Right && CurrentDevice.CurrentFolder.GetDeckItems().Any(c => CurrentDevice.CurrentFolder.GetItemIndex(c) == senderB.CurrentSlot)) {
+                if (e.Button == MouseButtons.Right && CurrentDevice.CurrentFolder.GetDeckItems().Any(c => CurrentDevice.CurrentFolder.GetItemIndex(c) == senderB.CurrentSlot))
+                {
 
 
-                    popupMenu.Items.Add("Remove item").Click += (s, ee) => {
-                        if (senderB != null) {
-                            if (senderB.Image != Resources.img_folder && senderB.Image != Resources.img_item_default) {
+                    popupMenu.Items.Add("Remove item").Click += (s, ee) =>
+                    {
+                        if (senderB != null)
+                        {
+                            if (senderB.Image != Resources.img_folder && senderB.Image != Resources.img_item_default)
+                            {
                                 senderB.Image.Dispose();
                             }
                             senderB.Tag = null;
@@ -1450,10 +1454,13 @@ parent.Controls.Add(item);
                         }
                     };
 
-                    popupMenu.Items.Add("Clear image").Click += (s, ee) => {
-                        if (senderB.Image != null && senderB.Image != Resources.img_folder && senderB.Image != Resources.img_item_default) {
+                    popupMenu.Items.Add("Clear image").Click += (s, ee) =>
+                    {
+                        if (senderB.Image != null && senderB.Image != Resources.img_folder && senderB.Image != Resources.img_item_default)
+                        {
                             senderB.Image.Dispose();
-                            if (senderB != null && senderB.Tag != null && senderB.Tag is IDeckItem deckItem) {
+                            if (senderB != null && senderB.Tag != null && senderB.Tag is IDeckItem deckItem)
+                            {
                                 bool isFolder = deckItem is IDeckFolder;
                                 senderB.Image = isFolder ? Resources.img_folder : ((IDeckItem)senderB.Tag).GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
                             }
@@ -2099,6 +2106,24 @@ parent.Controls.Add(item);
         private void appBar1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            var con = CurrentDevice.GetConnection();
+            var packet = new HelloPacket();
+            if (con != null)
+            {
+
+             con.SendPacket(packet);
+
+          }
+
+               
+            
+
+         
+            
         }
     }
     #endregion

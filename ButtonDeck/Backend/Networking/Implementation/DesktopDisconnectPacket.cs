@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
-    [Architecture(PacketArchitecture.ServerToClient)]
+    [Architecture(PacketArchitecture.ClientToServer)]
     public class DesktopDisconnectPacket : INetworkPacket
     {
         public override object Clone()

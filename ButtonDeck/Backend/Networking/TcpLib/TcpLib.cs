@@ -363,7 +363,11 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             _listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             _connections = new ArrayList();
-      
+
+            ConnectionReady = new AsyncCallback(ConnectionReady_Handler);
+            AcceptConnection = new WaitCallback(AcceptConnection_Handler);
+            ReceivedDataReady = new AsyncCallback(ReceivedDataReady_Handler);
+
         }
 
 
@@ -382,7 +386,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                 //   _listener.Listen(1000) ;   
              //   _listener.Listen(100);
                 _listener.BeginConnect(remoteEP,
-                       new AsyncCallback(ConnectionReady_Handler), _listener);
+                       ConnectionReady, _listener);
                 //  NetworkPacketExtensions.SendPacket(_listener.,new UsbInteractPacket());
                 //  _listener.send
                 //      _listener.Bind(new IPEndPoint(IPAddress.Any, _port));
@@ -406,26 +410,17 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             lock (this)
             {
             
-                if (_listener == null) return;
+             
                 IPAddress ip_usable = IPAddress.Parse("127.0.0.1");
 
                 IPEndPoint remoteEP = new IPEndPoint(ip_usable, _port);
 
                 Socket conn = (Socket)ar.AsyncState;
 
-                if (_connections.Count >= _maxConnections)
-                {
-                    //Max number of connections reached.
-                    string msg = "SE001: Server busy";
-                    Debug.WriteLine("SERVER BUSY");
-                    conn.Send(Encoding.UTF8.GetBytes(msg), 0, msg.Length, SocketFlags.None);
-                    conn.Shutdown(SocketShutdown.Both);
-                    conn.Close();
-                }
-                else
-                {
-                    //Start servicing a new connection
-                    ConnectionState st = new ConnectionState
+               conn.EndConnect(ar);
+              
+                //Start servicing a new connection
+                ConnectionState st = new ConnectionState
                     {
                         _conn = conn,
                         _client = this,
@@ -434,11 +429,14 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     };
                     _connections.Add(st);
                     //Queue the rest of the job to be executed latter
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(AcceptConnection_Handler), st);
-                }
-                //Resume the listening callback loop
-         // _listener.BeginAccept(new AsyncCallback(ConnectionReady_Handler), null);
-            }
+                    ThreadPool.QueueUserWorkItem(AcceptConnection, st);
+
+
+                //Resume the remoteEP callback loop
+                // _listener.Close();
+               // _listener.Disconnect(false);
+             //   _listener.begin(remoteEP,ConnectionReady, null);
+             }
         }
 
 
@@ -459,8 +457,9 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             }
             //Starts the ReceiveData callback loop
             if (st._conn.Connected)
+                Debug.WriteLine("Starts the ReceiveData callback loop");
                 st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
-                new AsyncCallback(ReceivedDataReady_Handler), st);
+                ReceivedDataReady, st);
         }
 
 
@@ -479,7 +478,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                 if (st._conn.Available == 0)
                 {
                     Debug.WriteLine("drop connection");
-                    DropConnection(st);
+              //      DropConnection(st);
                 }
                 else
                 {
@@ -492,8 +491,10 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     }
                     //Resume ReceivedData callback loop
                     if (st._conn.Connected)
-                        st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
-                        new AsyncCallback(ReceivedDataReady_Handler), st);
+                        Debug.WriteLine("Resume ReceivedData callback loop");
+
+                    st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
+                        ReceivedDataReady, st);
                 }
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
             }
@@ -547,8 +548,8 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         {
             lock (this)
             {
-                st._conn.Shutdown(SocketShutdown.Both);
-                st._conn.Close();
+            st._conn.Shutdown(SocketShutdown.Both);
+               st._conn.Close();
                 if (_connections.Contains(st))
                     _connections.Remove(st);
             }

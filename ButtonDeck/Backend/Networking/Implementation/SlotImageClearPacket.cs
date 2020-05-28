@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
-    [Architecture(PacketArchitecture.ServerToClient)]
+    [Architecture(PacketArchitecture.ClientToServer)]
     public class SlotImageClearPacket : INetworkPacket
     {
         public SlotImageClearPacket(int slotID)

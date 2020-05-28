@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
-    [Architecture(PacketArchitecture.ServerToClient)]
+    [Architecture(PacketArchitecture.ClientToServer)]
     public class HelloPacket : INetworkPacket
     {
         public int ProtocolVersion { get; set; }
@@ -27,9 +27,11 @@ namespace ButtonDeck.Backend.Networking.Implementation
         {
             Debug.WriteLine("EXECUTE  ");
             if (ProtocolVersion != Constants.PROTOCOL_VERSION) {
-              state.EndConnection();
+            state.EndConnection();
             } else {
                 state.SendPacket(new DeviceIdentityPacket(HasDeviceGuid));
+            // state.SendPacket(new AlternativeHello());
+
             }
         }
   
@@ -51,6 +53,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         public override void ToOutputStream(DataOutputStream writer)
         {
+            
         }
     }
 }
