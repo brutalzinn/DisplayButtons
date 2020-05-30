@@ -80,7 +80,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
         private void LayerMultiActionHelper_Load(object sender, EventArgs e)
         {
 
-            listBox2.DrawItem += new DrawItemEventHandler(ListBox2_DrawItem);
+           // listBox2.DrawItem += new DrawItemEventHandler(ListBox2_DrawItem);
             //    listb.OwnerDraw = true;
             GenerateSidebar(listBox1);
             foreach( var item in list_actions)
@@ -142,11 +142,9 @@ namespace ButtonDeck.Forms.ActionHelperForms
                     
                                 listBox2.Items.Add(i2.GetActionName()) ;
                          list_actions.Add(i2);
-                               
+   
 
-
-
-                                listBox2.Refresh();
+                                //listBox2.Refresh();
                              //   item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
 
                             }
@@ -162,60 +160,32 @@ namespace ButtonDeck.Forms.ActionHelperForms
         }
 
 
-        private void LoadProperties(DynamicDeckItem item)
-        {
-
-
-            var props = item.DeckAction.GetType().GetProperties().Where(
-                prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
-            foreach (var prop in props)
-            {
-              //  bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
-                MethodInfo helperMethod = item.DeckAction.GetType().GetMethod(prop.Name + "Helper");
-                if (helperMethod != null)
-                {
-              
-
-                   helperMethod.Invoke(item.DeckAction, new object[] { });
-
-                  
-                }
-             
-            }
-
-           
-        }
+        
         private void ListBox2_DrawItem(object sender, DrawItemEventArgs e)
         {
-
-            if (e.Index < 0) return;
-            //if the item state is selected them change the back color 
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
-                e = new DrawItemEventArgs(e.Graphics,
-                                          e.Font,
-                                          e.Bounds,
-                                          e.Index,
-                                          e.State ^ DrawItemState.Selected,
-                                          e.ForeColor,
-                                          Color.Yellow);//Choose the color
-
-            // Draw the background of the ListBox control for each item.
-            e.DrawBackground();
-            // Draw the current item text
-            e.Graphics.DrawString(listBox2.Items[e.Index].ToString(), e.Font, Brushes.Black, e.Bounds, StringFormat.GenericDefault);
-            label3.Text = listBox2.Items[e.Index].ToString();
-            global_index = e.Index;
-            // If the ListBox has focus, draw a focus rectangle around the selected item.
-            e.DrawFocusRectangle();
+          
+      
         }
 
         private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+          
 
+            // Find the string in ListBox2.
+            if(listBox2.SelectedItem != null)
+            {
+
+ global_index = listBox2.SelectedIndex;
+          //  Debug.WriteLine("INDEX COLORED: " + global_index);
+
+            }
+        
+           
         }
 
         private void ImageModernButton4_Click(object sender, EventArgs e)
         {
+            Debug.WriteLine("INDEX SELECIONADO: " + global_index);
             var c = list_actions.ElementAt(global_index); // 4th
             var props = c.GetType().GetProperties().Where(
                    prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
