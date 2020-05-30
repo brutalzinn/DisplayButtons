@@ -193,6 +193,7 @@
     <Compile Include="Backend\Objects\IDeckFolder.cs" />
     <Compile Include="Backend\Objects\IDeckItem.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\Deck\FolderAddAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\Deck\LayerMultiAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\ExecutableRunAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\KeyPressAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\KeyToggleAction.cs" />
@@ -268,6 +269,12 @@
     </Compile>
     <Compile Include="Forms\ActionHelperForms\KeyInfoHelper.Designer.cs">
       <DependentUpon>KeyInfoHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ActionHelperForms\LayerMultiActionHelper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ActionHelperForms\LayerMultiActionHelper.Designer.cs">
+      <DependentUpon>LayerMultiActionHelper.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ActionHelperForms\OBS\OBSSceneChangeHelper.cs">
       <SubType>Form</SubType>
@@ -399,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\KeyInfoHelper.resx">
       <DependentUpon>KeyInfoHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ActionHelperForms\LayerMultiActionHelper.resx">
+      <DependentUpon>LayerMultiActionHelper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\MainFormMenuOption.resx">
       <DependentUpon>MainFormMenuOption.cs</DependentUpon>
