@@ -73,22 +73,21 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBox1.Size = new System.Drawing.Size(156, 304);
+            this.listBox1.Size = new System.Drawing.Size(219, 304);
             this.listBox1.TabIndex = 12;
             // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
+            this.listBox2.HorizontalScrollbar = true;
             this.listBox2.ItemHeight = 15;
             this.listBox2.Location = new System.Drawing.Point(329, 89);
             this.listBox2.Name = "listBox2";
             this.listBox2.ScrollAlwaysVisible = true;
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBox2.Size = new System.Drawing.Size(156, 304);
+            this.listBox2.Size = new System.Drawing.Size(218, 304);
             this.listBox2.TabIndex = 13;
-          //  this.listBox2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
-         //   this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
-        //    // 
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -101,7 +100,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(389, 58);
+            this.label2.Location = new System.Drawing.Point(408, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 15);
             this.label2.TabIndex = 15;
@@ -111,7 +110,7 @@
             // 
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(515, 179);
+            this.imageModernButton1.Location = new System.Drawing.Point(590, 206);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
@@ -124,7 +123,7 @@
             // 
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
-            this.imageModernButton2.Location = new System.Drawing.Point(504, 133);
+            this.imageModernButton2.Location = new System.Drawing.Point(579, 160);
             this.imageModernButton2.Name = "imageModernButton2";
             this.imageModernButton2.NormalImage = null;
             this.imageModernButton2.Origin = null;
@@ -137,7 +136,7 @@
             // 
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(504, 225);
+            this.imageModernButton3.Location = new System.Drawing.Point(579, 252);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;

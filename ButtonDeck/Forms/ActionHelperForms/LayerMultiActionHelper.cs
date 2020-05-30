@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,9 @@ namespace ButtonDeck.Forms.ActionHelperForms
 {
     public partial class LayerMultiActionHelper : TemplateForm
     {
-        public LayerMultiActionHelper()
-        {
-            InitializeComponent();
-        }
+      
         private LayerMultiActionHelper _modifiableAction;
-
+        private static string scripter_form;
         public LayerMultiActionHelper ModifiableAction
         {
             get { return _modifiableAction; }
@@ -42,7 +40,23 @@ namespace ButtonDeck.Forms.ActionHelperForms
 
 
             }
-        
+        public static IEnumerable<AbstractDeckAction> items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
+      public List<AbstractDeckAction> list_actions { get; set; } = new List<AbstractDeckAction>();
+        public LayerMultiActionHelper()
+        {
+            InitializeComponent();
+        }
+        public string scripter
+        {
+            get { return scripter_form; }
+            set
+            {
+                scripter_form = value;
+
+
+            }
+        }
+
         private void CloseWithResult(DialogResult result)
         {
             DialogResult = result;
@@ -50,6 +64,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
         }
         private void ModernButton2_Click(object sender, EventArgs e)
         {
+       
             CloseWithResult(DialogResult.OK);
         }
 
@@ -62,6 +77,13 @@ namespace ButtonDeck.Forms.ActionHelperForms
         {
         //    listb.OwnerDraw = true;
             GenerateSidebar(listBox1);
+            foreach( var item in list_actions)
+            {
+         Debug.WriteLine("PERCORRENDO ITEM AO LOAD " + item.GetActionName());
+          listBox2.Items.Add(item.GetActionName());
+
+            }
+      
         }
         private void GenerateSidebar(Control parent)
         {
@@ -111,7 +133,11 @@ namespace ButtonDeck.Forms.ActionHelperForms
                         item.MouseDown += (s, ee) => {
                             if (item.Tag is AbstractDeckAction act)
                             {
-                                listBox2.Items.Add(item.Text) ;
+                                listBox2.Items.Add(i2.GetActionName()) ;
+                         list_actions.Add(i2);
+
+
+                            
                                 listBox2.Refresh();
                              //   item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
 

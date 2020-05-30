@@ -17,22 +17,28 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Deck
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
+        public string script { get; set; } = "";
+
+
+
+        [ActionPropertyInclude]
+        public List<AbstractDeckAction> list_actions { get; set; } = new List<AbstractDeckAction>();
 
         public void ToExecuteHelper()
         {
-            var originalToExec = new String(ToExecute.ToCharArray());
+           // var originalToExec = new String(ToExecute.ToCharArray());
             dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.LayerMultiActionHelper")) as Form;
-         //   var execAction = CloneAction() as LayerMultiAction;
-          //  execAction.ToExecute = ToExecute;
-          //  form.ModifiableAction = execAction;
-
+      
+            form.list_actions = list_actions;
             if (form.ShowDialog() == DialogResult.OK)
             {
-               // ToExecute = form.ModifiableAction.ToExecute;
+                //   ToExecute = form.ModifiableAction.ToExecute;
+                list_actions = form.list_actions;
             }
             else
             {
-           //     ToExecute = originalToExec;
+
+             //   form.list_actions = list_actions;
             }
         }
 
@@ -50,7 +56,12 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Deck
         public override void OnButtonDown(DeckDevice deckDevice)
         {
 
+            foreach(var item in list_actions)
+            {
 
+                item.OnButtonDown(deckDevice);
+
+            }
 
         }
 
