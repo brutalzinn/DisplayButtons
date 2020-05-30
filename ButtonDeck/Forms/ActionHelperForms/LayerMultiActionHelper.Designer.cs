@@ -37,6 +37,8 @@
             this.imageModernButton1 = new ButtonDeck.Controls.ImageModernButton();
             this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
             this.imageModernButton3 = new ButtonDeck.Controls.ImageModernButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.imageModernButton4 = new ButtonDeck.Controls.ImageModernButton();
             this.SuspendLayout();
             // 
             // modernButton3
@@ -78,6 +80,7 @@
             // 
             // listBox2
             // 
+            this.listBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.HorizontalScrollbar = true;
             this.listBox2.ItemHeight = 15;
@@ -87,6 +90,7 @@
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listBox2.Size = new System.Drawing.Size(218, 304);
             this.listBox2.TabIndex = 13;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -110,7 +114,7 @@
             // 
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(590, 206);
+            this.imageModernButton1.Location = new System.Drawing.Point(579, 134);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
@@ -123,7 +127,7 @@
             // 
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
-            this.imageModernButton2.Location = new System.Drawing.Point(579, 160);
+            this.imageModernButton2.Location = new System.Drawing.Point(565, 89);
             this.imageModernButton2.Name = "imageModernButton2";
             this.imageModernButton2.NormalImage = null;
             this.imageModernButton2.Origin = null;
@@ -136,7 +140,7 @@
             // 
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(579, 252);
+            this.imageModernButton3.Location = new System.Drawing.Point(565, 179);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;
@@ -144,6 +148,29 @@
             this.imageModernButton3.TabIndex = 18;
             this.imageModernButton3.Text = "Adicionar Delay";
             this.imageModernButton3.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(587, 245);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "label3";
+            // 
+            // imageModernButton4
+            // 
+            this.imageModernButton4.CustomColorScheme = false;
+            this.imageModernButton4.Image = null;
+            this.imageModernButton4.Location = new System.Drawing.Point(565, 279);
+            this.imageModernButton4.Name = "imageModernButton4";
+            this.imageModernButton4.NormalImage = null;
+            this.imageModernButton4.Origin = null;
+            this.imageModernButton4.Size = new System.Drawing.Size(100, 23);
+            this.imageModernButton4.TabIndex = 20;
+            this.imageModernButton4.Text = "Configurações";
+            this.imageModernButton4.UseVisualStyleBackColor = true;
+            this.imageModernButton4.Click += new System.EventHandler(this.ImageModernButton4_Click);
             // 
             // LayerMultiActionHelper
             // 
@@ -154,6 +181,8 @@
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.imageModernButton4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.imageModernButton3);
             this.Controls.Add(this.imageModernButton2);
             this.Controls.Add(this.imageModernButton1);
@@ -183,5 +212,7 @@
         private Controls.ImageModernButton imageModernButton1;
         private Controls.ImageModernButton imageModernButton2;
         private Controls.ImageModernButton imageModernButton3;
+        private System.Windows.Forms.Label label3;
+        private Controls.ImageModernButton imageModernButton4;
     }
 }

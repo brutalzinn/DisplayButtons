@@ -61,7 +61,11 @@ namespace ButtonDeck.Backend.Objects
 
             return false ;
         }
-        [Obsolete]
+
+   
+      
+
+      [Obsolete]
         public virtual bool OnButtonClick(DeckDevice deckDevice) {
             return false;
         }

@@ -1,4 +1,5 @@
 ﻿using ButtonDeck.Backend.Objects;
+using ButtonDeck.Backend.Objects.Implementation;
 using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
 using ButtonDeck.Backend.Utils;
 using System;
@@ -8,6 +9,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,6 +22,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
       
         private LayerMultiActionHelper _modifiableAction;
         private static string scripter_form;
+        public static int global_index = 0;
         public LayerMultiActionHelper ModifiableAction
         {
             get { return _modifiableAction; }
@@ -45,6 +48,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
         public LayerMultiActionHelper()
         {
             InitializeComponent();
+
         }
         public string scripter
         {
@@ -75,7 +79,9 @@ namespace ButtonDeck.Forms.ActionHelperForms
 
         private void LayerMultiActionHelper_Load(object sender, EventArgs e)
         {
-        //    listb.OwnerDraw = true;
+
+            listBox2.DrawItem += new DrawItemEventHandler(ListBox2_DrawItem);
+            //    listb.OwnerDraw = true;
             GenerateSidebar(listBox1);
             foreach( var item in list_actions)
             {
@@ -83,7 +89,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
           listBox2.Items.Add(item.GetActionName());
 
             }
-      
+
         }
         private void GenerateSidebar(Control parent)
         {
@@ -133,11 +139,13 @@ namespace ButtonDeck.Forms.ActionHelperForms
                         item.MouseDown += (s, ee) => {
                             if (item.Tag is AbstractDeckAction act)
                             {
+                    
                                 listBox2.Items.Add(i2.GetActionName()) ;
                          list_actions.Add(i2);
+                               
 
 
-                            
+
                                 listBox2.Refresh();
                              //   item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
 
@@ -153,22 +161,84 @@ namespace ButtonDeck.Forms.ActionHelperForms
             });
         }
 
-      
 
-        private void ListBox2_DrawItem(object sender, System.Windows.Forms.DrawItemEventArgs e)
+        private void LoadProperties(DynamicDeckItem item)
         {
 
-            e.DrawBackground();
-            Brush myBrush = Brushes.Black;
-            var item = listBox2.Items[e.Index];
-            if (e.Index % 2 == 0)
+
+            var props = item.DeckAction.GetType().GetProperties().Where(
+                prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
+            foreach (var prop in props)
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.Gold), e.Bounds);
+              //  bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
+                MethodInfo helperMethod = item.DeckAction.GetType().GetMethod(prop.Name + "Helper");
+                if (helperMethod != null)
+                {
+              
+
+                   helperMethod.Invoke(item.DeckAction, new object[] { });
+
+                  
+                }
+             
             }
-            e.Graphics.DrawString(((ListBox)sender).Items[e.Index].ToString(),
-                e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+
+           
+        }
+        private void ListBox2_DrawItem(object sender, DrawItemEventArgs e)
+        {
+
+            if (e.Index < 0) return;
+            //if the item state is selected them change the back color 
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                e = new DrawItemEventArgs(e.Graphics,
+                                          e.Font,
+                                          e.Bounds,
+                                          e.Index,
+                                          e.State ^ DrawItemState.Selected,
+                                          e.ForeColor,
+                                          Color.Yellow);//Choose the color
+
+            // Draw the background of the ListBox control for each item.
+            e.DrawBackground();
+            // Draw the current item text
+            e.Graphics.DrawString(listBox2.Items[e.Index].ToString(), e.Font, Brushes.Black, e.Bounds, StringFormat.GenericDefault);
+            label3.Text = listBox2.Items[e.Index].ToString();
+            global_index = e.Index;
+            // If the ListBox has focus, draw a focus rectangle around the selected item.
             e.DrawFocusRectangle();
         }
+
+        private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ImageModernButton4_Click(object sender, EventArgs e)
+        {
+            var c = list_actions.ElementAt(global_index); // 4th
+            var props = c.GetType().GetProperties().Where(
+                   prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
+            foreach (var prop in props)
+            {
+               
+                MethodInfo helperMethod = c.GetType().GetMethod(prop.Name + "Helper");
+                if (helperMethod != null)
+                {
+
+                    helperMethod.Invoke(c, new object[] { });
+
+                }
+          
+
+
+            }
+
+
+              //  LoadProperties(c);
+        
+        }
+        }
     }
-    }
+    
 
