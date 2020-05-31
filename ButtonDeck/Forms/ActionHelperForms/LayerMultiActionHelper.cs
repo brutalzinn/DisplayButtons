@@ -22,7 +22,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
       
         private LayerMultiActionHelper _modifiableAction;
         private static string scripter_form;
-        public static int global_index = 0;
+        public static int global_index;
         public LayerMultiActionHelper ModifiableAction
         {
             get { return _modifiableAction; }
@@ -186,13 +186,10 @@ namespace ButtonDeck.Forms.ActionHelperForms
         private void ImageModernButton4_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("INDEX SELECIONADO: " + global_index);
+
             var c = list_actions.ElementAt(global_index); // 4th
-            var props = c.GetType().GetProperties().Where(
-                   prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
-            foreach (var prop in props)
-            {
-               
-                MethodInfo helperMethod = c.GetType().GetMethod(prop.Name + "Helper");
+         
+                MethodInfo helperMethod = c.GetType().GetMethod("ToExecuteHelper");
                 if (helperMethod != null)
                 {
 
@@ -202,7 +199,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
           
 
 
-            }
+            
 
 
               //  LoadProperties(c);
