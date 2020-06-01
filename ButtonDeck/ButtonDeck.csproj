@@ -200,6 +200,7 @@
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\MediaKeyAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\Media\SpotifyMediaAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\Misc\IFTTTEventAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\MultiAction\DelayMultiAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\SceneItemVisibilityAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\StartStopRecordingAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\OBS\StartStopStreamingAction.cs" />

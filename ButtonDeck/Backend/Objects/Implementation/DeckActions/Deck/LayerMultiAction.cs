@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Deck
 
 
         [ActionPropertyInclude]
+        public ArrayList list_multiple_actions { get; set; } = new ArrayList();
         public List<AbstractDeckAction> list_actions { get; set; } = new List<AbstractDeckAction>();
 
         public void ToExecuteHelper()
@@ -56,12 +58,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Deck
         public override void OnButtonDown(DeckDevice deckDevice)
         {
 
-            foreach(var item in list_actions)
-            {
-
-                item.OnButtonDown(deckDevice);
-
-            }
+          
 
         }
 

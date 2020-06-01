@@ -15,9 +15,10 @@ namespace ButtonDeck.Backend.Utils
         protected static Type[] extraTypes;
 
         public static Type[] ExtraTypes {
-            get {
+            get
+            {
                 if (extraTypes == null)
-                    extraTypes = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>().Select(c=>c.GetType()).ToArray();
+                    extraTypes = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>().Select(c => c.GetType()).ToArray();
                 return extraTypes;
             }
         }
