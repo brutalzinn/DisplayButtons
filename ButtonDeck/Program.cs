@@ -14,7 +14,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.CoreAudioApi;
-using Managed.Adb;
+using SharpAdbClient;
+using System.Net;
 
 namespace ButtonDeck
 {
@@ -173,10 +174,22 @@ namespace ButtonDeck
             }
             else
             {
+
                 Debug.WriteLine("MODO USB");
                 mode = 1;
-                 ClientThread = new ClientThread();
-                ClientThread.Start();
+                AdbServer server = new AdbServer();
+      
+                var result = server.StartServer(@"C:\adb\adb.exe", restartServerIfNewer: false);
+
+                var monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
+              
+                monitor.DeviceConnected += OnDeviceConnected;
+                monitor.Start();
+                var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+
+              //  var devices = AdbClient.Instance.GetDevices();
+
+              
                 Application.Run(new MainForm());
 
   ClientThread.Stop();
@@ -196,7 +209,19 @@ namespace ButtonDeck
                 DevicePersistManager.SaveDevices();
                 Trace.Flush();
         }
-      
+        public static void OnDeviceConnected(object sender, DeviceDataEventArgs e)
+        {
+            Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
+            var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+            client.CreateForward(e.Device, 5095, 5095);
+            client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", e.Device, null);
+
+          //  am start -S - D net.nickac.buttondeck / android.app.MainActivity--es name MYNAME--es email test @gmail.com
+              ClientThread = new ClientThread();
+            ClientThread.Start();
+            Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
+
+        }
         private static void NetworkChange_NetworkAddressChanged(object sender, EventArgs e)
         {
             if(Program.mode ==0)
