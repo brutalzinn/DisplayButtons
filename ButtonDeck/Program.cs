@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using NAudio.CoreAudioApi;
 using SharpAdbClient;
 using System.Net;
+using System.Threading;
 
 namespace ButtonDeck
 {
@@ -179,17 +180,25 @@ namespace ButtonDeck
                 mode = 1;
                 AdbServer server = new AdbServer();
       
-                var result = server.StartServer(@"C:\adb\adb.exe", restartServerIfNewer: false);
+                var result = server.StartServer(@"C:\adb\adb.exe", restartServerIfNewer: true);
 
                 var monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
               
-                monitor.DeviceConnected += OnDeviceConnected;
-                monitor.Start();
+              
                 var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
 
-              //  var devices = AdbClient.Instance.GetDevices();
+                //  var devices = AdbClient.Instance.GetDevices();
+                foreach (var device in client.GetDevices())
+                {
+ client.CreateForward(device, "tcp:5095", "tcp:5095",true);
+                client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity",device, null);
 
-              
+                    Thread.Sleep(1200);
+                }
+  //monitor.DeviceConnected += OnDeviceConnected;
+               // monitor.Start();
+                ClientThread = new ClientThread();
+                   ClientThread.Start();
                 Application.Run(new MainForm());
 
   ClientThread.Stop();
@@ -212,14 +221,14 @@ namespace ButtonDeck
         public static void OnDeviceConnected(object sender, DeviceDataEventArgs e)
         {
             Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
-            var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
-            client.ExecuteRemoteCommand("usb", e.Device, null);
-            client.CreateForward(e.Device, 5095, 5095);
-            client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", e.Device, null);
+          //  var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+        //    client.ExecuteRemoteCommand("usb", e.Device, null);
+         //   client.CreateForward(e.Device, 5095, 5095);
+  //          client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", e.Device, null);
 
           //  am start -S - D net.nickac.buttondeck / android.app.MainActivity--es name MYNAME--es email test @gmail.com
-              ClientThread = new ClientThread();
-            ClientThread.Start();
+           //   ClientThread = new ClientThread();
+         //   ClientThread.Start();
             Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
 
         }
