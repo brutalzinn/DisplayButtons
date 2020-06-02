@@ -180,7 +180,7 @@ namespace ButtonDeck
                 mode = 1;
                 AdbServer server = new AdbServer();
       
-                var result = server.StartServer(@"C:\adb\adb.exe", restartServerIfNewer: true);
+                var result = server.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
 
                 var monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
               
