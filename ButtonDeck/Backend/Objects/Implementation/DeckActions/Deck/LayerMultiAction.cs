@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -57,8 +60,27 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Deck
 
         public override void OnButtonDown(DeckDevice deckDevice)
         {
+            var t = new Thread(() => actionUp(deckDevice));
 
-          
+            t.Start();
+
+        }
+        public void actionUp(DeckDevice deckDevice)
+        {
+
+
+          foreach(var item in list_actions)
+            {
+                MethodInfo helperMethod = item.GetType().GetMethod("OnButtonDown");
+                if (helperMethod != null)
+                {
+                    Debug.WriteLine("TEntando executar.." + item.GetActionName());
+                    helperMethod.Invoke(item, new object[] { deckDevice });
+
+                }
+             
+
+            }
 
         }
 
