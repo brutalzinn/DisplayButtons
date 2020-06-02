@@ -213,6 +213,7 @@ namespace ButtonDeck
         {
             Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
             var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+            client.ExecuteRemoteCommand("usb", e.Device, null);
             client.CreateForward(e.Device, 5095, 5095);
             client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", e.Device, null);
 
