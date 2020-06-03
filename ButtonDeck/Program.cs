@@ -199,8 +199,10 @@ namespace ButtonDeck
                // monitor.Start();
                 ClientThread = new ClientThread();
                    ClientThread.Start();
+             //   var teste = new DevicesTitlebarButton(MainForm.Instance);
+             //   teste.RefreshCurrentDevices();
                 Application.Run(new MainForm());
-
+              
   ClientThread.Stop();
 
                 //     Application.Run(new MainForm());

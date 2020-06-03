@@ -163,10 +163,15 @@ return Program.ServerThread.TcpServer.CurrentConnections;
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
+         
+
+    DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
 
             DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
-            var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
+
+ 
+          
+                var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
             var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
             var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
             var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.Folder_grey_16x : Resources.Folder_grey_16x;
@@ -215,7 +220,7 @@ return Program.ServerThread.TcpServer.CurrentConnections;
             {
                 Image = imageBiblioteca
             };
-
+           
             itemBiblioteca.Click += (s, ee) => {
                 new ImageListForm().ShowDialog();
                 //     new ScribeBot.Interface.Window().Show();
@@ -255,27 +260,27 @@ return Program.ServerThread.TcpServer.CurrentConnections;
             });
 
 
-
-
-              
-
-
-
-
-
-
-
-
-
-
-
-
+           
 
 
 
             label1.ForeColor = ColorScheme.SecondaryColor;
         }
 
+        public DeckDevice DeckDevice
+        {
+            get { return _deckDevice; }
+            set
+            {
+                _deckDevice = value;
+                deviceNamePrefix = (!DevicePersistManager.IsDeviceOnline(DeckDevice) ? $"{OFFLINE_PREFIX} " : "");
+            }
+        }
+        const string OFFLINE_PREFIX = "[OFFLINE]";
+        public new Padding Padding = new Padding(5);
+        private bool _selected;
+        private DeckDevice _deckDevice;
+        private string deviceNamePrefix;
         private void ApplySidebarTheme(Control parent)
         {
             //Headers have the theme's secondary color as background
@@ -676,7 +681,7 @@ return Program.ServerThread.TcpServer.CurrentConnections;
             if (CurrentDevice == null) {
                 ChangeToDevice(e.Device);
             }
-      //   SendItemsToDevice(CurrentDevice, true);
+         SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
             }));
 

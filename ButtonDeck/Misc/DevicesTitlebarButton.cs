@@ -62,7 +62,10 @@ namespace ButtonDeck.Misc
                         Dock = DockStyle.Top,
                         Tag = _frm
                     };
+                 
                     frm.Controls.Add(ctrl);
+                    
+                   
                 } catch (Exception) {
                     continue;
                 }
@@ -95,7 +98,7 @@ namespace ButtonDeck.Misc
         }
         public override string Text {
             get {
-                _frm.ChangeButtonsVisibility(DevicePersistManager.IsVirtualDeviceConnected || CurrentConnections > 0);
+                _frm.ChangeButtonsVisibility(DevicePersistManager.IsVirtualDeviceConnected);
                 
                 return $"{CurrentConnections} Connected Device{(CurrentConnections != 1 ? "s" : "")}";
             }

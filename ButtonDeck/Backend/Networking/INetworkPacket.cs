@@ -17,13 +17,13 @@ namespace ButtonDeck.Backend.Networking
 
         public static bool IsStillFunctioning(this ConnectionState con)
         {
-            //try {
-            //    var rep = con.RemoteEndPoint;
-            //    return true;
-            //} catch (Exception) {
-            //    return false;
-            //}
-            return true;
+           try {
+               var rep = con.RemoteEndPoint;
+               return true;
+            } catch (Exception) {
+                return false;
+            }
+            
         }
 
         public static bool TryHeartbeat(this ConnectionState con)
@@ -93,7 +93,7 @@ namespace ButtonDeck.Backend.Networking
                 }
             }
             if (!packet.CanServerReceive()) {
-                throw new Exception($"Server can't receive NetworkPacket[ID: {packet.GetPacketNumber()}].");
+            //    throw new Exception($"Server can't receive NetworkPacket[ID: {packet.GetPacketNumber()}].");
             }
             return packet;
         }
