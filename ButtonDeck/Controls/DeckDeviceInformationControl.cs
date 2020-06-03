@@ -63,6 +63,7 @@ namespace ButtonDeck.Forms
                     } else {
                         if (Tag is MainForm frm) {
                             if (IsVirtualDeviceConnected) {
+                                Debug.WriteLine("CHEGOU 2");
                                 if (frm.CurrentDevice.DeviceGuid == DeckDevice.DeviceGuid) {
                                     //Someone clicked on the same device. Unload this one.
                                     OnDeviceDisconnected(this, DeckDevice);
@@ -82,6 +83,7 @@ namespace ButtonDeck.Forms
                                     frm.RefreshAllButtons(false);
                                 }
                             } else {
+                                Debug.WriteLine("CHEGOU 3");
                                 frm.CurrentDevice = DeckDevice;
                                 IsVirtualDeviceConnected = true;
                                 OnDeviceConnected(this, DeckDevice);

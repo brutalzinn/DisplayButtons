@@ -64,7 +64,7 @@ namespace ButtonDeck.Misc
                         Dock = DockStyle.Top,
                         Tag = _frm
                     };
-                 
+                   
                     frm.Controls.Add(ctrl);
                     
                    

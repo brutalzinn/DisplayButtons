@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
-    [Architecture(PacketArchitecture.ClientToServer)]
+   // [Architecture(PacketArchitecture.ClientToServer)]
     public class HelloPacket : INetworkPacket
     {
         public int ProtocolVersion { get; set; }

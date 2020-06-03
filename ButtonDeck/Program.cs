@@ -156,8 +156,7 @@ namespace ButtonDeck
             OBSUtils.PrepareOBSIntegration();
 
 
-            NetworkChange.NetworkAddressChanged += NetworkChange_NetworkAddressChanged;
-            NetworkChange.NetworkAvailabilityChanged += NetworkChange_NetworkAddressChanged;
+          
             // começo da implementação do host usb
             dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
   if (form.ShowDialog() == DialogResult.OK)
@@ -165,8 +164,8 @@ namespace ButtonDeck
                 mode = 0;
      ServerThread = new ServerThread();
             ServerThread.Start();
-                Application.Run(new MainForm());
-                ServerThread.Stop();
+            
+             //   ServerThread.Stop();
                 Debug.WriteLine("MODO SOCKET CLIENT");
 
                 //     Application.Run(new MainForm());
@@ -195,28 +194,29 @@ namespace ButtonDeck
 
                     Thread.Sleep(1200);
                 }
-  //monitor.DeviceConnected += OnDeviceConnected;
-               // monitor.Start();
+ 
                 ClientThread = new ClientThread();
                    ClientThread.Start();
-             //   var teste = new DevicesTitlebarButton(MainForm.Instance);
-             //   teste.RefreshCurrentDevices();
-                Application.Run(new MainForm());
-              
-  ClientThread.Stop();
+         
+             
+          
+ // ClientThread.Stop();
 
                 //     Application.Run(new MainForm());
 
 
 
             }
-                OBSUtils.Disconnect();
+         
+           
 
                 
               
                 NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
                 NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
-                ApplicationSettingsManager.SaveSettings();
+               Application.Run(new MainForm());
+            OBSUtils.Disconnect();
+            ApplicationSettingsManager.SaveSettings();
                 DevicePersistManager.SaveDevices();
                 Trace.Flush();
         }
@@ -236,7 +236,7 @@ namespace ButtonDeck
         }
         private static void NetworkChange_NetworkAddressChanged(object sender, EventArgs e)
         {
-            if(Program.mode ==0)
+            if(mode ==0)
             {
    ServerThread.Stop();
             ServerThread = new ServerThread();

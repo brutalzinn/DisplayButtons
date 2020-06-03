@@ -29,7 +29,7 @@ using static ButtonDeck.Backend.Objects.AbstractDeckAction;
 using System.Threading;
 using Timer = System.Windows.Forms.Timer;
 using static ButtonDeck.Backend.Utils.DevicePersistManager;
-
+using ButtonDeck.Backend.Networking.TcpLib;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -55,6 +55,7 @@ namespace ButtonDeck.Forms
          
             instance = this;
             InitializeComponent();
+         
             Globals.launcher_principal = this;
             panel1.Freeze();
             DevicesTitlebarButton item = new DevicesTitlebarButton(this);
@@ -113,8 +114,89 @@ namespace ButtonDeck.Forms
             }
             ColorSchemeCentral.ThemeChanged += (s, e) =>
             ApplySidebarTheme(shadedPanel1);
-        }
+            if (Program.mode == 1)
+            {
+                foreach (var device in DevicePersistManager.PersistedDevices)
+                {
+                    try
+                    {
+                        RefreshCurrentDevices();
+                        CurrentDevice = device;
+                        IsVirtualDeviceConnected = true;
 
+                        OnDeviceConnected(this, device);
+                        ChangeButtonsVisibility(true);
+                        RefreshAllButtons(false);
+                        void tempConnected(object s, DeviceEventArgs ee)
+                        {
+                            if (ee.Device.DeviceGuid == device.DeviceGuid) return;
+                            DeviceConnected -= tempConnected;
+                            if (IsVirtualDeviceConnected)
+                            {
+                                //We had a virtual device.
+                                OnDeviceDisconnected(this, device);
+                                IsVirtualDeviceConnected = false;
+                                ChangeButtonsVisibility(false);
+                            }
+                        }
+                        DeviceConnected += tempConnected;
+
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+
+                }
+                }
+
+        }
+        public void RefreshCurrentDevices()
+        {
+            Thread th = new Thread(UpdateConnectedDevices);
+            th.Start();
+        }
+        private void UpdateConnectedDevices()
+        {
+
+            if (Program.mode == 0)
+            {
+
+                List<Guid> toRemove = new List<Guid>();
+                DevicePersistManager.DeckDevicesFromConnection.All(c => {
+
+                    if (!Program.ServerThread.TcpServer.Connections.OfType<Backend.Networking.TcpLib.ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
+                    {
+                        toRemove.Add(c.Key);
+                    }
+                    return true;
+                });
+                toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+
+
+            }
+            else
+            {
+
+                List<Guid> toRemove = new List<Guid>();
+                DevicePersistManager.DeckDevicesFromConnection.All(c => {
+                    if (!Program.ClientThread.TcpClient.Connections.OfType<Backend.Networking.TcpLib.ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
+                    {
+                        toRemove.Add(c.Key);
+                    }
+                    return true;
+                });
+                toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+
+
+
+
+
+
+
+
+            }
+        }
         public void ChangeButtonsVisibility(bool visible)
         {
             visible = true;
@@ -167,9 +249,12 @@ return Program.ServerThread.TcpServer.CurrentConnections;
         {
             base.OnLoad(e);
          
+           
 
+
+           
     DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
-
+ 
             DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
 
  
@@ -262,10 +347,10 @@ return Program.ServerThread.TcpServer.CurrentConnections;
               
             });
 
-            if(Program.mode == 1)
-            {
-          
-            }
+
+
+
+
 
 
 
@@ -273,15 +358,7 @@ return Program.ServerThread.TcpServer.CurrentConnections;
             label1.ForeColor = ColorScheme.SecondaryColor;
         }
 
-        public DeckDevice DeckDevice
-        {
-            get { return _deckDevice; }
-            set
-            {
-                _deckDevice = value;
-                deviceNamePrefix = (!DevicePersistManager.IsDeviceOnline(DeckDevice) ? $"{OFFLINE_PREFIX} " : "");
-            }
-        }
+        
         const string OFFLINE_PREFIX = "[OFFLINE]";
         public new Padding Padding = new Padding(5);
         private bool _selected;
@@ -675,7 +752,11 @@ return Program.ServerThread.TcpServer.CurrentConnections;
     {
             
             Invoke(new Action(() => {
-            shadedPanel1.Show();
+
+
+           
+
+                shadedPanel1.Show();
             //GenerateFolderList(shadedPanel1);
             shadedPanel2.Hide();
             Refresh();
@@ -688,7 +769,7 @@ return Program.ServerThread.TcpServer.CurrentConnections;
                 ChangeToDevice(e.Device);
             }
          SendItemsToDevice(CurrentDevice, true);
-                GenerateFolderList(shadedPanel1);
+              //  GenerateFolderList(shadedPanel1);
             }));
 
         e.Device.ButtonInteraction += Device_ButtonInteraction;
@@ -757,6 +838,7 @@ return Program.ServerThread.TcpServer.CurrentConnections;
 
     private static void SendItemsToDevice(DeckDevice device, IDeckFolder folder, IMagickImage image_receivd = null)
     {
+          
         var con = device.GetConnection();
         if (con != null) {
               
