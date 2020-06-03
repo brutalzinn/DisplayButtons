@@ -26,6 +26,9 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using static ButtonDeck.Backend.Objects.AbstractDeckAction;
+using System.Threading;
+using Timer = System.Windows.Forms.Timer;
+using static ButtonDeck.Backend.Utils.DevicePersistManager;
 
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -259,8 +262,11 @@ return Program.ServerThread.TcpServer.CurrentConnections;
               
             });
 
+            if(Program.mode == 1)
+            {
+          
+            }
 
-           
 
 
 

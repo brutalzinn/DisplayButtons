@@ -29,7 +29,7 @@ namespace ButtonDeck.Misc
 
         private void DevicesTitlebarButton_Click(object sender, MouseEventArgs e)
         {
-            Debug.WriteLine("CLICOU> CONECTOU!");
+            
             RefreshCurrentDevices();
 
             int controlSize = _frm.TitlebarHeight * 2;
@@ -90,9 +90,9 @@ namespace ButtonDeck.Misc
                 return Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
 
                 }
-                else
+                else 
                 {
-                    return Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+            return Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
 
 
                 }
