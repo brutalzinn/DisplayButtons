@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ButtonDeck.Misc
 {
@@ -28,6 +29,7 @@ namespace ButtonDeck.Misc
 
         private void DevicesTitlebarButton_Click(object sender, MouseEventArgs e)
         {
+            Debug.WriteLine("CLICOU> CONECTOU!");
             RefreshCurrentDevices();
 
             int controlSize = _frm.TitlebarHeight * 2;
