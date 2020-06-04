@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ButtonDeck.Misc
 {
@@ -28,6 +29,7 @@ namespace ButtonDeck.Misc
 
         private void DevicesTitlebarButton_Click(object sender, MouseEventArgs e)
         {
+            
             RefreshCurrentDevices();
 
             int controlSize = _frm.TitlebarHeight * 2;
@@ -62,7 +64,10 @@ namespace ButtonDeck.Misc
                         Dock = DockStyle.Top,
                         Tag = _frm
                     };
+                   
                     frm.Controls.Add(ctrl);
+                    
+                   
                 } catch (Exception) {
                     continue;
                 }
@@ -85,9 +90,9 @@ namespace ButtonDeck.Misc
                 return Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
 
                 }
-                else
+                else 
                 {
-                    return Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+            return Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
 
 
                 }
@@ -95,7 +100,7 @@ namespace ButtonDeck.Misc
         }
         public override string Text {
             get {
-                _frm.ChangeButtonsVisibility(DevicePersistManager.IsVirtualDeviceConnected || CurrentConnections > 0);
+                _frm.ChangeButtonsVisibility(DevicePersistManager.IsVirtualDeviceConnected);
                 
                 return $"{CurrentConnections} Connected Device{(CurrentConnections != 1 ? "s" : "")}";
             }

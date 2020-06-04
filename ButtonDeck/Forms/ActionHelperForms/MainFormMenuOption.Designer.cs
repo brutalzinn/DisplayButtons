@@ -52,7 +52,7 @@
             this.modernButton2.Name = "modernButton2";
             this.modernButton2.Size = new System.Drawing.Size(142, 39);
             this.modernButton2.TabIndex = 11;
-            this.modernButton2.Text = "SOCKET";
+            this.modernButton2.Text = "WIFI";
             this.modernButton2.UseVisualStyleBackColor = true;
             this.modernButton2.Click += new System.EventHandler(this.ModernButton2_Click);
             // 

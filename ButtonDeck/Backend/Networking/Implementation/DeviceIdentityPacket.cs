@@ -26,10 +26,10 @@ namespace ButtonDeck.Backend.Networking.Implementation
             this.hasDeviceGuid = hasDeviceGuid;
         }
 
-        [ServerOnly]
+       // [ServerOnly]
         public Guid DeviceGuid { get; set; }
 
-        [ClientOnly]
+       // [ClientOnly]
         public string DeviceName { get; set; }
 
         public override long GetPacketNumber() => 2;

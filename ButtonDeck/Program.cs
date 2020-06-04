@@ -14,7 +14,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.CoreAudioApi;
-using Managed.Adb;
+using SharpAdbClient;
+using System.Net;
+using System.Threading;
 
 namespace ButtonDeck
 {
@@ -154,8 +156,7 @@ namespace ButtonDeck
             OBSUtils.PrepareOBSIntegration();
 
 
-            NetworkChange.NetworkAddressChanged += NetworkChange_NetworkAddressChanged;
-            NetworkChange.NetworkAvailabilityChanged += NetworkChange_NetworkAddressChanged;
+          
             // começo da implementação do host usb
             dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
   if (form.ShowDialog() == DialogResult.OK)
@@ -163,8 +164,8 @@ namespace ButtonDeck
                 mode = 0;
      ServerThread = new ServerThread();
             ServerThread.Start();
-                Application.Run(new MainForm());
-                ServerThread.Stop();
+            
+             //   ServerThread.Stop();
                 Debug.WriteLine("MODO SOCKET CLIENT");
 
                 //     Application.Run(new MainForm());
@@ -173,33 +174,69 @@ namespace ButtonDeck
             }
             else
             {
+
                 Debug.WriteLine("MODO USB");
                 mode = 1;
-                 ClientThread = new ClientThread();
-                ClientThread.Start();
-                Application.Run(new MainForm());
+                AdbServer server = new AdbServer();
+      
+                var result = server.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
 
-  ClientThread.Stop();
+                var monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
+              
+              
+                var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+
+                //  var devices = AdbClient.Instance.GetDevices();
+                foreach (var device in client.GetDevices())
+                {
+ client.CreateForward(device, "tcp:5095", "tcp:5095",true);
+                client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity",device, null);
+
+                    Thread.Sleep(1200);
+                }
+ 
+                ClientThread = new ClientThread();
+                   ClientThread.Start();
+         
+             
+          
+ // ClientThread.Stop();
 
                 //     Application.Run(new MainForm());
 
 
 
             }
-                OBSUtils.Disconnect();
+         
+           
 
                 
               
                 NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
                 NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
-                ApplicationSettingsManager.SaveSettings();
+               Application.Run(new MainForm());
+            OBSUtils.Disconnect();
+            ApplicationSettingsManager.SaveSettings();
                 DevicePersistManager.SaveDevices();
                 Trace.Flush();
         }
-      
+        public static void OnDeviceConnected(object sender, DeviceDataEventArgs e)
+        {
+            Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
+          //  var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+        //    client.ExecuteRemoteCommand("usb", e.Device, null);
+         //   client.CreateForward(e.Device, 5095, 5095);
+  //          client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", e.Device, null);
+
+          //  am start -S - D net.nickac.buttondeck / android.app.MainActivity--es name MYNAME--es email test @gmail.com
+           //   ClientThread = new ClientThread();
+         //   ClientThread.Start();
+            Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
+
+        }
         private static void NetworkChange_NetworkAddressChanged(object sender, EventArgs e)
         {
-            if(Program.mode ==0)
+            if(mode ==0)
             {
    ServerThread.Stop();
             ServerThread = new ServerThread();
