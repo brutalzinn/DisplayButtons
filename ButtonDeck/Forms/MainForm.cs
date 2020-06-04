@@ -317,7 +317,7 @@ namespace ButtonDeck.Forms
 
             if (Program.mode == 1)
             {
-                ///RefreshCurrentDevices();
+             RefreshCurrentDevices();
                 foreach (var device in DevicePersistManager.PersistedDevices)
                 {
                     try
@@ -1694,53 +1694,61 @@ return resultado;
 
             thread = new Thread(() => {
 
-
-            ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-
-
-
-
-                Image baseImage = imageFilePath;
-
-
-            Image modifiedImage = (Image)baseImage.Clone();
-            var fC = new FontConverter();
-            var PrintFont = fC.ConvertFromString(font) as Font;
-
-            var tempimage = new MagickImage((Bitmap)modifiedImage);
-            int textWidth = tempimage.Width - 10;
-
-
-                using (var image = new MagickImage((Bitmap)modifiedImage))
+                try
                 {
-                    var readSettings = new MagickReadSettings
+                    ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+
+
+
+
+                    Image baseImage = imageFilePath;
+
+
+                    Image modifiedImage = (Image)baseImage.Clone();
+                    var fC = new FontConverter();
+                    var PrintFont = fC.ConvertFromString(font) as Font;
+
+                    var tempimage = new MagickImage((Bitmap)modifiedImage);
+                    int textWidth = tempimage.Width - 10;
+
+
+                    using (var image = new MagickImage((Bitmap)modifiedImage))
                     {
-                        Font = "Arial",
-                        FillColor = MagickColors.White,
-                        BackgroundColor = MagickColors.Transparent,
-                        TextGravity = Gravity.South,
-                        // This determines the size of the area where the text will be drawn in
-                        Width = tempimage.Width,
-                        Height = tempimage.Height
-                    };
+                        var readSettings = new MagickReadSettings
+                        {
+                            Font = "Arial",
+                            FillColor = MagickColors.White,
+                            BackgroundColor = MagickColors.Transparent,
+                            TextGravity = Gravity.South,
+                            // This determines the size of the area where the text will be drawn in
+                            Width = tempimage.Width,
+                            Height = tempimage.Height
+                        };
 
 
-                    image.Alpha(AlphaOption.Opaque);
+                        image.Alpha(AlphaOption.Opaque);
 
-                    using (var label = new MagickImage("label:" + watermarkText, readSettings))
-                    {
-                        image.Composite(label, 0, 0, CompositeOperator.Over);
+                        using (var label = new MagickImage("label:" + watermarkText, readSettings))
+                        {
+                            image.Composite(label, 0, 0, CompositeOperator.Over);
 
 
+                        }
+
+
+                        control.NormalImage = image.ToBitmap();
+                        image.Dispose();
+                        modifiedImage.Dispose();
+                        tempimage.Dispose();
+
+                        //    SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentFolder);
                     }
+                }
+                catch(Exception e)
+                {
 
 
-                    control.NormalImage = image.ToBitmap();
-                    image.Dispose();
-                    modifiedImage.Dispose();
-                    tempimage.Dispose();
-
-                    //    SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentFolder);
+                    
                 }
             });
             //Inicia a execução da thread (em paralelo a esse código)
