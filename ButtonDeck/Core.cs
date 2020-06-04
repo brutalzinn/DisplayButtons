@@ -212,12 +212,19 @@ namespace ScribeBot
         /// <param name="args">Strings prepended by colors ex: Color, "text", Color, "text2".</param>
         public static void WriteLine(params object[] args)
         {
-            MainWindow?.Invoke(new Action(() =>
+            try
             {
-               // MainWindow.ConsoleOutput.AppendText(args);
-               // MainWindow.ConsoleOutput.AppendText(Environment.NewLine);
-            }));
+                MainWindow?.Invoke(new Action(() =>
+                {
+                    MainWindow.ConsoleOutput.AppendText(args);
+                    MainWindow.ConsoleOutput.AppendText(Environment.NewLine);
+                }));
+            }
+            catch(Exception e)
+            {
 
+
+            }
             var text = new StringBuilder();
             for (int i = 0; i < args.Length; i += 2)
             {

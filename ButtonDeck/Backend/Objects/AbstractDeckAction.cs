@@ -6,6 +6,13 @@ using System.Xml.Serialization;
 
 namespace ButtonDeck.Backend.Objects
 {
+
+
+
+
+
+
+
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public class ActionPropertyIncludeAttribute : Attribute
     { }
@@ -20,8 +27,10 @@ namespace ButtonDeck.Backend.Objects
     {
         readonly string description;
 
-        public string Description {
-            get {
+        public string Description
+        {
+            get
+            {
                 return description;
             }
         }
@@ -31,8 +40,11 @@ namespace ButtonDeck.Backend.Objects
             this.description = description;
         }
     }
-    
-    public abstract class AbstractDeckAction
+    // novos botões do multiple action 
+
+
+
+    public abstract class AbstractDeckAction 
     {
         public static Type FindType(string fullName)
         {
@@ -61,6 +73,14 @@ namespace ButtonDeck.Backend.Objects
 
             return false ;
         }
+        public virtual bool IsTool()
+        {
+
+            return false;
+        }
+
+
+
         [Obsolete]
         public virtual bool OnButtonClick(DeckDevice deckDevice) {
             return false;
@@ -74,4 +94,7 @@ namespace ButtonDeck.Backend.Objects
         }
 
     }
+
+    
+    
 }

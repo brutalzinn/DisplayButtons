@@ -34,9 +34,12 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.imageModernButton1 = new ButtonDeck.Controls.ImageModernButton();
-            this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
             this.imageModernButton3 = new ButtonDeck.Controls.ImageModernButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.imageModernButton4 = new ButtonDeck.Controls.ImageModernButton();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // modernButton3
@@ -84,9 +87,9 @@
             this.listBox2.Location = new System.Drawing.Point(329, 89);
             this.listBox2.Name = "listBox2";
             this.listBox2.ScrollAlwaysVisible = true;
-            this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listBox2.Size = new System.Drawing.Size(218, 304);
             this.listBox2.TabIndex = 13;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -106,44 +109,72 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "Ações";
             // 
-            // imageModernButton1
-            // 
-            this.imageModernButton1.CustomColorScheme = false;
-            this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(590, 206);
-            this.imageModernButton1.Name = "imageModernButton1";
-            this.imageModernButton1.NormalImage = null;
-            this.imageModernButton1.Origin = null;
-            this.imageModernButton1.Size = new System.Drawing.Size(75, 30);
-            this.imageModernButton1.TabIndex = 16;
-            this.imageModernButton1.Text = "Deletar ação";
-            this.imageModernButton1.UseVisualStyleBackColor = true;
-            // 
-            // imageModernButton2
-            // 
-            this.imageModernButton2.CustomColorScheme = false;
-            this.imageModernButton2.Image = null;
-            this.imageModernButton2.Location = new System.Drawing.Point(579, 160);
-            this.imageModernButton2.Name = "imageModernButton2";
-            this.imageModernButton2.NormalImage = null;
-            this.imageModernButton2.Origin = null;
-            this.imageModernButton2.Size = new System.Drawing.Size(100, 30);
-            this.imageModernButton2.TabIndex = 17;
-            this.imageModernButton2.Text = "Adicionar ação";
-            this.imageModernButton2.UseVisualStyleBackColor = true;
-            // 
             // imageModernButton3
             // 
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(579, 252);
+            this.imageModernButton3.Location = new System.Drawing.Point(553, 182);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;
-            this.imageModernButton3.Size = new System.Drawing.Size(100, 23);
+            this.imageModernButton3.Size = new System.Drawing.Size(117, 45);
             this.imageModernButton3.TabIndex = 18;
-            this.imageModernButton3.Text = "Adicionar Delay";
+            this.imageModernButton3.Text = "<-- Adicionar Ação -";
             this.imageModernButton3.UseVisualStyleBackColor = true;
+            this.imageModernButton3.Click += new System.EventHandler(this.ImageModernButton3_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(587, 245);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "label3";
+            // 
+            // imageModernButton4
+            // 
+            this.imageModernButton4.CustomColorScheme = false;
+            this.imageModernButton4.Image = null;
+            this.imageModernButton4.Location = new System.Drawing.Point(565, 279);
+            this.imageModernButton4.Name = "imageModernButton4";
+            this.imageModernButton4.NormalImage = null;
+            this.imageModernButton4.Origin = null;
+            this.imageModernButton4.Size = new System.Drawing.Size(100, 23);
+            this.imageModernButton4.TabIndex = 20;
+            this.imageModernButton4.Text = "Configurações";
+            this.imageModernButton4.UseVisualStyleBackColor = true;
+            this.imageModernButton4.Click += new System.EventHandler(this.ImageModernButton4_Click);
+            // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.ItemHeight = 15;
+            this.listBox3.Location = new System.Drawing.Point(671, 84);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.ScrollAlwaysVisible = true;
+            this.listBox3.Size = new System.Drawing.Size(119, 304);
+            this.listBox3.TabIndex = 21;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(575, 89);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(53, 31);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "/\\";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(575, 140);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(51, 26);
+            this.button2.TabIndex = 23;
+            this.button2.Text = "\\/";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // LayerMultiActionHelper
             // 
@@ -154,9 +185,12 @@
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.listBox3);
+            this.Controls.Add(this.imageModernButton4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.imageModernButton3);
-            this.Controls.Add(this.imageModernButton2);
-            this.Controls.Add(this.imageModernButton1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox2);
@@ -180,8 +214,11 @@
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private Controls.ImageModernButton imageModernButton1;
-        private Controls.ImageModernButton imageModernButton2;
         private Controls.ImageModernButton imageModernButton3;
+        private System.Windows.Forms.Label label3;
+        private Controls.ImageModernButton imageModernButton4;
+        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
