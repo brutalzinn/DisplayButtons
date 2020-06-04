@@ -65,7 +65,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
             }
-            public string getFormControl(string name, string type)
+            public static string getFormControl(string name, string type)
             {
 
                 string result = "";

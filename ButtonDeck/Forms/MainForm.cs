@@ -114,41 +114,7 @@ namespace ButtonDeck.Forms
             }
             ColorSchemeCentral.ThemeChanged += (s, e) =>
             ApplySidebarTheme(shadedPanel1);
-            if (Program.mode == 1)
-            {
-                foreach (var device in DevicePersistManager.PersistedDevices)
-                {
-                    try
-                    {
-                        RefreshCurrentDevices();
-                        CurrentDevice = device;
-                        IsVirtualDeviceConnected = true;
-
-                        OnDeviceConnected(this, device);
-                        ChangeButtonsVisibility(true);
-                        RefreshAllButtons(false);
-                        void tempConnected(object s, DeviceEventArgs ee)
-                        {
-                            if (ee.Device.DeviceGuid == device.DeviceGuid) return;
-                            DeviceConnected -= tempConnected;
-                            if (IsVirtualDeviceConnected)
-                            {
-                                //We had a virtual device.
-                                OnDeviceDisconnected(this, device);
-                                IsVirtualDeviceConnected = false;
-                                ChangeButtonsVisibility(false);
-                            }
-                        }
-                        DeviceConnected += tempConnected;
-
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-
-                }
-                }
+           
 
         }
         public void RefreshCurrentDevices()
@@ -349,7 +315,86 @@ return Program.ServerThread.TcpServer.CurrentConnections;
 
 
 
+            if (Program.mode == 1)
+            {
+                ///RefreshCurrentDevices();
+                foreach (var device in DevicePersistManager.PersistedDevices)
+                {
+                    try
+                    {
+                        if (device != null)
+                        {
+                            // CurrentDevice = device;
+                            if (IsVirtualDeviceConnected)
+                            {
+                                Debug.WriteLine("CHEGOU 2");
+                                if (CurrentDevice.DeviceGuid == device.DeviceGuid)
+                                {
+                                    //Someone clicked on the same device. Unload this one.
+                                    OnDeviceDisconnected(this, device);
+                                    IsVirtualDeviceConnected = false;
 
+
+                                    ChangeButtonsVisibility(false);
+                                    CurrentDevice = null;
+                                    RefreshAllButtons(false);
+                                    Activate();
+                                }
+                                else
+                                {
+                                    //Someone requested another device. Unload current virtual device..
+                                    OnDeviceDisconnected(this, CurrentDevice);
+                                    IsVirtualDeviceConnected = false;
+                                    ChangeButtonsVisibility(false);
+                                    CurrentDevice = null;
+                                    RefreshAllButtons(false);
+                                }
+                            }
+                            else
+                            {
+                                Debug.WriteLine("CHEGOU 3");
+                                CurrentDevice = device;
+                                IsVirtualDeviceConnected = true;
+                                OnDeviceConnected(this, device);
+                                ChangeButtonsVisibility(true);
+                                RefreshAllButtons(false);
+                                void tempConnected(object s, DeviceEventArgs ee)
+                                {
+                                    if (ee.Device.DeviceGuid == device.DeviceGuid) return;
+                                    DeviceConnected -= tempConnected;
+                                    if (IsVirtualDeviceConnected)
+                                    {
+                                        //We had a virtual device.
+                                        OnDeviceDisconnected(this, device);
+                                        IsVirtualDeviceConnected = false;
+                                        ChangeButtonsVisibility(false);
+                                    }
+                                }
+                                DeviceConnected += tempConnected;
+                            }
+
+
+
+
+
+
+
+
+                        }
+
+
+
+
+
+
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+
+                }
+            }
 
 
 
