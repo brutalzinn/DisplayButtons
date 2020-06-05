@@ -11,5 +11,8 @@ namespace ButtonDeck
     {
 
        public static  Forms.MainForm launcher_principal;
+
+        public static int linha = 3;
+        public static int coluna = 5;
     }
 }

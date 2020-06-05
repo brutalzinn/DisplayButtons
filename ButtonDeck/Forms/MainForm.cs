@@ -600,12 +600,41 @@ namespace ButtonDeck.Forms
                 return true;
             });
         }
+   
+        public void CreateButtons()
+        {
+            int x = 0;
+            int y = 0;
+            for (int lin = 0; lin < Globals.coluna; lin++)
+            {
+                for (int con = 0; con < Globals.linha; con++)
+            {
+               
+              
+               
+                    
+                    ImageModernButton control = new ImageModernButton();
+                    control.Name = "modernButton" + lin + con;
+                    control.Size = new Size(80, 80);
+                    control.Location = new Point(lin * 110 + 10, con * 110 + 10);
+                    control.Text = control.Name;
+                    panel1.Controls.Add(control);
 
+                   
+                }
+            
+                panel1.Refresh();
+            }
+
+
+
+        }
         public void RefreshAllButtons(bool sendToDevice = true)
         {
             Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
-            for (int j = 0; j < 15; j++)
+            int calc = Globals.linha * Globals.coluna;
+            for (int j = 0; j < calc; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
                 control.NormalImage = null;
@@ -626,7 +655,7 @@ namespace ButtonDeck.Forms
                     if (item is DynamicDeckItem DI && DI.DeckAction != null)
                     {
 
-                        AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+               //         control.NormalImage = ReceiveWaterMark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap);
 
                     }
 
@@ -696,14 +725,15 @@ namespace ButtonDeck.Forms
                         //  item.GetItemImage().BitmapSerialized = converterDemo(item?.GetItemImage().Bitmap);
                         //     var ser = item.GetItemImage().BitmapSerialized;
                         //    item.BitmapSerialized = item?.GetItemImage().Bitmap;
-                        AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                      //  control.NormalImage = ReceiveWaterMark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap);
                         //item.GetItemImage().BitmapSerialized = converterDemo( AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White)); 
                         //   Write_name_Image("testeee", item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
 
                     }
                     else if (item is DynamicDeckFolder FO)
                     {
-                        AddWatermark(FO.folder_name, item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                      //  AddWatermark(FO.folder_name, item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                   //     control.NormalImage = ReceiveWaterMark(FO.folder_name, item?.GetItemImage().Bitmap);
 
 
 
@@ -848,6 +878,8 @@ namespace ButtonDeck.Forms
         private static void SendItemsToDevice(DeckDevice device, IDeckFolder folder, IMagickImage image_receivd = null)
         {
 
+
+
             var con = device.GetConnection();
             if (con != null) {
 
@@ -878,26 +910,27 @@ namespace ButtonDeck.Forms
                     ///     ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
                     //  IDeckFolder folder_t = CurrentDevice?.CurrentFolder;
                     //        var seri = teste.BitmapSerialized;
-                  
-                        if (item is DynamicDeckItem DI && DI.DeckAction != null) {
+                   
+                        if (item is DynamicDeckItem DI && DI.DeckAction != null)
+                        {
 
-                        packet.AddToQueue(folder.GetItemIndex(item), ReceiveWaterMark(image.Bitmap, DI.DeckAction.GetActionName(), "Arial", 7, 10f, 67f, Brushes.White));
+                          //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
 
-                    }
-                    else if (item is DynamicDeckFolder Da)
-                    {
-                        packet.AddToQueue(folder.GetItemIndex(item), ReceiveWaterMark(image.Bitmap, Da.folder_name, "Arial", 7, 10f, 67f, Brushes.White));
+                        }
+                        else if (item is DynamicDeckFolder Da)
+                        {
+                        //    packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(Da.folder_name,image.Bitmap)));
 
 
-                    }
-                    else
-                    {
-                        packet.AddToQueue(folder.GetItemIndex(item),image);
+                        }
+                        else
+                        {
+                            packet.AddToQueue(folder.GetItemIndex(item), image);
 
-                    }
+                        }
 
                         con.SendPacket(packet);
-                
+             
                     //    packet.AddToQueue(folder.GetItemIndex(item), image);
                     //  con.SendPacket(packet);
 
@@ -918,6 +951,7 @@ namespace ButtonDeck.Forms
                 con.SendPacket(clearPacket);
                 
             }
+     
         }
 
         private void LoadItems(IDeckFolder folder)
@@ -939,14 +973,14 @@ namespace ButtonDeck.Forms
                     //  item.GetItemImage().BitmapSerialized = converterDemo(item?.GetItemImage().Bitmap);
                     //     var ser = item.GetItemImage().BitmapSerialized;
                     //    item.BitmapSerialized = item?.GetItemImage().Bitmap;
-                    AddWatermark(DI.DeckAction.GetActionName(), image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                 //   AddWatermark(DI.DeckAction.GetActionName(), image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
                     //item.GetItemImage().BitmapSerialized = converterDemo( AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White)); 
                     //   Write_name_Image("testeee", item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
 
                 }
                 else if (item is DynamicDeckFolder FO)
                 {
-                    AddWatermark(FO.folder_name, image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                    //AddWatermark(FO.folder_name, image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
 
 
 
@@ -1613,150 +1647,7 @@ namespace ButtonDeck.Forms
             byte[] xByte = (byte[])_imageConverter.ConvertTo(x, typeof(byte[]));
             return xByte;
         }
-        private Thread thread;
-        private Thread threadWa;
-private static Image baseImageRWT;
-        public static DeckImage ReceiveWaterMark(Bitmap image_receivd, string watermark, string font, int size, float x, float y, Brush color)
-        {
-           
-            
-    var resultado = new DeckImage();
-            
-            Image modifiedImage;
-
-            try
-            {
-                baseImageRWT = image_receivd;
-
-            modifiedImage = (Image)baseImageRWT.Clone();
-
-            
-                var tempimage = new MagickImage((Bitmap)modifiedImage);
-
-
-
-
-                using (var image = new MagickImage((Bitmap)modifiedImage))
-                {
-                    var readSettings = new MagickReadSettings
-                    {
-                        Font = "Arial",
-                        FillColor = MagickColors.White,
-                        BackgroundColor = MagickColors.Transparent,
-                        TextGravity = Gravity.South,
-                        // This determines the size of the area where the text will be drawn in
-                        Width = tempimage.Width,
-                        Height = tempimage.Height
-                    };
-
-
-                    // Only need this with a transparent background in the readSettings
-                    image.Alpha(AlphaOption.Opaque);
-
-                    using (var label = new MagickImage("label:" + watermark, readSettings))
-                    {
-                        image.Composite(label, 0, 0, CompositeOperator.Over);
-
-
-                    }
-                    
-
-                    resultado = new DeckImage(image.ToBitmap());
-image.Dispose();
-                    modifiedImage.Dispose();
-                    tempimage.Dispose();
-                 
-
-                }
-            }
-            catch (Exception e)
-            {
-
-                resultado = new DeckImage((Bitmap)baseImageRWT);
-
-            }
-
-          
-return resultado;
-                
-            }
-
-
-
-
-        public static Bitmap resizeImage(Bitmap imgToResize, Size size)
-        {
-            return new Bitmap(imgToResize, size);
-        }
-
-        public void AddWatermark(string watermarkText, Bitmap imageFilePath, string font, int size, float x, float y, Brush color, IDeckItem item, IDeckFolder folder) // pass string
-        {
-
-            thread = new Thread(() => {
-
-                try
-                {
-                    ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-
-
-
-
-                    Image baseImage = imageFilePath;
-
-
-                    Image modifiedImage = (Image)baseImage.Clone();
-                    var fC = new FontConverter();
-                    var PrintFont = fC.ConvertFromString(font) as Font;
-
-                    var tempimage = new MagickImage((Bitmap)modifiedImage);
-                    int textWidth = tempimage.Width - 10;
-
-
-                    using (var image = new MagickImage((Bitmap)modifiedImage))
-                    {
-                        var readSettings = new MagickReadSettings
-                        {
-                            Font = "Arial",
-                            FillColor = MagickColors.White,
-                            BackgroundColor = MagickColors.Transparent,
-                            TextGravity = Gravity.South,
-                            // This determines the size of the area where the text will be drawn in
-                            Width = tempimage.Width,
-                            Height = tempimage.Height
-                        };
-
-
-                        image.Alpha(AlphaOption.Opaque);
-
-                        using (var label = new MagickImage("label:" + watermarkText, readSettings))
-                        {
-                            image.Composite(label, 0, 0, CompositeOperator.Over);
-
-
-                        }
-
-
-                        control.NormalImage = image.ToBitmap();
-                        image.Dispose();
-                        modifiedImage.Dispose();
-                        tempimage.Dispose();
-
-                        //    SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentFolder);
-                    }
-                }
-                catch(Exception e)
-                {
-
-
-                    
-                }
-            });
-            //Inicia a execução da thread (em paralelo a esse código)
-            thread.Start();
-        }
-    
-
-        
+       
          
         
 
@@ -2074,7 +1965,7 @@ return resultado;
                 {
                     if (item is DynamicDeckItem DI && DI.DeckAction != null)
                     {
-                        AddWatermark(DI.DeckAction.GetActionName(), ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                        //AddWatermark(DI.DeckAction.GetActionName(), ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
 
 
                         //imageModernButton1.Refresh();
@@ -2243,20 +2134,13 @@ return resultado;
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            var con = CurrentDevice.GetConnection();
-            var packet = new HelloPacket();
-            if (con != null)
-            {
+            CreateButtons();
 
-             con.SendPacket(packet);
 
-          }
 
-               
-            
 
-         
-            
+
+
         }
     }
     #endregion

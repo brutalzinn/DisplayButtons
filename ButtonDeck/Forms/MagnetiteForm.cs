@@ -1,4 +1,5 @@
-﻿using ButtonDeck.Backend.Objects;
+﻿using ButtonDeck.Backend.Networking.Implementation;
+using ButtonDeck.Backend.Objects;
 using ButtonDeck.Backend.Utils;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ButtonDeck.Backend.Networking.Implementation;
+using ButtonDeck.Backend.Objects;
+using ButtonDeck.Backend.Objects.Implementation;
+using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
+using ButtonDeck.Backend.Utils;
+using ButtonDeck.Controls;
+using ButtonDeck.Misc;
+using ButtonDeck.Properties;
+using ImageMagick;
+using ButtonDeck.Backend.Networking;
+
+using NickAc.ModernUIDoneRight.Controls;
+using NickAc.ModernUIDoneRight.Objects;
+using ScribeBot;
+using ScribeBot.Interface;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
+using static ButtonDeck.Backend.Objects.AbstractDeckAction;
+using System.Threading;
+using Timer = System.Windows.Forms.Timer;
+using static ButtonDeck.Backend.Utils.DevicePersistManager;
+using ButtonDeck.Backend.Networking.TcpLib;
 
 namespace ButtonDeck.Forms
 {
@@ -73,5 +106,20 @@ namespace ButtonDeck.Forms
         {
             return v ? "true" : "false";
         }
+
+        private void ModernButton8_Click(object sender, EventArgs e)
+        {
+       
+            var con = MainForm.Instance.CurrentDevice.GetConnection();
+            if (con != null)
+            {
+                Globals.coluna = Convert.ToInt32(coluna.Text);
+                Globals.linha = Convert.ToInt32(linha.Text);
+                var Matriz = new MatrizPacket();
+                con.SendPacket(Matriz);
+            }
+
+        }
+       
     }
 }

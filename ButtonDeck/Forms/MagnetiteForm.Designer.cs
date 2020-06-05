@@ -30,34 +30,39 @@
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.label1 = new System.Windows.Forms.Label();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
+            this.coluna = new System.Windows.Forms.TextBox();
+            this.linha = new System.Windows.Forms.TextBox();
+            this.modernButton8 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.modernButton7 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.modernButton3 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernButton4 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.modernButton5 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton6 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernButton7 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernButton4 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernButton3 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.modernShadowPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar1
             // 
             this.appBar1.CastShadow = true;
             this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.appBar1.HamburgerButtonSize = 32;
             this.appBar1.IconVisible = false;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
+            this.appBar1.OverrideParentText = false;
             this.appBar1.Size = new System.Drawing.Size(664, 50);
             this.appBar1.TabIndex = 0;
-            this.appBar1.Text = "appBar1";
+            this.appBar1.Text = "Magnetite - Menu";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
             // label1
@@ -73,6 +78,9 @@
             // 
             // modernShadowPanel1
             // 
+            this.modernShadowPanel1.Controls.Add(this.coluna);
+            this.modernShadowPanel1.Controls.Add(this.linha);
+            this.modernShadowPanel1.Controls.Add(this.modernButton8);
             this.modernShadowPanel1.Controls.Add(this.panel4);
             this.modernShadowPanel1.Controls.Add(this.panel3);
             this.modernShadowPanel1.Controls.Add(this.panel2);
@@ -82,46 +90,43 @@
             this.modernShadowPanel1.Size = new System.Drawing.Size(636, 323);
             this.modernShadowPanel1.TabIndex = 2;
             // 
-            // panel1
+            // coluna
             // 
-            this.panel1.Controls.Add(this.modernButton5);
-            this.panel1.Controls.Add(this.modernButton6);
-            this.panel1.Location = new System.Drawing.Point(457, 214);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(170, 100);
-            this.panel1.TabIndex = 1;
+            this.coluna.Location = new System.Drawing.Point(338, 238);
+            this.coluna.Name = "coluna";
+            this.coluna.Size = new System.Drawing.Size(58, 23);
+            this.coluna.TabIndex = 5;
             // 
-            // modernButton5
+            // linha
             // 
-            this.modernButton5.Location = new System.Drawing.Point(12, 53);
-            this.modernButton5.Name = "modernButton5";
-            this.modernButton5.Size = new System.Drawing.Size(147, 37);
-            this.modernButton5.TabIndex = 0;
-            this.modernButton5.Text = "Stop OBS Connection";
-            this.modernButton5.UseVisualStyleBackColor = true;
-            this.modernButton5.Click += new System.EventHandler(this.ModernButton5_Click);
+            this.linha.Location = new System.Drawing.Point(249, 238);
+            this.linha.Name = "linha";
+            this.linha.Size = new System.Drawing.Size(58, 23);
+            this.linha.TabIndex = 4;
             // 
-            // modernButton6
+            // modernButton8
             // 
-            this.modernButton6.Location = new System.Drawing.Point(12, 10);
-            this.modernButton6.Name = "modernButton6";
-            this.modernButton6.Size = new System.Drawing.Size(147, 37);
-            this.modernButton6.TabIndex = 0;
-            this.modernButton6.Text = "Create OBS Connection";
-            this.modernButton6.UseVisualStyleBackColor = true;
-            this.modernButton6.Click += new System.EventHandler(this.ModernButton6_Click);
+            this.modernButton8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.modernButton8.CustomColorScheme = false;
+            this.modernButton8.Location = new System.Drawing.Point(249, 267);
+            this.modernButton8.Name = "modernButton8";
+            this.modernButton8.Size = new System.Drawing.Size(147, 37);
+            this.modernButton8.TabIndex = 1;
+            this.modernButton8.Text = "Alterar matriz";
+            this.modernButton8.UseVisualStyleBackColor = true;
+            this.modernButton8.Click += new System.EventHandler(this.ModernButton8_Click);
             // 
-            // modernButton2
+            // panel4
             // 
-            this.modernButton2.Location = new System.Drawing.Point(12, 10);
-            this.modernButton2.Name = "modernButton2";
-            this.modernButton2.Size = new System.Drawing.Size(147, 37);
-            this.modernButton2.TabIndex = 0;
-            this.modernButton2.Text = "Import Profile";
-            this.modernButton2.UseVisualStyleBackColor = true;
+            this.panel4.Controls.Add(this.modernButton7);
+            this.panel4.Location = new System.Drawing.Point(457, 10);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(170, 58);
+            this.panel4.TabIndex = 3;
             // 
             // modernButton7
             // 
+            this.modernButton7.CustomColorScheme = false;
             this.modernButton7.Location = new System.Drawing.Point(12, 10);
             this.modernButton7.Name = "modernButton7";
             this.modernButton7.Size = new System.Drawing.Size(147, 37);
@@ -130,30 +135,28 @@
             this.modernButton7.UseVisualStyleBackColor = true;
             this.modernButton7.Click += new System.EventHandler(this.ModernButton7_Click);
             // 
-            // modernButton4
+            // panel3
             // 
-            this.modernButton4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.modernButton4.Location = new System.Drawing.Point(12, 10);
-            this.modernButton4.Name = "modernButton4";
-            this.modernButton4.Size = new System.Drawing.Size(147, 37);
-            this.modernButton4.TabIndex = 0;
-            this.modernButton4.Text = "Start TcpServer";
-            this.modernButton4.UseVisualStyleBackColor = true;
-            this.modernButton4.Click += new System.EventHandler(this.ModernButton4_Click);
+            this.panel3.Controls.Add(this.modernButton2);
+            this.panel3.Controls.Add(this.modernButton1);
+            this.panel3.Location = new System.Drawing.Point(10, 10);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(170, 100);
+            this.panel3.TabIndex = 3;
             // 
-            // modernButton3
+            // modernButton2
             // 
-            this.modernButton3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.modernButton3.Location = new System.Drawing.Point(12, 53);
-            this.modernButton3.Name = "modernButton3";
-            this.modernButton3.Size = new System.Drawing.Size(147, 37);
-            this.modernButton3.TabIndex = 0;
-            this.modernButton3.Text = "Stop TcpServer";
-            this.modernButton3.UseVisualStyleBackColor = true;
-            this.modernButton3.Click += new System.EventHandler(this.ModernButton3_Click);
+            this.modernButton2.CustomColorScheme = false;
+            this.modernButton2.Location = new System.Drawing.Point(12, 10);
+            this.modernButton2.Name = "modernButton2";
+            this.modernButton2.Size = new System.Drawing.Size(147, 37);
+            this.modernButton2.TabIndex = 0;
+            this.modernButton2.Text = "Import Profile";
+            this.modernButton2.UseVisualStyleBackColor = true;
             // 
             // modernButton1
             // 
+            this.modernButton1.CustomColorScheme = false;
             this.modernButton1.Location = new System.Drawing.Point(12, 53);
             this.modernButton1.Name = "modernButton1";
             this.modernButton1.Size = new System.Drawing.Size(147, 37);
@@ -170,28 +173,68 @@
             this.panel2.Size = new System.Drawing.Size(170, 100);
             this.panel2.TabIndex = 2;
             // 
-            // panel3
+            // modernButton3
             // 
-            this.panel3.Controls.Add(this.modernButton2);
-            this.panel3.Controls.Add(this.modernButton1);
-            this.panel3.Location = new System.Drawing.Point(10, 10);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(170, 100);
-            this.panel3.TabIndex = 3;
+            this.modernButton3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.modernButton3.CustomColorScheme = false;
+            this.modernButton3.Location = new System.Drawing.Point(12, 53);
+            this.modernButton3.Name = "modernButton3";
+            this.modernButton3.Size = new System.Drawing.Size(147, 37);
+            this.modernButton3.TabIndex = 0;
+            this.modernButton3.Text = "Stop TcpServer";
+            this.modernButton3.UseVisualStyleBackColor = true;
+            this.modernButton3.Click += new System.EventHandler(this.ModernButton3_Click);
             // 
-            // panel4
+            // modernButton4
             // 
-            this.panel4.Controls.Add(this.modernButton7);
-            this.panel4.Location = new System.Drawing.Point(457, 10);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(170, 58);
-            this.panel4.TabIndex = 3;
+            this.modernButton4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.modernButton4.CustomColorScheme = false;
+            this.modernButton4.Location = new System.Drawing.Point(12, 10);
+            this.modernButton4.Name = "modernButton4";
+            this.modernButton4.Size = new System.Drawing.Size(147, 37);
+            this.modernButton4.TabIndex = 0;
+            this.modernButton4.Text = "Start TcpServer";
+            this.modernButton4.UseVisualStyleBackColor = true;
+            this.modernButton4.Click += new System.EventHandler(this.ModernButton4_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.modernButton5);
+            this.panel1.Controls.Add(this.modernButton6);
+            this.panel1.Location = new System.Drawing.Point(457, 214);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(170, 100);
+            this.panel1.TabIndex = 1;
+            // 
+            // modernButton5
+            // 
+            this.modernButton5.CustomColorScheme = false;
+            this.modernButton5.Location = new System.Drawing.Point(12, 53);
+            this.modernButton5.Name = "modernButton5";
+            this.modernButton5.Size = new System.Drawing.Size(147, 37);
+            this.modernButton5.TabIndex = 0;
+            this.modernButton5.Text = "Stop OBS Connection";
+            this.modernButton5.UseVisualStyleBackColor = true;
+            this.modernButton5.Click += new System.EventHandler(this.ModernButton5_Click);
+            // 
+            // modernButton6
+            // 
+            this.modernButton6.CustomColorScheme = false;
+            this.modernButton6.Location = new System.Drawing.Point(12, 10);
+            this.modernButton6.Name = "modernButton6";
+            this.modernButton6.Size = new System.Drawing.Size(147, 37);
+            this.modernButton6.TabIndex = 0;
+            this.modernButton6.Text = "Create OBS Connection";
+            this.modernButton6.UseVisualStyleBackColor = true;
+            this.modernButton6.Click += new System.EventHandler(this.ModernButton6_Click);
             // 
             // MagnetiteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 488);
+            this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
+            this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.modernShadowPanel1);
@@ -202,10 +245,11 @@
             this.Sizable = false;
             this.Text = "Magnetite - Menu";
             this.modernShadowPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.modernShadowPanel1.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +271,8 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox coluna;
+        private System.Windows.Forms.TextBox linha;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton8;
     }
 }

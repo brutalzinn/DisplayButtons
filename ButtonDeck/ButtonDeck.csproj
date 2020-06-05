@@ -71,7 +71,6 @@
     </Reference>
     <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.11.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
       <HintPath>..\packages\Magick.NET-Q16-AnyCPU.7.11.0\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
@@ -180,10 +179,12 @@
     <Compile Include="Backend\Networking\Implementation\DeviceIdentityPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\HeathbeatPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\HelloPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\MatrizPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\SingleSlotImageChangePacket.cs" />
     <Compile Include="Backend\Networking\Implementation\SlotImageChangeChunkPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\SlotImageClearChunkPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\SlotImageClearPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\SlotLabelChangeChunkPacket.cs" />
     <Compile Include="Backend\Networking\INetworkPacket.cs" />
     <Compile Include="Backend\Networking\IO\DataInputStream.cs" />
     <Compile Include="Backend\Networking\IO\DataOutputStream.cs" />
