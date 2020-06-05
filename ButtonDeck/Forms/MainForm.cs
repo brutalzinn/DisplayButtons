@@ -601,15 +601,16 @@ namespace ButtonDeck.Forms
             });
         }
    
-        public void CreateButtons()
+        public void ButtonCreator()
         {
             int x = 0;
             int y = 0;
             int id = 1;
-            for (int lin = 0; lin < Globals.coluna; lin++)
+            for (int con = 0; con < Globals.linha; con++)
             {
-                for (int con = 0; con < Globals.linha; con++)
+                for (int lin = 0; lin < Globals.coluna; lin++)
             {
+            
 
                   
                
@@ -618,7 +619,6 @@ namespace ButtonDeck.Forms
                     control.Name = "modernButton" + id;
                     control.Size = new Size(80, 80);
                     control.Location = new Point(lin * 110 + 10, con * 110 + 10);
-                    Debug.WriteLine(control.Name);
                     id += 1;
                     control.MouseUp += (sender, e) =>
                     {
@@ -787,8 +787,9 @@ namespace ButtonDeck.Forms
                   
                         control.Click += (sender, e) => {
                         Debug.WriteLine("CLICANDO");
+                            Debug.WriteLine(control.Name);
 
-                        lastClick.Stop();
+                            lastClick.Stop();
                         bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
                         if (sender is ImageModernButton mb)
                         {
@@ -853,7 +854,7 @@ namespace ButtonDeck.Forms
             Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
             int calc = Globals.linha * Globals.coluna;
-            for (int j = 0; j < calc; j++)
+            for (int j = 0; j < 14; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
                 control.NormalImage = null;
@@ -1143,11 +1144,11 @@ namespace ButtonDeck.Forms
                         }
                         else
                         {
-                            packet.AddToQueue(folder.GetItemIndex(item), image);
+                          //  packet.AddToQueue(folder.GetItemIndex(item), image);
 
                         }
-
-                        con.SendPacket(packet);
+                    packet.AddToQueue(folder.GetItemIndex(item), image);
+                    con.SendPacket(packet);
              
                     //    packet.AddToQueue(folder.GetItemIndex(item), image);
                     //  con.SendPacket(packet);
@@ -2339,7 +2340,8 @@ namespace ButtonDeck.Forms
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            CreateButtons();
+            // CreateButtons();
+            ButtonCreator();
             ApplyTheme(panel1);
 
             Refresh();
