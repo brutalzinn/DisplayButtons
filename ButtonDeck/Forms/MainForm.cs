@@ -618,11 +618,63 @@ namespace ButtonDeck.Forms
                     control.Size = new Size(80, 80);
                     control.Location = new Point(lin * 110 + 10, con * 110 + 10);
                     control.Text = control.Name;
-                    panel1.Controls.Add(control);
+                    control.Click += (sender, e) => {
+                        Debug.WriteLine("CLICANDO");
 
-                   
+                        lastClick.Stop();
+                        bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
+                        if (sender is ImageModernButton mb)
+                        {
+                            if (mb.Tag != null && mb.Tag is IDeckItem item)
+                            {
+                                if (item is IDeckFolder folder)
+                                {
+                                    if (!isDoubleClick)
+                                    {
+                                        FocusItem(mb, item);
+                                        goto end;
+                                    }
+                                    //Navigate to the folder
+                                    CurrentDevice.CurrentFolder = folder;
+                                    RefreshAllButtons();
+                                    goto end;
+                                }
+                                if (CurrentDevice.CurrentFolder.GetParent() != null)
+                                {
+                                    //Not on the main folder
+                                    if (mb.CurrentSlot == 1)
+                                    {
+                                        CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
+                                        RefreshAllButtons();
+                                        lastClick.Reset();
+                                        return;
+                                    }
+                                }
+
+                                //Show button panel with settable properties
+                                FocusItem(mb, item);
+
+                                lastClick.Reset();
+                            }
+                            else
+                            {
+                                Buttons_Unfocus(sender, e);
+                            }
+                            return;
+                            end:
+                            lastClick.Reset();
+                            lastClick.Start();
+                        }
+
+
+                        RefreshAllButtons(true);
+
+                    };
+
+                    panel1.Controls.Add(control);
                 }
-            
+              
+
                 panel1.Refresh();
             }
 
