@@ -2341,6 +2341,7 @@ namespace ButtonDeck.Forms
         private void Button1_Click(object sender, EventArgs e)
         {
             // CreateButtons();
+
             ButtonCreator();
             ApplyTheme(panel1);
 
