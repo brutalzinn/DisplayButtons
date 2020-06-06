@@ -283,15 +283,14 @@ namespace ButtonDeck.Forms
             appBar1.Actions.Add(itemMagnetite);
             appBar1.Actions.Add(itemPlugins);
             appBar1.Actions.Add(itemBiblioteca);
-            ApplyTheme(panel1);
+           // ApplyTheme(panel1);
             GenerateSidebar(shadedPanel1);
             ApplySidebarTheme(shadedPanel1);
             shadedPanel2.Hide();
             shadedPanel1.Hide();
             Refresh();
-            Globals.linha = ApplicationSettingsManager.Settings.linha;
-            Globals.coluna = ApplicationSettingsManager.Settings.coluna;
-            Start_configs();
+
+       
 
            
 
@@ -609,9 +608,9 @@ namespace ButtonDeck.Forms
             int x = 0;
             int y = 0;
             int id = 1;
-            for (int con = 0; con < Globals.linha; con++)
+            for (int con = 0; con < ApplicationSettingsManager.Settings.linha; con++)
             {
-                for (int lin = 0; lin < Globals.coluna; lin++)
+                for (int lin = 0; lin < ApplicationSettingsManager.Settings.coluna; lin++)
                 {
 
 
@@ -856,7 +855,7 @@ namespace ButtonDeck.Forms
         {
             Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
-            int calc = Globals.linha * Globals.coluna;
+            int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
             for (int j = 0; j < calc; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
@@ -1013,18 +1012,18 @@ namespace ButtonDeck.Forms
         }
         private void Start_configs()
             {
+          
+            ButtonCreator();
+            ApplyTheme(panel1);
 
-
-       
-           DevicePersistManager.LoadDevices();
-
+        
 
    
             var con = MainForm.Instance.CurrentDevice.GetConnection();
             if (con != null)
             {
                
-                ButtonCreator();
+                
                 var Matriz = new MatrizPacket();
                 con.SendPacket(Matriz);
             }
@@ -1035,7 +1034,7 @@ namespace ButtonDeck.Forms
             Invoke(new Action(() => {
 
 
-
+                Start_configs();
 
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);
@@ -1127,7 +1126,7 @@ namespace ButtonDeck.Forms
 
                 var packet = new SlotImageChangeChunkPacket();
                 List<IDeckItem> items = folder.GetDeckItems();
-                int calc = Globals.coluna * Globals.linha;
+                int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
                 List<int> addedItems = new List<int>();
                 bool isFolder = false;
                 for (int i = 0; i < calc; i++)

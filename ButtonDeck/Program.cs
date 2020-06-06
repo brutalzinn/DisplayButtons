@@ -138,6 +138,8 @@ namespace ButtonDeck
 
             Application.ThreadException += Application_ThreadException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+              DevicePersistManager.LoadDevices();
+          
 
             ApplicationSettingsManager.LoadSettings();
 

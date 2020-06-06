@@ -33,8 +33,8 @@ namespace ButtonDeck.Backend.Networking.Implementation
         public override void ToOutputStream(DataOutputStream writer)
         {
             //To client
-          writer.WriteInt(Globals.linha);
-            writer.WriteInt(Globals.coluna);
+          writer.WriteInt(ApplicationSettingsManager.Settings.linha);
+            writer.WriteInt(ApplicationSettingsManager.Settings.coluna);
         }
 
         public override object Clone()

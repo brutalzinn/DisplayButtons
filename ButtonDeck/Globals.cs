@@ -11,7 +11,7 @@ namespace ButtonDeck
     class Globals
     {
 
-        public  Forms.MainForm launcher_principal;
+    
 
         public  static int linha  { get; set;}
            

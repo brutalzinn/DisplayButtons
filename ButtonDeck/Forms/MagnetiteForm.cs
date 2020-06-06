@@ -115,9 +115,8 @@ namespace ButtonDeck.Forms
             {
                 ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
                 ApplicationSettingsManager.Settings.linha= Convert.ToInt32(linha.Text);
-                Globals.linha = ApplicationSettingsManager.Settings.linha;
-                Globals.coluna = ApplicationSettingsManager.Settings.coluna;
                 ApplicationSettingsManager.SaveSettings();
+           
                 var Matriz = new MatrizPacket();
                 con.SendPacket(Matriz);
             }
@@ -126,8 +125,8 @@ namespace ButtonDeck.Forms
 
         private void MagnetiteForm_Load(object sender, EventArgs e)
         {
-            coluna.Text = Globals.coluna.ToString();
-            linha.Text = Globals.linha.ToString();
+            coluna.Text = ApplicationSettingsManager.Settings.coluna.ToString();
+            linha.Text = ApplicationSettingsManager.Settings.linha.ToString();
         }
     }
 }
