@@ -18,7 +18,7 @@ using ButtonDeck.Backend.Utils;
 using ButtonDeck.Controls;
 using ButtonDeck.Misc;
 using ButtonDeck.Properties;
-using ImageMagick;
+
 using ButtonDeck.Backend.Networking;
 
 using NickAc.ModernUIDoneRight.Controls;
