@@ -113,13 +113,21 @@ namespace ButtonDeck.Forms
             var con = MainForm.Instance.CurrentDevice.GetConnection();
             if (con != null)
             {
-                Globals.coluna = Convert.ToInt32(coluna.Text);
-                Globals.linha = Convert.ToInt32(linha.Text);
+                ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
+                ApplicationSettingsManager.Settings.linha= Convert.ToInt32(linha.Text);
+                Globals.linha = ApplicationSettingsManager.Settings.linha;
+                Globals.coluna = ApplicationSettingsManager.Settings.coluna;
+                ApplicationSettingsManager.SaveSettings();
                 var Matriz = new MatrizPacket();
                 con.SendPacket(Matriz);
             }
 
         }
-       
+
+        private void MagnetiteForm_Load(object sender, EventArgs e)
+        {
+            coluna.Text = Globals.coluna.ToString();
+            linha.Text = Globals.linha.ToString();
+        }
     }
 }

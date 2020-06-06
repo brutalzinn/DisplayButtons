@@ -51,6 +51,7 @@ namespace ButtonDeck.Forms.FirstSetup
                 });
                 ctrl.Tag = true;
                 Refresh();
+          
                 ApplicationSettingsManager.Settings.Theme = ctrl.UnderlyingAppTheme;
                 ColorSchemeCentral.OnThemeChanged(this);
             }

@@ -7,12 +7,14 @@ using System.Windows.Forms;
 
 namespace ButtonDeck
 {
+    [Serializable]
     class Globals
     {
 
-       public static  Forms.MainForm launcher_principal;
+        public  Forms.MainForm launcher_principal;
 
-        public static int linha = 3;
-        public static int coluna = 5;
+        public  static int linha  { get; set;}
+           
+        public static int coluna { get; set; }
     }
 }

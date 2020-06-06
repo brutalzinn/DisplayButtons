@@ -140,8 +140,6 @@ namespace ButtonDeck
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             ApplicationSettingsManager.LoadSettings();
-            DevicePersistManager.LoadDevices();
-
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -216,8 +214,8 @@ namespace ButtonDeck
                 NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
                Application.Run(new MainForm());
             OBSUtils.Disconnect();
-            ApplicationSettingsManager.SaveSettings();
-                DevicePersistManager.SaveDevices();
+           ApplicationSettingsManager.SaveSettings();
+             DevicePersistManager.SaveDevices();
                 Trace.Flush();
         }
         public static void OnDeviceConnected(object sender, DeviceDataEventArgs e)

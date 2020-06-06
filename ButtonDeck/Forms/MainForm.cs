@@ -56,7 +56,7 @@ namespace ButtonDeck.Forms
             instance = this;
             InitializeComponent();
 
-            Globals.launcher_principal = this;
+            //Globals.launcher_principal = this;
             panel1.Freeze();
             DevicesTitlebarButton item = new DevicesTitlebarButton(this);
             TitlebarButtons.Add(item);
@@ -289,9 +289,11 @@ namespace ButtonDeck.Forms
             shadedPanel2.Hide();
             shadedPanel1.Hide();
             Refresh();
+            Globals.linha = ApplicationSettingsManager.Settings.linha;
+            Globals.coluna = ApplicationSettingsManager.Settings.coluna;
+            Start_configs();
 
-
-
+           
 
             Package[] installedPackages = Workshop.GetInstalled();
 
@@ -317,7 +319,7 @@ namespace ButtonDeck.Forms
 
             if (Program.mode == 1)
             {
-             RefreshCurrentDevices();
+                RefreshCurrentDevices();
                 foreach (var device in DevicePersistManager.PersistedDevices)
                 {
                     try
@@ -371,7 +373,7 @@ namespace ButtonDeck.Forms
                                         ChangeButtonsVisibility(false);
                                     }
                                 }
-                              //  DeviceConnected += tempConnected;
+                                //  DeviceConnected += tempConnected;
                             }
 
 
@@ -600,7 +602,7 @@ namespace ButtonDeck.Forms
                 return true;
             });
         }
-   
+
         public void ButtonCreator()
         {
             panel1.Controls.Clear();
@@ -610,12 +612,12 @@ namespace ButtonDeck.Forms
             for (int con = 0; con < Globals.linha; con++)
             {
                 for (int lin = 0; lin < Globals.coluna; lin++)
-            {
-            
+                {
 
-                  
-               
-                    
+
+
+
+
                     ImageModernButton control = new ImageModernButton();
                     control.Name = "modernButton" + id;
                     control.Size = new Size(80, 80);
@@ -785,12 +787,12 @@ namespace ButtonDeck.Forms
                         }
                     };
 
-                  
-                        control.Click += (sender, e) => {
-                        Debug.WriteLine("CLICANDO");
-                            Debug.WriteLine(control.Name);
 
-                            lastClick.Stop();
+                    control.Click += (sender, e) => {
+                        Debug.WriteLine("CLICANDO");
+                        Debug.WriteLine(control.Name);
+
+                        lastClick.Stop();
                         bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
                         if (sender is ImageModernButton mb)
                         {
@@ -842,7 +844,7 @@ namespace ButtonDeck.Forms
 
                     panel1.Controls.Add(control);
                 }
-              
+
 
                 panel1.Refresh();
             }
@@ -855,7 +857,7 @@ namespace ButtonDeck.Forms
             Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
             int calc = Globals.linha * Globals.coluna;
-            for (int j = 0; j < 14; j++)
+            for (int j = 0; j < calc; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
                 control.NormalImage = null;
@@ -869,28 +871,31 @@ namespace ButtonDeck.Forms
                 item = folder.GetDeckItems()[i];
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
 
-                if (item != null)
-                {
+                //if (item != null)
+                //{
 
 
-                    if (item is DynamicDeckItem DI && DI.DeckAction != null)
-                    {
+                //    if (item is DynamicDeckItem DI && DI.DeckAction != null)
+                //    {
 
-                        //         control.NormalImage = ReceiveWaterMark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap);
-                        control.NormalImage = item?.GetItemImage().Bitmap;
-                    }
+                //        //         control.NormalImage = ReceiveWaterMark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap);
+                //       // control.NormalImage = item?.GetItemImage().Bitmap;
+                //    }
 
-                    else
-                    {
-                        control.NormalImage = item?.GetItemImage().Bitmap;
-
-                    }
-                    control.Tag = item;
-                    control.Invoke(new Action(control.Refresh));
+                //    else
+                //    {
+                //   //     control.NormalImage = item?.GetItemImage().Bitmap;
 
 
 
-                }
+
+
+                //}
+
+                //}
+                control.NormalImage = item?.GetItemImage().Bitmap;
+                control.Tag = item;
+                control.Invoke(new Action(control.Refresh));
                 CurrentDevice.CheckCurrentFolder();
                 if (sendToDevice)
                 {
@@ -1006,7 +1011,24 @@ namespace ButtonDeck.Forms
                 Refresh();
             }));
         }
+        private void Start_configs()
+            {
 
+
+       
+           DevicePersistManager.LoadDevices();
+
+
+   
+            var con = MainForm.Instance.CurrentDevice.GetConnection();
+            if (con != null)
+            {
+               
+                ButtonCreator();
+                var Matriz = new MatrizPacket();
+                con.SendPacket(Matriz);
+            }
+        }
         private void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
 
@@ -1105,10 +1127,10 @@ namespace ButtonDeck.Forms
 
                 var packet = new SlotImageChangeChunkPacket();
                 List<IDeckItem> items = folder.GetDeckItems();
-
+                int calc = Globals.coluna * Globals.linha;
                 List<int> addedItems = new List<int>();
                 bool isFolder = false;
-                for (int i = 0; i < 15; i++)
+                for (int i = 0; i < calc; i++)
                 {
                     IDeckItem item = null;
                     if (items.ElementAtOrDefault(i) != null)
@@ -1145,11 +1167,11 @@ namespace ButtonDeck.Forms
                         }
                         else
                         {
-                          //  packet.AddToQueue(folder.GetItemIndex(item), image);
+                  //   packet.AddToQueue(folder.GetItemIndex(item), image);
 
                         }
                     packet.AddToQueue(folder.GetItemIndex(item), image);
-                    con.SendPacket(packet);
+              
              
                     //    packet.AddToQueue(folder.GetItemIndex(item), image);
                     //  con.SendPacket(packet);
@@ -1160,10 +1182,10 @@ namespace ButtonDeck.Forms
                     //     packet.AddToQueue(folder.GetItemIndex(item), image);
                 }
 
-                
-               
+                con.SendPacket(packet);
+
                 var clearPacket = new SlotImageClearChunkPacket();
-                for (int i = 1; i < 16; i++) {
+                for (int i = 1; i < calc + 1; i++) {
                     if (addedItems.Contains(i)) continue;
                     clearPacket.AddToQueue(i);
                 }
@@ -2063,12 +2085,12 @@ namespace ButtonDeck.Forms
 
             FolderAddAction.name_space = name_space;
             Padding categoryPadding = new Padding(5, 0, 0, 0);
-            Font categoryFont = new Font(Globals.launcher_principal.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
+            Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
-            Font itemFont = new Font(Globals.launcher_principal.ShadedPanel1.Font.FontFamily, 12);
+            Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
             IList<FolderAddAction> list = new List<FolderAddAction>();
             // ButtonDeck.Forms.MainForm.testando(value);
-            Globals.launcher_principal.ShadedPanel1.Invoke((MethodInvoker)delegate {
+            MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate {
             //Globals.launcher_principal.ShadedPanel1.Controls.Clear();
             Label teste = new Label()
             {
@@ -2082,18 +2104,18 @@ namespace ButtonDeck.Forms
             };
 
 
-              //  FolderAddAction testando = new FolderAddAction();
-              //  FolderAddAction.name = name_button;
+                //  FolderAddAction testando = new FolderAddAction();
+                //  FolderAddAction.name = name_button;
 
-           //     FolderAddAction.LuaExecuteButtonDown = buttondowm;
-              //  FolderAddAction.LuaExecuteButtonDown = //buttondowm;
-           //     FolderAddAction.DeckActionCategory_string = category;
+                //     FolderAddAction.LuaExecuteButtonDown = buttondowm;
+                //  FolderAddAction.LuaExecuteButtonDown = //buttondowm;
+                //     FolderAddAction.DeckActionCategory_string = category;
 
 
-            //    Debug.WriteLine("RRR" + testando.GetActionName());
-                
+                //    Debug.WriteLine("RRR" + testando.GetActionName());
+
                 // Globals.launcher_principal.ShadedPanel1.Controls.Add(teste);
-               Globals.launcher_principal.ShadedPanel1.Refresh();
+                MainForm.instance.ShadedPanel1.Refresh();
 
                 var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
@@ -2142,7 +2164,7 @@ namespace ButtonDeck.Forms
                     }
                 }
                 toAdd.AsEnumerable().Reverse().All(m => {
-                    Globals.launcher_principal.ShadedPanel1.Controls.Add(m);
+                    MainForm.instance.ShadedPanel1.Controls.Add(m);
                     return true;
                 });
                 Debug.WriteLine("GRANDO SIDEBAR " + name);

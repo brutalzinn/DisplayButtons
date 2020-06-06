@@ -244,6 +244,7 @@
             this.Name = "MagnetiteForm";
             this.Sizable = false;
             this.Text = "Magnetite - Menu";
+            this.Load += new System.EventHandler(this.MagnetiteForm_Load);
             this.modernShadowPanel1.ResumeLayout(false);
             this.modernShadowPanel1.PerformLayout();
             this.panel4.ResumeLayout(false);
