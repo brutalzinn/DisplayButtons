@@ -603,6 +603,7 @@ namespace ButtonDeck.Forms
    
         public void ButtonCreator()
         {
+            panel1.Controls.Clear();
             int x = 0;
             int y = 0;
             int id = 1;
