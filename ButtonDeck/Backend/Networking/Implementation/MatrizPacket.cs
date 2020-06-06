@@ -28,7 +28,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         }
 
-        public override long GetPacketNumber() => 6;
+        public override long GetPacketNumber() => 11;
 
         public override void ToOutputStream(DataOutputStream writer)
         {
@@ -39,7 +39,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         public override object Clone()
         {
-            return new AlternativeHello();
+            return new MatrizPacket();
         }
     }
 }
