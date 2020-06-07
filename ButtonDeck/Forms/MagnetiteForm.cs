@@ -48,7 +48,15 @@ namespace ButtonDeck.Forms
     public partial class MagnetiteForm : TemplateForm
     {
         bool isDebugBuild;
+        private static MagnetiteForm instance;
 
+        public static MagnetiteForm Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
         public MagnetiteForm()
         {
             InitializeComponent();
@@ -106,19 +114,32 @@ namespace ButtonDeck.Forms
         {
             return v ? "true" : "false";
         }
-
+        public DeckDevice CurrentDevice { get; set; }
         private void ModernButton8_Click(object sender, EventArgs e)
         {
-       
-            var con = MainForm.Instance.CurrentDevice.GetConnection();
-            if (con != null)
+            try
             {
-                ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
+
+
+
+                var con = MainForm.Instance.CurrentDevice.GetConnection() ;
+           
+                if (con != null)
+            {
+              MainForm.Instance.ButtonCreator();
+                    
+              ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
                 ApplicationSettingsManager.Settings.linha= Convert.ToInt32(linha.Text);
                 ApplicationSettingsManager.SaveSettings();
-           
-                var Matriz = new MatrizPacket();
+              
+                     var Matriz = new MatrizPacket();
                 con.SendPacket(Matriz);
+            }
+            }
+            catch(Exception ea)
+            {
+
+                MessageBox.Show("Aguardando conexão com o device.." + ea);
             }
 
         }

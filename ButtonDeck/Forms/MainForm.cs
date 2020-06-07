@@ -849,7 +849,7 @@ namespace ButtonDeck.Forms
             }
 
 
-
+            ApplyTheme(panel1);
         }
         public void RefreshAllButtons(bool sendToDevice = true)
         {
@@ -1012,21 +1012,21 @@ namespace ButtonDeck.Forms
         }
         private void Start_configs()
             {
-          
-            ButtonCreator();
-            ApplyTheme(panel1);
-
         
+            ButtonCreator();
+      //      ApplyTheme(panel1);
 
-   
             var con = MainForm.Instance.CurrentDevice.GetConnection();
             if (con != null)
             {
-               
-                
+
+
                 var Matriz = new MatrizPacket();
-                con.SendPacket(Matriz);
+              con.SendPacket(Matriz);
             }
+
+
+
         }
         private void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
@@ -2364,11 +2364,12 @@ namespace ButtonDeck.Forms
         {
             // CreateButtons();
 
-            ButtonCreator();
-            ApplyTheme(panel1);
+          //  ButtonCreator();
+         //   ApplyTheme(panel1);
 
-            Refresh();
-
+       //     Refresh();
+           // var con = MainForm.Instance.CurrentDevice.GetConnection();
+      
 
 
         }
