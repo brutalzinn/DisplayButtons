@@ -60,7 +60,8 @@ namespace ButtonDeck.Backend.Objects.Implementation
         public override int Add(IDeckItem item)
         {
             int addToSlot = -1;
-            for (int i = 15 - 1; i >= 0; i--)
+         
+            for (int i = Globals.calc - 1; i >= 0; i--)
             {
                 if (items.ContainsKey(i))
                 {

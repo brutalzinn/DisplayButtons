@@ -117,6 +117,7 @@ namespace ButtonDeck.Forms
 
 
         }
+       
         public void RefreshCurrentDevices()
         {
             Thread th = new Thread(UpdateConnectedDevices);
@@ -855,8 +856,7 @@ namespace ButtonDeck.Forms
         {
             Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
-            int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
-            for (int j = 0; j < calc; j++)
+            for (int j = 0; j < Globals.calc; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
                 control.NormalImage = null;
@@ -1034,7 +1034,7 @@ namespace ButtonDeck.Forms
             Invoke(new Action(() => {
 
 
-                Start_configs();
+              
 
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);
@@ -1051,7 +1051,7 @@ namespace ButtonDeck.Forms
                 SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
             }));
-
+            Start_configs();
             e.Device.ButtonInteraction += Device_ButtonInteraction;
         }
 
@@ -1126,10 +1126,10 @@ namespace ButtonDeck.Forms
 
                 var packet = new SlotImageChangeChunkPacket();
                 List<IDeckItem> items = folder.GetDeckItems();
-                int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
+            
                 List<int> addedItems = new List<int>();
                 bool isFolder = false;
-                for (int i = 0; i < calc; i++)
+                for (int i = 0; i < Globals.calc ; i++)
                 {
                     IDeckItem item = null;
                     if (items.ElementAtOrDefault(i) != null)
@@ -1184,7 +1184,7 @@ namespace ButtonDeck.Forms
                 con.SendPacket(packet);
 
                 var clearPacket = new SlotImageClearChunkPacket();
-                for (int i = 1; i < calc + 1; i++) {
+                for (int i = 1; i < Globals.calc + 1; i++) {
                     if (addedItems.Contains(i)) continue;
                     clearPacket.AddToQueue(i);
                 }
