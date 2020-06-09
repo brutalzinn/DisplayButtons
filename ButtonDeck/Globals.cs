@@ -14,7 +14,7 @@ namespace ButtonDeck
     
 
         public  static int linha  { get; set;}
-           
+           public static bool can_refresh { get; set; }
         public static int coluna { get; set; }
     }
 }

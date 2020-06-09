@@ -316,91 +316,14 @@ namespace ButtonDeck.Forms
 
 
 
-            if (Program.mode == 1)
-            {
-                RefreshCurrentDevices();
-                foreach (var device in DevicePersistManager.PersistedDevices)
-                {
-                    try
-                    {
-                        if (device != null)
-                        {
-                            // CurrentDevice = device;
-                            if (IsVirtualDeviceConnected)
-                            {
-                                Debug.WriteLine("CHEGOU 2");
-                                if (CurrentDevice.DeviceGuid == device.DeviceGuid)
-                                {
-                                    //Someone clicked on the same device. Unload this one.
-                                    OnDeviceDisconnected(this, device);
-                                    IsVirtualDeviceConnected = false;
-
-
-                                    ChangeButtonsVisibility(false);
-                                    CurrentDevice = null;
-                                    RefreshAllButtons(false);
-                                    Activate();
-                                }
-                                else
-                                {
-                                    //Someone requested another device. Unload current virtual device..
-                                    OnDeviceDisconnected(this, CurrentDevice);
-                                    IsVirtualDeviceConnected = false;
-                                    ChangeButtonsVisibility(false);
-                                    CurrentDevice = null;
-                                    RefreshAllButtons(false);
-                                }
-                            }
-                            else
-                            {
-                                Debug.WriteLine("CHEGOU 3");
-                                CurrentDevice = device;
-                                IsVirtualDeviceConnected = true;
-                                OnDeviceConnected(this, device);
-                                ChangeButtonsVisibility(true);
-                                RefreshAllButtons(false);
-                                ChangeToDevice(device);
-                                void tempConnected(object s, DeviceEventArgs ee)
-                                {
-                                    if (ee.Device.DeviceGuid == device.DeviceGuid) return;
-                                    DeviceConnected -= tempConnected;
-                                    if (IsVirtualDeviceConnected)
-                                    {
-                                        //We had a virtual device.
-                                        OnDeviceDisconnected(this, device);
-                                        IsVirtualDeviceConnected = false;
-                                        ChangeButtonsVisibility(false);
-                                    }
-                                }
-                                //  DeviceConnected += tempConnected;
-                            }
 
 
 
 
 
-
-
-
-                        }
-
-
-
-
-
-
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-
-                }
-            }
-
-
-
-
+StartLoad();
+            Start_configs();
+                
 
             label1.ForeColor = ColorScheme.SecondaryColor;
         }
@@ -842,6 +765,12 @@ namespace ButtonDeck.Forms
                     };
 
                     panel1.Controls.Add(control);
+                    if(Globals.calc == id)
+                    {
+                       Debug.WriteLine( "Debug pegou o calculo");
+                        Globals.can_refresh = true;
+
+                    }
                 }
 
 
@@ -849,10 +778,15 @@ namespace ButtonDeck.Forms
             }
 
 
-            ApplyTheme(panel1);
+            
         }
         public void RefreshAllButtons(bool sendToDevice = true)
         {
+            if(Globals.can_refresh == false)
+            {
+
+                return;
+            }
             Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
             int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
@@ -870,28 +804,8 @@ namespace ButtonDeck.Forms
                 item = folder.GetDeckItems()[i];
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
 
-                //if (item != null)
-                //{
+             
 
-
-                //    if (item is DynamicDeckItem DI && DI.DeckAction != null)
-                //    {
-
-                //        //         control.NormalImage = ReceiveWaterMark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap);
-                //       // control.NormalImage = item?.GetItemImage().Bitmap;
-                //    }
-
-                //    else
-                //    {
-                //   //     control.NormalImage = item?.GetItemImage().Bitmap;
-
-
-
-
-
-                //}
-
-                //}
                 control.NormalImage = item?.GetItemImage().Bitmap;
                 control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
@@ -976,15 +890,6 @@ namespace ButtonDeck.Forms
                     control.Invoke(new Action(control.Refresh));
 
 
-                    //title_control.NormalImage = null
-                    //       title_control.Tag = item;
-                    //       title_control.Invoke(new Action(control.Refresh));
-
-
-
-
-
-
 
                 }
             }
@@ -1010,11 +915,45 @@ namespace ButtonDeck.Forms
                 Refresh();
             }));
         }
+        private void StartLoad()
+        {
+
+
+            foreach (var device in DevicePersistManager.PersistedDevices)
+            {
+
+                Debug.WriteLine("CHEGOU 3");
+                CurrentDevice = device;
+                IsVirtualDeviceConnected = true;
+                OnDeviceConnected(this, device);
+                ChangeButtonsVisibility(true);
+                RefreshAllButtons(false);
+                ChangeToDevice(device);
+                void tempConnected(object s, DeviceEventArgs ee)
+                {
+                    if (ee.Device.DeviceGuid == device.DeviceGuid) return;
+                    DeviceConnected -= tempConnected;
+                    if (IsVirtualDeviceConnected)
+                    {
+                        //We had a virtual device.
+                        OnDeviceDisconnected(this, device);
+                        IsVirtualDeviceConnected = false;
+                        ChangeButtonsVisibility(false);
+                    }
+                }
+                DeviceConnected += tempConnected;
+            }
+
+             
+            
+
+        }
         private void Start_configs()
             {
         
             ButtonCreator();
-      //      ApplyTheme(panel1);
+            ApplyTheme(panel1);
+            //      ApplyTheme(panel1);
 
             var con = MainForm.Instance.CurrentDevice.GetConnection();
             if (con != null)
@@ -1034,8 +973,11 @@ namespace ButtonDeck.Forms
             Invoke(new Action(() => {
 
 
+<<<<<<< HEAD
                 Start_configs();
 
+=======
+>>>>>>> 22c27bb62853cae927f7a2f455944179c76d28b1
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);
                 shadedPanel2.Hide();
@@ -1047,19 +989,27 @@ namespace ButtonDeck.Forms
 
                 if (CurrentDevice == null) {
                     ChangeToDevice(e.Device);
+                    
                 }
                 SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
+                
             }));
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 22c27bb62853cae927f7a2f455944179c76d28b1
             e.Device.ButtonInteraction += Device_ButtonInteraction;
         }
 
         public void ChangeToDevice(DeckDevice device)
         {
+            
             CurrentDevice = device;
+        
             LoadItems(CurrentDevice.CurrentFolder);
-
+           
         }
 
         //List<Tuple<Guid, int>> ignoreOnce = new List<Tuple<Guid, int>>();
@@ -1197,6 +1147,11 @@ namespace ButtonDeck.Forms
 
         private void LoadItems(IDeckFolder folder)
         {
+            if(Globals.can_refresh == false)
+            {
+
+                return;
+            }
             List<IDeckItem> items = folder.GetDeckItems();
             foreach (var item in items) {
                 //This is when it loads.

@@ -211,11 +211,29 @@ namespace ButtonDeck
            
 
                 
-              
+              //facilitando debug 09/06/2020
                 NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
                 NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
                Application.Run(new MainForm());
             OBSUtils.Disconnect();
+            if (mode == 1)
+            {
+                AdbServer server = new AdbServer();
+
+                var result = server.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
+                var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+
+                foreach (var device in client.GetDevices())
+            {
+
+                client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
+
+
+            }
+
+            }
+           
+
            ApplicationSettingsManager.SaveSettings();
              DevicePersistManager.SaveDevices();
                 Trace.Flush();
