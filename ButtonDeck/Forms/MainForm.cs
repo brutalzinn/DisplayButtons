@@ -973,11 +973,9 @@ StartLoad();
             Invoke(new Action(() => {
 
 
-<<<<<<< HEAD
+
                 Start_configs();
 
-=======
->>>>>>> 22c27bb62853cae927f7a2f455944179c76d28b1
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);
                 shadedPanel2.Hide();
@@ -995,11 +993,7 @@ StartLoad();
                 GenerateFolderList(shadedPanel1);
                 
             }));
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 22c27bb62853cae927f7a2f455944179c76d28b1
             e.Device.ButtonInteraction += Device_ButtonInteraction;
         }
 

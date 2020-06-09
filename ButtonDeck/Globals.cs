@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ButtonDeck.Backend.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,8 @@ namespace ButtonDeck
     class Globals
     {
 
-    
 
+        public static int calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
         public  static int linha  { get; set;}
            public static bool can_refresh { get; set; }
         public static int coluna { get; set; }
