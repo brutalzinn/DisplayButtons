@@ -794,11 +794,9 @@ StartLoad();
         }
         public void RefreshAllButtons(bool sendToDevice = true)
         {
-            if(Globals.can_refresh == false)
-            {
-
-                return;
-            }
+          
+            if (Globals.can_refresh == false) return;
+           
            // Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
             int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
@@ -989,7 +987,7 @@ StartLoad();
 
 
                 var Matriz = new MatrizPacket();
-              con.SendPacket(Matriz);
+             con.SendPacket(Matriz);
             }
 
 
@@ -1002,7 +1000,7 @@ StartLoad();
 
 
 
-                Start_configs();
+            //    Start_configs();
 
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);
@@ -1095,8 +1093,9 @@ StartLoad();
 
             var con = device.GetConnection();
             if (con != null) {
-
+                if (Globals.status == false) return;
                 var packet = new SlotImageChangeChunkPacket();
+                var packet_label = new SlotLabelButtonChangeChunkPacket();
                 List<IDeckItem> items = folder.GetDeckItems();
                 int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
                 List<int> addedItems = new List<int>();
@@ -1127,8 +1126,8 @@ StartLoad();
                         if (item is DynamicDeckItem DI && DI.DeckAction != null)
                         {
 
-                          //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
-
+                        //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
+                        packet_label.AddToQueue(folder.GetItemIndex(item), DI.DeckAction.GetActionName(), "", 1, 1, 0);
                         }
                         else if (item is DynamicDeckFolder Da)
                         {
@@ -1138,10 +1137,11 @@ StartLoad();
                         }
                         else
                         {
-                  //   packet.AddToQueue(folder.GetItemIndex(item), image);
+             
 
                         }
                     packet.AddToQueue(folder.GetItemIndex(item), image);
+                //    packet.AddToQueue(folder.GetItemIndex(item), image);
               
              
                     //    packet.AddToQueue(folder.GetItemIndex(item), image);
@@ -1153,16 +1153,19 @@ StartLoad();
                     //     packet.AddToQueue(folder.GetItemIndex(item), image);
                 }
 
-                con.SendPacket(packet);
-
+                con.SendPacket( packet);
+                con.SendPacket(packet_label);
+                //    con.SendPacket(packet_label);
                 var clearPacket = new SlotImageClearChunkPacket();
+              //  var clearPacket_labels = new SlotLabelButtonClearChunkPacket();
                 for (int i = 1; i < calc + 1; i++) {
                     if (addedItems.Contains(i)) continue;
                     clearPacket.AddToQueue(i);
+               //     clearPacket_labels.AddToQueue(i);
                 }
 
                 con.SendPacket(clearPacket);
-                
+            //    con.SendPacket(clearPacket_labels);
             }
      
         }

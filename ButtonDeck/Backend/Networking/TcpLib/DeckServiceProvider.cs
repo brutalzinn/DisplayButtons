@@ -25,6 +25,8 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             RegisterNetworkPacket(new AlternativeHello());
             RegisterNetworkPacket(new ButtonInteractPacket());
             RegisterNetworkPacket(new MatrizPacket());
+            //RegisterNetworkPacket(new SlotLabelButtonChangeChunkPacket());
+            //RegisterNetworkPacket(new SlotLabelButtonClearChunkPacket());
             //    RegisterNetworkPacket(new UsbInteractPacket());
         }
 

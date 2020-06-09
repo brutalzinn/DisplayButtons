@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace ButtonDeck.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer)]
-    public class SlotLabelChangeChunkPacket : INetworkPacket
+    public class SlotLabelButtonChangeChunkPacket : INetworkPacket
     {
-        public class Labels
+         class Labels
         {
             private int id;
             private string font;
@@ -81,7 +81,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
         {
         }
 
-        public override long GetPacketNumber() => 7;
+        public override long GetPacketNumber() => 12;
 
         public override void ToOutputStream(DataOutputStream writer)
         {
@@ -96,12 +96,14 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         private void SendDeckLabel(DataOutputStream writer, int slot, string font,int size,int pos,string text,int color)
         {
-            if (text != null)
-            {
+           
                 //Write the slot
                 writer.WriteInt(slot);
                 //font
                 writer.WriteUTF(text);
+            //text
+
+            writer.WriteUTF(text);
                 //size
                 writer.WriteInt(size);
                 //position
@@ -110,12 +112,12 @@ namespace ButtonDeck.Backend.Networking.Implementation
                 //color
 
                 writer.WriteInt(color);
-            }
+           
         }
 
         public override object Clone()
         {
-            return new SlotLabelChangeChunkPacket();
+            return new SlotLabelButtonChangeChunkPacket();
         }
     }
 }

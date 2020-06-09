@@ -24,8 +24,9 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         public override void FromInputStream(DataInputStream reader)
         {
-            //From client
 
+            Globals.status = reader.ReadBoolean();
+            Debug.WriteLine("RECEBIDO. " + Globals.status.ToString());
         }
 
         public override long GetPacketNumber() => 11;
