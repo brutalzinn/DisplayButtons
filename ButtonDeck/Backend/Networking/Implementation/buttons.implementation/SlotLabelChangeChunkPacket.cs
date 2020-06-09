@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ButtonDeck.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer)]
-    public class SlotLabelChunkPacket : INetworkPacket
+    public class SlotLabelChangeChunk : INetworkPacket
     {
         IDictionary<int, string> toSend = new Dictionary<int, string>();
 
@@ -51,7 +51,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         public override object Clone()
         {
-            return new SlotImageChangeChunkPacket();
+            return new SlotLabelChangeChunk();
         }
     }
 }
