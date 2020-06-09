@@ -33,11 +33,11 @@ namespace ButtonDeck.Forms
         {
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.panel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.warning_label = new System.Windows.Forms.Label();
             this.shadedPanel1 = new ButtonDeck.Forms.ShadedPanel();
             this.shadedPanel2 = new ButtonDeck.Forms.ShadedPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.action_label = new System.Windows.Forms.Label();
             this.imageModernButton1 = new ButtonDeck.Controls.ImageModernButton();
             this.button1 = new System.Windows.Forms.Button();
             this.shadedPanel1.SuspendLayout();
@@ -68,18 +68,18 @@ namespace ButtonDeck.Forms
             this.panel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // label1
+            // warning_label
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(118, 499);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(424, 69);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "The buttons will appear after you connect the device.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Visible = false;
+            this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.warning_label.BackColor = System.Drawing.Color.Transparent;
+            this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warning_label.Location = new System.Drawing.Point(118, 499);
+            this.warning_label.Name = "warning_label";
+            this.warning_label.Size = new System.Drawing.Size(424, 69);
+            this.warning_label.TabIndex = 3;
+            this.warning_label.Text = "The buttons will appear after you connect the device.";
+            this.warning_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.warning_label.Visible = false;
             // 
             // shadedPanel1
             // 
@@ -95,7 +95,7 @@ namespace ButtonDeck.Forms
             // 
             this.shadedPanel2.ColorScheme = null;
             this.shadedPanel2.Controls.Add(this.flowLayoutPanel1);
-            this.shadedPanel2.Controls.Add(this.label2);
+            this.shadedPanel2.Controls.Add(this.action_label);
             this.shadedPanel2.Controls.Add(this.imageModernButton1);
             this.shadedPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.shadedPanel2.Location = new System.Drawing.Point(0, 244);
@@ -114,14 +114,14 @@ namespace ButtonDeck.Forms
             this.flowLayoutPanel1.TabIndex = 4;
             this.flowLayoutPanel1.WrapContents = false;
             // 
-            // label2
+            // action_label
             // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label2.Location = new System.Drawing.Point(102, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 36);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Action Text";
+            this.action_label.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.action_label.Location = new System.Drawing.Point(102, 13);
+            this.action_label.Name = "action_label";
+            this.action_label.Size = new System.Drawing.Size(142, 36);
+            this.action_label.TabIndex = 3;
+            this.action_label.Text = "Action Text";
             // 
             // imageModernButton1
             // 
@@ -156,7 +156,7 @@ namespace ButtonDeck.Forms
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.button1);
             this.Controls.Add(this.shadedPanel1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.warning_label);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.appBar1);
             this.Location = new System.Drawing.Point(0, 0);
@@ -177,10 +177,10 @@ namespace ButtonDeck.Forms
 
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
         private NickAc.ModernUIDoneRight.Controls.ModernShadowPanel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label warning_label;
         private ShadedPanel shadedPanel2;
         private ImageModernButton imageModernButton1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label action_label;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private ShadedPanel shadedPanel1;
         private Button button1;

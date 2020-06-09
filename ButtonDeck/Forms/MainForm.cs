@@ -325,7 +325,7 @@ StartLoad();
             Start_configs();
                 
 
-            label1.ForeColor = ColorScheme.SecondaryColor;
+            warning_label.ForeColor = ColorScheme.SecondaryColor;
         }
 
 
@@ -541,7 +541,12 @@ StartLoad();
 
 
                     ImageModernButton control = new ImageModernButton();
+                    Label control2 = new Label();
+                    control2.BackColor = Color.Transparent;
+                    control2.ForeColor = Color.White;
+                    control2.Dock = DockStyle.Bottom;
                     control.Name = "modernButton" + id;
+                    control2.Name = "label" + id;
                     control.Size = new Size(80, 80);
                     control.Location = new Point(lin * 110 + 10, con * 110 + 10);
                     id += 1;
@@ -763,18 +768,25 @@ StartLoad();
                         RefreshAllButtons(true);
 
                     };
-
+                    control.Controls.Add(control2);
                     panel1.Controls.Add(control);
                     if(Globals.calc == id)
                     {
-                       Debug.WriteLine( "Debug pegou o calculo");
+                        
+                        Debug.WriteLine( "Debug pegou o calculo");
                         Globals.can_refresh = true;
 
+                    }
+                    if(Globals.calc < id)
+                    {
+
+                        ApplyTheme(panel1);
+                        panel1.Refresh();
                     }
                 }
 
 
-                panel1.Refresh();
+           
             }
 
 
@@ -787,12 +799,13 @@ StartLoad();
 
                 return;
             }
-            Buttons_Unfocus(this, EventArgs.Empty);
+           // Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
             int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
             for (int j = 0; j < calc; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
+                Label control2 = GetLabelControl(j + 1);
                 control.NormalImage = null;
                 control.Tag = null;
                 if (folder == null) control.Invoke(new Action(control.Refresh));
@@ -804,11 +817,23 @@ StartLoad();
                 item = folder.GetDeckItems()[i];
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
 
-             
+                Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
 
-                control.NormalImage = item?.GetItemImage().Bitmap;
-                control.Tag = item;
+
+
+
+                if (item is DynamicDeckItem DI && DI.DeckAction != null)
+                {
+                    control2.Text = DI.DeckAction.GetActionName();
+                    Debug.WriteLine(control2.Name);
+                }
+ control.NormalImage = item?.GetItemImage().Bitmap;
+
+
+                    control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
+                control2.Tag = item;
+                control2.Invoke(new Action(control.Refresh));
                 CurrentDevice.CheckCurrentFolder();
                 if (sendToDevice)
                 {
@@ -906,7 +931,10 @@ StartLoad();
         {
             return Controls.Find("modernButton" + id, true).FirstOrDefault() as ImageModernButton;
         }
-
+        private Label GetLabelControl(int id)
+        {
+            return Controls.Find("label" + id, true).FirstOrDefault() as Label;
+        }
         private void Buttons_Unfocus(object sender, EventArgs e)
         {
             Invoke(new Action(() => {
@@ -952,7 +980,7 @@ StartLoad();
             {
         
             ButtonCreator();
-            ApplyTheme(panel1);
+            
             //      ApplyTheme(panel1);
 
             var con = MainForm.Instance.CurrentDevice.GetConnection();
@@ -1911,12 +1939,12 @@ StartLoad();
 
             flowLayoutPanel1.Controls.Clear();
             if (item is DynamicDeckItem dI && dI.DeckAction != null) {
-                label2.Text = dI.DeckAction.GetActionName();
+                action_label.Text = dI.DeckAction.GetActionName();
                 
                 LoadProperties(dI, flowLayoutPanel1);
             } else if (item is DynamicDeckFolder DF) {
 
-                label2.Text = "Folder";
+                action_label.Text = "Folder";
                 TextBox myText = new TextBox();
                 ModernButton myButton = new ModernButton();
                 flowLayoutPanel1.Controls.Add(myText);
