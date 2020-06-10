@@ -1951,6 +1951,7 @@ StartLoad();
                 TextBox myColorText = new TextBox();
 
                 myColor.Text = "Selecionar Cor";
+                myColorText.Text = dI.DeckColor;
 
                 myColor.Click += (s, e) =>
                 {

@@ -13,8 +13,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
     {
 
 
-        [ActionPropertyInclude]
-        [ActionPropertyDescription("name")]
+      
         public string name { get; set; } = "To execute";
 
 

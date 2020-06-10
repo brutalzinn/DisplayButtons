@@ -13,13 +13,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Deck
 {
     public class LayerMultiAction : AbstractDeckAction
     {
-        [ActionPropertyInclude]
-        [ActionPropertyDescription("name")]
+
         public string name { get; set; } = "Multi Action Button";
 
 
-        [ActionPropertyInclude]
-        [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
         public string script { get; set; } = "";
 
