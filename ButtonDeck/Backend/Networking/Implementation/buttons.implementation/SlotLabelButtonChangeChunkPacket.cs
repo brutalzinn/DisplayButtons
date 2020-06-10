@@ -70,15 +70,17 @@ namespace ButtonDeck.Backend.Networking.Implementation
             // Should also override == and != operators.
         }
 
-       private static List<Labels> list_labels = new List<Labels>();
+ List<Labels> list_labels = new List<Labels>();
         public void AddToQueue(int slot, string text, string font,int size, int position, string color)
         {
-           
+         
             list_labels.Add (new Labels( slot, font, size, position,text, color));
         }
 
         public override void FromInputStream(DataInputStream reader)
         {
+            list_labels.Clear();
+
         }
 
         public override long GetPacketNumber() => 12;
@@ -90,6 +92,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
             foreach (var item in list_labels)
             {
                 SendDeckLabel(writer, item.Id, item.Font,item.Size,item.Position,item.Text,item.Color) ;
+           
             }
 
         }
