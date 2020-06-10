@@ -20,8 +20,8 @@ namespace ButtonDeck.Backend.Networking.Implementation
             private int size;
             private string text;
             private int position;
-            private int color;
-            public Labels(int id, string font,int size, int position, string text,int color){
+            private string color;
+            public Labels(int id, string font,int size, int position, string text,string color){
                 this.id = id;
                 this.font = font;
                 this.text = text;
@@ -30,7 +30,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
                 this.color = color;
 
                 }
-            public int Color
+            public string Color
             {
 
                 get { return color; }
@@ -71,7 +71,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
         }
 
        private static List<Labels> list_labels = new List<Labels>();
-        public void AddToQueue(int slot, string text, string font,int size, int position, int color)
+        public void AddToQueue(int slot, string text, string font,int size, int position, string color)
         {
            
             list_labels.Add (new Labels( slot, font, size, position,text, color));
@@ -94,7 +94,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         }
 
-        private void SendDeckLabel(DataOutputStream writer, int slot, string font,int size,int pos,string text,int color)
+        private void SendDeckLabel(DataOutputStream writer, int slot, string font,int size,int pos,string text,string color)
         {
            
                 //Write the slot
@@ -111,7 +111,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
                 //color
 
-                writer.WriteInt(color);
+                writer.WriteUTF(color);
            
         }
 

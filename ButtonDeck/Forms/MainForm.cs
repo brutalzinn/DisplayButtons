@@ -1127,7 +1127,7 @@ StartLoad();
                         {
 
                         //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
-                        packet_label.AddToQueue(folder.GetItemIndex(item), DI.DeckAction.GetActionName(), "", 1, 1, 0);
+                        packet_label.AddToQueue(folder.GetItemIndex(item), DI.DeckAction.GetActionName(), "", 30, 1, "#d11aff");
                         }
                         else if (item is DynamicDeckFolder Da)
                         {
