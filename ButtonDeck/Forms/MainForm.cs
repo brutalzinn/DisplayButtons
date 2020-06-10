@@ -1968,13 +1968,13 @@ StartLoad();
 
         public enum Position
         {
-
-            [Description("cima")]
-            SPECIAL_TRAINING = 250,
-            [Description("meio")]
-            NORMAL_TRAINING = 30,
             [Description("baixo")]
-            SIMPLE_TRAINING = 1
+            SIMPLE_TRAINING = 0x00000050,
+          [Description("cima")]
+            SPECIAL_TRAINING = 0x00000030,
+            [Description("meio")]
+            NORMAL_TRAINING = 0x00000011
+
         }
         
         private void FocusItem(ImageModernButton mb, IDeckItem item)
@@ -1987,7 +1987,11 @@ StartLoad();
             flowLayoutPanel1.Controls.Clear();
             if (item is IDeckItem dI) {
                 action_label.Text = dI.DeckName;
-                
+           
+            
+         
+
+              
                 ModernButton myButton = new ModernButton();
                 ModernButton myColor = new ModernButton();
                 Label myTextNameInformation = new Label();
@@ -2004,6 +2008,11 @@ StartLoad();
                 FlowLayoutPanel painel_color = new FlowLayoutPanel();
                 FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
                 FlowLayoutPanel painel_position = new FlowLayoutPanel();
+
+                setEnumValues(PositionComboBox, typeof(Position));
+                myColorText.Text = dI.DeckColor;
+                PositionComboBox.SelectedValue = dI.DeckPosition;
+                sizeLabelTextBox.Text = dI.DeckSize.ToString();
                 myColor.Click += (s, e) =>
                 {
 
@@ -2029,7 +2038,7 @@ StartLoad();
                 PositionComboBox.Dock = DockStyle.None;
 
 
-                setEnumValues(PositionComboBox, typeof(Position));
+             
                 myButton.Text = "Salvar";
  myButton.Click += (s, e) =>
                 {
