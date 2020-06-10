@@ -1926,12 +1926,56 @@ StartLoad();
         }
 
 
-       
 
-        
-       
-           
 
+
+        public static void setEnumValues(ComboBox cxbx, Type typ)
+        {
+            if (!typ.IsEnum)
+            {
+                throw new ArgumentException("Only Enum types can be set");
+            }
+
+            List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
+
+            foreach (int i in Enum.GetValues(typ))
+            {
+                string name = Enum.GetName(typ, i);
+                string desc = name;
+                FieldInfo fi = typ.GetField(name);
+
+                // Get description for enum element
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (attributes.Length > 0)
+                {
+                    string s = attributes[0].Description;
+                    if (!string.IsNullOrEmpty(s))
+                    {
+                        desc = s;
+                    }
+                }
+
+                list.Add(new KeyValuePair<string, int>(desc, i));
+            }
+            // NOTE: It is very important that DisplayMember and ValueMember are set before DataSource.
+            //       If you do, this works fine, and the SelectedValue of the ComboBox will be an int
+            //       version of the Enum.
+            //       If you don't, it will be a KeyValuePair.
+            cxbx.DisplayMember = "Key";
+            cxbx.ValueMember = "Value";
+            cxbx.DataSource = list;
+        }
+
+        public enum Position
+        {
+
+            [Description("cima")]
+            SPECIAL_TRAINING = 250,
+            [Description("meio")]
+            NORMAL_TRAINING = 30,
+            [Description("baixo")]
+            SIMPLE_TRAINING = 1
+        }
         
         private void FocusItem(ImageModernButton mb, IDeckItem item)
         {
@@ -1941,28 +1985,30 @@ StartLoad();
             });
 
             flowLayoutPanel1.Controls.Clear();
-            if (item is DynamicDeckItem dI && dI.DeckAction != null) {
+            if (item is IDeckItem dI) {
                 action_label.Text = dI.DeckName;
-
+                
                 ModernButton myButton = new ModernButton();
                 ModernButton myColor = new ModernButton();
                 Label myTextNameInformation = new Label();
                 Label sizeLabelInfo = new Label();
+                Label positionLabelInfo = new Label();
                 TextBox sizeLabelTextBox = new TextBox();
+                ComboBox PositionComboBox= new ComboBox();
                 TextBox myText = new TextBox();
                 TextBox myColorText = new TextBox();
                 myColor.Size = new Size(70, 30);
                 myColor.Text = "Selecionar Cor";
                 myColorText.Text = dI.DeckColor;
-
+ FlowLayoutPanel painel_name = new FlowLayoutPanel();
+                FlowLayoutPanel painel_color = new FlowLayoutPanel();
+                FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
+                FlowLayoutPanel painel_position = new FlowLayoutPanel();
                 myColor.Click += (s, e) =>
                 {
 
                     using (ColorPickerDialog dialog = new ColorPickerDialog())
                     {
-                        // myColorText.Text = dialog.Color;
-                      //  dialog.ShowAlphaChannel = showAlphaChannelCheckBox.Checked;
-
                         dialog.PreviewColorChanged += this.DialogColorChangedHandler;
 
                         if (dialog.ShowDialog(this) == DialogResult.OK)
@@ -1975,83 +2021,76 @@ StartLoad();
 
                 };
 
-           
-                FlowLayoutPanel panel = new FlowLayoutPanel();
-                //panel.SuspendLayout(); // don't calculate the layout before all picture boxes are added
-                panel.Size = new Size(190, 30);
-                //panel.FlowDirection = FlowDirection.LeftToRight;
-            //    panel.AutoScroll = true; // automatically add scrollbars if needed
-                panel.WrapContents = true; // all picture boxes in a single row
-
-
-                   myColor.Dock = DockStyle.None;
+                myColor.Dock = DockStyle.None;
                        myColorText.Dock = DockStyle.None;
+                  sizeLabelTextBox.Dock = DockStyle.None;
+                sizeLabelInfo.Dock = DockStyle.None;
+                positionLabelInfo.Dock = DockStyle.None;
+                PositionComboBox.Dock = DockStyle.None;
 
-                panel.Controls.Add(myColor);
-                panel.Controls.Add(myColorText);
 
-
+                setEnumValues(PositionComboBox, typeof(Position));
                 myButton.Text = "Salvar";
  myButton.Click += (s, e) =>
                 {
                     dI.DeckName = myText.Text;
                     dI.DeckColor = myColorText.Text;
                     dI.DeckSize = Convert.ToInt32(sizeLabelTextBox.Text);
+                  
+                    dI.DeckPosition = (int)PositionComboBox.SelectedValue;
                 };
                 myTextNameInformation.Text = "Nome:";
-                FlowLayoutPanel panelb = new FlowLayoutPanel();
-                //panel.SuspendLayout(); // don't calculate the layout before all picture boxes are added
-                panelb.Size = new Size(190, 50);
-             //panel.FlowDirection = FlowDirection.LeftToRight;
-                //    panel.AutoScroll = true; // automatically add scrollbars if needed
-                panelb.WrapContents = true; // all picture boxes in a single row
-
-
+   
                 sizeLabelInfo.Text = "Tamanho:";
-           
 
-                FlowLayoutPanel panelc = new FlowLayoutPanel();
-                //panel.SuspendLayout(); // don't calculate the layout before all picture boxes are added
 
-                panelc.Size = new Size(190, 50);
-                //panel.FlowDirection = FlowDirection.LeftToRight;
-                //    panel.AutoScroll = true; // automatically add scrollbars if needed
-                panelc.WrapContents = true; // all picture boxes in a single row
-                sizeLabelTextBox.Dock = DockStyle.None;
-                sizeLabelInfo.Dock = DockStyle.None;
-                panelb.Controls.Add(myTextNameInformation);
-                panelb.Controls.Add(myText);
-                panelc.Controls.Add(sizeLabelInfo);
-                panelc.Controls.Add(sizeLabelTextBox);
-           
-                flowLayoutPanel1.Controls.Add(panelb);
-                flowLayoutPanel1.Controls.Add(panel);
-                flowLayoutPanel1.Controls.Add(panelc);
-                flowLayoutPanel1.Controls.Add(myButton);
-                LoadProperties(dI, flowLayoutPanel1);
-            } else if (item is DynamicDeckFolder DF) {
 
-                action_label.Text = "Folder";
-                TextBox myText = new TextBox();
-               
-             
-                ModernButton myButton = new ModernButton();
-                flowLayoutPanel1.Controls.Add(myText);
 
-                flowLayoutPanel1.Controls.Add(myButton);
-                myText.Text = DF.folder_name;
-                myText.TextChanged += (s, e) =>
-                {
-                   
-                  
-                    DF.folder_name = myText.Text;
-                    //   myText.Text = DF.;
-                    
 
-                };
-                   
+
+
+
+
+
+
+                painel_position.Size = new Size(190, 60);
+
+                painel_color.Size = new Size(190, 30);
+
+                painel_name.Size = new Size(190, 50);
+                painel_tamanho.Size = new Size(190, 50);
+                painel_tamanho.WrapContents = true;
+                painel_name.WrapContents = true;
+                //painel 1
+                painel_color.WrapContents = true;
+                painel_position.WrapContents = true;
+                painel_position.Controls.Add(positionLabelInfo);
+                painel_position.Controls.Add(PositionComboBox);
+
+                painel_color.Controls.Add(myColor);
+                painel_color.Controls.Add(myColorText);
                 
+                painel_name.Controls.Add(myTextNameInformation);
+                painel_name.Controls.Add(myText);
+                painel_tamanho.Controls.Add(sizeLabelInfo);
+                painel_tamanho.Controls.Add(sizeLabelTextBox);
 
+        
+   
+             
+           
+                flowLayoutPanel1.Controls.Add(painel_name);
+                flowLayoutPanel1.Controls.Add(painel_color);
+                flowLayoutPanel1.Controls.Add(painel_tamanho);
+                flowLayoutPanel1.Controls.Add(painel_position);
+
+                flowLayoutPanel1.Controls.Add(myButton);
+                if(dI is DynamicDeckItem TT)
+                {
+                LoadProperties(TT, flowLayoutPanel1);
+
+                }
+            
             }
             imageModernButton1.Origin = mb;
                 //Write_name_Image("testando", mb, 10f,10f,"Arial",10);
