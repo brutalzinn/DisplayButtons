@@ -1123,23 +1123,10 @@ StartLoad();
                     //  IDeckFolder folder_t = CurrentDevice?.CurrentFolder;
                     //        var seri = teste.BitmapSerialized;
                    
-                        if (item is DynamicDeckItem DI && DI.DeckAction != null)
-                        {
-
+                    
                         //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
-                        packet_label.AddToQueue(folder.GetItemIndex(item), DI.DeckName, "", DI.DeckSize, 1, DI.DeckColor);
-                        }
-                        else if (item is DynamicDeckFolder Da)
-                        {
-                        //    packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(Da.folder_name,image.Bitmap)));
-
-
-                        }
-                        else
-                        {
-             
-
-                        }
+                        packet_label.AddToQueue(folder.GetItemIndex(item), item.DeckName, "", item.DeckSize,item.DeckPosition, item.DeckColor);
+                       
                     packet.AddToQueue(folder.GetItemIndex(item), image);
                 //    packet.AddToQueue(folder.GetItemIndex(item), image);
               
@@ -1986,7 +1973,7 @@ StartLoad();
 
             flowLayoutPanel1.Controls.Clear();
             if (item is IDeckItem dI) {
-                action_label.Text = dI.DeckName;
+               
            
             
          
@@ -1999,7 +1986,7 @@ StartLoad();
                 Label positionLabelInfo = new Label();
                 TextBox sizeLabelTextBox = new TextBox();
                 ComboBox PositionComboBox= new ComboBox();
-                TextBox myText = new TextBox();
+                TextBox myNameText = new TextBox();
                 TextBox myColorText = new TextBox();
                 myColor.Size = new Size(70, 30);
                 myColor.Text = "Selecionar Cor";
@@ -2010,6 +1997,7 @@ StartLoad();
                 FlowLayoutPanel painel_position = new FlowLayoutPanel();
 
                 setEnumValues(PositionComboBox, typeof(Position));
+                myNameText.Text = dI.DeckName;
                 myColorText.Text = dI.DeckColor;
                 PositionComboBox.SelectedValue = dI.DeckPosition;
                 sizeLabelTextBox.Text = dI.DeckSize.ToString();
@@ -2022,7 +2010,7 @@ StartLoad();
 
                         if (dialog.ShowDialog(this) == DialogResult.OK)
                         {
-                            myColorText.Text =  dialog.Color.Name;
+                            myColorText.Text = "#"+ dialog.Color.Name;
                         }
 
                         dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
@@ -2042,7 +2030,7 @@ StartLoad();
                 myButton.Text = "Salvar";
  myButton.Click += (s, e) =>
                 {
-                    dI.DeckName = myText.Text;
+                    dI.DeckName = myNameText.Text;
                     dI.DeckColor = myColorText.Text;
                     dI.DeckSize = Convert.ToInt32(sizeLabelTextBox.Text);
                   
@@ -2080,7 +2068,7 @@ StartLoad();
                 painel_color.Controls.Add(myColorText);
                 
                 painel_name.Controls.Add(myTextNameInformation);
-                painel_name.Controls.Add(myText);
+                painel_name.Controls.Add(myNameText);
                 painel_tamanho.Controls.Add(sizeLabelInfo);
                 painel_tamanho.Controls.Add(sizeLabelTextBox);
 

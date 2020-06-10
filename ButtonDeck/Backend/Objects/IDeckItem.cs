@@ -15,7 +15,7 @@ namespace ButtonDeck.Backend.Objects
         public string DeckName { get; set; } = "";
         public string DeckColor { get; set; } = "#ffffff";
         public int DeckSize { get; set; } = 30;
-        public int DeckPosition { get; set; } = 30;
+        public int DeckPosition { get; set; } = 0x00000050;
         public abstract DeckImage GetItemImage();
 
         public virtual DeckImage GetDefaultImage()
