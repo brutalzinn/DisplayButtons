@@ -804,6 +804,7 @@ StartLoad();
             {
                 ImageModernButton control = GetButtonControl(j + 1);
                 Label control2 = GetLabelControl(j + 1);
+                control2.Text = null;
                 control.NormalImage = null;
                 control.Tag = null;
                 if (folder == null) control.Invoke(new Action(control.Refresh));
@@ -820,15 +821,15 @@ StartLoad();
 
 
 
-                if (item is DynamicDeckItem DI && DI.DeckAction != null)
-                {
-                    control2.Text = DI.DeckAction.GetActionName();
+
+                control2.Text = item.DeckName;
                     Debug.WriteLine(control2.Name);
-                }
- control.NormalImage = item?.GetItemImage().Bitmap;
+             
+         control.NormalImage = item?.GetItemImage().Bitmap;
 
 
-                    control.Tag = item;
+               
+                control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
                 control2.Tag = item;
                 control2.Invoke(new Action(control.Refresh));
