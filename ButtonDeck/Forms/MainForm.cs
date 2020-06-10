@@ -1127,7 +1127,7 @@ StartLoad();
                         {
 
                         //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
-                        packet_label.AddToQueue(folder.GetItemIndex(item), DI.DeckAction.GetActionName(), "", 30, 1, "#d11aff");
+                        packet_label.AddToQueue(folder.GetItemIndex(item), DI.DeckName, "", DI.DeckSize, 1, DI.DeckColor);
                         }
                         else if (item is DynamicDeckFolder Da)
                         {
@@ -1946,10 +1946,12 @@ StartLoad();
 
                 ModernButton myButton = new ModernButton();
                 ModernButton myColor = new ModernButton();
-
+                Label myTextNameInformation = new Label();
+                Label sizeLabelInfo = new Label();
+                TextBox sizeLabelTextBox = new TextBox();
                 TextBox myText = new TextBox();
                 TextBox myColorText = new TextBox();
-
+                myColor.Size = new Size(70, 30);
                 myColor.Text = "Selecionar Cor";
                 myColorText.Text = dI.DeckColor;
 
@@ -1972,27 +1974,70 @@ StartLoad();
                     }
 
                 };
-                flowLayoutPanel1.Controls.Add(myText);
-                flowLayoutPanel1.Controls.Add(myButton);
-                flowLayoutPanel1.Controls.Add(myColor);
-                flowLayoutPanel1.Controls.Add(myColorText);
+
+           
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                //panel.SuspendLayout(); // don't calculate the layout before all picture boxes are added
+                panel.Size = new Size(190, 30);
+                //panel.FlowDirection = FlowDirection.LeftToRight;
+            //    panel.AutoScroll = true; // automatically add scrollbars if needed
+                panel.WrapContents = true; // all picture boxes in a single row
+
+
+                   myColor.Dock = DockStyle.None;
+                       myColorText.Dock = DockStyle.None;
+
+                panel.Controls.Add(myColor);
+                panel.Controls.Add(myColorText);
+
 
                 myButton.Text = "Salvar";
  myButton.Click += (s, e) =>
                 {
                     dI.DeckName = myText.Text;
                     dI.DeckColor = myColorText.Text;
+                    dI.DeckSize = Convert.ToInt32(sizeLabelTextBox.Text);
                 };
+                myTextNameInformation.Text = "Nome:";
+                FlowLayoutPanel panelb = new FlowLayoutPanel();
+                //panel.SuspendLayout(); // don't calculate the layout before all picture boxes are added
+                panelb.Size = new Size(190, 50);
+             //panel.FlowDirection = FlowDirection.LeftToRight;
+                //    panel.AutoScroll = true; // automatically add scrollbars if needed
+                panelb.WrapContents = true; // all picture boxes in a single row
 
-              
 
+                sizeLabelInfo.Text = "Tamanho:";
+           
+
+                FlowLayoutPanel panelc = new FlowLayoutPanel();
+                //panel.SuspendLayout(); // don't calculate the layout before all picture boxes are added
+
+                panelc.Size = new Size(190, 50);
+                //panel.FlowDirection = FlowDirection.LeftToRight;
+                //    panel.AutoScroll = true; // automatically add scrollbars if needed
+                panelc.WrapContents = true; // all picture boxes in a single row
+                sizeLabelTextBox.Dock = DockStyle.None;
+                sizeLabelInfo.Dock = DockStyle.None;
+                panelb.Controls.Add(myTextNameInformation);
+                panelb.Controls.Add(myText);
+                panelc.Controls.Add(sizeLabelInfo);
+                panelc.Controls.Add(sizeLabelTextBox);
+           
+                flowLayoutPanel1.Controls.Add(panelb);
+                flowLayoutPanel1.Controls.Add(panel);
+                flowLayoutPanel1.Controls.Add(panelc);
+                flowLayoutPanel1.Controls.Add(myButton);
                 LoadProperties(dI, flowLayoutPanel1);
             } else if (item is DynamicDeckFolder DF) {
 
                 action_label.Text = "Folder";
                 TextBox myText = new TextBox();
+               
+             
                 ModernButton myButton = new ModernButton();
                 flowLayoutPanel1.Controls.Add(myText);
+
                 flowLayoutPanel1.Controls.Add(myButton);
                 myText.Text = DF.folder_name;
                 myText.TextChanged += (s, e) =>

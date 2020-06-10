@@ -18,6 +18,7 @@ namespace ButtonDeck.Backend.Objects.Implementation
         public DeckImage DeckImage { get; set; }
         public string DeckName { get; set; }
         public string DeckColor { get; set; }
+        public int DeckSize { get; set; }
         public AbstractDeckAction DeckAction { get; set; }
         public AbstractDeckInformation DeckInformation { get; set; }
         public override DeckImage GetItemImage()
@@ -69,6 +70,32 @@ namespace ButtonDeck.Backend.Objects.Implementation
                 else
                 {
                     DeckColor = value;
+
+                }
+
+            }
+
+
+        }
+        [XmlElement("DeckItemSize")]
+        private int DeckItemSize
+        {
+
+
+            get
+            { // serialize
+                if (DeckSize == null) return 0;
+                return DeckSize;
+            }
+            set
+            { // deserialize
+                if (value == 0)
+                {
+                    DeckSize = 0;
+                }
+                else
+                {
+                    DeckSize = value;
 
                 }
 
