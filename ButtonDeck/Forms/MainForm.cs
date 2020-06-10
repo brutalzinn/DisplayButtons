@@ -6,7 +6,7 @@ using ButtonDeck.Backend.Utils;
 using ButtonDeck.Controls;
 using ButtonDeck.Misc;
 using ButtonDeck.Properties;
-
+using Cyotek.Windows.Forms;
 using ButtonDeck.Backend.Networking;
 
 using NickAc.ModernUIDoneRight.Controls;
@@ -1942,12 +1942,48 @@ StartLoad();
 
             flowLayoutPanel1.Controls.Clear();
             if (item is DynamicDeckItem dI && dI.DeckAction != null) {
-                action_label.Text = dI.DeckInformation.GetActionName();
-                
+                action_label.Text = dI.DeckName;
 
+                ModernButton myButton = new ModernButton();
+                ModernButton myColor = new ModernButton();
 
+                TextBox myText = new TextBox();
+                TextBox myColorText = new TextBox();
 
+                myColor.Text = "Selecionar Cor";
 
+                myColor.Click += (s, e) =>
+                {
+
+                    using (ColorPickerDialog dialog = new ColorPickerDialog())
+                    {
+                        // myColorText.Text = dialog.Color;
+                      //  dialog.ShowAlphaChannel = showAlphaChannelCheckBox.Checked;
+
+                        dialog.PreviewColorChanged += this.DialogColorChangedHandler;
+
+                        if (dialog.ShowDialog(this) == DialogResult.OK)
+                        {
+                            myColorText.Text =  dialog.Color.Name;
+                        }
+
+                        dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
+                    }
+
+                };
+                flowLayoutPanel1.Controls.Add(myText);
+                flowLayoutPanel1.Controls.Add(myButton);
+                flowLayoutPanel1.Controls.Add(myColor);
+                flowLayoutPanel1.Controls.Add(myColorText);
+
+                myButton.Text = "Salvar";
+ myButton.Click += (s, e) =>
+                {
+                    dI.DeckName = myText.Text;
+                    dI.DeckColor = myColorText.Text;
+                };
+
+              
 
                 LoadProperties(dI, flowLayoutPanel1);
             } else if (item is DynamicDeckFolder DF) {
@@ -1976,6 +2012,15 @@ StartLoad();
             imageModernButton1.Refresh();
             shadedPanel2.Show();
             shadedPanel1.Refresh();
+        }
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void DialogColorChangedHandler(object sender, EventArgs e)
+        {
+         //   dialogColorPreviewPanel.Color = ((ColorPickerDialog)sender).Color;
         }
 
         private void LoadProperties(DynamicDeckItem item, FlowLayoutPanel panel)

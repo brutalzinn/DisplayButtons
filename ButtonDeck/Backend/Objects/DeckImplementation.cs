@@ -14,6 +14,7 @@ namespace ButtonDeck.Backend.Objects
         [Serializable]
     public abstract class AbstractDeckInformation
         {
+        public  string GetName { get; set; }
             public static Type FindType(string fullName)
             {
                 return
@@ -23,7 +24,11 @@ namespace ButtonDeck.Backend.Objects
                         .FirstOrDefault(t => t.FullName.Equals(fullName));
             }
 
-            public abstract string GetActionName();
+            public virtual string GetActionName()
+        {
+
+            return GetName;
+        }
             public abstract string Color();
 
             public abstract int Size();
