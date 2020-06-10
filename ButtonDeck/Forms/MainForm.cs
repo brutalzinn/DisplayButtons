@@ -1942,8 +1942,13 @@ StartLoad();
 
             flowLayoutPanel1.Controls.Clear();
             if (item is DynamicDeckItem dI && dI.DeckAction != null) {
-                action_label.Text = dI.DeckAction.GetActionName();
+                action_label.Text = dI.DeckInformation.GetActionName();
                 
+
+
+
+
+
                 LoadProperties(dI, flowLayoutPanel1);
             } else if (item is DynamicDeckFolder DF) {
 

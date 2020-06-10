@@ -12,7 +12,7 @@ namespace ButtonDeck.Backend.Objects
  
 
         [Serializable]
-    public abstract class AbstractDeckMultipleActions
+    public abstract class AbstractDeckInformation
         {
             public static Type FindType(string fullName)
             {
@@ -22,21 +22,17 @@ namespace ButtonDeck.Backend.Objects
                         .SelectMany(a => a.GetTypes())
                         .FirstOrDefault(t => t.FullName.Equals(fullName));
             }
-            public enum DeckMultiActionCategory
-            {
-                General,
-                Misc
-            }
+
             public abstract string GetActionName();
-            public abstract string Type();
-            public abstract DeckMultiActionCategory GetActionCategory();
-            public abstract void Execute();
+            public abstract string Color();
+
+            public abstract int Size();
             public virtual bool IsPlugin()
             {
 
                 return false;
             }
-            public abstract AbstractDeckMultipleActions CloneAction();
+  
         }
 
     }

@@ -63,6 +63,10 @@
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
     </Reference>
+    <Reference Include="Cyotek.Windows.Forms.ColorPicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=58daa28b0b2de221, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Cyotek.Windows.Forms.ColorPicker.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -297,6 +301,18 @@
     <Compile Include="Forms\ActionHelperForms\ToolDelayActionHelper.Designer.cs">
       <DependentUpon>ToolDelayActionHelper.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ColorPickerDialogDemoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ColorPickerDialogDemoForm.designer.cs">
+      <DependentUpon>ColorPickerDialogDemoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ColorPicker\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ColorPicker\ColorPreviewBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\FirstSetupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -430,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\ToolDelayActionHelper.resx">
       <DependentUpon>ToolDelayActionHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ColorPickerDialogDemoForm.resx">
+      <DependentUpon>ColorPickerDialogDemoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FirstSetupForm.resx">
       <DependentUpon>FirstSetupForm.cs</DependentUpon>
