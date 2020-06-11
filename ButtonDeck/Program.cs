@@ -184,12 +184,10 @@ namespace ButtonDeck
                 mode = 1;
                 Adbserver = new AdbServer();
     
-  AdbResult = Adbserver.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
+  AdbResult = Adbserver.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: false);
 
-                 monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
-
-
-                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+               
+                client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
                 foreach (var device in client.GetDevices())
                 {
                  client.CreateForward(device, "tcp:5095", "tcp:5095",true);
@@ -227,6 +225,8 @@ namespace ButtonDeck
             {
                     client.RemoveAllForwards(device);
                 client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
+                    client.ExecuteRemoteCommand("kill-server", device, null);
+
                     client.KillAdb();
             }
               

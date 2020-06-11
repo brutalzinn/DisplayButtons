@@ -67,7 +67,7 @@ namespace ButtonDeck.Forms
                         if (Tag is MainForm frm) {
                             if (IsVirtualDeviceConnected) {
 
-                                if (Program.mode == 3)
+                                if (Program.mode == 1)
                                 {
                                    
 
@@ -76,17 +76,17 @@ namespace ButtonDeck.Forms
                               
                                     foreach (var device in Program.client.GetDevices())
                                     {
+                                       
 
-
-                                        //    client.CreateForward(device, "tcp:5095", "tcp:5095", true);
+                                        Debug.WriteLine("Resolvendo conexão com.." + device.Name.ToString());
+                                        Program.client.RemoveAllForwards(device);
+                                        Program.client.CreateForward(device, "tcp:5095", "tcp:5095", true);
                                         Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
-                                            Thread.Sleep(1500);
+                                      
                                         Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", device, null);
-                                        Thread.Sleep(1200);
 
-                                        Program.ClientThread.Start();
+                               
 
-                                        //   Thread.Sleep(1200);
                                     }
 
 
@@ -111,7 +111,7 @@ namespace ButtonDeck.Forms
                                     frm.RefreshAllButtons(false);
                                 }
                             } else {
-                              
+                            
                                 Debug.WriteLine("CHEGOU 3");
                                 frm.CurrentDevice = DeckDevice;
                                 IsVirtualDeviceConnected = true;
