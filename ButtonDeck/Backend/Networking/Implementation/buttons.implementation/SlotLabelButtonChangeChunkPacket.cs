@@ -4,13 +4,14 @@ using ButtonDeck.Backend.Objects;
 using Microsoft.VisualC.StlClr;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
-    [Architecture(PacketArchitecture.ClientToServer)]
+    [Architecture(PacketArchitecture.ClientToServer | PacketArchitecture.ServerToClient)]
     public class SlotLabelButtonChangeChunkPacket : INetworkPacket
     {
          class Labels
@@ -79,7 +80,13 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         public override void FromInputStream(DataInputStream reader)
         {
-            list_labels.Clear();
+           if(reader.ReadInt() == 1)
+            {
+                Debug.WriteLine("Limpando textos..");
+ list_labels.Clear();
+
+            }
+           
 
         }
 

@@ -13,6 +13,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ButtonDeck.Backend.Utils.DevicePersistManager;
+using SharpAdbClient;
+using System.Net;
+using System.Threading;
 
 namespace ButtonDeck.Forms
 {
@@ -63,6 +66,36 @@ namespace ButtonDeck.Forms
                     } else {
                         if (Tag is MainForm frm) {
                             if (IsVirtualDeviceConnected) {
+
+                                if (Program.mode == 1)
+                                {
+                                    AdbServer server = new AdbServer();
+
+                                    var result = server.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
+
+                                    var monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
+
+
+                                    var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+                                    //  var devices = AdbClient.Instance.GetDevices();
+                              
+                                    foreach (var device in client.GetDevices())
+                                    {
+                                       
+                                   
+                                        //    client.CreateForward(device, "tcp:5095", "tcp:5095", true);
+                                            client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
+                                            Thread.Sleep(1500);
+                                            client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", device, null);
+                                        Thread.Sleep(1200);
+
+                                        Program.ClientThread.Start();
+
+                                        //   Thread.Sleep(1200);
+                                    }
+
+
+                                }
                                 Debug.WriteLine("CHEGOU 2");
                                 if (frm.CurrentDevice.DeviceGuid == DeckDevice.DeviceGuid) {
                                     //Someone clicked on the same device. Unload this one.
@@ -83,6 +116,7 @@ namespace ButtonDeck.Forms
                                     frm.RefreshAllButtons(false);
                                 }
                             } else {
+                              
                                 Debug.WriteLine("CHEGOU 3");
                                 frm.CurrentDevice = DeckDevice;
                                 IsVirtualDeviceConnected = true;

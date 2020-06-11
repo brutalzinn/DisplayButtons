@@ -323,7 +323,7 @@ namespace ButtonDeck.Forms
 
 StartLoad();
             Start_configs();
-                
+            
 
             warning_label.ForeColor = ColorScheme.SecondaryColor;
         }
@@ -765,23 +765,21 @@ StartLoad();
                         }
 
 
-                        RefreshAllButtons(true);
+                       RefreshAllButtons(true);
 
                     };
                     control.Controls.Add(control2);
                     panel1.Controls.Add(control);
-                    if(Globals.calc == id)
-                    {
-                        
-                        Debug.WriteLine( "Debug pegou o calculo");
-                        Globals.can_refresh = true;
-
-                    }
+                    
                     if(Globals.calc < id)
                     {
+                                         
 
                         ApplyTheme(panel1);
+                        Globals.can_refresh = true;
+                      
                         panel1.Refresh();
+                    
                     }
                 }
 
@@ -794,8 +792,8 @@ StartLoad();
         }
         public void RefreshAllButtons(bool sendToDevice = true)
         {
-          
-            if (Globals.can_refresh == false) return;
+
+            if (Globals.can_refresh == false) { return; }
            
            // Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
@@ -805,6 +803,7 @@ StartLoad();
                 ImageModernButton control = GetButtonControl(j + 1);
                 Label control2 = GetLabelControl(j + 1);
                 control2.Text = null;
+                control2.Tag = null; 
                 control.NormalImage = null;
                 control.Tag = null;
                 if (folder == null) control.Invoke(new Action(control.Refresh));
@@ -823,7 +822,7 @@ StartLoad();
 
 
                 control2.Text = item.DeckName;
-                    Debug.WriteLine(control2.Name);
+                  
              
          control.NormalImage = item?.GetItemImage().Bitmap;
 
@@ -832,7 +831,7 @@ StartLoad();
                 control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
                 control2.Tag = item;
-                control2.Invoke(new Action(control.Refresh));
+                control2.Invoke(new Action(control2.Refresh));
                 CurrentDevice.CheckCurrentFolder();
                 if (sendToDevice)
                 {
@@ -850,11 +849,15 @@ StartLoad();
 
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
             ImageModernButton control1 = GetButtonControl(slot);
+            Label control_label = GetLabelControl(slot);
             // Label title_control = Controls.Find("titleLabel" + slot, true).FirstOrDefault() as Label;
 
             control1.NormalImage = null;
             control1.Tag = null;
             control1.Text = "";
+
+            control_label.Tag = null;
+            control_label.Text = "";
 
 
             //title_control.NormalImage = null;
@@ -869,6 +872,7 @@ StartLoad();
 
                 if (folder.GetItemIndex(item) != slot) continue;
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+                Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
 
                 //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
                 if (item != null) {
@@ -880,31 +884,9 @@ StartLoad();
 
 
 
-                    if (item is DynamicDeckItem DI && DI.DeckAction != null)
-                    {
+                  
                         control.NormalImage = item?.GetItemImage().Bitmap;
-                        //     item.GetItemImage().BitmapSerialized = converterDemo(AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White,item));
-                        //  item.GetItemImage().BitmapSerialized = converterDemo(item?.GetItemImage().Bitmap);
-                        //     var ser = item.GetItemImage().BitmapSerialized;
-                        //    item.BitmapSerialized = item?.GetItemImage().Bitmap;
-                        //  control.NormalImage = ReceiveWaterMark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap);
-                        //item.GetItemImage().BitmapSerialized = converterDemo( AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White)); 
-                        //   Write_name_Image("testeee", item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
-
-                    }
-                    else if (item is DynamicDeckFolder FO)
-                    {
-                        //  AddWatermark(FO.folder_name, item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
-                        //     control.NormalImage = ReceiveWaterMark(FO.folder_name, item?.GetItemImage().Bitmap);
-
-
-                        control.NormalImage = item?.GetItemImage().Bitmap;
-                    }
-                    else
-                    {
-                        control.NormalImage = item?.GetItemImage().Bitmap;
-
-                    }
+                    control2.Text = item.DeckName;
 
 
                     //control.NormalImage = item?.GetItemImage().Bitmap; //Write_name_Image(dI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
@@ -912,6 +894,8 @@ StartLoad();
 
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
+                    control2.Tag = item;
+                    control2.Invoke(new Action(control2.Refresh));
 
 
 
@@ -969,8 +953,9 @@ StartLoad();
                     }
                 }
                 DeviceConnected += tempConnected;
+            
             }
-
+            
              
             
 
@@ -989,6 +974,7 @@ StartLoad();
 
                 var Matriz = new MatrizPacket();
              con.SendPacket(Matriz);
+                RefreshAllButtons(true);
             }
 
 
@@ -1094,7 +1080,7 @@ StartLoad();
 
             var con = device.GetConnection();
             if (con != null) {
-                if (Globals.status == false) return;
+              //  if (Globals.status == false) return;
                 var packet = new SlotImageChangeChunkPacket();
                 var packet_label = new SlotLabelButtonChangeChunkPacket();
                 List<IDeckItem> items = folder.GetDeckItems();
@@ -1957,11 +1943,11 @@ StartLoad();
         public enum Position
         {
             [Description("baixo")]
-            SIMPLE_TRAINING = 0x00000050,
+            SIMPLE_TRAINING = 0x00000050 | 0x00000001,
           [Description("cima")]
-            SPECIAL_TRAINING = 0x00000030,
+            SPECIAL_TRAINING = 0x00000030 | 0x00000001,
             [Description("meio")]
-            NORMAL_TRAINING = 0x00000011
+            NORMAL_TRAINING = 0x00000011 | 0x00000001
 
         }
         

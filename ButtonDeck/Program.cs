@@ -33,6 +33,10 @@ namespace ButtonDeck
         public static ClientThread ClientThread { get; set; }
         public static int mode { get; set; }
         public static bool SuccessfulServerStart { get; set; } = false;
+        public static SharpAdbClient.StartServerResult AdbResult;
+        public static AdbServer Adbserver;
+        public static SharpAdbClient.DeviceMonitor monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
+
         public static Type FindType(string fullName)
         {
             return
@@ -179,9 +183,9 @@ namespace ButtonDeck
                 mode = 1;
                 AdbServer server = new AdbServer();
       
-                var result = server.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
+                
 
-                var monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
+                SharpAdbClient.DeviceMonitor monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
               
               
                 var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
@@ -227,7 +231,7 @@ namespace ButtonDeck
             {
 
                 client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
-
+                    client.KillAdb();
 
             }
 
