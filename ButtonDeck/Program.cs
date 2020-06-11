@@ -184,11 +184,11 @@ namespace ButtonDeck
                 mode = 1;
                 Adbserver = new AdbServer();
     
-  AdbResult = Adbserver.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: false);
+  AdbResult = Adbserver.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
 
                
                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
-                foreach (var device in client.GetDevices())
+                foreach (var device in client.GetDevices().ToList())
                 {
                  client.CreateForward(device, "tcp:5095", "tcp:5095",true);
                 client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity",device, null);
@@ -221,7 +221,7 @@ namespace ButtonDeck
             {
 
              
-                foreach (var device in client.GetDevices())
+                foreach (var device in client.GetDevices().ToList())
             {
                     client.RemoveAllForwards(device);
                 client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);

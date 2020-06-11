@@ -74,23 +74,33 @@ namespace ButtonDeck.Forms
                              
                                     //  var devices = AdbClient.Instance.GetDevices();
                               
-                                    foreach (var device in Program.client.GetDevices())
+                                    foreach (var device in Program.client.GetDevices().ToList())
                                     {
-                                       
+                                        Debug.WriteLine(device.Model);
+                                        Debug.WriteLine(device.Name);
+                                        Debug.WriteLine(device.Product);
+                                        Debug.WriteLine(device.Serial);
 
-                                        Debug.WriteLine("Resolvendo conexão com.." + device.Name.ToString());
-                                        Program.client.RemoveAllForwards(device);
-                                        Program.client.CreateForward(device, "tcp:5095", "tcp:5095", true);
                                         Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
-                                      
+                                        Thread.Sleep(1400);
                                         Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", device, null);
+                                        Thread.Sleep(1200);
+                                        Program.ClientThread.Stop();
+                                        Program.ClientThread = new Misc.ClientThread();
+                                        Program.ClientThread.Start();
 
-                               
+                                        MainForm.Instance.StartLoad();
+                                        MainForm.Instance.Start_configs();
+
+
+
+
 
                                     }
 
 
                                 }
+                           
                                 Debug.WriteLine("CHEGOU 2");
                                 if (frm.CurrentDevice.DeviceGuid == DeckDevice.DeviceGuid) {
                                     //Someone clicked on the same device. Unload this one.

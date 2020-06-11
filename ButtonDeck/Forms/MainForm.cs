@@ -926,11 +926,11 @@ StartLoad();
                 Refresh();
             }));
         }
-        private void StartLoad()
+        public void StartLoad()
         {
 
-
-            foreach (var device in DevicePersistManager.PersistedDevices)
+         
+            foreach (var device in DevicePersistManager.PersistedDevices.ToList())
             {
 
                 Debug.WriteLine("CHEGOU 3");
@@ -960,7 +960,7 @@ StartLoad();
             
 
         }
-        private void Start_configs()
+        public void Start_configs()
             {
         
             ButtonCreator();
@@ -980,7 +980,7 @@ StartLoad();
 
 
         }
-        private void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
+        public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
 
             Invoke(new Action(() => {
