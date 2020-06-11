@@ -33,9 +33,10 @@ namespace ButtonDeck
         public static ClientThread ClientThread { get; set; }
         public static int mode { get; set; }
         public static bool SuccessfulServerStart { get; set; } = false;
-        public static SharpAdbClient.StartServerResult AdbResult;
-        public static AdbServer Adbserver;
-        public static SharpAdbClient.DeviceMonitor monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
+        public static StartServerResult AdbResult { get; set; }
+        public static AdbServer Adbserver { get; set; }
+        public static DeviceMonitor monitor { get; set; }
+        public static AdbClient client { get; set; }
 
         public static Type FindType(string fullName)
         {
@@ -181,22 +182,20 @@ namespace ButtonDeck
 
                 Debug.WriteLine("MODO USB");
                 mode = 1;
-                AdbServer server = new AdbServer();
-      
-                
+                Adbserver = new AdbServer();
+    
+  AdbResult = Adbserver.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
 
-                SharpAdbClient.DeviceMonitor monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
-              
-              
-                var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+                 monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
 
-                //  var devices = AdbClient.Instance.GetDevices();
+
+                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
                 foreach (var device in client.GetDevices())
                 {
- client.CreateForward(device, "tcp:5095", "tcp:5095",true);
+                 client.CreateForward(device, "tcp:5095", "tcp:5095",true);
                 client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity",device, null);
 
-                    Thread.Sleep(1200);
+                   Thread.Sleep(1200);
                 }
  
                 ClientThread = new ClientThread();
@@ -222,18 +221,15 @@ namespace ButtonDeck
             OBSUtils.Disconnect();
             if (mode == 1)
             {
-                AdbServer server = new AdbServer();
 
-                var result = server.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
-                var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
-
+             
                 foreach (var device in client.GetDevices())
             {
-
+                    client.RemoveAllForwards(device);
                 client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
                     client.KillAdb();
-
             }
+              
 
             }
            

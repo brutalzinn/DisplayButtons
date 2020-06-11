@@ -67,26 +67,21 @@ namespace ButtonDeck.Forms
                         if (Tag is MainForm frm) {
                             if (IsVirtualDeviceConnected) {
 
-                                if (Program.mode == 1)
+                                if (Program.mode == 3)
                                 {
-                                    AdbServer server = new AdbServer();
+                                   
 
-                                    var result = server.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
-
-                                    var monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
-
-
-                                    var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+                             
                                     //  var devices = AdbClient.Instance.GetDevices();
                               
-                                    foreach (var device in client.GetDevices())
+                                    foreach (var device in Program.client.GetDevices())
                                     {
-                                       
-                                   
+
+
                                         //    client.CreateForward(device, "tcp:5095", "tcp:5095", true);
-                                            client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
+                                        Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
                                             Thread.Sleep(1500);
-                                            client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", device, null);
+                                        Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", device, null);
                                         Thread.Sleep(1200);
 
                                         Program.ClientThread.Start();
