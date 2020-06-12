@@ -320,11 +320,10 @@ namespace ButtonDeck.Forms
 
 
 
-            if(Program.mode == 1)
-            {
+        
 
 StartLoad();
-            }
+            
 
             Start_configs();
             
@@ -1011,20 +1010,23 @@ SetControl(control);
             thread1.SetApartmentState(ApartmentState.STA);
      
             thread1.Start();
+
+            //      ApplyTheme(panel1);
+         
+                var con = MainForm.Instance.CurrentDevice.GetConnection();
+                if (con != null)
+                {
+
+
+                    var Matriz = new MatrizPacket();
+                    con.SendPacket(Matriz);
+     RefreshAllButtons(true);
+                }
+         
+          
+
+
        
-                  //      ApplyTheme(panel1);
-
-                  var con = MainForm.Instance.CurrentDevice.GetConnection();
-            if (con != null)
-            {
-
-
-                var Matriz = new MatrizPacket();
-             con.SendPacket(Matriz);
-                RefreshAllButtons(true);
-            }
-
-
 
         }
         public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
@@ -1033,8 +1035,12 @@ SetControl(control);
             Invoke(new Action(() => {
 
 
+                if(Program.mode == 0)
+                {
 
-            //    Start_configs();
+   Start_configs();
+                }
+           
 
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);

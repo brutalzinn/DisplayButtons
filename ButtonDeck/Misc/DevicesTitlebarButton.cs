@@ -148,8 +148,8 @@ namespace ButtonDeck.Misc
             get {
                 if(Program.mode == 0)
                 {
-
-                return Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+                 
+                    return Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
 
                 }
                 else 
@@ -163,7 +163,7 @@ namespace ButtonDeck.Misc
         public override string Text {
             get {
                 _frm.ChangeButtonsVisibility(DevicePersistManager.IsVirtualDeviceConnected);
-                
+         
                 return $"{CurrentConnections} Connected Device{(CurrentConnections != 1 ? "s" : "")}";
             }
             set => base.Text = value;
@@ -175,8 +175,8 @@ namespace ButtonDeck.Misc
 
             if(Program.mode == 0)
             {
-
-  List<Guid> toRemove = new List<Guid>();
+               
+                List<Guid> toRemove = new List<Guid>();
             DevicePersistManager.DeckDevicesFromConnection.All(c => {
                 if (!Program.ServerThread.TcpServer.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key)) {
                     toRemove.Add(c.Key);
@@ -185,7 +185,7 @@ namespace ButtonDeck.Misc
             });
             toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
 
-
+                
             }
             else
             {
