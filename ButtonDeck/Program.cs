@@ -161,8 +161,6 @@ namespace ButtonDeck
             OBSUtils.PrepareOBSIntegration();
 
 
-          
-            // começo da implementação do host usb
             dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
   if (form.ShowDialog() == DialogResult.OK)
             {
@@ -170,11 +168,10 @@ namespace ButtonDeck
      ServerThread = new ServerThread();
             ServerThread.Start();
             
-             //   ServerThread.Stop();
+
                 Debug.WriteLine("MODO SOCKET CLIENT");
 
-                //     Application.Run(new MainForm());
-
+ 
 
             }
             else
@@ -190,34 +187,44 @@ namespace ButtonDeck
                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
 
                 monitor.DeviceConnected += OnDeviceConnected;
-              //  monitor.Start();
-                
+                 monitor.Start();
+                List<DeviceData> device_list = new List<DeviceData>();
+                var receiver = new ConsoleOutputReceiver();
                 foreach (var device in client.GetDevices().ToList())
                 {
-                 client.CreateForward(device, "tcp:5095", "tcp:5095",true);
-                client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity",device, null);
-               Thread.Sleep(1200);
-                    //Debug.WriteLine(device.Model);
+              
+                    client.CreateForward(device, "tcp:5095", "tcp:5095",true);
                   
+                    client.ExecuteRemoteCommand("pm path net.nickac.buttondeck",device,receiver);
+           
+                    if (receiver != null)
+                    {
+                        device_list.Add(device);
+
+                    }
+                   
+
                 }
- 
+
+                foreach (var devices in device_list)
+                {
+                    if (device_list.Count < 2)
+                    {
+                        client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", devices, null);
+                  
+                     
+                    }
+                    
+                }
+
+
+                Thread.Sleep(1300);
                 ClientThread = new ClientThread();
-                   ClientThread.Start();
-         
-             
+                        ClientThread.Start();
           
- // ClientThread.Stop();
-
-                //     Application.Run(new MainForm());
-
-
 
             }
-         
-           
 
-                
-              //facilitando debug 09/06/2020
                 NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
                 NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
                Application.Run(new MainForm());
@@ -245,7 +252,7 @@ namespace ButtonDeck
         }
         public static void OnDeviceConnected(object sender, DeviceDataEventArgs e)
         {
-            
+       
             Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
           //  var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
         //    client.ExecuteRemoteCommand("usb", e.Device, null);

@@ -81,6 +81,8 @@ namespace ButtonDeck.Forms
                     {
                         if (Tag is MainForm frm)
                         {
+                            Program.client.RemoveAllForwards(DeviceUsb);
+                            Program.client.CreateForward(DeviceUsb, "tcp:5095", "tcp:5095", true);
                             Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", DeviceUsb, null);
                             Thread.Sleep(1400);
                             Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", DeviceUsb, null);
@@ -198,6 +200,7 @@ namespace ButtonDeck.Forms
             }
         }
         public string device_usb_model { get; set; }
+        public string device_usb_manufacturer { get; set; }
         public DeviceData DeviceUsb { get; set; }
 
         public new Padding Padding = new Padding(5);
@@ -216,16 +219,47 @@ namespace ButtonDeck.Forms
 
         public Rectangle NameLabelRectangle {
             get {
+                if(Program.mode == 0)
+                {
+
+
+                
                 if (DeckDevice == null) return Rectangle.Empty;
                 int textHeight = (int)TextRenderer.MeasureText("AaBbCc", Font).Height;
                 return new Rectangle(Padding.Left, Padding.Top, (int)MeasureString((deviceNamePrefix + DeckDevice.DeviceName), Font).Width, textHeight);
+                }
+                else
+                {
+
+                    if (DeviceUsb == null) return Rectangle.Empty;
+                    int textHeight = (int)TextRenderer.MeasureText("AaBbCc", Font).Height;
+                    return new Rectangle(Padding.Left, Padding.Top, (int)MeasureString((DeviceUsb.Product + DeviceUsb.Name), Font).Width, textHeight);
+
+
+                }
             }
         }
         public Rectangle NameLabelRectangleWithoutPrefix {
             get {
-                if (DeckDevice == null) return Rectangle.Empty;
+                if(Program.mode == 0)
+                {
+  if (DeckDevice == null) return Rectangle.Empty;
                 Rectangle rect = NameLabelRectangle;
                 return Rectangle.FromLTRB((int)(rect.Left + MeasureString(deviceNamePrefix, Font).Width), rect.Top, rect.Right, rect.Bottom);
+
+
+
+
+                }
+                else
+                {
+
+                    if (DeviceUsb == null) return Rectangle.Empty;
+                    Rectangle rect = NameLabelRectangle;
+                    return Rectangle.FromLTRB((int)(rect.Left + MeasureString(DeviceUsb.Product, Font).Width), rect.Top, rect.Right, rect.Bottom);
+
+                }
+
             }
         }
 
@@ -250,6 +284,7 @@ namespace ButtonDeck.Forms
             }
             else
             {
+                if (DeviceUsb == null) return;
                 int textHeight = (int)e.Graphics.MeasureString("AaBbCc", Font).Height;
                 var backgroundColor = Selected ? ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme).SecondaryColor : Color.Transparent;
                 using (var sb = new SolidBrush(Selected ? GetReadableForeColor(backgroundColor) : ForeColor))
@@ -261,7 +296,8 @@ namespace ButtonDeck.Forms
                             e.Graphics.FillRectangle(sb2, new Rectangle(Point.Empty, Size));
                         }
                     }
-                    e.Graphics.DrawString(device_usb_model.Replace("_"," "), Font, sb, Padding.Left, Padding.Top);
+                    e.Graphics.DrawString(DeviceUsb.Product + " " +  DeviceUsb.Model.Replace("_"," "), Font, sb, Padding.Left, Padding.Top);
+
                     using (var sb2 = new SolidBrush(Color.FromArgb(150, ForeColor)))
                     {
                         string status = "";
@@ -275,12 +311,14 @@ namespace ButtonDeck.Forms
                             {
 
                                 status = "Sincronizado";
-                            }else
-                            {
-                                status = "Sem sincronia";
                             }
+                           
                         }
-                       
+                        if (status == "")
+                        {
+
+                           status= "Sem sincronia";
+                        }
                         e.Graphics.DrawString("MODO USB | " + DeviceUsb.State + " | " + status, Font, sb, Padding.Left, Padding.Top + textHeight); ;
                     }
                 }

@@ -86,17 +86,28 @@ namespace ButtonDeck.Misc
 
 
                 //  var devices = AdbClient.Instance.GetDevices();
-
+                var product_name = new ConsoleOutputReceiver();
+                var product_manufacter = new ConsoleOutputReceiver();
                 foreach (var device in Program.client.GetDevices().ToList())
                 {
-                    Thread.Sleep(1500);
+                   if(device.Model == "")
+                    {
+                        Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
+                        Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
+
+                        Debug.WriteLine("alterando nome não reconhecido para : " + product_name);
+
+                        device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                        device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                    }
                     Debug.WriteLine("adicionando " + device.Model);
                     try
                     {
                         var ctrl = new DeckDeviceInformationControl()
                     {
                       DeviceUsb = device,
-                        device_usb_model = device.Model,
+
+
                         Size = controlFinalSize,
                         ForeColor = _frm.ColorScheme.SecondaryColor,
                         Dock = DockStyle.Top,
