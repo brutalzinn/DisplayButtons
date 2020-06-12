@@ -529,9 +529,20 @@ StartLoad();
             });
          
         }
-     
-        public void ButtonCreator()
+        delegate void ButtonCreatorCallback();
+         void ButtonCreator()
         {
+
+            if (InvokeRequired)
+            {
+                ButtonCreatorCallback callback = ButtonCreator;
+                Invoke(callback);
+            }
+            else
+            {
+
+
+           
             panel1.Controls.Clear();
             int x = 0;
             int y = 0;
@@ -774,12 +785,15 @@ StartLoad();
 
                     };
                          control.Controls.Add(control2);
-      //          panel1.Controls.Add(control)
+                           //  panel1.Controls.Add(control)
 
 
 
 
-        panel1.Invoke(new Action(() => panel1.Controls.Add(control)));
+
+SetControl(control);
+
+
 
 
                     if (Globals.calc < id)
@@ -789,7 +803,7 @@ StartLoad();
                         ApplyTheme(panel1);
                         Globals.can_refresh = true;
                       
-                        panel1.Refresh();
+                      //  panel1.Refresh();
                     
                     }
                 }
@@ -797,12 +811,30 @@ StartLoad();
 
            
             }
+            }
 
 
-            
         }
-    
+        static void SynchronizedInvoke(ISynchronizeInvoke sync, Action action)
+        {
+            // If the invoke is not required, then invoke here and get out.
+            if (!sync.InvokeRequired)
+            {
+                // Execute action.
+                action();
 
+                // Get out.
+                return;
+            }
+
+            // Marshal to the required context.
+            sync.Invoke(action, new object[] { });
+        }
+
+        private void SetControl(Control control)
+{
+            SynchronizedInvoke(panel1, delegate () { panel1.Controls.Add(control); });
+        }
         public void RefreshAllButtons(bool sendToDevice = true)
         {
 

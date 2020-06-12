@@ -14,9 +14,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ButtonDeck.Backend.Utils.AppSettings;
+using System.ComponentModel;
 
 namespace ButtonDeck.Forms
 {
+
+   
     public class TemplateForm : ModernForm
     {
         public bool MinimizeToTrayRightMinimize { get; set; }
@@ -54,7 +57,7 @@ namespace ButtonDeck.Forms
             ModifyColorScheme(Controls.OfType<Control>());
 
         }
-
+       
         private static Color GetReadableForeColor(Color c)
         {
             return (((c.R + c.B + c.G) / 3) > 128) ? Color.Black : Color.White;

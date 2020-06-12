@@ -126,7 +126,7 @@ namespace ButtonDeck.Forms
            
                 if (con != null)
             {
-              MainForm.Instance.ButtonCreator();
+            //  MainForm.ButtonCreator();
                     
               ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
                 ApplicationSettingsManager.Settings.linha= Convert.ToInt32(linha.Text);
