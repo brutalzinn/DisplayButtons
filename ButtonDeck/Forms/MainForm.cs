@@ -320,12 +320,16 @@ namespace ButtonDeck.Forms
 
 
 
-        
+          if(Program.mode == 1)
+            {
 
 StartLoad();
             
+          
+Start_configs();
 
-            Start_configs();
+            }
+            
             
 
             warning_label.ForeColor = ColorScheme.SecondaryColor;
@@ -520,7 +524,7 @@ StartLoad();
 
                         }
                     };
-                    mb.Text = string.Empty;
+                  //  mb.Text = string.Empty;
                     mb.ColorScheme = ColorScheme;
                 }
                 c.BackColor = appTheme.BackgroundColor;
@@ -556,12 +560,10 @@ StartLoad();
 
 
                     ImageModernButton control = new ImageModernButton();
-                    Label control2 = new Label();
-                    control2.BackColor = Color.Transparent;
-                    control2.ForeColor = Color.White;
-                    control2.Dock = DockStyle.Bottom;
+                  
+               
                     control.Name = "modernButton" + id;
-                    control2.Name = "label" + id;
+                  
                     control.Size = new Size(80, 80);
                     control.Location = new Point(lin * 110 + 10, con * 110 + 10);
                     id += 1;
@@ -783,14 +785,14 @@ StartLoad();
                        RefreshAllButtons(true);
 
                     };
-                         control.Controls.Add(control2);
-                           //  panel1.Controls.Add(control)
+                     //    control.Controls.Add(control2);
+                        panel1.Controls.Add(control);
 
 
 
 
 
-SetControl(control);
+//SetControl(control);
 
 
 
@@ -802,7 +804,7 @@ SetControl(control);
                         ApplyTheme(panel1);
                         Globals.can_refresh = true;
                       
-                      //  panel1.Refresh();
+                     panel1.Refresh();
                     
                     }
                 }
@@ -814,26 +816,7 @@ SetControl(control);
 
 
         }
-        static void SynchronizedInvoke(ISynchronizeInvoke sync, Action action)
-        {
-            // If the invoke is not required, then invoke here and get out.
-            if (!sync.InvokeRequired)
-            {
-                // Execute action.
-                action();
-
-                // Get out.
-                return;
-            }
-
-            // Marshal to the required context.
-            sync.Invoke(action, new object[] { });
-        }
-
-        private void SetControl(Control control)
-{
-            SynchronizedInvoke(panel1, delegate () { panel1.Controls.Add(control); });
-        }
+    
         public void RefreshAllButtons(bool sendToDevice = true)
         {
 
@@ -845,9 +828,9 @@ SetControl(control);
             for (int j = 0; j < calc; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
-                Label control2 = GetLabelControl(j + 1);
-                control2.Text = null;
-                control2.Tag = null; 
+              //  Label control2 = GetLabelControl(j + 1);
+               /// control2.Text = null;
+                //control2.Tag = null; 
                 control.NormalImage = null;
                 control.Tag = null;
                 if (folder == null) control.Invoke(new Action(control.Refresh));
@@ -859,14 +842,13 @@ SetControl(control);
                 item = folder.GetDeckItems()[i];
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
 
-                Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
+                // Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
 
 
 
 
 
-                control2.Text = item.DeckName;
-                  
+                control.Text = item?.DeckName;
              
          control.NormalImage = item?.GetItemImage().Bitmap;
 
@@ -874,8 +856,7 @@ SetControl(control);
                
                 control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
-                control2.Tag = item;
-                control2.Invoke(new Action(control2.Refresh));
+            
                 CurrentDevice.CheckCurrentFolder();
                 if (sendToDevice)
                 {
@@ -1010,6 +991,7 @@ SetControl(control);
             thread1.SetApartmentState(ApartmentState.STA);
      
             thread1.Start();
+           
 
             //      ApplyTheme(panel1);
          
@@ -1020,9 +1002,9 @@ SetControl(control);
 
                     var Matriz = new MatrizPacket();
                     con.SendPacket(Matriz);
-     RefreshAllButtons(true);
+    
                 }
-         
+          RefreshAllButtons(true);
           
 
 
@@ -1035,11 +1017,7 @@ SetControl(control);
             Invoke(new Action(() => {
 
 
-                if(Program.mode == 0)
-                {
-
-   Start_configs();
-                }
+             
            
 
                 shadedPanel1.Show();
@@ -1053,11 +1031,15 @@ SetControl(control);
 
                 if (CurrentDevice == null) {
                     ChangeToDevice(e.Device);
-                    
+                  
                 }
                 SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
-                
+                if (Program.mode == 0)
+                {
+
+                    Start_configs();
+                }
             }));
 
             e.Device.ButtonInteraction += Device_ButtonInteraction;
