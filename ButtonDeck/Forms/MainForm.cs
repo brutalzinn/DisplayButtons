@@ -320,8 +320,12 @@ namespace ButtonDeck.Forms
 
 
 
+            if(Program.mode == 1)
+            {
 
 StartLoad();
+            }
+
             Start_configs();
             
 
@@ -349,12 +353,12 @@ StartLoad();
                 return true;
             });
         }
-
+    
         private void ApplyTheme(Control parent)
         {
-
-            //IMPORTANT
-            ApplicationColorScheme appTheme = ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme);
+           
+                //IMPORTANT
+                ApplicationColorScheme appTheme = ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme);
             parent.Controls.OfType<Control>().All((c) => {
                 if (c is ImageModernButton mb) {
                     mb.AllowDrop = true;
@@ -523,8 +527,9 @@ StartLoad();
                 c.BackColor = appTheme.BackgroundColor;
                 return true;
             });
+         
         }
-
+     
         public void ButtonCreator()
         {
             panel1.Controls.Clear();
@@ -768,10 +773,16 @@ StartLoad();
                        RefreshAllButtons(true);
 
                     };
-                    control.Controls.Add(control2);
-                    panel1.Controls.Add(control);
-                    
-                    if(Globals.calc < id)
+                         control.Controls.Add(control2);
+      //          panel1.Controls.Add(control)
+
+
+
+
+        panel1.Invoke(new Action(() => panel1.Controls.Add(control)));
+
+
+                    if (Globals.calc < id)
                     {
                                          
 
@@ -790,6 +801,8 @@ StartLoad();
 
             
         }
+    
+
         public void RefreshAllButtons(bool sendToDevice = true)
         {
 
@@ -962,12 +975,14 @@ StartLoad();
         }
         public void Start_configs()
             {
-        
-            ButtonCreator();
-            
-            //      ApplyTheme(panel1);
+          Thread thread1 = new Thread(() => ButtonCreator());
+            thread1.SetApartmentState(ApartmentState.STA);
+     
+            thread1.Start();
+       
+                  //      ApplyTheme(panel1);
 
-            var con = MainForm.Instance.CurrentDevice.GetConnection();
+                  var con = MainForm.Instance.CurrentDevice.GetConnection();
             if (con != null)
             {
 
