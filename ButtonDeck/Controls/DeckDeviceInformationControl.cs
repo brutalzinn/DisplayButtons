@@ -35,6 +35,67 @@ namespace ButtonDeck.Forms
         {
             base.OnDoubleClick(e);
             if (e is MouseEventArgs e2) {
+
+                if (Program.mode == 1)
+                {
+
+                    if (NameLabelRectangle.Contains(e2.Location))
+                    {
+                        if (device_usb_model != null)
+                        {
+
+
+                            TextBox txtBox = new TextBox()
+                            {
+                                Bounds = NameLabelRectangleWithoutPrefix,
+                                Width = Width - Padding.Right * 2,
+                                Text = device_usb_model,
+                                BorderStyle = BorderStyle.None,
+                                BackColor = BackColor,
+                                ForeColor = ForeColor,
+                            };
+                            txtBox.LostFocus += (s, ee) =>
+                            {
+                                if (txtBox.Text.Trim() != string.Empty)
+                                {
+                                    device_usb_model = txtBox.Text.Trim();
+                                    Refresh();
+                                }
+                                Controls.Remove(txtBox);
+                            };
+                            txtBox.KeyUp += (s, ee) =>
+                            {
+                                if (ee.KeyCode != Keys.Enter) return;
+                                if (txtBox.Text.Trim() != string.Empty)
+                                {
+                                    device_usb_model = txtBox.Text.Trim();
+                                    Refresh();
+                                }
+                                Controls.Remove(txtBox);
+                            };
+                            Controls.Add(txtBox);
+                            txtBox.Focus();
+                        }
+                    }
+                    else
+                    {
+                        if (Tag is MainForm frm)
+                        {
+                            Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", DeviceUsb, null);
+                            Thread.Sleep(1400);
+                            Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", DeviceUsb, null);
+                            Thread.Sleep(1200);
+                            Program.ClientThread.Stop();
+                            Program.ClientThread = new Misc.ClientThread();
+                            Program.ClientThread.Start();
+
+                            MainForm.Instance.StartLoad();
+                            MainForm.Instance.Start_configs();
+
+                        }
+                    }
+                }
+
                 if (DeckDevice != null) {
                     if (NameLabelRectangle.Contains(e2.Location)) {
                         TextBox txtBox = new TextBox()
@@ -67,39 +128,7 @@ namespace ButtonDeck.Forms
                         if (Tag is MainForm frm) {
                             if (IsVirtualDeviceConnected) {
 
-                                if (Program.mode == 1)
-                                {
-                                   
-
-                             
-                                    //  var devices = AdbClient.Instance.GetDevices();
                               
-                                    foreach (var device in Program.client.GetDevices().ToList())
-                                    {
-                                        Debug.WriteLine(device.Model);
-                                        Debug.WriteLine(device.Name);
-                                        Debug.WriteLine(device.Product);
-                                        Debug.WriteLine(device.Serial);
-
-                                        Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
-                                        Thread.Sleep(1400);
-                                        Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", device, null);
-                                        Thread.Sleep(1200);
-                                        Program.ClientThread.Stop();
-                                        Program.ClientThread = new Misc.ClientThread();
-                                        Program.ClientThread.Start();
-
-                                        MainForm.Instance.StartLoad();
-                                        MainForm.Instance.Start_configs();
-
-
-
-
-
-                                    }
-
-
-                                }
                            
                                 Debug.WriteLine("CHEGOU 2");
                                 if (frm.CurrentDevice.DeviceGuid == DeckDevice.DeviceGuid) {
@@ -168,6 +197,8 @@ namespace ButtonDeck.Forms
                 deviceNamePrefix = (!DevicePersistManager.IsDeviceOnline(DeckDevice) ? $"{OFFLINE_PREFIX} " : "");
             }
         }
+        public string device_usb_model { get; set; }
+        public DeviceData DeviceUsb { get; set; }
 
         public new Padding Padding = new Padding(5);
         private bool _selected;
@@ -201,6 +232,7 @@ namespace ButtonDeck.Forms
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            if(Program.mode == 0) { 
             if (DeckDevice == null) return;
             int textHeight = (int)e.Graphics.MeasureString("AaBbCc", Font).Height;
             var backgroundColor = Selected ? ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme).SecondaryColor : Color.Transparent;
@@ -214,7 +246,45 @@ namespace ButtonDeck.Forms
                 using (var sb2 = new SolidBrush(Color.FromArgb(150, ForeColor))) {
                     e.Graphics.DrawString("ID: " + DeckDevice.DeviceGuid, Font, sb, Padding.Left, Padding.Top + textHeight);
                 }
+                }
             }
+            else
+            {
+                int textHeight = (int)e.Graphics.MeasureString("AaBbCc", Font).Height;
+                var backgroundColor = Selected ? ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme).SecondaryColor : Color.Transparent;
+                using (var sb = new SolidBrush(Selected ? GetReadableForeColor(backgroundColor) : ForeColor))
+                {
+                    if (Selected)
+                    {
+                        using (var sb2 = new SolidBrush(backgroundColor))
+                        {
+                            e.Graphics.FillRectangle(sb2, new Rectangle(Point.Empty, Size));
+                        }
+                    }
+                    e.Graphics.DrawString(device_usb_model.Replace("_"," "), Font, sb, Padding.Left, Padding.Top);
+                    using (var sb2 = new SolidBrush(Color.FromArgb(150, ForeColor)))
+                    {
+                        string status = "";
+
+                        foreach (var item in DevicePersistManager.DeckDevicesFromConnection)
+                        {
+
+
+                            var teste = item.Value.GetConnection();
+                            if (teste != null)
+                            {
+
+                                status = "Sincronizado";
+                            }else
+                            {
+                                status = "Sem sincronia";
+                            }
+                        }
+                       
+                        e.Graphics.DrawString("MODO USB | " + DeviceUsb.State + " | " + status, Font, sb, Padding.Left, Padding.Top + textHeight); ;
+                    }
+                }
+                }
 
         }
     }

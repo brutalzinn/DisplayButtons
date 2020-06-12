@@ -185,15 +185,20 @@ namespace ButtonDeck
                 Adbserver = new AdbServer();
     
   AdbResult = Adbserver.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
-
-               
+              
+               monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
+
+                monitor.DeviceConnected += OnDeviceConnected;
+              //  monitor.Start();
+                
                 foreach (var device in client.GetDevices().ToList())
                 {
                  client.CreateForward(device, "tcp:5095", "tcp:5095",true);
                 client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity",device, null);
-
-                   Thread.Sleep(1200);
+               Thread.Sleep(1200);
+                    //Debug.WriteLine(device.Model);
+                  
                 }
  
                 ClientThread = new ClientThread();
@@ -240,6 +245,7 @@ namespace ButtonDeck
         }
         public static void OnDeviceConnected(object sender, DeviceDataEventArgs e)
         {
+            
             Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
           //  var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
         //    client.ExecuteRemoteCommand("usb", e.Device, null);

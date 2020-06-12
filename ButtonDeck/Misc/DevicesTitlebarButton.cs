@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using SharpAdbClient;
 
 namespace ButtonDeck.Misc
 {
@@ -29,7 +30,7 @@ namespace ButtonDeck.Misc
 
         private void DevicesTitlebarButton_Click(object sender, MouseEventArgs e)
         {
-            
+
             RefreshCurrentDevices();
 
             int controlSize = _frm.TitlebarHeight * 2;
@@ -51,27 +52,77 @@ namespace ButtonDeck.Misc
             frm.Location = new Point(rect.Right - frm.Width, rect.Bottom);
             frm.Deactivate += (s, ee) => frm.Dispose();
             Size controlFinalSize = new Size(frm.DisplayRectangle.Width, controlSize);
-
-            //Load devices
-            foreach (var device in DevicePersistManager.PersistedDevices) {
-                try {
-
-                    var ctrl = new DeckDeviceInformationControl()
+            if (Program.mode == 0)
+            {
+                //Load devices
+                foreach (var device in DevicePersistManager.PersistedDevices)
+                {
+                    try
                     {
-                        DeckDevice = device,
+
+                        var ctrl = new DeckDeviceInformationControl()
+                        {
+                            DeckDevice = device,
+                            Size = controlFinalSize,
+                            ForeColor = _frm.ColorScheme.SecondaryColor,
+                            Dock = DockStyle.Top,
+                            Tag = _frm
+                        };
+
+                        frm.Controls.Add(ctrl);
+
+
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+
+
+
+
+                //  var devices = AdbClient.Instance.GetDevices();
+
+                foreach (var device in Program.client.GetDevices().ToList())
+                {
+                    Thread.Sleep(1500);
+                    Debug.WriteLine("adicionando " + device.Model);
+                    try
+                    {
+                        var ctrl = new DeckDeviceInformationControl()
+                    {
+                      DeviceUsb = device,
+                        device_usb_model = device.Model,
                         Size = controlFinalSize,
                         ForeColor = _frm.ColorScheme.SecondaryColor,
                         Dock = DockStyle.Top,
                         Tag = _frm
                     };
-                   
                     frm.Controls.Add(ctrl);
-                    
-                   
-                } catch (Exception) {
-                    continue;
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+
+
                 }
-            }
+
+
+            
+
+
+
+
+
+        }
+
+
+            
 
             frm.Show();
         }
