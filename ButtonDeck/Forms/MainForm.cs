@@ -30,6 +30,7 @@ using System.Threading;
 using Timer = System.Windows.Forms.Timer;
 using static ButtonDeck.Backend.Utils.DevicePersistManager;
 using ButtonDeck.Backend.Networking.TcpLib;
+using System.Windows.Threading;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -532,193 +533,186 @@ Start_configs();
             });
          
         }
-        delegate void ButtonCreatorCallback();
-         void ButtonCreator()
+        
+        public void ButtonCreator()
         {
 
-            if (InvokeRequired)
-            {
-                ButtonCreatorCallback callback = ButtonCreator;
-                Invoke(callback);
-            }
-            else
+            BeginInvoke(new Action(() =>
             {
 
-
-           
-            panel1.Controls.Clear();
-            int x = 0;
-            int y = 0;
-            int id = 1;
-            for (int con = 0; con < ApplicationSettingsManager.Settings.linha; con++)
-            {
-                for (int lin = 0; lin < ApplicationSettingsManager.Settings.coluna; lin++)
+                panel1.Controls.Clear();
+                int x = 0;
+                int y = 0;
+                int id = 1;
+                for (int con = 0; con < ApplicationSettingsManager.Settings.linha; con++)
                 {
-
-
-
-
-
-                    ImageModernButton control = new ImageModernButton();
-                  
-               
-                    control.Name = "modernButton" + id;
-                  
-                    control.Size = new Size(80, 80);
-                    control.Location = new Point(lin * 110 + 10, con * 110 + 10);
-                    id += 1;
-                    control.MouseUp += (sender, e) =>
+                    for (int lin = 0; lin < ApplicationSettingsManager.Settings.coluna; lin++)
                     {
-                        mouseDown = false;
-                        var popupMenu = new ContextMenuStrip();
 
 
 
 
 
-                        if (sender is ImageModernButton senderB)
-                        {
-                            if (e.Button == MouseButtons.Left && DevicePersistManager.IsVirtualDeviceConnected && ModifierKeys == Keys.Shift)
-                            {
-                                if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item)
-                                {
-                                    item.DeckAction?.OnButtonUp(CurrentDevice);
-                                }
-                                return;
-                            }
+                        ImageModernButton control = new ImageModernButton();
 
 
-                            if (!senderB.DisplayRectangle.Contains(e.Location)) return;
-                            if (e.Button == MouseButtons.Right && CurrentDevice.CurrentFolder.GetDeckItems().Any(c => CurrentDevice.CurrentFolder.GetItemIndex(c) == senderB.CurrentSlot))
-                            {
+                        control.Name = "modernButton" + id;
 
-
-                                popupMenu.Items.Add("Remove item").Click += (s, ee) =>
-                                {
-                                    if (senderB != null)
-                                    {
-                                        if (senderB.Image != Resources.img_folder && senderB.Image != Resources.img_item_default)
-                                        {
-                                            senderB.Image.Dispose();
-                                        }
-                                        senderB.Tag = null;
-                                        senderB.Image = null;
-                                        Buttons_Unfocus(sender, e);
-                                        CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
-                                    }
-                                };
-
-                                popupMenu.Items.Add("Clear image").Click += (s, ee) =>
-                                {
-                                    if (senderB.Image != null && senderB.Image != Resources.img_folder && senderB.Image != Resources.img_item_default)
-                                    {
-                                        senderB.Image.Dispose();
-                                        if (senderB != null && senderB.Tag != null && senderB.Tag is IDeckItem deckItem)
-                                        {
-                                            bool isFolder = deckItem is IDeckFolder;
-                                            senderB.Image = isFolder ? Resources.img_folder : ((IDeckItem)senderB.Tag).GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
-                                        }
-                                    }
-                                };
-
-
-                                popupMenu.Show(sender as Control, e.Location);
-
-
-
-                            }
-
-
-                            return;
-                        }
-
-                    };
-
-                    control.MouseDown += (sender, e) =>
-                    {
-                        if (sender is ImageModernButton senderB)
-                        {
-                            if (e.Button == MouseButtons.Left && DevicePersistManager.IsVirtualDeviceConnected && ModifierKeys == Keys.Shift)
-                            {
-                                if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item)
-                                {
-                                    item.DeckAction?.OnButtonDown(CurrentDevice);
-                                }
-                                return;
-                            }
-                        }
-
-
-                        mouseDown = e.Button == MouseButtons.Left;
-                        mouseDownLoc = Cursor.Position;
-                        if (e.Button == MouseButtons.Right)
-                        {
-
-                            if (sender is ImageModernButton senderT)
-                            {
-                                if (senderT.Tag is DynamicDeckItem == false)
-                                {
-                                    ContextMenuStrip menu = new ContextMenuStrip();
-                                    menu.Items.Add("Adicionar pasta").Click += (s, ee) =>
-                                    {
-
-                                        if (sender is ImageModernButton mb)
-                                        {
-                                            Debug.WriteLine("Adicionando pasta...");
-                                            CurrentDevice.CheckCurrentFolder();
-                                            var newFolder = new DynamicDeckFolder
-                                            {
-                                                DeckImage = new DeckImage(Resources.img_folder)
-                                            };
-                                            newFolder.ParentFolder = CurrentDevice.CurrentFolder;
-                                            newFolder.Add(1, folderUpItem);
-
-                                            CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
-                                            //CurrentDevice.CurrentFolder = newFolder;
-                                            RefreshAllButtons(true);
-
-                                        }
-                                    };
-
-
-                                    menu.Items.Add("Atualizar").Click += (s, ee) =>
-                                    {
-
-                                        if (sender is ImageModernButton mb)
-                                        {
-                                            //CurrentDevice.CurrentFolder = newFolder;
-                                            RefreshAllButtons(true);
-
-                                        }
-                                    };
-
-
-                                    menu.Show(sender as Control, e.Location);
-                                }
-                            }
-                        }
-                    };
-
-                    control.MouseMove += (sender, e) =>
-                    {
-                        if (!mouseDown) return;
-                        int distanceX = Math.Abs(mouseDownLoc.X - Cursor.Position.X);
-                        int distanceY = Math.Abs(mouseDownLoc.Y - Cursor.Position.Y);
-                        IDeckFolder folder = CurrentDevice?.CurrentFolder;
-
-                        var finalPoint = new Point(distanceX, distanceY);
-                        bool didMove = SystemInformation.DragSize.Width * 2 > finalPoint.X && SystemInformation.DragSize.Height * 2 > finalPoint.Y;
-                        if (didMove && !finalPoint.IsEmpty)
+                        control.Size = new Size(80, 80);
+                        control.Location = new Point(lin * 110 + 10, con * 110 + 10);
+                        id += 1;
+                        control.MouseUp += (sender, e) =>
                         {
                             mouseDown = false;
-                            if (sender is ImageModernButton mb)
+                            var popupMenu = new ContextMenuStrip();
+
+
+
+
+
+                            if (sender is ImageModernButton senderB)
                             {
-                                if (mb.Tag != null && mb.Tag is IDeckItem act)
+                                if (e.Button == MouseButtons.Left && DevicePersistManager.IsVirtualDeviceConnected && ModifierKeys == Keys.Shift)
                                 {
-                                    bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
-                                    if (isDoubleClick) return;
-                                    if ((CurrentDevice.CurrentFolder.GetParent() != null && (mb.CurrentSlot == 1))) return;
-                                    mb.DoDragDrop(new DeckItemMoveHelper(act, CurrentDevice.CurrentFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
+                                    if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item)
+                                    {
+                                        item.DeckAction?.OnButtonUp(CurrentDevice);
+                                    }
+                                    return;
+                                }
+
+
+                                if (!senderB.DisplayRectangle.Contains(e.Location)) return;
+                                if (e.Button == MouseButtons.Right && CurrentDevice.CurrentFolder.GetDeckItems().Any(c => CurrentDevice.CurrentFolder.GetItemIndex(c) == senderB.CurrentSlot))
+                                {
+
+
+                                    popupMenu.Items.Add("Remove item").Click += (s, ee) =>
+                                    {
+                                        if (senderB != null)
+                                        {
+                                            if (senderB.Image != Resources.img_folder && senderB.Image != Resources.img_item_default)
+                                            {
+                                                senderB.Image.Dispose();
+                                            }
+                                            senderB.Tag = null;
+                                            senderB.Image = null;
+                                            Buttons_Unfocus(sender, e);
+                                            CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
+                                        }
+                                    };
+
+                                    popupMenu.Items.Add("Clear image").Click += (s, ee) =>
+                                    {
+                                        if (senderB.Image != null && senderB.Image != Resources.img_folder && senderB.Image != Resources.img_item_default)
+                                        {
+                                            senderB.Image.Dispose();
+                                            if (senderB != null && senderB.Tag != null && senderB.Tag is IDeckItem deckItem)
+                                            {
+                                                bool isFolder = deckItem is IDeckFolder;
+                                                senderB.Image = isFolder ? Resources.img_folder : ((IDeckItem)senderB.Tag).GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
+                                            }
+                                        }
+                                    };
+
+
+                                    popupMenu.Show(sender as Control, e.Location);
+
+
+
+                                }
+
+
+                                return;
+                            }
+
+                        };
+
+                        control.MouseDown += (sender, e) =>
+                        {
+                            if (sender is ImageModernButton senderB)
+                            {
+                                if (e.Button == MouseButtons.Left && DevicePersistManager.IsVirtualDeviceConnected && ModifierKeys == Keys.Shift)
+                                {
+                                    if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item)
+                                    {
+                                        item.DeckAction?.OnButtonDown(CurrentDevice);
+                                    }
+                                    return;
+                                }
+                            }
+
+
+                            mouseDown = e.Button == MouseButtons.Left;
+                            mouseDownLoc = Cursor.Position;
+                            if (e.Button == MouseButtons.Right)
+                            {
+
+                                if (sender is ImageModernButton senderT)
+                                {
+                                    if (senderT.Tag is DynamicDeckItem == false)
+                                    {
+                                        ContextMenuStrip menu = new ContextMenuStrip();
+                                        menu.Items.Add("Adicionar pasta").Click += (s, ee) =>
+                                        {
+
+                                            if (sender is ImageModernButton mb)
+                                            {
+                                                Debug.WriteLine("Adicionando pasta...");
+                                                CurrentDevice.CheckCurrentFolder();
+                                                var newFolder = new DynamicDeckFolder
+                                                {
+                                                    DeckImage = new DeckImage(Resources.img_folder)
+                                                };
+                                                newFolder.ParentFolder = CurrentDevice.CurrentFolder;
+                                                newFolder.Add(1, folderUpItem);
+
+                                                CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
+                                            //CurrentDevice.CurrentFolder = newFolder;
+                                            RefreshAllButtons(true);
+
+                                            }
+                                        };
+
+
+                                        menu.Items.Add("Atualizar").Click += (s, ee) =>
+                                        {
+
+                                            if (sender is ImageModernButton mb)
+                                            {
+                                            //CurrentDevice.CurrentFolder = newFolder;
+                                            RefreshAllButtons(true);
+
+                                            }
+                                        };
+
+
+                                        menu.Show(sender as Control, e.Location);
+                                    }
+                                }
+                            }
+                        };
+
+                        control.MouseMove += (sender, e) =>
+                        {
+                            if (!mouseDown) return;
+                            int distanceX = Math.Abs(mouseDownLoc.X - Cursor.Position.X);
+                            int distanceY = Math.Abs(mouseDownLoc.Y - Cursor.Position.Y);
+                            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+
+                            var finalPoint = new Point(distanceX, distanceY);
+                            bool didMove = SystemInformation.DragSize.Width * 2 > finalPoint.X && SystemInformation.DragSize.Height * 2 > finalPoint.Y;
+                            if (didMove && !finalPoint.IsEmpty)
+                            {
+                                mouseDown = false;
+                                if (sender is ImageModernButton mb)
+                                {
+                                    if (mb.Tag != null && mb.Tag is IDeckItem act)
+                                    {
+                                        bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
+                                        if (isDoubleClick) return;
+                                        if ((CurrentDevice.CurrentFolder.GetParent() != null && (mb.CurrentSlot == 1))) return;
+                                        mb.DoDragDrop(new DeckItemMoveHelper(act, CurrentDevice.CurrentFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
                                     //if (act is DynamicDeckItem dI && dI.DeckAction != null)
                                     //{
                                     //    Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(act), true).FirstOrDefault() as Label;
@@ -727,96 +721,95 @@ Start_configs();
                                     //    Debug.WriteLine("Clicando no " + dI.DeckAction.GetActionName());
                                     //}
                                 }
+                                }
                             }
-                        }
-                    };
+                        };
 
 
-                    control.Click += (sender, e) => {
-                        Debug.WriteLine("CLICANDO");
-                        Debug.WriteLine(control.Name);
-
-                        lastClick.Stop();
-                        bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
-                        if (sender is ImageModernButton mb)
+                        control.Click += (sender, e) =>
                         {
-                            if (mb.Tag != null && mb.Tag is IDeckItem item)
+                            Debug.WriteLine("CLICANDO");
+                            Debug.WriteLine(control.Name);
+
+                            lastClick.Stop();
+                            bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
+                            if (sender is ImageModernButton mb)
                             {
-                                if (item is IDeckFolder folder)
+                                if (mb.Tag != null && mb.Tag is IDeckItem item)
                                 {
-                                    if (!isDoubleClick)
+                                    if (item is IDeckFolder folder)
                                     {
-                                        FocusItem(mb, item);
+                                        if (!isDoubleClick)
+                                        {
+                                            FocusItem(mb, item);
+                                            goto end;
+                                        }
+                                        //Navigate to the folder
+                                        CurrentDevice.CurrentFolder = folder;
+                                        RefreshAllButtons();
                                         goto end;
                                     }
-                                    //Navigate to the folder
-                                    CurrentDevice.CurrentFolder = folder;
-                                    RefreshAllButtons();
-                                    goto end;
-                                }
-                                if (CurrentDevice.CurrentFolder.GetParent() != null)
-                                {
-                                    //Not on the main folder
-                                    if (mb.CurrentSlot == 1)
+                                    if (CurrentDevice.CurrentFolder.GetParent() != null)
                                     {
-                                        CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
-                                        RefreshAllButtons();
-                                        lastClick.Reset();
-                                        return;
+                                        //Not on the main folder
+                                        if (mb.CurrentSlot == 1)
+                                        {
+                                            CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
+                                            RefreshAllButtons();
+                                            lastClick.Reset();
+                                            return;
+                                        }
                                     }
+
+                                    //Show button panel with settable properties
+                                    FocusItem(mb, item);
+
+                                    lastClick.Reset();
                                 }
-
-                                //Show button panel with settable properties
-                                FocusItem(mb, item);
-
+                                else
+                                {
+                                    Buttons_Unfocus(sender, e);
+                                }
+                                return;
+                                end:
                                 lastClick.Reset();
+                                lastClick.Start();
                             }
-                            else
-                            {
-                                Buttons_Unfocus(sender, e);
-                            }
-                            return;
-                            end:
-                            lastClick.Reset();
-                            lastClick.Start();
-                        }
 
 
-                       RefreshAllButtons(true);
+                            RefreshAllButtons(true);
 
-                    };
-                     //    control.Controls.Add(control2);
+                        };
+                        //    control.Controls.Add(control2);
                         panel1.Controls.Add(control);
 
 
 
 
-
-//SetControl(control);
-
-
+                        if (Globals.calc < id)
+                        {
 
 
-                    if (Globals.calc < id)
-                    {
-                                         
+                            ApplyTheme(panel1);
+                            Globals.can_refresh = true;
 
-                        ApplyTheme(panel1);
-                        Globals.can_refresh = true;
-                      
-                     panel1.Refresh();
-                    
+
+                        }
+
+                        Application.DoEvents();
+                        Refresh();
                     }
+
+
+
                 }
 
+            }));
 
-           
-            }
-            }
-
+            // Application.DoEvents();
 
         }
-    
+
         public void RefreshAllButtons(bool sendToDevice = true)
         {
 
@@ -985,17 +978,17 @@ Start_configs();
             
 
         }
+        
+
         public void Start_configs()
             {
-          Thread thread1 = new Thread(() => ButtonCreator());
-            thread1.SetApartmentState(ApartmentState.STA);
-     
-            thread1.Start();
-           
-
+       Thread thread1 = new Thread(() => ButtonCreator());
+        //  thread1.SetApartmentState(ApartmentState.STA);
+         thread1.Start();
+            //   thread1.Join();
             //      ApplyTheme(panel1);
-         
-                var con = MainForm.Instance.CurrentDevice.GetConnection();
+
+            var con = MainForm.Instance.CurrentDevice.GetConnection();
                 if (con != null)
                 {
 
@@ -1040,7 +1033,7 @@ Start_configs();
 
                     Start_configs();
                 }
-            }));
+             }));
 
             e.Device.ButtonInteraction += Device_ButtonInteraction;
         }
