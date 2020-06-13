@@ -81,7 +81,11 @@ namespace ButtonDeck.Forms
                 }
 
                 Shown += handler;
-                t.Start();
+                if(Program.mode == 0)
+                {
+  t.Start();
+                }
+              
                 NotifyIcon icon = new NotifyIcon
                 {
                     Icon = Icon,
@@ -118,52 +122,7 @@ namespace ButtonDeck.Forms
 
 
         }
-        public void RefreshCurrentDevices()
-        {
-            Thread th = new Thread(UpdateConnectedDevices);
-            th.Start();
-        }
-        private void UpdateConnectedDevices()
-        {
-
-            if (Program.mode == 0)
-            {
-
-                List<Guid> toRemove = new List<Guid>();
-                DevicePersistManager.DeckDevicesFromConnection.All(c => {
-
-                    if (!Program.ServerThread.TcpServer.Connections.OfType<Backend.Networking.TcpLib.ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
-                    {
-                        toRemove.Add(c.Key);
-                    }
-                    return true;
-                });
-                toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
-
-
-            }
-            else
-            {
-
-                List<Guid> toRemove = new List<Guid>();
-                DevicePersistManager.DeckDevicesFromConnection.All(c => {
-                    if (!Program.ClientThread.TcpClient.Connections.OfType<Backend.Networking.TcpLib.ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
-                    {
-                        toRemove.Add(c.Key);
-                    }
-                    return true;
-                });
-                toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
-
-
-
-
-
-
-
-
-            }
-        }
+       
         public void ChangeButtonsVisibility(bool visible)
         {
             visible = true;
@@ -321,16 +280,11 @@ namespace ButtonDeck.Forms
 
 
 
-          if(Program.mode == 1)
+        if(Program.mode == 1)
             {
 
-StartLoad();
-            
-          
-Start_configs();
-
+                StartUsbMode();
             }
-            
             
 
             warning_label.ForeColor = ColorScheme.SecondaryColor;
@@ -342,6 +296,14 @@ Start_configs();
         private bool _selected;
         private DeckDevice _deckDevice;
         private string deviceNamePrefix;
+        public void StartUsbMode()
+        {
+StartLoad();
+            
+          
+Start_configs();
+
+        }
         private void ApplySidebarTheme(Control parent)
         {
             //Headers have the theme's secondary color as background
@@ -950,7 +912,25 @@ Start_configs();
          
             foreach (var device in DevicePersistManager.PersistedDevices.ToList())
             {
+                DevicesTitlebarButton item = new DevicesTitlebarButton(this);
+                Timer t = new Timer
+                {
+                    //We should run it every 2 seconds and half.
+                    Interval = 3000
+                };
+                t.Tick += (s, e) => {
+                    //The discovery works by reading the Text from the button
+                    item.RefreshCurrentDevices();
+                };
 
+                void handler(object s, EventArgs e)
+                {
+                    Hide();
+                    Shown -= handler;
+                }
+
+                Shown += handler;
+                t.Start();
                 Debug.WriteLine("CHEGOU 3");
                 CurrentDevice = device;
                 IsVirtualDeviceConnected = true;
@@ -971,7 +951,7 @@ Start_configs();
                     }
                 }
                 DeviceConnected += tempConnected;
-            
+               
             }
             
              

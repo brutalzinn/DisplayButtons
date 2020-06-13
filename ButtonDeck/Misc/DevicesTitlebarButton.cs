@@ -144,6 +144,10 @@ namespace ButtonDeck.Misc
             th.Start();
         }
 
+
+
+
+
         public int CurrentConnections {
             get {
                 if(Program.mode == 0)
@@ -169,30 +173,19 @@ namespace ButtonDeck.Misc
             set => base.Text = value;
         }
 
+  
 
-        private void UpdateConnectedDevices()
+            private void UpdateConnectedDevices()
         {
 
-            if(Program.mode == 0)
-            {
-               
-                List<Guid> toRemove = new List<Guid>();
-            DevicePersistManager.DeckDevicesFromConnection.All(c => {
-                if (!Program.ServerThread.TcpServer.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key)) {
-                    toRemove.Add(c.Key);
-                }
-                return true;
-            });
-            toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
-
-                
-            }
-            else
+            if (Program.mode == 0)
             {
 
+
                 List<Guid> toRemove = new List<Guid>();
-                DevicePersistManager.DeckDevicesFromConnection.All(c => {
-                    if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
+                DevicePersistManager.DeckDevicesFromConnection.All(c =>
+                {
+                    if (!Program.ServerThread.TcpServer.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
                     {
                         toRemove.Add(c.Key);
                     }
@@ -200,6 +193,30 @@ namespace ButtonDeck.Misc
                 });
                 toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
 
+            }
+            else
+            {
+
+              
+                    List<Guid> toRemover = new List<Guid>();
+                DevicePersistManager.PersistedDevices.All(c =>
+                {
+
+                    if (c.GetConnection() == null)
+                    {
+
+                        Program.ClientThread.Stop();
+                        Program.ClientThread = new Misc.ClientThread();
+                        Program.ClientThread.Start();
+                        MainForm.Instance.Invoke(new Action(() => {
+                            MainForm.Instance.ButtonCreator();
+                        }));
+                        toRemover.Add(c.DeviceGuid);
+                    }
+                    return true;
+                });
+                toRemover.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+         
 
 
 

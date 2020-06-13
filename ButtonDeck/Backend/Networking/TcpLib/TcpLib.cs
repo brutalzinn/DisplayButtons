@@ -409,15 +409,15 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         
             lock (this)
             {
-            
-             
+
+               
                 IPAddress ip_usable = IPAddress.Parse("127.0.0.1");
 
                 IPEndPoint remoteEP = new IPEndPoint(ip_usable, _port);
 
                 Socket conn = (Socket)ar.AsyncState;
 
-               conn.EndConnect(ar);
+          //    conn.EndConnect(ar);
               
                 //Start servicing a new connection
                 ConnectionState st = new ConnectionState
@@ -431,12 +431,14 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     //Queue the rest of the job to be executed latter
                     ThreadPool.QueueUserWorkItem(AcceptConnection, st);
 
+           
+
 
                 //Resume the remoteEP callback loop
                 // _listener.Close();
-               // _listener.Disconnect(false);
-             //   _listener.begin(remoteEP,ConnectionReady, null);
-             }
+                // _listener.Disconnect(false);
+                //   _listener.begin(remoteEP,ConnectionReady, null);
+            }
         }
 
 
@@ -472,13 +474,13 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             {
                 Debug.WriteLine("REICEIVED DATRA READY");
                 ConnectionState st = ar.AsyncState as ConnectionState;
-        //        st._conn.EndReceive(ar);
+           st._conn.EndReceive(ar);
                 //Im considering the following condition as a signal that the
                 //remote host droped the connection.
                 if (st._conn.Available == 0)
                 {
                     Debug.WriteLine("drop connection");
-              //      DropConnection(st);
+           DropConnection(st);
                 }
                 else
                 {
@@ -552,6 +554,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                st._conn.Close();
                 if (_connections.Contains(st))
                     _connections.Remove(st);
+      
             }
         }
 
