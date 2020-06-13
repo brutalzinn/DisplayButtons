@@ -47,11 +47,11 @@ namespace ButtonDeck.Forms
                 return instance;
             }
         }
-
+        static Timer timer = new Timer();
         private const int CLIENT_ARRAY_LENGHT = 1024 * 50;
 
         #region Constructors
-        public static Timer timer {get;set;}
+      
 
         public MainForm()
         {
@@ -305,7 +305,7 @@ namespace ButtonDeck.Forms
         public void StartUsbMode()
         {
        //     StartLoad();
-         StartLoad();
+         StartLoad(true);
 
             Start_configs();
 
@@ -913,80 +913,80 @@ namespace ButtonDeck.Forms
             }));
         }
 
-        
-  
 
 
-        
-        public void StartLoad()
+
+
+     
+        public void StartLoad(bool restart)
         {
 
-            
-            DevicesTitlebarButton item = new DevicesTitlebarButton(this);
-            foreach (var device in DevicePersistManager.PersistedDevices.ToList())
-            {
-               
-                Debug.WriteLine("CHEGOU 3");
-                CurrentDevice = device;
-                IsVirtualDeviceConnected = true;
-                OnDeviceConnected(this, device);
-                ChangeButtonsVisibility(true);
-                RefreshAllButtons(false);
-                ChangeToDevice(device);
-               
-                void tempConnected(object s, DeviceEventArgs ee)
-                {
-                    if (ee.Device.DeviceGuid == device.DeviceGuid) return;
-                    DeviceConnected -= tempConnected;
-                    if (IsVirtualDeviceConnected)
-                    {
-                        //We had a virtual device.
-                        OnDeviceDisconnected(this, device);
-                        IsVirtualDeviceConnected = false;
-                        ChangeButtonsVisibility(false);
-                    }
-                }
-                DeviceConnected += tempConnected;
-               
-            }
-           
-
-            timer = new Timer()
-            {
-                //We should run it every 2 seconds and half.
-                Interval = 2000
-            };
-            timer.Tick += (s, e) => {
-                //The discovery works by reading the Text from the button
-
-                if (Program.mode == 0)
-                {
-
-                    item.RefreshCurrentDevices();
-
-                }
-                else
-                {
-
-                    item.RefreshCurrentUsb();
-
-                }
-
-            };
-
-            void handler(object s, EventArgs e)
-            {
-                Hide();
-                Shown -= handler;
-            }
-
-            Shown += handler;
-           item.MountUsbDevices(); 
             DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
 
             DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
+           
+            DevicesTitlebarButton item = new DevicesTitlebarButton(this);
+        
+                foreach (var device in DevicePersistManager.PersistedDevices.ToList())
+                {
 
+                    Debug.WriteLine("CHEGOU 3");
+                    CurrentDevice = device;
+                    IsVirtualDeviceConnected = true;
+                    OnDeviceConnected(this, device);
+                    ChangeButtonsVisibility(true);
+                    RefreshAllButtons(false);
+                    ChangeToDevice(device);
 
+                    void tempConnected(object s, DeviceEventArgs ee)
+                    {
+                        if (ee.Device.DeviceGuid == device.DeviceGuid) return;
+                        DeviceConnected -= tempConnected;
+                        if (IsVirtualDeviceConnected)
+                        {
+                            //We had a virtual device.
+                            OnDeviceDisconnected(this, device);
+                            IsVirtualDeviceConnected = false;
+                            ChangeButtonsVisibility(false);
+                        }
+                    }
+                    DeviceConnected += tempConnected;
+
+                }
+
+          
+            timer = new Timer()
+            {
+
+                Interval = 3000
+            };
+          
+            timer.Tick += (s, e) => {
+                //The discovery works by reading the Text from the button
+
+              
+                    item.RefreshCurrentDevices();
+
+              
+
+                    item.RefreshCurrentUsb();
+
+                
+
+            };
+
+            
+           
+          item.MountUsbDevices();
+            if (restart)
+            {
+
+            timer.Start();
+            }
+            else
+            {
+                timer.Stop();
+            }
             //    TitlebarButtons.Add(item);
             //   timer.Start();
             //Right now, we use the window redraw for device discovery purposes.

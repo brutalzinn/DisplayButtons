@@ -93,7 +93,7 @@ namespace ButtonDeck.Forms
                                 Program.ClientThread = new Misc.ClientThread();
                                 Program.ClientThread.Start();
 
-                                MainForm.Instance.StartLoad();
+                                MainForm.Instance.StartLoad(true);
                                 MainForm.Instance.Start_configs();
                             }
                         }

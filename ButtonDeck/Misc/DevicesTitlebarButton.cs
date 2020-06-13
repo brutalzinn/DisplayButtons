@@ -165,7 +165,7 @@ namespace ButtonDeck.Misc
                 DevicePersistManager.PersistedDevices.Any(c =>
                 {
                     Debug.WriteLine("TENTANDO COM " + device.State);
-                    if (c.GetConnection() != null && device != null)
+                    if (device != null)
                     {
                         
                         c.DeviceUsb = device;
@@ -306,22 +306,30 @@ private void UpdateConnectedDevices()
                     else
                     {
 
-                        if(item.DeviceUsb != null) {
-                            Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
-                            Program.client.RemoveAllForwards(item.DeviceUsb);
-                            Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
-                            Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", item.DeviceUsb, null);
-                            Thread.Sleep(1400);
-                            Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", item.DeviceUsb, null);
-                            Thread.Sleep(1200);
-                            Program.ClientThread.Stop();
-                            Program.ClientThread = new Misc.ClientThread();
-                            Program.ClientThread.Start();
-                            MainForm.Instance.Invoke(new Action(() =>
-                            {
-                                MainForm.Instance.StartLoad();
-                                MainForm.Instance.Start_configs();
-                            }));
+                       
+                        if (item.DeviceUsb != null)
+                        {
+                            
+                                Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
+                                Program.client.RemoveAllForwards(item.DeviceUsb);
+                                Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
+                                //  Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", item.DeviceUsb, null);
+                                //     Thread.Sleep(1400);
+                                //      Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", item.DeviceUsb, null);
+                                //        Thread.Sleep(1200);
+                                Program.ClientThread.Stop();
+                                Program.ClientThread = new Misc.ClientThread();
+                                Program.ClientThread.Start();
+                                MainForm.Instance.Invoke(new Action(() =>
+                                {
+                                    if(item.GetConnection() != null)
+                                    {
+                                     MainForm.Instance.StartLoad(false);
+                                    MainForm.Instance.Start_configs();
+                                    }
+                                   
+                                }));
+                            
                         }
                     }
 
