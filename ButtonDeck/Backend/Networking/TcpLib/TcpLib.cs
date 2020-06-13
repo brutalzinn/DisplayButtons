@@ -417,7 +417,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
 
                 Socket conn = (Socket)ar.AsyncState;
 
-          //    conn.EndConnect(ar);
+       conn.EndConnect(ar);
               
                 //Start servicing a new connection
                 ConnectionState st = new ConnectionState

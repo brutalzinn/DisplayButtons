@@ -81,19 +81,21 @@ namespace ButtonDeck.Forms
                     {
                         if (Tag is MainForm frm)
                         {
-                            Program.client.RemoveAllForwards(DeviceUsb);
-                            Program.client.CreateForward(DeviceUsb, "tcp:5095", "tcp:5095", true);
-                            Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", DeviceUsb, null);
-                            Thread.Sleep(1400);
-                            Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", DeviceUsb, null);
-                            Thread.Sleep(1200);
-                            Program.ClientThread.Stop();
-                            Program.ClientThread = new Misc.ClientThread();
-                            Program.ClientThread.Start();
+                            if (IsVirtualDeviceConnected)
+                            {
+                                Program.client.RemoveAllForwards(DeviceUsb);
+                                Program.client.CreateForward(DeviceUsb, "tcp:5095", "tcp:5095", true);
+                                Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", DeviceUsb, null);
+                                Thread.Sleep(1400);
+                                Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", DeviceUsb, null);
+                                Thread.Sleep(1200);
+                                Program.ClientThread.Stop();
+                                Program.ClientThread = new Misc.ClientThread();
+                                Program.ClientThread.Start();
 
-                            MainForm.Instance.StartLoad();
-                            MainForm.Instance.Start_configs();
-
+                                MainForm.Instance.StartLoad();
+                                MainForm.Instance.Start_configs();
+                            }
                         }
                     }
                 }

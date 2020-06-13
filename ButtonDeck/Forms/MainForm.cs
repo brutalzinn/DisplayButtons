@@ -31,6 +31,8 @@ using Timer = System.Windows.Forms.Timer;
 using static ButtonDeck.Backend.Utils.DevicePersistManager;
 using ButtonDeck.Backend.Networking.TcpLib;
 using System.Windows.Threading;
+using ConnectionState = ButtonDeck.Backend.Networking.TcpLib.ConnectionState;
+using SharpAdbClient;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -49,10 +51,10 @@ namespace ButtonDeck.Forms
         private const int CLIENT_ARRAY_LENGHT = 1024 * 50;
 
         #region Constructors
+        public static Timer timer {get;set;}
 
         public MainForm()
         {
-
 
             instance = this;
             InitializeComponent();
@@ -64,14 +66,22 @@ namespace ButtonDeck.Forms
             if (Program.Silent) {
                 //Right now, we use the window redraw for device discovery purposes.
                 //We need to simulate that with a timer.
-                Timer t = new Timer
+                 Timer t = new Timer
                 {
                     //We should run it every 2 seconds and half.
-                    Interval = 2500
+                    Interval = 2000
                 };
                 t.Tick += (s, e) => {
                     //The discovery works by reading the Text from the button
-                    item.RefreshCurrentDevices();
+                 
+
+                        item.RefreshCurrentDevices();
+
+                    
+                   
+                    
+                 
+                  
                 };
 
                 void handler(object s, EventArgs e)
@@ -81,10 +91,9 @@ namespace ButtonDeck.Forms
                 }
 
                 Shown += handler;
-                if(Program.mode == 0)
-                {
-  t.Start();
-                }
+
+             t.Start();
+             
               
                 NotifyIcon icon = new NotifyIcon
                 {
@@ -119,7 +128,7 @@ namespace ButtonDeck.Forms
             }
             ColorSchemeCentral.ThemeChanged += (s, e) =>
             ApplySidebarTheme(shadedPanel1);
-
+            
 
         }
        
@@ -138,10 +147,7 @@ namespace ButtonDeck.Forms
             }));
         }
 
-        ~MainForm()
-        {
-            instance = null;
-        }
+   
 
         #endregion
 
@@ -176,13 +182,17 @@ namespace ButtonDeck.Forms
             base.OnLoad(e);
 
 
+          
+
+            if(Program.mode == 0)
+            {
 
 
-
+           
             DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
-
+         
             DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
-
+            }
 
 
             var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
@@ -276,16 +286,12 @@ namespace ButtonDeck.Forms
 
 
 
+            StartUsbMode();
 
 
 
 
-        if(Program.mode == 1)
-            {
 
-                StartUsbMode();
-            }
-            
 
             warning_label.ForeColor = ColorScheme.SecondaryColor;
         }
@@ -298,10 +304,10 @@ namespace ButtonDeck.Forms
         private string deviceNamePrefix;
         public void StartUsbMode()
         {
-StartLoad();
-            
-          
-Start_configs();
+       //     StartLoad();
+         StartLoad();
+
+            Start_configs();
 
         }
         private void ApplySidebarTheme(Control parent)
@@ -499,7 +505,7 @@ Start_configs();
         public void ButtonCreator()
         {
 
-            BeginInvoke(new Action(() =>
+            Invoke(new Action(() =>
             {
 
                 panel1.Controls.Clear();
@@ -906,31 +912,20 @@ Start_configs();
                 Refresh();
             }));
         }
+
+        
+  
+
+
+        
         public void StartLoad()
         {
 
-         
+            
+            DevicesTitlebarButton item = new DevicesTitlebarButton(this);
             foreach (var device in DevicePersistManager.PersistedDevices.ToList())
             {
-                DevicesTitlebarButton item = new DevicesTitlebarButton(this);
-                Timer t = new Timer
-                {
-                    //We should run it every 2 seconds and half.
-                    Interval = 3000
-                };
-                t.Tick += (s, e) => {
-                    //The discovery works by reading the Text from the button
-                    item.RefreshCurrentDevices();
-                };
-
-                void handler(object s, EventArgs e)
-                {
-                    Hide();
-                    Shown -= handler;
-                }
-
-                Shown += handler;
-                t.Start();
+               
                 Debug.WriteLine("CHEGOU 3");
                 CurrentDevice = device;
                 IsVirtualDeviceConnected = true;
@@ -938,6 +933,7 @@ Start_configs();
                 ChangeButtonsVisibility(true);
                 RefreshAllButtons(false);
                 ChangeToDevice(device);
+               
                 void tempConnected(object s, DeviceEventArgs ee)
                 {
                     if (ee.Device.DeviceGuid == device.DeviceGuid) return;
@@ -953,13 +949,69 @@ Start_configs();
                 DeviceConnected += tempConnected;
                
             }
-            
-             
-            
+           
+
+            timer = new Timer()
+            {
+                //We should run it every 2 seconds and half.
+                Interval = 2000
+            };
+            timer.Tick += (s, e) => {
+                //The discovery works by reading the Text from the button
+
+                if (Program.mode == 0)
+                {
+
+                    item.RefreshCurrentDevices();
+
+                }
+                else
+                {
+
+                    item.RefreshCurrentUsb();
+
+                }
+
+            };
+
+            void handler(object s, EventArgs e)
+            {
+                Hide();
+                Shown -= handler;
+            }
+
+            Shown += handler;
+           item.MountUsbDevices(); 
+            DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
+
+            DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
+
+
+            //    TitlebarButtons.Add(item);
+            //   timer.Start();
+            //Right now, we use the window redraw for device discovery purposes.
+            //We need to simulate that with a timer.
 
         }
-        
 
+        public static void DeviceAdbConnected(object sender, DeviceDataEventArgs e)
+        {
+            Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
+
+            Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
+
+//        timer.Start();
+
+
+
+
+        }
+        public static void DeviceAdbDisconnected(object sender, DeviceDataEventArgs e)
+        {
+            Console.WriteLine("Device desconectado.....");
+
+         //   timer.Stop();
+        }
         public void Start_configs()
             {
        Thread thread1 = new Thread(() => ButtonCreator());
@@ -975,9 +1027,9 @@ Start_configs();
 
                     var Matriz = new MatrizPacket();
                     con.SendPacket(Matriz);
-    
+         RefreshAllButtons(true);
                 }
-          RefreshAllButtons(true);
+     
           
 
 
@@ -986,7 +1038,7 @@ Start_configs();
         }
         public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
-
+           
             Invoke(new Action(() => {
 
 
@@ -1014,7 +1066,8 @@ Start_configs();
                     Start_configs();
                 }
              }));
-
+ Debug.WriteLine("DEVICE CONNNNECTEDDED");
+            timer.Stop();
             e.Device.ButtonInteraction += Device_ButtonInteraction;
         }
 
@@ -1249,6 +1302,8 @@ Start_configs();
 
         private void DevicePersistManager_DeviceDisconnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
+            timer.Start();
+            Debug.WriteLine("DEVICE DESCONECTTED");
             if (e.Device.DeviceGuid == CurrentDevice.DeviceGuid) {
                 if (!DevicePersistManager.IsVirtualDeviceConnected) CurrentDevice = null;
                 //Try to find a new device to be the current one.

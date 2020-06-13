@@ -90,7 +90,20 @@ namespace ButtonDeck.Misc
                 var product_manufacter = new ConsoleOutputReceiver();
                 foreach (var device in Program.client.GetDevices().ToList())
                 {
-                   if(device.Model == "")
+                    DevicePersistManager.PersistedDevices.Any(c =>
+                    {
+
+                   if( c.GetConnection() != null && device != null)
+                        {
+
+                            c.DeviceUsb = device;
+
+                        }
+
+
+                        return true;
+                    });
+                    if (device.Model == "")
                     {
                         Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
                         Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
@@ -137,14 +150,69 @@ namespace ButtonDeck.Misc
 
             frm.Show();
         }
+        public void MountUsbDevices()
+        {
 
-        public void RefreshCurrentDevices()
+
+
+    
+            var product_name = new ConsoleOutputReceiver();
+            var product_manufacter = new ConsoleOutputReceiver();
+            try
+            {
+                foreach (var device in Program.client.GetDevices().ToList())
+            {
+                DevicePersistManager.PersistedDevices.Any(c =>
+                {
+                    Debug.WriteLine("TENTANDO COM " + device.State);
+                    if (c.GetConnection() != null && device != null)
+                    {
+                        
+                        c.DeviceUsb = device;
+                        Debug.WriteLine("ASSIMILANDO DEVICE AO USB.");
+                    }
+
+
+                    return true;
+                });
+                if (device.Model == "")
+                {
+                    Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
+                    Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
+
+                    Debug.WriteLine("alterando nome não reconhecido para : " + product_name);
+
+                    device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                    device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                }
+                Debug.WriteLine("adicionando " + device.Model);
+              
+
+               
+               
+
+            }
+
+ }
+ catch (Exception)
+                {
+                   
+                }
+
+
+
+        }
+    public void RefreshCurrentDevices()
         {
             Thread th = new Thread(UpdateConnectedDevices);
             th.Start();
         }
-
-
+        public void RefreshCurrentUsb()
+        {
+            Thread th = new Thread(AutoConnectedUsb);
+            th.Start();
+        }
+     
 
 
 
@@ -173,9 +241,9 @@ namespace ButtonDeck.Misc
             set => base.Text = value;
         }
 
-  
 
-            private void UpdateConnectedDevices()
+
+private void UpdateConnectedDevices()
         {
 
             if (Program.mode == 0)
@@ -197,26 +265,19 @@ namespace ButtonDeck.Misc
             else
             {
 
-              
-                    List<Guid> toRemover = new List<Guid>();
-                DevicePersistManager.PersistedDevices.All(c =>
+
+                List<Guid> toRemove = new List<Guid>();
+                DevicePersistManager.DeckDevicesFromConnection.All(c =>
                 {
-
-                    if (c.GetConnection() == null)
+                    if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
                     {
-
-                        Program.ClientThread.Stop();
-                        Program.ClientThread = new Misc.ClientThread();
-                        Program.ClientThread.Start();
-                        MainForm.Instance.Invoke(new Action(() => {
-                            MainForm.Instance.ButtonCreator();
-                        }));
-                        toRemover.Add(c.DeviceGuid);
+                        toRemove.Add(c.Key);
                     }
                     return true;
                 });
-                toRemover.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
-         
+                toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+
+
 
 
 
@@ -226,7 +287,54 @@ namespace ButtonDeck.Misc
 
             }
         }
+        private void AutoConnectedUsb()
+        {
+            List<Guid> toRemove = new List<Guid>();
 
+            foreach(var item in DevicePersistManager.PersistedDevices.ToList())
+            {
+                
+
+             
+                if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
+                {
+                    
+                    if (item.GetConnection() != null)
+                    {
+
+                    }
+                    else
+                    {
+
+                        if(item.DeviceUsb != null) {
+                            Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
+                            Program.client.RemoveAllForwards(item.DeviceUsb);
+                            Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
+                            Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", item.DeviceUsb, null);
+                            Thread.Sleep(1400);
+                            Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", item.DeviceUsb, null);
+                            Thread.Sleep(1200);
+                            Program.ClientThread.Stop();
+                            Program.ClientThread = new Misc.ClientThread();
+                            Program.ClientThread.Start();
+                            MainForm.Instance.Invoke(new Action(() =>
+                            {
+                                MainForm.Instance.StartLoad();
+                                MainForm.Instance.Start_configs();
+                            }));
+                        }
+                    }
+
+                    toRemove.Add(item.DeviceGuid);
+
+                }
+                
+               
+              
+            }
+            toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+
+        }
         public override int Width { get => TextRenderer.MeasureText(Text, Font).Width + 16; set => base.Width = value; }
 
     }

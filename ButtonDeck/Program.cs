@@ -139,6 +139,7 @@ namespace ButtonDeck
 #else
             Silent = args.Any(c => c.ToLower() == "/s");
 #endif
+     
             errorText = $"An error occured! And it was saved to a file called {errorFileName}." + Environment.NewLine + "Please send this to the developer of the application.";
 
             Application.ThreadException += Application_ThreadException;
@@ -176,7 +177,7 @@ namespace ButtonDeck
             }
             else
             {
-
+               // Silent = true;
                 Debug.WriteLine("MODO USB");
                 mode = 1;
                 Adbserver = new AdbServer();
@@ -185,9 +186,8 @@ namespace ButtonDeck
               
                monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
-
-                monitor.DeviceConnected += OnDeviceConnected;
-                 monitor.Start();
+                monitor.Start();
+              
                 List<DeviceData> device_list = new List<DeviceData>();
                 var receiver = new ConsoleOutputReceiver();
                 foreach (var device in client.GetDevices().ToList())
@@ -250,21 +250,7 @@ namespace ButtonDeck
              DevicePersistManager.SaveDevices();
                 Trace.Flush();
         }
-        public static void OnDeviceConnected(object sender, DeviceDataEventArgs e)
-        {
-       
-            Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
-          //  var client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
-        //    client.ExecuteRemoteCommand("usb", e.Device, null);
-         //   client.CreateForward(e.Device, 5095, 5095);
-  //          client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", e.Device, null);
-
-          //  am start -S - D net.nickac.buttondeck / android.app.MainActivity--es name MYNAME--es email test @gmail.com
-           //   ClientThread = new ClientThread();
-         //   ClientThread.Start();
-            Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
-
-        }
+    
         private static void NetworkChange_NetworkAddressChanged(object sender, EventArgs e)
         {
             if(mode ==0)

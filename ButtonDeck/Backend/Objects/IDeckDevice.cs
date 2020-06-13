@@ -1,4 +1,5 @@
 ﻿using ButtonDeck.Backend.Networking.Implementation;
+using SharpAdbClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,7 @@ namespace ButtonDeck.Backend.Objects
             DeviceName = deviceName;
             MainFolder = new Implementation.DynamicDeckFolder();
         }
+        public DeviceData DeviceUsb { get; set; }
 
         public Guid DeviceGuid { get; set; }
         public String DeviceName { get; set; }
