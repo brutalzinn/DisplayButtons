@@ -153,24 +153,7 @@ namespace ButtonDeck.Forms
 
         #region Properties
 
-        public static int ConnectedDevices {
-            get
-            {
-
-
-                if (Program.mode == 0)
-                {
-
-                    return Program.ServerThread.TcpServer.CurrentConnections;
-
-                }
-                else
-                {
-
-                    return Program.ClientThread.TcpClient.CurrentConnections;
-                }
-            }
-        }
+      
         public DeckDevice CurrentDevice { get; set; }
 
         #endregion
@@ -182,17 +165,11 @@ namespace ButtonDeck.Forms
             base.OnLoad(e);
 
 
-          
-
-            if(Program.mode == 0)
-            {
+      
 
 
-           
-            DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
-         
-            DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
-            }
+
+
 
 
             var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
@@ -286,7 +263,7 @@ namespace ButtonDeck.Forms
 
 
 
-            StartUsbMode();
+          
 
 
 
@@ -304,11 +281,13 @@ namespace ButtonDeck.Forms
         private string deviceNamePrefix;
         public void StartUsbMode()
         {
-       //     StartLoad();
-         StartLoad(true);
+            //     StartLoad();
+            //   StartLoad(true);
+            DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
 
-            Start_configs();
+            DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
 
+      
         }
         private void ApplySidebarTheme(Control parent)
         {
@@ -921,72 +900,21 @@ namespace ButtonDeck.Forms
         public void StartLoad(bool restart)
         {
 
-            DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
+//            DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
 
-            DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
+           // DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
            
             DevicesTitlebarButton item = new DevicesTitlebarButton(this);
         
                 foreach (var device in DevicePersistManager.PersistedDevices.ToList())
                 {
 
-                    Debug.WriteLine("CHEGOU 3");
-                    CurrentDevice = device;
-                    IsVirtualDeviceConnected = true;
-                    OnDeviceConnected(this, device);
-                    ChangeButtonsVisibility(true);
-                    RefreshAllButtons(false);
-                    ChangeToDevice(device);
-
-                    void tempConnected(object s, DeviceEventArgs ee)
-                    {
-                        if (ee.Device.DeviceGuid == device.DeviceGuid) return;
-                        DeviceConnected -= tempConnected;
-                        if (IsVirtualDeviceConnected)
-                        {
-                            //We had a virtual device.
-                            OnDeviceDisconnected(this, device);
-                            IsVirtualDeviceConnected = false;
-                            ChangeButtonsVisibility(false);
-                        }
-                    }
-                    DeviceConnected += tempConnected;
-
-                }
-
-          
-            timer = new Timer()
-            {
-
-                Interval = 3000
-            };
-          
-            timer.Tick += (s, e) => {
-                //The discovery works by reading the Text from the button
-
-              
-                    item.RefreshCurrentDevices();
-
-              
-
-                    item.RefreshCurrentUsb();
-
-                
-
-            };
-
-            
+  
            
-          item.MountUsbDevices();
-            if (restart)
-            {
+                 
+            }
 
-            timer.Start();
-            }
-            else
-            {
-                timer.Stop();
-            }
+
             //    TitlebarButtons.Add(item);
             //   timer.Start();
             //Right now, we use the window redraw for device discovery purposes.
@@ -1042,14 +970,14 @@ namespace ButtonDeck.Forms
             Invoke(new Action(() => {
 
 
-             
-           
 
+
+                Start_configs();
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);
                 shadedPanel2.Hide();
                 Refresh();
-
+              
 
                 e.Device.CheckCurrentFolder();
                 FixFolders(e.Device);
@@ -1060,14 +988,12 @@ namespace ButtonDeck.Forms
                 }
                 SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
-                if (Program.mode == 0)
-                {
+            
 
-                    Start_configs();
-                }
+                  
+                
              }));
- Debug.WriteLine("DEVICE CONNNNECTEDDED");
-            timer.Stop();
+       
             e.Device.ButtonInteraction += Device_ButtonInteraction;
         }
 
@@ -1302,8 +1228,9 @@ namespace ButtonDeck.Forms
 
         private void DevicePersistManager_DeviceDisconnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
-            timer.Start();
-            Debug.WriteLine("DEVICE DESCONECTTED");
+            // timer.Start();
+
+        
             if (e.Device.DeviceGuid == CurrentDevice.DeviceGuid) {
                 if (!DevicePersistManager.IsVirtualDeviceConnected) CurrentDevice = null;
                 //Try to find a new device to be the current one.
@@ -1319,7 +1246,8 @@ namespace ButtonDeck.Forms
 
                             RefreshAllButtons(false);
                         }));
-                }
+
+                } 
             }
             if (IsHandleCreated && !Disposing)
                 Invoke(new Action(() => {
@@ -1327,7 +1255,7 @@ namespace ButtonDeck.Forms
                     shadedPanel1.Hide();
                     Refresh();
                 }));
-
+           
             e.Device.ButtonInteraction -= Device_ButtonInteraction;
         }
         public class folders

@@ -47,7 +47,15 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         public override void OnAcceptConnection(ConnectionState state)
         {
         }
+        public override void OnConnectect(ConnectionState state)
+        {
+            
 
+
+
+
+
+        }
         public override void OnDropConnection(ConnectionState state)
         {
             state.SendPacket(new DesktopDisconnectPacket());

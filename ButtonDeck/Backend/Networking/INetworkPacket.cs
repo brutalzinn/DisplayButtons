@@ -25,6 +25,7 @@ namespace ButtonDeck.Backend.Networking
             }
             
         }
+     
 
         public static bool TryHeartbeat(this ConnectionState con)
         {

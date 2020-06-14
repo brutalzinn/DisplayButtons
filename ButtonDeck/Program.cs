@@ -218,7 +218,7 @@ namespace ButtonDeck
                 }
 
 
-                Thread.Sleep(1300);
+                Thread.Sleep(1600);
                 ClientThread = new ClientThread();
                         ClientThread.Start();
           

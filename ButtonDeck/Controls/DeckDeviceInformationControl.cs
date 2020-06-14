@@ -134,7 +134,7 @@ namespace ButtonDeck.Forms
 
                               
                            
-                                Debug.WriteLine("CHEGOU 2");
+                                Debug.WriteLine("DEVICE MNANAWE 2");
                                 if (frm.CurrentDevice.DeviceGuid == DeckDevice.DeviceGuid) {
                                     //Someone clicked on the same device. Unload this one.
                                     OnDeviceDisconnected(this, DeckDevice);
@@ -146,6 +146,7 @@ namespace ButtonDeck.Forms
                                     frm.RefreshAllButtons(false);
                                     frm.Activate();
                                 } else {
+                                    Debug.WriteLine("DEVICE MNANAWE 2");
                                     //Someone requested another device. Unload current virtual device..
                                     OnDeviceDisconnected(this, frm.CurrentDevice);
                                     IsVirtualDeviceConnected = false;
@@ -155,7 +156,7 @@ namespace ButtonDeck.Forms
                                 }
                             } else {
                             
-                                Debug.WriteLine("CHEGOU 3");
+                                Debug.WriteLine("DEVICE MNANAWE 3");
                                 frm.CurrentDevice = DeckDevice;
                                 IsVirtualDeviceConnected = true;
                                 OnDeviceConnected(this, DeckDevice);

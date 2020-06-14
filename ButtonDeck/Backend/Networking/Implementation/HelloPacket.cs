@@ -27,7 +27,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
         {
             Debug.WriteLine("EXECUTE  ");
             if (ProtocolVersion != Constants.PROTOCOL_VERSION) {
-          state.EndConnection();
+        //  state.EndConnection();
             } else {
                 state.SendPacket(new DeviceIdentityPacket(HasDeviceGuid));
             // state.SendPacket(new AlternativeHello());

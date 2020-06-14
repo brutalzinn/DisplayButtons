@@ -9,6 +9,8 @@ using ButtonDeck.Backend.Networking.IO;
 using ButtonDeck.Backend.Networking.TcpLib;
 using ButtonDeck.Backend.Objects;
 using ButtonDeck.Backend.Utils;
+using System.Diagnostics;
+using ButtonDeck.Forms;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
@@ -26,10 +28,10 @@ namespace ButtonDeck.Backend.Networking.Implementation
             this.hasDeviceGuid = hasDeviceGuid;
         }
 
-       // [ServerOnly]
+       [ServerOnly]
         public Guid DeviceGuid { get; set; }
 
-       // [ClientOnly]
+      [ClientOnly]
         public string DeviceName { get; set; }
 
         public override long GetPacketNumber() => 2;
@@ -37,8 +39,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
         public override void FromInputStream(DataInputStream reader)
         {
             string receivedGuid = reader.ReadUTF().ToUpperInvariant();
-            // DeviceGuid = new Guid(receivedGuid);
-            //  DeviceName = reader.ReadUTF();
+ 
            DeviceGuid = new Guid(receivedGuid);
               DeviceName = reader.ReadUTF();
         }
@@ -47,7 +48,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
         {
             DeckDevice deckDevice = new DeckDevice(DeviceGuid, DeviceName);
 
-            DevicePersistManager.PersistDevice(deckDevice);
+           DevicePersistManager.PersistDevice(deckDevice);
             DevicePersistManager.ChangeConnectedState(state, deckDevice);
             /*
             var deckImage = new DeckImage(new System.Drawing.Bitmap("streamdeck_key.png"));
@@ -57,10 +58,23 @@ namespace ButtonDeck.Backend.Networking.Implementation
             packet.AddToQueue(5, deckImage);
             packet.AddToQueue(15, deckImage);
             state.SendPacket(packet);*/
+    
+            if(Program.mode == 1)
+            {
+            
+
+            MainForm.Instance.CurrentDevice = deckDevice;
+                MainForm.Instance.StartUsbMode();
+            }
             DevicePersistManager.OnDeviceConnected(this, deckDevice);
+            Debug.WriteLine("MOSTRANDO GUID PARA: " + DeviceName);
+            Debug.WriteLine("MOSTRANDO GUID PARA: " + DeviceGuid);
+
+
+
         }
 
-  
+
         public override void ToOutputStream(DataOutputStream writer)
         {
             //From server to client
