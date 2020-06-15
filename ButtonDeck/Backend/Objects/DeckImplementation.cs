@@ -84,11 +84,12 @@ namespace ButtonDeck.Backend.Objects
             {
 
 
-
-                if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
+                try
                 {
+                    if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
+                    {
 
-                 
+
 
                         if (item.DeviceUsb != null)
                         {
@@ -96,7 +97,9 @@ namespace ButtonDeck.Backend.Objects
                             Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
                             Program.client.RemoveAllForwards(item.DeviceUsb);
                             Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
-                      
+
+
+
                             Program.ClientThread.Stop();
                             Program.ClientThread = new Misc.ClientThread();
                             Program.ClientThread.Start();
@@ -106,22 +109,30 @@ namespace ButtonDeck.Backend.Objects
                                 if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
                                 {
                                     Debug.WriteLine("Reconectado.");
-                                        
-MainForm.Instance.Start_configs();
+
+
+                                    MainForm.Instance.StartUsbMode();
+                                    MainForm.Instance.CurrentDevice = item;
+                                    MountUsbDevices();
                                 }
-                              
-                                    
-                                
+
+
+
 
                             }));
 
-                        }
-                    
 
-                    toRemove.Add(item.DeviceGuid);
+                        }
+
+                        toRemove.Add(item.DeviceGuid);
+
+                    }
+                }
+                catch
+                {
+
 
                 }
-
 
 
             }

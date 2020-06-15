@@ -284,8 +284,7 @@ namespace ButtonDeck.Forms
         private string deviceNamePrefix;
         public void StartUsbMode()
         {
-            //     StartLoad();
-            //   StartLoad(true);
+       
             DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
 
             DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
@@ -964,10 +963,14 @@ namespace ButtonDeck.Forms
            
             Invoke(new Action(() => {
 
+                if(Program.mode == 1)
+                {
+
+                    Start_configs();
+                }
 
 
-
-                Start_configs();
+               
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);
                 shadedPanel2.Hide();
@@ -979,7 +982,12 @@ namespace ButtonDeck.Forms
 
                 if (CurrentDevice == null) {
                     ChangeToDevice(e.Device);
-                  
+                    if(Program.mode == 0)
+                    {
+  Start_configs();
+
+                    }
+                 
                 }
                 SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
@@ -1220,50 +1228,13 @@ namespace ButtonDeck.Forms
                 return true;
             });
         }
-
-        private void DevicePersistManager_DeviceDisconnected(object sender, DevicePersistManager.DeviceEventArgs e)
+      
+            private void DevicePersistManager_DeviceDisconnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
 
-
-            if (Program.mode == 1)
-            {
-
-
-                var UsbMode = new UsbMode();
-                Timer t = new Timer
-                {
-                    //We should run it every 2 seconds and half.
-                    Interval = 2000
-                };
-                t.Tick += (s, a) => {
-                    //The discovery works by reading the Text from the button
-
-
-                    UsbMode.RefreshCurrentUsb();
-
-
-
-
-
-
-                };
-                void handler(object s, EventArgs a)
-                {
-                    Hide();
-                    Shown -= handler;
-                }
-
-                Shown += handler;
-
-                t.Start();
-
-
-            }
-
-
-
-
             if (e.Device.DeviceGuid == CurrentDevice.DeviceGuid) {
+
+    
                 if (!DevicePersistManager.IsVirtualDeviceConnected) CurrentDevice = null;
 
             
@@ -1292,6 +1263,7 @@ namespace ButtonDeck.Forms
            
             e.Device.ButtonInteraction -= Device_ButtonInteraction;
         }
+      
         public class folders
         {
             private string name;

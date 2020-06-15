@@ -116,7 +116,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         {
             throw new Exception("Derived clases must override Clone method.");
         }
-        public abstract void OnConnectect(ConnectionState state);
+        public abstract void OnRetryConnect(ConnectionState state);
         /// <summary>
         /// Gets executed when the server accepts a new connection.
         /// </summary>
@@ -419,16 +419,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                 Socket conn = (Socket)ar.AsyncState;
 
                 // conn.EndConnect(ar);
-                if (_connections.Count >= _maxConnections)
-                {
-                    //Max number of connections reached.
-                    string msg = "SE001: Server busy";
-                    conn.Send(Encoding.UTF8.GetBytes(msg), 0, msg.Length, SocketFlags.None);
-                    conn.Shutdown(SocketShutdown.Both);
-                    conn.Close();
-                }
-                else
-                {
+            
                     //Start servicing a new connection
                     ConnectionState st = new ConnectionState
                     {
@@ -442,11 +433,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     ThreadPool.QueueUserWorkItem(AcceptConnection, st);
 
 
-                }
-
-              //  _listener.BeginAccept(ConnectionReady, null);
-
-
+            
 
             }
         }
@@ -484,14 +471,17 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             {
                 Debug.WriteLine("REICEIVED DATRA READY");
                 ConnectionState st = ar.AsyncState as ConnectionState;
-         //  st._conn.EndReceive(ar);
+           //st._conn.EndReceive(ar);
                 //Im considering the following condition as a signal that the
                 //remote host droped the connection.
                 if (st._conn.Available == 0)
                 {
                     Debug.WriteLine("drop connection");
-                    st._provider.OnDropConnection(st);
-           DropConnection(st);
+
+                    //   Stop();
+                    //st._provider.OnDropConnection(st);
+                   st._provider.OnRetryConnect(st);
+                 DropConnection(st);
                 }
                 else
                 {
@@ -532,7 +522,9 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                 {
                     ConnectionState st = obj as ConnectionState;
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
-                    try { st._provider.OnDropConnection(st); }
+                    try {
+                        st._provider.OnDropConnection(st);
+                    }
                     catch
                     {
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body

@@ -1,4 +1,5 @@
 ﻿using ButtonDeck.Backend.Networking.Implementation;
+using ButtonDeck.Backend.Objects;
 using ButtonDeck.Backend.Utils;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace ButtonDeck.Backend.Networking.TcpLib
 {
@@ -15,7 +17,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
 
         private static List<INetworkPacket> networkPackets = new List<INetworkPacket>();
 
-
+        private static System.Timers.Timer aTimer = new System.Timers.Timer();
         static DeckServiceProvider()
         {
             RegisterNetworkPacket(new HelloPacket());
@@ -46,19 +48,27 @@ namespace ButtonDeck.Backend.Networking.TcpLib
 
         public override void OnAcceptConnection(ConnectionState state)
         {
+            aTimer.Enabled = false;
         }
-        public override void OnConnectect(ConnectionState state)
+        public override void OnRetryConnect(ConnectionState state)
         {
-            
+            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            aTimer.Interval = 3000;
+            aTimer.Enabled = true;
+
+            Debug.WriteLine("Tentando reconexão.." + aTimer.Interval);
 
 
 
-
-
+        }
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            UsbMode teste = new UsbMode();
+            teste.RefreshCurrentUsb();
         }
         public override void OnDropConnection(ConnectionState state)
         {
-            state.SendPacket(new DesktopDisconnectPacket());
+           // state.SendPacket(new DesktopDisconnectPacket());
             DevicePersistManager.RemoveConnectionState(state);
         }
 
