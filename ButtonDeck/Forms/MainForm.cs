@@ -164,7 +164,10 @@ namespace ButtonDeck.Forms
         {
             base.OnLoad(e);
 
-
+            if(Program.mode == 0)
+            {
+                StartUsbMode();
+            }
       
 
 
@@ -814,20 +817,14 @@ namespace ButtonDeck.Forms
 
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
             ImageModernButton control1 = GetButtonControl(slot);
-            Label control_label = GetLabelControl(slot);
+            //Label control_label = GetLabelControl(slot);
             // Label title_control = Controls.Find("titleLabel" + slot, true).FirstOrDefault() as Label;
 
             control1.NormalImage = null;
             control1.Tag = null;
             control1.Text = "";
 
-            control_label.Tag = null;
-            control_label.Text = "";
-
-
-            //title_control.NormalImage = null;
-            // title_control.Tag = null;
-            //   title_control.Text = "";
+            
             if (folder == null) control1.Invoke(new Action(control1.Refresh));
 
             if (folder == null) return;
@@ -851,7 +848,7 @@ namespace ButtonDeck.Forms
 
                   
                         control.NormalImage = item?.GetItemImage().Bitmap;
-                    control2.Text = item.DeckName;
+                   // control2.Text = item.DeckName;
 
 
                     //control.NormalImage = item?.GetItemImage().Bitmap; //Write_name_Image(dI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
@@ -859,9 +856,7 @@ namespace ButtonDeck.Forms
 
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
-                    control2.Tag = item;
-                    control2.Invoke(new Action(control2.Refresh));
-
+                  
 
 
                 }
@@ -1228,11 +1223,50 @@ namespace ButtonDeck.Forms
 
         private void DevicePersistManager_DeviceDisconnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
-            // timer.Start();
 
-        
+
+            if (Program.mode == 1)
+            {
+
+
+                var UsbMode = new UsbMode();
+                Timer t = new Timer
+                {
+                    //We should run it every 2 seconds and half.
+                    Interval = 2000
+                };
+                t.Tick += (s, a) => {
+                    //The discovery works by reading the Text from the button
+
+
+                    UsbMode.RefreshCurrentUsb();
+
+
+
+
+
+
+                };
+                void handler(object s, EventArgs a)
+                {
+                    Hide();
+                    Shown -= handler;
+                }
+
+                Shown += handler;
+
+                t.Start();
+
+
+            }
+
+
+
+
             if (e.Device.DeviceGuid == CurrentDevice.DeviceGuid) {
                 if (!DevicePersistManager.IsVirtualDeviceConnected) CurrentDevice = null;
+
+            
                 //Try to find a new device to be the current one.
                 if (DevicePersistManager.PersistedDevices.Any(d => DevicePersistManager.IsDeviceConnected(d.DeviceGuid))) {
                     CurrentDevice = DevicePersistManager.PersistedDevices.First(d => DevicePersistManager.IsDeviceConnected(d.DeviceGuid));

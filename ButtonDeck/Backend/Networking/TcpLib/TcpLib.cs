@@ -490,6 +490,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                 if (st._conn.Available == 0)
                 {
                     Debug.WriteLine("drop connection");
+                    st._provider.OnDropConnection(st);
            DropConnection(st);
                 }
                 else
