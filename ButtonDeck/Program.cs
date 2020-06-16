@@ -180,6 +180,8 @@ namespace ButtonDeck
                // Silent = true;
                 Debug.WriteLine("MODO USB");
                 mode = 1;
+                ClientThread = new ClientThread();
+                ClientThread.Start();
                 Adbserver = new AdbServer();
     
   AdbResult = Adbserver.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
@@ -218,9 +220,8 @@ namespace ButtonDeck
                 }
 
 
-                Thread.Sleep(1600);
-                ClientThread = new ClientThread();
-                        ClientThread.Start();
+           //     Thread.Sleep(1600);
+                
           
 
             }

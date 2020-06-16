@@ -457,7 +457,8 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             //Starts the ReceiveData callback loop
             if (st._conn.Connected)
                 Debug.WriteLine("Starts the ReceiveData callback loop");
-                st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
+
+            st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
                 ReceivedDataReady, st);
         }
 
