@@ -791,7 +791,7 @@ namespace ButtonDeck.Forms
 
 
 
-                control.TextLabel(item.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
+                control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
              
          control.NormalImage = item?.GetItemImage().Bitmap;
 
@@ -1979,8 +1979,7 @@ namespace ButtonDeck.Forms
             ANDROID_cima = 0x00000030 | 0x00000001,
         
             [Description("meio")]
-            ANDROID_meio = 0x00000011 | 0x00000001,
-  
+            ANDROID_meio = 0x00000011
         }
         
         private void FocusItem(ImageModernButton mb, IDeckItem item)
@@ -2026,7 +2025,7 @@ namespace ButtonDeck.Forms
 
 
             
-                PositionComboBox.SelectedValue = (Position)dI.DeckPosition;
+                PositionComboBox.SelectedValue = (int) (Position)dI.DeckPosition;
 
 
 

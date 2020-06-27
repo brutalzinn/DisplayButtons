@@ -12,8 +12,8 @@ namespace ButtonDeck.Backend.Objects
     [XmlInclude(typeof(DynamicDeckItem))]
     public abstract class IDeckItem
     {
-        public string DeckName { get; set; }
-        public string DeckColor { get; set; } 
+        public string DeckName { get; set; } = "";
+        public string DeckColor { get; set; }= "#FFFFFF";
         public int DeckSize { get; set; } = 30;
         public int DeckPosition { get; set; } = 0x00000050;
         public abstract DeckImage GetItemImage();
