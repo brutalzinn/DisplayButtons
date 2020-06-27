@@ -766,8 +766,9 @@ namespace ButtonDeck.Forms
            
            // Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
-            int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
-            for (int j = 0; j < calc; j++)
+           
+
+            for (int j = 0; j < Globals.calc; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
               //  Label control2 = GetLabelControl(j + 1);
@@ -790,7 +791,7 @@ namespace ButtonDeck.Forms
 
 
 
-                control.Text = item?.DeckName;
+                control.TextLabel(item.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
              
          control.NormalImage = item?.GetItemImage().Bitmap;
 

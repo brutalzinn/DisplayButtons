@@ -50,16 +50,28 @@ namespace ButtonDeck.Controls
             }
 
         }
-    
+      private string _text;
+        private Font _font;
+        private Brush _brush;
 
+        private PointF _pointf;
 
+        public void TextLabel(string text, Font font, Brush brush, PointF pointf)
+        {
+
+            _text = text;
+            _font = font;
+            _brush = brush;
+            _pointf = pointf;
+
+        }
         public string ExtractNumber(string original)
         {
             return new string(original.Where(Char.IsDigit).ToArray());
         }
 
         private Image _image;
-
+      
         public Image NormalImage {
             get => Origin?._image ?? _image; set {
                 if (Origin != null) {
@@ -137,7 +149,13 @@ namespace ButtonDeck.Controls
             if (Image != null) {
                 pevent.Graphics.DrawImage(Image, DisplayRectangle);
             }
+            if(_text != null){
+
+                pevent.Graphics.DrawString(_text, this.Font, Brushes.Black, new PointF(25, 3));
+
+            }
         }
+        
 
     }
 }
