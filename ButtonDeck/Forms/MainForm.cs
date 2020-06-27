@@ -164,10 +164,10 @@ namespace ButtonDeck.Forms
         {
             base.OnLoad(e);
 
-            if(Program.mode == 0)
-            {
-                StartUsbMode();
-            }
+            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
+
+            StartUsbMode();
+            
       
 
 
@@ -1103,7 +1103,7 @@ namespace ButtonDeck.Forms
                    
                     
                         //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
-                        packet_label.AddToQueue(folder.GetItemIndex(item), item.DeckName, "", item.DeckSize,item.DeckPosition, item.DeckColor);
+                        packet_label.AddToQueue(folder.GetItemIndex(item), item?.DeckName, "", item.DeckSize,item.DeckPosition, item?.DeckColor);
                        
                     packet.AddToQueue(folder.GetItemIndex(item), image);
                 //    packet.AddToQueue(folder.GetItemIndex(item), image);
@@ -1899,7 +1899,39 @@ namespace ButtonDeck.Forms
 
 
 
+        public static void getEnumValue(ComboBox cxbx, Type typ)
+        {
 
+            if (!typ.IsEnum)
+            {
+                throw new ArgumentException("Only Enum types can be set");
+            }
+
+
+            List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
+
+            foreach (int i in Enum.GetValues(typ))
+            {
+                string name = Enum.GetName(typ, i);
+                string desc = name;
+                FieldInfo fi = typ.GetField(name);
+
+                // Get description for enum element
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (attributes.Length > 0)
+                {
+                    string s = attributes[0].Description;
+                    if (!string.IsNullOrEmpty(s))
+                    {
+                        
+                        desc = s;
+                    }
+                }
+
+                list.Add(new KeyValuePair<string, int>(desc, i));
+            }
+
+        }
 
         public static void setEnumValues(ComboBox cxbx, Type typ)
         {
@@ -1941,12 +1973,14 @@ namespace ButtonDeck.Forms
         public enum Position
         {
             [Description("baixo")]
-            SIMPLE_TRAINING = 0x00000050 | 0x00000001,
-          [Description("cima")]
-            SPECIAL_TRAINING = 0x00000030 | 0x00000001,
+            ANDROID_baixo = 0x00000050 | 0x00000001,
+           
+            [Description("cima")]
+            ANDROID_cima = 0x00000030 | 0x00000001,
+        
             [Description("meio")]
-            NORMAL_TRAINING = 0x00000011 | 0x00000001
-
+            ANDROID_meio = 0x00000011 | 0x00000001,
+  
         }
         
         private void FocusItem(ImageModernButton mb, IDeckItem item)
@@ -1980,11 +2014,22 @@ namespace ButtonDeck.Forms
                 FlowLayoutPanel painel_color = new FlowLayoutPanel();
                 FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
                 FlowLayoutPanel painel_position = new FlowLayoutPanel();
-
+                myColor.Dock = DockStyle.None;
+                myColorText.Dock = DockStyle.None;
+                sizeLabelTextBox.Dock = DockStyle.None;
+                sizeLabelInfo.Dock = DockStyle.None;
+                positionLabelInfo.Dock = DockStyle.None;
+                PositionComboBox.Dock = DockStyle.None;
                 setEnumValues(PositionComboBox, typeof(Position));
                 myNameText.Text = dI.DeckName;
                 myColorText.Text = dI.DeckColor;
-                PositionComboBox.SelectedValue = dI.DeckPosition;
+
+
+            
+                PositionComboBox.SelectedValue = (Position)dI.DeckPosition;
+
+
+
                 sizeLabelTextBox.Text = dI.DeckSize.ToString();
                 myColor.Click += (s, e) =>
                 {
@@ -1995,7 +2040,9 @@ namespace ButtonDeck.Forms
 
                         if (dialog.ShowDialog(this) == DialogResult.OK)
                         {
-                            myColorText.Text = "#"+ dialog.Color.Name;
+                            //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
+                            string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
+                            myColorText.Text = result;
                         }
 
                         dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
@@ -2003,12 +2050,7 @@ namespace ButtonDeck.Forms
 
                 };
 
-                myColor.Dock = DockStyle.None;
-                       myColorText.Dock = DockStyle.None;
-                  sizeLabelTextBox.Dock = DockStyle.None;
-                sizeLabelInfo.Dock = DockStyle.None;
-                positionLabelInfo.Dock = DockStyle.None;
-                PositionComboBox.Dock = DockStyle.None;
+          
 
 
              

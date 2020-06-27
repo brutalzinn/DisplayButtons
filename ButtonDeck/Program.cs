@@ -158,7 +158,6 @@ namespace ButtonDeck
                 Application.Run(firstRunForm);
                 if (!firstRunForm.FinishedSetup) return;
             }
-            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
             OBSUtils.PrepareOBSIntegration();
 
 

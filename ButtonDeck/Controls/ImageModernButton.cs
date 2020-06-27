@@ -151,7 +151,7 @@ namespace ButtonDeck.Controls
             }
             if(_text != null){
 
-                pevent.Graphics.DrawString(_text, this.Font, Brushes.Black, new PointF(25, 3));
+                pevent.Graphics.DrawString(_text, _font, _brush, _pointf);
 
             }
         }
