@@ -23,7 +23,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
             
         }
 
-        public override long GetPacketNumber() => 12;
+        public override long GetPacketNumber() => 13;
 
         public override void ToOutputStream(DataOutputStream writer)
         {

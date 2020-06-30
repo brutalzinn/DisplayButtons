@@ -14,7 +14,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
     [Architecture(PacketArchitecture.ClientToServer | PacketArchitecture.ServerToClient)]
     public class SlotLabelButtonChangeChunkPacket : INetworkPacket
     {
-         class Labels
+        public class Labels
         {
             private int id;
             private string font;
@@ -22,7 +22,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
             private string text;
             private int position;
             private string color;
-            public Labels(int id, string font,int size, int position, string text,string color){
+            public Labels(int id, string font, int size, int position, string text, string color) {
                 this.id = id;
                 this.font = font;
                 this.text = text;
@@ -30,7 +30,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
                 this.position = position;
                 this.color = color;
 
-                }
+            }
             public string Color
             {
 
@@ -61,7 +61,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
             public int Size
             { get { return size; }
-            set { size = value; }
+                set { size = value; }
             }
             public int Position
             {
@@ -71,21 +71,22 @@ namespace ButtonDeck.Backend.Networking.Implementation
             // Should also override == and != operators.
         }
 
- List<Labels> list_labels = new List<Labels>();
+        List<Labels> list_labels = new List<Labels>();
         public void AddToQueue(int slot, string text, string font,int size, int position, string color)
         {
          
             list_labels.Add (new Labels( slot, font, size, position,text, color));
         }
+        public void ClearPacket()
+        {
 
+            list_labels.Clear();
+
+        }
         public override void FromInputStream(DataInputStream reader)
         {
-           if(reader.ReadInt() == 1)
-            {
-                Debug.WriteLine("Limpando textos..");
- list_labels.Clear();
 
-            }
+         
            
 
         }
@@ -106,14 +107,15 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         private void SendDeckLabel(DataOutputStream writer, int slot, string font,int size,int pos,string text,string color)
         {
-           
+            if (String.IsNullOrEmpty(text) == false)
+            {
                 //Write the slot
                 writer.WriteInt(slot);
                 //font
-                writer.WriteUTF(text);
-            //text
+                writer.WriteUTF(font);
+                //text
 
-            writer.WriteUTF(text);
+                writer.WriteUTF(text);
                 //size
                 writer.WriteInt(size);
                 //position
@@ -122,7 +124,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
                 //color
 
                 writer.WriteUTF(color);
-           
+            }
         }
 
         public override object Clone()

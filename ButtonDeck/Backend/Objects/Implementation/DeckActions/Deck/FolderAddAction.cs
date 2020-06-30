@@ -41,7 +41,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
-   
+        public static List<Control> ToControls { get; set; } = new List<Control>();
         public static string dictionary_name { get; set; } = "";
        public static dynamic form;
         [MoonSharpUserData]
@@ -124,15 +124,36 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 {
                     case "textbox":
                         TextBox txt = new TextBox();
-                        txt.Text = value;
-                        txt.Name = name;
+                        if (!String.IsNullOrEmpty(value))
+                        {
+                            txt.Text = value;
+                            txt.Name = name;
+                        }
                         txt.Width = tam_x;
                         txt.Height = tam_y;
                         txt.Location = new System.Drawing.Point (x,y);
-                      
-                        //       FolderAddAction.form.Controls.Add(txt);
 
-                        form.Controls.Add(txt);
+                        //       FolderAddAction.form.Controls.Add(txt);
+                        ToControls.Add(txt);
+                     //   form.Controls.Add(txt);
+
+                        break;
+                    case "ritchtextbox":
+                        RichTextBox ritchtext = new RichTextBox();
+                        if (!String.IsNullOrEmpty(value))
+                        {
+ ritchtext.Text = value;
+
+                        }
+                       
+                        ritchtext.Name = name;
+                        ritchtext.Width = tam_x;
+                        ritchtext.Height = tam_y;
+                        ritchtext.Location = new System.Drawing.Point(x, y);
+
+                        //       FolderAddAction.form.Controls.Add(txt);
+                        ToControls.Add(ritchtext);
+                        // form.Controls.Add(ritchtext);
 
                         break;
                     case "label":
@@ -143,8 +164,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         labeled.Width = tam_x;
                         labeled.Height = tam_y;
                         labeled.Location = new System.Drawing.Point(x, y);
-                        form.Controls.Add(labeled);
-
+                        //form.Controls.Add(labeled);
+                        ToControls.Add(labeled);
                         break;
                     case "file":
                         TextBox file_text = new TextBox();
@@ -176,9 +197,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         file_table_layout.Controls.Add(file_text, 0, 0);
                         file_table_layout.Controls.Add(file_button, 1 , 0);
 
-                        form.Controls.Add(file_table_layout);
-                       
+                       // form.Controls.Add(file_table_layout);
 
+                        ToControls.Add(file_table_layout);
                         break;
 
 
@@ -196,6 +217,15 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
            // ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
             return true;
         }
+        public void setupControls()
+        {
+            foreach(var item in ToControls)
+            {
+                form.Controls.Add(item);
+
+            }
+
+        }
         public void ToExecuteHelper()
         {
             ScribeBot.Scripter.Execute(script, true);
@@ -207,13 +237,13 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
             object functiontable = ScribeBot.Scripter.Environment.Globals["form_menu"];
             ScribeBot.Scripter.Environment.Call(functiontable);
-          //  var execAction = CloneAction() as FolderAddAction;
-     
-        //    execAction.ToExecute = ToExecute;
+            //  var execAction = CloneAction() as FolderAddAction;
 
-         //   form.ModifiableAction = execAction;
+            //    execAction.ToExecute = ToExecute;
 
+            //   form.ModifiableAction = execAction;
 
+            setupControls();
             form.scripter = script;
             if (form.ShowDialog() == DialogResult.OK)
             {

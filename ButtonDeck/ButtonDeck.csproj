@@ -256,6 +256,12 @@
     <Compile Include="Engine\Wrappers\DatabaseWrapper.cs" />
     <Compile Include="Engine\Wrappers\InputWrapper.cs" />
     <Compile Include="Engine\Wrappers\InterfaceWrapper.cs" />
+    <Compile Include="Bibliotecas\Minecraft\Extensions.cs" />
+    <Compile Include="Bibliotecas\Minecraft\RCONClient.cs" />
+    <Compile Include="Bibliotecas\Minecraft\RCONMessageAnswer.cs" />
+    <Compile Include="Bibliotecas\Minecraft\RCONMessageType.cs" />
+    <Compile Include="Bibliotecas\Minecraft\RCONReader.cs" />
+    <Compile Include="Engine\Wrappers\MinecraftWrapper.cs" />
     <Compile Include="Engine\Wrappers\PluginWrapper.cs" />
     <Compile Include="Engine\Wrappers\ScreenWrapper.cs" />
     <Compile Include="Extensions.cs" />

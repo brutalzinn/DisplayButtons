@@ -1075,10 +1075,10 @@ namespace ButtonDeck.Forms
                 var packet = new SlotImageChangeChunkPacket();
                 var packet_label = new SlotLabelButtonChangeChunkPacket();
                 List<IDeckItem> items = folder.GetDeckItems();
-                int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
+               // int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
                 List<int> addedItems = new List<int>();
                 bool isFolder = false;
-                for (int i = 0; i < calc; i++)
+                for (int i = 0; i < Globals.calc; i++)
                 {
                     IDeckItem item = null;
                     if (items.ElementAtOrDefault(i) != null)
@@ -1103,7 +1103,7 @@ namespace ButtonDeck.Forms
                    
                     
                         //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
-                        packet_label.AddToQueue(folder.GetItemIndex(item), item?.DeckName, "", item.DeckSize,item.DeckPosition, item?.DeckColor);
+                        packet_label.AddToQueue(folder.GetItemIndex(item), item?.DeckName, "", item.DeckSize, item.DeckPosition, item?.DeckColor);
                        
                     packet.AddToQueue(folder.GetItemIndex(item), image);
                 //    packet.AddToQueue(folder.GetItemIndex(item), image);
@@ -1123,8 +1123,9 @@ namespace ButtonDeck.Forms
                 //    con.SendPacket(packet_label);
                 var clearPacket = new SlotImageClearChunkPacket();
               //  var clearPacket_labels = new SlotLabelButtonClearChunkPacket();
-                for (int i = 1; i < calc + 1; i++) {
+                for (int i = 1; i < Globals.calc + 1; i++) {
                     if (addedItems.Contains(i)) continue;
+                    //packet_label.ClearPacket();
                     clearPacket.AddToQueue(i);
                //     clearPacket_labels.AddToQueue(i);
                 }
@@ -1973,13 +1974,13 @@ namespace ButtonDeck.Forms
         public enum Position
         {
             [Description("baixo")]
-            ANDROID_baixo = 0x00000050 | 0x00000001,
+            ANDROID_baixo = 81,
            
             [Description("cima")]
-            ANDROID_cima = 0x00000030 | 0x00000001,
-        
+            ANDROID_cima = 49,
+
             [Description("meio")]
-            ANDROID_meio = 0x00000011
+            ANDROID_meio = 17 
         }
         
         private void FocusItem(ImageModernButton mb, IDeckItem item)
@@ -1992,9 +1993,15 @@ namespace ButtonDeck.Forms
             flowLayoutPanel1.Controls.Clear();
             if (item is IDeckItem dI) {
                
-           
             
-         
+         if(dI is DynamicDeckFolder TA)
+                {
+                    if(TA.GetSubFolders().Count > 0)
+                    {
+
+                    }
+
+                }
 
               
                 ModernButton myButton = new ModernButton();
@@ -2008,7 +2015,7 @@ namespace ButtonDeck.Forms
                 TextBox myColorText = new TextBox();
                 myColor.Size = new Size(70, 30);
                 myColor.Text = "Selecionar Cor";
-                myColorText.Text = dI.DeckColor;
+               
  FlowLayoutPanel painel_name = new FlowLayoutPanel();
                 FlowLayoutPanel painel_color = new FlowLayoutPanel();
                 FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
@@ -2019,13 +2026,13 @@ namespace ButtonDeck.Forms
                 sizeLabelInfo.Dock = DockStyle.None;
                 positionLabelInfo.Dock = DockStyle.None;
                 PositionComboBox.Dock = DockStyle.None;
-                setEnumValues(PositionComboBox, typeof(Position));
+         
                 myNameText.Text = dI.DeckName;
                 myColorText.Text = dI.DeckColor;
 
-
+   myColorText.Text = dI.DeckColor;
             
-                PositionComboBox.SelectedValue = (int) (Position)dI.DeckPosition;
+               // PositionComboBox.SelectedValue = (int)dI.DeckPosition;
 
 
 
@@ -2049,27 +2056,16 @@ namespace ButtonDeck.Forms
 
                 };
 
-          
-
-
-             
-                myButton.Text = "Salvar";
- myButton.Click += (s, e) =>
-                {
-                    dI.DeckName = myNameText.Text;
-                    dI.DeckColor = myColorText.Text;
-                    dI.DeckSize = Convert.ToInt32(sizeLabelTextBox.Text);
-                  
-                    dI.DeckPosition = (int)PositionComboBox.SelectedValue;
-                };
-                myTextNameInformation.Text = "Nome:";
-   
-                sizeLabelInfo.Text = "Tamanho:";
 
 
 
 
 
+
+
+
+
+                
 
 
 
@@ -2088,8 +2084,10 @@ namespace ButtonDeck.Forms
                 painel_color.WrapContents = true;
                 painel_position.WrapContents = true;
                 painel_position.Controls.Add(positionLabelInfo);
+              
                 painel_position.Controls.Add(PositionComboBox);
-
+ 
+            
                 painel_color.Controls.Add(myColor);
                 painel_color.Controls.Add(myColorText);
                 
@@ -2108,12 +2106,31 @@ namespace ButtonDeck.Forms
                 flowLayoutPanel1.Controls.Add(painel_position);
 
                 flowLayoutPanel1.Controls.Add(myButton);
-                if(dI is DynamicDeckItem TT)
+                myButton.Text = "Salvar";
+
+                myTextNameInformation.Text = "Nome:";
+
+                sizeLabelInfo.Text = "Tamanho:";
+                
+ setEnumValues(PositionComboBox, typeof(Position));
+                myButton.Click += (s, e) =>
                 {
-                LoadProperties(TT, flowLayoutPanel1);
+                    dI.DeckName = myNameText.Text;
+                    dI.DeckColor = myColorText.Text;
+                    dI.DeckSize = Convert.ToInt32(sizeLabelTextBox.Text);
+             
+                    dI.DeckPosition = (int)PositionComboBox.SelectedValue;
+
+                };
+               
+
+                PositionComboBox.SelectedValue = dI.DeckPosition;
+                if (dI is DynamicDeckItem TT)
+                {
+                    LoadProperties(TT, flowLayoutPanel1);
 
                 }
-            
+
             }
             imageModernButton1.Origin = mb;
                 //Write_name_Image("testando", mb, 10f,10f,"Arial",10);
