@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,11 +16,13 @@ using System.Xml.Serialization;
 
 namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 {
+    [DataContract]
+
     public class FolderAddAction : AbstractDeckAction
     {
-      
 
-   
+
+
 
 
 
@@ -27,13 +30,13 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         //     public static string script { get; set; } = "";
         public static string script { get; set; } = "";
-        public  string script_to_form { get; set; } = "";
+        public string script_to_form { get; set; } = "";
 
         public static string name_space { get; set; } = "";
 
-        
 
-        public  static string name_img { get; set; } = "";
+
+        public static string name_img { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
         [ActionPropertyInclude]
         [ActionPropertyDescription("name")]
@@ -41,9 +44,25 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
-        public static List<Control> ToControls { get; set; } = new List<Control>();
+
+        [ActionPropertyInclude]
+
+        public SerializableDictionary<string, string> ToControls { get; set; } = new SerializableDictionary<string, string>();
+
         public static string dictionary_name { get; set; } = "";
        public static dynamic form;
+        [XmlIgnore]
+        private static FolderAddAction instance;
+
+        public static FolderAddAction Instance
+        {
+            get
+            {
+
+                return instance;
+            }
+        }
+
         [MoonSharpUserData]
         class Formvoid
         {
@@ -65,32 +84,22 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
             }
-            public static string getFormControl(string name, string type)
-            {
-
-                string result = "";
-                foreach (Control c in form.Controls)
-                {
-                    if (c.Name == name)
-                    {
-                      result = c.Text;
-
-                    }
-                }
-                return result;
-               
-            }
+        
 
 
         }
+      
+      
         [MoonSharpUserData]
 
         public class formcontrol
         {
-           
-      
-        
-            public static Dictionary<string, string> users = new Dictionary<string, string>();
+
+
+
+            private static Dictionary<string, string> users = new Dictionary<string, string>();
+            public static string dictionary_name { get; set; } = "";
+
 
             public static void Set(string key, string value)
             {
@@ -115,11 +124,22 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
                 return result;
             }
-          
-           
-                public static void setFormControl(string name, string value, string type, int x ,int y, int tam_x, int tam_y)
+
+            public static void AddControlToUser(string key, string value)
+            {
+                if (FolderAddAction.Instance.ToControls.ContainsKey(key))
+                {
+                    FolderAddAction.Instance.ToControls[key] = value;
+                }
+                else
+                {
+                    FolderAddAction.Instance.ToControls.Add(key, value);
+                }
+            }
+            public static void setFormControl(string name, string value, string type, int x ,int y, int tam_x, int tam_y)
             {
 
+               
                 switch (type)
                 {
                     case "textbox":
@@ -127,15 +147,16 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         if (!String.IsNullOrEmpty(value))
                         {
                             txt.Text = value;
-                            txt.Name = name;
+                            
                         }
+                        txt.Name = name;
                         txt.Width = tam_x;
                         txt.Height = tam_y;
                         txt.Location = new System.Drawing.Point (x,y);
 
                         //       FolderAddAction.form.Controls.Add(txt);
-                        ToControls.Add(txt);
-                     //   form.Controls.Add(txt);
+                        AddControlToUser(name,txt.Text);
+                      form.Controls.Add(txt);
 
                         break;
                     case "ritchtextbox":
@@ -152,9 +173,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         ritchtext.Location = new System.Drawing.Point(x, y);
 
                         //       FolderAddAction.form.Controls.Add(txt);
-                        ToControls.Add(ritchtext);
-                        // form.Controls.Add(ritchtext);
-
+                        form.Controls.Add(ritchtext);
+                        AddControlToUser(name, value);
+               
+                     
                         break;
                     case "label":
                         Label labeled = new Label();
@@ -164,8 +186,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         labeled.Width = tam_x;
                         labeled.Height = tam_y;
                         labeled.Location = new System.Drawing.Point(x, y);
-                        //form.Controls.Add(labeled);
-                        ToControls.Add(labeled);
+                        AddControlToUser(labeled.Name, labeled.Text);
+                        form.Controls.Add(labeled);
+                     
                         break;
                     case "file":
                         TextBox file_text = new TextBox();
@@ -197,16 +220,54 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         file_table_layout.Controls.Add(file_text, 0, 0);
                         file_table_layout.Controls.Add(file_button, 1 , 0);
 
-                       // form.Controls.Add(file_table_layout);
+                        // form.Controls.Add(file_table_layout);
 
-                        ToControls.Add(file_table_layout);
+                    //ToControls.Add(file_table_layout);
+                       
                         break;
 
 
                 }
-
+              
 
             }
+            public static string GetControlToUser(string key)
+            {
+                string result = null;
+                try
+                {
+
+
+
+                    if (FolderAddAction.Instance.ToControls.ContainsKey(key))
+                    {
+                        result = FolderAddAction.Instance.ToControls[key];
+                    }
+                }
+                catch (Exception e)
+                {
+
+                    Debug.WriteLine("NULL");
+                }
+                return result;
+            }
+            public static string getFormControl(string name, string type)
+            {
+
+
+                string result = "";
+                foreach (Control c in form.Controls)
+                {
+                    if (c.Name == name)
+                    {
+                        result = c.Text;
+
+                    }
+                }
+                return result;
+
+            }
+          
         }
         public override bool IsPlugin()
         {
@@ -217,17 +278,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
            // ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
             return true;
         }
-        public void setupControls()
-        {
-            foreach(var item in ToControls)
-            {
-                form.Controls.Add(item);
-
-            }
-
-        }
+    
+   
         public void ToExecuteHelper()
         {
+            instance = this;
             ScribeBot.Scripter.Execute(script, true);
 
             //          ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
@@ -243,7 +298,6 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             //   form.ModifiableAction = execAction;
 
-            setupControls();
             form.scripter = script;
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -282,12 +336,12 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
         public override AbstractDeckAction CloneAction()
         {
-          //  Debug.WriteLine("CHEGOU A CHAMAR O NAMESPACE" + name_space);
-           // DynValue obj = UserData.Create(name_space);
+            //  Debug.WriteLine("CHEGOU A CHAMAR O NAMESPACE" + name_space);
+            // DynValue obj = UserData.Create(name_space);
             //  ScribeBot.Scripter.Execute(script, false);
-          //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
+            //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
+   
 
-         
             return new FolderAddAction();
         }
       
