@@ -12,7 +12,6 @@ using ScribeBot.Engine.Wrappers;
 using ScribeBot.Engine.Proxies;
 using ButtonDeck.Engine.Wrappers;
 
-
 namespace ScribeBot
 {
     /// <summary>
@@ -70,7 +69,7 @@ namespace ScribeBot
             Environment.Globals["Color"] = new ColorContainer();
             Environment.Globals["Point"] = new PointContainer();
             Environment.Globals["Size"] = new SizeContainer();
-            Environment.Globals["socket"] = new SocketWrapper();
+
             //Enums
             UserData.RegisterType<Native.VirtualKeyCode>();
             UserData.RegisterType<NoteFrequencies>();
