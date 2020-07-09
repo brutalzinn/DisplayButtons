@@ -25,7 +25,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
 
-        public  string script  = "";
+        public static  string script  = "";
         public string script_to_form { get; set; } = "";
 
         public static string name_space { get; set; } = "";
@@ -36,7 +36,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public static string DeckActionCategory_string { get; set; } = "Deck";
    
   
-        public string name { get; set; } = "";
+        public static string name { get; set; } = "";
 
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";

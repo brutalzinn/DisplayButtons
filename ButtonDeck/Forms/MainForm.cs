@@ -2232,13 +2232,11 @@ namespace ButtonDeck.Forms
         {
             var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
-       
-        Type type = PluginListGenerator.Instance.GetType();
-           // PropertyInfo script_set = type.GetProperty("script");
-            PropertyInfo name_set = type.GetProperty("name");
-         //   script_set.SetValue(abacatao, script);
-            name_set.SetValue(PluginListGenerator.Instance, name);
-      
+
+            PluginListGenerator.name = name;
+            PluginListGenerator.script = script;
+  
+
 
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
