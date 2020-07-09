@@ -2228,32 +2228,25 @@ namespace ButtonDeck.Forms
 
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public static  void button_creator(string name,string name_space, string script)
+        public static  void button_creator(string name, string script)
         {
-            //FolderAddAction testando = new FolderAddAction();
-            FolderAddAction.name = name;
-            FolderAddAction.script = script;
-           // testando.script = script;
+            var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
-<<<<<<< HEAD
 
             PluginListGenerator.name = name;
             PluginListGenerator.script = script;
   
 
-=======
->>>>>>> parent of e2fe468... coisas críticas
 
-
-            FolderAddAction.name_space = name_space;
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
             Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
-            IList<FolderAddAction> list = new List<FolderAddAction>();
-            // ButtonDeck.Forms.MainForm.testando(value);
+      
+          
+          
             MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate {
-            //Globals.launcher_principal.ShadedPanel1.Controls.Clear();
+         
             Label teste = new Label()
             {
                 Padding = categoryPadding,
@@ -2279,7 +2272,6 @@ namespace ButtonDeck.Forms
                 // Globals.launcher_principal.ShadedPanel1.Controls.Add(teste);
                 MainForm.instance.ShadedPanel1.Refresh();
 
-                var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
                 List<Control> toAdd = new List<Control>();
 
@@ -2326,9 +2318,12 @@ namespace ButtonDeck.Forms
                     }
                 }
                 toAdd.AsEnumerable().Reverse().All(m => {
+                  
                     MainForm.instance.ShadedPanel1.Controls.Add(m);
+                 
                     return true;
                 });
+         
                 Debug.WriteLine("GRANDO SIDEBAR " + name);
             });
             //   return "";
