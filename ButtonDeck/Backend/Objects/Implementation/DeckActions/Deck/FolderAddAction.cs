@@ -16,16 +16,24 @@ using System.Xml.Serialization;
 
 namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 {
-   
+    [DataContract]
 
-    public class PluginListGenerator : AbstractDeckAction
+    public class FolderAddAction : AbstractDeckAction
     {
 
 
 
 
 
+<<<<<<< HEAD:ButtonDeck/Backend/Objects/Implementation/DeckActions/Deck/PluginListGenerator.cs
         public static  string script  = "";
+=======
+
+
+
+        //     public static string script { get; set; } = "";
+        public static string script { get; set; } = "";
+>>>>>>> parent of e2fe468... coisas críticas:ButtonDeck/Backend/Objects/Implementation/DeckActions/Deck/FolderAddAction.cs
         public string script_to_form { get; set; } = "";
 
         public static string name_space { get; set; } = "";
@@ -34,10 +42,17 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public static string name_img { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
+<<<<<<< HEAD:ButtonDeck/Backend/Objects/Implementation/DeckActions/Deck/PluginListGenerator.cs
    
   
         public static string name { get; set; } = "";
 
+=======
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("name")]
+        public static string name { get; set; } = "teste";
+        [ActionPropertyInclude]
+>>>>>>> parent of e2fe468... coisas críticas:ButtonDeck/Backend/Objects/Implementation/DeckActions/Deck/FolderAddAction.cs
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
 
@@ -48,9 +63,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public static string dictionary_name { get; set; } = "";
        public static dynamic form;
         [XmlIgnore]
-        private static PluginListGenerator instance;
+        private static FolderAddAction instance;
 
-        public static PluginListGenerator Instance
+        public static FolderAddAction Instance
         {
             get
             {
@@ -123,13 +138,13 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             public static void AddControlToUser(string key, string value)
             {
-                if (PluginListGenerator.Instance.ToControls.ContainsKey(key))
+                if (FolderAddAction.Instance.ToControls.ContainsKey(key))
                 {
-                    PluginListGenerator.Instance.ToControls[key] = value;
+                    FolderAddAction.Instance.ToControls[key] = value;
                 }
                 else
                 {
-                    PluginListGenerator.Instance.ToControls.Add(key, value);
+                    FolderAddAction.Instance.ToControls.Add(key, value);
                 }
             }
             public static void setFormControl(string name, string value, string type, int x ,int y, int tam_x, int tam_y)
@@ -150,7 +165,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         txt.Height = tam_y;
                         txt.Location = new System.Drawing.Point (x,y);
 
-                        //       PluginListGenerator.form.Controls.Add(txt);
+                        //       FolderAddAction.form.Controls.Add(txt);
                         AddControlToUser(name,txt.Text);
                       form.Controls.Add(txt);
 
@@ -168,7 +183,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         ritchtext.Height = tam_y;
                         ritchtext.Location = new System.Drawing.Point(x, y);
 
-                        //       PluginListGenerator.form.Controls.Add(txt);
+                        //       FolderAddAction.form.Controls.Add(txt);
                         form.Controls.Add(ritchtext);
                         AddControlToUser(name, value);
                
@@ -178,7 +193,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         Label labeled = new Label();
                         labeled.Text = value;
                         labeled.Name = name;
-                        //       PluginListGenerator.form.Controls.Add(txt);
+                        //       FolderAddAction.form.Controls.Add(txt);
                         labeled.Width = tam_x;
                         labeled.Height = tam_y;
                         labeled.Location = new System.Drawing.Point(x, y);
@@ -205,7 +220,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                            file_text.Text = file_search.FileName;
 
                         };
-                        //       PluginListGenerator.form.Controls.Add(txt);
+                        //       FolderAddAction.form.Controls.Add(txt);
 
                      file_text.Width = tam_x;
                         file_table_layout.Width = tam_x + 90;
@@ -235,9 +250,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
 
-                    if (PluginListGenerator.Instance.ToControls.ContainsKey(key))
+                    if (FolderAddAction.Instance.ToControls.ContainsKey(key))
                     {
-                        result = PluginListGenerator.Instance.ToControls[key];
+                        result = FolderAddAction.Instance.ToControls[key];
                     }
                 }
                 catch (Exception e)
@@ -284,11 +299,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             //          ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
             var originalToExec = new String(ToExecute.ToCharArray());
              form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
-
+           
             ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
             object functiontable = ScribeBot.Scripter.Environment.Globals["form_menu"];
             ScribeBot.Scripter.Environment.Call(functiontable);
-            //  var execAction = CloneAction() as PluginListGenerator;
+            //  var execAction = CloneAction() as FolderAddAction;
 
             //    execAction.ToExecute = ToExecute;
 
@@ -338,7 +353,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
    
 
-            return new PluginListGenerator();
+            return new FolderAddAction();
         }
       
 
@@ -358,9 +373,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public override void OnButtonDown(DeckDevice deckDevice)
         {
+ Debug.WriteLine("CONTINENTE");
+    //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
-            //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
- 
 
             ScribeBot.Scripter.Execute(script,true);
            object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];

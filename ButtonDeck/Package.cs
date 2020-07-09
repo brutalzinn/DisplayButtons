@@ -163,7 +163,7 @@ namespace ScribeBot
             {
 
 
-         MainForm.button_creator(GetInfo()["Name"], $"{ReadFileContents(GetInfo()["EntryPoint"])}");
+         MainForm.button_creator(GetInfo()["Name"], GetInfo()["Namespace"], $"{ReadFileContents(GetInfo()["EntryPoint"])}");
 
             }
 
