@@ -200,7 +200,7 @@
     <Compile Include="Backend\Objects\IDeckDevice.cs" />
     <Compile Include="Backend\Objects\IDeckFolder.cs" />
     <Compile Include="Backend\Objects\IDeckItem.cs" />
-    <Compile Include="Backend\Objects\Implementation\DeckActions\Deck\FolderAddAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\Deck\PluginListGenerator.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\Deck\LayerMultiAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\ExecutableRunAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\KeyPressAction.cs" />
@@ -229,6 +229,7 @@
     <Compile Include="Backend\Utils\Native\NativeKeyHandler.cs" />
     <Compile Include="Backend\Utils\OBSUtils.cs" />
     <Compile Include="Backend\Utils\XMLUtils.cs" />
+    <Compile Include="Engine\Wrappers\SocketWrapper.cs" />
     <Compile Include="Controls\ColorSchemePreviewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

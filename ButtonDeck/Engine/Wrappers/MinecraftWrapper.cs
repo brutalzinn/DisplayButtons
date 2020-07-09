@@ -12,12 +12,12 @@ namespace ButtonDeck.Engine.Wrappers
     class MinecraftWrapper
     {
 
-        public static void SendCommand(string ip,int port, string password, string command)
+        public static void SendCommand(string ip, string password, string command)
         {
 
             using (var rcon = RCONClient.INSTANCE)
             {
-                rcon.setupStream(ip, port,password: password);
+                rcon.setupStream(ip,password: password);
                var answer = rcon.sendMessage(RCONMessageType.Command, command);
                 Console.WriteLine(answer.RemoveColorCodes());
             }

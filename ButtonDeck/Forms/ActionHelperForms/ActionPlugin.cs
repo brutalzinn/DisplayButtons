@@ -20,9 +20,9 @@ namespace ButtonDeck.Forms.ActionHelperForms
     
         private string _toExecuteFileName;
 
-        private FolderAddAction _modifiableAction;
+        private PluginListGenerator _modifiableAction;
         private static string scripter_form;
-        public FolderAddAction ModifiableAction
+        public PluginListGenerator ModifiableAction
         {
             get { return _modifiableAction; }
             set
@@ -51,7 +51,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
                 UpdateFinal(ModifiableAction);
             }
         }
-        private void UpdateFinal(FolderAddAction act)
+        private void UpdateFinal(PluginListGenerator act)
         {
          //   act.ToExecute = (_toExecuteFileName + "#" + _toExecuteArguments + "#" + _toExecuteAsk);
 
