@@ -1,22 +1,17 @@
 ﻿using ButtonDeck.Backend.Utils;
 using ButtonDeck.Forms;
 using MoonSharp.Interpreter;
+using ScribeBot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-
 namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 {
-    [DataContract]
 
     public class FolderAddAction : AbstractDeckAction
     {
@@ -25,45 +20,42 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
 
-<<<<<<< HEAD:ButtonDeck/Backend/Objects/Implementation/DeckActions/Deck/PluginListGenerator.cs
-        public static  string script  = "";
-=======
 
 
-
-        //     public static string script { get; set; } = "";
-        public static string script { get; set; } = "";
->>>>>>> parent of e2fe468... coisas críticas:ButtonDeck/Backend/Objects/Implementation/DeckActions/Deck/FolderAddAction.cs
+        //[XmlElement("script_garbage")]
+        //public string script_garbage { get; set; } = "";
+        [XmlIgnore]
         public string script_to_form { get; set; } = "";
-
+        [XmlIgnore]
+        public static string script { get; set; }
+        [XmlIgnore]
         public static string name_space { get; set; } = "";
 
 
-
+        [XmlIgnore]
         public static string name_img { get; set; } = "";
+        [XmlIgnore]
         public static string DeckActionCategory_string { get; set; } = "Deck";
-<<<<<<< HEAD:ButtonDeck/Backend/Objects/Implementation/DeckActions/Deck/PluginListGenerator.cs
-   
-  
-        public static string name { get; set; } = "";
 
-=======
+        [XmlElement("NameType")]
+
+        public static string Name { get; set; }
+
+
         [ActionPropertyInclude]
-        [ActionPropertyDescription("name")]
-        public static string name { get; set; } = "teste";
-        [ActionPropertyInclude]
->>>>>>> parent of e2fe468... coisas críticas:ButtonDeck/Backend/Objects/Implementation/DeckActions/Deck/FolderAddAction.cs
-        [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
 
-        [ActionPropertyInclude]
+
 
         public SerializableDictionary<string, string> ToControls { get; set; } = new SerializableDictionary<string, string>();
+  
 
         public static string dictionary_name { get; set; } = "";
-       public static dynamic form;
+   
+        public static dynamic form;
         [XmlIgnore]
         private static FolderAddAction instance;
+        [XmlIgnore]
 
         public static FolderAddAction Instance
         {
@@ -325,6 +317,28 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 ToExecute = originalToExec;
             }
         }
+
+        public FolderAddAction()
+        {
+                 
+        }
+       
+
+        // A constructor that takes parameter to set the properties
+        public FolderAddAction(string name_param, string script_param)
+        {
+
+
+     
+           Name = name_param;
+      script = script_param;
+           
+    
+            // script = script_garbage;
+        }
+
+
+
         public override DeckImage GetDefaultItemImage()
         {
         // string image_name = ScribeBot.Scripter.Environment.Globals["set_image"];
@@ -347,12 +361,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
         public override AbstractDeckAction CloneAction()
         {
-            //  Debug.WriteLine("CHEGOU A CHAMAR O NAMESPACE" + name_space);
-            // DynValue obj = UserData.Create(name_space);
-            //  ScribeBot.Scripter.Execute(script, false);
-            //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
-   
-
+           
+      
             return new FolderAddAction();
         }
       
@@ -368,17 +378,17 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public override string GetActionName()
         {
 
-            return name;
+            return Name;
         }
 
         public override void OnButtonDown(DeckDevice deckDevice)
         {
- Debug.WriteLine("CONTINENTE");
-    //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
+            //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
-            ScribeBot.Scripter.Execute(script,true);
-           object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
+            ScribeBot.Scripter.Execute(script, true);
+
+            object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
           ScribeBot.Scripter.Environment.Call(functiontable);
             //  ScribeBot.Scripter.Environment.Call(DynValue.NewString("buttondown"));
             
@@ -387,11 +397,12 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
       
         public override void OnButtonUp(DeckDevice deckDevice)
         {
-        //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
+            ScribeBot.Scripter.Execute(script, true);
+            //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
             //    ScribeBot.Scripter.Execute(script);
             //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
-            ScribeBot.Scripter.Execute(script, true);
+
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonUP"];
             ScribeBot.Scripter.Environment.Call(functiontable);
             //    DynValue res = ScribeBot.Scripter.Environment.Call(luaFactFunction);

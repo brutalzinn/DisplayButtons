@@ -2231,26 +2231,17 @@ namespace ButtonDeck.Forms
         public static  void button_creator(string name,string name_space, string script)
         {
             //FolderAddAction testando = new FolderAddAction();
-            FolderAddAction.name = name;
-            FolderAddAction.script = script;
-           // testando.script = script;
 
-<<<<<<< HEAD
-
-            PluginListGenerator.name = name;
-            PluginListGenerator.script = script;
-  
-
-=======
->>>>>>> parent of e2fe468... coisas críticas
-
-
-            FolderAddAction.name_space = name_space;
+            // testando.script = script;
+    FolderAddAction to_lua = new FolderAddAction(name, script);
+         
+        
+          
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
             Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
-            IList<FolderAddAction> list = new List<FolderAddAction>();
+      
             // ButtonDeck.Forms.MainForm.testando(value);
             MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate {
             //Globals.launcher_principal.ShadedPanel1.Controls.Clear();
@@ -2266,23 +2257,12 @@ namespace ButtonDeck.Forms
             };
 
 
-                //  FolderAddAction testando = new FolderAddAction();
-                //  FolderAddAction.name = name_button;
-
-                //     FolderAddAction.LuaExecuteButtonDown = buttondowm;
-                //  FolderAddAction.LuaExecuteButtonDown = //buttondowm;
-                //     FolderAddAction.DeckActionCategory_string = category;
-
-
-                //    Debug.WriteLine("RRR" + testando.GetActionName());
-
-                // Globals.launcher_principal.ShadedPanel1.Controls.Add(teste);
+            
                 MainForm.instance.ShadedPanel1.Refresh();
 
                 var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
                 List<Control> toAdd = new List<Control>();
-
 
 
 
