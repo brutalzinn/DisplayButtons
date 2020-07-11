@@ -35,6 +35,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [ActionPropertyPluginsScriptEntryPoint]
 
         public  string ScriptEntryPoint { get; set; } = "";
+        [ActionPropertyPluginsScriptEntryPoint]
+
+        public string ScriptNamePoint { get; set; } = "";
         public string script_to_form { get; set; } = "";
 
         public static string name_space { get; set; } = "";
@@ -297,13 +300,12 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
    public override void SetConfigs()
         {
 
-          
+
             //  ToScript = File.ReadAllText(path);
-            var path = $@"{Path.GetDirectoryName(Application.ExecutablePath)}"+ScriptEntryPoint;
+            ToScript = File.ReadAllText(ScriptEntryPoint);
+           // ToScript = File.ReadAllText(path);
 
 
-
-            Debug.WriteLine(path);
 
         }
         public void ToExecuteHelper()

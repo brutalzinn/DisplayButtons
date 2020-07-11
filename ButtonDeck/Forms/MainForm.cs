@@ -383,10 +383,10 @@ namespace ButtonDeck.Forms
                                     mb.Image = ((DynamicDeckItem)mb.Tag).DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default;
 
                                     FocusItem(mb, mb.Tag as IDeckItem);
-                                    if (mb.Tag is DynamicDeckItem TT)
+                                    if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is FolderAddAction YY)
                                     {
-                                        LoadPropertiesPlugins(TT, action.ToExecute);
-
+                                        LoadPropertiesPlugins(TT, action.ToExecute,action.ToName);
+                                        YY.SetConfigs();
                                     }
                                 }
                             }
@@ -2227,38 +2227,21 @@ namespace ButtonDeck.Forms
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
 
-        private void LoadPropertiesPlugins(DynamicDeckItem item, string result_string)
+        private void LoadPropertiesPlugins(DynamicDeckItem item, string result_string, string name)
         {
 
+            Type type = item.DeckAction.GetType();
+            PropertyInfo prop = type.GetProperty("ScriptEntryPoint");
+            prop.SetValue(item.DeckAction, result_string, null);
+            PropertyInfo propa = type.GetProperty("ScriptNamePoint");
+            propa.SetValue(item.DeckAction, name, null);
+            //  prop.SetValue(item.DeckAction, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(result_string));
+            //         UpdateIcon(shouldUpdateIcon);
 
-            var props = item.DeckAction.GetType().GetProperties().Where(
-                prop => Attribute.IsDefined(prop, typeof(ActionPropertyPluginsScriptEntryPoint)));
-            foreach (var prop in props)
-            {
-            //    bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
 
 
-               // if (!TypeDescriptor.GetConverter(prop.PropertyType).CanConvertFrom
-               //(typeof(string))) continue;
-                try
-                        {
-                   // if (result_string == string.Empty) return;
-                    //if (result_string == string.Empty) return;
-                    //After loosing focus, convert type to thingy.
-                    prop.SetValue(item.DeckAction, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(result_string));
-                   //         UpdateIcon(shouldUpdateIcon);
-                        }
-                        catch (Exception eee)
-                        {
-                    Debug.WriteLine("DEBUG:" + eee);
-                            //Ignore all errors
-                        }
-                 
-                    
-                }
-            
 
-          //  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
+            //  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
         public  void button_creator(string name,string script)
         {
@@ -2325,7 +2308,7 @@ namespace ButtonDeck.Forms
 
                       
 
-                          i2.SetConfigs();
+                         
 
 
                             Label item = new Label()
@@ -2348,9 +2331,9 @@ namespace ButtonDeck.Forms
                                 {
                                     var leste = new DeckActionHelper(act);
                                     leste.ToExecute = script;
-                                   
+                                    leste.ToName = name;
                                     item.DoDragDrop( leste, DragDropEffects.Copy);
-                                   
+                              //      i2.SetConfigs();
                                     //  LoadPropertiesPlugins(i2, script);
 
                                 }
@@ -2429,7 +2412,7 @@ namespace ButtonDeck.Forms
                     if (item is DynamicDeckItem TT && TT.DeckAction is FolderAddAction FF)
                     {
 
-                        LoadPropertiesPlugins(TT, script);
+                //        LoadPropertiesPlugins(TT, script);
                     }
                     // control2.Text = item.DeckName;
 
@@ -2466,7 +2449,7 @@ namespace ButtonDeck.Forms
 
 
 
-                        MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
+                        MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ArchivePath +"\\" + x.GetInfo()["EntryPoint"]);
                         //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
 
                     });
@@ -2502,7 +2485,7 @@ namespace ButtonDeck.Forms
                 if (item is DynamicDeckItem TT && TT.DeckAction is FolderAddAction FF)
                 {
                  
-                    LoadPropertiesPlugins(TT, script);
+                    //LoadPropertiesPlugins(TT, script);
                  }
               //  ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
             }

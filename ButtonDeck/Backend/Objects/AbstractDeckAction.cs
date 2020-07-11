@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace ButtonDeck.Backend.Objects
 {
 
-
+    
 
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public class ActionPropertyPluginsScriptEntryPoint : Attribute
