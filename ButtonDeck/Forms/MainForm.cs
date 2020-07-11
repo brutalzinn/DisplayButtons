@@ -33,6 +33,7 @@ using ButtonDeck.Backend.Networking.TcpLib;
 using System.Windows.Threading;
 using ConnectionState = ButtonDeck.Backend.Networking.TcpLib.ConnectionState;
 using SharpAdbClient;
+using System.Threading.Tasks;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -240,27 +241,19 @@ namespace ButtonDeck.Forms
             shadedPanel1.Hide();
             Refresh();
 
-       
-
-           
-
-            Package[] installedPackages = Workshop.GetInstalled();
-
-            installedPackages.ToList().ForEach(x =>
-            {
-                Dictionary<string, string> packageInfo = x.GetInfo();
-     
-
-        
-                button_creator(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
-
-            });
 
 
 
-          
 
 
+
+
+
+
+
+            Thread thread1 = new Thread(() => isReadyMatrizHandle());
+            //  thread1.SetApartmentState(ApartmentState.STA);
+            thread1.Start();
 
 
 
@@ -623,7 +616,7 @@ namespace ButtonDeck.Forms
                                             {
                                             //CurrentDevice.CurrentFolder = newFolder;
                                             RefreshAllButtons(true);
-
+                                                
                                             }
                                         };
 
@@ -780,7 +773,7 @@ namespace ButtonDeck.Forms
                 // Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
 
 
-
+                
 
 
                 control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
@@ -2221,34 +2214,30 @@ namespace ButtonDeck.Forms
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
 
-        private void LoadPropertiesPlugins(AbstractDeckAction item, string result_string)
+        private void LoadPropertiesPlugins(DynamicDeckItem item, string result_string)
         {
 
 
-            var props = item.GetType().GetProperties().Where(
+            var props = item.DeckAction.GetType().GetProperties().Where(
                 prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeTesteAttribute)));
             foreach (var prop in props)
             {
-                bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
-          
-          
-
-                 
+            //    bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
 
 
-              //result_string = (string)TypeDescriptor.GetConverter(prop.PropertyType).ConvertTo(prop.GetValue(item), typeof(string));
-                   
-                
-                        try
+               // if (!TypeDescriptor.GetConverter(prop.PropertyType).CanConvertFrom
+               //(typeof(string))) continue;
+                try
                         {
-                    if (result_string == string.Empty) return;
+                   // if (result_string == string.Empty) return;
                     //if (result_string == string.Empty) return;
                     //After loosing focus, convert type to thingy.
-                    prop.SetValue(item, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(result_string));
-                            UpdateIcon(shouldUpdateIcon);
+                    prop.SetValue(item.DeckAction, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(result_string));
+                   //         UpdateIcon(shouldUpdateIcon);
                         }
                         catch (Exception eee)
                         {
+                    Debug.WriteLine("DEBUG:" + eee);
                             //Ignore all errors
                         }
                  
@@ -2321,15 +2310,19 @@ namespace ButtonDeck.Forms
 
 
 
+                      
+
+                            // i2.SetConfigs(script);
 
 
                             Label item = new Label()
                             {
+                            
                                 Padding = itemPadding,
                                 TextAlign = ContentAlignment.MiddleLeft,
                                 Font = itemFont,
                                 Dock = DockStyle.Top,
-                                Text = name,
+                                Text = i2.GetActionName(),
                                 Height = TextRenderer.MeasureText(name, itemFont).Height,
                                 Tag = i2,
 
@@ -2342,7 +2335,8 @@ namespace ButtonDeck.Forms
                                 {
                               
                                     item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
-                             LoadPropertiesPlugins(i2, script);
+                                    
+                                    //  LoadPropertiesPlugins(i2, script);
 
                                 }
 
@@ -2358,7 +2352,7 @@ namespace ButtonDeck.Forms
 
 
 
-
+                          
 
                         }
                       
@@ -2368,17 +2362,77 @@ namespace ButtonDeck.Forms
           
             Debug.WriteLine("GRANDO SIDEBAR " + name);
             });
-            
-               
 
-            
 
-                            
+
+
 
       
 
+          
+
         }
-        private void UpdateIcon(bool shouldUpdateIcon)
+
+     
+        static void isReadyMatrizHandle()
+        {
+            while (true)
+            {
+                if (Globals.can_refresh == true)
+                {
+                    Package[] installedPackages = Workshop.GetInstalled();
+
+                    installedPackages.ToList().ForEach(x =>
+                    {
+                        Dictionary<string, string> packageInfo = x.GetInfo();
+
+
+
+                        MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
+                    MainForm.Instance.RefreshAllPluginsDependencies(x.ReadFileContents(x.GetInfo()["EntryPoint"]));
+
+                    });
+                    break;
+                }
+                else
+                {
+
+                    Thread.Sleep(500);
+                    continue;
+                }
+
+ 
+            }
+           
+        }
+     
+        public void RefreshAllPluginsDependencies( string script)
+        {
+         
+
+
+            // Buttons_Unfocus(this, EventArgs.Empty);
+            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+
+
+          
+            if (folder == null) return;
+            for (int i = 0; i < folder.GetDeckItems().Count; i++)
+            {
+                IDeckItem item = null;
+                item = folder.GetDeckItems()[i];
+                if (item is DynamicDeckItem TT)
+                {
+                    LoadPropertiesPlugins(TT, script);
+                 }
+              //  ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+            }
+
+
+
+
+            }
+            private void UpdateIcon(bool shouldUpdateIcon)
         {
            // IDeckFolder folder = CurrentDevice?.CurrentFolder;
             if (shouldUpdateIcon) {

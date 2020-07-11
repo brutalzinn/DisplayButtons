@@ -78,12 +78,8 @@ namespace ButtonDeck.Backend.Objects
 
             return false;
         }
-        public virtual void SetConfigs(string name, string script)
-        {
-
-
-        }
-
+        public virtual void SetConfigs(string script) { }
+       
 
         [Obsolete]
         public virtual bool OnButtonClick(DeckDevice deckDevice) {

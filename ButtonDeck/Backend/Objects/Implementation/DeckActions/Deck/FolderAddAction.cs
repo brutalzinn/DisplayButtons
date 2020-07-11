@@ -30,8 +30,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         //     public static string script { get; set; } = "";
 
-        [ActionPropertyIncludeTesteAttribute]
-        [ActionPropertyDescription("script")]
+    
 
         public  string ToScript { get; set; } = "print('default')";
         public string script_to_form { get; set; } = "";
@@ -42,7 +41,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public static string name_img { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
-   
+
+        [ActionPropertyIncludeTesteAttribute]
+        [ActionPropertyDescription("name")]
         public string name { get; set; } = "";
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
@@ -292,22 +293,23 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             }
         }
-   public override void SetConfigs(string name_param, string script_param)
+   public override void SetConfigs(string script_param)
         {
+     
+            
+    
+            var execAction = CloneAction() as FolderAddAction;
+            execAction.ToScript = script_param;
+
+            ToScript = execAction.ToScript;
 
 
 
-            ToScript = script_param;
 
-            name = name_param;
-            ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
-            ScribeBot.Scripter.Environment.Globals["formdesignvoid"] = typeof(Formvoid);
-
-            ScribeBot.Scripter.Execute(ToScript);
         }
         public void ToExecuteHelper()
         {
-            instance = this;
+     
           //  ScribeBot.Scripter.Execute(script, true);
 
             //          ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
@@ -361,11 +363,13 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
         public override AbstractDeckAction CloneAction()
         {
+
+    
             //  Debug.WriteLine("CHEGOU A CHAMAR O NAMESPACE" + name_space);
             // DynValue obj = UserData.Create(name_space);
             //  ScribeBot.Scripter.Execute(script, false);
             //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
-            var oldSceneName = new String(ToScript.ToCharArray());
+            //  var oldSceneName = new String(ToScript.ToCharArray());
 
 
             return new FolderAddAction();
@@ -407,7 +411,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public FolderAddAction(string name_param, string script_param)
         {
 
-            ToScript = script_param;
+       //     ToScript = script_param;
         }
         public override void OnButtonUp(DeckDevice deckDevice)
         {
