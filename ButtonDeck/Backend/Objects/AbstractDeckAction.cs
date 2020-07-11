@@ -10,7 +10,7 @@ namespace ButtonDeck.Backend.Objects
 
 
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-    public class ActionPropertyIncludeTesteAttribute : Attribute
+    public class ActionPropertyPluginsScriptEntryPoint : Attribute
     { }
 
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
@@ -78,7 +78,7 @@ namespace ButtonDeck.Backend.Objects
 
             return false;
         }
-        public virtual void SetConfigs(string script) { }
+        public virtual void SetConfigs() { }
        
 
         [Obsolete]

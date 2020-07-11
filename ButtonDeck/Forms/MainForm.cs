@@ -250,10 +250,10 @@ namespace ButtonDeck.Forms
 
 
 
-
-            Thread thread1 = new Thread(() => isReadyMatrizHandle());
-            //  thread1.SetApartmentState(ApartmentState.STA);
-            thread1.Start();
+         
+           Thread thread1 = new Thread(() => isReadyMatrizHandle());
+              thread1.SetApartmentState(ApartmentState.STA);
+        thread1.Start();
 
 
 
@@ -315,14 +315,18 @@ namespace ButtonDeck.Forms
                             var item = ee.Data.GetData(typeof(DeckItemMoveHelper)) as DeckItemMoveHelper;
                             ee.Effect = item.CopyOld ? DragDropEffects.Copy : DragDropEffects.Move;
                         }
+
                     };
                     mb.DragDrop += (s, ee) => {
                         if (ee.Data.GetData(typeof(DeckActionHelper)) is DeckActionHelper action)
                         {
                             if (ee.Effect == DragDropEffects.Copy)
                             {
+
                                 if (mb.Tag != null && mb.Tag is IDeckItem item)
                                 {
+                    
+
                                     if (CurrentDevice.CurrentFolder.GetParent() != null && mb.CurrentSlot == 1) return;
                                     if (item is IDeckFolder deckFolder)
                                     {
@@ -335,8 +339,11 @@ namespace ButtonDeck.Forms
 
                                         CurrentDevice.CurrentFolder = deckFolder;
                                         RefreshAllButtons();
+                                        //implementação dos plugins
+                
 
-                                        FocusItem(GetButtonControl(id2), deckItemToAdd);
+
+                                            FocusItem(GetButtonControl(id2), deckItemToAdd);
 
                                         return;
                                     }
@@ -376,6 +383,11 @@ namespace ButtonDeck.Forms
                                     mb.Image = ((DynamicDeckItem)mb.Tag).DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default;
 
                                     FocusItem(mb, mb.Tag as IDeckItem);
+                                    if (mb.Tag is DynamicDeckItem TT)
+                                    {
+                                        LoadPropertiesPlugins(TT, action.ToExecute);
+
+                                    }
                                 }
                             }
                         }
@@ -467,7 +479,8 @@ namespace ButtonDeck.Forms
             });
          
         }
-        
+     
+
         public void ButtonCreator()
         {
 
@@ -2219,7 +2232,7 @@ namespace ButtonDeck.Forms
 
 
             var props = item.DeckAction.GetType().GetProperties().Where(
-                prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeTesteAttribute)));
+                prop => Attribute.IsDefined(prop, typeof(ActionPropertyPluginsScriptEntryPoint)));
             foreach (var prop in props)
             {
             //    bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
@@ -2247,7 +2260,7 @@ namespace ButtonDeck.Forms
 
           //  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public  void button_creator(string name, string script)
+        public  void button_creator(string name,string script)
         {
             //FolderAddAction testando = new FolderAddAction();
        
@@ -2312,7 +2325,7 @@ namespace ButtonDeck.Forms
 
                       
 
-                            // i2.SetConfigs(script);
+                          i2.SetConfigs();
 
 
                             Label item = new Label()
@@ -2322,7 +2335,7 @@ namespace ButtonDeck.Forms
                                 TextAlign = ContentAlignment.MiddleLeft,
                                 Font = itemFont,
                                 Dock = DockStyle.Top,
-                                Text = i2.GetActionName(),
+                                Text = name,
                                 Height = TextRenderer.MeasureText(name, itemFont).Height,
                                 Tag = i2,
 
@@ -2333,9 +2346,11 @@ namespace ButtonDeck.Forms
 
                                 if (item.Tag is AbstractDeckAction act)
                                 {
-                              
-                                    item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
-                                    
+                                    var leste = new DeckActionHelper(act);
+                                    leste.ToExecute = script;
+                                   
+                                    item.DoDragDrop( leste, DragDropEffects.Copy);
+                                   
                                     //  LoadPropertiesPlugins(i2, script);
 
                                 }
@@ -2373,7 +2388,70 @@ namespace ButtonDeck.Forms
 
         }
 
-     
+        public void RefreshButtonPlugin(int slot,string script, bool sendToDevice = true)
+        {
+            Buttons_Unfocus(this, EventArgs.Empty);
+
+            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+            ImageModernButton control1 = GetButtonControl(slot);
+            //Label control_label = GetLabelControl(slot);
+            // Label title_control = Controls.Find("titleLabel" + slot, true).FirstOrDefault() as Label;
+
+            control1.NormalImage = null;
+            control1.Tag = null;
+            control1.Text = "";
+
+
+            if (folder == null) control1.Invoke(new Action(control1.Refresh));
+
+            if (folder == null) return;
+            for (int i = 0; i < folder.GetDeckItems().Count; i++)
+            {
+                IDeckItem item = null;
+                item = folder.GetDeckItems()[i];
+
+                if (folder.GetItemIndex(item) != slot) continue;
+                ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
+                Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
+
+                //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
+                if (item != null)
+                {
+                    var ser = item.GetItemImage().BitmapSerialized;
+                    //  control.NormalImage = null
+
+
+
+
+
+
+
+                    if (item is DynamicDeckItem TT && TT.DeckAction is FolderAddAction FF)
+                    {
+
+                        LoadPropertiesPlugins(TT, script);
+                    }
+                    // control2.Text = item.DeckName;
+
+
+                    //control.NormalImage = item?.GetItemImage().Bitmap; //Write_name_Image(dI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
+
+
+                    control.Tag = item;
+                    control.Invoke(new Action(control.Refresh));
+
+
+
+                }
+            }
+            CurrentDevice.CheckCurrentFolder();
+            if (sendToDevice)
+            {
+                SendItemsToDevice(CurrentDevice, folder);
+
+            }
+            // 
+        }
         static void isReadyMatrizHandle()
         {
             while (true)
@@ -2389,7 +2467,7 @@ namespace ButtonDeck.Forms
 
 
                         MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
-                    MainForm.Instance.RefreshAllPluginsDependencies(x.ReadFileContents(x.GetInfo()["EntryPoint"]));
+                        //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
 
                     });
                     break;
@@ -2421,8 +2499,9 @@ namespace ButtonDeck.Forms
             {
                 IDeckItem item = null;
                 item = folder.GetDeckItems()[i];
-                if (item is DynamicDeckItem TT)
+                if (item is DynamicDeckItem TT && TT.DeckAction is FolderAddAction FF)
                 {
+                 
                     LoadPropertiesPlugins(TT, script);
                  }
               //  ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;

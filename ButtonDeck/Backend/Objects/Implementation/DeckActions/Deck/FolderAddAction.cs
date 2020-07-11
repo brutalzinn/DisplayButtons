@@ -29,10 +29,12 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
         //     public static string script { get; set; } = "";
+        public string ToScript { get; set; } = "";
 
-    
 
-        public  string ToScript { get; set; } = "print('default')";
+        [ActionPropertyPluginsScriptEntryPoint]
+
+        public  string ScriptEntryPoint { get; set; } = "";
         public string script_to_form { get; set; } = "";
 
         public static string name_space { get; set; } = "";
@@ -42,8 +44,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public static string name_img { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
 
-        [ActionPropertyIncludeTesteAttribute]
-        [ActionPropertyDescription("name")]
+       
         public string name { get; set; } = "";
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
@@ -293,18 +294,16 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             }
         }
-   public override void SetConfigs(string script_param)
+   public override void SetConfigs()
         {
-     
-            
-    
-            var execAction = CloneAction() as FolderAddAction;
-            execAction.ToScript = script_param;
 
-            ToScript = execAction.ToScript;
+          
+            //  ToScript = File.ReadAllText(path);
+            var path = $@"{Path.GetDirectoryName(Application.ExecutablePath)}"+ScriptEntryPoint;
 
 
 
+            Debug.WriteLine(path);
 
         }
         public void ToExecuteHelper()
