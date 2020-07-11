@@ -9,7 +9,9 @@ namespace ButtonDeck.Backend.Objects
 
 
 
-
+    [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public class ActionPropertyIncludeTesteAttribute : Attribute
+    { }
 
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public class ActionPropertyIncludeAttribute : Attribute

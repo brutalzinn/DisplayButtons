@@ -153,13 +153,13 @@ namespace ScribeBot
         public void Run(bool type = false) {
 
             
-              Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), false);
+              Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), type);
 
 
 
            
 
-         MainForm.Instance.button_creator(GetInfo()["Name"], GetInfo()["Namespace"], ReadFileContents(GetInfo()["EntryPoint"]));
+ 
 
          
 

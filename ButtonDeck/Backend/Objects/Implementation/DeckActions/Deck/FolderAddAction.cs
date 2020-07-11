@@ -30,8 +30,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         //     public static string script { get; set; } = "";
 
+        [ActionPropertyIncludeTesteAttribute]
+        [ActionPropertyDescription("script")]
 
-        public static string script { get; set; } = "";
+        public  string ToScript { get; set; } = "print('default')";
         public string script_to_form { get; set; } = "";
 
         public static string name_space { get; set; } = "";
@@ -40,10 +42,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public static string name_img { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
-
-     
-
-        public static string name { get; set; }
+   
+        public string name { get; set; } = "";
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
@@ -294,16 +294,16 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
    public override void SetConfigs(string name_param, string script_param)
         {
- 
 
-         
-            script = script_param;
+
+
+            ToScript = script_param;
 
             name = name_param;
             ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
             ScribeBot.Scripter.Environment.Globals["formdesignvoid"] = typeof(Formvoid);
-         
 
+            ScribeBot.Scripter.Execute(ToScript);
         }
         public void ToExecuteHelper()
         {
@@ -323,7 +323,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             //   form.ModifiableAction = execAction;
 
-            form.scripter = script;
+            form.scripter = ToScript;
             if (form.ShowDialog() == DialogResult.OK)
             {
 
@@ -365,7 +365,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             // DynValue obj = UserData.Create(name_space);
             //  ScribeBot.Scripter.Execute(script, false);
             //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
-   
+            var oldSceneName = new String(ToScript.ToCharArray());
+
 
             return new FolderAddAction();
         }
@@ -389,29 +390,37 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         {
 
             //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
-
-
+            
+            ScribeBot.Scripter.Execute(ToScript, false);
             //  Debug.WriteLine(script);
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
-            Action myFunctionCall = () => ScribeBot.Scripter.Environment.Call(functiontable);
+          ScribeBot.Scripter.Environment.Call(functiontable);
             //  ScribeBot.Scripter.Environment.Call(DynValue.NewString("buttondown"));
-            myFunctionCall.Invoke();
+         
 
 
         }
-      
+        public FolderAddAction() { }
+
+        // The following constructor has parameters for two of the three
+        // properties.
+        public FolderAddAction(string name_param, string script_param)
+        {
+
+            ToScript = script_param;
+        }
         public override void OnButtonUp(DeckDevice deckDevice)
         {
             //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
-  
-            //    ScribeBot.Scripter.Execute(script);
+
+
             //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
-            //    ScribeBot.Scripter.Execute(script, false);
+            ScribeBot.Scripter.Execute(ToScript, false);
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonUP"];
-            Action myFunctionCall = () => ScribeBot.Scripter.Environment.Call(functiontable);
+          ScribeBot.Scripter.Environment.Call(functiontable);
             //    DynValue res = ScribeBot.Scripter.Environment.Call(luaFactFunction);
             //   ScribeBot.Scripter.Execute(res.tos);
-            myFunctionCall.Invoke();
+ 
 
         }
     }

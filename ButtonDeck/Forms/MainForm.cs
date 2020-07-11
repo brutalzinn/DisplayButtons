@@ -249,18 +249,10 @@ namespace ButtonDeck.Forms
             installedPackages.ToList().ForEach(x =>
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
+     
 
-                PackageInfo p = new PackageInfo();
-                //     p.NameLabel.Text = packageInfo["Name"];
-                //     p.AuthorLabel.Text = packageInfo["Authors"];
-                //      p.DescLabel.Text = packageInfo["Description"];
-                //     p.Namespace.Text = packageInfo["Namespace"];
-                //      p.Package = x;
-
-                //     p.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
-
-                //     InstalledPackagesList.Controls.Add(p);
-                x.Run(false);
+        
+                button_creator(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
 
             });
 
@@ -2228,7 +2220,45 @@ namespace ButtonDeck.Forms
 
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public  void button_creator(string name,string name_space, string script)
+
+        private void LoadPropertiesPlugins(AbstractDeckAction item, string result_string)
+        {
+
+
+            var props = item.GetType().GetProperties().Where(
+                prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeTesteAttribute)));
+            foreach (var prop in props)
+            {
+                bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
+          
+          
+
+                 
+
+
+              //result_string = (string)TypeDescriptor.GetConverter(prop.PropertyType).ConvertTo(prop.GetValue(item), typeof(string));
+                   
+                
+                        try
+                        {
+                    if (result_string == string.Empty) return;
+                    //if (result_string == string.Empty) return;
+                    //After loosing focus, convert type to thingy.
+                    prop.SetValue(item, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(result_string));
+                            UpdateIcon(shouldUpdateIcon);
+                        }
+                        catch (Exception eee)
+                        {
+                            //Ignore all errors
+                        }
+                 
+                    
+                }
+            
+
+          //  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
+        }
+        public  void button_creator(string name, string script)
         {
             //FolderAddAction testando = new FolderAddAction();
        
@@ -2236,7 +2266,7 @@ namespace ButtonDeck.Forms
 
 
 
-            FolderAddAction.name_space = name_space;
+   
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
@@ -2283,7 +2313,7 @@ namespace ButtonDeck.Forms
                     var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i.IsPlugin() == true);
                     if (enumItems.Any())
                     {
-                    
+
 
 
                         foreach (var i2 in enumItems)
@@ -2291,8 +2321,8 @@ namespace ButtonDeck.Forms
 
 
 
-                           
-                
+
+
                             Label item = new Label()
                             {
                                 Padding = itemPadding,
@@ -2307,24 +2337,30 @@ namespace ButtonDeck.Forms
                             //    Debug.WriteLine("TAG VINDO: " + i2);
                             item.MouseDown += (s, ee) =>
                             {
+
                                 if (item.Tag is AbstractDeckAction act)
-                                    item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
+                                {
                               
+                                    item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
+                             LoadPropertiesPlugins(i2, script);
+
+                                }
+
+                                  
                             };
-
-          
-  MainForm.instance.ShadedPanel1.Controls.Add(item);
                           
-                              i2.SetConfigs(name, script);  
-    
+
+                            MainForm.instance.ShadedPanel1.Controls.Add(item);
+                            //  i2.SetConfigs(name, script);
 
 
-                   
+
+
+
 
 
 
                         }
-
                       
                     }
                 }
