@@ -2228,11 +2228,10 @@ namespace ButtonDeck.Forms
 
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public static  void button_creator(string name,string name_space, string script)
+        public  void button_creator(string name,string name_space, string script)
         {
             //FolderAddAction testando = new FolderAddAction();
-            FolderAddAction.name = name;
-            FolderAddAction.script = script;
+       
            // testando.script = script;
 
 
@@ -2244,18 +2243,19 @@ namespace ButtonDeck.Forms
             Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
             IList<FolderAddAction> list = new List<FolderAddAction>();
             // ButtonDeck.Forms.MainForm.testando(value);
-            MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate {
-            //Globals.launcher_principal.ShadedPanel1.Controls.Clear();
-            Label teste = new Label()
+            MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate
             {
-                Padding = categoryPadding,
-                TextAlign = ContentAlignment.MiddleLeft,
-                Font = categoryFont,
-                Dock = DockStyle.Top,
-                Text = name,
-                Tag = "header",
+                //Globals.launcher_principal.ShadedPanel1.Controls.Clear();
+                Label teste = new Label()
+                {
+                    Padding = categoryPadding,
+                    TextAlign = ContentAlignment.MiddleLeft,
+                    Font = categoryFont,
+                    Dock = DockStyle.Top,
+                    Text = name,
+                    Tag = "header",
 
-            };
+                };
 
 
                 //  FolderAddAction testando = new FolderAddAction();
@@ -2283,47 +2283,64 @@ namespace ButtonDeck.Forms
                     var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i.IsPlugin() == true);
                     if (enumItems.Any())
                     {
-                        toAdd.Add(new Label()
-                        {
-                            Padding = categoryPadding,
-                            TextAlign = ContentAlignment.MiddleLeft,
-                            Font = categoryFont,
-                            Dock = DockStyle.Top,
-                            Text = enumItem.ToString(),
-                            Tag = "header",
-                            Height = TextRenderer.MeasureText(enumItem.ToString(), categoryFont).Height
-                        });
+                    
 
 
                         foreach (var i2 in enumItems)
                         {
+
+
+
+                           
+                
                             Label item = new Label()
                             {
                                 Padding = itemPadding,
                                 TextAlign = ContentAlignment.MiddleLeft,
                                 Font = itemFont,
                                 Dock = DockStyle.Top,
-                                Text = i2.GetActionName(),
-                                Height = TextRenderer.MeasureText(i2.GetActionName(), itemFont).Height,
+                                Text = name,
+                                Height = TextRenderer.MeasureText(name, itemFont).Height,
                                 Tag = i2,
 
                             };
                             //    Debug.WriteLine("TAG VINDO: " + i2);
-                            item.MouseDown += (s, ee) => {
+                            item.MouseDown += (s, ee) =>
+                            {
                                 if (item.Tag is AbstractDeckAction act)
                                     item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
+                              
                             };
-                            toAdd.Add(item);
+
+          
+  MainForm.instance.ShadedPanel1.Controls.Add(item);
+                          
+                              i2.SetConfigs(name, script);  
+    
+
+
+                   
+
+
+
                         }
+
+                      
                     }
                 }
-                toAdd.AsEnumerable().Reverse().All(m => {
-                    MainForm.instance.ShadedPanel1.Controls.Add(m);
-                    return true;
-                });
-                Debug.WriteLine("GRANDO SIDEBAR " + name);
+               
+          
+            Debug.WriteLine("GRANDO SIDEBAR " + name);
             });
-            //   return "";
+            
+               
+
+            
+
+                            
+
+      
+
         }
         private void UpdateIcon(bool shouldUpdateIcon)
         {

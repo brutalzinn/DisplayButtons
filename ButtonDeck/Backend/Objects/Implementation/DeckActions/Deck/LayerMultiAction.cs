@@ -16,7 +16,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Deck
 
         public string name { get; set; } = "Multi Action Button";
 
-
+        [ActionPropertyInclude]
         public string ToExecute { get; set; } = "";
         public string script { get; set; } = "";
 

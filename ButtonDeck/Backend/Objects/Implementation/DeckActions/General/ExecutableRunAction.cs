@@ -27,6 +27,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ExecutableRunHelper")) as Form;
             var execAction = CloneAction() as ExecutableRunAction;
             execAction.ToExecute = ToExecute;
+            
             form.ModifiableAction = execAction;
 
             if (form.ShowDialog() == DialogResult.OK) {

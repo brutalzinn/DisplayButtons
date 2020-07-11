@@ -162,6 +162,7 @@ namespace ScribeBot.Interface
             this.runButton.Size = new System.Drawing.Size(32, 32);
             this.runButton.TabIndex = 6;
             this.runButton.UseVisualStyleBackColor = false;
+            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
             // editButton
             // 

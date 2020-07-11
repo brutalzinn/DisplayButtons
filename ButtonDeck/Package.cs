@@ -152,25 +152,16 @@ namespace ScribeBot
      //    public void Run(bool silent = true) => Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), silent);
         public void Run(bool type = false) {
 
-            if (type)
-            {
+            
               Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), false);
 
 
 
-            }
-            else
-            {
+           
 
+         MainForm.Instance.button_creator(GetInfo()["Name"], GetInfo()["Namespace"], ReadFileContents(GetInfo()["EntryPoint"]));
 
-         MainForm.button_creator(GetInfo()["Name"], GetInfo()["Namespace"], $"{ReadFileContents(GetInfo()["EntryPoint"])}");
-
-            }
-
-
-            // DeckImplementation.packages.plugins_list.Add(new DeckImplementation.packages(GetInfo()["Name"], GetInfo()["Namespace"], ReadFileContents(GetInfo()["EntryPoint"])));
-          //  Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), false);
-       //     Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), tt);
+         
 
         }
 

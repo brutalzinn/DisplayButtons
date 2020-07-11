@@ -11,8 +11,6 @@ namespace ButtonDeck.Backend.Objects
 
 
 
-
-
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public class ActionPropertyIncludeAttribute : Attribute
     { }
@@ -78,7 +76,11 @@ namespace ButtonDeck.Backend.Objects
 
             return false;
         }
+        public virtual void SetConfigs(string name, string script)
+        {
 
+
+        }
 
 
         [Obsolete]

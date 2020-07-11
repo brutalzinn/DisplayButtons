@@ -16,7 +16,7 @@ using System.Xml.Serialization;
 
 namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 {
-    [DataContract]
+ 
 
     public class FolderAddAction : AbstractDeckAction
     {
@@ -29,6 +29,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
         //     public static string script { get; set; } = "";
+
+
         public static string script { get; set; } = "";
         public string script_to_form { get; set; } = "";
 
@@ -38,9 +40,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public static string name_img { get; set; } = "";
         public static string DeckActionCategory_string { get; set; } = "Deck";
-        [ActionPropertyInclude]
-        [ActionPropertyDescription("name")]
-        public static string name { get; set; } = "teste";
+
+     
+
+        public static string name { get; set; }
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
@@ -136,6 +139,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                     FolderAddAction.Instance.ToControls.Add(key, value);
                 }
             }
+
             public static void setFormControl(string name, string value, string type, int x ,int y, int tam_x, int tam_y)
             {
 
@@ -271,25 +275,46 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
         public override bool IsPlugin()
         {
-            ScribeBot.Scripter.Execute(script,true);
+           // ScribeBot.Scripter.Execute(script,true);
 
-            ScribeBot.Scripter.Environment.Globals["formdesignvoid"] = typeof(Formvoid);
 
            // ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
             return true;
         }
-    
-   
+        private FolderAddAction _modifiableAction;
+
+        public FolderAddAction ModifiableAction
+        {
+            get { return _modifiableAction; }
+            set
+            {
+                _modifiableAction = value;
+
+            }
+        }
+   public override void SetConfigs(string name_param, string script_param)
+        {
+ 
+
+         
+            script = script_param;
+
+            name = name_param;
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
+            ScribeBot.Scripter.Environment.Globals["formdesignvoid"] = typeof(Formvoid);
+         
+
+        }
         public void ToExecuteHelper()
         {
             instance = this;
-            ScribeBot.Scripter.Execute(script, true);
+          //  ScribeBot.Scripter.Execute(script, true);
 
             //          ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
             var originalToExec = new String(ToExecute.ToCharArray());
              form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
            
-            ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
+          
             object functiontable = ScribeBot.Scripter.Environment.Globals["form_menu"];
             ScribeBot.Scripter.Environment.Call(functiontable);
             //  var execAction = CloneAction() as FolderAddAction;
@@ -302,7 +327,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             if (form.ShowDialog() == DialogResult.OK)
             {
 
-                ScribeBot.Scripter.Execute(script, true);
+              //  ScribeBot.Scripter.Execute(script, true);
 
                 object functioncall = ScribeBot.Scripter.Environment.Globals["menu_ok"];
                 ScribeBot.Scripter.Environment.Call(functioncall);
@@ -362,29 +387,32 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public override void OnButtonDown(DeckDevice deckDevice)
         {
- Debug.WriteLine("CONTINENTE");
-    //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
+
+            //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
 
-            ScribeBot.Scripter.Execute(script,true);
-           object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
-          ScribeBot.Scripter.Environment.Call(functiontable);
+            //  Debug.WriteLine(script);
+            object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
+            Action myFunctionCall = () => ScribeBot.Scripter.Environment.Call(functiontable);
             //  ScribeBot.Scripter.Environment.Call(DynValue.NewString("buttondown"));
-            
-          
+            myFunctionCall.Invoke();
+
+
         }
       
         public override void OnButtonUp(DeckDevice deckDevice)
         {
-        //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
-
+            //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
+  
             //    ScribeBot.Scripter.Execute(script);
             //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
-            ScribeBot.Scripter.Execute(script, true);
+            //    ScribeBot.Scripter.Execute(script, false);
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonUP"];
-            ScribeBot.Scripter.Environment.Call(functiontable);
+            Action myFunctionCall = () => ScribeBot.Scripter.Environment.Call(functiontable);
             //    DynValue res = ScribeBot.Scripter.Environment.Call(luaFactFunction);
             //   ScribeBot.Scripter.Execute(res.tos);
+            myFunctionCall.Invoke();
+
         }
     }
 }
