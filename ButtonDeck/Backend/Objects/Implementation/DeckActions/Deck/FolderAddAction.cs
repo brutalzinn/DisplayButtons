@@ -29,6 +29,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
         //     public static string script { get; set; } = "";
+        [XmlIgnore]
         public string ToScript { get; set; } = "";
 
 
@@ -302,7 +303,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
             //  ToScript = File.ReadAllText(path);
-            ToScript = File.ReadAllText(ScriptEntryPoint);
+      //      ToScript = File.ReadAllText(ScriptEntryPoint);
             // ToScript = File.ReadAllText(path);
 
         

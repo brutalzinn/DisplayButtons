@@ -16,6 +16,7 @@ namespace ButtonDeck.Backend.Utils
 
         public AbstractDeckAction DeckAction { get; set; }
         public string ToExecute { get; set; }
+        public string ToScript { get; set; }
         public string ToName{ get; set; }
     }
 }

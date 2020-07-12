@@ -385,7 +385,7 @@ namespace ButtonDeck.Forms
                                     FocusItem(mb, mb.Tag as IDeckItem);
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is FolderAddAction YY)
                                     {
-                                        LoadPropertiesPlugins(TT, action.ToExecute,action.ToName);
+                                        LoadPropertiesPlugins(TT, action.ToExecute,action.ToName,action.ToScript);
                                         YY.SetConfigs();
                                     }
                                 }
@@ -2227,14 +2227,17 @@ namespace ButtonDeck.Forms
             ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
 
-        private void LoadPropertiesPlugins(DynamicDeckItem item, string result_string, string name)
+        private void LoadPropertiesPlugins(DynamicDeckItem item, string entrypoint, string name,string script)
         {
 
             Type type = item.DeckAction.GetType();
             PropertyInfo prop = type.GetProperty("ScriptEntryPoint");
-            prop.SetValue(item.DeckAction, result_string, null);
+            prop.SetValue(item.DeckAction, entrypoint, null);
             PropertyInfo propa = type.GetProperty("ScriptNamePoint");
             propa.SetValue(item.DeckAction, name, null);
+
+            PropertyInfo propb = type.GetProperty("ToScript");
+            propb.SetValue(item.DeckAction, script, null);
             //  prop.SetValue(item.DeckAction, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(result_string));
             //         UpdateIcon(shouldUpdateIcon);
 
@@ -2243,7 +2246,7 @@ namespace ButtonDeck.Forms
 
             //  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public  void button_creator(string name,string script)
+        public  void button_creator(string name,string entry_point, string script)
         {
             //FolderAddAction testando = new FolderAddAction();
        
@@ -2330,8 +2333,9 @@ namespace ButtonDeck.Forms
                                 if (item.Tag is AbstractDeckAction act)
                                 {
                                     var leste = new DeckActionHelper(act);
-                                    leste.ToExecute = script;
+                                    leste.ToExecute = entry_point;
                                     leste.ToName = name;
+                                    leste.ToScript = script;
                                     item.DoDragDrop( leste, DragDropEffects.Copy);
                               //      i2.SetConfigs();
                                     //  LoadPropertiesPlugins(i2, script);
@@ -2449,7 +2453,7 @@ namespace ButtonDeck.Forms
 
 
 
-                        MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ArchivePath +"\\" + x.GetInfo()["EntryPoint"]);
+                        MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ArchivePath +"\\" + x.GetInfo()["EntryPoint"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
                         //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
 
                     });
