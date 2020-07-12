@@ -78,7 +78,7 @@ namespace ButtonDeck.Backend.Objects
 
             return false;
         }
-        public virtual void SetConfigs() { }
+        public virtual void SetConfigs(string script_param) { }
        
 
         [Obsolete]

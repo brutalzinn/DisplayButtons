@@ -1,6 +1,7 @@
 ﻿using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -31,29 +32,47 @@ namespace ScribeBot.Engine.Wrappers
             instance = this;
 
         }
-
-    
-        public static void Connect(string ip, int port)
+       public  bool Status()
         {
-
-            instance.clientSocket.Connect(ip, port);
+            return !((clientSocket.Client.Poll(1000, SelectMode.SelectRead) && (clientSocket.Available == 0)) || !clientSocket.Connected);
 
         }
-        public static void Write()
-        {
-            NetworkStream serverStream = instance.clientSocket.GetStream();
 
-            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(instance.msg);
-            serverStream.Write(outStream, 0, outStream.Length);
-            serverStream.Flush();
-        }
-        public static string Read()
+        public void Connect(string ip, int port)
         {
-            NetworkStream serverStream = instance.clientSocket.GetStream();
-            byte[] inStream = new byte[10025];
-            serverStream.Read(inStream, 0, (int)instance.clientSocket.ReceiveBufferSize);
-            string returndata = System.Text.Encoding.ASCII.GetString(inStream);
-            return returndata;
+            try
+            {
+ clientSocket.Connect(ip, port);
+            }
+            catch(Exception eee)
+            {
+                Debug.WriteLine(eee);
+
+            }
+          
+
+        }
+        public  void Write(string msg)
+        {
+            Byte[] data = System.Text.Encoding.ASCII.GetBytes(msg);
+            NetworkStream stream = clientSocket.GetStream();
+
+            stream.Write(data, 0, data.Length);
+
+        }
+        public  string Read()
+        {
+       
+            NetworkStream stream = clientSocket.GetStream();
+
+            Byte[]  data = new Byte[256];
+
+            String responseData = String.Empty;
+
+            Int32 bytes = stream.Read(data, 0, data.Length);
+            responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+      
+            return responseData;
         }
 
     }

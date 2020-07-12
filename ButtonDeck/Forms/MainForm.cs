@@ -386,7 +386,7 @@ namespace ButtonDeck.Forms
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is FolderAddAction YY)
                                     {
                                         LoadPropertiesPlugins(TT, action.ToExecute,action.ToName,action.ToScript);
-                                        YY.SetConfigs();
+                                        YY.SetConfigs(action.ToScript);
                                     }
                                 }
                             }

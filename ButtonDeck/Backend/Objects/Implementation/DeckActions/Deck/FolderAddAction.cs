@@ -298,15 +298,15 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             }
         }
-   public override void SetConfigs()
+   public override void SetConfigs(string script_param)
         {
 
-
+            ToScript = script_param;
             //  ToScript = File.ReadAllText(path);
-      //      ToScript = File.ReadAllText(ScriptEntryPoint);
+            //      ToScript = File.ReadAllText(ScriptEntryPoint);
             // ToScript = File.ReadAllText(path);
 
-        
+
 
         }
         public void ToExecuteHelper()
@@ -396,12 +396,16 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         {
 
             //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
+            
 
-            ScribeBot.Scripter.Execute(ToScript, true);
+    ScribeBot.Scripter.Execute(ToScript, true);
             //  Debug.WriteLine(script);
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
           ScribeBot.Scripter.Environment.Call(functiontable);
-            //  ScribeBot.Scripter.Environment.Call(DynValue.NewString("buttondown"));
+
+           
+     
+           //  ScribeBot.Scripter.Environment.Call(DynValue.NewString("buttondown"));
          
 
 
