@@ -303,9 +303,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             //  ToScript = File.ReadAllText(path);
             ToScript = File.ReadAllText(ScriptEntryPoint);
-           // ToScript = File.ReadAllText(path);
+            // ToScript = File.ReadAllText(path);
 
-
+        
 
         }
         public void ToExecuteHelper()
@@ -395,8 +395,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         {
 
             //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
-            
-            ScribeBot.Scripter.Execute(ToScript, false);
+
+            ScribeBot.Scripter.Execute(ToScript, true);
             //  Debug.WriteLine(script);
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
           ScribeBot.Scripter.Environment.Call(functiontable);
@@ -418,9 +418,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         {
             //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
-
+            ScribeBot.Scripter.Execute(ToScript, true);
             //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
-            ScribeBot.Scripter.Execute(ToScript, false);
+
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonUP"];
           ScribeBot.Scripter.Environment.Call(functiontable);
             //    DynValue res = ScribeBot.Scripter.Environment.Call(luaFactFunction);

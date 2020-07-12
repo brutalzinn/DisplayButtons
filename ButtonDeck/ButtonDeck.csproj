@@ -265,6 +265,7 @@
     <Compile Include="Engine\Wrappers\MinecraftWrapper.cs" />
     <Compile Include="Engine\Wrappers\PluginWrapper.cs" />
     <Compile Include="Engine\Wrappers\ScreenWrapper.cs" />
+    <Compile Include="Engine\Wrappers\SocketWrapper.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Forms\ActionHelperForms\ActionPlugin.cs">
       <SubType>Form</SubType>

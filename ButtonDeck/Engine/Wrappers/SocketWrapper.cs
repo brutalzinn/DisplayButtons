@@ -23,12 +23,16 @@ namespace ScribeBot.Engine.Wrappers
             }
         }
         private String msg;
+
+
         public SocketWrapper()
         {
 
             instance = this;
 
         }
+
+    
         public static void Connect(string ip, int port)
         {
 
@@ -39,7 +43,7 @@ namespace ScribeBot.Engine.Wrappers
         {
             NetworkStream serverStream = instance.clientSocket.GetStream();
 
-            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(instance.msg + "$");
+            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(instance.msg);
             serverStream.Write(outStream, 0, outStream.Length);
             serverStream.Flush();
         }
