@@ -42,6 +42,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
 
             }
         }
+    
         public string ToExecuteFileName
         {
             get { return _toExecuteFileName; }
@@ -64,7 +65,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
         }
         private void ActionPlugin_Load(object sender, EventArgs e)
         {
-
+          
         }
 
         private void ModernButton2_Click(object sender, EventArgs e)
@@ -76,11 +77,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
 
         private void ModernButton3_Click(object sender, EventArgs e)
         {
-            ScribeBot.Scripter.Execute(scripter_form, false);
-
-            object functiontable = ScribeBot.Scripter.Environment.Globals["menu_cancel"];
-
-            ScribeBot.Scripter.Environment.Call(functiontable);
+         
             CloseWithResult(DialogResult.Cancel);
 
         }

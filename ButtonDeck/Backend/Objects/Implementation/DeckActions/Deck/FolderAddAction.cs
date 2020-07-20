@@ -165,7 +165,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         txt.Location = new System.Drawing.Point (x,y);
 
                         //       FolderAddAction.form.Controls.Add(txt);
-                        AddControlToUser(name,txt.Text);
+                      //  AddControlToUser(name,txt.Text);
                       form.Controls.Add(txt);
 
                         break;
@@ -184,7 +184,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
                         //       FolderAddAction.form.Controls.Add(txt);
                         form.Controls.Add(ritchtext);
-                        AddControlToUser(name, value);
+                     //   AddControlToUser(name, value);
                
                      
                         break;
@@ -196,7 +196,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         labeled.Width = tam_x;
                         labeled.Height = tam_y;
                         labeled.Location = new System.Drawing.Point(x, y);
-                        AddControlToUser(labeled.Name, labeled.Text);
+                   //     AddControlToUser(labeled.Name, labeled.Text);
                         form.Controls.Add(labeled);
                      
                         break;
@@ -253,15 +253,21 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                     {
                         result = FolderAddAction.Instance.ToControls[key];
                     }
+                    else
+                    {
+
+                        result = "";
+                    }
                 }
                 catch (Exception e)
                 {
 
+                //    result = "";
                     Debug.WriteLine("NULL");
                 }
                 return result;
             }
-            public static string getFormControl(string name, string type)
+            public static string getFormControl(string name)
             {
 
 
@@ -272,6 +278,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                     {
                         result = c.Text;
 
+                    }
+                    else
+                    {
+
+                        result = "";
                     }
                 }
                 return result;
@@ -300,48 +311,58 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
    public override void SetConfigs(string script_param)
         {
-
+          
             ToScript = script_param;
+       ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol();
+
             //  ToScript = File.ReadAllText(path);
             //      ToScript = File.ReadAllText(ScriptEntryPoint);
             // ToScript = File.ReadAllText(path);
 
 
-
         }
+
         public void ToExecuteHelper()
         {
-     
-          //  ScribeBot.Scripter.Execute(script, true);
 
-            //          ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
-            var originalToExec = new String(ToExecute.ToCharArray());
-             form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
-           
+         
+                //   var originalToExec = new String(ToScript.ToCharArray());
+                form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
+
+
+
           
-            object functiontable = ScribeBot.Scripter.Environment.Globals["form_menu"];
-            ScribeBot.Scripter.Environment.Call(functiontable);
-            //  var execAction = CloneAction() as FolderAddAction;
 
-            //    execAction.ToExecute = ToExecute;
+        
+          
 
-            //   form.ModifiableAction = execAction;
+     
+       ScribeBot.Scripter.Execute(ToScript, true);
+                object formmenu_object = ScribeBot.Scripter.Environment.Globals["FormMenu"];
+                ScribeBot.Scripter.Environment.Call(formmenu_object);
+   
 
-            form.scripter = ToScript;
-            if (form.ShowDialog() == DialogResult.OK)
+            if ( form.ShowDialog() == DialogResult.OK)
             {
-
-              //  ScribeBot.Scripter.Execute(script, true);
-
-                object functioncall = ScribeBot.Scripter.Environment.Globals["menu_ok"];
+               
+                //  ScribeBot.Scripter.Execute(script, true);
+           
+                object functioncall = ScribeBot.Scripter.Environment.Globals["MenuOk"];
                 ScribeBot.Scripter.Environment.Call(functioncall);
                 // ToExecute = form.ModifiableAction.toExecute;  
                 // oExecute = form.ModifiableAction;
             }
             else
         {
-                ToExecute = originalToExec;
+
+            
+
+                object function_cancel = ScribeBot.Scripter.Environment.Globals["MenuCancel"];
+
+                ScribeBot.Scripter.Environment.Call(function_cancel);
+                //    ToScript = originalToExec;
             }
+            
         }
         public override DeckImage GetDefaultItemImage()
         {
@@ -366,12 +387,13 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public override AbstractDeckAction CloneAction()
         {
 
-    
+
             //  Debug.WriteLine("CHEGOU A CHAMAR O NAMESPACE" + name_space);
             // DynValue obj = UserData.Create(name_space);
             //  ScribeBot.Scripter.Execute(script, false);
             //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
             //  var oldSceneName = new String(ToScript.ToCharArray());
+            instance = this;
 
 
             return new FolderAddAction();
