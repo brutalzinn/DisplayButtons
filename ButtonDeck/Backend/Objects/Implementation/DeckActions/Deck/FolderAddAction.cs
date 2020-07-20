@@ -54,7 +54,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [ActionPropertyDescription("To Execute")]
         public string ToExecute { get; set; } = "";
 
-        [ActionPropertyInclude]
+        [XmlElement("ToControls")]
 
         public SerializableDictionary<string, string> ToControls { get; set; } = new SerializableDictionary<string, string>();
 
@@ -325,13 +325,13 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public void ToExecuteHelper()
         {
 
-         
-                //   var originalToExec = new String(ToScript.ToCharArray());
-                form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
+           
+            //   var originalToExec = new String(ToScript.ToCharArray());
+            form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
 
 
 
-          
+           instance = this;
 
         
           
@@ -393,7 +393,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             //  ScribeBot.Scripter.Execute(script, false);
             //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
             //  var oldSceneName = new String(ToScript.ToCharArray());
-            instance = this;
+       
 
 
             return new FolderAddAction();
