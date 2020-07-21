@@ -65,10 +65,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
         }
         private void ActionPlugin_Load(object sender, EventArgs e)
         {
-            ScribeBot.Scripter.Execute(scripter_form, true);
-
-            object formmenu_object = ScribeBot.Scripter.Environment.Globals["FormMenu"];
-            ScribeBot.Scripter.Environment.Call(formmenu_object);
+          
         }
 
         private void ModernButton2_Click(object sender, EventArgs e)

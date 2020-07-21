@@ -17,7 +17,7 @@ using System.Xml.Serialization;
 namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 {
 
-    [XmlInclude(typeof(formcontrol))]
+ 
     [MoonSharpUserData]
    
     public class PluginLuaGenerator : AbstractDeckAction
@@ -66,8 +66,21 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [MoonSharpUserData]
 
 
-        public  class formcontrol
+        public class formcontrol
         {
+
+            private PluginLuaGenerator instance;
+            public formcontrol()
+            {
+
+
+
+            }
+            public formcontrol(PluginLuaGenerator param)
+            {
+
+                instance = param;
+            }
             public  string name_img { get; set; } = "";
 
             public  void setButtonImg(string nameimg)
@@ -118,20 +131,20 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             public  void AddControlToUser(string key, string value)
             {
-                if (PluginLuaGenerator.Instance.ToControls.ContainsKey(key))
+                if (instance.ToControls.ContainsKey(key))
                 {
-                    PluginLuaGenerator.Instance.ToControls[key] = value;
+                    instance.ToControls[key] = value;
                 }
                 else
                 {
-                    PluginLuaGenerator.Instance.ToControls.Add(key, value);
+                    instance.ToControls.Add(key, value);
                 }
             }
 
             public  void setFormControl(string name, string value, string type, int x, int y, int tam_x, int tam_y)
             {
 
-
+              if(instance.form != null)
                 switch (type)
                 {
                     case "textbox":
@@ -146,9 +159,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         txt.Height = tam_y;
                         txt.Location = new System.Drawing.Point(x, y);
 
-                        //       PluginLuaGenerator.form.Controls.Add(txt);
-                        //  AddControlToUser(name,txt.Text);
-                        PluginLuaGenerator.Instance.form.Controls.Add(txt);
+                            //       PluginLuaGenerator.form.Controls.Add(txt);
+                            //  AddControlToUser(name,txt.Text);
+                            instance.form.Controls.Add(txt);
 
                         break;
                     case "ritchtextbox":
@@ -164,8 +177,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         ritchtext.Height = tam_y;
                         ritchtext.Location = new System.Drawing.Point(x, y);
 
-                        //       PluginLuaGenerator.form.Controls.Add(txt);
-                        PluginLuaGenerator.Instance.form.Controls.Add(ritchtext);
+                            //       PluginLuaGenerator.form.Controls.Add(txt);
+                            instance.form.Controls.Add(ritchtext);
                         //   AddControlToUser(name, value);
 
 
@@ -178,8 +191,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         labeled.Width = tam_x;
                         labeled.Height = tam_y;
                         labeled.Location = new System.Drawing.Point(x, y);
-                        //     AddControlToUser(labeled.Name, labeled.Text);
-                        PluginLuaGenerator.Instance.form.Controls.Add(labeled);
+                            //     AddControlToUser(labeled.Name, labeled.Text);
+                            instance.form.Controls.Add(labeled);
 
                         break;
                     case "file":
@@ -231,9 +244,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
 
-                    if (PluginLuaGenerator.Instance.ToControls.ContainsKey(key))
+                    if (instance.ToControls.ContainsKey(key))
                     {
-                        result = PluginLuaGenerator.Instance.ToControls[key];
+                        result = instance.ToControls[key];
                     }
                     else
                     {
@@ -254,7 +267,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
                 string result = "";
-                foreach (Control c in PluginLuaGenerator.Instance.form.Controls)
+                foreach (Control c in instance.form.Controls)
                 {
                     if (c.Name == name)
                     {
@@ -288,7 +301,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         {
 
 
-            //ToScript = script_param;
+            
+
+
+            ToScript = script_param;
 
             //  ToScript = File.ReadAllText(path);
             //      ToScript = File.ReadAllText(ScriptEntryPoint);
@@ -300,22 +316,23 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public void ToExecuteHelper()
         {
 
-            instance = this;
-            ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
-
             //   var originalToExec = new String(ToScript.ToCharArray());
             form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
 
         
 
-           
+                       ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol(this);
+
 
 
 
             Debug.WriteLine("VINDO NYULDO:" + ToScript);
-     
-   
-            form.scripter = ToScript;
+
+
+            ScribeBot.Scripter.Execute(ToScript, true);
+    
+            object formmenu_object = ScribeBot.Scripter.Environment.Globals["FormMenu"];
+            ScribeBot.Scripter.Environment.Call(formmenu_object);
             if ( form.ShowDialog() == DialogResult.OK)
             {
                
