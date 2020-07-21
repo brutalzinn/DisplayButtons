@@ -17,7 +17,9 @@ using System.Xml.Serialization;
 namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 {
 
+    [XmlInclude(typeof(formcontrol))]
     [MoonSharpUserData]
+   
     public class PluginLuaGenerator : AbstractDeckAction
     {
 
@@ -64,11 +66,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         [MoonSharpUserData]
 
 
-        public class formcontrol
+        public  class formcontrol
         {
-            public string name_img { get; set; } = "";
+            public  string name_img { get; set; } = "";
 
-            public void setButtonImg(string nameimg)
+            public  void setButtonImg(string nameimg)
             {
 
                 if (Directory.Exists(Application.StartupPath + @"\Data\imgs") == false)
@@ -86,11 +88,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
             }
-            private Dictionary<string, string> users = new Dictionary<string, string>();
-            public string dictionary_name { get; set; } = "";
+            private  Dictionary<string, string> users = new Dictionary<string, string>();
+            public  string dictionary_name { get; set; } = "";
 
 
-            public void Set(string key, string value)
+            public  void Set(string key, string value)
             {
                 if (users.ContainsKey(key))
                 {
@@ -102,7 +104,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 }
             }
 
-            public string Get(string key)
+            public  string Get(string key)
             {
                 string result = null;
 
@@ -114,7 +116,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 return result;
             }
 
-            public void AddControlToUser(string key, string value)
+            public  void AddControlToUser(string key, string value)
             {
                 if (PluginLuaGenerator.Instance.ToControls.ContainsKey(key))
                 {
@@ -126,7 +128,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 }
             }
 
-            public void setFormControl(string name, string value, string type, int x, int y, int tam_x, int tam_y)
+            public  void setFormControl(string name, string value, string type, int x, int y, int tam_x, int tam_y)
             {
 
 
@@ -221,7 +223,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
             }
-            public string GetControlToUser(string key)
+            public  string GetControlToUser(string key)
             {
                 string result = null;
                 try
@@ -247,7 +249,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 }
                 return result;
             }
-            public string getFormControl(string name)
+            public  string getFormControl(string name)
             {
 
 
@@ -281,20 +283,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
            // ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
             return true;
         }
-        private PluginLuaGenerator _modifiableAction;
-
-        public PluginLuaGenerator ModifiableAction
-        {
-            get { return _modifiableAction; }
-            set
-            {
-                _modifiableAction = value;
-
-            }
-        }
+   
    public override void SetConfigs(string script_param)
         {
-           
+
 
             //ToScript = script_param;
 
@@ -322,11 +314,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
             Debug.WriteLine("VINDO NYULDO:" + ToScript);
      
-       ScribeBot.Scripter.Execute(ToScript, true);
-                object formmenu_object = ScribeBot.Scripter.Environment.Globals["FormMenu"];
-                ScribeBot.Scripter.Environment.Call(formmenu_object);
    
-
+            form.scripter = ToScript;
             if ( form.ShowDialog() == DialogResult.OK)
             {
                
@@ -347,7 +336,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 ScribeBot.Scripter.Environment.Call(function_cancel);
                 //    ToScript = originalToExec;
             }
-            
+           
         }
         public override DeckImage GetDefaultItemImage()
         {
