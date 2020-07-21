@@ -50,7 +50,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public dynamic form;
         [XmlIgnore]
         private static PluginLuaGenerator instance;
-
+        [XmlIgnore]
         public static PluginLuaGenerator Instance
         {
             get
@@ -294,10 +294,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
    public override void SetConfigs(string script_param)
         {
-         
-      instance = this;
-            ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
-            ToScript = script_param;
+           
+
+            //ToScript = script_param;
 
             //  ToScript = File.ReadAllText(path);
             //      ToScript = File.ReadAllText(ScriptEntryPoint);
@@ -309,6 +308,8 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public void ToExecuteHelper()
         {
 
+            instance = this;
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
 
             //   var originalToExec = new String(ToScript.ToCharArray());
             form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;

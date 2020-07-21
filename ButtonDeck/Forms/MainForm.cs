@@ -792,7 +792,7 @@ namespace ButtonDeck.Forms
 
 
                     LoadPropertiesPlugins(FF, GetPluginScript(GetPropertiesPlugins(FF,"ScriptNamePoint")));
-                  //  TT.SetConfigs(GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
+                  TT.SetConfigs(GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
 
 
 
