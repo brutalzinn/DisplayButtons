@@ -301,10 +301,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         {
 
 
-            
 
 
-            ToScript = script_param;
+            //  ToScript = script_param;
 
             //  ToScript = File.ReadAllText(path);
             //      ToScript = File.ReadAllText(ScriptEntryPoint);
@@ -319,9 +318,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             //   var originalToExec = new String(ToScript.ToCharArray());
             form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
 
-        
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol(this);
 
-                       ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol(this);
+
+
 
 
 
@@ -355,11 +355,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                     //    ToScript = originalToExec;
                 }
             }
-            catch(Exception ii)
-            {
-
-
-            }
+            catch(Exception ii){}
         }
         public override DeckImage GetDefaultItemImage()
         {
@@ -390,7 +386,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             //  ScribeBot.Scripter.Execute(script, false);
             //  ScribeBot.Scripter.Environment.Globals.Set("name_space", obj);
             //  var oldSceneName = new String(ToScript.ToCharArray());
-       
+
 
 
             return new PluginLuaGenerator();
@@ -415,9 +411,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         {
 
             //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
-            
 
-    ScribeBot.Scripter.Execute(ToScript, true);
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol(this);
+
+            ScribeBot.Scripter.Execute(ToScript, true);
             //  Debug.WriteLine(script);
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
           ScribeBot.Scripter.Environment.Call(functiontable);
@@ -441,6 +438,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public override void OnButtonUp(DeckDevice deckDevice)
         {
             //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol(this);
 
             ScribeBot.Scripter.Execute(ToScript, true);
             //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");
