@@ -20,9 +20,9 @@ namespace ButtonDeck.Forms.ActionHelperForms
     
         private string _toExecuteFileName;
 
-        private FolderAddAction _modifiableAction;
+        private PluginLuaGenerator _modifiableAction;
         private static string scripter_form;
-        public FolderAddAction ModifiableAction
+        public PluginLuaGenerator ModifiableAction
         {
             get { return _modifiableAction; }
             set
@@ -52,7 +52,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
                 UpdateFinal(ModifiableAction);
             }
         }
-        private void UpdateFinal(FolderAddAction act)
+        private void UpdateFinal(PluginLuaGenerator act)
         {
          //   act.ToExecute = (_toExecuteFileName + "#" + _toExecuteArguments + "#" + _toExecuteAsk);
 

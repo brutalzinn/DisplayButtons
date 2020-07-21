@@ -16,6 +16,11 @@ namespace ButtonDeck.Backend.Objects
         public string DeckColor { get; set; }= "#FFFFFF";
         public int DeckSize { get; set; } = 30;
         public int DeckPosition { get; set; } = 81;
+
+
+
+
+        public string ToScript { get; set; } = "";
         public abstract DeckImage GetItemImage();
 
         public virtual DeckImage GetDefaultImage()

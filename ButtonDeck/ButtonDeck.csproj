@@ -200,7 +200,7 @@
     <Compile Include="Backend\Objects\IDeckDevice.cs" />
     <Compile Include="Backend\Objects\IDeckFolder.cs" />
     <Compile Include="Backend\Objects\IDeckItem.cs" />
-    <Compile Include="Backend\Objects\Implementation\DeckActions\Deck\FolderAddAction.cs" />
+    <Compile Include="Backend\Objects\Implementation\DeckActions\Deck\PluginsLuaGenerator.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\Deck\LayerMultiAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\ExecutableRunAction.cs" />
     <Compile Include="Backend\Objects\Implementation\DeckActions\General\KeyPressAction.cs" />

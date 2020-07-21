@@ -16,19 +16,13 @@ using System.Xml.Serialization;
 
 namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 {
- 
 
-    public class FolderAddAction : AbstractDeckAction
+    [MoonSharpUserData]
+    public class PluginLuaGenerator : AbstractDeckAction
     {
 
 
 
-
-
-
-
-
-        //     public static string script { get; set; } = "";
         [XmlIgnore]
         public string ToScript { get; set; } = "";
 
@@ -37,18 +31,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public  string ScriptEntryPoint { get; set; } = "";
         [ActionPropertyPluginsScriptEntryPoint]
-
+        
         public string ScriptNamePoint { get; set; } = "";
         public string script_to_form { get; set; } = "";
-
-        public static string name_space { get; set; } = "";
-
-
-
-        public static string name_img { get; set; } = "";
-        public static string DeckActionCategory_string { get; set; } = "Deck";
-
-       
+        public string name_img { get; set; } = "";
+       public string DeckActionCategory_string { get; set; } = "Deck";
         public string name { get; set; } = "";
         [ActionPropertyInclude]
         [ActionPropertyDescription("To Execute")]
@@ -58,12 +45,13 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
         public SerializableDictionary<string, string> ToControls { get; set; } = new SerializableDictionary<string, string>();
 
-        public static string dictionary_name { get; set; } = "";
-       public static dynamic form;
+        public  string dictionary_name { get; set; } = "";
         [XmlIgnore]
-        private static FolderAddAction instance;
+        public dynamic form;
+        [XmlIgnore]
+        private static PluginLuaGenerator instance;
 
-        public static FolderAddAction Instance
+        public static PluginLuaGenerator Instance
         {
             get
             {
@@ -72,10 +60,15 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
             }
         }
 
+
         [MoonSharpUserData]
-        class Formvoid
+
+
+        public class formcontrol
         {
-            public static void setButtonImg(string nameimg)
+            public string name_img { get; set; } = "";
+
+            public void setButtonImg(string nameimg)
             {
 
                 if (Directory.Exists(Application.StartupPath + @"\Data\imgs") == false)
@@ -85,7 +78,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 string path = Application.StartupPath + @"\Data\imgs\" + nameimg;
                 if (File.Exists(path))
                 {
-                    
+
                     name_img = nameimg;
                     MainForm.Instance.UpdatePluginImg();
                 }
@@ -93,24 +86,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
             }
-        
+            private Dictionary<string, string> users = new Dictionary<string, string>();
+            public string dictionary_name { get; set; } = "";
 
 
-        }
-      
-      
-        [MoonSharpUserData]
-
-        public class formcontrol
-        {
-
-
-
-            private static Dictionary<string, string> users = new Dictionary<string, string>();
-            public static string dictionary_name { get; set; } = "";
-
-
-            public static void Set(string key, string value)
+            public void Set(string key, string value)
             {
                 if (users.ContainsKey(key))
                 {
@@ -122,7 +102,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 }
             }
 
-            public static string Get(string key)
+            public string Get(string key)
             {
                 string result = null;
 
@@ -134,22 +114,22 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 return result;
             }
 
-            public static void AddControlToUser(string key, string value)
+            public void AddControlToUser(string key, string value)
             {
-                if (FolderAddAction.Instance.ToControls.ContainsKey(key))
+                if (PluginLuaGenerator.Instance.ToControls.ContainsKey(key))
                 {
-                    FolderAddAction.Instance.ToControls[key] = value;
+                    PluginLuaGenerator.Instance.ToControls[key] = value;
                 }
                 else
                 {
-                    FolderAddAction.Instance.ToControls.Add(key, value);
+                    PluginLuaGenerator.Instance.ToControls.Add(key, value);
                 }
             }
 
-            public static void setFormControl(string name, string value, string type, int x ,int y, int tam_x, int tam_y)
+            public void setFormControl(string name, string value, string type, int x, int y, int tam_x, int tam_y)
             {
 
-               
+
                 switch (type)
                 {
                     case "textbox":
@@ -157,48 +137,48 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         if (!String.IsNullOrEmpty(value))
                         {
                             txt.Text = value;
-                            
+
                         }
                         txt.Name = name;
                         txt.Width = tam_x;
                         txt.Height = tam_y;
-                        txt.Location = new System.Drawing.Point (x,y);
+                        txt.Location = new System.Drawing.Point(x, y);
 
-                        //       FolderAddAction.form.Controls.Add(txt);
-                      //  AddControlToUser(name,txt.Text);
-                      form.Controls.Add(txt);
+                        //       PluginLuaGenerator.form.Controls.Add(txt);
+                        //  AddControlToUser(name,txt.Text);
+                        PluginLuaGenerator.Instance.form.Controls.Add(txt);
 
                         break;
                     case "ritchtextbox":
                         RichTextBox ritchtext = new RichTextBox();
                         if (!String.IsNullOrEmpty(value))
                         {
- ritchtext.Text = value;
+                            ritchtext.Text = value;
 
                         }
-                       
+
                         ritchtext.Name = name;
                         ritchtext.Width = tam_x;
                         ritchtext.Height = tam_y;
                         ritchtext.Location = new System.Drawing.Point(x, y);
 
-                        //       FolderAddAction.form.Controls.Add(txt);
-                        form.Controls.Add(ritchtext);
-                     //   AddControlToUser(name, value);
-               
-                     
+                        //       PluginLuaGenerator.form.Controls.Add(txt);
+                        PluginLuaGenerator.Instance.form.Controls.Add(ritchtext);
+                        //   AddControlToUser(name, value);
+
+
                         break;
                     case "label":
                         Label labeled = new Label();
                         labeled.Text = value;
                         labeled.Name = name;
-                        //       FolderAddAction.form.Controls.Add(txt);
+                        //       PluginLuaGenerator.form.Controls.Add(txt);
                         labeled.Width = tam_x;
                         labeled.Height = tam_y;
                         labeled.Location = new System.Drawing.Point(x, y);
-                   //     AddControlToUser(labeled.Name, labeled.Text);
-                        form.Controls.Add(labeled);
-                     
+                        //     AddControlToUser(labeled.Name, labeled.Text);
+                        PluginLuaGenerator.Instance.form.Controls.Add(labeled);
+
                         break;
                     case "file":
                         TextBox file_text = new TextBox();
@@ -206,9 +186,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         Button file_button = new Button();
                         TableLayoutPanel file_table_layout = new TableLayoutPanel();
                         file_text.Name = name;
-                     //   file_text.Dock = DockStyle.Left;
+                        //   file_text.Dock = DockStyle.Left;
                         file_button.Name = name + "_button";
-                   //     file_button.Anchor = AnchorStyles.Left;
+                        //     file_button.Anchor = AnchorStyles.Left;
                         //  file_button.Dock = DockStyle.Right;
                         file_table_layout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize, 2f));
                         file_table_layout.RowStyles.Add(new RowStyle(SizeType.AutoSize, 2f));
@@ -216,32 +196,32 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                         {
                             file_search.ShowDialog();
 
-                           file_text.Text = file_search.FileName;
+                            file_text.Text = file_search.FileName;
 
                         };
-                        //       FolderAddAction.form.Controls.Add(txt);
+                        //       PluginLuaGenerator.form.Controls.Add(txt);
 
-                     file_text.Width = tam_x;
+                        file_text.Width = tam_x;
                         file_table_layout.Width = tam_x + 90;
                         //     file_text.Height = tam_y;
                         file_table_layout.Location = new System.Drawing.Point(x, y);
-                  //     form.Controls.Add(file_search);
+                        //     form.Controls.Add(file_search);
 
                         file_table_layout.Controls.Add(file_text, 0, 0);
-                        file_table_layout.Controls.Add(file_button, 1 , 0);
+                        file_table_layout.Controls.Add(file_button, 1, 0);
 
                         // form.Controls.Add(file_table_layout);
 
-                    //ToControls.Add(file_table_layout);
-                       
+                        //ToControls.Add(file_table_layout);
+
                         break;
 
 
                 }
-              
+
 
             }
-            public static string GetControlToUser(string key)
+            public string GetControlToUser(string key)
             {
                 string result = null;
                 try
@@ -249,9 +229,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
 
-                    if (FolderAddAction.Instance.ToControls.ContainsKey(key))
+                    if (PluginLuaGenerator.Instance.ToControls.ContainsKey(key))
                     {
-                        result = FolderAddAction.Instance.ToControls[key];
+                        result = PluginLuaGenerator.Instance.ToControls[key];
                     }
                     else
                     {
@@ -262,17 +242,17 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 catch (Exception e)
                 {
 
-                //    result = "";
+                    //    result = "";
                     Debug.WriteLine("NULL");
                 }
                 return result;
             }
-            public static string getFormControl(string name)
+            public string getFormControl(string name)
             {
 
 
                 string result = "";
-                foreach (Control c in form.Controls)
+                foreach (Control c in PluginLuaGenerator.Instance.form.Controls)
                 {
                     if (c.Name == name)
                     {
@@ -288,8 +268,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
                 return result;
 
             }
-          
+
         }
+
+
+
         public override bool IsPlugin()
         {
            // ScribeBot.Scripter.Execute(script,true);
@@ -298,9 +281,9 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
            // ScribeBot.Scripter.Environment.Globals["name_space"] = name_space;
             return true;
         }
-        private FolderAddAction _modifiableAction;
+        private PluginLuaGenerator _modifiableAction;
 
-        public FolderAddAction ModifiableAction
+        public PluginLuaGenerator ModifiableAction
         {
             get { return _modifiableAction; }
             set
@@ -311,9 +294,10 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         }
    public override void SetConfigs(string script_param)
         {
-          
+         
+      instance = this;
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = typeof(formcontrol);
             ToScript = script_param;
-       ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol();
 
             //  ToScript = File.ReadAllText(path);
             //      ToScript = File.ReadAllText(ScriptEntryPoint);
@@ -325,17 +309,17 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public void ToExecuteHelper()
         {
 
-           
+
             //   var originalToExec = new String(ToScript.ToCharArray());
             form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
 
-
-
-           instance = this;
-
         
-          
 
+           
+
+
+
+            Debug.WriteLine("VINDO NYULDO:" + ToScript);
      
        ScribeBot.Scripter.Execute(ToScript, true);
                 object formmenu_object = ScribeBot.Scripter.Environment.Globals["FormMenu"];
@@ -396,7 +380,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
        
 
 
-            return new FolderAddAction();
+            return new PluginLuaGenerator();
         }
       
 
@@ -432,11 +416,11 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
         }
-        public FolderAddAction() { }
+        public PluginLuaGenerator() { }
 
         // The following constructor has parameters for two of the three
         // properties.
-        public FolderAddAction(string name_param, string script_param)
+        public PluginLuaGenerator(string name_param, string script_param)
         {
 
        //     ToScript = script_param;

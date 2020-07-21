@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
 using System.Threading;
 using MoonSharp.Interpreter;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
 using ScribeBot.Engine.Proxies;
 using ButtonDeck.Engine.Wrappers;
-using static ButtonDeck.Backend.Objects.Implementation.DeckActions.General.FolderAddAction;
 
 namespace ScribeBot
 {
@@ -71,7 +67,7 @@ namespace ScribeBot
             Environment.Globals["Color"] = new ColorContainer();
             Environment.Globals["Point"] = new PointContainer();
             Environment.Globals["Size"] = new SizeContainer();
-            //Environment.Globals["formdesign"] = typeof(formcontrol);
+          
 
             //Enums
             UserData.RegisterType<Native.VirtualKeyCode>();

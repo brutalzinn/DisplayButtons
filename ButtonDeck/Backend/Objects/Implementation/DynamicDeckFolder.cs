@@ -25,7 +25,7 @@ namespace ButtonDeck.Backend.Objects.Implementation
                 items = value;
             }
         }
-
+   
         public override List<IDeckItem> GetDeckItems() => items.Values.ToList();
         public override List<IDeckFolder> GetSubFolders() => items.Values.OfType<IDeckFolder>().ToList();
 
