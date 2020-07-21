@@ -330,30 +330,36 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
 
 
             ScribeBot.Scripter.Execute(ToScript, true);
-    
-            object formmenu_object = ScribeBot.Scripter.Environment.Globals["FormMenu"];
-            ScribeBot.Scripter.Environment.Call(formmenu_object);
-            if ( form.ShowDialog() == DialogResult.OK)
+            try
             {
-               
-                //  ScribeBot.Scripter.Execute(script, true);
-           
-                object functioncall = ScribeBot.Scripter.Environment.Globals["MenuOk"];
-                ScribeBot.Scripter.Environment.Call(functioncall);
-                // ToExecute = form.ModifiableAction.toExecute;  
-                // oExecute = form.ModifiableAction;
+                object formmenu_object = ScribeBot.Scripter.Environment.Globals["FormMenu"];
+                ScribeBot.Scripter.Environment.Call(formmenu_object);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+
+                    //  ScribeBot.Scripter.Execute(script, true);
+
+                    object functioncall = ScribeBot.Scripter.Environment.Globals["MenuOk"];
+                    ScribeBot.Scripter.Environment.Call(functioncall);
+                    // ToExecute = form.ModifiableAction.toExecute;  
+                    // oExecute = form.ModifiableAction;
+                }
+                else
+                {
+
+
+
+                    object function_cancel = ScribeBot.Scripter.Environment.Globals["MenuCancel"];
+
+                    ScribeBot.Scripter.Environment.Call(function_cancel);
+                    //    ToScript = originalToExec;
+                }
             }
-            else
-        {
+            catch(Exception ii)
+            {
 
-            
 
-                object function_cancel = ScribeBot.Scripter.Environment.Globals["MenuCancel"];
-
-                ScribeBot.Scripter.Environment.Call(function_cancel);
-                //    ToScript = originalToExec;
             }
-           
         }
         public override DeckImage GetDefaultItemImage()
         {
