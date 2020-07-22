@@ -212,14 +212,14 @@ namespace ButtonDeck
                     if (device_list.Count < 2)
                     {
                         client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", devices, null);
-                  
+                   Thread.Sleep(1600);
                      
                     }
                     
                 }
 
 
-           //     Thread.Sleep(1600);
+           
                 
           
 

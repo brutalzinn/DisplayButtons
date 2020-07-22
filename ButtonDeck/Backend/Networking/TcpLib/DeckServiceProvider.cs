@@ -69,7 +69,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         public override void OnDropConnection(ConnectionState state)
         {
            // state.SendPacket(new DesktopDisconnectPacket());
-            DevicePersistManager.RemoveConnectionState(state);
+         DevicePersistManager.RemoveConnectionState(state);
         }
 
         public override void OnReceiveData(ConnectionState state)

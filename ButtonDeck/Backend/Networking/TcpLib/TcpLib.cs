@@ -464,9 +464,9 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                 ReceivedDataReady, st);
 
             }
-            catch
+            catch(Exception e)
             {
-
+                Debug.WriteLine(e);
 
             }
           

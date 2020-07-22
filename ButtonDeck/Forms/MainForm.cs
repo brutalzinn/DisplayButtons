@@ -973,12 +973,7 @@ namespace ButtonDeck.Forms
 
             Invoke(new Action(() => {
 
-                if (Program.mode == 1)
-                {
-
-                    Start_configs();
-                }
-
+                
 
 
                 shadedPanel1.Show();
@@ -992,16 +987,13 @@ namespace ButtonDeck.Forms
 
                 if (CurrentDevice == null) {
                     ChangeToDevice(e.Device);
-                    if (Program.mode == 0)
-                    {
-                        Start_configs();
+                        
 
-                    }
 
                 }
                 SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
-
+Start_configs();
 
 
 
