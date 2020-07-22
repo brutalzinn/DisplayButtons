@@ -235,7 +235,7 @@ namespace ButtonDeck
              
                 foreach (var device in client.GetDevices().ToList())
             {
-                    client.RemoveAllForwards(device);
+                    
                 client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
                     client.ExecuteRemoteCommand("kill-server", device, null);
 
