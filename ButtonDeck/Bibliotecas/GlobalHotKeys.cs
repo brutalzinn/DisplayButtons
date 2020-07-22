@@ -57,10 +57,10 @@ namespace ButtonDeck.Bibliotecas
                 Keys key;
                 Enum.TryParse(result, out key);
                 string unique_id = folder.DeckName + folder.GetParent().GetItemIndex(folder);
-                HotkeyManager.Current.AddOrReplace(unique_id, key, MyEventHandler) ;
+         //       HotkeyManager.Current.AddOrReplace(unique_id, key, MyEventHandler(this,folder)) ;
             }
         }
-
+      
         public void refreshFolder(DynamicDeckFolder folder)
         {
             string value1 = string.Join("+", folder.KeyGlobalValue.ModifierKeys.Where(c => c != Keys.None).Select(c => c.ToString()).OrderBy(c => c));
@@ -83,7 +83,12 @@ namespace ButtonDeck.Bibliotecas
                     retval = (System.Windows.Forms.Keys)kc.ConvertFromInvariantString(result);
 
                     string unique_id = folder.DeckName + folder.GetParent().GetItemIndex(folder);
-                    HotkeyManager.Current.AddOrReplace(unique_id, retval, MyEventHandler);
+
+
+
+                    var eh = ButtonInteraction;
+                    HotkeyManager.Current.AddOrReplace(unique_id, retval,
+            eh?.Invoke(this, new ButtonInteractionEventArgs(folder)));
                 }
                 catch (Exception ex)
                 {
@@ -92,11 +97,29 @@ namespace ButtonDeck.Bibliotecas
 
             }
         }
-        
-        private void MyEventHandler(object sender, HotkeyEventArgs e)
+        public class ButtonInteractionEventArgs : EventArgs
+        {
+            public ButtonInteractionEventArgs(DynamicDeckFolder folder)
+            {
+                folder_principal = folder;
+            }
+
+            public DynamicDeckFolder folder_principal { get; set; }
+        }
+            public event EventHandler<ButtonInteractionEventArgs> ButtonInteraction;
+        public class ProcessEventArgs : EventArgs
+        {
+            
+            public DynamicDeckFolder folder { get; set; }
+   
+        }
+
+     
+
+        protected virtual void MyEventHandler(object sender, ProcessEventArgs e)
         {
             MessageBox.Show("RECEBIDO>");
-            e.Handled = true;
+          //  e.Handled = true;
         }
 
     }
