@@ -1988,14 +1988,7 @@ Start_configs();
             if (item is IDeckItem dI) {
 
 
-                if (dI is DynamicDeckFolder TA)
-                {
-                    if (TA.GetSubFolders().Count > 0)
-                    {
-
-                    }
-
-                }
+               
 
 
                 ModernButton myButton = new ModernButton();
@@ -2124,6 +2117,12 @@ Start_configs();
                     LoadProperties(TT, flowLayoutPanel1);
 
                 }
+                if(dI is DynamicDeckFolder AA)
+                {
+
+
+                    LoadPropertiesFolder(AA, flowLayoutPanel1);
+                }
 
             }
             imageModernButton1.Origin = mb;
@@ -2141,7 +2140,99 @@ Start_configs();
         {
             //   dialogColorPreviewPanel.Color = ((ColorPickerDialog)sender).Color;
         }
+        
 
+            private void LoadPropertiesFolder(DynamicDeckFolder item, FlowLayoutPanel panel)
+        {
+
+
+            var props = item.GetType().GetProperties().Where(
+                prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
+            foreach (var prop in props)
+            {
+                bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
+                MethodInfo helperMethod = item.GetType().GetMethod(prop.Name + "Helper");
+                if (helperMethod != null)
+                {
+                    panel.Controls.Add(new Label()
+                    {
+                        Text = GetPropertyDescription(prop)
+                    });
+
+                    Button helperButton = new ModernButton()
+                    {
+                        Text = "..."
+                    };
+
+                    helperButton.Click += (sender, e) => helperMethod.Invoke(item, new object[] { });
+
+                    helperButton.Width = panel.DisplayRectangle.Width - 16;
+                    panel.Controls.Add(helperButton);
+                }
+                else
+                {
+                    if (prop.PropertyType.IsSubclassOf(typeof(Enum)))
+                    {
+                        var values = Enum.GetValues(prop.PropertyType);
+                        panel.Controls.Add(new Label()
+                        {
+                            Text = GetPropertyDescription(prop)
+                        });
+                        ComboBox cBox = new ComboBox
+                        {
+                            DropDownStyle = ComboBoxStyle.DropDownList
+                        };
+                        cBox.Items.AddRange(values.OfType<Enum>().Select(c => EnumUtils.GetDescription(prop.PropertyType, c, c.ToString())).ToArray());
+
+                        cBox.Text = EnumUtils.GetDescription(prop.PropertyType, (Enum)prop.GetValue(item), ((Enum)prop.GetValue(item)).ToString());
+
+                        cBox.SelectedIndexChanged += (s, e) => {
+                            try
+                            {
+                                if (cBox.Text == string.Empty) return;
+                                prop.SetValue(item, EnumUtils.FromDescription(prop.PropertyType, cBox.Text));
+                                UpdateIcon(shouldUpdateIcon);
+                            }
+                            catch (Exception)
+                            {
+                                //Ignore all errors
+                            }
+                        };
+                        panel.Controls.Add(cBox);
+                        return;
+                    }
+
+                    if (!TypeDescriptor.GetConverter(prop.PropertyType).CanConvertFrom
+                (typeof(string))) continue;
+                    panel.Controls.Add(new Label()
+                    {
+                        Text = GetPropertyDescription(prop)
+                    });
+
+                    var txt = new TextBox
+                    {
+                        Text = (string)TypeDescriptor.GetConverter(prop.PropertyType).ConvertTo(prop.GetValue(item), typeof(string))
+                    };
+                    txt.TextChanged += (sender, e) => {
+                        try
+                        {
+                            if (txt.Text == string.Empty) return;
+                            //After loosing focus, convert type to thingy.
+                            prop.SetValue(item, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(txt.Text));
+                            UpdateIcon(shouldUpdateIcon);
+                        }
+                        catch (Exception)
+                        {
+                            //Ignore all errors
+                        }
+                    };
+                    txt.Width = panel.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
+                    panel.Controls.Add(txt);
+                }
+            }
+
+            ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
+        }
         private void LoadProperties(DynamicDeckItem item, FlowLayoutPanel panel)
         {
 

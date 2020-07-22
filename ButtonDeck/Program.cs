@@ -179,8 +179,7 @@ namespace ButtonDeck
                // Silent = true;
                 Debug.WriteLine("MODO USB");
                 mode = 1;
-                ClientThread = new ClientThread();
-                ClientThread.Start();
+              
                 Adbserver = new AdbServer();
     
   AdbResult = Adbserver.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
@@ -190,13 +189,13 @@ namespace ButtonDeck
                 monitor.Start();
               
                 List<DeviceData> device_list = new List<DeviceData>();
-                var receiver = new ConsoleOutputReceiver();
+             
+                
+                
                 foreach (var device in client.GetDevices().ToList())
                 {
-              
-                    client.CreateForward(device, "tcp:5095", "tcp:5095",true);
-                  
-                    client.ExecuteRemoteCommand("pm path net.nickac.buttondeck",device,receiver);
+              var receiver = new ConsoleOutputReceiver();
+                   client.ExecuteRemoteCommand("pm path net.nickac.buttondeck",device,receiver);
            
                     if (receiver != null)
                     {
@@ -207,16 +206,32 @@ namespace ButtonDeck
 
                 }
 
-                foreach (var devices in device_list)
-                {
-                    if (device_list.Count < 2)
+                if (device_list.Count < 2)
                     {
-                        client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", devices, null);
-                   Thread.Sleep(1600);
-                     
-                    }
-                    
+
+
+
+                    client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", device_list[0], null);
+                  
+                 client.CreateForward(device_list[0],"tcp:5095", "tcp:5095",true);
+                    ClientThread = new ClientThread();
+                    ClientThread.Start();
+
                 }
+                else
+                {
+ foreach (var devices in device_list)
+                {
+                    
+                       
+                  
+             
+                      
+                    }
+                }
+               
+                       
+                
 
 
            
@@ -237,7 +252,7 @@ namespace ButtonDeck
             {
                     
                 client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
-                    client.ExecuteRemoteCommand("kill-server", device, null);
+                   // client.ExecuteRemoteCommand("kill-server", device, null);
 
                     client.KillAdb();
             }

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Serialization;
+using static ButtonDeck.Backend.Objects.Implementation.DeckActions.General.KeyPressAction;
 
 namespace ButtonDeck.Backend.Objects.Implementation
 {
@@ -142,6 +144,13 @@ namespace ButtonDeck.Backend.Objects.Implementation
 
 
         }
-
+     
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("Keys")]
+        public KeyInfo KeyInfoValue { get; set; } = new KeyInfo();
+        public void KeyInfo()
+        {
+            
+        }
     }
     }
