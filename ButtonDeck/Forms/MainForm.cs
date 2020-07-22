@@ -453,6 +453,8 @@ namespace ButtonDeck.Forms
                                     CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
                                     CurrentDevice.CurrentFolder = newFolder;
                                     Debug.WriteLine("Dois itens.");
+                                    FolderCallBack(newFolder);
+                                    // call event
                                 }
 
 
@@ -479,7 +481,24 @@ namespace ButtonDeck.Forms
 
         }
 
+        public void FolderCallBack(DynamicDeckFolder folder, bool isForDelete = false) 
+        {
 
+
+            if (!isForDelete)
+            {
+ folder_globals_keys.Add(folder);
+
+            }
+            else
+            {
+                folder_globals_keys.Remove(folder);
+            }
+           
+
+        }
+
+     
         public void ButtonCreator()
         {
 
@@ -544,7 +563,18 @@ namespace ButtonDeck.Forms
                                             senderB.Tag = null;
                                             senderB.Image = null;
                                             Buttons_Unfocus(sender, e);
-                                            CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
+                                            if(senderB.Tag is DynamicDeckFolder item)
+                                            {
+
+CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
+
+                                                folder_globals_keys.Remove(item);
+                                            }
+                                            else
+                                            {
+                                                CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
+                                            }
+                                            
                                         }
                                     };
 
@@ -614,6 +644,7 @@ namespace ButtonDeck.Forms
                                                 newFolder.Add(1, folderUpItem);
 
                                                 CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
+                                                FolderCallBack(newFolder);
                                                 //CurrentDevice.CurrentFolder = newFolder;
                                                 RefreshAllButtons(true);
 
@@ -965,7 +996,7 @@ namespace ButtonDeck.Forms
 
 
 
-
+            folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
 
         }
         public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
@@ -1305,6 +1336,7 @@ Start_configs();
         }
         public static List<folders> folder_form = new List<folders>();
         public static List<IDeckFolder> folder_mode = new List<IDeckFolder>();
+        public static List<DynamicDeckFolder> folder_globals_keys = new List<DynamicDeckFolder>();
         public static List<DynamicDeckFolder> ListFolders(DynamicDeckFolder initialFolder)
         {
             var folders = new List<DynamicDeckFolder>();
@@ -2144,7 +2176,7 @@ Start_configs();
 
             private void LoadPropertiesFolder(DynamicDeckFolder item, FlowLayoutPanel panel)
         {
-
+            
 
             var props = item.GetType().GetProperties().Where(
                 prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));

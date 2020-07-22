@@ -186,12 +186,13 @@ namespace ButtonDeck
               
                monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
-                monitor.Start();
+             ///   monitor.Start();
               
                 List<DeviceData> device_list = new List<DeviceData>();
-             
-                
-                
+
+               
+
+
                 foreach (var device in client.GetDevices().ToList())
                 {
               var receiver = new ConsoleOutputReceiver();
@@ -229,14 +230,14 @@ namespace ButtonDeck
                       
                     }
                 }
-               
-                       
-                
 
 
-           
+
+
+
+
+
                 
-          
 
             }
 
@@ -251,16 +252,16 @@ namespace ButtonDeck
                 foreach (var device in client.GetDevices().ToList())
             {
                     
-                client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
+             //   client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
                    // client.ExecuteRemoteCommand("kill-server", device, null);
 
-                    client.KillAdb();
+                 //   client.KillAdb();
             }
               
 
             }
-           
 
+         //   client.KillAdb();
            ApplicationSettingsManager.SaveSettings();
              DevicePersistManager.SaveDevices();
                 Trace.Flush();

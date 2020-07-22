@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ButtonDeck.Backend.Utils.Native;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -144,13 +145,49 @@ namespace ButtonDeck.Backend.Objects.Implementation
 
 
         }
-     
-        [ActionPropertyInclude]
-        [ActionPropertyDescription("Keys")]
-        public KeyInfo KeyInfoValue { get; set; } = new KeyInfo();
-        public void KeyInfo()
+        [Serializable]
+      
+
+            public class KeyInfoGlobal
         {
-            
+                public KeyInfoGlobal()
+                {
+                }
+                public KeyInfoGlobal(Keys[] modifierKeys, Keys[] keys)
+                {
+                    ModifierKeys = modifierKeys;
+                    Keys = keys;
+                }
+
+                public Keys[] ModifierKeys { get; set; } = new Keys[] { };
+                public Keys[] Keys { get; set; } = new Keys[] { };
+            }
+       
+        [ActionPropertyInclude]
+      [ActionPropertyDescription("GlobalHotKeys")]
+    
+            public KeyInfoGlobal KeyGlobalValue { get; set; } = new KeyInfoGlobal();
+            public void KeyGlobalValueHelper()
+            {
+                var keyInfo = new KeyInfoGlobal(KeyGlobalValue.ModifierKeys, KeyGlobalValue.Keys);
+                dynamic form = Activator.CreateInstance(UsbMode.FindType("ButtonDeck.Forms.ActionHelperForms.FolderGlobalHotKey")) as Form;
+
+                var execAction = new DynamicDeckFolder() as DynamicDeckFolder;
+                execAction.KeyGlobalValue = KeyGlobalValue;
+                form.ModifiableAction = execAction;
+
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                KeyGlobalValue = form.ModifiableAction.KeyGlobalValue;
+                }
+                else
+                {
+                KeyGlobalValue = keyInfo;
+                }
+            }
         }
-    }
+
+    
+  
+    
     }

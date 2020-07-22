@@ -279,6 +279,12 @@
     <Compile Include="Forms\ActionHelperForms\ExecutableRunHelper.Designer.cs">
       <DependentUpon>ExecutableRunHelper.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ActionHelperForms\FolderGlobalHotKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ActionHelperForms\FolderGlobalHotKey.Designer.cs">
+      <DependentUpon>FolderGlobalHotKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ActionHelperForms\KeyInfoHelper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -436,6 +442,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\ExecutableRunHelper.resx">
       <DependentUpon>ExecutableRunHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ActionHelperForms\FolderGlobalHotKey.resx">
+      <DependentUpon>FolderGlobalHotKey.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\KeyInfoHelper.resx">
       <DependentUpon>KeyInfoHelper.cs</DependentUpon>

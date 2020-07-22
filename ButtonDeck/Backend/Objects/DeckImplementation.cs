@@ -70,6 +70,14 @@ namespace ButtonDeck.Backend.Objects
 
 
         }
+        public static Type FindType(string fullName)
+        {
+            return
+                AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(a => !a.IsDynamic)
+                    .SelectMany(a => a.GetTypes())
+                    .FirstOrDefault(t => t.FullName.Equals(fullName));
+        }
         public void RefreshCurrentUsb()
         {
             Thread th = new Thread(AutoConnectedUsb);
@@ -96,7 +104,7 @@ namespace ButtonDeck.Backend.Objects
 
                             Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
                         //    Program.client.RemoveAllForwards(item.DeviceUsb);
-                            //Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
+                           Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
 
 
 
