@@ -92,9 +92,17 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NHotkey, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a76ffb086700b11c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHotkey.2.1.0\lib\net45\NHotkey.dll</HintPath>
+    </Reference>
+    <Reference Include="NHotkey.WindowsForms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a76ffb086700b11c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHotkey.WindowsForms.2.1.0\lib\net45\NHotkey.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="obs-websocket-dotnet, Version=4.2.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\obs-websocket-dotnet.4.2.0-beta3\lib\net40\obs-websocket-dotnet.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="SharpAdbClient, Version=2.3.0.0, Culture=neutral, PublicKeyToken=d728076f5d82a2e8, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpAdbClient.2.3.22\lib\net461\SharpAdbClient.dll</HintPath>
     </Reference>
@@ -221,6 +229,7 @@
     <Compile Include="Backend\Utils\Helper\DeckItemHelper.cs" />
     <Compile Include="Backend\Utils\Helper\SerializableDictionary.cs" />
     <Compile Include="Backend\Utils\IFTTTWebHookClient.cs" />
+    <Compile Include="Backend\Utils\KeyConverter.cs" />
     <Compile Include="Backend\Utils\Misc\AppSettings.cs" />
     <Compile Include="Backend\Utils\Misc\Constants.cs" />
     <Compile Include="Backend\Utils\Misc\DevicePersistManager.cs" />
@@ -229,6 +238,7 @@
     <Compile Include="Backend\Utils\Native\NativeKeyHandler.cs" />
     <Compile Include="Backend\Utils\OBSUtils.cs" />
     <Compile Include="Backend\Utils\XMLUtils.cs" />
+    <Compile Include="Bibliotecas\GlobalHotKeys.cs" />
     <Compile Include="Controls\ColorSchemePreviewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

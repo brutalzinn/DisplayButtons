@@ -34,6 +34,7 @@ using System.Windows.Threading;
 using ConnectionState = ButtonDeck.Backend.Networking.TcpLib.ConnectionState;
 using SharpAdbClient;
 using System.Threading.Tasks;
+using ButtonDeck.Bibliotecas;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -483,18 +484,22 @@ namespace ButtonDeck.Forms
 
         public void FolderCallBack(DynamicDeckFolder folder, bool isForDelete = false) 
         {
-
+           
 
             if (!isForDelete)
             {
- folder_globals_keys.Add(folder);
+                GlobalFolderHotkeys.folder_form.Add(folder);
 
             }
             else
             {
-                folder_globals_keys.Remove(folder);
+                //    GlobalFolderHotkeys.folder_form.Add(new GlobalFolderHotkeys.folders(folder));
+                GlobalFolderHotkeys.folder_form.Remove(folder);
+             //   GlobalFolderHotkeys.hotKeyManager.Unregister(GlobalFolderHotkeys.VirtualKeyFromKey(folder.KeyGlobalValue.Keys), GlobalFolderHotkeys.VirtualKeyFromKeyModifier(folder.KeyGlobalValue.ModifierKeys));
             }
-           
+            GlobalFolderHotkeys.Instance.init();
+
+
 
         }
 
@@ -830,7 +835,12 @@ CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
 
 
                 }
+                if (item is DynamicDeckFolder EE && EE != null)
+                {
+                    GlobalFolderHotkeys.Instance.refreshFolder(EE);
 
+                }
+                   
                 control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
 
                 control.NormalImage = item?.GetItemImage().Bitmap;
@@ -997,7 +1007,8 @@ CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
 
 
             folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
-
+            GlobalFolderHotkeys teste = new GlobalFolderHotkeys();
+            GlobalFolderHotkeys.Instance.init();
         }
         public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {

@@ -46,7 +46,7 @@ namespace ButtonDeck.Backend.Utils.Native
             }
         }
 
-        private static byte GetKey(Keys k)
+        public static byte GetKey(Keys k)
         {
             switch (k) {
                 case Keys.Shift:
