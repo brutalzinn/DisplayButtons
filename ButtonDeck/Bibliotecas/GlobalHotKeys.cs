@@ -2,6 +2,7 @@
 using ButtonDeck.Forms;
 using NHotkey;
 using NHotkey.WindowsForms;
+using shortid;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -30,26 +31,19 @@ namespace ButtonDeck.Bibliotecas
         }
      
 
-        public static int VirtualKeyFromKeys(Keys[] keys)
+    
+        public void RegisterHotKeyCollector(DynamicDeckFolder folder)
         {
-            int result = 0;
+            folder.UniqueID = ShortId.Generate(true, false, 12);
 
-            foreach (var k in keys)
-            {
-
-                result += (int)k;
-            }
-
-            return result;
         }
-
         public void GarbageHotKeyCollector(DynamicDeckFolder folder)
         {
             
 
                 
-                string unique_id = folder.GetParent().GetItemIndex(folder) + "";
-                   HotkeyManager.Current.Remove(unique_id) ;
+    
+                   HotkeyManager.Current.Remove(folder.UniqueID) ;
             
         }
       
@@ -69,10 +63,10 @@ namespace ButtonDeck.Bibliotecas
                     System.Windows.Forms.KeysConverter kc = new System.Windows.Forms.KeysConverter();
                     retval = (System.Windows.Forms.Keys)kc.ConvertFromInvariantString(result);
 
-                    string unique_id = folder.GetParent().GetItemIndex(folder) + "";
-                    var handlerEvent = new ActionsFolderButtons(folder);
                   
-                    HotkeyManager.Current.AddOrReplace(unique_id, retval, handlerEvent.MyEventHandler);
+                      var handlerEvent = new ActionsFolderButtons(folder);
+                  
+                    HotkeyManager.Current.AddOrReplace(folder.UniqueID, retval, handlerEvent.MyEventHandler);
 
                     
            

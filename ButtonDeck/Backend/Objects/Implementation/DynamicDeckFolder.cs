@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using static ButtonDeck.Backend.Objects.Implementation.DeckActions.General.KeyPressAction;
+using shortid;
 
 namespace ButtonDeck.Backend.Objects.Implementation
 {
     [Serializable]
     public class DynamicDeckFolder : IDeckFolder
     {
+
+ 
         public DeckImage DeckImage { get; set; }
         SerializableDictionary<int, IDeckItem> items = new SerializableDictionary<int, IDeckItem>();
 
@@ -62,6 +65,8 @@ namespace ButtonDeck.Backend.Objects.Implementation
 
         public override int Add(IDeckItem item)
         {
+           
+          
             int addToSlot = -1;
             for (int i = Globals.calc - 1; i >= 0; i--)
             {
@@ -163,16 +168,19 @@ namespace ButtonDeck.Backend.Objects.Implementation
                 public Keys[] ModifierKeys { get; set; } = new Keys[] { };
                 public Keys[] Keys { get; set; } = new Keys[] { };
             }
-       
+
+     
+        public string UniqueID { get; set; }
         [ActionPropertyInclude]
       [ActionPropertyDescription("GlobalHotKeys")]
     
             public KeyInfoGlobal KeyGlobalValue { get; set; } = new KeyInfoGlobal();
             public void KeyGlobalValueHelper()
             {
+           
                 var keyInfo = new KeyInfoGlobal(KeyGlobalValue.ModifierKeys, KeyGlobalValue.Keys);
                 dynamic form = Activator.CreateInstance(UsbMode.FindType("ButtonDeck.Forms.ActionHelperForms.FolderGlobalHotKey")) as Form;
-
+          
                 var execAction = new DynamicDeckFolder() as DynamicDeckFolder;
                 execAction.KeyGlobalValue = KeyGlobalValue;
                 form.ModifiableAction = execAction;
@@ -180,7 +188,8 @@ namespace ButtonDeck.Backend.Objects.Implementation
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                 KeyGlobalValue = form.ModifiableAction.KeyGlobalValue;
-                }
+             
+            }
                 else
                 {
                 KeyGlobalValue = keyInfo;

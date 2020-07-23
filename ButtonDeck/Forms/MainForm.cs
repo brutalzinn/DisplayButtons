@@ -432,12 +432,18 @@ namespace ButtonDeck.Forms
 
                                 //parei aqui
 
-                                if (oldItem is IDeckFolder deckFolder)
+                                if (oldItem is DynamicDeckFolder deckFolder)
                                 {
                                     CurrentDevice.CheckCurrentFolder();
+                                  deckFolder.ParentFolder = CurrentDevice.CurrentFolder;
+                                    deckFolder.Add(1, folderUpItem);
                                     Debug.WriteLine("Mesclagem de pasta.");
                                     deckFolder.Add(action1.DeckItem);
+                                    CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, deckFolder);
+
                                     CurrentDevice.CurrentFolder = deckFolder;
+                                 
+
                                     //   mb.DoDragDrop(new DeckItemMoveHelper(action1.DeckItem, deckFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
 
 
@@ -488,7 +494,7 @@ namespace ButtonDeck.Forms
 
             if (!isForDelete)
             {
-                GlobalHotKeys.folder_form.Add(folder);
+                GlobalHotKeys.Instance.RegisterHotKeyCollector(folder);
 
             }
             else
@@ -565,20 +571,20 @@ namespace ButtonDeck.Forms
                                             {
                                                 senderB.Image.Dispose();
                                             }
+                                            if (senderB.Tag is DynamicDeckFolder item)
+                                            {
+
+
+
+                                                FolderCallBack(item, true);
+                                            }
                                             senderB.Tag = null;
                                             senderB.Image = null;
                                             Buttons_Unfocus(sender, e);
-                                            if(senderB.Tag is DynamicDeckFolder item)
-                                            {
-
-CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
-
-                                                folder_globals_keys.Remove(item);
-                                            }
-                                            else
-                                            {
+                                           
+                                            
                                                 CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
-                                            }
+                                           
                                             
                                         }
                                     };
