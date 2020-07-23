@@ -488,16 +488,16 @@ namespace ButtonDeck.Forms
 
             if (!isForDelete)
             {
-                GlobalFolderHotkeys.folder_form.Add(folder);
+                GlobalHotKeys.folder_form.Add(folder);
 
             }
             else
             {
-                //    GlobalFolderHotkeys.folder_form.Add(new GlobalFolderHotkeys.folders(folder));
-                GlobalFolderHotkeys.folder_form.Remove(folder);
-             //   GlobalFolderHotkeys.hotKeyManager.Unregister(GlobalFolderHotkeys.VirtualKeyFromKey(folder.KeyGlobalValue.Keys), GlobalFolderHotkeys.VirtualKeyFromKeyModifier(folder.KeyGlobalValue.ModifierKeys));
+                //    GlobalHotKeys.folder_form.Add(new GlobalHotKeys.folders(folder));
+                GlobalHotKeys.Instance.GarbageHotKeyCollector(folder);
+             //   GlobalHotKeys.hotKeyManager.Unregister(GlobalHotKeys.VirtualKeyFromKey(folder.KeyGlobalValue.Keys), GlobalHotKeys.VirtualKeyFromKeyModifier(folder.KeyGlobalValue.ModifierKeys));
             }
-            GlobalFolderHotkeys.Instance.init();
+         //   GlobalHotKeys.Instance.init();
 
 
 
@@ -837,7 +837,7 @@ CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
                 }
                 if (item is DynamicDeckFolder EE && EE != null)
                 {
-                    GlobalFolderHotkeys.Instance.refreshFolder(EE);
+                    GlobalHotKeys.Instance.refreshFolder(EE);
 
                 }
                    
@@ -1007,8 +1007,8 @@ CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
 
 
             folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
-            GlobalFolderHotkeys teste = new GlobalFolderHotkeys();
-            GlobalFolderHotkeys.Instance.init();
+            GlobalHotKeys teste = new GlobalHotKeys();
+       
         }
         public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
@@ -1827,6 +1827,16 @@ Start_configs();
                     {
                         if (senderB != null)
                         {
+
+                            if (senderB.Tag is DynamicDeckFolder ttt)
+                            {
+                                if(ttt.KeyGlobalValue.Keys != null)
+                                {
+
+ GlobalHotKeys.Instance.GarbageHotKeyCollector(ttt);
+                                }
+                               
+                            }
                             if (senderB.Image != Resources.img_folder && senderB.Image != Resources.img_item_default)
                             {
                                 senderB.Image.Dispose();
@@ -1834,6 +1844,8 @@ Start_configs();
                             senderB.Tag = null;
                             senderB.Image = null;
                             Buttons_Unfocus(sender, e);
+                           
+                                
                             CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
                         }
                     };

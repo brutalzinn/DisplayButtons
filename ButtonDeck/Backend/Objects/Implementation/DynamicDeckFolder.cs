@@ -81,6 +81,7 @@ namespace ButtonDeck.Backend.Objects.Implementation
         public override void Remove(int slot)
         {
             items.Remove(slot);
+            
         }
 
         public override DeckImage GetDeckImage()

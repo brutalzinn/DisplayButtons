@@ -1,5 +1,6 @@
 ﻿using ButtonDeck.Backend.Networking.TcpLib;
 using ButtonDeck.Backend.Objects;
+using NHotkey.WindowsForms;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -156,9 +157,12 @@ namespace ButtonDeck.Backend.Utils
                 CompressFolders(c);
                 c.SetParent(folder);
                 if (c.GetParent() != null) {
+                    HotkeyManager.Current.Remove(c.GetParent().GetItemIndex(c) + "");
                     c.Remove(1);
                 }
+
                 return true;
+            
             });
         }
 

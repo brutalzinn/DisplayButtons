@@ -11,11 +11,11 @@ using System.Windows.Input;
 
 namespace ButtonDeck.Bibliotecas
 {
-    class GlobalFolderHotkeys
+    class GlobalHotKeys
     {
-        private static GlobalFolderHotkeys instance;
+        private static GlobalHotKeys instance;
 
-        public static GlobalFolderHotkeys Instance
+        public static GlobalHotKeys Instance
         {
             get
             {
@@ -24,7 +24,7 @@ namespace ButtonDeck.Bibliotecas
         }
         public static List<DynamicDeckFolder> folder_form = new List<DynamicDeckFolder>();
 
-        public GlobalFolderHotkeys()
+        public GlobalHotKeys()
         {
             instance = this;
         }
@@ -43,25 +43,14 @@ namespace ButtonDeck.Bibliotecas
             return result;
         }
 
-        public void init()
+        public void GarbageHotKeyCollector(DynamicDeckFolder folder)
         {
-            int modifiers = 0;
-            int keys = 0;
+            
 
-            foreach (DynamicDeckFolder folder in folder_form)
-            {
-
-
-                string modifierString = "2";
-                string keyString = "49";
-                string value1 = string.Join(" + ", folder.KeyGlobalValue.ModifierKeys.Where(c => c != Keys.None).Select(c => c.ToString()).OrderBy(c => c));
-                string value2 = string.Join(" + ", folder.KeyGlobalValue.Keys.Where(c => !(c == Keys.ShiftKey || c == Keys.ControlKey || c == Keys.Menu)));
-                string result = string.IsNullOrEmpty(value1) ? value2 : string.IsNullOrEmpty(value2) ? value1 : (string.Join(" + ", value1, value2));
-                Keys key;
-                Enum.TryParse(result, out key);
-                string unique_id = folder.DeckName + folder.GetParent().GetItemIndex(folder);
-         //       HotkeyManager.Current.AddOrReplace(unique_id, key, MyEventHandler(this,folder)) ;
-            }
+                
+                string unique_id = folder.GetParent().GetItemIndex(folder) + "";
+                   HotkeyManager.Current.Remove(unique_id) ;
+            
         }
       
         public void refreshFolder(DynamicDeckFolder folder)
@@ -70,11 +59,6 @@ namespace ButtonDeck.Bibliotecas
             string value2 = string.Join("+", folder.KeyGlobalValue.Keys.Where(c => !(c == Keys.ShiftKey || c == Keys.ControlKey || c == Keys.Menu)));
             string result = string.IsNullOrEmpty(value1) ? value2 : string.IsNullOrEmpty(value2) ? value1 : (string.Join("+", value1, value2));
             result = result.Replace("Control", "Ctrl");
-
-
-
-
-
 
             System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
 
@@ -86,16 +70,11 @@ namespace ButtonDeck.Bibliotecas
                     retval = (System.Windows.Forms.Keys)kc.ConvertFromInvariantString(result);
 
                     string unique_id = folder.GetParent().GetItemIndex(folder) + "";
-
-
-
-
-
-
-
-
                     var handlerEvent = new ActionsFolderButtons(folder);
+                  
                     HotkeyManager.Current.AddOrReplace(unique_id, retval, handlerEvent.MyEventHandler);
+
+                    
            
                 }
                 catch (Exception ex)
@@ -104,6 +83,7 @@ namespace ButtonDeck.Bibliotecas
                 }
 
             }
+            
         }
 
    
@@ -122,7 +102,8 @@ public void MyEventHandler(object sender, HotkeyEventArgs e)
 
                 Debug.WriteLine("Trocando para pasta: "+  FolderPrincipal.DeckName + " Atalho: "  + e.Name);
                 MainForm.Instance.CurrentDevice.CurrentFolder = FolderPrincipal;
-            e.Handled = true;
+                MainForm.Instance.RefreshAllButtons(true);
+         e.Handled = true;
         }
         }
         
