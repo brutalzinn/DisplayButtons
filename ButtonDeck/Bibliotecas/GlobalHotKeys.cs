@@ -1,8 +1,10 @@
 ﻿using ButtonDeck.Backend.Objects.Implementation;
+using ButtonDeck.Forms;
 using NHotkey;
 using NHotkey.WindowsForms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -26,6 +28,7 @@ namespace ButtonDeck.Bibliotecas
         {
             instance = this;
         }
+     
 
         public static int VirtualKeyFromKeys(Keys[] keys)
         {
@@ -82,13 +85,18 @@ namespace ButtonDeck.Bibliotecas
                     System.Windows.Forms.KeysConverter kc = new System.Windows.Forms.KeysConverter();
                     retval = (System.Windows.Forms.Keys)kc.ConvertFromInvariantString(result);
 
-                    string unique_id = folder.DeckName + folder.GetParent().GetItemIndex(folder);
+                    string unique_id = folder.GetParent().GetItemIndex(folder) + "";
 
 
 
-                    var eh = ButtonInteraction;
-                    HotkeyManager.Current.AddOrReplace(unique_id, retval,
-            eh?.Invoke(this, new ButtonInteractionEventArgs(folder)));
+
+
+
+
+
+                    var handlerEvent = new ActionsFolderButtons(folder);
+                    HotkeyManager.Current.AddOrReplace(unique_id, retval, handlerEvent.MyEventHandler);
+           
                 }
                 catch (Exception ex)
                 {
@@ -97,30 +105,28 @@ namespace ButtonDeck.Bibliotecas
 
             }
         }
-        public class ButtonInteractionEventArgs : EventArgs
+
+   
+     public class ActionsFolderButtons
         {
-            public ButtonInteractionEventArgs(DynamicDeckFolder folder)
+            public DynamicDeckFolder FolderPrincipal { get; set; }
+            public ActionsFolderButtons(DynamicDeckFolder folder)
             {
-                folder_principal = folder;
+
+                FolderPrincipal = folder;
+
             }
 
-            public DynamicDeckFolder folder_principal { get; set; }
-        }
-            public event EventHandler<ButtonInteractionEventArgs> ButtonInteraction;
-        public class ProcessEventArgs : EventArgs
+public void MyEventHandler(object sender, HotkeyEventArgs e)
         {
-            
-            public DynamicDeckFolder folder { get; set; }
-   
-        }
 
-     
-
-        protected virtual void MyEventHandler(object sender, ProcessEventArgs e)
-        {
-            MessageBox.Show("RECEBIDO>");
-          //  e.Handled = true;
+                Debug.WriteLine("Trocando para pasta: "+  FolderPrincipal.DeckName + " Atalho: "  + e.Name);
+                MainForm.Instance.CurrentDevice.CurrentFolder = FolderPrincipal;
+            e.Handled = true;
         }
+        }
+        
+
 
     }
 }
