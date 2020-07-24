@@ -196,25 +196,35 @@ namespace ButtonDeck
                 foreach (var device in client.GetDevices().ToList())
                 {
               var receiver = new ConsoleOutputReceiver();
-                   client.ExecuteRemoteCommand("pm path net.nickac.buttondeck",device,receiver);
-           
+                    client.ExecuteRemoteCommand("adb usb", device, receiver);
+                    client.ExecuteRemoteCommand("pm path net.nickac.buttondeck",device,receiver);
+                    Console.WriteLine(receiver.ToString());
                     if (receiver != null)
                     {
-                        device_list.Add(device);
+                       if(device != null)
+                        {
+device_list.Add(device);
+
+                        }
+                        
 
                     }
+                 
                    
 
                 }
-
+              
                 if (device_list.Count < 2)
                     {
 
-
-
-                    client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", device_list[0], null);
+                   
+            
                   
-                 client.CreateForward(device_list[0],"tcp:5095", "tcp:5095",true);
+                 
+                 
+                    client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", client.GetDevices().First(), null);
+                  
+                 client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095",true);
                     ClientThread = new ClientThread();
                     ClientThread.Start();
 

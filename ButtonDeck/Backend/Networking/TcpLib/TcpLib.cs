@@ -451,24 +451,22 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             try { st._provider.OnAcceptConnection(st); }
             catch
             {
+
+                st._provider.OnRetryConnect(st);
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
                 //report error in provider... Probably to the EventLog
             }
             //Starts the ReceiveData callback loop
             if (st._conn.Connected)
                 Debug.WriteLine("Starts the ReceiveData callback loop");
-            try
-            {
-
+         
   st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
                 ReceivedDataReady, st);
 
-            }
-            catch(Exception e)
-            {
-                Debug.WriteLine(e);
+            
+          
 
-            }
+            
           
         }
 
@@ -492,7 +490,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     //   Stop();
                     //st._provider.OnDropConnection(st);
                    st._provider.OnRetryConnect(st);
-                 DropConnection(st);
+                DropConnection(st);
                 }
                 else
                 {
