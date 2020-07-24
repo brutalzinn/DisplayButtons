@@ -16,9 +16,59 @@ namespace ButtonDeck.Backend.Networking.Implementation
         { }
         public SingleSlotLabelChangePacket(int slot, string font, int size, int pos, string text, string color)
         {
-            
+            Id = slot;
+            Font = font;
+            Size = size;
+            Position = pos;
+            Color = color;
+            Text = text;
         }
-       
+        
+            private int id;
+            private string font;
+            private int size;
+            private string text;
+            private int position;
+            private string color;
+            public string Color
+            {
+
+                get { return color; }
+                set { color = value; }
+
+            }
+            public string Text
+            {
+                get { return text; }
+                set { text = value; }
+            }
+            public int Id
+            {
+
+                get { return id; }
+                set { id = value; }
+            }
+
+            public string Font
+            {
+
+                get { return font; }
+                set { font = value; }
+
+
+            }
+
+            public int Size
+            {
+                get { return size; }
+                set { size = value; }
+            }
+            public int Position
+            {
+                get { return position; }
+                set { position = value; }
+            }
+        
         public DeckImage DeckImage { get; set; }
         public int ImageSlot { get; set; }
 
@@ -37,12 +87,25 @@ namespace ButtonDeck.Backend.Networking.Implementation
         public override void ToOutputStream(DataOutputStream writer)
         {
             //Server to Client
-            writer.WriteBoolean(DeckImage != null);
-            if (DeckImage != null) {
-                writer.WriteInt(ImageSlot);
-                //Byte array lenght
-                writer.WriteInt(DeckImage.InternalBitmap.Length);
-                writer.Write(DeckImage.InternalBitmap);
+            if(String.IsNullOrEmpty(Text) == false)
+            {
+
+
+         
+            writer.WriteInt(Id);
+            //font
+            writer.WriteUTF(Font);
+            //text
+
+            writer.WriteUTF(Text);
+            //size
+            writer.WriteInt(Size);
+            //position
+            writer.WriteInt(Position);
+
+            //color
+
+            writer.WriteUTF(Color);
             }
         }
     }
