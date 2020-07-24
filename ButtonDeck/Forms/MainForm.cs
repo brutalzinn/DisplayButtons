@@ -1168,7 +1168,7 @@ Start_configs();
                 }
 
                 con.SendPacket(packet);
-                con.SendPacket(packet_label);
+              //  con.SendPacket(packet_label);
                 //    con.SendPacket(packet_label);
                 var clearPacket = new SlotImageClearChunkPacket();
                 //  var clearPacket_labels = new SlotLabelButtonClearChunkPacket();
@@ -1179,7 +1179,13 @@ Start_configs();
                     //     clearPacket_labels.AddToQueue(i);
                 }
 
+               
+
+
+                con.SendPacket(packet_label);
+               
                 con.SendPacket(clearPacket);
+
                 //    con.SendPacket(clearPacket_labels);
             }
 
