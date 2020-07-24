@@ -122,7 +122,7 @@ namespace ButtonDeck.Controls
 
                         Bitmap bmp = new Bitmap(value);
                         var deckImage = new DeckImage(bmp);
-                        var DeckItem = new DynamicDeckItem();
+                        DynamicDeckItem DeckItem = null;
                         if (Tag is DynamicDeckItem itemTag) {
                             itemTag.DeckImage = deckImage;
 
@@ -138,9 +138,10 @@ namespace ButtonDeck.Controls
                             {
                                 ImageSlot = slot
                             });
-
-                            state.SendPacket(new SingleSlotLabelChangePacket(slot, "", DeckItem.DeckSize, DeckItem.DeckPosition, DeckItem.DeckName, DeckItem.DeckColor));
-                          
+                            if (state != null)
+                            {
+                                state.SendPacket(new SingleSlotLabelChangePacket(slot, "", DeckItem.DeckSize, DeckItem.DeckPosition, DeckItem.DeckName, DeckItem.DeckColor));
+                            }
 
 
 
