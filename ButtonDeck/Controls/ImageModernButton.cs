@@ -116,13 +116,19 @@ namespace ButtonDeck.Controls
                         if (value == null) {
                             //Send clear packet
                             state?.SendPacket(new SlotImageClearPacket(slot));
+                            state?.SendPacket(new SlotLabelClearPacket(slot));
                             return;
                         }
 
                         Bitmap bmp = new Bitmap(value);
                         var deckImage = new DeckImage(bmp);
+                        var DeckItem = new DynamicDeckItem();
                         if (Tag is DynamicDeckItem itemTag) {
                             itemTag.DeckImage = deckImage;
+
+
+                            DeckItem = itemTag;
+
                         } else if (Tag is DynamicDeckFolder itemFolder) {
                             itemFolder.DeckImage = deckImage;
                         }
@@ -132,6 +138,14 @@ namespace ButtonDeck.Controls
                             {
                                 ImageSlot = slot
                             });
+
+                            state.SendPacket(new SingleSlotLabelChangePacket(slot, "", DeckItem.DeckSize, DeckItem.DeckPosition, DeckItem.DeckName, DeckItem.DeckColor)
+                            {
+                                ImageSlot = slot
+                            });
+
+
+
                         }
                         if (Tag is DynamicDeckItem item) {
                             var device = frm.CurrentDevice;
