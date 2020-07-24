@@ -139,10 +139,8 @@ namespace ButtonDeck.Controls
                                 ImageSlot = slot
                             });
 
-                            state.SendPacket(new SingleSlotLabelChangePacket(slot, "", DeckItem.DeckSize, DeckItem.DeckPosition, DeckItem.DeckName, DeckItem.DeckColor)
-                            {
-                                ImageSlot = slot
-                            });
+                            state.SendPacket(new SingleSlotLabelChangePacket(slot, "", DeckItem.DeckSize, DeckItem.DeckPosition, DeckItem.DeckName, DeckItem.DeckColor));
+                          
 
 
 
