@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace ButtonDeck.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer | PacketArchitecture.ServerToClient)]
-    public class SlotLabelButtonChangeChunkPacket : INetworkPacket
+    public class SlotUniversalChangeChunkPacket : INetworkPacket
     {
         public class Labels
         {
@@ -149,7 +149,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
 
         public override object Clone()
         {
-            return new SlotLabelButtonChangeChunkPacket();
+            return new SlotUniversalChangeChunkPacket();
         }
     }
 }

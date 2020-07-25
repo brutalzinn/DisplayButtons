@@ -1121,7 +1121,7 @@ Start_configs();
             var con = device.GetConnection();
             if (con != null) {
                 //  if (Globals.status == false) return;
-                var packet = new SlotLabelButtonChangeChunkPacket();
+                var packet = new SlotUniversalChangeChunkPacket();
               
                 List<IDeckItem> items = folder.GetDeckItems();
                 // int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;

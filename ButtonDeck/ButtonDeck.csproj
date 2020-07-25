@@ -186,7 +186,7 @@
     <Compile Include="Backend\Networking\Implementation\buttons.implementation\SingleSlotUniversalChangePacket.cs" />
     <Compile Include="Backend\Networking\Implementation\buttons.implementation\SlotUniversalClearPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\buttons.implementation\SlotLabelButtonClearChunkPacket.cs" />
-    <Compile Include="Backend\Networking\Implementation\buttons.implementation\SlotLabelButtonChangeChunkPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\buttons.implementation\SlotUniversalChangeChunkPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\DesktopDisconnectPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\DeviceIdentityPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\HeathbeatPacket.cs" />
