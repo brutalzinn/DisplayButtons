@@ -10,11 +10,11 @@ using ButtonDeck.Backend.Objects;
 namespace ButtonDeck.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer)]
-    public class SingleSlotImageChangePacket : INetworkPacket
+    public class SingleSlotUniversalChangePacket : INetworkPacket
     {
-        public SingleSlotImageChangePacket()
+        public SingleSlotUniversalChangePacket()
         { }
-        public SingleSlotImageChangePacket(DeckImage deckImage)
+        public SingleSlotUniversalChangePacket(DeckImage deckImage)
         {
             DeckImage = deckImage;
         }
@@ -22,7 +22,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
         public DeckImage DeckImage { get; set; }
         public int ImageSlot { get; set; }
         public string Color { get; set; }
-
+        
         public string Text
         { get; set; }
         public int Id
@@ -37,7 +37,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
         { get; set; }
         public override object Clone()
         {
-            return new SingleSlotImageChangePacket();
+            return new SingleSlotUniversalChangePacket();
         }
 
         public override void FromInputStream(DataInputStream reader)
@@ -56,6 +56,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
                 //Byte array lenght
                 writer.WriteInt(DeckImage.InternalBitmap.Length);
                 writer.Write(DeckImage.InternalBitmap);
+
                 writer.WriteUTF(Font);
                 //text
 

@@ -121,17 +121,28 @@ namespace ButtonDeck.Controls
 
                         Bitmap bmp = new Bitmap(value);
                         var deckImage = new DeckImage(bmp);
+                        
                         if (Tag is DynamicDeckItem itemTag) {
                             itemTag.DeckImage = deckImage;
+
                         } else if (Tag is DynamicDeckFolder itemFolder) {
                             itemFolder.DeckImage = deckImage;
                         }
-
-                        if (state != null) {
-                            state.SendPacket(new SingleSlotImageChangePacket(deckImage)
+                        if (Tag is IDeckItem itemNew)
+                        {
+                            if (state != null)
                             {
-                                ImageSlot = slot
-                            });
+                                state.SendPacket(new SingleSlotImageChangePacket(deckImage)
+                                {
+                                    ImageSlot = slot,
+                                    Color = itemNew.DeckColor,
+                                    Font = " ",
+                                    Text = itemNew.DeckName,
+                                    Size = itemNew.DeckSize,
+                                    Position = itemNew.DeckPosition
+
+                                });
+                            }
                         }
                         if (Tag is DynamicDeckItem item) {
                             var device = frm.CurrentDevice;

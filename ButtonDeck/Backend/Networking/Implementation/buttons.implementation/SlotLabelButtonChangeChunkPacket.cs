@@ -22,13 +22,27 @@ namespace ButtonDeck.Backend.Networking.Implementation
             private string text;
             private int position;
             private string color;
-            public Labels(int id, string font, int size, int position, string text, string color) {
+            private DeckImage image;
+            public Labels(int id, string font, int size, int position, string text, string color, DeckImage img) {
+                if (String.IsNullOrEmpty(text))
+                {
+
+                    text = "-";
+                }
                 this.id = id;
                 this.font = font;
                 this.text = text;
                 this.size = size;
                 this.position = position;
                 this.color = color;
+                this.image = img;
+
+            }
+            public DeckImage Image
+            {
+
+                get { return image; }
+                set { image = value; }
 
             }
             public string Color
@@ -72,10 +86,10 @@ namespace ButtonDeck.Backend.Networking.Implementation
         }
 
         List<Labels> list_labels = new List<Labels>();
-        public void AddToQueue(int slot, string text, string font,int size, int position, string color)
+        public void AddToQueue(int slot, string text, string font,int size, int position, string color, DeckImage image)
         {
          
-            list_labels.Add (new Labels( slot, font, size, position,text, color));
+            list_labels.Add (new Labels( slot, font, size, position,text, color, image));
         }
         public void ClearPacket()
         {
@@ -99,18 +113,24 @@ namespace ButtonDeck.Backend.Networking.Implementation
             writer.WriteInt(list_labels.Count);
             foreach (var item in list_labels)
             {
-                SendDeckLabel(writer, item.Id, item.Font,item.Size,item.Position,item.Text,item.Color) ;
+                SendDeckLabel(writer, item.Id, item.Font,item.Size,item.Position,item.Text,item.Color, item.Image) ;
            
             }
 
         }
 
-        private void SendDeckLabel(DataOutputStream writer, int slot, string font,int size,int pos,string text,string color)
+        private void SendDeckLabel(DataOutputStream writer, int slot, string font,int size,int pos,string text,string color , DeckImage img)
         {
-            if (String.IsNullOrEmpty(text) == false)
+           
+            //Write the slot
+            if (img != null)
             {
-                //Write the slot
+
                 writer.WriteInt(slot);
+
+                writer.WriteInt(img.InternalBitmap.Length);
+                writer.Write(img.InternalBitmap);
+
                 //font
                 writer.WriteUTF(font);
                 //text

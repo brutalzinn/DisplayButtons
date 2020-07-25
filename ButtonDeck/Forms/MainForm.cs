@@ -1121,8 +1121,8 @@ Start_configs();
             var con = device.GetConnection();
             if (con != null) {
                 //  if (Globals.status == false) return;
-                var packet = new SlotImageChangeChunkPacket();
-                var packet_label = new SlotLabelButtonChangeChunkPacket();
+                var packet = new SlotLabelButtonChangeChunkPacket();
+              
                 List<IDeckItem> items = folder.GetDeckItems();
                 // int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
                 List<int> addedItems = new List<int>();
@@ -1152,9 +1152,9 @@ Start_configs();
 
 
                     //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
-                    packet_label.AddToQueue(folder.GetItemIndex(item), item?.DeckName, "", item.DeckSize, item.DeckPosition, item?.DeckColor);
+                    packet.AddToQueue(folder.GetItemIndex(item), item?.DeckName, " ", item.DeckSize, item.DeckPosition, item?.DeckColor ,image);
 
-                    packet.AddToQueue(folder.GetItemIndex(item), image);
+                 //   packet.AddToQueue(folder.GetItemIndex(item), image);
                     //    packet.AddToQueue(folder.GetItemIndex(item), image);
 
 
@@ -1182,9 +1182,9 @@ Start_configs();
                
 
 
-                con.SendPacket(packet_label);
+              //  con.SendPacket(packet_label);
                
-                con.SendPacket(clearPacket);
+             con.SendPacket(clearPacket);
 
                 //    con.SendPacket(clearPacket_labels);
             }
