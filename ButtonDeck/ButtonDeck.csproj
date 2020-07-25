@@ -183,10 +183,10 @@
     <Compile Include="Backend\Networking\Attributes\PacketArchitecture.cs" />
     <Compile Include="Backend\Networking\Implementation\AlternativeHello.cs" />
     <Compile Include="Backend\Networking\Implementation\ButtonInteractPacket.cs" />
-    <Compile Include="Backend\Networking\Implementation\buttons.implementation\SingleSlotLabelChangePacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\buttons.implementation\SingleSlotUniversalChangePacket.cs" />
     <Compile Include="Backend\Networking\Implementation\buttons.implementation\SlotLabelClearPacket.cs" />
-    <Compile Include="Backend\Networking\Implementation\buttons.implementation\SlotLabelButtonClearChunkPacket.cs" />
-    <Compile Include="Backend\Networking\Implementation\buttons.implementation\SlotLabelButtonChangeChunkPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\buttons.implementation\SlotUniversalButtonClearChunkPacket.cs" />
+    <Compile Include="Backend\Networking\Implementation\buttons.implementation\SlotUniversalChangeChunkPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\DesktopDisconnectPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\DeviceIdentityPacket.cs" />
     <Compile Include="Backend\Networking\Implementation\HeathbeatPacket.cs" />

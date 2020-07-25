@@ -115,8 +115,8 @@ namespace ButtonDeck.Controls
                         var state = connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
                         if (value == null) {
                             //Send clear packet
-                            state?.SendPacket(new SlotImageClearPacket(slot));
-                            state?.SendPacket(new SlotLabelClearPacket(slot));
+                          //  state?.SendPacket(new SlotImageClearPacket(slot));
+                            state?.SendPacket(new SlotUniversalClearPacket(slot));
                             return;
                         }
 
@@ -134,13 +134,13 @@ namespace ButtonDeck.Controls
                         }
 
                         if (state != null) {
-                            state.SendPacket(new SingleSlotImageChangePacket(deckImage)
-                            {
-                                ImageSlot = slot
-                            });
+                            //state.SendPacket(new SingleSlotImageChangePacket(deckImage)
+                            //{
+                            //    ImageSlot = slot
+                            //});
                             if (state != null)
                             {
-                                state.SendPacket(new SingleSlotLabelChangePacket(slot, "", DeckItem.DeckSize, DeckItem.DeckPosition, DeckItem.DeckName, DeckItem.DeckColor));
+                                state.SendPacket(new SingleSlotUniversalChangePacket(deckImage,slot, "", DeckItem.DeckSize, DeckItem.DeckPosition, DeckItem.DeckName, DeckItem.DeckColor));
                             }
 
 

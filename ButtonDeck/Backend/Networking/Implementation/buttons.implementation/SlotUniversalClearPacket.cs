@@ -9,28 +9,24 @@ using System.Threading.Tasks;
 namespace ButtonDeck.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer)]
-    public class SlotLabelButtonClearChunkPacket : INetworkPacket
+    public class SlotUniversalClearPacket : INetworkPacket
     {
-        readonly List<int> slotsToSend = new List<int>();
-
-        public void AddToQueue(int slot)
+        public SlotUniversalClearPacket(int slotID)
         {
-            slotsToSend.Add(slot);
+            SlotID = slotID;
         }
 
+        public int SlotID { get; set; }
         public override void FromInputStream(DataInputStream reader)
         {
             
         }
 
-        public override long GetPacketNumber() => 13;
+        public override long GetPacketNumber() => 15;
 
         public override void ToOutputStream(DataOutputStream writer)
         {
-            writer.WriteInt(slotsToSend.Count);
-            foreach (var slot in slotsToSend) {
-                writer.WriteInt(slot);
-            }
+            writer.WriteInt(SlotID);   
         }
     }
 }
