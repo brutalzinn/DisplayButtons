@@ -52,14 +52,16 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         }
         public override void OnRetryConnect(ConnectionState state)
         {
+
+           
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = 3000;
             aTimer.Enabled = true;
-            UsbMode devices_refresh = new UsbMode();
-            devices_refresh.MountUsbDevices();
+           
             Debug.WriteLine("Tentando reconexão.." + aTimer.Interval);
 
-
+ UsbMode devices_refresh = new UsbMode();
+            devices_refresh.MountUsbDevices();
 
         }
         private static void OnTimedEvent(object source, ElapsedEventArgs e)

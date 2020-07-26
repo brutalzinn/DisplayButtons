@@ -1010,7 +1010,7 @@ namespace ButtonDeck.Forms
             }
 
 
-
+       
 
             folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
             GlobalHotKeys teste = new GlobalHotKeys();

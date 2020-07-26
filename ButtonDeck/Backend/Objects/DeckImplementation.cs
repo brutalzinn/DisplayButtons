@@ -32,6 +32,7 @@ namespace ButtonDeck.Backend.Objects
                 {
                     DevicePersistManager.PersistedDevices.Any(c =>
                     {
+
                         Debug.WriteLine("TENTANDO COM " + device.State);
                         if (device != null)
                         {
@@ -86,35 +87,47 @@ namespace ButtonDeck.Backend.Objects
 
         private void AutoConnectedUsb()
         {
-            List<Guid> toRemove = new List<Guid>();
+            
+try
+                {
 
-            foreach (var item in DevicePersistManager.PersistedDevices.ToList())
+                if(Program.client.GetDevices().Count() < 2)
+                {
+
+
+              
+         
+                Program.client.RemoveAllForwards(Program.client.GetDevices().First());
+                Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+                Program.ClientThread.Stop();
+                Program.ClientThread = new Misc.ClientThread();
+                Program.ClientThread.Start();
+  }
+                foreach (var item in DevicePersistManager.PersistedDevices)
             {
 
-
-                try
-                {
+                
+                
                     if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
                     {
 
 
 
-                        if (item.DeviceUsb != null)
-                        {
+                    
 
                             Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
                           Program.client.RemoveAllForwards(item.DeviceUsb);
                            Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
+     Program.ClientThread.Stop();
+                Program.ClientThread = new Misc.ClientThread();
+                Program.ClientThread.Start();
 
 
-
-                            Program.ClientThread.Stop();
-                            Program.ClientThread = new Misc.ClientThread();
-                            Program.ClientThread.Start();
+                          
                             MainForm.Instance.Invoke(new Action(() =>
                             {
 
-                                if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
+                                if (!DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
                                 {
                                     Debug.WriteLine("Reconectado.");
 
@@ -130,21 +143,21 @@ namespace ButtonDeck.Backend.Objects
                             }));
 
 
-                        }
+                        
 
-                        toRemove.Add(item.DeviceGuid);
+             
 
                     }
-                }
-                catch
-                {
-
-
-                }
+               
 
 
             }
-            toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+            }
+                catch(Exception eeee)
+                {
+                    Debug.WriteLine("ERROR: " + eeee);
+
+                }
 
         }
 
