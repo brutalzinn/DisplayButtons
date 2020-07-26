@@ -103,35 +103,70 @@ namespace ButtonDeck.Backend.Objects
         }
         private void AutoConnectedUsb()
         {
+            List<Guid> toRemove = new List<Guid>();
 
-            try
-
-
+            foreach (var item in DevicePersistManager.PersistedDevices.ToList())
             {
 
 
-
-                var result = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected);
-                if (result <= 1)
+                try
                 {
-                
-                    Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
-                    Program.ClientThread.Stop();
-                    Program.ClientThread = new Misc.ClientThread();
-                    Program.ClientThread.Start();
-                    Thread.Sleep(3000);
+                    if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
+                    {
+
+
+
+                        if (item.DeviceUsb != null)
+                        {
+
+                            Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
+                            Program.client.RemoveAllForwards(item.DeviceUsb);
+                            Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
+
+
+
+                            Program.ClientThread.Stop();
+                            Program.ClientThread = new Misc.ClientThread();
+                            Program.ClientThread.Start();
+                            MainForm.Instance.Invoke(new Action(() =>
+                            {
+
+                                if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
+                                {
+                                    Debug.WriteLine("Reconectado.");
+
+
+                                    MainForm.Instance.StartUsbMode();
+                                    MainForm.Instance.CurrentDevice = item;
+                                    MountUsbDevices();
+                                }
+
+
+
+
+                            }));
+
+
+                        }
+
+                        toRemove.Add(item.DeviceGuid);
+
+                    }
                 }
-                
+                catch
+                {
+
+
+                }
 
 
             }
-            catch { }
-
-
+            toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
 
         }
+
     }
-        [Serializable]
+    [Serializable]
     public abstract class AbstractDeckInformation
         {
         public  string GetName { get; set; }

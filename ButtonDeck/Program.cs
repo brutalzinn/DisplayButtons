@@ -222,7 +222,7 @@ device_list.Add(device);
                   
                  
                  
-                    client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", client.GetDevices().First(), null);
+                 //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", client.GetDevices().First(), null);
                   
                  client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095",true);
                     ClientThread = new ClientThread();
