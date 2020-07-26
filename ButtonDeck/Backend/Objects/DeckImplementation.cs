@@ -85,6 +85,22 @@ namespace ButtonDeck.Backend.Objects
             th.Start();
         }
 
+               public int CurrentConnections {
+            get {
+                if(Program.mode == 0)
+                {
+                 
+                    return Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+
+                }
+                else 
+                {
+            return Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+
+
+                }
+            }
+        }
         private void AutoConnectedUsb()
         {
 
@@ -92,19 +108,20 @@ namespace ButtonDeck.Backend.Objects
 
 
             {
-                if (Program.client.GetDevices().Count() < 2)
+
+
+
+                var result = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected);
+                if (result <= 1)
                 {
-
-
-
-
-                    Program.client.RemoveAllForwards(Program.client.GetDevices().First());
+                
                     Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
                     Program.ClientThread.Stop();
                     Program.ClientThread = new Misc.ClientThread();
                     Program.ClientThread.Start();
-
+                    Thread.Sleep(3000);
                 }
+                
 
 
             }

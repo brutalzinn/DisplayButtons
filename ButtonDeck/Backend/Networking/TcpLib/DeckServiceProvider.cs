@@ -60,15 +60,15 @@ namespace ButtonDeck.Backend.Networking.TcpLib
            
             Debug.WriteLine("Tentando reconexão.." + aTimer.Interval);
 
- UsbMode devices_refresh = new UsbMode();
-            devices_refresh.MountUsbDevices();
+ //UsbMode devices_refresh = new UsbMode();
+           
 
         }
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             UsbMode devices_refresh = new UsbMode();
             devices_refresh.RefreshCurrentUsb();
-            
+             devices_refresh.MountUsbDevices();
         }
         public override void OnDropConnection(ConnectionState state)
         {

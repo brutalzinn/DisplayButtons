@@ -452,7 +452,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             catch
             {
 
-                st._provider.OnRetryConnect(st);
+             //   st._provider.OnRetryConnect(st);
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
                 //report error in provider... Probably to the EventLog
             }
