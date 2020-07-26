@@ -16,8 +16,10 @@ namespace ButtonDeck.Backend.Networking.TcpLib
     {
 
         private static List<INetworkPacket> networkPackets = new List<INetworkPacket>();
+       
+        public static System.Timers.Timer aTimer = new System.Timers.Timer();
 
-        private static System.Timers.Timer aTimer = new System.Timers.Timer();
+       
         static DeckServiceProvider()
         {
             RegisterNetworkPacket(new HelloPacket());
@@ -49,19 +51,22 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         public override void OnAcceptConnection(ConnectionState state)
         {
          aTimer.Enabled = false;
+      
         }
         public override void OnRetryConnect(ConnectionState state)
         {
+          
+            if (state.Connected == false)
+            {
+                aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+                aTimer.Interval = 3000;
+                aTimer.Enabled = true;
+            }
+                Debug.WriteLine("Tentando reconexão..");
 
-           
-            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Interval = 3000;
-            aTimer.Enabled = true;
-           
-            Debug.WriteLine("Tentando reconexão.." + aTimer.Interval);
-
-UsbMode devices_refresh = new UsbMode();
-       devices_refresh.MountUsbDevices();
+                UsbMode devices_refresh = new UsbMode();
+                devices_refresh.MountUsbDevices();
+            
 
         }
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -72,6 +77,7 @@ UsbMode devices_refresh = new UsbMode();
         }
         public override void OnDropConnection(ConnectionState state)
         {
+            //isConnected = false;
            // state.SendPacket(new DesktopDisconnectPacket());
          DevicePersistManager.RemoveConnectionState(state);
         }

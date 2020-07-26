@@ -111,47 +111,52 @@ namespace ButtonDeck.Backend.Objects
 
                 try
                 {
-                    if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
+                    Program.client.RemoveAllForwards(Program.client.GetDevices().First());
+                   Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+
+                    Program.ClientThread.Stop();
+                    Program.ClientThread = new ClientThread();
+                    Program.ClientThread.Start();
+
+
+
+
+                    DeckDevice deckDevice = new DeckDevice(item.DeviceGuid, item.DeviceName);
+
+                    DevicePersistManager.PersistDevice(deckDevice);
+                    DevicePersistManager.ChangeConnectedState(item.GetConnection(), deckDevice);
+
+                    if (deckDevice.GetConnection().Connected)
                     {
 
-
-
-                        if (item.DeviceUsb != null)
-                        {
-
-                            Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
-                            Program.client.RemoveAllForwards(item.DeviceUsb);
-                            Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
-
-
-
-                           Program.ClientThread.Stop();
-                           Program.ClientThread = new Misc.ClientThread();
-                            Program.ClientThread.Start();
-                            MainForm.Instance.Invoke(new Action(() =>
+                     
+                        MainForm.Instance.Invoke(new Action(() =>
                             {
 
-                                if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
-                                {
-                                    Debug.WriteLine("Reconectado.");
+                                
+                                Debug.WriteLine("Reconectado.");
+                                MainForm.Instance.StartUsbMode();
+                                MainForm.Instance.CurrentDevice = deckDevice;
 
 
-                                    MainForm.Instance.StartUsbMode();
-                                    MainForm.Instance.CurrentDevice = item;
-                                    MountUsbDevices();
-                                }
+                              //  DevicePersistManager.OnDeviceConnected(this, deckDevice);
+
+
+
+
+
 
 
 
 
                             }));
 
+                    }
 
-                        }
-
+                
                      
 
-                    }
+                    
                 }
                 catch
                 {
@@ -164,7 +169,7 @@ namespace ButtonDeck.Backend.Objects
         
 
         }
-
+       
     }
     [Serializable]
     public abstract class AbstractDeckInformation
