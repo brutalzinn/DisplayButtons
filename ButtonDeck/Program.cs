@@ -17,6 +17,7 @@ using NAudio.CoreAudioApi;
 using SharpAdbClient;
 using System.Net;
 using System.Threading;
+using ButtonDeck.Backend.Objects;
 
 namespace ButtonDeck
 {
@@ -215,33 +216,32 @@ device_list.Add(device);
                    
 
                 }
-              
+
                 if (device_list.Count < 2)
-                    {
+                {
 
 
-
+                    Debug.WriteLine("ONE DEVICE");
 
 
 
                     //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", client.GetDevices().First(), null);
 
-                
-          client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095",true);
+
+                    client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
                     ClientThread = new ClientThread();
-              ClientThread.Start();
+                    ClientThread.Start();
 
                 }
                 else
                 {
- foreach (var devices in device_list)
-                {
-                    
-                       
                   
-             
-                      
-                    }
+              
+                            ClientThread = new ClientThread();
+                            ClientThread.Start();
+                        
+
+                    
                 }
 
 
@@ -250,9 +250,9 @@ device_list.Add(device);
 
 
 
-                
 
-            }
+
+                }
 
                
                Application.Run(new MainForm());
