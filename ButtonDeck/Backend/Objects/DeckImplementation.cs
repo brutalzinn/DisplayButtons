@@ -1,4 +1,6 @@
-﻿using ButtonDeck.Backend.Networking.TcpLib;
+﻿using ButtonDeck.Backend.Networking;
+using ButtonDeck.Backend.Networking.Implementation;
+using ButtonDeck.Backend.Networking.TcpLib;
 using ButtonDeck.Backend.Utils;
 using ButtonDeck.Forms;
 using ButtonDeck.Misc;
@@ -18,6 +20,11 @@ namespace ButtonDeck.Backend.Objects
  
     public class UsbMode
     {
+        public UsbMode()
+        {
+
+
+        }
         public void MountUsbDevices()
         {
 
@@ -103,47 +110,53 @@ namespace ButtonDeck.Backend.Objects
         }
         private void AutoConnectedUsb()
         {
-     
 
             foreach (var item in DevicePersistManager.PersistedDevices.ToList())
             {
+            List<Guid> toRemove = new List<Guid>();
+            Program.client.RemoveAllForwards(Program.client.GetDevices().First());
+            Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+
+            Program.ClientThread.Stop();
+            Program.ClientThread = new Misc.ClientThread();
+            Program.ClientThread.Start();
+            
 
 
                 try
                 {
-                    Program.client.RemoveAllForwards(Program.client.GetDevices().First());
-                   Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+                   
+                 
 
-                    Program.ClientThread.Stop();
-                    Program.ClientThread = new ClientThread();
-                    Program.ClientThread.Start();
+                      
 
+                            Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
 
-
-
-                    DeckDevice deckDevice = new DeckDevice(item.DeviceGuid, item.DeviceName);
-
-                    DevicePersistManager.PersistDevice(deckDevice);
-                    DevicePersistManager.ChangeConnectedState(item.GetConnection(), deckDevice);
-
-                    if (deckDevice.GetConnection().Connected)
+                    if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
                     {
 
-                     
                         MainForm.Instance.Invoke(new Action(() =>
                             {
 
-                                
-                                Debug.WriteLine("Reconectado.");
-                                MainForm.Instance.StartUsbMode();
-                                MainForm.Instance.CurrentDevice = deckDevice;
+                               
+                                    Debug.WriteLine("Reconectado.");
 
 
-                              //  DevicePersistManager.OnDeviceConnected(this, deckDevice);
+                                    MainForm.Instance.StartUsbMode();
+
+
+                         
+
+                                          
+
+                                            MainForm.Instance.StartUsbMode();  
+                               MainForm.Instance.CurrentDevice = item;
+                                               //   teste.MountUsbDevices();
 
 
 
 
+                            
 
 
 
@@ -151,12 +164,12 @@ namespace ButtonDeck.Backend.Objects
 
                             }));
 
+
                     }
 
-                
-                     
+                    //  toRemove.Add(item.DeviceGuid);
 
-                    
+
                 }
                 catch
                 {
@@ -165,11 +178,11 @@ namespace ButtonDeck.Backend.Objects
                 }
 
 
-            }
-        
-
+          
+           // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+  }
         }
-       
+
     }
     [Serializable]
     public abstract class AbstractDeckInformation

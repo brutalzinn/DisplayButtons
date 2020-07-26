@@ -162,7 +162,9 @@ namespace ButtonDeck
 
 
             dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
-  if (form.ShowDialog() == DialogResult.OK)
+            NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
+            NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
+            if (form.ShowDialog() == DialogResult.OK)
             {
                 mode = 0;
      ServerThread = new ServerThread();
@@ -196,7 +198,7 @@ namespace ButtonDeck
                 foreach (var device in client.GetDevices().ToList())
                 {
               var receiver = new ConsoleOutputReceiver();
-                    client.ExecuteRemoteCommand("adb usb", device, receiver);
+                  //  client.ExecuteRemoteCommand("adb usb", device, receiver);
                     client.ExecuteRemoteCommand("pm path net.nickac.buttondeck",device,receiver);
                     Console.WriteLine(receiver.ToString());
                     if (receiver != null)
@@ -217,16 +219,17 @@ device_list.Add(device);
                 if (device_list.Count < 2)
                     {
 
-                   
-            
-                  
-                 
-                 
-                 //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", client.GetDevices().First(), null);
-                  
-                 client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095",true);
+
+
+
+
+
+                    //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", client.GetDevices().First(), null);
+
+                
+          client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095",true);
                     ClientThread = new ClientThread();
-                    ClientThread.Start();
+              ClientThread.Start();
 
                 }
                 else
@@ -251,8 +254,7 @@ device_list.Add(device);
 
             }
 
-                NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
-                NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
+               
                Application.Run(new MainForm());
             OBSUtils.Disconnect();
             if (mode == 1)

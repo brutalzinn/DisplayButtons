@@ -248,12 +248,12 @@ namespace ButtonDeck.Forms
 
 
 
+     //       DeckServiceProvider.StartTimers();
 
 
 
 
-   
-            
+
 
 
 
@@ -843,7 +843,7 @@ namespace ButtonDeck.Forms
                 }
                 if (item is DynamicDeckFolder EE && EE != null)
                 {
-                  GlobalHotKeys.Instance.refreshFolder(EE);
+                 // GlobalHotKeys.Instance.refreshFolder(EE);
 
                 }
                    
@@ -993,6 +993,7 @@ namespace ButtonDeck.Forms
         }
         public void Start_configs()
         {
+         
             Thread thread1 = new Thread(() => ButtonCreator());
             //  thread1.SetApartmentState(ApartmentState.STA);
             thread1.Start();
@@ -1010,7 +1011,7 @@ namespace ButtonDeck.Forms
             }
 
 
-       
+           
 
             folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
             GlobalHotKeys teste = new GlobalHotKeys();
@@ -1113,7 +1114,7 @@ Start_configs();
         }
 
 
-        private static void SendItemsToDevice(DeckDevice device, IDeckFolder folder)
+        public static void SendItemsToDevice(DeckDevice device, IDeckFolder folder)
         {
 
 
