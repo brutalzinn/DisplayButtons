@@ -39,11 +39,15 @@ namespace ButtonDeck.Bibliotecas
         }
         public void GarbageHotKeyCollector(DynamicDeckFolder folder)
         {
-            
 
-                
-    
-                   HotkeyManager.Current.Remove(folder.UniqueID) ;
+
+
+            if (!String.IsNullOrEmpty(folder.UniqueID))
+            {
+HotkeyManager.Current.Remove(folder.UniqueID) ;
+
+            }
+                   
             
         }
       
@@ -55,7 +59,10 @@ namespace ButtonDeck.Bibliotecas
             result = result.Replace("Control", "Ctrl");
 
             System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
-
+            if (string.IsNullOrEmpty(folder.UniqueID))
+            {
+                return;
+            }
             if (!string.IsNullOrEmpty(result))
             {
                 try

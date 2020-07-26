@@ -132,7 +132,7 @@ namespace ButtonDeck.Controls
                         {
                             if (state != null)
                             {
-                                state.SendPacket(new SingleSlotImageChangePacket(deckImage)
+                                state.SendPacket(new SingleUniversalChangePacket(deckImage)
                                 {
                                     ImageSlot = slot,
                                     Color = itemNew.DeckColor,

@@ -48,6 +48,7 @@ namespace ButtonDeck.Backend.Objects
             DeviceName = deviceName;
             MainFolder = new Implementation.DynamicDeckFolder();
         }
+        [XmlIgnore]
         public DeviceData DeviceUsb { get; set; }
 
         public Guid DeviceGuid { get; set; }

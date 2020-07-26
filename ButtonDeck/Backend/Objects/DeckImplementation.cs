@@ -87,80 +87,32 @@ namespace ButtonDeck.Backend.Objects
 
         private void AutoConnectedUsb()
         {
-            
-try
-                {
 
-                if(Program.client.GetDevices().Count() < 2)
-                {
+            try
 
 
-              
-         
-                Program.client.RemoveAllForwards(Program.client.GetDevices().First());
-                Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
-                Program.ClientThread.Stop();
-                Program.ClientThread = new Misc.ClientThread();
-                Program.ClientThread.Start();
-  }
-                foreach (var item in DevicePersistManager.PersistedDevices)
             {
-
-                
-                
-                    if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
-                    {
-
-
-
-                    
-
-                            Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
-                          Program.client.RemoveAllForwards(item.DeviceUsb);
-                           Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
-     Program.ClientThread.Stop();
-                Program.ClientThread = new Misc.ClientThread();
-                Program.ClientThread.Start();
-
-
-                          
-                            MainForm.Instance.Invoke(new Action(() =>
-                            {
-
-                                if (!DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
-                                {
-                                    Debug.WriteLine("Reconectado.");
-
-
-                                    MainForm.Instance.StartUsbMode();
-                                    MainForm.Instance.CurrentDevice = item;
-                                    MountUsbDevices();
-                                }
-
-
-
-
-                            }));
-
-
-                        
-
-             
-
-                    }
-               
-
-
-            }
-            }
-                catch(Exception eeee)
+                if (Program.client.GetDevices().Count() < 2)
                 {
-                    Debug.WriteLine("ERROR: " + eeee);
+
+
+
+
+                    Program.client.RemoveAllForwards(Program.client.GetDevices().First());
+                    Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+                    Program.ClientThread.Stop();
+                    Program.ClientThread = new Misc.ClientThread();
+                    Program.ClientThread.Start();
 
                 }
 
-        }
 
+            }
+            catch { }
+
+
+
+        }
     }
         [Serializable]
     public abstract class AbstractDeckInformation
