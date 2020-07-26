@@ -149,7 +149,7 @@ namespace ButtonDeck.Backend.Objects
 
                                           
 
-                                            MainForm.Instance.StartUsbMode();  
+                                     
                                MainForm.Instance.CurrentDevice = item;
                                                //   teste.MountUsbDevices();
 
