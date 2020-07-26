@@ -24,8 +24,7 @@ namespace ButtonDeck.Backend.Objects
 
 
 
-            var product_name = new ConsoleOutputReceiver();
-            var product_manufacter = new ConsoleOutputReceiver();
+       
             try
             {
                 foreach (var device in Program.client.GetDevices().ToList())
@@ -44,17 +43,18 @@ namespace ButtonDeck.Backend.Objects
 
                         return true;
                     });
-                    if (device.Model == "")
-                    {
-                        Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
-                        Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
+                
+                    //if (device.Model == "")
+                    //{
+                    //    Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
+                    //    Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
 
-                        Debug.WriteLine("alterando nome não reconhecido para : " + product_name);
+                    //    Debug.WriteLine("alterando nome não reconhecido para : " + product_name);
 
-                        device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                        device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                    }
-                    Debug.WriteLine("adicionando " + device.Model);
+                    //    device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                    //    device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                    //}
+                    //Debug.WriteLine("adicionando " + device.Model);
 
 
 
@@ -103,7 +103,7 @@ namespace ButtonDeck.Backend.Objects
         }
         private void AutoConnectedUsb()
         {
-            List<Guid> toRemove = new List<Guid>();
+     
 
             foreach (var item in DevicePersistManager.PersistedDevices.ToList())
             {
@@ -125,8 +125,8 @@ namespace ButtonDeck.Backend.Objects
 
 
 
-                            Program.ClientThread.Stop();
-                            Program.ClientThread = new Misc.ClientThread();
+                           Program.ClientThread.Stop();
+                           Program.ClientThread = new Misc.ClientThread();
                             Program.ClientThread.Start();
                             MainForm.Instance.Invoke(new Action(() =>
                             {
@@ -149,7 +149,7 @@ namespace ButtonDeck.Backend.Objects
 
                         }
 
-                        toRemove.Add(item.DeviceGuid);
+                     
 
                     }
                 }
@@ -161,7 +161,7 @@ namespace ButtonDeck.Backend.Objects
 
 
             }
-            toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+        
 
         }
 
