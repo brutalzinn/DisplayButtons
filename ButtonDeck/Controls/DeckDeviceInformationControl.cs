@@ -335,7 +335,7 @@ namespace ButtonDeck.Forms
 
                     using (var sb2 = new SolidBrush(Color.FromArgb(150, ForeColor)))
                     {
-                     e.Graphics.DrawString("ID: " + DeckUsb.Product, Font, sb, Padding.Left, Padding.Top + textHeight);
+                     e.Graphics.DrawString("MODO: USB" , Font, sb, Padding.Left, Padding.Top + textHeight);
                     }
                 }
                 }
