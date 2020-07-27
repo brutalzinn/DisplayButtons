@@ -38,7 +38,7 @@ namespace ButtonDeck
         public static AdbServer Adbserver { get; set; }
         public static DeviceMonitor monitor { get; set; }
         public static AdbClient client { get; set; }
-
+        public static List<DeviceData> device_list = new List<DeviceData>();
         public static Type FindType(string fullName)
         {
             return
@@ -189,14 +189,15 @@ namespace ButtonDeck
               
                monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
-             ///   monitor.Start();
-              
-                List<DeviceData> device_list = new List<DeviceData>();
-
-               
+                ///   monitor.Start();
 
 
-                foreach (var device in client.GetDevices().ToList())
+
+
+                var devices = client.GetDevices();
+
+
+                foreach (var device in devices)
                 {
               var receiver = new ConsoleOutputReceiver();
                   //  client.ExecuteRemoteCommand("adb usb", device, receiver);
@@ -235,10 +236,12 @@ device_list.Add(device);
                 }
                 else
                 {
-                  
-              
-                            ClientThread = new ClientThread();
-                            ClientThread.Start();
+
+                    client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+                    ClientThread = new ClientThread();
+                    ClientThread.Start();
+                 
+                         // ClientThread.Start();
                         
 
                     

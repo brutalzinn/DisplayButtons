@@ -77,7 +77,7 @@ namespace ButtonDeck.Forms
                     //The discovery works by reading the Text from the button
 
 
-                    item.RefreshCurrentDevices();
+                 item.RefreshCurrentDevices();
 
 
 
