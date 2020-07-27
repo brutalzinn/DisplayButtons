@@ -96,6 +96,30 @@ namespace ButtonDeck.Forms
                                 MainForm.Instance.StartLoad(true);
                                 MainForm.Instance.Start_configs();
                             }
+                            else
+                            {
+
+                                foreach (DeviceData device in Program.device_list)
+                                {
+ Program.client.RemoveAllForwards(device);
+
+                                }
+                               
+                                Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
+                                try
+                                {
+                                    Program.ClientThread.Stop();
+                                    Program.ClientThread = new Misc.ClientThread();
+                                    Program.ClientThread.Start();
+
+                                //    MainForm.Instance.StartUsbMode();
+
+                                }
+                                catch (Exception eee)
+                                {
+
+                                }
+                            }
                         }
                     }
                 }

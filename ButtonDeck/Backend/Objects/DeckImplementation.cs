@@ -112,7 +112,7 @@ namespace ButtonDeck.Backend.Objects
         {
             var list = Program.device_list;
 
-            if (list.Count == 4)
+            if (list.Count == 1)
                 {
 
 
@@ -158,7 +158,7 @@ namespace ButtonDeck.Backend.Objects
                                     Debug.WriteLine("Reconectado.");
 
 
-                                    MainForm.Instance.StartUsbMode();
+                                  MainForm.Instance.StartUsbMode();
 
 
                          
@@ -166,7 +166,7 @@ namespace ButtonDeck.Backend.Objects
                                           
 
                                      
-                               MainForm.Instance.CurrentDevice = item;
+                             MainForm.Instance.CurrentDevice = item;
                                                //   teste.MountUsbDevices();
 
 
