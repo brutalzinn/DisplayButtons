@@ -49,7 +49,7 @@ namespace ButtonDeck.Forms
                             {
                                 Bounds = NameLabelRectangleWithoutPrefix,
                                 Width = Width - Padding.Right * 2,
-                                Text = DeviceUsb.Model,
+                                Text = DeckUsb.Model,
                                 BorderStyle = BorderStyle.None,
                                 BackColor = BackColor,
                                 ForeColor = ForeColor,
@@ -58,7 +58,7 @@ namespace ButtonDeck.Forms
                             {
                                 if (txtBox.Text.Trim() != string.Empty)
                                 {
-                                    DeviceUsb.Model = txtBox.Text.Trim();
+                                    DeckUsb.Model = txtBox.Text.Trim();
                                     Refresh();
                                 }
                                 Controls.Remove(txtBox);
@@ -68,7 +68,7 @@ namespace ButtonDeck.Forms
                                 if (ee.KeyCode != Keys.Enter) return;
                                 if (txtBox.Text.Trim() != string.Empty)
                                 {
-                                    DeviceUsb.Model = txtBox.Text.Trim();
+                                    DeckUsb.Model = txtBox.Text.Trim();
                                     Refresh();
                                 }
                                 Controls.Remove(txtBox);
@@ -83,11 +83,11 @@ namespace ButtonDeck.Forms
                         {
                             if (IsVirtualDeviceConnected)
                             {
-                                Program.client.RemoveAllForwards(DeviceUsb);
-                                Program.client.CreateForward(DeviceUsb, "tcp:5095", "tcp:5095", true);
-                                Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", DeviceUsb, null);
+                                Program.client.RemoveAllForwards(DeckUsb);
+                                Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
+                                Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", DeckUsb, null);
                                 Thread.Sleep(1400);
-                                Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", DeviceUsb, null);
+                                Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", DeckUsb, null);
                                 Thread.Sleep(1200);
                                 Program.ClientThread.Stop();
                                 Program.ClientThread = new Misc.ClientThread();
@@ -227,15 +227,15 @@ namespace ButtonDeck.Forms
 
         public DeviceData DeckUsb
         {
-            get { return DeviceUsb; }
+            get { return _deviceusb; }
             set
             {
-                DeviceUsb = value;
+                _deviceusb = value;
              
             }
         }
 
-        private DeviceData DeviceUsb;
+        private DeviceData _deviceusb;
 
         public new Padding Padding = new Padding(5);
         private bool _selected;
@@ -267,7 +267,7 @@ namespace ButtonDeck.Forms
 
                     if (DeckUsb == null) return Rectangle.Empty;
                     int textHeight = (int)TextRenderer.MeasureText("AaBbCc", Font).Height;
-                    return new Rectangle(Padding.Left, Padding.Top, (int)MeasureString((DeckUsb.Product + DeckUsb.Model), Font).Width, textHeight);
+                    return new Rectangle(Padding.Left, Padding.Top, (int)MeasureString((DeckUsb.Product + DeckUsb.Model), Font).Width, textHeight) ;
 
 
                 }
@@ -291,7 +291,7 @@ namespace ButtonDeck.Forms
                     if (DeckUsb == null) return 
                             Rectangle.Empty;
                     Rectangle rect = NameLabelRectangle;
-                    return Rectangle.FromLTRB((int)(rect.Left + MeasureString(DeckUsb.Product, Font).Width), rect.Top, rect.Right, rect.Bottom);
+                    return Rectangle.FromLTRB((int)(rect.Left + MeasureString(DeckUsb.Product + DeckUsb.Model, Font).Width), rect.Top, rect.Right, rect.Bottom);
 
                 }
 
@@ -335,10 +335,7 @@ namespace ButtonDeck.Forms
 
                     using (var sb2 = new SolidBrush(Color.FromArgb(150, ForeColor)))
                     {
-                      
-
-                  
-                        e.Graphics.DrawString("MODO USB | " + DeckUsb.State + " | ", Font, sb, Padding.Left, Padding.Top + textHeight);
+                     e.Graphics.DrawString("ID: " + DeckUsb.Product, Font, sb, Padding.Left, Padding.Top + textHeight);
                     }
                 }
                 }

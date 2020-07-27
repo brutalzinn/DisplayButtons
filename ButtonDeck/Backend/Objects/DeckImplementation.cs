@@ -110,16 +110,25 @@ namespace ButtonDeck.Backend.Objects
         }
         private void AutoConnectedUsb()
         {
-   if (Program.client.GetDevices().Count < 2)
+            var list = Program.device_list;
+
+            if (list.Count == 4)
                 {
 
 
 
                     Program.client.RemoveAllForwards(Program.client.GetDevices().First());
                     Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
-                Program.ClientThread.Stop();
+                try
+                {
+  Program.ClientThread.Stop();
                 Program.ClientThread = new Misc.ClientThread();
                 Program.ClientThread.Start();
+                }catch(Exception eee)
+                {
+
+                }
+              
             }
                
               

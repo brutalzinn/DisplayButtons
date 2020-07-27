@@ -975,12 +975,21 @@ namespace ButtonDeck.Forms
 
         public static void DeviceAdbConnected(object sender, DeviceDataEventArgs e)
         {
-            Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
+            Thread.Sleep(1500);
+            var receiver = new ConsoleOutputReceiver();
 
-            Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
+            Program.client.ExecuteRemoteCommand("pm path net.nickac.buttondeck", e.Device, receiver);
 
-            //        timer.Start();
+            if (receiver != null)
+            {
 
+                Program.device_list.Add(e.Device);
+         //       Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
+
+                Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
+
+            
+            }
 
 
 
@@ -988,7 +997,12 @@ namespace ButtonDeck.Forms
         public static void DeviceAdbDisconnected(object sender, DeviceDataEventArgs e)
         {
             Console.WriteLine("Device desconectado.....");
-
+            try
+            {
+    Program.device_list.Remove(e.Device);
+            }
+            catch (Exception) { }
+        
             //   timer.Stop();
         }
         public void Start_configs()

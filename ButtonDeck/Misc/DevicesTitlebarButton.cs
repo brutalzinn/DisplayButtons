@@ -34,6 +34,20 @@ namespace ButtonDeck.Misc
            RefreshCurrentDevices();
 
             int controlSize = _frm.TitlebarHeight * 2;
+            System.Drawing.Size result;
+            if (Program.mode == 0)
+            {
+         result = new Size(Width * 2, Math.Max(controlSize * CurrentConnections, controlSize) + 2);
+
+            }
+            else
+            {
+
+                var list = Program.device_list;
+                result = new Size(Width * 2, Math.Max(controlSize * list.Count, controlSize) + 2);
+
+            }
+
             ModernForm frm = new ModernForm()
             {
                 Sizable = false,
@@ -43,8 +57,9 @@ namespace ButtonDeck.Misc
                 ColorScheme = _frm.ColorScheme,
                 TitlebarVisible = false,
                 MinimumSize = new Size(0, controlSize),
-                Size = new Size(Width * 2, Math.Max(controlSize * CurrentConnections, controlSize) + 2)
-            };
+
+                Size = result
+        };
 
             //Hacky method to get this button rectangle on screen
             var rect = _frm.RectangleToScreen(_frm.TitlebarButtonsRectangle);
@@ -86,12 +101,12 @@ namespace ButtonDeck.Misc
             {
 
 
-
-
+             
+            
                 //  var devices = AdbClient.Instance.GetDevices();
                 var product_name = new ConsoleOutputReceiver();
                 var product_manufacter = new ConsoleOutputReceiver();
-                foreach (var device in Program.device_list)
+                foreach (DeviceData device in Program.device_list)
                 {
                     
                     if (String.IsNullOrEmpty(device.Model))
@@ -99,18 +114,18 @@ namespace ButtonDeck.Misc
                         Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
                         Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
 
-                        Debug.WriteLine("alterando nome não reconhecido para : " + product_name);
+                    
 
                         device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
                         device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
                     }
-                    Debug.WriteLine("adicionando " + device.Model);
+                  //  Debug.WriteLine("adicionando " + device.Model);
                     try
                     {
                         var ttt = new DeckDeviceInformationControl()
                         {
-                         
-                            DeckDevice = null,
+
+                           
                             DeckUsb = device,
                             Size = controlFinalSize,
                             ForeColor = _frm.ColorScheme.SecondaryColor,

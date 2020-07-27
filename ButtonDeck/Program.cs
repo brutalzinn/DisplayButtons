@@ -189,36 +189,19 @@ namespace ButtonDeck
               
                monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
-                ///   monitor.Start();
+
+                monitor.DeviceConnected += MainForm.DeviceAdbConnected;
+                monitor.DeviceDisconnected += MainForm.DeviceAdbDisconnected;
+                monitor.Start();
 
 
 
 
-                var devices = client.GetDevices();
+                
 
 
-                foreach (var device in devices)
-                {
-              var receiver = new ConsoleOutputReceiver();
-                  //  client.ExecuteRemoteCommand("adb usb", device, receiver);
-                    client.ExecuteRemoteCommand("pm path net.nickac.buttondeck",device,receiver);
-                    Console.WriteLine(receiver.ToString());
-                    if (receiver != null)
-                    {
-                       if(device != null)
-                        {
-device_list.Add(device);
 
-                        }
-                        
-
-                    }
-                 
-                   
-
-                }
-
-                if (device_list.Count < 2)
+                if (client.GetDevices().Count == 1)
                 {
 
 
@@ -237,9 +220,9 @@ device_list.Add(device);
                 else
                 {
 
-                    client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+                   
                     ClientThread = new ClientThread();
-                    ClientThread.Start();
+                    
                  
                          // ClientThread.Start();
                         
