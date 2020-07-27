@@ -119,6 +119,9 @@ namespace ButtonDeck.Backend.Objects
 
                     Program.client.RemoveAllForwards(Program.client.GetDevices().First());
                     Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+
+
+            }
                 try
                 {
   Program.ClientThread.Stop();
@@ -129,7 +132,7 @@ namespace ButtonDeck.Backend.Objects
 
                 }
               
-            }
+          
                
               
             foreach (var item in DevicePersistManager.PersistedDevices.ToList())
