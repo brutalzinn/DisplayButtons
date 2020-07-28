@@ -40,10 +40,10 @@ namespace ButtonDeck.Forms
             this.action_label = new System.Windows.Forms.Label();
             this.imageModernButton1 = new ButtonDeck.Controls.ImageModernButton();
             this.painel_developer = new ButtonDeck.Forms.ShadedPanel();
+            this.imageModernButton5 = new ButtonDeck.Controls.ImageModernButton();
             this.imageModernButton4 = new ButtonDeck.Controls.ImageModernButton();
             this.imageModernButton3 = new ButtonDeck.Controls.ImageModernButton();
             this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
-            this.imageModernButton5 = new ButtonDeck.Controls.ImageModernButton();
             this.panel1.SuspendLayout();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
@@ -155,28 +155,43 @@ namespace ButtonDeck.Forms
             this.painel_developer.TabIndex = 5;
             this.painel_developer.Visible = false;
             // 
+            // imageModernButton5
+            // 
+            this.imageModernButton5.CustomColorScheme = false;
+            this.imageModernButton5.Image = null;
+            this.imageModernButton5.Location = new System.Drawing.Point(127, 9);
+            this.imageModernButton5.Name = "imageModernButton5";
+            this.imageModernButton5.NormalImage = null;
+            this.imageModernButton5.Origin = null;
+            this.imageModernButton5.Size = new System.Drawing.Size(112, 33);
+            this.imageModernButton5.TabIndex = 2;
+            this.imageModernButton5.Text = "Recarregar botões externos";
+            this.imageModernButton5.UseVisualStyleBackColor = true;
+            this.imageModernButton5.Click += new System.EventHandler(this.ImageModernButton6_Click);
+            // 
             // imageModernButton4
             // 
             this.imageModernButton4.CustomColorScheme = false;
             this.imageModernButton4.Image = null;
-            this.imageModernButton4.Location = new System.Drawing.Point(369, 7);
+            this.imageModernButton4.Location = new System.Drawing.Point(369, 9);
             this.imageModernButton4.Name = "imageModernButton4";
             this.imageModernButton4.NormalImage = null;
             this.imageModernButton4.Origin = null;
-            this.imageModernButton4.Size = new System.Drawing.Size(118, 35);
+            this.imageModernButton4.Size = new System.Drawing.Size(118, 33);
             this.imageModernButton4.TabIndex = 1;
             this.imageModernButton4.Text = "Abrir console";
             this.imageModernButton4.UseVisualStyleBackColor = true;
+            this.imageModernButton4.Click += new System.EventHandler(this.ImageModernButton4_Click);
             // 
             // imageModernButton3
             // 
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(245, 7);
+            this.imageModernButton3.Location = new System.Drawing.Point(245, 9);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;
-            this.imageModernButton3.Size = new System.Drawing.Size(118, 35);
+            this.imageModernButton3.Size = new System.Drawing.Size(118, 33);
             this.imageModernButton3.TabIndex = 1;
             this.imageModernButton3.Text = "Recarregar botões";
             this.imageModernButton3.UseVisualStyleBackColor = true;
@@ -195,20 +210,6 @@ namespace ButtonDeck.Forms
             this.imageModernButton2.Text = "Recarregar tudo";
             this.imageModernButton2.UseVisualStyleBackColor = true;
             this.imageModernButton2.Click += new System.EventHandler(this.ImageModernButton2_Click);
-            // 
-            // imageModernButton5
-            // 
-            this.imageModernButton5.CustomColorScheme = false;
-            this.imageModernButton5.Image = null;
-            this.imageModernButton5.Location = new System.Drawing.Point(127, 9);
-            this.imageModernButton5.Name = "imageModernButton5";
-            this.imageModernButton5.NormalImage = null;
-            this.imageModernButton5.Origin = null;
-            this.imageModernButton5.Size = new System.Drawing.Size(112, 33);
-            this.imageModernButton5.TabIndex = 2;
-            this.imageModernButton5.Text = "Recarregar botões externos";
-            this.imageModernButton5.UseVisualStyleBackColor = true;
-            this.imageModernButton5.Click += new System.EventHandler(this.ImageModernButton6_Click);
             // 
             // MainForm
             // 

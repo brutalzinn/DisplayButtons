@@ -154,19 +154,34 @@ namespace ScribeBot
             Log.ToString().Split('\n').ToList().ForEach(x => LogStream.WriteLine(x));
             LogStream.Flush();
         }
+        private static bool CheckOpened(string name)
+        {
+            FormCollection fc = Application.OpenForms;
 
+            foreach (Form frm in fc)
+            {
+                if (frm.Text == name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         /// <summary>
         /// Write a string of text.
         /// </summary>
         /// <param name="value">String to write</param>
         public static void Write(string value)
         {
-            MainWindow?.Invoke(new Action(() =>
+            if (CheckOpened(MainWindow.Text))
             {
-                MainWindow.ConsoleOutput.AppendText(value);
-            }));
+                MainWindow?.Invoke(new Action(() =>
+                {
+                    MainWindow.ConsoleOutput.AppendText(value);
+                }));
 
-            Log.Append(value);
+                Log.Append(value);
+            }
         }
 
         /// <summary>
@@ -175,18 +190,21 @@ namespace ScribeBot
         /// <param name="args">Strings prepended by colors ex: Color.Red, "text", Color.Yellow, "text2".</param>
         public static void Write(params object[] args)
         {
-            //MainWindow?.Invoke(new Action(() =>
-            //{
-            //   MainWindow.ConsoleOutput.AppendText(args);
-            //}));
+            if (CheckOpened(MainWindow.Text))
+            {
+                MainWindow?.Invoke(new Action(() =>
+            {
+                MainWindow.ConsoleOutput.AppendText(args);
+            }));
 
-            //var text = new StringBuilder();
-            //for (int i = 0; i < args.Length; i += 2)
-            //{
-            //    text.Append((String)args[i + 1]);
-            //}
+                var text = new StringBuilder();
+                for (int i = 0; i < args.Length; i += 2)
+                {
+                    text.Append((String)args[i + 1]);
+                }
 
-            //Log.Append(text);
+                Log.Append(text);
+            }
         }
 
         /// <summary>
@@ -195,12 +213,15 @@ namespace ScribeBot
         /// <param name="value">String to write</param>
         public static void WriteLine(string value)
         {
-            MainWindow?.Invoke(new Action(() =>
+            if (CheckOpened(MainWindow.Text))
+            {
+                MainWindow?.Invoke(new Action(() =>
             {
                 MainWindow.ConsoleOutput.AppendText(value + Environment.NewLine);
             }));
 
-            Log.Append(value + Environment.NewLine);
+                Log.Append(value + Environment.NewLine);
+            }
         }
       
   

@@ -742,6 +742,7 @@ namespace ScribeBot.Interface
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GERENCIADOR DE PLUGINS";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Window_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Window_FormClosed);
             this.Load += new System.EventHandler(this.Window_Load);
             this.consolePanel.ResumeLayout(false);
             this.consolePanel.PerformLayout();

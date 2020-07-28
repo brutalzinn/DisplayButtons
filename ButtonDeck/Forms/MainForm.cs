@@ -3009,24 +3009,9 @@ createPluginButton();
         public void reloadButtons()
         {
 
-            List<Control> toAdd = new List<Control>();
 
-            foreach (Control c in shadedPanel1.Controls)
-            {
-
-
-                if (c.Tag is AbstractDeckAction act)
-                    if (act.IsPlugin() == false)
-                    {
-                        toAdd.Add(c);
-
-
-                    }
-            }
-            toAdd.AsEnumerable().Reverse().All(m => {
-                shadedPanel1.Controls.Remove(m);
-                return true;
-            });
+            shadedPanel1.Controls.Clear();
+           
             GenerateSidebar(shadedPanel1, false);
         }
 
@@ -3037,8 +3022,20 @@ createPluginButton();
 
         private void ImageModernButton2_Click(object sender, EventArgs e)
         {
-            reloadExternButtons();
-            reloadButtons();
+
+            try
+            {
+reloadButtons();
+            }
+            finally
+            {
+
+ reloadExternButtons();
+            }
+
+
+            
+           
         }
 
         private void ImageModernButton6_Click(object sender, EventArgs e)
@@ -3049,6 +3046,11 @@ createPluginButton();
         private void ImageModernButton3_Click(object sender, EventArgs e)
         {
             reloadButtons();
+        }
+
+        private void ImageModernButton4_Click(object sender, EventArgs e)
+        {
+            openConsoleDeveloper();
         }
     }
     #endregion

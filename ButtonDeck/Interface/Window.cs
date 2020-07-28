@@ -142,8 +142,8 @@ namespace ScribeBot.Interface
 
         private void Window_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Scripter.Stop();
-
+            // Scripter.Stop();
+  
             Core.DumpLog();
 
             if (Core.Editor.InvokeRequired)
@@ -153,6 +153,7 @@ namespace ScribeBot.Interface
                     Core.Editor.Close();
                 }));
             }
+            
         }
 
         private void workshopFetchButton_Click(object sender, EventArgs e)
@@ -333,6 +334,11 @@ namespace ScribeBot.Interface
         }
 
         private void LayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Window_FormClosed(object sender, FormClosedEventArgs e)
         {
 
         }
