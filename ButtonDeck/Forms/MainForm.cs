@@ -875,7 +875,7 @@ Application.DoEvents();
                 }
                 if (item is DynamicDeckFolder EE && EE != null)
                 {
-                 // GlobalHotKeys.Instance.refreshFolder(EE);
+                 GlobalHotKeys.Instance.refreshFolder(EE);
 
                 }
                    

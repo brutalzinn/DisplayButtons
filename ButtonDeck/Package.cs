@@ -152,16 +152,17 @@ namespace ScribeBot
      //    public void Run(bool silent = true) => Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), silent);
         public void Run(bool type = false) {
 
-            
-              Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), type);
 
-
+            //   Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), type);
 
            
 
- 
 
-         
+
+                   MainForm.Instance.PluginLoaderScript(GetInfo()["Name"], ReadFileContents(GetInfo()["EntryPoint"]));
+
+
+
 
         }
 
