@@ -161,7 +161,7 @@ namespace ScribeBot
 
                    MainForm.Instance.PluginLoaderScript(GetInfo()["Name"], ReadFileContents(GetInfo()["EntryPoint"]));
 
-
+            MainForm.Instance.RefreshAllButtons(false);
 
 
         }
