@@ -64,7 +64,6 @@ namespace ButtonDeck.Forms
             //Globals.launcher_principal = this;
             panel1.Freeze();
     
-            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
             DevicesTitlebarButton item = new DevicesTitlebarButton(this);
             TitlebarButtons.Add(item);
             if (Program.Silent) {
@@ -234,26 +233,27 @@ namespace ButtonDeck.Forms
                 new ImageListForm().ShowDialog();
                 //     new ScribeBot.Interface.Window().Show();
             };
+            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
 
             appBar1.Actions.Add(itemMagnetite);
             appBar1.Actions.Add(itemPlugins);
             appBar1.Actions.Add(itemBiblioteca);
             // ApplyTheme(panel1);
-            GenerateSidebar(shadedPanel1);
+            GenerateSidebar(shadedPanel1,true);
             ApplySidebarTheme(shadedPanel1);
           
-          //  ApplySidebarTheme(painel_developer);
+          ApplySidebarTheme(painel_developer);
             shadedPanel2.Hide();
             shadedPanel1.Hide();
           
             ButtonCreator();
             ApplyTheme(panel1);
-      
-           
-           // Refresh();
+            ChangeDeveloperMode();
+
+           Refresh();
 
 
-            
+
 
 
 
@@ -276,10 +276,10 @@ namespace ButtonDeck.Forms
             Invoke(new Action(() =>
             {
 
-                Control control = this.Controls.Find("painel_developer", true).FirstOrDefault() as ShadedPanel;
+                Control control = Controls.Find("painel_developer", true).FirstOrDefault() as ShadedPanel;
                 if (control != null)
                 {
-                    //                control.Visible = ApplicationSettingsManager.Settings.isDevelopermode;
+        control.Visible = ApplicationSettingsManager.Settings.isDevelopermode;
                 }
 
             }));
@@ -1729,7 +1729,7 @@ Start_configs();
 
         }
 
-        private void GenerateSidebar(Control parent)
+        private void GenerateSidebar(Control parent,bool loadplugins = false)
         {
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(parent.Font.FontFamily, 13, FontStyle.Bold);
@@ -1783,7 +1783,11 @@ Start_configs();
                 parent.Controls.Add(m);
                 return true;
             });
-          isReadyMatrizHandle();
+            if (loadplugins)
+            {
+createPluginButton();
+            }
+            
        
         }
 
@@ -2710,7 +2714,7 @@ Start_configs();
                 MainForm.Instance.PluginsLists.Add(NameSpace, Script);
             }
         }
-      public  void isReadyMatrizHandle()
+      public void createPluginButton()
         {
 
 
@@ -2967,6 +2971,84 @@ Start_configs();
       
 
 
+        }
+
+        public void reloadALL()
+        {
+
+
+        }
+        public void reloadExternButtons()
+        {
+
+            List<Control> toAdd = new List<Control>();
+
+            foreach (Control c in shadedPanel1.Controls)
+            {
+       
+
+                    if(c.Tag is  AbstractDeckAction act)
+                        if(act.IsPlugin() == true)
+                        {
+                        toAdd.Add(c);
+                 
+
+                        }
+                        }
+            toAdd.AsEnumerable().Reverse().All(m => {
+                shadedPanel1.Controls.Remove(m);
+                return true;
+            });
+            createPluginButton();
+
+
+
+
+        }
+
+        public void reloadButtons()
+        {
+
+            List<Control> toAdd = new List<Control>();
+
+            foreach (Control c in shadedPanel1.Controls)
+            {
+
+
+                if (c.Tag is AbstractDeckAction act)
+                    if (act.IsPlugin() == false)
+                    {
+                        toAdd.Add(c);
+
+
+                    }
+            }
+            toAdd.AsEnumerable().Reverse().All(m => {
+                shadedPanel1.Controls.Remove(m);
+                return true;
+            });
+            GenerateSidebar(shadedPanel1, false);
+        }
+
+        public void openConsoleDeveloper()
+        {
+            Core.Initialize();
+        }
+
+        private void ImageModernButton2_Click(object sender, EventArgs e)
+        {
+            reloadExternButtons();
+            reloadButtons();
+        }
+
+        private void ImageModernButton6_Click(object sender, EventArgs e)
+        {
+            reloadExternButtons();
+        }
+
+        private void ImageModernButton3_Click(object sender, EventArgs e)
+        {
+            reloadButtons();
         }
     }
     #endregion
