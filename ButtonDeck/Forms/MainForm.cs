@@ -77,7 +77,7 @@ namespace ButtonDeck.Forms
                     //The discovery works by reading the Text from the button
 
 
-                    item.RefreshCurrentDevices();
+                 item.RefreshCurrentDevices();
 
 
 
@@ -248,12 +248,12 @@ namespace ButtonDeck.Forms
 
 
 
+     //       DeckServiceProvider.StartTimers();
 
 
 
 
-   
-            
+
 
 
 
@@ -843,7 +843,7 @@ namespace ButtonDeck.Forms
                 }
                 if (item is DynamicDeckFolder EE && EE != null)
                 {
-                    GlobalHotKeys.Instance.refreshFolder(EE);
+                 // GlobalHotKeys.Instance.refreshFolder(EE);
 
                 }
                    
@@ -975,12 +975,34 @@ namespace ButtonDeck.Forms
 
         public static void DeviceAdbConnected(object sender, DeviceDataEventArgs e)
         {
-            Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
+            Thread.Sleep(1500);
+            var receiver = new ConsoleOutputReceiver();
 
-            Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
+            Program.client.ExecuteRemoteCommand("pm path net.nickac.buttondeck", e.Device, receiver);
 
-            //        timer.Start();
+            if (receiver != null)
+            {
+                var product_name = new ConsoleOutputReceiver();
+                var product_manufacter = new ConsoleOutputReceiver();
 
+                if (String.IsNullOrEmpty(e.Device.Model))
+                {
+                    Program.client.ExecuteRemoteCommand("getprop ro.product.name", e.Device, product_name);
+                    Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", e.Device, product_manufacter);
+
+
+
+                    e.Device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                    e.Device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                }
+
+                Program.device_list.Add(e.Device);
+         //       Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
+
+                Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
+
+            
+            }
 
 
 
@@ -988,11 +1010,17 @@ namespace ButtonDeck.Forms
         public static void DeviceAdbDisconnected(object sender, DeviceDataEventArgs e)
         {
             Console.WriteLine("Device desconectado.....");
-
+            try
+            {
+    Program.device_list.Remove(e.Device);
+            }
+            catch (Exception) { }
+        
             //   timer.Stop();
         }
         public void Start_configs()
         {
+         
             Thread thread1 = new Thread(() => ButtonCreator());
             //  thread1.SetApartmentState(ApartmentState.STA);
             thread1.Start();
@@ -1010,7 +1038,7 @@ namespace ButtonDeck.Forms
             }
 
 
-
+           
 
             folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
             GlobalHotKeys teste = new GlobalHotKeys();
@@ -1113,7 +1141,7 @@ Start_configs();
         }
 
 
-        private static void SendItemsToDevice(DeckDevice device, IDeckFolder folder)
+        public static void SendItemsToDevice(DeckDevice device, IDeckFolder folder)
         {
 
 
@@ -1121,8 +1149,8 @@ Start_configs();
             var con = device.GetConnection();
             if (con != null) {
                 //  if (Globals.status == false) return;
-                var packet = new SlotImageChangeChunkPacket();
-                var packet_label = new SlotLabelButtonChangeChunkPacket();
+                var packet = new SlotUniversalChangeChunkPacket();
+              
                 List<IDeckItem> items = folder.GetDeckItems();
                 // int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
                 List<int> addedItems = new List<int>();
@@ -1152,9 +1180,9 @@ Start_configs();
 
 
                     //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
-                    packet_label.AddToQueue(folder.GetItemIndex(item), item?.DeckName, "", item.DeckSize, item.DeckPosition, item?.DeckColor);
+                    packet.AddToQueue(folder.GetItemIndex(item), item?.DeckName, " ", item.DeckSize, item.DeckPosition, item?.DeckColor ,image);
 
-                    packet.AddToQueue(folder.GetItemIndex(item), image);
+                 //   packet.AddToQueue(folder.GetItemIndex(item), image);
                     //    packet.AddToQueue(folder.GetItemIndex(item), image);
 
 
@@ -1182,9 +1210,9 @@ Start_configs();
                
 
 
-                con.SendPacket(packet_label);
+              //  con.SendPacket(packet_label);
                
-                con.SendPacket(clearPacket);
+             con.SendPacket(clearPacket);
 
                 //    con.SendPacket(clearPacket_labels);
             }

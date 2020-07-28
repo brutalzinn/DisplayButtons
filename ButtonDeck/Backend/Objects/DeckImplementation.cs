@@ -1,4 +1,6 @@
-﻿using ButtonDeck.Backend.Networking.TcpLib;
+﻿using ButtonDeck.Backend.Networking;
+using ButtonDeck.Backend.Networking.Implementation;
+using ButtonDeck.Backend.Networking.TcpLib;
 using ButtonDeck.Backend.Utils;
 using ButtonDeck.Forms;
 using ButtonDeck.Misc;
@@ -18,20 +20,25 @@ namespace ButtonDeck.Backend.Objects
  
     public class UsbMode
     {
+        public UsbMode()
+        {
+
+
+        }
         public void MountUsbDevices()
         {
 
 
 
 
-            var product_name = new ConsoleOutputReceiver();
-            var product_manufacter = new ConsoleOutputReceiver();
+       
             try
             {
                 foreach (var device in Program.client.GetDevices().ToList())
                 {
                     DevicePersistManager.PersistedDevices.Any(c =>
                     {
+
                         Debug.WriteLine("TENTANDO COM " + device.State);
                         if (device != null)
                         {
@@ -43,17 +50,18 @@ namespace ButtonDeck.Backend.Objects
 
                         return true;
                     });
-                    if (device.Model == "")
-                    {
-                        Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
-                        Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
+                
+                    //if (device.Model == "")
+                    //{
+                    //    Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
+                    //    Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
 
-                        Debug.WriteLine("alterando nome não reconhecido para : " + product_name);
+                    //    Debug.WriteLine("alterando nome não reconhecido para : " + product_name);
 
-                        device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                        device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                    }
-                    Debug.WriteLine("adicionando " + device.Model);
+                    //    device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                    //    device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                    //}
+                    //Debug.WriteLine("adicionando " + device.Model);
 
 
 
@@ -84,45 +92,91 @@ namespace ButtonDeck.Backend.Objects
             th.Start();
         }
 
+               public int CurrentConnections {
+            get {
+                if(Program.mode == 0)
+                {
+                 
+                    return Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+
+                }
+                else 
+                {
+            return Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+
+
+                }
+            }
+        }
         private void AutoConnectedUsb()
         {
-            List<Guid> toRemove = new List<Guid>();
+            var list = Program.device_list;
 
+            if (list.Count == 1)
+                {
+
+
+
+                    Program.client.RemoveAllForwards(Program.client.GetDevices().First());
+                    Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+
+
+            }
+                try
+                {
+  Program.ClientThread.Stop();
+                Program.ClientThread = new Misc.ClientThread();
+                Program.ClientThread.Start();
+                }catch(Exception eee)
+                {
+
+                }
+              
+          
+               
+              
             foreach (var item in DevicePersistManager.PersistedDevices.ToList())
             {
+            List<Guid> toRemove = new List<Guid>();
+             
+
 
 
                 try
                 {
-                    if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
-                    {
+                   
+                 
 
-
-
-                        if (item.DeviceUsb != null)
-                        {
+                      
 
                             Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
-                          Program.client.RemoveAllForwards(item.DeviceUsb);
-                           Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
 
+                    if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
+                    {
 
-
-                            Program.ClientThread.Stop();
-                            Program.ClientThread = new Misc.ClientThread();
-                            Program.ClientThread.Start();
-                            MainForm.Instance.Invoke(new Action(() =>
+                        MainForm.Instance.Invoke(new Action(() =>
                             {
 
-                                if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
-                                {
+                               
                                     Debug.WriteLine("Reconectado.");
 
 
-                                    MainForm.Instance.StartUsbMode();
-                                    MainForm.Instance.CurrentDevice = item;
-                                    MountUsbDevices();
-                                }
+                                  MainForm.Instance.StartUsbMode();
+
+
+                         
+
+                                          
+
+                                     
+                             MainForm.Instance.CurrentDevice = item;
+                                               //   teste.MountUsbDevices();
+
+
+
+
+                            
+
 
 
 
@@ -130,11 +184,11 @@ namespace ButtonDeck.Backend.Objects
                             }));
 
 
-                        }
-
-                        toRemove.Add(item.DeviceGuid);
-
                     }
+
+                    //  toRemove.Add(item.DeviceGuid);
+
+
                 }
                 catch
                 {
@@ -143,13 +197,13 @@ namespace ButtonDeck.Backend.Objects
                 }
 
 
-            }
-            toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
-
+          
+           // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+  }
         }
 
     }
-        [Serializable]
+    [Serializable]
     public abstract class AbstractDeckInformation
         {
         public  string GetName { get; set; }

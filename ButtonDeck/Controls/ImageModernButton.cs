@@ -116,35 +116,33 @@ namespace ButtonDeck.Controls
                         if (value == null) {
                             //Send clear packet
                             state?.SendPacket(new SlotImageClearPacket(slot));
-                            state?.SendPacket(new SlotLabelClearPacket(slot));
                             return;
                         }
 
                         Bitmap bmp = new Bitmap(value);
                         var deckImage = new DeckImage(bmp);
-                        DynamicDeckItem DeckItem = null;
+                        
                         if (Tag is DynamicDeckItem itemTag) {
                             itemTag.DeckImage = deckImage;
-
-
-                            DeckItem = itemTag;
 
                         } else if (Tag is DynamicDeckFolder itemFolder) {
                             itemFolder.DeckImage = deckImage;
                         }
-
-                        if (state != null) {
-                            state.SendPacket(new SingleSlotImageChangePacket(deckImage)
-                            {
-                                ImageSlot = slot
-                            });
+                        if (Tag is IDeckItem itemNew)
+                        {
                             if (state != null)
                             {
-                                state.SendPacket(new SingleSlotLabelChangePacket(slot, "", DeckItem.DeckSize, DeckItem.DeckPosition, DeckItem.DeckName, DeckItem.DeckColor));
+                                state.SendPacket(new SingleUniversalChangePacket(deckImage)
+                                {
+                                    ImageSlot = slot,
+                                    Color = itemNew.DeckColor,
+                                    Font = " ",
+                                    Text = itemNew.DeckName,
+                                    Size = itemNew.DeckSize,
+                                    Position = itemNew.DeckPosition
+
+                                });
                             }
-
-
-
                         }
                         if (Tag is DynamicDeckItem item) {
                             var device = frm.CurrentDevice;

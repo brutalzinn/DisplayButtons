@@ -17,6 +17,7 @@ using NAudio.CoreAudioApi;
 using SharpAdbClient;
 using System.Net;
 using System.Threading;
+using ButtonDeck.Backend.Objects;
 
 namespace ButtonDeck
 {
@@ -37,7 +38,7 @@ namespace ButtonDeck
         public static AdbServer Adbserver { get; set; }
         public static DeviceMonitor monitor { get; set; }
         public static AdbClient client { get; set; }
-
+        public static List<DeviceData> device_list = new List<DeviceData>();
         public static Type FindType(string fullName)
         {
             return
@@ -162,7 +163,9 @@ namespace ButtonDeck
 
 
             dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
-  if (form.ShowDialog() == DialogResult.OK)
+            NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
+            NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
+            if (form.ShowDialog() == DialogResult.OK)
             {
                 mode = 0;
      ServerThread = new ServerThread();
@@ -186,73 +189,58 @@ namespace ButtonDeck
               
                monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
-             ///   monitor.Start();
-              
-                List<DeviceData> device_list = new List<DeviceData>();
 
-               
-
-
-                foreach (var device in client.GetDevices().ToList())
-                {
-              var receiver = new ConsoleOutputReceiver();
-                    client.ExecuteRemoteCommand("adb usb", device, receiver);
-                    client.ExecuteRemoteCommand("pm path net.nickac.buttondeck",device,receiver);
-                    Console.WriteLine(receiver.ToString());
-                    if (receiver != null)
-                    {
-                       if(device != null)
-                        {
-device_list.Add(device);
-
-                        }
-                        
-
-                    }
-                 
-                   
-
-                }
-              
-                if (device_list.Count < 2)
-                    {
-
-                   
-            
-                  
-                 
-                 
-                    client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", client.GetDevices().First(), null);
-                  
-                 client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095",true);
-                    ClientThread = new ClientThread();
-                    ClientThread.Start();
-
-                }
-                else
-                {
- foreach (var devices in device_list)
-                {
-                    
-                       
-                  
-             
-                      
-                    }
-                }
-
-
-
+                monitor.DeviceConnected += MainForm.DeviceAdbConnected;
+                monitor.DeviceDisconnected += MainForm.DeviceAdbDisconnected;
+                monitor.Start();
 
 
 
 
                 
 
-            }
 
-                NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
-                NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
+
+                if (client.GetDevices().Count == 1)
+                {
+
+
+                    Debug.WriteLine("ONE DEVICE");
+
+
+
+                    //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", client.GetDevices().First(), null);
+
+
+                    client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+                    ClientThread = new ClientThread();
+                    ClientThread.Start();
+
+                }
+                else
+                {
+
+                   
+                    ClientThread = new ClientThread();
+                    
+                 
+                         // ClientThread.Start();
+                        
+
+                    
+                }
+
+
+
+
+
+
+
+
+
+                }
+
+               
                Application.Run(new MainForm());
             OBSUtils.Disconnect();
             if (mode == 1)

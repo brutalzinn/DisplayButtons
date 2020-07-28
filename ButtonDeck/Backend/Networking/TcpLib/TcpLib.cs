@@ -116,7 +116,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
         {
             throw new Exception("Derived clases must override Clone method.");
         }
-        public abstract void OnRetryConnect(ConnectionState state);
+        public abstract void OnRetryConnect(ConnectionState state, bool isErrorOnConnected);
         /// <summary>
         /// Gets executed when the server accepts a new connection.
         /// </summary>
@@ -231,6 +231,8 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             ConnectionState st = state as ConnectionState;
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
             try { st._provider.OnAcceptConnection(st); } catch {
+
+                Debug.WriteLine("CONECTION ERROR HANDLER");
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
                 //report error in provider... Probably to the EventLog
             }
@@ -397,6 +399,7 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             }
             catch (Exception)
             {
+                Debug.WriteLine("CONEXÃO ALVO FALHOU.");
                 return false;
             }
         }
@@ -447,22 +450,30 @@ namespace ButtonDeck.Backend.Networking.TcpLib
             Debug.WriteLine("Calling accept connection handler");
    
             ConnectionState st = state as ConnectionState;
-#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+ // A catch clause that catches System.Exception and has an empty body
             try { st._provider.OnAcceptConnection(st); }
             catch
             {
+                Debug.WriteLine("DEBBUUG CONNECTION ERROR.");
+          //      st._provider.OnRetryConnect(st, true);
 
-                st._provider.OnRetryConnect(st);
-#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
                 //report error in provider... Probably to the EventLog
             }
             //Starts the ReceiveData callback loop
             if (st._conn.Connected)
                 Debug.WriteLine("Starts the ReceiveData callback loop");
-         
+            try
+            {
+
+            
   st._conn.BeginReceive(st._buffer, 0, 0, SocketFlags.None,
                 ReceivedDataReady, st);
+            }
+            catch
+            {
 
+
+            }
             
           
 
@@ -488,9 +499,10 @@ namespace ButtonDeck.Backend.Networking.TcpLib
                     Debug.WriteLine("drop connection");
 
                     //   Stop();
-                    //st._provider.OnDropConnection(st);
-                   st._provider.OnRetryConnect(st);
+               //st._provider.OnDropConnection(st);
+                  st._provider.OnRetryConnect(st,true);
                 DropConnection(st);
+                    
                 }
                 else
                 {

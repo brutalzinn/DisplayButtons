@@ -61,16 +61,16 @@ namespace ButtonDeck.Backend.Networking.Implementation
     
             if(Program.mode == 1)
             {
-                UsbMode teste = new UsbMode();
+//                UsbMode teste = new UsbMode();
               
-             MainForm.Instance.StartUsbMode();  
-MainForm.Instance.CurrentDevice = deckDevice;
-                teste.MountUsbDevices();
+//             MainForm.Instance.StartUsbMode();  
+//MainForm.Instance.CurrentDevice = deckDevice;
+//                //   teste.MountUsbDevices();
 
 
 
-               // var UsbMode = new UsbMode();
-               //  UsbMode.MountUsbDevices();
+
+//                teste.MountUsbDevices();
             }
             DevicePersistManager.OnDeviceConnected(this, deckDevice);
             Debug.WriteLine("MOSTRANDO GUID PARA: " + DeviceName);

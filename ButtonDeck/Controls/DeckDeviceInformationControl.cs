@@ -41,7 +41,7 @@ namespace ButtonDeck.Forms
 
                     if (NameLabelRectangle.Contains(e2.Location))
                     {
-                        if (device_usb_model != null)
+                        if (DeckUsb != null)
                         {
 
 
@@ -49,7 +49,7 @@ namespace ButtonDeck.Forms
                             {
                                 Bounds = NameLabelRectangleWithoutPrefix,
                                 Width = Width - Padding.Right * 2,
-                                Text = device_usb_model,
+                                Text = DeckUsb.Model,
                                 BorderStyle = BorderStyle.None,
                                 BackColor = BackColor,
                                 ForeColor = ForeColor,
@@ -58,7 +58,7 @@ namespace ButtonDeck.Forms
                             {
                                 if (txtBox.Text.Trim() != string.Empty)
                                 {
-                                    device_usb_model = txtBox.Text.Trim();
+                                    DeckUsb.Model = txtBox.Text.Trim();
                                     Refresh();
                                 }
                                 Controls.Remove(txtBox);
@@ -68,7 +68,7 @@ namespace ButtonDeck.Forms
                                 if (ee.KeyCode != Keys.Enter) return;
                                 if (txtBox.Text.Trim() != string.Empty)
                                 {
-                                    device_usb_model = txtBox.Text.Trim();
+                                    DeckUsb.Model = txtBox.Text.Trim();
                                     Refresh();
                                 }
                                 Controls.Remove(txtBox);
@@ -83,11 +83,11 @@ namespace ButtonDeck.Forms
                         {
                             if (IsVirtualDeviceConnected)
                             {
-                                Program.client.RemoveAllForwards(DeviceUsb);
-                                Program.client.CreateForward(DeviceUsb, "tcp:5095", "tcp:5095", true);
-                                Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", DeviceUsb, null);
+                                Program.client.RemoveAllForwards(DeckUsb);
+                                Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
+                                Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", DeckUsb, null);
                                 Thread.Sleep(1400);
-                                Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", DeviceUsb, null);
+                                Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", DeckUsb, null);
                                 Thread.Sleep(1200);
                                 Program.ClientThread.Stop();
                                 Program.ClientThread = new Misc.ClientThread();
@@ -96,84 +96,129 @@ namespace ButtonDeck.Forms
                                 MainForm.Instance.StartLoad(true);
                                 MainForm.Instance.Start_configs();
                             }
+                            else
+                            {
+
+                                foreach (DeviceData device in Program.device_list)
+                                {
+ Program.client.RemoveAllForwards(device);
+
+                                }
+                               
+                                Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
+                                try
+                                {
+                                    Program.ClientThread.Stop();
+                                    Program.ClientThread = new Misc.ClientThread();
+                                    Program.ClientThread.Start();
+
+                                //    MainForm.Instance.StartUsbMode();
+
+                                }
+                                catch (Exception eee)
+                                {
+
+                                }
+                            }
                         }
                     }
                 }
+                else
+                {
 
-                if (DeckDevice != null) {
-                    if (NameLabelRectangle.Contains(e2.Location)) {
-                        TextBox txtBox = new TextBox()
+
+
+                    if (DeckDevice != null)
+                    {
+                        if (NameLabelRectangle.Contains(e2.Location))
                         {
-                            Bounds = NameLabelRectangleWithoutPrefix,
-                            Width = Width - Padding.Right * 2,
-                            Text = DeckDevice.DeviceName,
-                            BorderStyle = BorderStyle.None,
-                            BackColor = BackColor,
-                            ForeColor = ForeColor,
-                        };
-                        txtBox.LostFocus += (s, ee) => {
-                            if (txtBox.Text.Trim() != string.Empty) {
-                                DeckDevice.DeviceName = txtBox.Text.Trim();
-                                Refresh();
-                            }
-                            Controls.Remove(txtBox);
-                        };
-                        txtBox.KeyUp += (s, ee) => {
-                            if (ee.KeyCode != Keys.Enter) return;
-                            if (txtBox.Text.Trim() != string.Empty) {
-                                DeckDevice.DeviceName = txtBox.Text.Trim();
-                                Refresh();
-                            }
-                            Controls.Remove(txtBox);
-                        };
-                        Controls.Add(txtBox);
-                        txtBox.Focus();
-                    } else {
-                        if (Tag is MainForm frm) {
-                            if (IsVirtualDeviceConnected) {
-
-                              
-                           
-                                Debug.WriteLine("DEVICE MNANAWE 2");
-                                if (frm.CurrentDevice.DeviceGuid == DeckDevice.DeviceGuid) {
-                                    //Someone clicked on the same device. Unload this one.
-                                    OnDeviceDisconnected(this, DeckDevice);
-                                    IsVirtualDeviceConnected = false;
-
-
-                                    frm.ChangeButtonsVisibility(false);
-                                    frm.CurrentDevice = null;
-                                    frm.RefreshAllButtons(false);
-                                    frm.Activate();
-                                } else {
-                                    Debug.WriteLine("DEVICE MNANAWE 2");
-                                    //Someone requested another device. Unload current virtual device..
-                                    OnDeviceDisconnected(this, frm.CurrentDevice);
-                                    IsVirtualDeviceConnected = false;
-                                    frm.ChangeButtonsVisibility(false);
-                                    frm.CurrentDevice = null;
-                                    frm.RefreshAllButtons(false);
-                                }
-                            } else {
-                            
-                                Debug.WriteLine("DEVICE MNANAWE 3");
-                                frm.CurrentDevice = DeckDevice;
-                                IsVirtualDeviceConnected = true;
-                                OnDeviceConnected(this, DeckDevice);
-                                frm.ChangeButtonsVisibility(true);
-                                frm.RefreshAllButtons(false);
-                                void tempConnected(object s, DeviceEventArgs ee)
+                            TextBox txtBox = new TextBox()
+                            {
+                                Bounds = NameLabelRectangleWithoutPrefix,
+                                Width = Width - Padding.Right * 2,
+                                Text = DeckDevice.DeviceName,
+                                BorderStyle = BorderStyle.None,
+                                BackColor = BackColor,
+                                ForeColor = ForeColor,
+                            };
+                            txtBox.LostFocus += (s, ee) =>
+                            {
+                                if (txtBox.Text.Trim() != string.Empty)
                                 {
-                                    if (ee.Device.DeviceGuid == DeckDevice.DeviceGuid) return;
-                                    DeviceConnected -= tempConnected;
-                                    if (IsVirtualDeviceConnected) {
-                                        //We had a virtual device.
+                                    DeckDevice.DeviceName = txtBox.Text.Trim();
+                                    Refresh();
+                                }
+                                Controls.Remove(txtBox);
+                            };
+                            txtBox.KeyUp += (s, ee) =>
+                            {
+                                if (ee.KeyCode != Keys.Enter) return;
+                                if (txtBox.Text.Trim() != string.Empty)
+                                {
+                                    DeckDevice.DeviceName = txtBox.Text.Trim();
+                                    Refresh();
+                                }
+                                Controls.Remove(txtBox);
+                            };
+                            Controls.Add(txtBox);
+                            txtBox.Focus();
+                        }
+                        else
+                        {
+                            if (Tag is MainForm frm)
+                            {
+                                if (IsVirtualDeviceConnected)
+                                {
+
+
+
+                                    Debug.WriteLine("DEVICE MNANAWE 2");
+                                    if (frm.CurrentDevice.DeviceGuid == DeckDevice.DeviceGuid)
+                                    {
+                                        //Someone clicked on the same device. Unload this one.
                                         OnDeviceDisconnected(this, DeckDevice);
                                         IsVirtualDeviceConnected = false;
+
+
                                         frm.ChangeButtonsVisibility(false);
+                                        frm.CurrentDevice = null;
+                                        frm.RefreshAllButtons(false);
+                                        frm.Activate();
+                                    }
+                                    else
+                                    {
+                                        Debug.WriteLine("DEVICE MNANAWE 2");
+                                        //Someone requested another device. Unload current virtual device..
+                                        OnDeviceDisconnected(this, frm.CurrentDevice);
+                                        IsVirtualDeviceConnected = false;
+                                        frm.ChangeButtonsVisibility(false);
+                                        frm.CurrentDevice = null;
+                                        frm.RefreshAllButtons(false);
                                     }
                                 }
-                                DeviceConnected += tempConnected;
+                                else
+                                {
+
+                                    Debug.WriteLine("DEVICE MNANAWE 3");
+                                    frm.CurrentDevice = DeckDevice;
+                                    IsVirtualDeviceConnected = true;
+                                    OnDeviceConnected(this, DeckDevice);
+                                    frm.ChangeButtonsVisibility(true);
+                                    frm.RefreshAllButtons(false);
+                                    void tempConnected(object s, DeviceEventArgs ee)
+                                    {
+                                        if (ee.Device.DeviceGuid == DeckDevice.DeviceGuid) return;
+                                        DeviceConnected -= tempConnected;
+                                        if (IsVirtualDeviceConnected)
+                                        {
+                                            //We had a virtual device.
+                                            OnDeviceDisconnected(this, DeckDevice);
+                                            IsVirtualDeviceConnected = false;
+                                            frm.ChangeButtonsVisibility(false);
+                                        }
+                                    }
+                                    DeviceConnected += tempConnected;
+                                }
                             }
                         }
                     }
@@ -202,9 +247,19 @@ namespace ButtonDeck.Forms
                 deviceNamePrefix = (!DevicePersistManager.IsDeviceOnline(DeckDevice) ? $"{OFFLINE_PREFIX} " : "");
             }
         }
-        public string device_usb_model { get; set; }
-        public string device_usb_manufacturer { get; set; }
-        public DeviceData DeviceUsb { get; set; }
+
+
+        public DeviceData DeckUsb
+        {
+            get { return _deviceusb; }
+            set
+            {
+                _deviceusb = value;
+             
+            }
+        }
+
+        private DeviceData _deviceusb;
 
         public new Padding Padding = new Padding(5);
         private bool _selected;
@@ -234,9 +289,9 @@ namespace ButtonDeck.Forms
                 else
                 {
 
-                    if (DeviceUsb == null) return Rectangle.Empty;
+                    if (DeckUsb == null) return Rectangle.Empty;
                     int textHeight = (int)TextRenderer.MeasureText("AaBbCc", Font).Height;
-                    return new Rectangle(Padding.Left, Padding.Top, (int)MeasureString((DeviceUsb.Product + DeviceUsb.Name), Font).Width, textHeight);
+                    return new Rectangle(Padding.Left, Padding.Top, (int)MeasureString((DeckUsb.Product + DeckUsb.Model), Font).Width, textHeight) ;
 
 
                 }
@@ -257,9 +312,10 @@ namespace ButtonDeck.Forms
                 else
                 {
 
-                    if (DeviceUsb == null) return Rectangle.Empty;
+                    if (DeckUsb == null) return 
+                            Rectangle.Empty;
                     Rectangle rect = NameLabelRectangle;
-                    return Rectangle.FromLTRB((int)(rect.Left + MeasureString(DeviceUsb.Product, Font).Width), rect.Top, rect.Right, rect.Bottom);
+                    return Rectangle.FromLTRB((int)(rect.Left + MeasureString(DeckUsb.Product + DeckUsb.Model, Font).Width), rect.Top, rect.Right, rect.Bottom);
 
                 }
 
@@ -287,7 +343,7 @@ namespace ButtonDeck.Forms
             }
             else
             {
-                if (DeviceUsb == null) return;
+                if (DeckUsb == null) return;
                 int textHeight = (int)e.Graphics.MeasureString("AaBbCc", Font).Height;
                 var backgroundColor = Selected ? ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme).SecondaryColor : Color.Transparent;
                 using (var sb = new SolidBrush(Selected ? GetReadableForeColor(backgroundColor) : ForeColor))
@@ -299,30 +355,11 @@ namespace ButtonDeck.Forms
                             e.Graphics.FillRectangle(sb2, new Rectangle(Point.Empty, Size));
                         }
                     }
-                    e.Graphics.DrawString(DeviceUsb.Product + " " +  DeviceUsb.Model.Replace("_"," "), Font, sb, Padding.Left, Padding.Top);
+                    e.Graphics.DrawString(DeckUsb.Product + " " +  DeckUsb.Model, Font, sb, Padding.Left, Padding.Top);
 
                     using (var sb2 = new SolidBrush(Color.FromArgb(150, ForeColor)))
                     {
-                        string status = "";
-
-                        foreach (var item in DevicePersistManager.DeckDevicesFromConnection)
-                        {
-
-
-                            var teste = item.Value.GetConnection();
-                            if (teste != null)
-                            {
-
-                                status = "Sincronizado";
-                            }
-                           
-                        }
-                        if (status == "")
-                        {
-
-                           status= "Sem sincronia";
-                        }
-                        e.Graphics.DrawString("MODO USB | " + DeviceUsb.State + " | " + status, Font, sb, Padding.Left, Padding.Top + textHeight); ;
+                     e.Graphics.DrawString("MODO: USB" , Font, sb, Padding.Left, Padding.Top + textHeight);
                     }
                 }
                 }

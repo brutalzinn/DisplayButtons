@@ -31,9 +31,23 @@ namespace ButtonDeck.Misc
         private void DevicesTitlebarButton_Click(object sender, MouseEventArgs e)
         {
 
-            RefreshCurrentDevices();
+           RefreshCurrentDevices();
 
             int controlSize = _frm.TitlebarHeight * 2;
+            System.Drawing.Size result;
+            if (Program.mode == 0)
+            {
+         result = new Size(Width * 2, Math.Max(controlSize * CurrentConnections, controlSize) + 2);
+
+            }
+            else
+            {
+
+                var list = Program.device_list;
+                result = new Size(Width * 2, Math.Max(controlSize * list.Count, controlSize) + 2);
+
+            }
+
             ModernForm frm = new ModernForm()
             {
                 Sizable = false,
@@ -43,8 +57,9 @@ namespace ButtonDeck.Misc
                 ColorScheme = _frm.ColorScheme,
                 TitlebarVisible = false,
                 MinimumSize = new Size(0, controlSize),
-                Size = new Size(Width * 2, Math.Max(controlSize * CurrentConnections, controlSize) + 2)
-            };
+
+                Size = result
+        };
 
             //Hacky method to get this button rectangle on screen
             var rect = _frm.RectangleToScreen(_frm.TitlebarButtonsRectangle);
@@ -54,6 +69,7 @@ namespace ButtonDeck.Misc
             Size controlFinalSize = new Size(frm.DisplayRectangle.Width, controlSize);
             if (Program.mode == 0)
             {
+             
                 //Load devices
                 foreach (var device in DevicePersistManager.PersistedDevices)
                 {
@@ -78,130 +94,54 @@ namespace ButtonDeck.Misc
                         continue;
                     }
                 }
+
+          
             }
             else
             {
 
 
-
-
+             
+            
                 //  var devices = AdbClient.Instance.GetDevices();
-                var product_name = new ConsoleOutputReceiver();
-                var product_manufacter = new ConsoleOutputReceiver();
-                foreach (var device in Program.client.GetDevices().ToList())
+             
+                foreach (DeviceData device in Program.device_list)
                 {
-                    DevicePersistManager.PersistedDevices.Any(c =>
-                    {
-
-                   if( c.GetConnection() != null && device != null)
-                        {
-
-                            c.DeviceUsb = device;
-
-                        }
-
-
-                        return true;
-                    });
-                    if (device.Model == "")
-                    {
-                        Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
-                        Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
-
-                        Debug.WriteLine("alterando nome não reconhecido para : " + product_name);
-
-                        device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                        device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                    }
-                    Debug.WriteLine("adicionando " + device.Model);
+                    
+                   
+                  //  Debug.WriteLine("adicionando " + device.Model);
                     try
                     {
-                        var ctrl = new DeckDeviceInformationControl()
+                        var ttt = new DeckDeviceInformationControl()
+                        {
+
+                           
+                            DeckUsb = device,
+                            Size = controlFinalSize,
+                            ForeColor = _frm.ColorScheme.SecondaryColor,
+                            Dock = DockStyle.Top,
+                            Tag = _frm
+                        };
+                        frm.Controls.Add(ttt);
+                    }
+                    catch (Exception ee)
                     {
-                      DeviceUsb = device,
+                        Debug.WriteLine(ee);
+                       continue;
+                    }
 
 
-                        Size = controlFinalSize,
-                        ForeColor = _frm.ColorScheme.SecondaryColor,
-                        Dock = DockStyle.Top,
-                        Tag = _frm
-                    };
-                    frm.Controls.Add(ctrl);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
 
 
                 }
 
 
             
-
-
-
-
-
-        }
-
-
-            
-
-            frm.Show();
-        }
-        public void MountUsbDevices()
-        {
-
-
-
-    
-            var product_name = new ConsoleOutputReceiver();
-            var product_manufacter = new ConsoleOutputReceiver();
-            try
-            {
-                foreach (var device in Program.client.GetDevices().ToList())
-            {
-                DevicePersistManager.PersistedDevices.Any(c =>
-                {
-                    Debug.WriteLine("TENTANDO COM " + device.State);
-                    if (device != null)
-                    {
-                        
-                        c.DeviceUsb = device;
-                        Debug.WriteLine("ASSIMILANDO DEVICE AO USB.");
-                    }
-
-
-                    return true;
-                });
-                if (device.Model == "")
-                {
-                    Program.client.ExecuteRemoteCommand("getprop ro.product.name", device, product_name);
-                    Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", device, product_manufacter);
-
-                    Debug.WriteLine("alterando nome não reconhecido para : " + product_name);
-
-                    device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                    device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                }
-                Debug.WriteLine("adicionando " + device.Model);
-              
-
-               
-               
-
             }
 
- }
- catch (Exception)
-                {
-                   
-                }
-
-
-
+              frm.Show();
         }
+       
     public void RefreshCurrentDevices()
         {
             Thread th = new Thread(UpdateConnectedDevices);
