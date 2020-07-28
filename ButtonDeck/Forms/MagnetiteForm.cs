@@ -156,15 +156,27 @@ namespace ButtonDeck.Forms
             if(ApplicationSettingsManager.Settings.isDevelopermode == false)
             {
                 ApplicationSettingsManager.Settings.isDevelopermode = true;
-                status = "Ativo";
+            
             }
             else
             {
                 ApplicationSettingsManager.Settings.isDevelopermode = false;
-                status = "Desativado";
+        
+            }
+            switch (ApplicationSettingsManager.Settings.isDevelopermode){
+
+                case true:
+                    status = "Ativo";
+                    break;
+
+                case false:
+                    status = "Desativado";
+                    break;
             }
 
             label2.Text = "Modo: " + status;
+
+            MainForm.Instance.ChangeDeveloperMode();
         }
     }
 }

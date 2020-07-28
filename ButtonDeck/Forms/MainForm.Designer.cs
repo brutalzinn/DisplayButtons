@@ -33,16 +33,21 @@ namespace ButtonDeck.Forms
         {
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.panel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
-            this.panel2_matriz = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
             this.warning_label = new System.Windows.Forms.Label();
             this.shadedPanel1 = new ButtonDeck.Forms.ShadedPanel();
             this.shadedPanel2 = new ButtonDeck.Forms.ShadedPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.action_label = new System.Windows.Forms.Label();
             this.imageModernButton1 = new ButtonDeck.Controls.ImageModernButton();
+            this.painel_developer = new ButtonDeck.Forms.ShadedPanel();
+            this.imageModernButton4 = new ButtonDeck.Controls.ImageModernButton();
+            this.imageModernButton3 = new ButtonDeck.Controls.ImageModernButton();
+            this.imageModernButton5 = new ButtonDeck.Controls.ImageModernButton();
+            this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
             this.panel1.SuspendLayout();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
+            this.painel_developer.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar1
@@ -62,27 +67,20 @@ namespace ButtonDeck.Forms
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.panel2_matriz);
-            this.panel1.Location = new System.Drawing.Point(1, 83);
+            this.panel1.Controls.Add(this.warning_label);
+            this.panel1.Location = new System.Drawing.Point(1, 128);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(924, 506);
+            this.panel1.Size = new System.Drawing.Size(662, 449);
             this.panel1.TabIndex = 2;
             this.panel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // panel2_matriz
-            // 
-            this.panel2_matriz.Location = new System.Drawing.Point(3, 6);
-            this.panel2_matriz.Name = "panel2_matriz";
-            this.panel2_matriz.Size = new System.Drawing.Size(659, 399);
-            this.panel2_matriz.TabIndex = 3;
             // 
             // warning_label
             // 
             this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.warning_label.BackColor = System.Drawing.Color.Transparent;
             this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warning_label.Location = new System.Drawing.Point(118, 499);
+            this.warning_label.Location = new System.Drawing.Point(108, 184);
             this.warning_label.Name = "warning_label";
             this.warning_label.Size = new System.Drawing.Size(424, 69);
             this.warning_label.TabIndex = 3;
@@ -145,6 +143,69 @@ namespace ButtonDeck.Forms
             this.imageModernButton1.UseVisualStyleBackColor = true;
             this.imageModernButton1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImageModernButton1_MouseClick);
             // 
+            // painel_developer
+            // 
+            this.painel_developer.Controls.Add(this.imageModernButton4);
+            this.painel_developer.Controls.Add(this.imageModernButton3);
+            this.painel_developer.Controls.Add(this.imageModernButton5);
+            this.painel_developer.Controls.Add(this.imageModernButton2);
+            this.painel_developer.Location = new System.Drawing.Point(4, 89);
+            this.painel_developer.Name = "painel_developer";
+            this.painel_developer.Size = new System.Drawing.Size(662, 42);
+            this.painel_developer.TabIndex = 5;
+            // 
+            // imageModernButton4
+            // 
+            this.imageModernButton4.CustomColorScheme = false;
+            this.imageModernButton4.Image = null;
+            this.imageModernButton4.Location = new System.Drawing.Point(127, 3);
+            this.imageModernButton4.Name = "imageModernButton4";
+            this.imageModernButton4.NormalImage = null;
+            this.imageModernButton4.Origin = null;
+            this.imageModernButton4.Size = new System.Drawing.Size(118, 35);
+            this.imageModernButton4.TabIndex = 1;
+            this.imageModernButton4.Text = "Abrir console";
+            this.imageModernButton4.UseVisualStyleBackColor = true;
+            // 
+            // imageModernButton3
+            // 
+            this.imageModernButton3.CustomColorScheme = false;
+            this.imageModernButton3.Image = null;
+            this.imageModernButton3.Location = new System.Drawing.Point(127, 4);
+            this.imageModernButton3.Name = "imageModernButton3";
+            this.imageModernButton3.NormalImage = null;
+            this.imageModernButton3.Origin = null;
+            this.imageModernButton3.Size = new System.Drawing.Size(118, 35);
+            this.imageModernButton3.TabIndex = 1;
+            this.imageModernButton3.Text = "Abrir console";
+            this.imageModernButton3.UseVisualStyleBackColor = true;
+            // 
+            // imageModernButton5
+            // 
+            this.imageModernButton5.CustomColorScheme = false;
+            this.imageModernButton5.Image = null;
+            this.imageModernButton5.Location = new System.Drawing.Point(3, 3);
+            this.imageModernButton5.Name = "imageModernButton5";
+            this.imageModernButton5.NormalImage = null;
+            this.imageModernButton5.Origin = null;
+            this.imageModernButton5.Size = new System.Drawing.Size(118, 33);
+            this.imageModernButton5.TabIndex = 0;
+            this.imageModernButton5.Text = "Recarregar tudo";
+            this.imageModernButton5.UseVisualStyleBackColor = true;
+            // 
+            // imageModernButton2
+            // 
+            this.imageModernButton2.CustomColorScheme = false;
+            this.imageModernButton2.Image = null;
+            this.imageModernButton2.Location = new System.Drawing.Point(3, 4);
+            this.imageModernButton2.Name = "imageModernButton2";
+            this.imageModernButton2.NormalImage = null;
+            this.imageModernButton2.Origin = null;
+            this.imageModernButton2.Size = new System.Drawing.Size(118, 35);
+            this.imageModernButton2.TabIndex = 0;
+            this.imageModernButton2.Text = "Recarregar tudo";
+            this.imageModernButton2.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -153,8 +214,8 @@ namespace ButtonDeck.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.painel_developer);
             this.Controls.Add(this.shadedPanel1);
-            this.Controls.Add(this.warning_label);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.appBar1);
             this.Location = new System.Drawing.Point(0, 0);
@@ -168,6 +229,7 @@ namespace ButtonDeck.Forms
             this.panel1.ResumeLayout(false);
             this.shadedPanel1.ResumeLayout(false);
             this.shadedPanel2.ResumeLayout(false);
+            this.painel_developer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -182,7 +244,11 @@ namespace ButtonDeck.Forms
         private System.Windows.Forms.Label action_label;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private ShadedPanel shadedPanel1;
-        private NickAc.ModernUIDoneRight.Controls.ModernShadowPanel panel2_matriz;
+        private ShadedPanel painel_developer;
+        private ImageModernButton imageModernButton3;
+        private ImageModernButton imageModernButton2;
+        private ImageModernButton imageModernButton4;
+        private ImageModernButton imageModernButton5;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

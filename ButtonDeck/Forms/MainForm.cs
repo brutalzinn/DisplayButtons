@@ -63,7 +63,8 @@ namespace ButtonDeck.Forms
 
             //Globals.launcher_principal = this;
             panel1.Freeze();
-            panel2_matriz.Freeze();
+    
+            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
             DevicesTitlebarButton item = new DevicesTitlebarButton(this);
             TitlebarButtons.Add(item);
             if (Program.Silent) {
@@ -147,12 +148,12 @@ namespace ButtonDeck.Forms
                 if (control != null) control.Visible = visible;
                 Control control3 = Controls["shadedPanel1"];
                 if (control3 != null) control3.Visible = visible;
-                Control control4 = Controls["panel2"];
+                Control control4 = Controls["painel_developer"];
                 if (control4 != null) control4.Visible = visible;
             }));
         }
-
-
+  
+          
 
         #endregion
 
@@ -169,7 +170,7 @@ namespace ButtonDeck.Forms
         {
             base.OnLoad(e);
 
-            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
+    
 
             StartUsbMode();
 
@@ -241,12 +242,19 @@ namespace ButtonDeck.Forms
             // ApplyTheme(panel1);
             GenerateSidebar(shadedPanel1);
             ApplySidebarTheme(shadedPanel1);
+            painel_developer.Visible = false ;
+          //  ApplySidebarTheme(painel_developer);
             shadedPanel2.Hide();
             shadedPanel1.Hide();
-            Refresh();
-
+          
             ButtonCreator();
+            ApplyTheme(panel1);
+      
+           
+           // Refresh();
 
+
+            
 
 
 
@@ -262,7 +270,22 @@ namespace ButtonDeck.Forms
 
             warning_label.ForeColor = ColorScheme.SecondaryColor;
         }
+        public void ChangeDeveloperMode()
+        {
 
+            if (Disposing || !IsHandleCreated) return;
+            Invoke(new Action(() =>
+            {
+
+                Control control = this.Controls.Find("painel_developer", true).FirstOrDefault() as ShadedPanel;
+                if (control != null)
+                {
+                    //                control.Visible = ApplicationSettingsManager.Settings.isDevelopermode;
+                }
+
+            }));
+
+        }
 
         const string OFFLINE_PREFIX = "[OFFLINE]";
         public new Padding Padding = new Padding(5);
@@ -519,7 +542,7 @@ namespace ButtonDeck.Forms
                 {
                     List<Control> toAdd = new List<Control>();
 
-                    panel2_matriz.Controls.Clear();
+                    panel1.Controls.Clear();
                     int x = 0;
                     int y = 0;
                     int id = 1;
@@ -778,15 +801,15 @@ namespace ButtonDeck.Forms
 
                             toAdd.Add(control);
 
-                              
-                            if (Globals.calc <= toAdd.Count)
+                          
+                            if (toAdd.Count >= Globals.calc)
                             {
   
 toAdd.AsEnumerable().Reverse().All(m => {
-                                    panel2_matriz.Controls.Add(m);
+    panel1.Controls.Add(m);
                                     return true;
                                 });
-                                ApplyTheme(panel2_matriz);
+                               
                                 Globals.can_refresh = true;
                                 RefreshAllButtons(true);
                     //            break;
@@ -836,7 +859,7 @@ Application.DoEvents();
 
                 // Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
 
-
+           //     var ser = item.GetItemImage().BitmapSerialized;
 
                 if (item is DynamicDeckItem FF  && FF.DeckAction is PluginLuaGenerator TT)
                 {
@@ -857,7 +880,7 @@ Application.DoEvents();
 
                 }
                    
-                control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
+                //control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
 
                 control.NormalImage = item?.GetItemImage().Bitmap;
 
@@ -1762,6 +1785,7 @@ Start_configs();
                 return true;
             });
           isReadyMatrizHandle();
+       
         }
 
 
