@@ -33,12 +33,14 @@ namespace ButtonDeck.Forms
         {
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.panel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
+            this.panel2_matriz = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
             this.warning_label = new System.Windows.Forms.Label();
             this.shadedPanel1 = new ButtonDeck.Forms.ShadedPanel();
             this.shadedPanel2 = new ButtonDeck.Forms.ShadedPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.action_label = new System.Windows.Forms.Label();
             this.imageModernButton1 = new ButtonDeck.Controls.ImageModernButton();
+            this.panel1.SuspendLayout();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -60,12 +62,20 @@ namespace ButtonDeck.Forms
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel2_matriz);
             this.panel1.Location = new System.Drawing.Point(1, 83);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(924, 506);
             this.panel1.TabIndex = 2;
             this.panel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // panel2_matriz
+            // 
+            this.panel2_matriz.Location = new System.Drawing.Point(3, 6);
+            this.panel2_matriz.Name = "panel2_matriz";
+            this.panel2_matriz.Size = new System.Drawing.Size(659, 399);
+            this.panel2_matriz.TabIndex = 3;
             // 
             // warning_label
             // 
@@ -155,6 +165,7 @@ namespace ButtonDeck.Forms
             this.TransparencyKey = System.Drawing.Color.Magenta;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Click += new System.EventHandler(this.Buttons_Unfocus);
+            this.panel1.ResumeLayout(false);
             this.shadedPanel1.ResumeLayout(false);
             this.shadedPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -171,6 +182,7 @@ namespace ButtonDeck.Forms
         private System.Windows.Forms.Label action_label;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private ShadedPanel shadedPanel1;
+        private NickAc.ModernUIDoneRight.Controls.ModernShadowPanel panel2_matriz;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

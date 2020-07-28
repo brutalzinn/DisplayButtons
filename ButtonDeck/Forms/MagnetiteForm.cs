@@ -149,5 +149,22 @@ namespace ButtonDeck.Forms
             coluna.Text = ApplicationSettingsManager.Settings.coluna.ToString();
             linha.Text = ApplicationSettingsManager.Settings.linha.ToString();
         }
+
+        private void ModernButton9_Click(object sender, EventArgs e)
+        {
+            string status = "";
+            if(ApplicationSettingsManager.Settings.isDevelopermode == false)
+            {
+                ApplicationSettingsManager.Settings.isDevelopermode = true;
+                status = "Ativo";
+            }
+            else
+            {
+                ApplicationSettingsManager.Settings.isDevelopermode = false;
+                status = "Desativado";
+            }
+
+            label2.Text = "Modo: " + status;
+        }
     }
 }

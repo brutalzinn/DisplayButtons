@@ -94,10 +94,10 @@ namespace ButtonDeck.Backend.Utils
         public bool FirstRun { get; set; }
 
         public string DeviceName { get; set; }
-        public int coluna { get; set; }
-        public int linha { get; set; }
+        public int coluna { get; set; } = 5;
+        public int linha { get; set; } = 3;
         public bool OBSPluginNagged { get; set; }
-
+        public bool isDevelopermode { get; set; } = false;
         public string IFTTTAPIKey { get; set; }
     }
 }
