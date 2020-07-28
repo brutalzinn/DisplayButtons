@@ -148,8 +148,7 @@ namespace ButtonDeck.Forms
                 if (control != null) control.Visible = visible;
                 Control control3 = Controls["shadedPanel1"];
                 if (control3 != null) control3.Visible = visible;
-                Control control4 = Controls["painel_developer"];
-                if (control4 != null) control4.Visible = visible;
+               
             }));
         }
   
@@ -242,7 +241,7 @@ namespace ButtonDeck.Forms
             // ApplyTheme(panel1);
             GenerateSidebar(shadedPanel1);
             ApplySidebarTheme(shadedPanel1);
-            painel_developer.Visible = false ;
+          
           //  ApplySidebarTheme(painel_developer);
             shadedPanel2.Hide();
             shadedPanel1.Hide();

@@ -68,9 +68,9 @@ namespace ButtonDeck.Forms
             // panel1
             // 
             this.panel1.Controls.Add(this.warning_label);
-            this.panel1.Location = new System.Drawing.Point(1, 128);
+            this.panel1.Location = new System.Drawing.Point(1, 146);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(662, 449);
+            this.panel1.Size = new System.Drawing.Size(662, 431);
             this.panel1.TabIndex = 2;
             this.panel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -80,7 +80,7 @@ namespace ButtonDeck.Forms
             this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.warning_label.BackColor = System.Drawing.Color.Transparent;
             this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warning_label.Location = new System.Drawing.Point(108, 184);
+            this.warning_label.Location = new System.Drawing.Point(108, 175);
             this.warning_label.Name = "warning_label";
             this.warning_label.Size = new System.Drawing.Size(424, 69);
             this.warning_label.TabIndex = 3;
@@ -149,10 +149,11 @@ namespace ButtonDeck.Forms
             this.painel_developer.Controls.Add(this.imageModernButton3);
             this.painel_developer.Controls.Add(this.imageModernButton5);
             this.painel_developer.Controls.Add(this.imageModernButton2);
-            this.painel_developer.Location = new System.Drawing.Point(4, 89);
+            this.painel_developer.Location = new System.Drawing.Point(4, 83);
             this.painel_developer.Name = "painel_developer";
-            this.painel_developer.Size = new System.Drawing.Size(662, 42);
+            this.painel_developer.Size = new System.Drawing.Size(273, 42);
             this.painel_developer.TabIndex = 5;
+            this.painel_developer.Visible = false;
             // 
             // imageModernButton4
             // 
