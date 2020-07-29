@@ -212,32 +212,22 @@ namespace ButtonDeck.Backend.Networking.Implementation
             {
                 Json headerContent = new Json();
 
-                headerContent.Slot = slot;
+     
+                writer.WriteInt(slot);
+                //Byte array lenght
+                writer.WriteInt(img.InternalBitmap.Length);
+                writer.Write(img.InternalBitmap);
+
                 headerContent.Font = font;
                 headerContent.Size = size;
                 headerContent.Position = pos;
                 headerContent.Text = text;
                 headerContent.Color = color;
-                headerContent.ArrayLenght = img.InternalBitmap.Length;
-
-                headerContent.InternalBtpm = img.InternalBitmap;
+                
 
 
+                string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.None);
 
-
-                string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.Indented);
-
-                //writer.WriteInt(slot);
-
-                //writer.WriteInt(img.InternalBitmap.Length);
-                //writer.Write(img.InternalBitmap);
-
-                ////font
-                ///  char[] chars = new char[8192];
-
-
-
-    
                 writer.WriteUTF(jsonString);
 
                 ////text
