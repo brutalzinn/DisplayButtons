@@ -12,13 +12,13 @@ namespace ButtonDeck
     class Globals
     {
 
-
+      
         public static bool status { get; set; }
         public static int calc  { get; set; } //ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
     public  static int linha  { get; set;}
 
         public static int ConsoleOpenned { get; set; }
-        public static bool can_refresh { get; set; }
+        public static bool can_refresh { get; set; } = false;
         public static int coluna { get; set; }
     }
 }

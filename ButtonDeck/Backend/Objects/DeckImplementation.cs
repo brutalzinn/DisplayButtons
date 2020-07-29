@@ -28,8 +28,8 @@ namespace ButtonDeck.Backend.Objects
         public void MountUsbDevices()
         {
 
-
-
+            
+       
 
        
             try
@@ -110,6 +110,10 @@ namespace ButtonDeck.Backend.Objects
         }
         private void AutoConnectedUsb()
         {
+
+            System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
+
+
             var list = Program.device_list;
 
             if (list.Count == 1)
@@ -127,55 +131,58 @@ namespace ButtonDeck.Backend.Objects
   Program.ClientThread.Stop();
                 Program.ClientThread = new Misc.ClientThread();
                 Program.ClientThread.Start();
-                }catch(Exception eee)
+
+                Thread.Sleep(5000);
+            }
+            catch(Exception eee)
                 {
 
                 }
-              
-          
-               
-              
-            foreach (var item in DevicePersistManager.PersistedDevices.ToList())
-            {
-            List<Guid> toRemove = new List<Guid>();
-             
 
 
 
-                try
+
+                foreach (var item in DevicePersistManager.PersistedDevices.ToList())
                 {
-                   
-                 
+                    List<Guid> toRemove = new List<Guid>();
 
-                      
 
-                            Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
 
-                    if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
+
+                    try
                     {
 
-                        MainForm.Instance.Invoke(new Action(() =>
-                            {
 
-                               
+
+
+
+                        Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
+
+                        if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
+                        {
+
+                            MainForm.Instance.Invoke(new Action(() =>
+                                {
+
+
                                     Debug.WriteLine("Reconectado.");
 
 
-                                  MainForm.Instance.StartUsbMode();
-
-
-                         
-
-                                          
-
-                                     
-                             MainForm.Instance.CurrentDevice = item;
-                                               //   teste.MountUsbDevices();
+                                    MainForm.Instance.StartUsbMode();
 
 
 
 
-                            
+
+
+
+                                    MainForm.Instance.CurrentDevice = item;
+                                //   teste.MountUsbDevices();
+
+
+
+
+
 
 
 
@@ -184,20 +191,19 @@ namespace ButtonDeck.Backend.Objects
                             }));
 
 
+                        }
+
+                        //  toRemove.Add(item.DeviceGuid);
+
+
+                    }
+                    catch
+                    {
+
+
                     }
 
-                    //  toRemove.Add(item.DeviceGuid);
 
-
-                }
-                catch
-                {
-
-
-                }
-
-
-          
            // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
   }
         }

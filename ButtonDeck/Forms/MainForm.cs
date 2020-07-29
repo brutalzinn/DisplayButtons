@@ -1178,11 +1178,11 @@ Start_configs();
 
             var con = device.GetConnection();
             if (con != null) {
-                //  if (Globals.status == false) return;
+            
                 var packet = new SlotUniversalChangeChunkPacket();
               
                 List<IDeckItem> items = folder.GetDeckItems();
-                // int calc = ApplicationSettingsManager.Settings.linha * ApplicationSettingsManager.Settings.coluna;
+              
                 List<int> addedItems = new List<int>();
                 bool isFolder = false;
                 for (int i = 0; i < Globals.calc; i++)
@@ -1200,29 +1200,13 @@ Start_configs();
 
                         isFolder = true;
                     }
-                    //var teste = new DeckImage(image_receivd.ToBitmap());
+             
 
                     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
-                    // var seri = image.BitmapSerialized;
-                    ///     ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-                    //  IDeckFolder folder_t = CurrentDevice?.CurrentFolder;
-                    //        var seri = teste.BitmapSerialized;
-
-
-                    //  packet.AddToQueue(folder.GetItemIndex(item), new DeckImage(ReceiveWaterMark(DI.DeckAction.GetActionName(),image.Bitmap)));
+                 var seri = image.BitmapSerialized;
+                  
                     packet.AddToQueue(folder.GetItemIndex(item), item?.DeckName, " ", item.DeckSize, item.DeckPosition, item?.DeckColor ,image);
 
-                 //   packet.AddToQueue(folder.GetItemIndex(item), image);
-                    //    packet.AddToQueue(folder.GetItemIndex(item), image);
-
-
-                    //    packet.AddToQueue(folder.GetItemIndex(item), image);
-                    //  con.SendPacket(packet);
-
-
-                    //   teste.modernButton1.NormalImage;
-
-                    //     packet.AddToQueue(folder.GetItemIndex(item), image);
                 }
 
                 con.SendPacket(packet);
