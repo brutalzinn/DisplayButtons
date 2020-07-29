@@ -806,7 +806,7 @@ namespace ButtonDeck.Forms
   
 toAdd.AsEnumerable().Reverse().All(m => {
     panel1.Controls.Add(m);
-                                    return true;
+                                   return true;
                                 });
                                
                                 Globals.can_refresh = true;

@@ -111,7 +111,7 @@ namespace ButtonDeck.Backend.Objects
         private void AutoConnectedUsb()
         {
 
-            System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
+          System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
 
 
             var list = Program.device_list;
@@ -132,7 +132,6 @@ namespace ButtonDeck.Backend.Objects
                 Program.ClientThread = new Misc.ClientThread();
                 Program.ClientThread.Start();
 
-                Thread.Sleep(5000);
             }
             catch(Exception eee)
                 {
@@ -203,7 +202,7 @@ namespace ButtonDeck.Backend.Objects
 
                     }
 
-
+                Thread.Sleep(5000);
            // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
   }
         }
