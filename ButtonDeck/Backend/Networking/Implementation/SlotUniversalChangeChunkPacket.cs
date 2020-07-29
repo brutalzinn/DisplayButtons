@@ -2,6 +2,7 @@
 using ButtonDeck.Backend.Networking.IO;
 using ButtonDeck.Backend.Objects;
 using Microsoft.VisualC.StlClr;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -84,7 +85,82 @@ namespace ButtonDeck.Backend.Networking.Implementation
             }
             // Should also override == and != operators.
         }
+        
+    public class Json
+        {
+            private int slot;
+            private int arraylenght;
+            private byte[] internalbtpm;
+            private string font;
+            private int size;
+            private string text;
+            private int position;
+            private string color;
+          
+            public Json()
 
+            {
+
+           
+
+
+            }
+            public int ArrayLenght
+            {
+
+                get { return arraylenght; }
+                set { arraylenght = value; }
+
+            }
+            public byte[] InternalBtpm
+            {
+
+                get { return internalbtpm; }
+                set { internalbtpm = value; }
+
+            }
+            public string Color
+            {
+
+                get { return color; }
+                set { color = value; }
+
+            }
+            public string Text
+            {
+                get { return text; }
+                set { text = value; }
+            }
+            public int Slot
+            {
+
+                get { return slot; }
+                set { slot = value; }
+            }
+
+            public string Font
+            {
+
+                get { return font; }
+                set { font = value; }
+
+
+            }
+
+            public int Size
+            {
+                get { return size; }
+                set { size = value; }
+            }
+            public int Position
+            {
+                get { return position; }
+                set { position = value; }
+            }
+
+
+
+        }
         List<Labels> list_labels = new List<Labels>();
         public void AddToQueue(int slot, string text, string font,int size, int position, string color, DeckImage image)
         {
@@ -110,40 +186,71 @@ namespace ButtonDeck.Backend.Networking.Implementation
         public override void ToOutputStream(DataOutputStream writer)
         {
             //The number of images to send
+      
+
+       
+
+
+            //     Debug.WriteLine(jsonString)
+
             writer.WriteInt(list_labels.Count);
-            foreach (var item in list_labels)
-            {
-                SendDeckLabel(writer, item.Id, item.Font,item.Size,item.Position,item.Text,item.Color, item.Image) ;
-           
-            }
+         //   writer.WriteUTF(jsonString);
+
+           foreach (var item in list_labels)
+           {
+              SendDeckLabel(writer, item.Id, item.Font,item.Size,item.Position,item.Text,item.Color, item.Image) ;
+
+             }
 
         }
 
         private void SendDeckLabel(DataOutputStream writer, int slot, string font,int size,int pos,string text,string color , DeckImage img)
         {
-           
+
             //Write the slot
             if (img != null)
             {
+                Json headerContent = new Json();
 
-                writer.WriteInt(slot);
+                headerContent.Slot = slot;
+                headerContent.Font = font;
+                headerContent.Size = size;
+                headerContent.Position = pos;
+                headerContent.Text = text;
+                headerContent.Color = color;
+                headerContent.ArrayLenght = img.InternalBitmap.Length;
 
-                writer.WriteInt(img.InternalBitmap.Length);
-                writer.Write(img.InternalBitmap);
+                headerContent.InternalBtpm = img.InternalBitmap;
 
-                //font
-                writer.WriteUTF(font);
-                //text
 
-                writer.WriteUTF(text);
-                //size
-                writer.WriteInt(size);
-                //position
-                writer.WriteInt(pos);
 
-                //color
 
-                writer.WriteUTF(color);
+                string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.Indented);
+
+                //writer.WriteInt(slot);
+
+                //writer.WriteInt(img.InternalBitmap.Length);
+                //writer.Write(img.InternalBitmap);
+
+                ////font
+                ///  char[] chars = new char[8192];
+
+
+
+    
+                writer.WriteUTF(jsonString);
+
+                ////text
+
+                //writer.WriteUTF(text);
+                ////size
+                //writer.WriteInt(size);
+                ////position
+                //writer.WriteInt(pos);
+
+                ////color
+
+                //writer.WriteUTF(color);
             }
         }
 
