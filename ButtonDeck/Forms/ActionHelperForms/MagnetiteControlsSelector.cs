@@ -1,5 +1,5 @@
 ﻿using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
-
+using ButtonDeck.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace ButtonDeck.Forms.ActionHelperForms
 {
-    public partial class KeyInfoHelper : TemplateForm
+    public partial class MagnetiteControlsSelector : TemplateForm
     {
 
         private void CloseWithResult(DialogResult result)
@@ -21,21 +21,42 @@ namespace ButtonDeck.Forms.ActionHelperForms
             Close();
         }
 
-        public KeyPressAction ModifiableAction {
+        public AppSettings ModifiableAction {
             get { return _modifiableAction; }
             set { _modifiableAction = value;
-                modifierKeys = value.KeyInfoValue.ModifierKeys.ToList();
-                nonModifierKeys = value.KeyInfoValue.Keys.ToList();
+
+                if (mode == 0)
+                {
+
+
+                    modifierKeys = value.keyMainFolder.ModifierKeys.ToList();
+                    nonModifierKeys = value.keyMainFolder.Keys.ToList();
+                }
+                else
+                {
+ modifierKeys = value.keyBackFolder.ModifierKeys.ToList();
+                    nonModifierKeys = value.keyBackFolder.Keys.ToList();
+         
+                }
+            
+       
+                
+                   
+
+                // modifierKeys = value.keyBackFolder.ModifierKeys.ToList();
+                //   nonModifierKeys = value.keyBackFolder.Keys.ToList();
+
                 UpdateTextBox();
             }
         }
         public bool ListenToKeys { get; set; } = true;
-        public KeyInfoHelper()
+        public MagnetiteControlsSelector()
         {
             InitializeComponent();
             textBox1.Click += (sender, e) => {
                 if (!ListenToKeys) {
                     ListenToKeys = true;
+                  
                     nonModifierKeys = new List<Keys>();
                     modifierKeys = new List<Keys>();
                     UpdateTextBox();
@@ -45,9 +66,12 @@ namespace ButtonDeck.Forms.ActionHelperForms
 
         List<Keys> modifierKeys;
         List<Keys> nonModifierKeys;
-        private KeyPressAction _modifiableAction;
 
-        private void KeyInfoHelper_KeyDown(object sender, KeyEventArgs e)
+      
+        private AppSettings _modifiableAction;
+        public int mode;
+
+        private void MagnetiteControlsSelector_KeyDown(object sender, KeyEventArgs e)
         {
             if (!ListenToKeys) return;
             List<Keys> modifiers = new List<Keys>();
@@ -72,7 +96,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
             }
         }
 
-        private void KeyInfoHelper_KeyUp(object sender, KeyEventArgs e)
+        private void MagnetiteControlsSelector_KeyUp(object sender, KeyEventArgs e)
         {
             /*foreach (Keys r in Enum.GetValues(typeof(Keys))) {
                 if (e.Modifiers.HasFlag(r))
@@ -86,7 +110,18 @@ namespace ButtonDeck.Forms.ActionHelperForms
 
         private void ModernButton2_Click(object sender, EventArgs e)
         {
-            _modifiableAction.KeyInfoValue = new KeyPressAction.KeyInfo(modifierKeys.Where(c=>c != Keys.None).ToArray(), nonModifierKeys.Where(c => c != Keys.None).ToArray());
+
+            if (ModifiableAction.keyBackFolder != null) {
+                _modifiableAction.keyBackFolder = new AppSettings.KeyInfoAppSettingsGlobal(modifierKeys.Where(c => c != Keys.None).ToArray(), nonModifierKeys.Where(c => c != Keys.None).ToArray());
+
+            }
+            if (ModifiableAction.keyMainFolder != null)
+            {
+            _modifiableAction.keyMainFolder = new AppSettings.KeyInfoAppSettingsGlobal(modifierKeys.Where(c=>c != Keys.None).ToArray(), nonModifierKeys.Where(c => c != Keys.None).ToArray());
+
+            }
+         //   _modifiableAction.keyBackFolder = new AppSettings.KeyInfoAppSettingsGlobal(modifierKeys.Where(c => c != Keys.None).ToArray(), nonModifierKeys.Where(c => c != Keys.None).ToArray());
+
             CloseWithResult(DialogResult.OK);
         }
 
@@ -95,7 +130,7 @@ namespace ButtonDeck.Forms.ActionHelperForms
             CloseWithResult(DialogResult.Cancel);
         }
 
-        private void KeyInfoHelper_Load(object sender, EventArgs e)
+        private void MagnetiteControlsSelector_Load(object sender, EventArgs e)
         {
 
         }

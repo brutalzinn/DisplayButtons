@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ButtonDeck.Backend.Utils
 {
@@ -62,7 +63,20 @@ namespace ButtonDeck.Backend.Utils
     [Serializable]
     public class AppSettings
     {
+        public class KeyInfoAppSettingsGlobal
+        {
+            public KeyInfoAppSettingsGlobal()
+            {
+            }
+            public KeyInfoAppSettingsGlobal(Keys[] modifierKeys, Keys[] keys)
+            {
+                ModifierKeys = modifierKeys;
+                Keys = keys;
+            }
 
+            public Keys[] ModifierKeys { get; set; } = new Keys[] { };
+            public Keys[] Keys { get; set; } = new Keys[] { };
+        }
         /// <summary>
         /// Called to signal to subscribers that the theme was changed.
         /// </summary>
@@ -99,5 +113,9 @@ namespace ButtonDeck.Backend.Utils
         public bool OBSPluginNagged { get; set; }
         public bool isDevelopermode { get; set; } = false;
         public string IFTTTAPIKey { get; set; }
+
+
+        public KeyInfoAppSettingsGlobal keyMainFolder { get; set; } = new KeyInfoAppSettingsGlobal();
+        public KeyInfoAppSettingsGlobal keyBackFolder { get; set; } = new KeyInfoAppSettingsGlobal();
     }
 }

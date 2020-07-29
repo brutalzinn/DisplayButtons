@@ -42,6 +42,7 @@ using System.Threading;
 using Timer = System.Windows.Forms.Timer;
 using static ButtonDeck.Backend.Utils.DevicePersistManager;
 using ButtonDeck.Backend.Networking.TcpLib;
+using static ButtonDeck.Backend.Utils.AppSettings;
 
 namespace ButtonDeck.Forms
 {
@@ -152,18 +153,64 @@ namespace ButtonDeck.Forms
 
         private void ModernButton9_Click(object sender, EventArgs e)
         {
+
+            var keyInfo = new KeyInfoAppSettingsGlobal(ApplicationSettingsManager.Settings.keyBackFolder.ModifierKeys, ApplicationSettingsManager.Settings.keyBackFolder.Keys);
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("ButtonDeck.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
+
+            var execAction = new AppSettings() as AppSettings;
+            execAction.keyBackFolder = ApplicationSettingsManager.Settings.keyBackFolder;
+            form.mode = 1;
+            form.ModifiableAction = execAction;
+         
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ApplicationSettingsManager.Settings.keyBackFolder = form.ModifiableAction.keyBackFolder;
+
+            }
+            else
+            {
+                ApplicationSettingsManager.Settings.keyBackFolder = keyInfo;
+            }
+        }
+
+        private void ModernButton11_Click(object sender, EventArgs e)
+        {
+
+            
+            var keyInfo = new KeyInfoAppSettingsGlobal(ApplicationSettingsManager.Settings.keyMainFolder.ModifierKeys, ApplicationSettingsManager.Settings.keyMainFolder.Keys);
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("ButtonDeck.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
+
+            var execAction = new AppSettings() as AppSettings;
+            execAction.keyMainFolder = ApplicationSettingsManager.Settings.keyMainFolder;
+            form.mode = 0;
+            form.ModifiableAction = execAction;
+          
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ApplicationSettingsManager.Settings.keyMainFolder = form.ModifiableAction.keyMainFolder;
+
+            }
+            else
+            {
+                ApplicationSettingsManager.Settings.keyMainFolder = keyInfo;
+            }
+        }
+
+        private void ModernButton10_Click(object sender, EventArgs e)
+        {
             string status = "";
-            if(ApplicationSettingsManager.Settings.isDevelopermode == false)
+            if (ApplicationSettingsManager.Settings.isDevelopermode == false)
             {
                 ApplicationSettingsManager.Settings.isDevelopermode = true;
-            
+
             }
             else
             {
                 ApplicationSettingsManager.Settings.isDevelopermode = false;
-        
+
             }
-            switch (ApplicationSettingsManager.Settings.isDevelopermode){
+            switch (ApplicationSettingsManager.Settings.isDevelopermode)
+            {
 
                 case true:
                     status = "Ativo";

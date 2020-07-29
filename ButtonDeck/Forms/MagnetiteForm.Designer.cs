@@ -30,7 +30,11 @@
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.label1 = new System.Windows.Forms.Label();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.modernButton10 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.modernButton11 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.label2 = new System.Windows.Forms.Label();
             this.modernButton9 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -48,18 +52,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.modernButton5 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton6 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.modernButton10 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernButton11 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernShadowPanel1.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar1
@@ -101,6 +101,36 @@
             this.modernShadowPanel1.Size = new System.Drawing.Size(636, 357);
             this.modernShadowPanel1.TabIndex = 2;
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.label3);
+            this.panel7.Controls.Add(this.modernButton10);
+            this.panel7.Location = new System.Drawing.Point(232, 244);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(170, 100);
+            this.panel7.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(62, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "label3";
+            // 
+            // modernButton10
+            // 
+            this.modernButton10.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.modernButton10.CustomColorScheme = false;
+            this.modernButton10.Location = new System.Drawing.Point(12, 34);
+            this.modernButton10.Name = "modernButton10";
+            this.modernButton10.Size = new System.Drawing.Size(147, 37);
+            this.modernButton10.TabIndex = 1;
+            this.modernButton10.Text = "Modo desenvolvedor";
+            this.modernButton10.UseVisualStyleBackColor = true;
+            this.modernButton10.Click += new System.EventHandler(this.ModernButton10_Click);
+            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.modernButton11);
@@ -110,6 +140,18 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(170, 138);
             this.panel6.TabIndex = 6;
+            // 
+            // modernButton11
+            // 
+            this.modernButton11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.modernButton11.CustomColorScheme = false;
+            this.modernButton11.Location = new System.Drawing.Point(16, 42);
+            this.modernButton11.Name = "modernButton11";
+            this.modernButton11.Size = new System.Drawing.Size(133, 37);
+            this.modernButton11.TabIndex = 3;
+            this.modernButton11.Text = "Pasta principal";
+            this.modernButton11.UseVisualStyleBackColor = true;
+            this.modernButton11.Click += new System.EventHandler(this.ModernButton11_Click);
             // 
             // label2
             // 
@@ -280,46 +322,6 @@
             this.modernButton6.UseVisualStyleBackColor = true;
             this.modernButton6.Click += new System.EventHandler(this.ModernButton6_Click);
             // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.label3);
-            this.panel7.Controls.Add(this.modernButton10);
-            this.panel7.Location = new System.Drawing.Point(232, 244);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(170, 100);
-            this.panel7.TabIndex = 7;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(62, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "label3";
-            // 
-            // modernButton10
-            // 
-            this.modernButton10.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.modernButton10.CustomColorScheme = false;
-            this.modernButton10.Location = new System.Drawing.Point(12, 34);
-            this.modernButton10.Name = "modernButton10";
-            this.modernButton10.Size = new System.Drawing.Size(147, 37);
-            this.modernButton10.TabIndex = 1;
-            this.modernButton10.Text = "Modo desenvolvedor";
-            this.modernButton10.UseVisualStyleBackColor = true;
-            // 
-            // modernButton11
-            // 
-            this.modernButton11.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.modernButton11.CustomColorScheme = false;
-            this.modernButton11.Location = new System.Drawing.Point(16, 42);
-            this.modernButton11.Name = "modernButton11";
-            this.modernButton11.Size = new System.Drawing.Size(133, 37);
-            this.modernButton11.TabIndex = 3;
-            this.modernButton11.Text = "Pasta principal";
-            this.modernButton11.UseVisualStyleBackColor = true;
-            // 
             // MagnetiteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -338,6 +340,8 @@
             this.Text = "Magnetite - Menu";
             this.Load += new System.EventHandler(this.MagnetiteForm_Load);
             this.modernShadowPanel1.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -346,8 +350,6 @@
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

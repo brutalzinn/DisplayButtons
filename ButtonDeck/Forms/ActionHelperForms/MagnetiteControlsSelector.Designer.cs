@@ -1,6 +1,6 @@
 ﻿namespace ButtonDeck.Forms.ActionHelperForms
 {
-    partial class KeyInfoHelper
+    partial class MagnetiteControlsSelector
     {
         /// <summary>
         /// Required designer variable.
@@ -95,7 +95,7 @@
             this.modernButton2.UseVisualStyleBackColor = true;
             this.modernButton2.Click += new System.EventHandler(this.ModernButton2_Click);
             // 
-            // KeyInfoHelper
+            // MagnetiteControlsSelector
             // 
             this.AcceptButton = this.modernButton2;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -112,12 +112,12 @@
             this.Controls.Add(this.appBar1);
             this.KeyPreview = true;
             this.Location = new System.Drawing.Point(0, 0);
-            this.Name = "KeyInfoHelper";
+            this.Name = "MagnetiteControlsSelector";
             this.Sizable = false;
             this.Text = "Key Selector - Editor";
-            this.Load += new System.EventHandler(this.KeyInfoHelper_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyInfoHelper_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInfoHelper_KeyUp);
+            this.Load += new System.EventHandler(this.MagnetiteControlsSelector_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MagnetiteControlsSelector_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MagnetiteControlsSelector_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
