@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ButtonDeck.Backend.Networking.Attributes;
 using ButtonDeck.Backend.Networking.IO;
 using ButtonDeck.Backend.Objects;
+using Newtonsoft.Json;
+using static ButtonDeck.Bibliotecas.CustomButtonJsonsModel;
 
 namespace ButtonDeck.Backend.Networking.Implementation
 {
@@ -56,18 +58,17 @@ namespace ButtonDeck.Backend.Networking.Implementation
                 //Byte array lenght
                 writer.WriteInt(DeckImage.InternalBitmap.Length);
                 writer.Write(DeckImage.InternalBitmap);
-                writer.WriteUTF(Font);
-                //text
+                Json headerContent = new Json();
 
-                writer.WriteUTF(Text);
-                //size
-                writer.WriteInt(Size);
-                //position
-                writer.WriteInt(Position);
 
-                //color
+                headerContent.Font = Font;
+                headerContent.Size = Size;
+                headerContent.Position = Position;
+                headerContent.Text = Text;
+                headerContent.Color = Color;
+                string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.None);
 
-                writer.WriteUTF(Color);
+                writer.WriteUTF(jsonString);
             }
         }
     }

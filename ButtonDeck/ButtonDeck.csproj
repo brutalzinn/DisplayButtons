@@ -236,6 +236,7 @@
     <Compile Include="Backend\Utils\Native\NativeKeyHandler.cs" />
     <Compile Include="Backend\Utils\OBSUtils.cs" />
     <Compile Include="Backend\Utils\XMLUtils.cs" />
+    <Compile Include="Bibliotecas\CustomButtonJsonsModel.cs" />
     <Compile Include="Bibliotecas\GlobalHotKeys.cs" />
     <Compile Include="Bibliotecas\NHotkey.WindowsForms\ExtensionAttribute.cs" />
     <Compile Include="Bibliotecas\NHotkey.WindowsForms\Extensions.cs" />
