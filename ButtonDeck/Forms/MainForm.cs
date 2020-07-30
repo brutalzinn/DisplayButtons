@@ -1802,11 +1802,14 @@ namespace ButtonDeck.Forms
                 foreach (DynamicDeckFolder item in CurrentDevice.MainFolder.GetSubFolders().ToList())
                 {
                     Label folder = new Label();
-Label subfolder = new Label();
+
               
 
 
-                    folder.Padding = itemPadding;
+                      if (ListFolders(item).Count > 0)
+                    {
+
+                        folder.Padding = itemPadding;
                         folder.TextAlign = ContentAlignment.MiddleLeft;
 
                         folder.Font = itemFont;
@@ -1814,11 +1817,11 @@ Label subfolder = new Label();
                         folder.Dock = DockStyle.Top;
                         folder.Text = item.DeckName;
                         folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
-                  
-                        foreach (DynamicDeckFolder subitem in ListFolders(item))
+                        toAdd.Add(folder);
+                        foreach (DynamicDeckFolder subitem in ListFolders(item).Skip(1))
                         {
-                            
-                           
+
+                            Label subfolder = new Label();
                             subfolder.Padding = itemPadding;
                             subfolder.TextAlign = ContentAlignment.MiddleLeft;
 
@@ -1828,21 +1831,35 @@ Label subfolder = new Label();
                             subfolder.Text = "..." + subitem.DeckName;
                             subfolder.Height = TextRenderer.MeasureText("..." + subitem.DeckName, itemFont).Height;
                             subfolder.Click += (s, ee) =>
-                                               {
+                                                   {
 
-                                                   CurrentDevice.CurrentFolder = subitem;
+                                                       CurrentDevice.CurrentFolder = subitem;
 
                                                    //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
                                                    RefreshAllButtons(true);
 
-                                               };
-                        toAdd.Add(subfolder);
+                                                   };
+                            toAdd.Add(subfolder);
 
 
+                        }
+                    }
+                    else
+                    {
+
+                        folder.Padding = itemPadding;
+                        folder.TextAlign = ContentAlignment.MiddleLeft;
+
+                        folder.Font = itemFont;
+
+                        folder.Dock = DockStyle.Top;
+                        folder.Text = item.DeckName;
+                        folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
+                        toAdd.Add(folder);
                     }
 
 
-                   
+
                     folder.Click += (s, ee) =>
                     {
 
@@ -1853,7 +1870,7 @@ Label subfolder = new Label();
 
                     };
                     i++;
-                    toAdd.Add(folder);
+              
                 
                 }
 
