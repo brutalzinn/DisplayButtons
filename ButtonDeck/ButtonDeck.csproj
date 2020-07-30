@@ -536,6 +536,8 @@
     <EmbeddedResource Include="Interface\Window.resx">
       <DependentUpon>Window.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Langs\langres.en.resx" />
+    <EmbeddedResource Include="Langs\langres.pt.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

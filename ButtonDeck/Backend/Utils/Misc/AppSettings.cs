@@ -113,7 +113,7 @@ namespace ButtonDeck.Backend.Utils
         public bool OBSPluginNagged { get; set; }
         public bool isDevelopermode { get; set; } = false;
         public string IFTTTAPIKey { get; set; }
-
+        public string Language { get; set; }
 
         public KeyInfoAppSettingsGlobal keyMainFolder { get; set; } = new KeyInfoAppSettingsGlobal();
         public KeyInfoAppSettingsGlobal keyBackFolder { get; set; } = new KeyInfoAppSettingsGlobal();

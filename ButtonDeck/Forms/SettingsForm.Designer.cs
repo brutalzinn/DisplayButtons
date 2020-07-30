@@ -39,6 +39,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.colorSchemePreviewControl4 = new ButtonDeck.Controls.ColorSchemePreviewControl();
             this.modernShadowPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +81,7 @@
             // 
             this.modernButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.modernButton2.CustomColorScheme = false;
-            this.modernButton2.Location = new System.Drawing.Point(636, 458);
+            this.modernButton2.Location = new System.Drawing.Point(636, 571);
             this.modernButton2.Name = "modernButton2";
             this.modernButton2.Size = new System.Drawing.Size(117, 39);
             this.modernButton2.TabIndex = 8;
@@ -89,7 +92,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 174);
+            this.label2.Location = new System.Drawing.Point(15, 237);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 21);
             this.label2.TabIndex = 3;
@@ -122,7 +125,7 @@
             this.modernButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.modernButton1.CustomColorScheme = false;
             this.modernButton1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.modernButton1.Location = new System.Drawing.Point(513, 458);
+            this.modernButton1.Location = new System.Drawing.Point(513, 571);
             this.modernButton1.Name = "modernButton1";
             this.modernButton1.Size = new System.Drawing.Size(117, 39);
             this.modernButton1.TabIndex = 8;
@@ -144,7 +147,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 383);
+            this.label3.Location = new System.Drawing.Point(15, 446);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(123, 21);
             this.label3.TabIndex = 10;
@@ -154,7 +157,7 @@
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(17, 407);
+            this.textBox2.Location = new System.Drawing.Point(19, 470);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(736, 29);
             this.textBox2.TabIndex = 11;
@@ -164,21 +167,55 @@
             this.modernShadowPanel1.Controls.Add(this.colorSchemePreviewControl2);
             this.modernShadowPanel1.Controls.Add(this.colorSchemePreviewControl1);
             this.modernShadowPanel1.Controls.Add(this.colorSchemePreviewControl3);
-            this.modernShadowPanel1.Location = new System.Drawing.Point(13, 198);
+            this.modernShadowPanel1.Location = new System.Drawing.Point(15, 261);
             this.modernShadowPanel1.Name = "modernShadowPanel1";
             this.modernShadowPanel1.Size = new System.Drawing.Size(567, 182);
             this.modernShadowPanel1.TabIndex = 12;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "pt-BR",
+            "en-US",
+            "es-EN"});
+            this.comboBox1.Location = new System.Drawing.Point(21, 193);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(733, 29);
+            this.comboBox1.TabIndex = 13;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 159);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 21);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "label4";
+            // 
+            // colorSchemePreviewControl4
+            // 
+            this.colorSchemePreviewControl4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.colorSchemePreviewControl4.DescriptionText = "Neptune";
+            this.colorSchemePreviewControl4.Location = new System.Drawing.Point(588, 269);
+            this.colorSchemePreviewControl4.Name = "colorSchemePreviewControl4";
+            this.colorSchemePreviewControl4.Size = new System.Drawing.Size(177, 167);
+            this.colorSchemePreviewControl4.TabIndex = 10;
+            this.colorSchemePreviewControl4.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
             // 
             // SettingsForm
             // 
             this.AcceptButton = this.modernButton2;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.modernButton1;
-            this.ClientSize = new System.Drawing.Size(766, 510);
+            this.ClientSize = new System.Drawing.Size(766, 623);
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.colorSchemePreviewControl4);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.modernButton1);
@@ -213,5 +250,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
         private NickAc.ModernUIDoneRight.Controls.ModernShadowPanel modernShadowPanel1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label4;
+        private Controls.ColorSchemePreviewControl colorSchemePreviewControl4;
     }
 }

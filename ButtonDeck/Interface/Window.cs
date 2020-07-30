@@ -330,7 +330,7 @@ namespace ScribeBot.Interface
 
         private void Window_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void LayoutPanel_Paint(object sender, PaintEventArgs e)

@@ -11,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
+using System.Resources;
+using System.Globalization;
 
 namespace ButtonDeck.Forms
 {
@@ -29,6 +32,7 @@ namespace ButtonDeck.Forms
             PrepareColorPreviews();
             textBox1.Text = OldSettings.DeviceName;
             textBox2.Text = OldSettings.IFTTTAPIKey;
+            comboBox1.Text = ApplicationSettingsManager.Settings.Language;
             textBox1.TextChanged += (s, e) => {
                 if (s is TextBox txt) {
                     hasSaved = txt.Text == OldSettings.DeviceName;
@@ -72,6 +76,8 @@ namespace ButtonDeck.Forms
             colorSchemePreviewControl3.AppTheme = ColorSchemeCentral.KindaGreen;
             colorSchemePreviewControl3.UnderlyingAppTheme = AppSettings.AppTheme.KindaGreen;
 
+
+
             modernShadowPanel1.Controls.OfType<ColorSchemePreviewControl>().All((c) => {
                 c.Tag = ApplicationSettingsManager.Settings.Theme == c.UnderlyingAppTheme ? new object() : null;
                 ((ColorSchemePreviewControl)c).FixMyTheme();
@@ -97,6 +103,7 @@ namespace ButtonDeck.Forms
         private void ModernButton2_Click(object sender, EventArgs e)
         {
             hasSaved = true;
+            ApplicationSettingsManager.Settings.Language = comboBox1.Text ;
             ApplicationSettingsManager.Settings.DeviceName = textBox1.Text;
             ApplicationSettingsManager.Settings.IFTTTAPIKey = textBox2.Text;
             Close();
@@ -112,10 +119,14 @@ namespace ButtonDeck.Forms
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            label1.Text = Texts.GetText("DEVICENAME");
-            label2.Text = Texts.GetText("THEME");
-            modernButton1.Text = Texts.GetText("BUTTONCANCEL");
-            modernButton2.Text = Texts.GetText("BUTTONSAVE");
+            Texts.initilizeLang();
+            
+
+            label1.Text = Texts.rm.GetString("DEVICENAME",Texts.cultereinfo);
+            label2.Text = Texts.rm.GetString("THEME", Texts.cultereinfo);
+            label4.Text = Texts.rm.GetString("LANGUAGE", Texts.cultereinfo);
+            modernButton1.Text = Texts.rm.GetString("BUTTONCANCEL", Texts.cultereinfo);
+            modernButton2.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
         }
     }
 }

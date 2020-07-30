@@ -1,8 +1,13 @@
-﻿using System;
+﻿using ButtonDeck.Backend.Utils;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ButtonDeck
 {
@@ -37,6 +42,31 @@ namespace ButtonDeck
             }
 
             return null;
+        }
+        public static CultureInfo cultereinfo = new CultureInfo("pt-BR");
+        public static Assembly a = Assembly.Load("ButtonDeck");
+        public static ResourceManager rm = new ResourceManager("ButtonDeck.Langs.langres", a);
+        public static void initilizeLang()
+        {
+
+            switch (ApplicationSettingsManager.Settings.Language){
+
+
+                case "pt-BR":
+                    cultereinfo = new CultureInfo("pt-BR");
+                    break;
+
+                case "en-US":
+            cultereinfo = new CultureInfo("en-US");
+
+                    break;
+                case "es-EN":
+                    cultereinfo = new CultureInfo("es-UN");
+                    break;
+            }
+     
+          
+
         }
     }
 }

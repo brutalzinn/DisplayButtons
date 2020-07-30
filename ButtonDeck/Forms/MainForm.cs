@@ -278,12 +278,18 @@ namespace ButtonDeck.Forms
 
 
 
+            Texts.initilizeLang();
 
 
 
 
 
             warning_label.ForeColor = ColorScheme.SecondaryColor;
+        }
+        public void setupLanguage()
+        {
+       
+
         }
         public void RegisterMainFolderHotKey()
         {
@@ -3285,12 +3291,12 @@ namespace ButtonDeck.Forms
         private void Painel_developer_Paint(object sender, PaintEventArgs e)
         {
 
-            imageModernButton2.Text = Texts.GetText("BUTTONRELOADALL");
-            imageModernButton5.Text = Texts.GetText("BUTTONRELOADEXTERNBUTTON");
+            imageModernButton2.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
+            imageModernButton5.Text = Texts.rm.GetString("BUTTONRELOADEXTERNBUTTON", Texts.cultereinfo);
 
-            imageModernButton3.Text = Texts.GetText("BUTTONRELOADBUTTONS");
+            imageModernButton3.Text = Texts.rm.GetString("BUTTONRELOADBUTTONS", Texts.cultereinfo);
 
-            imageModernButton4.Text = Texts.GetText("BUTTONOPENCONSOLE");
+            imageModernButton4.Text = Texts.rm.GetString("BUTTONOPENCONSOLE", Texts.cultereinfo);
 
 
 
