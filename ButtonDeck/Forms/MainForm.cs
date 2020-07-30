@@ -340,8 +340,11 @@ namespace ButtonDeck.Forms
                     RefreshAllButtons(true);
                     break;
                 case "back_folder":
-                    CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
-                    RefreshAllButtons(true);
+                    if (CurrentDevice.CurrentFolder.GetParent() != null)
+                    {
+                        CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
+                        RefreshAllButtons(true);
+                    }
                     break;
 
 
