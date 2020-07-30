@@ -157,19 +157,31 @@ namespace ButtonDeck.Misc
 
 
         public int CurrentConnections {
+       
             get {
-                if(Program.mode == 0)
+
+                int result = 0;
+                try
                 {
-                 
-                    return Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+                    if (Program.mode == 0)
+                    {
+
+                         result = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+
+                    }
+                    else
+                    {
+
+                        result = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+
+
+                    }
+                }
+                catch (Exception)
+                {
 
                 }
-                else 
-                {
-            return Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
-
-
-                }
+                return result;
             }
         }
         public override string Text {

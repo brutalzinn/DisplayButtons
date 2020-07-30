@@ -1787,6 +1787,26 @@ namespace ButtonDeck.Forms
             ApplicationColorScheme appTheme = ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme);
             List<DynamicDeckFolder> subFolders = new List<DynamicDeckFolder>();
             List<Control> toAdd = new List<Control>();
+            Label main_foolder = new Label();
+
+            main_foolder.Padding = itemPadding;
+            main_foolder.TextAlign = ContentAlignment.MiddleLeft;
+
+            main_foolder.Font = itemFont;
+
+            main_foolder.Dock = DockStyle.Top;
+            main_foolder.Text = "MAIN_FOOLDER";
+            main_foolder.Height = TextRenderer.MeasureText("MAIN_FOOLDER", itemFont).Height;
+            main_foolder.Click += (s, ee) =>
+            {
+
+                CurrentDevice.CurrentFolder = CurrentDevice.MainFolder;
+
+                //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
+                RefreshAllButtons(true);
+
+            };
+            toAdd.Add(main_foolder);
 
 
             try

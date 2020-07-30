@@ -229,7 +229,7 @@ namespace ButtonDeck.Forms
             this.shadedPanel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.shadedPanel4.Location = new System.Drawing.Point(1, 126);
             this.shadedPanel4.Name = "shadedPanel4";
-            this.shadedPanel4.Size = new System.Drawing.Size(143, 463);
+            this.shadedPanel4.Size = new System.Drawing.Size(149, 463);
             this.shadedPanel4.TabIndex = 6;
             // 
             // MainForm
