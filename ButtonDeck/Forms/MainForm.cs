@@ -1802,8 +1802,8 @@ namespace ButtonDeck.Forms
                 foreach (DynamicDeckFolder item in CurrentDevice.MainFolder.GetSubFolders().ToList())
                 {
                     Label folder = new Label();
-
-                    Label subfolder = new Label();
+Label subfolder = new Label();
+              
 
 
                     folder.Padding = itemPadding;
@@ -1814,10 +1814,11 @@ namespace ButtonDeck.Forms
                         folder.Dock = DockStyle.Top;
                         folder.Text = item.DeckName;
                         folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
-                    if (item.GetSubFolders().Count > 0)
-                    {
+                  
                         foreach (DynamicDeckFolder subitem in ListFolders(item))
                         {
+                            
+                           
                             subfolder.Padding = itemPadding;
                             subfolder.TextAlign = ContentAlignment.MiddleLeft;
 
@@ -1831,11 +1832,13 @@ namespace ButtonDeck.Forms
 
                                                    CurrentDevice.CurrentFolder = subitem;
 
-                        //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
-                        RefreshAllButtons(true);
+                                                   //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
+                                                   RefreshAllButtons(true);
 
                                                };
-                        }
+                        toAdd.Add(subfolder);
+
+
                     }
 
 
@@ -1851,7 +1854,7 @@ namespace ButtonDeck.Forms
                     };
                     i++;
                     toAdd.Add(folder);
-                    toAdd.Add(subfolder);
+                
                 }
 
             }
