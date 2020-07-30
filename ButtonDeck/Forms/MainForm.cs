@@ -253,7 +253,8 @@ namespace ButtonDeck.Forms
             ChangeDeveloperMode();
    MatrizGenerator();
            Refresh();
-
+           
+    
 
             RegisterMainFolderHotKey();
 
@@ -963,9 +964,9 @@ toAdd.AsEnumerable().Reverse().All(m => {
 
 
                 }
-                if (item is DynamicDeckFolder EE && EE != null)
+                if (item is DynamicDeckFolder EE && EE != null && EE.KeyGlobalValue != null && EE.UniqueID != null)
                 {
-                 GlobalHotKeys.Instance.refreshFolder(EE);
+             new GlobalHotKeys().refreshFolder(EE);
 
                 }
                    
@@ -1142,8 +1143,8 @@ toAdd.AsEnumerable().Reverse().All(m => {
         }
         public void Start_configs()
         {
-         
-        
+
+
             //   thread1.Join();
             //      ApplyTheme(panel1);
 
@@ -1154,7 +1155,7 @@ toAdd.AsEnumerable().Reverse().All(m => {
 
                 var Matriz = new MatrizPacket();
                 con.SendPacket(Matriz);
-           
+
             }
             if (Globals.can_refresh)
             {
@@ -1162,11 +1163,11 @@ toAdd.AsEnumerable().Reverse().All(m => {
                 RefreshAllButtons(true);
             }
 
-           
-
             folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
-            GlobalHotKeys teste = new GlobalHotKeys();
-       
+                GenerateFolderList(shadedPanel4);
+
+
+
         }
         public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
@@ -1192,7 +1193,7 @@ toAdd.AsEnumerable().Reverse().All(m => {
 
                 }
                 SendItemsToDevice(CurrentDevice, true);
-                GenerateFolderList(shadedPanel1);
+             //   GenerateFolderList(shadedPanel1);
           //      MatrizGenerator();
 Start_configs();
          
@@ -1202,7 +1203,8 @@ Start_configs();
 
             e.Device.ButtonInteraction += Device_ButtonInteraction;
         }
-
+       
+       
         public void ChangeToDevice(DeckDevice device)
         {
 
@@ -1726,86 +1728,79 @@ Start_configs();
             Padding itemPadding = new Padding(25, 0, 0, 0);
             Font itemFont = new Font(parent.Font.FontFamily, 12);
 
-            List<Control> toFolders = new List<Control>();
-            List<Control> toSubFolders = new List<Control>();
+            parent.Controls.Clear();
             ApplicationColorScheme appTheme = ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme);
 
+            List<Control> toAdd = new List<Control>();
 
 
             try
             {
 
-                Label header_folder = new Label()
+
+
+
+
+
+                int i = 0;
+
+                foreach (DynamicDeckFolder item in folder_globals_keys.ToList())
                 {
-                    Padding = categoryPadding,
-                    TextAlign = ContentAlignment.MiddleLeft,
-                    Font = categoryFont,
-                    BackColor = appTheme.SecondaryColor,
-                    ForeColor = appTheme.ForegroundColor,
-                    Dock = DockStyle.Top,
-                    Text = "Pastas",
-                    Tag = "header",
-                    Height = TextRenderer.MeasureText("Pastas", categoryFont).Height
-                };
+                    Label folder = new Label();
+                    if (i == 0)
+                    {
 
 
+                        folder.Padding = itemPadding;
+                        folder.TextAlign = ContentAlignment.MiddleLeft;
 
-                Label folder_root = new Label()
-                {
-                    Padding = itemPadding,
-                    TextAlign = ContentAlignment.MiddleLeft,
+                        folder.Font = itemFont;
 
-                    Font = itemFont,
+                        folder.Dock = DockStyle.Top;
+                        folder.Text = "MAIN_ROOT";
+                        folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
+                    }
+                    else
+                    {
 
-                    Dock = DockStyle.Top,
-                    Text = "MAIN ROOT",
-                    Tag = "Main_Folder",
-                    Height = TextRenderer.MeasureText("MAIN ROOT", itemFont).Height,
+                        folder.Padding = itemPadding;
+                        folder.TextAlign = ContentAlignment.MiddleLeft;
 
-                };
-                folder_root.Click += (s, ee) => {
+                        folder.Font = itemFont;
 
-                    CurrentDevice.CurrentFolder = CurrentDevice.MainFolder;
+                        folder.Dock = DockStyle.Top;
+                        folder.Text = item.DeckName;
 
-                    //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
-                    RefreshAllButtons(true);
-
-                };
-
-
-                IDeckFolder folder = CurrentDevice.MainFolder;
+                        folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
 
 
-                if (folder != null)
-                {
+                    }
+                        folder.Click += (s, ee) => {
 
-                    //   GetAllFolders(folder.GetSubFolders()[root]);
+                            CurrentDevice.CurrentFolder = item;
 
-                }
+                            //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
+                            RefreshAllButtons(true);
 
-
-
-                foreach (var item in toFolders)
-                {
-
-                    //parent.Controls.Add(item);
-
-
-                }
-
-
-
-
-                //         parent.Controls.Add(folder_root);
-                //         parent.Controls.Add(header_folder);
+                        };
+                        i++;
+                        toAdd.Add(folder);
+                    }
+                
             }
+
+            
+
 
             catch (Exception e)
             {
 
                 Debug.WriteLine("BUG:" + e.ToString());
             }
-
+toAdd.AsEnumerable().Reverse().All(m => {
+                    parent.Controls.Add(m);
+                    return true;
+                });
         }
 
         private void GenerateSidebar(Control parent,bool loadplugins = false)
