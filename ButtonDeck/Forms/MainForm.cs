@@ -35,6 +35,8 @@ using ConnectionState = ButtonDeck.Backend.Networking.TcpLib.ConnectionState;
 using SharpAdbClient;
 using System.Threading.Tasks;
 using ButtonDeck.Bibliotecas;
+using NHotkey.WindowsForms;
+using NHotkey;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -253,7 +255,9 @@ namespace ButtonDeck.Forms
            Refresh();
 
 
+            RegisterMainFolderHotKey();
 
+            RegisterBackFolderHotKey();
 
 
 
@@ -269,6 +273,85 @@ namespace ButtonDeck.Forms
 
             warning_label.ForeColor = ColorScheme.SecondaryColor;
         }
+        public void RegisterMainFolderHotKey()
+        {
+
+            string value1 = string.Join("+", ApplicationSettingsManager.Settings.keyMainFolder.ModifierKeys.Where(c => c != Keys.None).Select(c => c.ToString()).OrderBy(c => c));
+            string value2 = string.Join("+", ApplicationSettingsManager.Settings.keyMainFolder.Keys.Where(c => !(c == Keys.ShiftKey || c == Keys.ControlKey || c == Keys.Menu)));
+            string resultMainFolder = string.IsNullOrEmpty(value1) ? value2 : string.IsNullOrEmpty(value2) ? value1 : (string.Join("+", value1, value2));
+            resultMainFolder = resultMainFolder.Replace("Control", "Ctrl");
+
+            System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
+
+            if (!string.IsNullOrEmpty(resultMainFolder))
+            {
+                try
+                {
+                    System.Windows.Forms.KeysConverter kc = new System.Windows.Forms.KeysConverter();
+                    retval = (System.Windows.Forms.Keys)kc.ConvertFromInvariantString(resultMainFolder);
+
+                    HotkeyManager.Current.AddOrReplace("main_folder", retval, MyEventHandler);
+                   
+
+                }
+                catch (Exception ex)
+                {
+                    //Debug.(ex.ToString());
+                }
+            }
+               
+
+        }
+        public void RegisterBackFolderHotKey()
+        {
+
+            string value1 = string.Join("+", ApplicationSettingsManager.Settings.keyBackFolder.ModifierKeys.Where(c => c != Keys.None).Select(c => c.ToString()).OrderBy(c => c));
+            string value2 = string.Join("+", ApplicationSettingsManager.Settings.keyBackFolder.Keys.Where(c => !(c == Keys.ShiftKey || c == Keys.ControlKey || c == Keys.Menu)));
+            string resultBackFolder = string.IsNullOrEmpty(value1) ? value2 : string.IsNullOrEmpty(value2) ? value1 : (string.Join("+", value1, value2));
+            resultBackFolder = resultBackFolder.Replace("Control", "Ctrl");
+
+            System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
+
+            if (!string.IsNullOrEmpty(resultBackFolder))
+            {
+                try
+                {
+                    System.Windows.Forms.KeysConverter kc = new System.Windows.Forms.KeysConverter();
+                    retval = (System.Windows.Forms.Keys)kc.ConvertFromInvariantString(resultBackFolder);
+
+                    HotkeyManager.Current.AddOrReplace("back_folder", retval, MyEventHandler);
+
+
+                }
+                catch (Exception ex)
+                {
+                    //Debug.(ex.ToString());
+                }
+            }
+
+
+        }
+        public void MyEventHandler(object sender, HotkeyEventArgs e)
+        {
+            switch (e.Name)
+            {
+                case "main_folder":
+                    CurrentDevice.CurrentFolder = CurrentDevice.MainFolder;
+                    RefreshAllButtons(true);
+                    break;
+                case "back_folder":
+                    CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
+                    RefreshAllButtons(true);
+                    break;
+
+
+
+            }
+          
+            e.Handled = true;
+        }
+
+
         public void ChangeDeveloperMode()
         {
 
