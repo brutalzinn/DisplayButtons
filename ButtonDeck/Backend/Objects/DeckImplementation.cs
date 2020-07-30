@@ -111,7 +111,7 @@ namespace ButtonDeck.Backend.Objects
         private void AutoConnectedUsb()
         {
 
-   //System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
+System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
 
 
             var list = Program.device_list;
