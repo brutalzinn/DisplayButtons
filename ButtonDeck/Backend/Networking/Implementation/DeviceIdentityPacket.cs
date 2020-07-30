@@ -63,7 +63,7 @@ namespace ButtonDeck.Backend.Networking.Implementation
             {
 //                UsbMode teste = new UsbMode();
               
-//             MainForm.Instance.StartUsbMode();  
+          MainForm.Instance.StartUsbMode();  
 //MainForm.Instance.CurrentDevice = deckDevice;
 //                //   teste.MountUsbDevices();
 

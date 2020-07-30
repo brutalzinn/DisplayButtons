@@ -111,7 +111,7 @@ namespace ButtonDeck.Backend.Objects
         private void AutoConnectedUsb()
         {
 
-          System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
+   //System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
 
 
             var list = Program.device_list;
@@ -167,7 +167,7 @@ namespace ButtonDeck.Backend.Objects
                                     Debug.WriteLine("Reconectado.");
 
 
-                                    MainForm.Instance.StartUsbMode();
+                                //    MainForm.Instance.StartUsbMode();
 
 
 
@@ -176,7 +176,7 @@ namespace ButtonDeck.Backend.Objects
 
 
                                     MainForm.Instance.CurrentDevice = item;
-                                //   teste.MountUsbDevices();
+                                 //teste.MountUsbDevices();
 
 
 
@@ -202,9 +202,11 @@ namespace ButtonDeck.Backend.Objects
 
                     }
 
-                Thread.Sleep(5000);
+        
            // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
   }
+
+
         }
 
     }

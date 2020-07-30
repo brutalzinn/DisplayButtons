@@ -245,11 +245,11 @@ namespace ButtonDeck.Forms
           ApplySidebarTheme(painel_developer);
             shadedPanel2.Hide();
             shadedPanel1.Hide();
-          
-            ButtonCreator();
-            ApplyTheme(panel1);
-            ChangeDeveloperMode();
 
+         
+           
+            ChangeDeveloperMode();
+   MatrizGenerator();
            Refresh();
 
 
@@ -534,7 +534,7 @@ namespace ButtonDeck.Forms
         }
 
      
-        public void ButtonCreator()
+        public void MatrizGenerator()
         {
             
                 Invoke(new Action(() =>
@@ -801,21 +801,25 @@ namespace ButtonDeck.Forms
                             toAdd.Add(control);
 
                           
-                            if (toAdd.Count >= Globals.calc)
+                            if (toAdd.Count == Globals.calc)
                             {
   
 toAdd.AsEnumerable().Reverse().All(m => {
     panel1.Controls.Add(m);
+
+
+
                                    return true;
                                 });
-                               
+                                ApplyTheme(panel1);
                                 Globals.can_refresh = true;
-                                RefreshAllButtons(true);
+                       RefreshAllButtons(true); 
+
                     //            break;
 
                             }
                           
-Application.DoEvents();
+//Application.DoEvents();
                          
                         //      Refresh();
                     }
@@ -1064,9 +1068,13 @@ Application.DoEvents();
 
                 var Matriz = new MatrizPacket();
                 con.SendPacket(Matriz);
-                //RefreshAllButtons(true);
+           
             }
+            if (Globals.can_refresh)
+            {
 
+                RefreshAllButtons(true);
+            }
 
            
 
@@ -1093,12 +1101,13 @@ Application.DoEvents();
 
                 if (CurrentDevice == null) {
                     ChangeToDevice(e.Device);
-                        
+               
 
 
                 }
                 SendItemsToDevice(CurrentDevice, true);
                 GenerateFolderList(shadedPanel1);
+          //      MatrizGenerator();
 Start_configs();
          
 

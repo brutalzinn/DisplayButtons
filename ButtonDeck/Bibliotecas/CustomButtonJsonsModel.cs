@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace ButtonDeck.Bibliotecas
 {
-    class CustomButtonJsonsModel
-    {
+ 
         public class Labels
         {
             private int id;
@@ -156,5 +155,5 @@ namespace ButtonDeck.Bibliotecas
 
 
         }
-    }
+    
 }

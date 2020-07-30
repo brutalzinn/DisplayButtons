@@ -108,11 +108,12 @@ namespace ButtonDeck.Forms
                                 Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
                                 try
                                 {
+                                
                                     Program.ClientThread.Stop();
                                     Program.ClientThread = new Misc.ClientThread();
                                     Program.ClientThread.Start();
 
-                                //    MainForm.Instance.StartUsbMode();
+                            //MainForm.Instance.StartUsbMode();  
 
                                 }
                                 catch (Exception eee)
