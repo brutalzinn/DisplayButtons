@@ -141,6 +141,9 @@
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Key</value>
   </data>
+  <data name="KEYSELECTOR" xml:space="preserve">
+    <value>Key Selector - Editor</value>
+  </data>
   <data name="LANGUAGE" xml:space="preserve">
     <value>Language</value>
   </data>

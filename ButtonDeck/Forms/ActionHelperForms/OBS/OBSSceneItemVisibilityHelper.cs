@@ -26,6 +26,11 @@ namespace ButtonDeck.Forms.ActionHelperForms.OBS
         public OBSSceneItemVisibilityHelper()
         {
             InitializeComponent();
+
+
+            appBar1.Text = Texts.rm.GetString("OBS_SCENE_VISIBILITY_ITEM", Texts.cultereinfo);
+            label1.Text = Texts.rm.GetString("OBS_SCENE_VISIBILITY_NAME_LABEL", Texts.cultereinfo);
+            label2.Text = Texts.rm.GetString("OBS_SCENE_VISIBILITY_ITEM_LABEL", Texts.cultereinfo);
         }
 
         private void OBSSceneItemVisibilityHelper_Load(object sender, EventArgs e)

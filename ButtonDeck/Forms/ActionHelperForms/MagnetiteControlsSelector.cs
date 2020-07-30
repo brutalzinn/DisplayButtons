@@ -132,7 +132,8 @@ namespace ButtonDeck.Forms.ActionHelperForms
 
         private void MagnetiteControlsSelector_Load(object sender, EventArgs e)
         {
-
+            appBar1.Text = Texts.rm.GetString("KEYSELECTOR", Texts.cultereinfo);
+            label1.Text = Texts.rm.GetString("KEYSELECTOR_KEY", Texts.cultereinfo);
         }
     }
 }

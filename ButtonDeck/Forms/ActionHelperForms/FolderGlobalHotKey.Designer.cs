@@ -39,12 +39,14 @@
             // 
             this.appBar1.CastShadow = true;
             this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.appBar1.HamburgerButtonSize = 32;
             this.appBar1.IconVisible = false;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
+            this.appBar1.OverrideParentText = false;
             this.appBar1.Size = new System.Drawing.Size(425, 50);
             this.appBar1.TabIndex = 0;
-            this.appBar1.Text = "appBar1";
+            this.appBar1.Text = "Key Selector - Editor";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
             // label1
@@ -59,7 +61,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.BackColor = System.Drawing.SystemColors.Window;
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -72,6 +74,7 @@
             // modernButton3
             // 
             this.modernButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.modernButton3.CustomColorScheme = false;
             this.modernButton3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.modernButton3.Location = new System.Drawing.Point(174, 166);
             this.modernButton3.Name = "modernButton3";
@@ -84,6 +87,7 @@
             // modernButton2
             // 
             this.modernButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.modernButton2.CustomColorScheme = false;
             this.modernButton2.Location = new System.Drawing.Point(297, 166);
             this.modernButton2.Name = "modernButton2";
             this.modernButton2.Size = new System.Drawing.Size(117, 39);
@@ -92,12 +96,14 @@
             this.modernButton2.UseVisualStyleBackColor = true;
             this.modernButton2.Click += new System.EventHandler(this.ModernButton2_Click);
             // 
-            // KeyInfoHelper
+            // FolderGlobalHotKey
             // 
             this.AcceptButton = this.modernButton2;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.modernButton3;
             this.ClientSize = new System.Drawing.Size(427, 218);
+            this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
+            this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.modernButton3);
@@ -107,9 +113,10 @@
             this.Controls.Add(this.appBar1);
             this.KeyPreview = true;
             this.Location = new System.Drawing.Point(0, 0);
-            this.Name = "KeyInfoHelper";
+            this.Name = "FolderGlobalHotKey";
             this.Sizable = false;
             this.Text = "Key Selector - Editor";
+            this.Load += new System.EventHandler(this.FolderGlobalHotKey_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FolderGlobalHotKey_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FolderGlobalHotKey_KeyUp);
             this.ResumeLayout(false);

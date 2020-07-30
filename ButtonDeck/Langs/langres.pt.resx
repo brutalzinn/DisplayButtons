@@ -141,8 +141,29 @@
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Chave</value>
   </data>
+  <data name="KEYSELECTOR" xml:space="preserve">
+    <value>Seletor de teclas - Editor</value>
+  </data>
+  <data name="KEYSELECTOR_KEY" xml:space="preserve">
+    <value>Tecla</value>
+  </data>
   <data name="LANGUAGE" xml:space="preserve">
     <value>Língua</value>
+  </data>
+  <data name="OBS_SCENE_CHANGE" xml:space="preserve">
+    <value>OBS seletor de cena  - Editor</value>
+  </data>
+  <data name="OBS_SCENE_CHANGE_LABEL" xml:space="preserve">
+    <value>Cena selecionada</value>
+  </data>
+  <data name="OBS_SCENE_VISIBILITY_ITEM" xml:space="preserve">
+    <value>OBS visibilidade de item - Editor</value>
+  </data>
+  <data name="OBS_SCENE_VISIBILITY_ITEM_LABEL" xml:space="preserve">
+    <value>Item da cena</value>
+  </data>
+  <data name="OBS_SCENE_VISIBILITY_NAME_LABEL" xml:space="preserve">
+    <value>Nome da cena</value>
   </data>
   <data name="THEME" xml:space="preserve">
     <value>Tema</value>

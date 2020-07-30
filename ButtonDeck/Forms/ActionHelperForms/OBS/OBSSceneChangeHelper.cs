@@ -21,6 +21,9 @@ namespace ButtonDeck.Forms.ActionHelperForms.OBS
         public OBSSceneChangeHelper()
         {
             InitializeComponent();
+       //     Texts.initilizeLang();
+            appBar1.Text = Texts.rm.GetString("OBS_SCENE_CHANGE", Texts.cultereinfo);
+            label1.Text = Texts.rm.GetString("OBS_SCENE_CHANGE_LABEL", Texts.cultereinfo);
         }
 
         private void CloseWithResult(DialogResult result)

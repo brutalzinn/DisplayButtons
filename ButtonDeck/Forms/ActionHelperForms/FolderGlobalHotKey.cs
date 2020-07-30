@@ -95,5 +95,11 @@ namespace ButtonDeck.Forms.ActionHelperForms
         {
             CloseWithResult(DialogResult.Cancel);
         }
+
+        private void FolderGlobalHotKey_Load(object sender, EventArgs e)
+        {
+            appBar1.Text = Texts.rm.GetString("KEYSELECTOR", Texts.cultereinfo);
+            label1.Text = Texts.rm.GetString("KEYSELECTOR_KEY", Texts.cultereinfo);
+        }
     }
 }
