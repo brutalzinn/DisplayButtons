@@ -109,5 +109,13 @@ namespace ButtonDeck.Forms
             ColorSchemeCentral.OnThemeChanged(this);
             Close();
         }
+
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+            label1.Text = Texts.GetText("DEVICENAME");
+            label2.Text = Texts.GetText("THEME");
+            modernButton1.Text = Texts.GetText("BUTTONCANCEL");
+            modernButton2.Text = Texts.GetText("BUTTONSAVE");
+        }
     }
 }

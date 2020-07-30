@@ -46,12 +46,14 @@
             // 
             this.appBar1.CastShadow = true;
             this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.appBar1.HamburgerButtonSize = 32;
             this.appBar1.IconVisible = false;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
+            this.appBar1.OverrideParentText = false;
             this.appBar1.Size = new System.Drawing.Size(764, 50);
             this.appBar1.TabIndex = 0;
-            this.appBar1.Text = "appBar1";
+            this.appBar1.Text = "ButtonDeck - Settings";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
             // label1
@@ -75,6 +77,7 @@
             // modernButton2
             // 
             this.modernButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.modernButton2.CustomColorScheme = false;
             this.modernButton2.Location = new System.Drawing.Point(636, 458);
             this.modernButton2.Name = "modernButton2";
             this.modernButton2.Size = new System.Drawing.Size(117, 39);
@@ -117,6 +120,7 @@
             // modernButton1
             // 
             this.modernButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.modernButton1.CustomColorScheme = false;
             this.modernButton1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.modernButton1.Location = new System.Drawing.Point(513, 458);
             this.modernButton1.Name = "modernButton1";
@@ -171,6 +175,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.modernButton1;
             this.ClientSize = new System.Drawing.Size(766, 510);
+            this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
+            this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.label3);
@@ -186,6 +192,7 @@
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "SettingsForm";
             this.Text = "ButtonDeck - Settings";
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.modernShadowPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -159,6 +159,7 @@ namespace ButtonDeck.Forms
             this.painel_developer.Size = new System.Drawing.Size(814, 43);
             this.painel_developer.TabIndex = 5;
             this.painel_developer.Visible = false;
+            this.painel_developer.Paint += new System.Windows.Forms.PaintEventHandler(this.Painel_developer_Paint);
             // 
             // shadedPanel3
             // 

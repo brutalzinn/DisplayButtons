@@ -3281,6 +3281,21 @@ namespace ButtonDeck.Forms
         {
             openConsoleDeveloper();
         }
+
+        private void Painel_developer_Paint(object sender, PaintEventArgs e)
+        {
+
+            imageModernButton2.Text = Texts.GetText("BUTTONRELOADALL");
+            imageModernButton5.Text = Texts.GetText("BUTTONRELOADEXTERNBUTTON");
+
+            imageModernButton3.Text = Texts.GetText("BUTTONRELOADBUTTONS");
+
+            imageModernButton4.Text = Texts.GetText("BUTTONOPENCONSOLE");
+
+
+
+
+        }
     }
     #endregion
 }
