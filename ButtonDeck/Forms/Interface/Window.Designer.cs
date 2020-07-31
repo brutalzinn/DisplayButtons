@@ -71,13 +71,6 @@ namespace ScribeBot.Interface
             this.label4 = new System.Windows.Forms.Label();
             this.packageEntryPoint = new System.Windows.Forms.TextBox();
             this.packageDescription = new System.Windows.Forms.TextBox();
-            this.settingsPage = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.infoVersion = new System.Windows.Forms.Label();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkUpdate = new System.Windows.Forms.Button();
-            this.downloadUpdate = new System.Windows.Forms.Button();
             this.packageFolderSelectDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -98,10 +91,6 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
-            this.settingsPage.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // consolePanel
@@ -114,7 +103,7 @@ namespace ScribeBot.Interface
             this.consolePanel.Margin = new System.Windows.Forms.Padding(5);
             this.consolePanel.Name = "consolePanel";
             this.consolePanel.Padding = new System.Windows.Forms.Padding(5);
-            this.consolePanel.Size = new System.Drawing.Size(811, 552);
+            this.consolePanel.Size = new System.Drawing.Size(795, 513);
             this.consolePanel.TabIndex = 0;
             this.consolePanel.TabStop = false;
             this.consolePanel.Text = "Console";
@@ -194,7 +183,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel2.Controls.Add(this.ColorDisplay, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.consoleClearButton, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.CursorPosDisplay, 0, 0);
@@ -211,7 +200,7 @@ namespace ScribeBot.Interface
             // 
             this.ColorDisplay.AutoSize = true;
             this.ColorDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ColorDisplay.Location = new System.Drawing.Point(141, 0);
+            this.ColorDisplay.Location = new System.Drawing.Point(140, 0);
             this.ColorDisplay.Margin = new System.Windows.Forms.Padding(0);
             this.ColorDisplay.Name = "ColorDisplay";
             this.ColorDisplay.Size = new System.Drawing.Size(141, 32);
@@ -225,10 +214,10 @@ namespace ScribeBot.Interface
             this.consoleClearButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
             this.consoleClearButton.ForeColor = System.Drawing.SystemColors.InfoText;
             this.consoleClearButton.Image = global::ButtonDeck.Properties.Resources.CleanData_16x;
-            this.consoleClearButton.Location = new System.Drawing.Point(423, 0);
+            this.consoleClearButton.Location = new System.Drawing.Point(422, 0);
             this.consoleClearButton.Margin = new System.Windows.Forms.Padding(0);
             this.consoleClearButton.Name = "consoleClearButton";
-            this.consoleClearButton.Size = new System.Drawing.Size(37, 32);
+            this.consoleClearButton.Size = new System.Drawing.Size(38, 32);
             this.consoleClearButton.TabIndex = 1;
             this.consoleClearButton.UseVisualStyleBackColor = false;
             this.consoleClearButton.Click += new System.EventHandler(this.consoleClearButton_Click);
@@ -240,7 +229,7 @@ namespace ScribeBot.Interface
             this.CursorPosDisplay.Location = new System.Drawing.Point(0, 0);
             this.CursorPosDisplay.Margin = new System.Windows.Forms.Padding(0);
             this.CursorPosDisplay.Name = "CursorPosDisplay";
-            this.CursorPosDisplay.Size = new System.Drawing.Size(141, 32);
+            this.CursorPosDisplay.Size = new System.Drawing.Size(140, 32);
             this.CursorPosDisplay.TabIndex = 2;
             this.CursorPosDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -256,7 +245,7 @@ namespace ScribeBot.Interface
             this.layoutPanel.Name = "layoutPanel";
             this.layoutPanel.RowCount = 1;
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutPanel.Size = new System.Drawing.Size(1113, 562);
+            this.layoutPanel.Size = new System.Drawing.Size(1097, 523);
             this.layoutPanel.TabIndex = 1;
             this.layoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.LayoutPanel_Paint);
             // 
@@ -264,13 +253,12 @@ namespace ScribeBot.Interface
             // 
             this.optionsPanel.Controls.Add(this.scriptsPage);
             this.optionsPanel.Controls.Add(this.workshopPage);
-            this.optionsPanel.Controls.Add(this.settingsPage);
             this.optionsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.optionsPanel.Location = new System.Drawing.Point(826, 5);
+            this.optionsPanel.Location = new System.Drawing.Point(810, 5);
             this.optionsPanel.Margin = new System.Windows.Forms.Padding(5);
             this.optionsPanel.Name = "optionsPanel";
             this.optionsPanel.SelectedIndex = 0;
-            this.optionsPanel.Size = new System.Drawing.Size(282, 552);
+            this.optionsPanel.Size = new System.Drawing.Size(282, 513);
             this.optionsPanel.TabIndex = 1;
             // 
             // scriptsPage
@@ -281,7 +269,7 @@ namespace ScribeBot.Interface
             this.scriptsPage.Margin = new System.Windows.Forms.Padding(0);
             this.scriptsPage.Name = "scriptsPage";
             this.scriptsPage.Padding = new System.Windows.Forms.Padding(10);
-            this.scriptsPage.Size = new System.Drawing.Size(274, 524);
+            this.scriptsPage.Size = new System.Drawing.Size(274, 485);
             this.scriptsPage.TabIndex = 0;
             this.scriptsPage.Text = "PACOTES";
             this.scriptsPage.UseVisualStyleBackColor = true;
@@ -361,7 +349,7 @@ namespace ScribeBot.Interface
             this.workshopPage.Location = new System.Drawing.Point(4, 24);
             this.workshopPage.Name = "workshopPage";
             this.workshopPage.Padding = new System.Windows.Forms.Padding(5);
-            this.workshopPage.Size = new System.Drawing.Size(274, 520);
+            this.workshopPage.Size = new System.Drawing.Size(274, 524);
             this.workshopPage.TabIndex = 1;
             this.workshopPage.Text = "Workshop";
             this.workshopPage.UseVisualStyleBackColor = true;
@@ -382,7 +370,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(264, 510);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(264, 514);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // tableLayoutPanel7
@@ -391,7 +379,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel7.Controls.Add(this.workshopFetchButton, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 242);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 244);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -442,11 +430,11 @@ namespace ScribeBot.Interface
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel4);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(5, 275);
+            this.groupBox1.Location = new System.Drawing.Point(5, 277);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(254, 230);
+            this.groupBox1.Size = new System.Drawing.Size(254, 232);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Create Package";
@@ -618,113 +606,6 @@ namespace ScribeBot.Interface
             this.packageDescription.Size = new System.Drawing.Size(139, 59);
             this.packageDescription.TabIndex = 7;
             // 
-            // settingsPage
-            // 
-            this.settingsPage.Controls.Add(this.tableLayoutPanel1);
-            this.settingsPage.Location = new System.Drawing.Point(4, 24);
-            this.settingsPage.Margin = new System.Windows.Forms.Padding(0);
-            this.settingsPage.Name = "settingsPage";
-            this.settingsPage.Padding = new System.Windows.Forms.Padding(10);
-            this.settingsPage.Size = new System.Drawing.Size(274, 520);
-            this.settingsPage.TabIndex = 2;
-            this.settingsPage.Text = "Opções";
-            this.settingsPage.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(69)))), ((int)(((byte)(75)))));
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.infoVersion, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel10, 0, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 10);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(5);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(254, 500);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(254, 450);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // infoVersion
-            // 
-            this.infoVersion.AutoSize = true;
-            this.infoVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.infoVersion.ForeColor = System.Drawing.Color.White;
-            this.infoVersion.Location = new System.Drawing.Point(0, 450);
-            this.infoVersion.Margin = new System.Windows.Forms.Padding(0);
-            this.infoVersion.Name = "infoVersion";
-            this.infoVersion.Padding = new System.Windows.Forms.Padding(5);
-            this.infoVersion.Size = new System.Drawing.Size(254, 25);
-            this.infoVersion.TabIndex = 1;
-            this.infoVersion.Text = "Version";
-            this.infoVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.AutoSize = true;
-            this.tableLayoutPanel10.ColumnCount = 2;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel10.Controls.Add(this.checkUpdate, 0, 0);
-            this.tableLayoutPanel10.Controls.Add(this.downloadUpdate, 1, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 475);
-            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 1;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(254, 25);
-            this.tableLayoutPanel10.TabIndex = 1;
-            // 
-            // checkUpdate
-            // 
-            this.checkUpdate.BackColor = System.Drawing.Color.Transparent;
-            this.checkUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(201)))), ((int)(((byte)(175)))));
-            this.checkUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(124)))), ((int)(((byte)(190)))));
-            this.checkUpdate.Location = new System.Drawing.Point(1, 1);
-            this.checkUpdate.Margin = new System.Windows.Forms.Padding(1);
-            this.checkUpdate.Name = "checkUpdate";
-            this.checkUpdate.Size = new System.Drawing.Size(125, 23);
-            this.checkUpdate.TabIndex = 3;
-            this.checkUpdate.Text = "Check";
-            this.checkUpdate.UseVisualStyleBackColor = false;
-            this.checkUpdate.Click += new System.EventHandler(this.checkUpdate_Click);
-            // 
-            // downloadUpdate
-            // 
-            this.downloadUpdate.BackColor = System.Drawing.Color.Transparent;
-            this.downloadUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.downloadUpdate.Enabled = false;
-            this.downloadUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(201)))), ((int)(((byte)(175)))));
-            this.downloadUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
-            this.downloadUpdate.Location = new System.Drawing.Point(128, 1);
-            this.downloadUpdate.Margin = new System.Windows.Forms.Padding(1);
-            this.downloadUpdate.Name = "downloadUpdate";
-            this.downloadUpdate.Size = new System.Drawing.Size(125, 23);
-            this.downloadUpdate.TabIndex = 2;
-            this.downloadUpdate.Text = "Update";
-            this.downloadUpdate.UseVisualStyleBackColor = false;
-            this.downloadUpdate.Click += new System.EventHandler(this.downloadUpdate_Click);
-            // 
             // notifyIcon1
             // 
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
@@ -741,7 +622,7 @@ namespace ScribeBot.Interface
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.layoutPanel);
-           
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Location = new System.Drawing.Point(0, 0);
@@ -776,11 +657,6 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
-            this.settingsPage.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tableLayoutPanel10.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -825,13 +701,6 @@ namespace ScribeBot.Interface
         private Label label4;
         private TextBox packageEntryPoint;
         private TextBox packageDescription;
-        private TabPage settingsPage;
-        private TableLayoutPanel tableLayoutPanel1;
-        private PictureBox pictureBox1;
-        private Label infoVersion;
-        private TableLayoutPanel tableLayoutPanel10;
-        private Button checkUpdate;
-        private Button downloadUpdate;
         public Label CursorPosDisplay;
         public Label ColorDisplay;
         public RichTextBox consoleOutput;
