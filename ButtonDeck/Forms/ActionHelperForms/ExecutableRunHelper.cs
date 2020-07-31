@@ -91,6 +91,11 @@ namespace ButtonDeck.Forms.ActionHelperForms
         public ExecutableRunHelper()
         {
             InitializeComponent();
+           
+            appBar1.Text = Texts.rm.GetString("EXECUTABLE_RUN_ACTION", Texts.cultereinfo);
+            label1.Text = Texts.rm.GetString("EXECUTABLE_RUN_ACTION_LOCATION", Texts.cultereinfo);
+            label2.Text = Texts.rm.GetString("EXECUTABLE_RUN_ACTION_ARGS", Texts.cultereinfo);
+            checkBox1.Text = Texts.rm.GetString("EXECUTABLE_RUN_ACTION_ISTOWARNING", Texts.cultereinfo);
         }
 
         public string ToExecuteArguments {

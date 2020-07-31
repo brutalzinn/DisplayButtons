@@ -106,6 +106,7 @@ namespace ButtonDeck.Forms
             ApplicationSettingsManager.Settings.Language = comboBox1.Text ;
             ApplicationSettingsManager.Settings.DeviceName = textBox1.Text;
             ApplicationSettingsManager.Settings.IFTTTAPIKey = textBox2.Text;
+            Texts.initilizeLang();
             Close();
         }
 

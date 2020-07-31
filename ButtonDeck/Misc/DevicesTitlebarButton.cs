@@ -188,7 +188,7 @@ namespace ButtonDeck.Misc
             get {
                 _frm.ChangeButtonsVisibility(DevicePersistManager.IsVirtualDeviceConnected);
          
-                return $"{CurrentConnections} Connected Device{(CurrentConnections != 1 ? "s" : "")}";
+                return $"{CurrentConnections} "+ Texts.rm.GetString("CONNECTEDDEVICES", Texts.cultereinfo) + $"{(CurrentConnections != 1 ? "s" : "")}";
             }
             set => base.Text = value;
         }

@@ -149,6 +149,24 @@ namespace ButtonDeck.Forms
         {
             coluna.Text = ApplicationSettingsManager.Settings.coluna.ToString();
             linha.Text = ApplicationSettingsManager.Settings.linha.ToString();
+
+            modernButton2.Text = Texts.rm.GetString("IMPORTPROFILE", Texts.cultereinfo);
+            modernButton1.Text = Texts.rm.GetString("EXPORTPERFIL", Texts.cultereinfo);
+            modernButton11.Text = Texts.rm.GetString("PRINCIPALFOLDER", Texts.cultereinfo);
+            modernButton9.Text = Texts.rm.GetString("BACKFOLDER", Texts.cultereinfo);
+
+
+            modernButton8.Text = Texts.rm.GetString("MATRIZCHANGER", Texts.cultereinfo);
+
+            modernButton4.Text = Texts.rm.GetString("STARTTCPSERVER", Texts.cultereinfo);
+            modernButton3.Text = Texts.rm.GetString("STOPTCPSERVER", Texts.cultereinfo);
+            appBar1.Text = Texts.rm.GetString("APPLICATION_MENU", Texts.cultereinfo); 
+            label1.Text = Texts.rm.GetString("APPLICATIONNAME_DESCRIPTION", Texts.cultereinfo); 
+            modernButton3.Text = Texts.rm.GetString("STOPTCPSERVER", Texts.cultereinfo);
+            modernButton10.Text = Texts.rm.GetString("DEVELOPERMODE", Texts.cultereinfo);
+            modernButton10.Text = Texts.rm.GetString("DEVELOPERMODE", Texts.cultereinfo);
+            modernButton6.Text = Texts.rm.GetString("OBSCONNECTION", Texts.cultereinfo);
+            modernButton5.Text = Texts.rm.GetString("STOPOBSCONNECTION", Texts.cultereinfo);
         }
 
         private void ModernButton9_Click(object sender, EventArgs e)

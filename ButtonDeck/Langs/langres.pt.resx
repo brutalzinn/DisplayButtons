@@ -117,6 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="APPLICATIONNAME_DESCRIPTION" xml:space="preserve">
+    <value>Opções legais que você pode configurar a seu gosto para melhorar  
+o uso do ButtonDeck. Não esqueça de dar seu feedback.
+</value>
+  </data>
+  <data name="APPLICATION_MENU" xml:space="preserve">
+    <value>ButtonDeck - Menu</value>
+  </data>
+  <data name="BACKFOLDER" xml:space="preserve">
+    <value>Pasta anterior</value>
+  </data>
   <data name="BUTTONCANCEL" xml:space="preserve">
     <value>Cancelar</value>
   </data>
@@ -135,11 +146,35 @@
   <data name="BUTTONSAVE" xml:space="preserve">
     <value>Salvar</value>
   </data>
+  <data name="CONNECTEDDEVICES" xml:space="preserve">
+    <value>Dispositivos conectados</value>
+  </data>
+  <data name="DEVELOPERMODE" xml:space="preserve">
+    <value>Modo desenvolvedor</value>
+  </data>
   <data name="DEVICENAME" xml:space="preserve">
     <value>Nome do dispositivo</value>
   </data>
+  <data name="EXECUTABLE_RUN_ACTION" xml:space="preserve">
+    <value>Executor de software - Editor</value>
+  </data>
+  <data name="EXECUTABLE_RUN_ACTION_ARGS" xml:space="preserve">
+    <value>Argumentos</value>
+  </data>
+  <data name="EXECUTABLE_RUN_ACTION_ISTOWARNING" xml:space="preserve">
+    <value>Emitir aviso ao executar</value>
+  </data>
+  <data name="EXECUTABLE_RUN_ACTION_LOCATION" xml:space="preserve">
+    <value>Localização</value>
+  </data>
+  <data name="EXPORTPERFIL" xml:space="preserve">
+    <value>Exportar perfil</value>
+  </data>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Chave</value>
+  </data>
+  <data name="IMPORTPROFILE" xml:space="preserve">
+    <value>Importar perfil</value>
   </data>
   <data name="KEYSELECTOR" xml:space="preserve">
     <value>Seletor de teclas - Editor</value>
@@ -149,6 +184,12 @@
   </data>
   <data name="LANGUAGE" xml:space="preserve">
     <value>Língua</value>
+  </data>
+  <data name="MATRIZCHANGER" xml:space="preserve">
+    <value>Alterar matriz</value>
+  </data>
+  <data name="OBSCONNECTION" xml:space="preserve">
+    <value>Criar conexão OBS</value>
   </data>
   <data name="OBS_SCENE_CHANGE" xml:space="preserve">
     <value>OBS seletor de cena  - Editor</value>
@@ -164,6 +205,18 @@
   </data>
   <data name="OBS_SCENE_VISIBILITY_NAME_LABEL" xml:space="preserve">
     <value>Nome da cena</value>
+  </data>
+  <data name="PRINCIPALFOLDER" xml:space="preserve">
+    <value>Pasta principal</value>
+  </data>
+  <data name="STARTTCPSERVER" xml:space="preserve">
+    <value>Iniciar servidor TCP</value>
+  </data>
+  <data name="STOPOBSCONNECTION" xml:space="preserve">
+    <value>Parar conexão OBS</value>
+  </data>
+  <data name="STOPTCPSERVER" xml:space="preserve">
+    <value>Parar servidor TCP</value>
   </data>
   <data name="THEME" xml:space="preserve">
     <value>Tema</value>

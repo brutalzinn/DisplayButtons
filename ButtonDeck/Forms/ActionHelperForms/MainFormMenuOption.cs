@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ButtonDeck.Backend.Utils;
+using ButtonDeck.Misc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,12 +17,32 @@ namespace ButtonDeck.Forms.ActionHelperForms
         public MainFormMenuOption()
         {
             InitializeComponent();
+          
         }
-
+    private void ApplySidebarTheme(Control parent)
+        {
+            //Headers have the theme's secondary color as background
+            //and the theme's foreground color as text color
+            ApplicationColorScheme appTheme = ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme);
+            parent.Controls.OfType<Control>().All((c) =>
+            {
+                if (c.Tag != null && c.Tag.ToString().ToLowerInvariant() == "header")
+                {
+                    c.BackColor = appTheme.SecondaryColor;
+                    c.ForeColor = appTheme.ForegroundColor;
+                }
+                else
+                {
+                    c.BackColor = appTheme.BackgroundColor;
+                }
+                return true;
+            });
+        }
         private void MainFormMenuOption_Load(object sender, EventArgs e)
         {
-
+            ApplySidebarTheme(shadedPanel1);
         }
+    
         private string _toExecuteFileName;
 
        
