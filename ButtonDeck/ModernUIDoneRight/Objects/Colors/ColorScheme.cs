@@ -1,5 +1,6 @@
 ﻿using NickAc.ModernUIDoneRight.Utils;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using static NickAc.ModernUIDoneRight.Utils.GraphicUtils;
@@ -10,29 +11,48 @@ namespace NickAc.ModernUIDoneRight.Objects
     public class ColorScheme
     {
         #region Constructor
-        public ColorScheme(Color primaryColor, Color secondaryColor, bool ignoreDarks = false)
+        public ColorScheme(Color primaryColor, Color secondaryColor, bool ignoreDarkness = false)
         {
             PrimaryColor = primaryColor;
             SecondaryColor = secondaryColor;
             MouseDownColor = DarkenColor(primaryColor, 0.2f);
             MouseHoverColor = LightenColor(secondaryColor, 0.2F);
-            if (!ignoreDarks)
+            isToIgnoreForegroundColor = ignoreDarkness;
+            if (primaryColor.IsDarker())
             {
-                if (primaryColor.IsDarker())
-                {
-                    MouseDownColor = LightenColor(MouseDownColor, 0.2f);
-                    MouseHoverColor = LightenColor(MouseDownColor, 0.25f);
-                }
+                MouseDownColor = LightenColor(MouseDownColor, 0.2f);
+                MouseHoverColor = LightenColor(MouseDownColor, 0.25f);
             }
+            Debug.WriteLine(ignoreDarkness);
+
+
         }
         #endregion
 
         #region Properties
         public Color PrimaryColor { get; set; }
+        public bool isToIgnoreForegroundColor { get; set; }
         public Color SecondaryColor { get; set; }
         public Color MouseDownColor { get; set; }
         public Color MouseHoverColor { get; set; }
-        public Color ForegroundColor => ForegroundColorForBackground(PrimaryColor);
+        public Color ForegroundColor
+        {
+
+            get
+            {
+
+                if (isToIgnoreForegroundColor)
+                {
+                    return ForegroundColorForBackground(PrimaryColor);
+                }
+                else
+                {
+                   return Color.White;
+                }
+            }
+           
+        }
+            // => ForegroundColorForBackground(PrimaryColor)
         #endregion
 
         #region Static Methods
@@ -46,9 +66,9 @@ namespace NickAc.ModernUIDoneRight.Objects
             return ControlPaint.Light(original, value);
         }
         
-        public static ColorScheme CreateSimpleColorScheme(Color original, bool ignores)
+        public static ColorScheme CreateSimpleColorScheme(Color original)
         {
-            return new ColorScheme(original, DarkenColor(original),ignores);
+            return new ColorScheme(original, DarkenColor(original));
         }
         #endregion
     }

@@ -22,7 +22,7 @@ namespace NickAc.ModernUIDoneRight.Utils
             if (value is string stringVal && ColorConverter != null)
             {
                 var color = (Color) ColorConverter.ConvertFrom(stringVal);
-                return ColorScheme.CreateSimpleColorScheme(color,false);
+                return ColorScheme.CreateSimpleColorScheme(color);
             }
             return base.ConvertFrom(context, culture, value);
         }

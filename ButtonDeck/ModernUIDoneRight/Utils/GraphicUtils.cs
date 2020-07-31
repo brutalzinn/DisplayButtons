@@ -72,7 +72,7 @@ namespace NickAc.ModernUIDoneRight.Utils
             c.G * c.G * .587 +
             c.B * c.B * .114);
         }
-
+        
         public static Color ForegroundColorForBackground(Color back)
         {
             return !IsDark(back) ? Color.Black : Color.White;

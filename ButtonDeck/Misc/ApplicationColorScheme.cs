@@ -10,12 +10,12 @@ namespace ButtonDeck.Misc
 {
     public class ApplicationColorScheme : ColorScheme
     {
-        public ApplicationColorScheme(System.Drawing.Color primaryColor, System.Drawing.Color secondaryColor) : base(primaryColor, secondaryColor)
+        public ApplicationColorScheme(System.Drawing.Color primaryColor, System.Drawing.Color secondaryColor, bool teste = false) : base(primaryColor, secondaryColor, teste)
         {
         }
 
 
-        public ApplicationColorScheme(ColorScheme baseC, Color backColor) : this(baseC.PrimaryColor, baseC.SecondaryColor)
+        public ApplicationColorScheme(ColorScheme baseC, Color backColor, bool teste = false) : this(baseC.PrimaryColor, baseC.SecondaryColor,teste)
         {
             BackgroundColor = backColor;
             ForeColorShaded = baseC.SecondaryColor;

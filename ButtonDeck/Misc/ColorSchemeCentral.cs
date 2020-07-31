@@ -1,4 +1,5 @@
-﻿using NickAc.ModernUIDoneRight.Objects;
+﻿
+using NickAc.ModernUIDoneRight.Objects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -41,10 +42,14 @@ namespace ButtonDeck.Misc
             }
         }
  
+
+
         public static ApplicationColorScheme Neptune = new ApplicationColorScheme(DefaultColorSchemes.Blue, Color.FromArgb(245, 245, 245));
 
         // public static ApplicationColorScheme PinkNanda = new ApplicationColorScheme(new ColorScheme(Color.Magenta, Color.White), Color.FromArgb(255, 255, 255));
-        public static ApplicationColorScheme PinkNanda = new ApplicationColorScheme(new ColorScheme(Color.FromArgb(230, 105, 180), Color.FromArgb(230, 105, 180), false), Color.FromArgb(245, 245, 245));
+        public static ApplicationColorScheme PinkNanda = new ApplicationColorScheme(new ColorScheme(Color.FromArgb(231, 4, 186), Color.FromArgb(231, 4, 186), true), Color.FromArgb(255,255,255));
+
+
         public static ApplicationColorScheme KindaGreen = new ApplicationColorScheme(DefaultColorSchemes.Green, Color.FromArgb(245, 245, 245));
 
         public static ApplicationColorScheme DarkSide = new ApplicationColorScheme(new ColorScheme(Color.FromArgb(45, 45, 45), Color.FromArgb(28, 28, 28)), Color.FromArgb(75, 75, 75));
