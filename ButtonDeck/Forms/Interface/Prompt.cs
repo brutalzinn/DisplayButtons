@@ -26,5 +26,10 @@ namespace ScribeBot.Interface
                 e.Handled = true;
             }
         }
+
+        private void Prompt_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

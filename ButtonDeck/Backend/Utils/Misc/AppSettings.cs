@@ -92,6 +92,7 @@ namespace ButtonDeck.Backend.Utils
         {
             Neptune,
             DarkSide,
+            PinkNanda,
             KindaGreen
         }
 

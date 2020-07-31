@@ -76,6 +76,8 @@ namespace ButtonDeck.Forms
             colorSchemePreviewControl3.AppTheme = ColorSchemeCentral.KindaGreen;
             colorSchemePreviewControl3.UnderlyingAppTheme = AppSettings.AppTheme.KindaGreen;
 
+            colorSchemePreviewControl4.AppTheme = ColorSchemeCentral.PinkNanda;
+            colorSchemePreviewControl4.UnderlyingAppTheme = AppSettings.AppTheme.PinkNanda;
 
 
             modernShadowPanel1.Controls.OfType<ColorSchemePreviewControl>().All((c) => {
@@ -128,6 +130,11 @@ namespace ButtonDeck.Forms
             label4.Text = Texts.rm.GetString("LANGUAGE", Texts.cultereinfo);
             modernButton1.Text = Texts.rm.GetString("BUTTONCANCEL", Texts.cultereinfo);
             modernButton2.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+        }
+
+        private void ModernShadowPanel1_Paint_1(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -96,5 +96,29 @@ namespace ButtonDeck.Forms
         {
             ApplicationColorScheme = ColorSchemeCentral.FromAppTheme(theme);
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // TemplateForm
+            // 
+            this.ClientSize = new System.Drawing.Size(300, 300);
+            this.ColorScheme.isToIgnoreForegroundColor = false;
+            this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
+            this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
+            this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
+            this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Location = new System.Drawing.Point(0, 0);
+            this.Name = "TemplateForm";
+            this.Load += new System.EventHandler(this.TemplateForm_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void TemplateForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

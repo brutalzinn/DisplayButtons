@@ -18,6 +18,7 @@ using SharpAdbClient;
 using System.Net;
 using System.Threading;
 using ButtonDeck.Backend.Objects;
+using ButtonDeck.Forms.ActionHelperForms;
 
 namespace ButtonDeck
 {
@@ -163,8 +164,7 @@ namespace ButtonDeck
 
 
             dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
-            NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
-            NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
+      
             if (form.ShowDialog() == DialogResult.OK)
             {
                 mode = 0;
@@ -240,8 +240,9 @@ namespace ButtonDeck
 
                 }
 
-               
-               Application.Run(new MainForm());
+
+              Application.Run(new MainForm());
+            //Application.Run(new MainFormMenuOption());
             OBSUtils.Disconnect();
             if (mode == 1)
             {
@@ -262,7 +263,9 @@ namespace ButtonDeck
          //   client.KillAdb();
            ApplicationSettingsManager.SaveSettings();
              DevicePersistManager.SaveDevices();
-                Trace.Flush();
+            NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
+            NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
+            Trace.Flush();
         }
     
         private static void NetworkChange_NetworkAddressChanged(object sender, EventArgs e)
