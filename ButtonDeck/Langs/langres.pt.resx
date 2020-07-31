@@ -147,7 +147,7 @@ o uso do ButtonDeck. Não esqueça de dar seu feedback.
     <value>Salvar</value>
   </data>
   <data name="CONNECTEDDEVICES" xml:space="preserve">
-    <value>Dispositivos conectados</value>
+    <value>Dispositivo conectado</value>
   </data>
   <data name="DEVELOPERMODE" xml:space="preserve">
     <value>Modo desenvolvedor</value>

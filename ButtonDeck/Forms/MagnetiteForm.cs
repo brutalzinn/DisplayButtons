@@ -135,6 +135,7 @@ namespace ButtonDeck.Forms
               
                      var Matriz = new MatrizPacket();
                 con.SendPacket(Matriz);
+                    MainForm.Instance.MatrizGenerator();
             }
             }
             catch(Exception ea)
