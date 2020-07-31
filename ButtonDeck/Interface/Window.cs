@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using ButtonDeck;
+using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
 using System;
@@ -330,9 +331,7 @@ namespace ScribeBot.Interface
 
         private void Window_Load(object sender, EventArgs e)
         {
-<<<<<<< Updated upstream
-            
-=======
+
             this.Text = Texts.rm.GetString("PLUGINGERENCIER", Texts.cultereinfo);
             ConsoleRun.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_EXECUTOR", Texts.cultereinfo);
             ScriptStop.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_STOP", Texts.cultereinfo);
@@ -350,7 +349,7 @@ namespace ScribeBot.Interface
             PackageCreateFolder.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_CREATE", Texts.cultereinfo);
 
 
->>>>>>> Stashed changes
+
         }
 
         private void LayoutPanel_Paint(object sender, PaintEventArgs e)
