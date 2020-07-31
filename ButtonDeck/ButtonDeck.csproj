@@ -398,10 +398,10 @@
     <Compile Include="Controls\ShadedPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\ActionHelperForms\MainFormMenuOption.cs">
+    <Compile Include="Forms\MainFormMenuOption.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ActionHelperForms\MainFormMenuOption.Designer.cs">
+    <Compile Include="Forms\MainFormMenuOption.Designer.cs">
       <DependentUpon>MainFormMenuOption.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SettingsForm.cs">
@@ -536,7 +536,7 @@
     <EmbeddedResource Include="Forms\ActionHelperForms\LayerMultiActionHelper.resx">
       <DependentUpon>LayerMultiActionHelper.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ActionHelperForms\MainFormMenuOption.resx">
+    <EmbeddedResource Include="Forms\MainFormMenuOption.resx">
       <DependentUpon>MainFormMenuOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\OBS\OBSSceneChangeHelper.resx">

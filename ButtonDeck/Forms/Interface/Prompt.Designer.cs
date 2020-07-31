@@ -101,6 +101,7 @@ namespace ScribeBot.Interface
             this.Name = "Prompt";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "ScribeBot - Prompt";
+            this.Load += new System.EventHandler(this.Prompt_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
