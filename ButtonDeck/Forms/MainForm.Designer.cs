@@ -31,6 +31,8 @@ namespace ButtonDeck.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.panel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
             this.warning_label = new System.Windows.Forms.Label();
@@ -46,6 +48,7 @@ namespace ButtonDeck.Forms
             this.imageModernButton3 = new ButtonDeck.Controls.ImageModernButton();
             this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
             this.shadedPanel4 = new ButtonDeck.Forms.ShadedPanel();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel1.SuspendLayout();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
@@ -65,6 +68,7 @@ namespace ButtonDeck.Forms
             this.appBar1.TabIndex = 0;
             this.appBar1.Text = "ButtonDeck";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.appBar1.ToolTip = null;
             this.appBar1.Click += new System.EventHandler(this.appBar1_Click);
             // 
             // panel1
@@ -77,6 +81,7 @@ namespace ButtonDeck.Forms
             this.panel1.TabIndex = 2;
             this.panel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.Resize += new System.EventHandler(this.Panel1_Resize);
             // 
             // warning_label
             // 
@@ -233,10 +238,19 @@ namespace ButtonDeck.Forms
             this.shadedPanel4.Size = new System.Drawing.Size(149, 463);
             this.shadedPanel4.TabIndex = 6;
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseClick);
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseDoubleClick);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1072, 590);
+            this.ColorScheme.isToIgnoreForegroundColor = false;
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
@@ -254,6 +268,7 @@ namespace ButtonDeck.Forms
             this.TransparencyKey = System.Drawing.Color.Magenta;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Click += new System.EventHandler(this.Buttons_Unfocus);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.panel1.ResumeLayout(false);
             this.shadedPanel1.ResumeLayout(false);
             this.shadedPanel2.ResumeLayout(false);
@@ -280,6 +295,7 @@ namespace ButtonDeck.Forms
         private ImageModernButton imageModernButton5;
         private ShadedPanel shadedPanel3;
         private ShadedPanel shadedPanel4;
+        private NotifyIcon notifyIcon1;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

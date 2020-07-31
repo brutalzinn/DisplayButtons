@@ -3302,6 +3302,41 @@ namespace ButtonDeck.Forms
 
 
         }
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+
+
+            bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
+
+            if(this.WindowState == FormWindowState.Minimized && cursorNotInBar)
+            {
+
+                this.ShowInTaskbar = false;
+                notifyIcon1.Visible = true;
+                this.Hide();
+            }
+        }
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Panel1_Resize(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NotifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+ 
+        }
+
+        private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.Show();
+        }
     }
     #endregion
 }
