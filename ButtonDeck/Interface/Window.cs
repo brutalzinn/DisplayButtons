@@ -25,7 +25,7 @@ namespace ScribeBot.Interface
         {
             InitializeComponent();
 
-            InfoVersion.Text = Core.Version;
+            //InfoVersion.Text = Core.Version;
 
             ConsoleOutput.Font = new System.Drawing.Font("Arial", 10f);
 
@@ -309,7 +309,7 @@ namespace ScribeBot.Interface
                 if (latestVersion > currentVersion)
                 {
                     Core.WriteLine(new ColorContainer(89, 73, 163), $"New version is available: {tokens.First()["tag_name"]}.\nClick 'Update' to download and install the update.\nData folder will be backed up before the process.");
-                    downloadUpdate.Enabled = true;
+                    //downloadUpdate.Enabled = true;
                 }
                 else
                     Core.WriteLine(new ColorContainer(89, 73, 163), "You have the latest version. No update is neccessary.");
@@ -330,7 +330,27 @@ namespace ScribeBot.Interface
 
         private void Window_Load(object sender, EventArgs e)
         {
+<<<<<<< Updated upstream
             
+=======
+            this.Text = Texts.rm.GetString("PLUGINGERENCIER", Texts.cultereinfo);
+            ConsoleRun.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_EXECUTOR", Texts.cultereinfo);
+            ScriptStop.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_STOP", Texts.cultereinfo);
+            scriptsPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_PACKS", Texts.cultereinfo);
+            workshopPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_WORKSHOP", Texts.cultereinfo);
+    
+            //settingsPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_OPTIONS", Texts.cultereinfo);
+            workshopFetchButton.Text = Texts.rm.GetString("PLUGINGERENCIER_FETCH_BUTTON", Texts.cultereinfo);
+
+
+            label1.Text = Texts.rm.GetString("PLUGINGERENCIER_NAME_LABEL", Texts.cultereinfo);
+            label2.Text = Texts.rm.GetString("PLUGINGERENCIER_AUTHORS_LABEL", Texts.cultereinfo);
+            label3.Text = Texts.rm.GetString("PLUGINGERENCIER_AUTORUN_FILE", Texts.cultereinfo);
+            label4.Text = Texts.rm.GetString("PLUGINGERENCIER_DESCRIPTION", Texts.cultereinfo);
+            PackageCreateFolder.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_CREATE", Texts.cultereinfo);
+
+
+>>>>>>> Stashed changes
         }
 
         private void LayoutPanel_Paint(object sender, PaintEventArgs e)

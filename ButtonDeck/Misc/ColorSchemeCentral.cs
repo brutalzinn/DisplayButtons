@@ -28,6 +28,9 @@ namespace ButtonDeck.Misc
             switch (th) {
                 case AppTheme.Neptune:
                     return Neptune;
+
+                case AppTheme.PinkNanda:
+                    return PinkNanda;
                 case AppTheme.DarkSide:
                     return DarkSide;
                 case AppTheme.KindaGreen:
@@ -37,11 +40,13 @@ namespace ButtonDeck.Misc
                     return Neptune;
             }
         }
-
+ 
         public static ApplicationColorScheme Neptune = new ApplicationColorScheme(DefaultColorSchemes.Blue, Color.FromArgb(245, 245, 245));
 
+        // public static ApplicationColorScheme PinkNanda = new ApplicationColorScheme(new ColorScheme(Color.Magenta, Color.White), Color.FromArgb(255, 255, 255));
+        public static ApplicationColorScheme PinkNanda = new ApplicationColorScheme(ColorScheme.CreateSimpleColorScheme( Color.Blue,false), Color.FromArgb(245, 245, 245));
         public static ApplicationColorScheme KindaGreen = new ApplicationColorScheme(DefaultColorSchemes.Green, Color.FromArgb(245, 245, 245));
 
-        public static ApplicationColorScheme DarkSide = new ApplicationColorScheme(new ColorScheme(Color.FromArgb(45, 45, 45), Color.FromArgb(28, 28, 28)), Color.FromArgb(75, 75, 75));
+        public static ApplicationColorScheme DarkSide = new ApplicationColorScheme(new ColorScheme(Color.FromArgb(45, 45, 45), Color.FromArgb(28, 28, 28),false), Color.FromArgb(75, 75, 75));
     }
 }

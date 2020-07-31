@@ -176,6 +176,9 @@ o uso do ButtonDeck. Não esqueça de dar seu feedback.
   <data name="IMPORTPROFILE" xml:space="preserve">
     <value>Importar perfil</value>
   </data>
+  <data name="INITIALIZER_MODE_FORMMENUOPTIONS_TEXT" xml:space="preserve">
+    <value>ButtonDeck - Inicializador</value>
+  </data>
   <data name="KEYSELECTOR" xml:space="preserve">
     <value>Seletor de teclas - Editor</value>
   </data>

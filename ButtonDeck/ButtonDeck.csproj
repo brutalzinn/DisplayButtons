@@ -77,9 +77,6 @@
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualC.STLCLR" />
-    <Reference Include="ModernUIDoneRight">
-      <HintPath>..\ModernUIDoneRight.dll</HintPath>
-    </Reference>
     <Reference Include="MoonSharp.Interpreter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=921e73ce94aa17f8, processorArchitecture=MSIL">
       <HintPath>..\packages\MoonSharp.2.0.0.0\lib\net40-client\MoonSharp.Interpreter.dll</HintPath>
     </Reference>
@@ -453,6 +450,63 @@
     <Compile Include="Misc\DevicesTitlebarButton.cs" />
     <Compile Include="Misc\IDeckDeviceExtensions.cs" />
     <Compile Include="Misc\ServerThread.cs" />
+    <Compile Include="ModernUIDoneRight\Controls\AppBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Controls\ModernButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Controls\ModernShadowPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Controls\ModernTileReborn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Controls\ModernToolTIp.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Controls\SidebarControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Forms\AlphaWindow.cs" />
+    <Compile Include="ModernUIDoneRight\Forms\GlowShadowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Forms\GlowShadowFormAaaaaa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Forms\ModernForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Forms\PerPixelAlphaForm.cs" />
+    <Compile Include="ModernUIDoneRight\Forms\ShadowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Native\DwmNative.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\Action.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\Colors\ColorScheme.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\Colors\DefaultColors.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\Colors\DefaultColorSchemes.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\Interaction\ModernTitlebarButton.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\Interaction\NativeTitlebarButton.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\Interaction\WindowHitTestResult.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\MenuItems\AppBarMenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModernUIDoneRight\Objects\MenuItems\AppBarMenuItem.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\MenuItems\AppBarMenuTextItem.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\MenuItems\MeasureMenuItemEventArgs.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\MenuItems\RenderMenuItemEventArgs.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\ShadowType.cs" />
+    <Compile Include="ModernUIDoneRight\Objects\TileText.cs" />
+    <Compile Include="ModernUIDoneRight\SidebarTextItem.cs" />
+    <Compile Include="ModernUIDoneRight\Utils\Animation.cs" />
+    <Compile Include="ModernUIDoneRight\Utils\ColorSchemeConverter.cs" />
+    <Compile Include="ModernUIDoneRight\Utils\ControlPaintWrapper.cs" />
+    <Compile Include="ModernUIDoneRight\Utils\FormUtils.cs" />
+    <Compile Include="ModernUIDoneRight\Utils\GaussianBlur.cs" />
+    <Compile Include="ModernUIDoneRight\Utils\GraphicUtils.cs" />
+    <Compile Include="ModernUIDoneRight\Utils\ShadowUtils.cs" />
     <Compile Include="Native\API.cs" />
     <Compile Include="Native\Native.cs" />
     <Compile Include="Package.cs" />
@@ -583,6 +637,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Library Data\Tessdata\eng.traineddata" />
+    <None Include="ModernUIDoneRight\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="ModernUIDoneRight\obj\Debug\ModernUIDoneRight.csproj.CoreCompileInputs.cache" />
+    <None Include="ModernUIDoneRight\obj\Debug\ModernUIDoneRight.csprojAssemblyReference.cache" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -663,6 +720,9 @@
     <None Include="Resources\img_item_start_recording.png" />
     <None Include="Resources\img_item_start_stream.png" />
     <None Include="Resources\img_item_stop_recording.png" />
+    <Content Include="ModernUIDoneRight\obj\Debug\ModernUIDoneRight.csproj.FileListAbsolute.txt" />
+    <Content Include="ModernUIDoneRight\obj\Debug\ModernUIDoneRight.dll" />
+    <Content Include="ModernUIDoneRight\obj\Debug\ModernUIDoneRight.pdb" />
     <Content Include="Updater.exe" />
     <Resource Include="Resources\Stop_grey_16x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -706,6 +766,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Backend\Usb\" />
+    <Folder Include="ModernUIDoneRight\bin\" />
+    <Folder Include="ModernUIDoneRight\obj\Debug\TempPE\" />
+    <Folder Include="ModernUIDoneRight\Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

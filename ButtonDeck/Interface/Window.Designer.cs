@@ -843,6 +843,6 @@ namespace ScribeBot.Interface
         public TextBox PackageEntryPoint { get => packageEntryPoint; set => packageEntryPoint = value; }
         public TextBox PackageDescription { get => packageDescription; set => packageDescription = value; }
         public FolderBrowserDialog PackageFolderSelectDialog { get => packageFolderSelectDialog; set => packageFolderSelectDialog = value; }
-        public Label InfoVersion { get => infoVersion; set => infoVersion = value; }
+    //    public Label InfoVersion { get => infoVersion; set => infoVersion = value; }
     }
 }

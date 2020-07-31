@@ -12,35 +12,24 @@ using System.Windows.Forms;
 
 namespace ButtonDeck.Forms.ActionHelperForms
 {
-    public partial class MainFormMenuOption : Form
+    public partial class MainFormMenuOption : TemplateForm
     {
         public MainFormMenuOption()
         {
             InitializeComponent();
           
         }
-    private void ApplySidebarTheme(Control parent)
+        protected override void OnLoad(EventArgs e)
         {
-            //Headers have the theme's secondary color as background
-            //and the theme's foreground color as text color
-            ApplicationColorScheme appTheme = ColorSchemeCentral.FromAppTheme(ApplicationSettingsManager.Settings.Theme);
-            parent.Controls.OfType<Control>().All((c) =>
-            {
-                if (c.Tag != null && c.Tag.ToString().ToLowerInvariant() == "header")
-                {
-                    c.BackColor = appTheme.SecondaryColor;
-                    c.ForeColor = appTheme.ForegroundColor;
-                }
-                else
-                {
-                    c.BackColor = appTheme.BackgroundColor;
-                }
-                return true;
-            });
+            base.OnLoad(e);
+            
+
         }
+           
         private void MainFormMenuOption_Load(object sender, EventArgs e)
         {
-            ApplySidebarTheme(shadedPanel1);
+            Texts.initilizeLang();
+            this.Text = Texts.rm.GetString("INITIALIZER_MODE_FORMMENUOPTIONS_TEXT", Texts.cultereinfo);
         }
     
         private string _toExecuteFileName;
