@@ -168,8 +168,53 @@ namespace ButtonDeck.Forms
             modernButton10.Text = Texts.rm.GetString("DEVELOPERMODE", Texts.cultereinfo);
             modernButton6.Text = Texts.rm.GetString("OBSCONNECTION", Texts.cultereinfo);
             modernButton5.Text = Texts.rm.GetString("STOPOBSCONNECTION", Texts.cultereinfo);
+
+
+            loadDeveloperMod();
+
+            loadAutoMinimizer();
+
+        }
+        public void loadDeveloperMod()
+        {
+            string status = "";
+            switch (ApplicationSettingsManager.Settings.isDevelopermode)
+            {
+
+                case true:
+                    status = Texts.rm.GetString("ISTHISENABLED", Texts.cultereinfo); ;
+                    break;
+
+                case false:
+                    status = Texts.rm.GetString("ISTHISDISABLED", Texts.cultereinfo); ;
+                    break;
+            }
+
+            label2.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
+
+
+
+
         }
 
+        public void loadAutoMinimizer()
+        {
+            string status = "";
+            switch (ApplicationSettingsManager.Settings.isAutoMinimizer)
+            {
+
+                case true:
+                    status = Texts.rm.GetString("ISTHISENABLED", Texts.cultereinfo);
+                    break;
+
+                case false:
+                    status = Texts.rm.GetString("ISTHISDISABLED", Texts.cultereinfo);
+                    break;
+            }
+
+            label4.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
+
+        }
         private void ModernButton9_Click(object sender, EventArgs e)
         {
 
@@ -232,17 +277,45 @@ namespace ButtonDeck.Forms
             {
 
                 case true:
-                    status = "Ativo";
+                    status = Texts.rm.GetString("ISTHISENABLED", Texts.cultereinfo); ;
                     break;
 
                 case false:
-                    status = "Desativado";
+                    status = Texts.rm.GetString("ISTHISDISABLED", Texts.cultereinfo); ;
                     break;
             }
 
-            label2.Text = "Modo: " + status;
+            label2.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
 
             MainForm.Instance.ChangeDeveloperMode();
+        }
+
+        private void ImageModernButton1_Click(object sender, EventArgs e)
+        {
+            string status = "";
+            if (ApplicationSettingsManager.Settings.isAutoMinimizer == false)
+            {
+                ApplicationSettingsManager.Settings.isAutoMinimizer = true;
+
+            }
+            else
+            {
+                ApplicationSettingsManager.Settings.isAutoMinimizer = false;
+
+            }
+            switch (ApplicationSettingsManager.Settings.isAutoMinimizer)
+            {
+
+                case true:
+                    status = Texts.rm.GetString("ISTHISENABLED", Texts.cultereinfo); 
+                    break;
+
+                case false:
+                    status = Texts.rm.GetString("ISTHISDISABLED", Texts.cultereinfo); 
+                    break;
+            }
+
+            label4.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
         }
     }
 }

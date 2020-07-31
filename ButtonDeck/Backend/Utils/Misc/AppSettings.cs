@@ -113,6 +113,7 @@ namespace ButtonDeck.Backend.Utils
         public int linha { get; set; } = 3;
         public bool OBSPluginNagged { get; set; }
         public bool isDevelopermode { get; set; } = false;
+        public bool isAutoMinimizer { get; set; } = true;
         public string IFTTTAPIKey { get; set; }
         public string Language { get; set; }
 

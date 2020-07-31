@@ -3306,15 +3306,17 @@ namespace ButtonDeck.Forms
         {
             base.OnResize(e);
 
-
-            bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
-
-            if(this.WindowState == FormWindowState.Minimized && cursorNotInBar)
+            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
             {
+                bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
 
-                this.ShowInTaskbar = false;
-                notifyIcon1.Visible = true;
-                this.Hide();
+                if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
+                {
+
+                    this.ShowInTaskbar = false;
+                    notifyIcon1.Visible = true;
+                    this.Hide();
+                }
             }
         }
         private void MainForm_Resize(object sender, EventArgs e)
@@ -3334,8 +3336,11 @@ namespace ButtonDeck.Forms
 
         private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            this.WindowState = FormWindowState.Normal;
-            this.Show();
+            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.Show();
+            }
         }
     }
     #endregion

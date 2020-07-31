@@ -179,6 +179,15 @@ o uso do ButtonDeck. Não esqueça de dar seu feedback.
   <data name="INITIALIZER_MODE_FORMMENUOPTIONS_TEXT" xml:space="preserve">
     <value>Button Deck - Inicializador</value>
   </data>
+  <data name="ISTHISDISABLED" xml:space="preserve">
+    <value>Desabilitado</value>
+  </data>
+  <data name="ISTHISENABLED" xml:space="preserve">
+    <value>Habilitado</value>
+  </data>
+  <data name="ISTHISSTATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="KEYSELECTOR" xml:space="preserve">
     <value>Seletor de teclas - Editor</value>
   </data>
