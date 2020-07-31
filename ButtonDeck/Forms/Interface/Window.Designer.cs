@@ -114,7 +114,7 @@ namespace ScribeBot.Interface
             this.consolePanel.Margin = new System.Windows.Forms.Padding(5);
             this.consolePanel.Name = "consolePanel";
             this.consolePanel.Padding = new System.Windows.Forms.Padding(5);
-            this.consolePanel.Size = new System.Drawing.Size(482, 551);
+            this.consolePanel.Size = new System.Drawing.Size(677, 552);
             this.consolePanel.TabIndex = 0;
             this.consolePanel.TabStop = false;
             this.consolePanel.Text = "Console";
@@ -132,7 +132,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(462, 21);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(462, 23);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // consoleInput
@@ -141,7 +141,7 @@ namespace ScribeBot.Interface
             this.consoleInput.Location = new System.Drawing.Point(0, 0);
             this.consoleInput.Margin = new System.Windows.Forms.Padding(0);
             this.consoleInput.Name = "consoleInput";
-            this.consoleInput.Size = new System.Drawing.Size(332, 20);
+            this.consoleInput.Size = new System.Drawing.Size(332, 23);
             this.consoleInput.TabIndex = 1;
             this.consoleInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.consoleInput_KeyDown);
             this.consoleInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.consoleInput_KeyPress);
@@ -152,7 +152,7 @@ namespace ScribeBot.Interface
             this.consoleRun.Location = new System.Drawing.Point(332, 0);
             this.consoleRun.Margin = new System.Windows.Forms.Padding(0);
             this.consoleRun.Name = "consoleRun";
-            this.consoleRun.Size = new System.Drawing.Size(130, 21);
+            this.consoleRun.Size = new System.Drawing.Size(130, 23);
             this.consoleRun.TabIndex = 2;
             this.consoleRun.Text = "EXECUTAR";
             this.consoleRun.UseVisualStyleBackColor = true;
@@ -252,11 +252,11 @@ namespace ScribeBot.Interface
             this.layoutPanel.Controls.Add(this.consolePanel, 0, 0);
             this.layoutPanel.Controls.Add(this.optionsPanel, 1, 0);
             this.layoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.layoutPanel.Location = new System.Drawing.Point(1, 33);
             this.layoutPanel.Name = "layoutPanel";
             this.layoutPanel.RowCount = 1;
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutPanel.Size = new System.Drawing.Size(784, 561);
+            this.layoutPanel.Size = new System.Drawing.Size(979, 562);
             this.layoutPanel.TabIndex = 1;
             this.layoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.LayoutPanel_Paint);
             // 
@@ -266,22 +266,22 @@ namespace ScribeBot.Interface
             this.optionsPanel.Controls.Add(this.workshopPage);
             this.optionsPanel.Controls.Add(this.settingsPage);
             this.optionsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.optionsPanel.Location = new System.Drawing.Point(497, 5);
+            this.optionsPanel.Location = new System.Drawing.Point(692, 5);
             this.optionsPanel.Margin = new System.Windows.Forms.Padding(5);
             this.optionsPanel.Name = "optionsPanel";
             this.optionsPanel.SelectedIndex = 0;
-            this.optionsPanel.Size = new System.Drawing.Size(282, 551);
+            this.optionsPanel.Size = new System.Drawing.Size(282, 552);
             this.optionsPanel.TabIndex = 1;
             // 
             // scriptsPage
             // 
             this.scriptsPage.Controls.Add(this.tableLayoutPanel5);
             this.scriptsPage.Controls.Add(this.installedPackagesPanel);
-            this.scriptsPage.Location = new System.Drawing.Point(4, 22);
+            this.scriptsPage.Location = new System.Drawing.Point(4, 24);
             this.scriptsPage.Margin = new System.Windows.Forms.Padding(0);
             this.scriptsPage.Name = "scriptsPage";
             this.scriptsPage.Padding = new System.Windows.Forms.Padding(10);
-            this.scriptsPage.Size = new System.Drawing.Size(274, 525);
+            this.scriptsPage.Size = new System.Drawing.Size(274, 524);
             this.scriptsPage.TabIndex = 0;
             this.scriptsPage.Text = "PACOTES";
             this.scriptsPage.UseVisualStyleBackColor = true;
@@ -358,10 +358,10 @@ namespace ScribeBot.Interface
             // workshopPage
             // 
             this.workshopPage.Controls.Add(this.tableLayoutPanel6);
-            this.workshopPage.Location = new System.Drawing.Point(4, 22);
+            this.workshopPage.Location = new System.Drawing.Point(4, 24);
             this.workshopPage.Name = "workshopPage";
             this.workshopPage.Padding = new System.Windows.Forms.Padding(5);
-            this.workshopPage.Size = new System.Drawing.Size(274, 525);
+            this.workshopPage.Size = new System.Drawing.Size(274, 528);
             this.workshopPage.TabIndex = 1;
             this.workshopPage.Text = "Workshop";
             this.workshopPage.UseVisualStyleBackColor = true;
@@ -382,7 +382,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(264, 515);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(264, 518);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // tableLayoutPanel7
@@ -391,7 +391,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel7.Controls.Add(this.workshopFetchButton, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 245);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 246);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -442,11 +442,11 @@ namespace ScribeBot.Interface
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel4);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(5, 278);
+            this.groupBox1.Location = new System.Drawing.Point(5, 279);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(254, 232);
+            this.groupBox1.Size = new System.Drawing.Size(254, 234);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Create Package";
@@ -539,7 +539,7 @@ namespace ScribeBot.Interface
             this.label1.Location = new System.Drawing.Point(5, 5);
             this.label1.Margin = new System.Windows.Forms.Padding(5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 20);
+            this.label1.Size = new System.Drawing.Size(75, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -548,10 +548,10 @@ namespace ScribeBot.Interface
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(5, 35);
+            this.label2.Location = new System.Drawing.Point(5, 38);
             this.label2.Margin = new System.Windows.Forms.Padding(5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 20);
+            this.label2.Size = new System.Drawing.Size(75, 23);
             this.label2.TabIndex = 1;
             this.label2.Text = "Authors:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -559,29 +559,29 @@ namespace ScribeBot.Interface
             // packageName
             // 
             this.packageName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.packageName.Location = new System.Drawing.Point(81, 5);
+            this.packageName.Location = new System.Drawing.Point(90, 5);
             this.packageName.Margin = new System.Windows.Forms.Padding(5);
             this.packageName.Name = "packageName";
-            this.packageName.Size = new System.Drawing.Size(148, 20);
+            this.packageName.Size = new System.Drawing.Size(139, 23);
             this.packageName.TabIndex = 2;
             // 
             // packageAuthors
             // 
             this.packageAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.packageAuthors.Location = new System.Drawing.Point(81, 35);
+            this.packageAuthors.Location = new System.Drawing.Point(90, 38);
             this.packageAuthors.Margin = new System.Windows.Forms.Padding(5);
             this.packageAuthors.Name = "packageAuthors";
-            this.packageAuthors.Size = new System.Drawing.Size(148, 20);
+            this.packageAuthors.Size = new System.Drawing.Size(139, 23);
             this.packageAuthors.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(5, 65);
+            this.label3.Location = new System.Drawing.Point(5, 71);
             this.label3.Margin = new System.Windows.Forms.Padding(5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 20);
+            this.label3.Size = new System.Drawing.Size(75, 23);
             this.label3.TabIndex = 4;
             this.label3.Text = "Autorun File:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -590,10 +590,10 @@ namespace ScribeBot.Interface
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(5, 95);
+            this.label4.Location = new System.Drawing.Point(5, 104);
             this.label4.Margin = new System.Windows.Forms.Padding(5);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 68);
+            this.label4.Size = new System.Drawing.Size(75, 59);
             this.label4.TabIndex = 5;
             this.label4.Text = "Description:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -601,31 +601,31 @@ namespace ScribeBot.Interface
             // packageEntryPoint
             // 
             this.packageEntryPoint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.packageEntryPoint.Location = new System.Drawing.Point(81, 65);
+            this.packageEntryPoint.Location = new System.Drawing.Point(90, 71);
             this.packageEntryPoint.Margin = new System.Windows.Forms.Padding(5);
             this.packageEntryPoint.Name = "packageEntryPoint";
-            this.packageEntryPoint.Size = new System.Drawing.Size(148, 20);
+            this.packageEntryPoint.Size = new System.Drawing.Size(139, 23);
             this.packageEntryPoint.TabIndex = 6;
             // 
             // packageDescription
             // 
             this.packageDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.packageDescription.Location = new System.Drawing.Point(81, 95);
+            this.packageDescription.Location = new System.Drawing.Point(90, 104);
             this.packageDescription.Margin = new System.Windows.Forms.Padding(5);
             this.packageDescription.Multiline = true;
             this.packageDescription.Name = "packageDescription";
             this.packageDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.packageDescription.Size = new System.Drawing.Size(148, 68);
+            this.packageDescription.Size = new System.Drawing.Size(139, 59);
             this.packageDescription.TabIndex = 7;
             // 
             // settingsPage
             // 
             this.settingsPage.Controls.Add(this.tableLayoutPanel1);
-            this.settingsPage.Location = new System.Drawing.Point(4, 22);
+            this.settingsPage.Location = new System.Drawing.Point(4, 24);
             this.settingsPage.Margin = new System.Windows.Forms.Padding(0);
             this.settingsPage.Name = "settingsPage";
             this.settingsPage.Padding = new System.Windows.Forms.Padding(10);
-            this.settingsPage.Size = new System.Drawing.Size(274, 525);
+            this.settingsPage.Size = new System.Drawing.Size(274, 528);
             this.settingsPage.TabIndex = 2;
             this.settingsPage.Text = "Opções";
             this.settingsPage.UseVisualStyleBackColor = true;
@@ -646,7 +646,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(254, 505);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(254, 508);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox1
@@ -657,7 +657,7 @@ namespace ScribeBot.Interface
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(254, 457);
+            this.pictureBox1.Size = new System.Drawing.Size(254, 458);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -667,11 +667,11 @@ namespace ScribeBot.Interface
             this.infoVersion.AutoSize = true;
             this.infoVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.infoVersion.ForeColor = System.Drawing.Color.White;
-            this.infoVersion.Location = new System.Drawing.Point(0, 457);
+            this.infoVersion.Location = new System.Drawing.Point(0, 458);
             this.infoVersion.Margin = new System.Windows.Forms.Padding(0);
             this.infoVersion.Name = "infoVersion";
             this.infoVersion.Padding = new System.Windows.Forms.Padding(5);
-            this.infoVersion.Size = new System.Drawing.Size(254, 23);
+            this.infoVersion.Size = new System.Drawing.Size(254, 25);
             this.infoVersion.TabIndex = 1;
             this.infoVersion.Text = "Version";
             this.infoVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -686,7 +686,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel10.Controls.Add(this.checkUpdate, 0, 0);
             this.tableLayoutPanel10.Controls.Add(this.downloadUpdate, 1, 0);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 480);
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 483);
             this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 1;
@@ -733,12 +733,25 @@ namespace ScribeBot.Interface
             // Window
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(965, 557);
+            this.ColorScheme.isToIgnoreForegroundColor = false;
+            this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
+            this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
+            this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
+            this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.ControlBox = false;
             this.Controls.Add(this.layoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(0, 0);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(32, 39);
             this.Name = "Window";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Sizable = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GERENCIADOR DE PLUGINS";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Window_FormClosing);

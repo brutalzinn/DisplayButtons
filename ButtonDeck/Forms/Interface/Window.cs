@@ -1,4 +1,5 @@
 ﻿using ButtonDeck;
+using ButtonDeck.Forms;
 using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
@@ -19,8 +20,14 @@ namespace ScribeBot.Interface
     /// <summary>
     /// Main interface window.
     /// </summary>
-    public partial class Window : Form
+    public partial class Window : TemplateForm
     {
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+
+        }
         private List<string> commands = new List<string>();
         public Window()
         {

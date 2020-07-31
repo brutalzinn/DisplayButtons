@@ -43,6 +43,7 @@
             this.shadedPanel1.Name = "shadedPanel1";
             this.shadedPanel1.Size = new System.Drawing.Size(325, 155);
             this.shadedPanel1.TabIndex = 12;
+            this.shadedPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.ShadedPanel1_Paint);
             // 
             // modernButton4
             // 
@@ -73,6 +74,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(327, 189);
+            this.ColorScheme.isToIgnoreForegroundColor = false;
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));

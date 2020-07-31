@@ -414,34 +414,34 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Globals.cs" />
-    <Compile Include="Interface\PackageEditor.cs">
+    <Compile Include="Forms\Interface\PackageEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interface\PackageEditor.Designer.cs">
+    <Compile Include="Forms\Interface\PackageEditor.Designer.cs">
       <DependentUpon>PackageEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\PackageInfo.cs">
+    <Compile Include="Forms\Interface\PackageInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interface\PackageInfo.Designer.cs">
+    <Compile Include="Forms\Interface\PackageInfo.Designer.cs">
       <DependentUpon>PackageInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\PackageInfoMinimal.cs">
+    <Compile Include="Forms\Interface\PackageInfoMinimal.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interface\PackageInfoMinimal.Designer.cs">
+    <Compile Include="Forms\Interface\PackageInfoMinimal.Designer.cs">
       <DependentUpon>PackageInfoMinimal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\Prompt.cs">
+    <Compile Include="Forms\Interface\Prompt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interface\Prompt.Designer.cs">
+    <Compile Include="Forms\Interface\Prompt.Designer.cs">
       <DependentUpon>Prompt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\Window.cs">
+    <Compile Include="Forms\Interface\Window.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interface\Window.Designer.cs">
+    <Compile Include="Forms\Interface\Window.Designer.cs">
       <DependentUpon>Window.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\ApplicationColorScheme.cs" />
@@ -578,19 +578,19 @@
     <EmbeddedResource Include="Forms\TemplateForm.resx">
       <DependentUpon>TemplateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interface\PackageEditor.resx">
+    <EmbeddedResource Include="Forms\Interface\PackageEditor.resx">
       <DependentUpon>PackageEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interface\PackageInfo.resx">
+    <EmbeddedResource Include="Forms\Interface\PackageInfo.resx">
       <DependentUpon>PackageInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interface\PackageInfoMinimal.resx">
+    <EmbeddedResource Include="Forms\Interface\PackageInfoMinimal.resx">
       <DependentUpon>PackageInfoMinimal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interface\Prompt.resx">
+    <EmbeddedResource Include="Forms\Interface\Prompt.resx">
       <DependentUpon>Prompt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interface\Window.resx">
+    <EmbeddedResource Include="Forms\Interface\Window.resx">
       <DependentUpon>Window.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Langs\langres.en.resx" />

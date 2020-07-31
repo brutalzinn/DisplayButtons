@@ -71,5 +71,10 @@ namespace ButtonDeck.Forms.ActionHelperForms
         {
             CloseWithResult(DialogResult.Cancel);
         }
+
+        private void ShadedPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
