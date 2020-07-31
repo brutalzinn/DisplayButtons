@@ -206,6 +206,45 @@ o uso do ButtonDeck. Não esqueça de dar seu feedback.
   <data name="OBS_SCENE_VISIBILITY_NAME_LABEL" xml:space="preserve">
     <value>Nome da cena</value>
   </data>
+  <data name="PLUGINGERENCIER" xml:space="preserve">
+    <value>Gerenciador de plugins</value>
+  </data>
+  <data name="PLUGINGERENCIER_AUTHORS_LABEL" xml:space="preserve">
+    <value>Autores</value>
+  </data>
+  <data name="PLUGINGERENCIER_AUTORUN_FILE" xml:space="preserve">
+    <value>Arquivo de inicialização lua</value>
+  </data>
+  <data name="PLUGINGERENCIER_BUTTON_CREATE" xml:space="preserve">
+    <value>Criar pacote</value>
+  </data>
+  <data name="PLUGINGERENCIER_BUTTON_EXECUTOR" xml:space="preserve">
+    <value>Executar</value>
+  </data>
+  <data name="PLUGINGERENCIER_BUTTON_STOP" xml:space="preserve">
+    <value>Parar</value>
+  </data>
+  <data name="PLUGINGERENCIER_DESCRIPTION" xml:space="preserve">
+    <value>Descrição</value>
+  </data>
+  <data name="PLUGINGERENCIER_FETCH_BUTTON" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="PLUGINGERENCIER_NAME_LABEL" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="PLUGINGERENCIER_TABCONTROL_OPTIONS" xml:space="preserve">
+    <value>Opções</value>
+  </data>
+  <data name="PLUGINGERENCIER_TABCONTROL_PACKS" xml:space="preserve">
+    <value>Pacotes</value>
+  </data>
+  <data name="PLUGINGERENCIER_TABCONTROL_WORKSHOP" xml:space="preserve">
+    <value>Workshop</value>
+  </data>
+  <data name="PLUGINGERENCIER_VERSION" xml:space="preserve">
+    <value>VERSÃO</value>
+  </data>
   <data name="PRINCIPALFOLDER" xml:space="preserve">
     <value>Pasta principal</value>
   </data>

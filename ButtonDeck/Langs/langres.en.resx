@@ -214,6 +214,45 @@ the use of ButtonDeck. Don't forget to give your feedback.</value>
   <data name="OBS_SCENE_VISIBILITY_NAME_LABEL" xml:space="preserve">
     <value>Scene name</value>
   </data>
+  <data name="PLUGINGERENCIER" xml:space="preserve">
+    <value>Button Manager</value>
+  </data>
+  <data name="PLUGINGERENCIER_AUTHORS_LABEL" xml:space="preserve">
+    <value>Authors</value>
+  </data>
+  <data name="PLUGINGERENCIER_AUTORUN_FILE" xml:space="preserve">
+    <value>lua boot file</value>
+  </data>
+  <data name="PLUGINGERENCIER_BUTTON_CREATE" xml:space="preserve">
+    <value>Create package</value>
+  </data>
+  <data name="PLUGINGERENCIER_BUTTON_EXECUTOR" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="PLUGINGERENCIER_BUTTON_STOP" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="PLUGINGERENCIER_DESCRIPTION" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PLUGINGERENCIER_FETCH_BUTTON" xml:space="preserve">
+    <value>Fetch</value>
+  </data>
+  <data name="PLUGINGERENCIER_NAME_LABEL" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PLUGINGERENCIER_TABCONTROL_OPTIONS" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="PLUGINGERENCIER_TABCONTROL_PACKS" xml:space="preserve">
+    <value>Packages</value>
+  </data>
+  <data name="PLUGINGERENCIER_TABCONTROL_WORKSHOP" xml:space="preserve">
+    <value>Workshop</value>
+  </data>
+  <data name="PLUGINGERENCIER_VERSION" xml:space="preserve">
+    <value>VERSÃO</value>
+  </data>
   <data name="PRINCIPALFOLDER" xml:space="preserve">
     <value>Principal folder</value>
   </data>

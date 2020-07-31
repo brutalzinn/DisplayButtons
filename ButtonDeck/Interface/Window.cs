@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using ButtonDeck;
+using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
 using System;
@@ -330,7 +331,23 @@ namespace ScribeBot.Interface
 
         private void Window_Load(object sender, EventArgs e)
         {
-            
+            this.Text = Texts.rm.GetString("PLUGINGERENCIER", Texts.cultereinfo);
+            ConsoleRun.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_EXECUTOR", Texts.cultereinfo);
+            ScriptStop.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_STOP", Texts.cultereinfo);
+            scriptsPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_PACKS", Texts.cultereinfo);
+            workshopPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_WORKSHOP", Texts.cultereinfo);
+    
+            settingsPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_OPTIONS", Texts.cultereinfo);
+            workshopFetchButton.Text = Texts.rm.GetString("PLUGINGERENCIER_FETCH_BUTTON", Texts.cultereinfo);
+
+
+            label1.Text = Texts.rm.GetString("PLUGINGERENCIER_NAME_LABEL", Texts.cultereinfo);
+            label2.Text = Texts.rm.GetString("PLUGINGERENCIER_AUTHORS_LABEL", Texts.cultereinfo);
+            label3.Text = Texts.rm.GetString("PLUGINGERENCIER_AUTORUN_FILE", Texts.cultereinfo);
+            label4.Text = Texts.rm.GetString("PLUGINGERENCIER_DESCRIPTION", Texts.cultereinfo);
+            PackageCreateFolder.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_CREATE", Texts.cultereinfo);
+
+
         }
 
         private void LayoutPanel_Paint(object sender, PaintEventArgs e)
