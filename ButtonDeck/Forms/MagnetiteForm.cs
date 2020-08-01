@@ -174,7 +174,7 @@ namespace ButtonDeck.Forms
 
 
             imageModernButton2.Text = Texts.rm.GetString("MAGNETITEBROWSERFOLDERBUTTON", Texts.cultereinfo);
-            modernButton1.Text = Texts.rm.GetString("MAGNETITEAUTOMINIMIZER", Texts.cultereinfo);
+            imageModernButton1.Text = Texts.rm.GetString("MAGNETITEAUTOMINIMIZER", Texts.cultereinfo);
 
 
             label2.Text = Texts.rm.GetString("MAGNETITECOOLSATALHOS", Texts.cultereinfo);
