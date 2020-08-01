@@ -937,7 +937,7 @@ namespace ButtonDeck.Forms
                           
                            Globals.can_refresh = true;
                           RefreshAllButtons(true);
-
+                            ApplyTheme(panel1);
                                 //            break;
 
                             }
