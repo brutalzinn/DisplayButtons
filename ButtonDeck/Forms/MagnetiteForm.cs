@@ -190,7 +190,7 @@ namespace ButtonDeck.Forms
                     break;
             }
 
-            label2.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
+            label3.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
 
 
 
@@ -285,7 +285,7 @@ namespace ButtonDeck.Forms
                     break;
             }
 
-            label2.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
+            label3.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
 
             MainForm.Instance.ChangeDeveloperMode();
         }
