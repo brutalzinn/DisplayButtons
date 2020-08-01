@@ -3353,6 +3353,11 @@ namespace ButtonDeck.Forms
                 this.Show();
             }
         }
+
+        private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
     #endregion
 }
