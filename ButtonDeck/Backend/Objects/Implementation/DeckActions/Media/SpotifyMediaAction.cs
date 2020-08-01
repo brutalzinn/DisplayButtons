@@ -8,18 +8,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SpotifyAPI.Web;
+using System.Net;
+using System.Collections.Specialized;
 
 namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Media
 {
     public class SpotifyMediaAction : AbstractDeckAction
     {
 
-
+        static bool firstTime;
+        public static SpotifyAPI.Web.SpotifyClient SpotifyCliente;
+        public enum StatePlay
+        {
+            Start,
+            Stop,
+            Toggle
+        }
+        public StatePlay PlayAction { get; set; }
         public enum MediaSpotifyKeys
         {
             [Description("Anterior")]
             Back,
-            [Description("Proximp")]
+            [Description("Proximo")]
             Next,
             [Description("Tocar/Pausar")]
             PlayPause,
@@ -40,6 +51,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Media
 
         public override AbstractDeckAction CloneAction()
         {
+
             return new SpotifyMediaAction();
         }
 
@@ -50,7 +62,26 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Media
 
         public override string GetActionName()
         {
-            return "Spotify integration";
+
+
+            if (!firstTime)
+            {
+                firstTime ^= true;
+                return "Start/Stop Streaming";
+            }
+            switch (PlayAction)
+            {
+                case StatePlay.Start:
+                    return "Start Streaming";
+                case StatePlay.Stop:
+                    return "Stop Streaming";
+
+
+
+                   
+            }
+
+            return "Start/Stop Streaming";
         }
 
         [Obsolete]
@@ -59,39 +90,116 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Media
             return false;
         }
 
-        public Keys GetKeyFromMediaKey(MediaSpotifyKeys mediaKey)
+        public int GetKeyFromMediaKey(MediaSpotifyKeys mediaKey)
         {
             switch (mediaKey)
             {
                 case MediaSpotifyKeys.Back:
-                    return Keys.MediaPreviousTrack;
+                    return 1;
                 case MediaSpotifyKeys.Next:
-                    return Keys.MediaPreviousTrack;
+                    return 2;
                 case MediaSpotifyKeys.PlayPause:
-                    return Keys.MediaPlayPause;
+                    return 3;
                 case MediaSpotifyKeys.Stop:
-                    return Keys.MediaStop;
+                    return 4;
                 case MediaSpotifyKeys.VolumeOff:
-                    return Keys.VolumeMute;
+                    return 5;
                 case MediaSpotifyKeys.VolumeMinus:
-                    return Keys.VolumeDown;
+                    return 7;
                 case MediaSpotifyKeys.VolumePlus:
-                    return Keys.VolumeUp;
+                    return 7;
             }
-            return Keys.None;
+            return 0;
         }
+        public void GetClientCredentialsAuthToken()
+        {
+            var spotifyClient = "";
+            var spotifySecret = "";
 
+            var webClient = new WebClient();
+
+            var postparams = new NameValueCollection();
+            postparams.Add("grant_type", "client_credentials");
+
+            var authHeader = Convert.ToBase64String(Encoding.Default.GetBytes($"{spotifyClient}:{spotifySecret}"));
+            webClient.Headers.Add(HttpRequestHeader.Authorization, "Basic " + authHeader);
+
+            var tokenResponse = webClient.UploadValues("https://accounts.spotify.com/api/token", postparams);
+
+            var textResponse = Encoding.UTF8.GetString(tokenResponse);
+        }
         public override void OnButtonDown(DeckDevice deckDevice)
         {
 
         }
+       
+     
+    
 
         public override void OnButtonUp(DeckDevice deckDevice)
         {
+            int playpause = 0;
             var key = GetKeyFromMediaKey(Key);
-            if (key != Keys.None)
+            if (key != 0)
             {
-                NativeKeyHandler.ClickKey(new[] { key });
+                try
+                    {
+                if (key == 1)
+                {
+                
+
+                }
+                if ( key == 2)
+                {
+                    // SpotifyCliente.Player.SkipNext();
+
+                }
+              if(key == 4)
+                {
+
+
+                    // SpotifyCliente.Player.PausePlayback();
+                }
+                if (key == 3)
+                {
+                  
+                   
+                        switch (PlayAction)
+                        {
+                            case StatePlay.Start:
+                                //       API.resume();
+
+
+
+
+                             //  await SpotifyCliente.Player.ResumePlayback();
+
+                                PlayAction = StatePlay.Stop;
+                                // is the same as
+
+
+
+                                break;
+                            case StatePlay.Stop:
+                             //   await SpotifyCliente.Player.PausePlayback();
+                                PlayAction = StatePlay.Start;
+                                //   spotify.Player.PausePlayback();
+                                //       API.pause();
+                                break;
+                        }
+                    }
+                
+                
+             
+                   
+                
+                }
+                catch (Exception eee)
+                    {
+                
+
+                    }
+                //   NativeKeyHandler.ClickKey(new[] { key });
             }
         }
 
