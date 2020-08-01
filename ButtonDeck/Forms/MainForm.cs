@@ -263,6 +263,7 @@ namespace ButtonDeck.Forms
 
             ChangeDeveloperMode();
             MatrizGenerator();
+            ApplyTheme(panel1);
             Refresh();
 
 
@@ -280,7 +281,11 @@ namespace ButtonDeck.Forms
 
             Texts.initilizeLang();
 
-
+            if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
+            {
+                shadedPanel4.Visible = false;
+             
+            }
 
 
 
@@ -652,12 +657,13 @@ namespace ButtonDeck.Forms
 
         public void MatrizGenerator()
         {
-
+            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
+            panel1.Controls.Clear();
             Invoke(new Action(() =>
             {
                 List<Control> toAdd = new List<Control>();
 
-                panel1.Controls.Clear();
+             
                 int x = 0;
                 int y = 0;
                 int id = 1;
@@ -917,26 +923,26 @@ namespace ButtonDeck.Forms
                             toAdd.Add(control);
 
 
-                        if (toAdd.Count == Globals.calc)
+                        if (toAdd.Count >= Globals.calc)
                         {
 
                             toAdd.AsEnumerable().Reverse().All(m =>
                             {
                                 panel1.Controls.Add(m);
 
-
+                                toAdd.Remove(m);
 
                                 return true;
                             });
-                            ApplyTheme(panel1);
-                            Globals.can_refresh = true;
-                            RefreshAllButtons(true);
+                          
+                           Globals.can_refresh = true;
+                          RefreshAllButtons(true);
 
                                 //            break;
 
                             }
 
-                            //Application.DoEvents();
+                           Application.DoEvents();
 
                             //      Refresh();
                         }
@@ -1196,8 +1202,13 @@ namespace ButtonDeck.Forms
                 RefreshAllButtons(true);
             }
 
-       //     folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
-              GenerateFolderList(shadedPanel4);
+            //     folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
+
+            if (ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
+            {
+                GenerateFolderList(shadedPanel4);
+            }
+           
           //  GetAllFolders(CurrentDevice.MainFolder);
 
 
@@ -3301,6 +3312,46 @@ namespace ButtonDeck.Forms
 
 
 
+        }
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+
+            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
+            {
+                bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
+
+                if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
+                {
+
+                    this.ShowInTaskbar = false;
+                    notifyIcon1.Visible = true;
+                    this.Hide();
+                }
+            }
+        }
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Panel1_Resize(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NotifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+ 
+        }
+
+        private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.Show();
+            }
         }
     }
     #endregion
