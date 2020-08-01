@@ -100,9 +100,13 @@ namespace ButtonDeck.Forms
             // 
             // shadedPanel1
             // 
+            this.shadedPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.shadedPanel1.AutoSize = true;
+            this.shadedPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.shadedPanel1.ColorScheme = null;
             this.shadedPanel1.Controls.Add(this.shadedPanel2);
-            this.shadedPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.shadedPanel1.Location = new System.Drawing.Point(872, 3);
             this.shadedPanel1.Name = "shadedPanel1";
             this.shadedPanel1.Size = new System.Drawing.Size(195, 450);
@@ -296,7 +300,6 @@ namespace ButtonDeck.Forms
         private ImageModernButton imageModernButton1;
         private System.Windows.Forms.Label action_label;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private ShadedPanel shadedPanel1;
         private ShadedPanel painel_developer;
         private ImageModernButton imageModernButton3;
         private ImageModernButton imageModernButton2;
@@ -304,7 +307,8 @@ namespace ButtonDeck.Forms
         private ImageModernButton imageModernButton5;
         private ShadedPanel shadedPanel4;
         private NotifyIcon notifyIcon1;
-        private TableLayoutPanel tableLayoutPanel1;
+        public TableLayoutPanel tableLayoutPanel1;
+        public ShadedPanel shadedPanel1;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }
