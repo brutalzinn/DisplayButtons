@@ -253,17 +253,17 @@ namespace ButtonDeck.Forms
             appBar1.Actions.Add(itemBiblioteca);
             // ApplyTheme(panel1);
             GenerateSidebar(shadedPanel1, true);
-            ApplySidebarTheme(shadedPanel1);
+           ApplySidebarTheme(shadedPanel1);
 
             ApplySidebarTheme(painel_developer);
-            shadedPanel2.Hide();
-            shadedPanel1.Hide();
+            //shadedPanel2.Hide();
+            //shadedPanel1.Hide();
 
 
 
             ChangeDeveloperMode();
             MatrizGenerator();
-            ApplyTheme(panel1);
+            
             Refresh();
 
 
@@ -3355,6 +3355,11 @@ namespace ButtonDeck.Forms
         }
 
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TableLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
         {
 
         }
