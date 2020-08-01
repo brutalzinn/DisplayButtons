@@ -205,6 +205,15 @@ the use of ButtonDeck. Don't forget to give your feedback.</value>
   <data name="LANGUAGE" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="MAGNETITEAUTOMINIMIZER" xml:space="preserve">
+    <value>Automatic minimizer</value>
+  </data>
+  <data name="MAGNETITEBROWSERFOLDERBUTTON" xml:space="preserve">
+    <value>Folder browser</value>
+  </data>
+  <data name="MAGNETITECOOLSATALHOS" xml:space="preserve">
+    <value>Quick shortcuts</value>
+  </data>
   <data name="MATRIZCHANGER" xml:space="preserve">
     <value>Change matriz</value>
   </data>

@@ -131,12 +131,14 @@ namespace ButtonDeck.Forms
                     
               ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
                 ApplicationSettingsManager.Settings.linha= Convert.ToInt32(linha.Text);
-                ApplicationSettingsManager.SaveSettings();
+              
               
                      var Matriz = new MatrizPacket();
                 con.SendPacket(Matriz);
-                    MainForm.Instance.MatrizGenerator();
+                  
             }
+
+                MainForm.Instance.MatrizGenerator();
             }
             catch(Exception ea)
             {
@@ -169,6 +171,13 @@ namespace ButtonDeck.Forms
             modernButton6.Text = Texts.rm.GetString("OBSCONNECTION", Texts.cultereinfo);
             modernButton5.Text = Texts.rm.GetString("STOPOBSCONNECTION", Texts.cultereinfo);
 
+
+
+            imageModernButton2.Text = Texts.rm.GetString("MAGNETITEBROWSERFOLDERBUTTON", Texts.cultereinfo);
+            modernButton1.Text = Texts.rm.GetString("MAGNETITEAUTOMINIMIZER", Texts.cultereinfo);
+
+
+            label2.Text = Texts.rm.GetString("MAGNETITECOOLSATALHOS", Texts.cultereinfo);
 
             loadSettingsPanel(shadedPanel1, ApplicationSettingsManager.Settings.isAutoMinimizer);
             loadSettingsPanel(shadedPanel2, ApplicationSettingsManager.Settings.isFolderBrowserEnabled);
