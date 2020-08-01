@@ -161,8 +161,8 @@ namespace ButtonDeck.Forms
 
             modernButton4.Text = Texts.rm.GetString("STARTTCPSERVER", Texts.cultereinfo);
             modernButton3.Text = Texts.rm.GetString("STOPTCPSERVER", Texts.cultereinfo);
-            appBar1.Text = Texts.rm.GetString("APPLICATION_MENU", Texts.cultereinfo); 
-            label1.Text = Texts.rm.GetString("APPLICATIONNAME_DESCRIPTION", Texts.cultereinfo); 
+            appBar1.Text = Texts.rm.GetString("APPLICATION_MENU", Texts.cultereinfo);
+            label1.Text = Texts.rm.GetString("APPLICATIONNAME_DESCRIPTION", Texts.cultereinfo);
             modernButton3.Text = Texts.rm.GetString("STOPTCPSERVER", Texts.cultereinfo);
             modernButton10.Text = Texts.rm.GetString("DEVELOPERMODE", Texts.cultereinfo);
             modernButton10.Text = Texts.rm.GetString("DEVELOPERMODE", Texts.cultereinfo);
@@ -170,15 +170,15 @@ namespace ButtonDeck.Forms
             modernButton5.Text = Texts.rm.GetString("STOPOBSCONNECTION", Texts.cultereinfo);
 
 
-            loadDeveloperMod();
-
-            loadAutoMinimizer();
-
+            loadSettingsPanel(shadedPanel1, ApplicationSettingsManager.Settings.isAutoMinimizer);
+            loadSettingsPanel(shadedPanel2, ApplicationSettingsManager.Settings.isFolderBrowserEnabled);
+            loadSettingsPanel(panel7, ApplicationSettingsManager.Settings.isDevelopermode);
         }
-        public void loadDeveloperMod()
+        // painel // settings
+        public void loadSettingsPanel(Control parent, bool settings)
         {
             string status = "";
-            switch (ApplicationSettingsManager.Settings.isDevelopermode)
+            switch (settings)
             {
 
                 case true:
@@ -190,31 +190,17 @@ namespace ButtonDeck.Forms
                     break;
             }
 
-            label3.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
 
-
+            parent.Controls.OfType<Label>().All((c) => {
+              c.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
+                return true;
+            });
 
 
         }
 
-        public void loadAutoMinimizer()
-        {
-            string status = "";
-            switch (ApplicationSettingsManager.Settings.isAutoMinimizer)
-            {
+      
 
-                case true:
-                    status = Texts.rm.GetString("ISTHISENABLED", Texts.cultereinfo);
-                    break;
-
-                case false:
-                    status = Texts.rm.GetString("ISTHISDISABLED", Texts.cultereinfo);
-                    break;
-            }
-
-            label4.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
-
-        }
         private void ModernButton9_Click(object sender, EventArgs e)
         {
 
@@ -316,6 +302,34 @@ namespace ButtonDeck.Forms
             }
 
             label4.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
+        }
+
+        private void ImageModernButton2_Click(object sender, EventArgs e)
+        {
+            string status = "";
+            if (ApplicationSettingsManager.Settings.isFolderBrowserEnabled == false)
+            {
+                ApplicationSettingsManager.Settings.isFolderBrowserEnabled = true;
+
+            }
+            else
+            {
+                ApplicationSettingsManager.Settings.isFolderBrowserEnabled = false;
+
+            }
+            switch (ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
+            {
+
+                case true:
+                    status = Texts.rm.GetString("ISTHISENABLED", Texts.cultereinfo);
+                    break;
+
+                case false:
+                    status = Texts.rm.GetString("ISTHISDISABLED", Texts.cultereinfo);
+                    break;
+            }
+
+            label5.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
         }
     }
 }

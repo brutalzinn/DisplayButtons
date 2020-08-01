@@ -55,6 +55,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.modernButton5 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton6 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.shadedPanel2 = new ButtonDeck.Forms.ShadedPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
             this.modernShadowPanel1.SuspendLayout();
             this.shadedPanel1.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -64,6 +67,7 @@
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.shadedPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar1
@@ -94,6 +98,7 @@
             // 
             // modernShadowPanel1
             // 
+            this.modernShadowPanel1.Controls.Add(this.shadedPanel2);
             this.modernShadowPanel1.Controls.Add(this.shadedPanel1);
             this.modernShadowPanel1.Controls.Add(this.panel7);
             this.modernShadowPanel1.Controls.Add(this.panel6);
@@ -367,6 +372,42 @@
             this.modernButton6.UseVisualStyleBackColor = true;
             this.modernButton6.Click += new System.EventHandler(this.ModernButton6_Click);
             // 
+            // shadedPanel2
+            // 
+            this.shadedPanel2.ColorScheme = null;
+            this.shadedPanel2.Controls.Add(this.label5);
+            this.shadedPanel2.Controls.Add(this.imageModernButton2);
+            this.shadedPanel2.Location = new System.Drawing.Point(229, 154);
+            this.shadedPanel2.Name = "shadedPanel2";
+            this.shadedPanel2.Size = new System.Drawing.Size(170, 84);
+            this.shadedPanel2.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(23, 69);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(113, 15);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "gdfgdgdgdgdfgdgd";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // imageModernButton2
+            // 
+            this.imageModernButton2.CustomColorScheme = false;
+            this.imageModernButton2.Image = null;
+            this.imageModernButton2.Location = new System.Drawing.Point(26, 23);
+            this.imageModernButton2.Name = "imageModernButton2";
+            this.imageModernButton2.NormalImage = null;
+            this.imageModernButton2.Origin = null;
+            this.imageModernButton2.Size = new System.Drawing.Size(116, 38);
+            this.imageModernButton2.TabIndex = 0;
+            this.imageModernButton2.Text = "Browser navigator";
+            this.imageModernButton2.UseVisualStyleBackColor = true;
+            this.imageModernButton2.Click += new System.EventHandler(this.ImageModernButton2_Click);
+            // 
             // MagnetiteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -398,6 +439,8 @@
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.shadedPanel2.ResumeLayout(false);
+            this.shadedPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -433,5 +476,8 @@
         private ShadedPanel shadedPanel1;
         private System.Windows.Forms.Label label4;
         private Controls.ImageModernButton imageModernButton1;
+        private ShadedPanel shadedPanel2;
+        private System.Windows.Forms.Label label5;
+        private Controls.ImageModernButton imageModernButton2;
     }
 }
