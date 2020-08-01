@@ -49,10 +49,12 @@ namespace ButtonDeck.Forms
             this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
             this.shadedPanel4 = new ButtonDeck.Forms.ShadedPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar1
@@ -75,9 +77,9 @@ namespace ButtonDeck.Forms
             // 
             this.panel1.AutoSize = true;
             this.panel1.Controls.Add(this.warning_label);
-            this.panel1.Location = new System.Drawing.Point(150, 126);
+            this.panel1.Location = new System.Drawing.Point(572, 298);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(921, 463);
+            this.panel1.Size = new System.Drawing.Size(150, 144);
             this.panel1.TabIndex = 2;
             this.panel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -88,7 +90,7 @@ namespace ButtonDeck.Forms
             this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.warning_label.BackColor = System.Drawing.Color.Transparent;
             this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warning_label.Location = new System.Drawing.Point(96, 209);
+            this.warning_label.Location = new System.Drawing.Point(-289, 50);
             this.warning_label.Name = "warning_label";
             this.warning_label.Size = new System.Drawing.Size(424, 69);
             this.warning_label.TabIndex = 3;
@@ -153,15 +155,16 @@ namespace ButtonDeck.Forms
             // 
             // painel_developer
             // 
+            this.painel_developer.ColorScheme = null;
             this.painel_developer.Controls.Add(this.shadedPanel3);
             this.painel_developer.Controls.Add(this.imageModernButton5);
             this.painel_developer.Controls.Add(this.imageModernButton4);
+            this.painel_developer.Controls.Add(this.panel1);
             this.painel_developer.Controls.Add(this.imageModernButton3);
             this.painel_developer.Controls.Add(this.imageModernButton2);
-            this.painel_developer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.painel_developer.Location = new System.Drawing.Point(1, 83);
+            this.painel_developer.Location = new System.Drawing.Point(3, 3);
             this.painel_developer.Name = "painel_developer";
-            this.painel_developer.Size = new System.Drawing.Size(814, 43);
+            this.painel_developer.Size = new System.Drawing.Size(570, 43);
             this.painel_developer.TabIndex = 5;
             this.painel_developer.Visible = false;
             this.painel_developer.Paint += new System.Windows.Forms.PaintEventHandler(this.Painel_developer_Paint);
@@ -233,9 +236,9 @@ namespace ButtonDeck.Forms
             // shadedPanel4
             // 
             this.shadedPanel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.shadedPanel4.Location = new System.Drawing.Point(1, 126);
+            this.shadedPanel4.Location = new System.Drawing.Point(1, 83);
             this.shadedPanel4.Name = "shadedPanel4";
-            this.shadedPanel4.Size = new System.Drawing.Size(149, 463);
+            this.shadedPanel4.Size = new System.Drawing.Size(149, 506);
             this.shadedPanel4.TabIndex = 6;
             // 
             // notifyIcon1
@@ -246,6 +249,21 @@ namespace ButtonDeck.Forms
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseClick);
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseDoubleClick);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.painel_developer, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(187, 185);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(576, 62);
+            this.tableLayoutPanel1.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -255,10 +273,9 @@ namespace ButtonDeck.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.shadedPanel4);
-            this.Controls.Add(this.painel_developer);
             this.Controls.Add(this.shadedPanel1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.appBar1);
             this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(915, 535);
@@ -273,8 +290,9 @@ namespace ButtonDeck.Forms
             this.shadedPanel1.ResumeLayout(false);
             this.shadedPanel2.ResumeLayout(false);
             this.painel_developer.ResumeLayout(false);
+            this.painel_developer.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -296,6 +314,7 @@ namespace ButtonDeck.Forms
         private ShadedPanel shadedPanel3;
         private ShadedPanel shadedPanel4;
         private NotifyIcon notifyIcon1;
+        private TableLayoutPanel tableLayoutPanel1;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }
