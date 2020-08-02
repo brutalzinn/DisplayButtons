@@ -170,6 +170,9 @@ o uso do ButtonDeck. Não esqueça de dar seu feedback.
   <data name="EXPORTPERFIL" xml:space="preserve">
     <value>Exportar perfil</value>
   </data>
+  <data name="GENERATESIDEBARTITLEPLUGINS" xml:space="preserve">
+    <value>Botões externos</value>
+  </data>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Chave</value>
   </data>
