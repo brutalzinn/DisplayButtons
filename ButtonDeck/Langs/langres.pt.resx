@@ -134,6 +134,9 @@ executar ações (macros) em um computador.</value>
     <value>Android é uma marca comercial da Google LLC.
 Este aplicativo não está relacionado à Elgato Systems GmbH de forma alguma.</value>
   </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6" xml:space="preserve">
+    <value>Sejam em aplicativos simples, ou aplicativo como o DisplayKeys. Personalização é uma coisa muito legal de se ter em qualquer lugar.  Escolha um tema disponível abaixo para customizar sua interface de usuário</value>
+  </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_LABEL1" xml:space="preserve">
     <value>Agora que você selecionou um tema, é hora de nomear este dispositivo.</value>
   </data>
