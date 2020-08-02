@@ -135,7 +135,9 @@ execute actions (macros) on a computer.</value>
 This application is not related to Elgato Systems GmbH in any way.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6" xml:space="preserve">
-    <value>Whether in simple apps, or apps like DisplayKeys. Personalization is a really cool thing to have anywhere. Choose a theme available below to customize your user interface</value>
+    <value>Whether in simple apps, or apps like DisplayKeys.
+Personalization is a really cool thing to have anywhere.
+Choose a theme available below to customize your user interface.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_LABEL1" xml:space="preserve">
     <value>Now that you've selected a theme, it's time to name this device.</value>
