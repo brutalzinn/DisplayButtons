@@ -53,6 +53,11 @@ namespace ButtonDeck.Forms.FirstSetup
 
         private void DeviceNamePage_Load(object sender, EventArgs e)
         {
+            label1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL1", Texts.cultereinfo);
+            label2.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL2", Texts.cultereinfo);
+            label3.Text = Texts.rm.GetString("DEVICENAME", Texts.cultereinfo);
+            checkBox1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL3", Texts.cultereinfo);
+            checkBox1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL4", Texts.cultereinfo);
 
         }
     }
