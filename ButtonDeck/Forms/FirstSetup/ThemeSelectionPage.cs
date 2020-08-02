@@ -20,6 +20,12 @@ namespace ButtonDeck.Forms.FirstSetup
         {
             InitializeComponent();
             //Set the default theme
+
+
+
+
+
+            label4.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6", Texts.cultereinfo);
             colorSchemePreviewControl1.Tag = true;
 
             colorSchemePreviewControl1.AppTheme = ColorSchemeCentral.DarkSide;
