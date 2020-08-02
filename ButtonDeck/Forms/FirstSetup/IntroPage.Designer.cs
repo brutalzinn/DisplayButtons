@@ -62,7 +62,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(16, 190);
+            this.label3.Location = new System.Drawing.Point(16, 162);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(440, 42);
             this.label3.TabIndex = 0;
@@ -95,7 +95,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(16, 280);
+            this.label6.Location = new System.Drawing.Point(16, 223);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 21);
             this.label6.TabIndex = 1;
@@ -103,11 +103,12 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.ForeColor = System.Drawing.Color.White;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "pt-BR",
             "en-US"});
-            this.comboBox1.Location = new System.Drawing.Point(119, 276);
+            this.comboBox1.Location = new System.Drawing.Point(110, 220);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(413, 29);
             this.comboBox1.TabIndex = 2;
@@ -124,9 +125,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.White;
-            this.MaximumSize = new System.Drawing.Size(567, 500);
+            this.MaximumSize = new System.Drawing.Size(567, 320);
+            this.MinimumSize = new System.Drawing.Size(567, 320);
             this.Name = "IntroPage";
-            this.Size = new System.Drawing.Size(567, 359);
+            this.Size = new System.Drawing.Size(567, 320);
             this.Load += new System.EventHandler(this.IntroPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
