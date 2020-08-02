@@ -668,6 +668,9 @@ namespace ButtonDeck.Forms
         {
             Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
             panel1.Controls.Clear();
+            warning_label.Visible = true;
+            warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
+            panel1.Visible = false;
             Invoke(new Action(() =>
             {
                 List<Control> toAdd = new List<Control>();
@@ -946,7 +949,10 @@ namespace ButtonDeck.Forms
                           
                            Globals.can_refresh = true;
                           RefreshAllButtons(true);
+                            panel1.Visible = true;
+                            warning_label.Visible = false;
                             ApplyTheme(panel1);
+                            
                                 //            break;
 
                             }

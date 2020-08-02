@@ -175,9 +175,6 @@ the use of ButtonDeck. Don't forget to give your feedback.</value>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Key</value>
   </data>
-  <data name="IFTTMAKERKEYTEXT1" xml:space="preserve">
-    <value>IFTT Maker Key</value>
-  </data>
   <data name="IMPORTPROFILE" xml:space="preserve">
     <value>Import profile</value>
   </data>
@@ -216,6 +213,9 @@ the use of ButtonDeck. Don't forget to give your feedback.</value>
   </data>
   <data name="MATRIZCHANGER" xml:space="preserve">
     <value>Change matriz</value>
+  </data>
+  <data name="MATRIZGENERATORLABELLOADING" xml:space="preserve">
+    <value>Loading...</value>
   </data>
   <data name="OBSCONNECTION" xml:space="preserve">
     <value>Start OBS connection</value>

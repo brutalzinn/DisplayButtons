@@ -212,6 +212,9 @@ o uso do ButtonDeck. Não esqueça de dar seu feedback.
   <data name="MATRIZCHANGER" xml:space="preserve">
     <value>Alterar matriz</value>
   </data>
+  <data name="MATRIZGENERATORLABELLOADING" xml:space="preserve">
+    <value>Carregando...</value>
+  </data>
   <data name="OBSCONNECTION" xml:space="preserve">
     <value>Criar conexão OBS</value>
   </data>

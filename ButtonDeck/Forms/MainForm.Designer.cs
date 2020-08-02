@@ -91,11 +91,11 @@ namespace ButtonDeck.Forms
             this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.warning_label.BackColor = System.Drawing.Color.Transparent;
             this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warning_label.Location = new System.Drawing.Point(100, 229);
+            this.warning_label.Location = new System.Drawing.Point(95, 218);
             this.warning_label.Name = "warning_label";
             this.warning_label.Size = new System.Drawing.Size(424, 69);
             this.warning_label.TabIndex = 3;
-            this.warning_label.Text = "The buttons will appear after you connect the device.";
+            this.warning_label.Text = "STATUS LABEL";
             this.warning_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.warning_label.Visible = false;
             // 
