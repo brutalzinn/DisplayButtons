@@ -77,6 +77,7 @@ namespace ButtonDeck.Forms.FirstSetup
         {
 
             Texts.initilizeLang();
+            this.Refresh();
             label4.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6", Texts.cultereinfo);
 
         }

@@ -20,7 +20,8 @@ namespace ButtonDeck.Forms.FirstSetup
 
         private void MatrizSelector_Load(object sender, EventArgs e)
         {
-
+            Texts.initilizeLang();
+            this.Refresh();
             label1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL1", Texts.cultereinfo);
             label2.Text =   Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL2", Texts.cultereinfo);
 
@@ -31,9 +32,14 @@ namespace ButtonDeck.Forms.FirstSetup
         public override void SaveProgress()
         {
         
+            if(coluna.Text.Length > 0 && linha.Text.Length > 0)
+            {
 
+           
             ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
             ApplicationSettingsManager.Settings.linha = Convert.ToInt32(linha.Text);
+
+            }
         }
     }
 }
