@@ -96,7 +96,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.AutoSize = true;
             this.Controls.Add(this.colorSchemePreviewControl4);
             this.Controls.Add(this.colorSchemePreviewControl1);

@@ -371,6 +371,9 @@
     <Compile Include="Forms\FirstSetup\MatrizSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\FirstSetup\MatrizSelector.Designer.cs">
+      <DependentUpon>MatrizSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FirstSetup\PageTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>

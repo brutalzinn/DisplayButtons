@@ -23,10 +23,7 @@ namespace ButtonDeck.Forms.FirstSetup
 
 
 
-
-
-            label4.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6", Texts.cultereinfo);
-            colorSchemePreviewControl1.Tag = true;
+      colorSchemePreviewControl1.Tag = true;
 
             colorSchemePreviewControl1.AppTheme = ColorSchemeCentral.DarkSide;
    colorSchemePreviewControl1.UnderlyingAppTheme = AppSettings.AppTheme.DarkSide;
@@ -78,6 +75,9 @@ namespace ButtonDeck.Forms.FirstSetup
 
         private void ThemeSelectionPage_Load(object sender, EventArgs e)
         {
+
+            Texts.initilizeLang();
+            label4.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6", Texts.cultereinfo);
 
         }
     }

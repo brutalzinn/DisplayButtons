@@ -20,8 +20,9 @@ namespace ButtonDeck.Forms
         private List<PageTemplate> setupPages = new List<PageTemplate>() {
             new IntroPage(),
             new ThemeSelectionPage(),
-            new DeviceNamePage(),
-                     new MatrizSelector()
+            new MatrizSelector(),
+            new DeviceNamePage()
+    
         };
 
         public FirstSetupForm()
@@ -75,6 +76,22 @@ namespace ButtonDeck.Forms
         private void FirstSetupForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void ModernButton2_Click(object sender, EventArgs e)
+        {
+            if (currentPage < setupPages.Count - 1)
+            {
+                ChangePage(--currentPage);
+                ModifyColorScheme(Controls.OfType<Control>());
+            }
+            else
+            {
+                if (currentPageTemplate != null && !currentPageTemplate.CanProgress) return;
+                if (currentPageTemplate != null) currentPageTemplate.SaveProgress();
+                FinishedSetup = true;
+                Close();
+            }
         }
     }
 }

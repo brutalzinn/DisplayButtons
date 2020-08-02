@@ -20,6 +20,7 @@ namespace ButtonDeck.Forms.FirstSetup
 
         private void IntroPage_Load(object sender, EventArgs e)
         {
+            Texts.initilizeLang();
             label1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL1", Texts.cultereinfo);
             label2.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL2", Texts.cultereinfo);
             label4.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL3", Texts.cultereinfo);
@@ -33,6 +34,8 @@ namespace ButtonDeck.Forms.FirstSetup
             ApplicationSettingsManager.Settings.Language = comboBox1.Text;
           
             ApplicationSettingsManager.SaveSettings();
+      
+            Texts.initilizeLang();
         }
     }
 }

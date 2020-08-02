@@ -29,9 +29,10 @@
         {
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +61,16 @@
             this.panel1.Size = new System.Drawing.Size(768, 269);
             this.panel1.TabIndex = 1;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Tag = "Page {0}/{1}";
+            this.label1.Text = "Page {0}/{1}";
+            // 
             // modernButton1
             // 
             this.modernButton1.CustomColorScheme = false;
@@ -70,16 +81,6 @@
             this.modernButton1.Text = "Next";
             this.modernButton1.UseVisualStyleBackColor = true;
             this.modernButton1.Click += new System.EventHandler(this.ModernButton1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Tag = "Page {0}/{1}";
-            this.label1.Text = "Page {0}/{1}";
             // 
             // tableLayoutPanel1
             // 
@@ -94,6 +95,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 275);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
+            // modernButton2
+            // 
+            this.modernButton2.CustomColorScheme = false;
+            this.modernButton2.Location = new System.Drawing.Point(13, 370);
+            this.modernButton2.Name = "modernButton2";
+            this.modernButton2.Size = new System.Drawing.Size(133, 45);
+            this.modernButton2.TabIndex = 5;
+            this.modernButton2.Text = "Back";
+            this.modernButton2.UseVisualStyleBackColor = true;
+            this.modernButton2.Click += new System.EventHandler(this.ModernButton2_Click);
+            // 
             // FirstSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -104,6 +116,7 @@
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.modernButton2);
             this.Controls.Add(this.modernButton1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.appBar1);
@@ -126,5 +139,6 @@
         private System.Windows.Forms.Label label1;
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton2;
     }
 }
