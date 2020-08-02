@@ -96,6 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSize = true;
             this.Controls.Add(this.colorSchemePreviewControl4);
             this.Controls.Add(this.colorSchemePreviewControl1);
@@ -104,6 +105,7 @@
             this.Controls.Add(this.label4);
             this.ForeColor = System.Drawing.Color.White;
             this.MaximumSize = new System.Drawing.Size(800, 244);
+            this.MinimumSize = new System.Drawing.Size(800, 244);
             this.Name = "ThemeSelectionPage";
             this.Size = new System.Drawing.Size(800, 244);
             this.Load += new System.EventHandler(this.ThemeSelectionPage_Load);

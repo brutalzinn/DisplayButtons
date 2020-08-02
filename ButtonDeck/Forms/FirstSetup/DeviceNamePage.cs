@@ -46,6 +46,14 @@ namespace ButtonDeck.Forms.FirstSetup
         public DeviceNamePage()
         {
             InitializeComponent();
+
+
+
+        }
+
+        private void DeviceNamePage_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

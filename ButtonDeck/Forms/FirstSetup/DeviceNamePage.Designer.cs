@@ -87,9 +87,10 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.ForeColor = System.Drawing.Color.White;
             this.checkBox1.Location = new System.Drawing.Point(7, 184);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(245, 25);
+            this.checkBox1.Size = new System.Drawing.Size(244, 25);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "Start application with Windows";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -105,7 +106,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.White;
-            this.Text = "DeviceNamePage";
+            this.Name = "DeviceNamePage";
+            this.Load += new System.EventHandler(this.DeviceNamePage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

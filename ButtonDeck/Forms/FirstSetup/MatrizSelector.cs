@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ButtonDeck.Forms.FirstSetup
 {
-    public class MatrizSelector : UserControl
+    public class MatrizSelector : PageTemplate
     {
         private TextBox textBox2;
         private Label label4;
@@ -140,8 +140,14 @@ namespace ButtonDeck.Forms.FirstSetup
             this.Controls.Add(this.textBox1);
             this.Name = "MatrizSelector";
             this.Size = new System.Drawing.Size(548, 163);
+            this.Load += new System.EventHandler(this.MatrizSelector_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
+        }
+
+        private void MatrizSelector_Load(object sender, EventArgs e)
+        {
 
         }
     }

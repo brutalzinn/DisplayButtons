@@ -20,7 +20,8 @@ namespace ButtonDeck.Forms
         private List<PageTemplate> setupPages = new List<PageTemplate>() {
             new IntroPage(),
             new ThemeSelectionPage(),
-            new DeviceNamePage()
+            new DeviceNamePage(),
+                     new MatrizSelector()
         };
 
         public FirstSetupForm()
@@ -69,6 +70,11 @@ namespace ButtonDeck.Forms
                 FinishedSetup = true;
                 Close();
             }
+        }
+
+        private void FirstSetupForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
