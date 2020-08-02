@@ -368,6 +368,12 @@
     <Compile Include="Forms\FirstSetup\IntroPage.Designer.cs">
       <DependentUpon>IntroPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FirstSetup\MatrizSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FirstSetup\MatrizSelector.Designer.cs">
+      <DependentUpon>MatrizSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FirstSetup\PageTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -535,6 +541,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActionHelperForms\LayerMultiActionHelper.resx">
       <DependentUpon>LayerMultiActionHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FirstSetup\MatrizSelector.resx">
+      <DependentUpon>MatrizSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainFormMenuOption.resx">
       <DependentUpon>MainFormMenuOption.cs</DependentUpon>

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ButtonDeck.Forms
 {
-    class ShadedPanel : Panel
+  public  class ShadedPanel : Panel
     {
         bool hasPainted;
         protected override void OnPaint(PaintEventArgs e)

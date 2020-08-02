@@ -253,17 +253,17 @@ namespace ButtonDeck.Forms
             appBar1.Actions.Add(itemBiblioteca);
             // ApplyTheme(panel1);
             GenerateSidebar(shadedPanel1, true);
-            ApplySidebarTheme(shadedPanel1);
+           ApplySidebarTheme(shadedPanel1);
 
             ApplySidebarTheme(painel_developer);
-            shadedPanel2.Hide();
-            shadedPanel1.Hide();
+            //shadedPanel2.Hide();
+            //shadedPanel1.Hide();
 
 
 
             ChangeDeveloperMode();
             MatrizGenerator();
-            ApplyTheme(panel1);
+            
             Refresh();
 
 
@@ -284,7 +284,16 @@ namespace ButtonDeck.Forms
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
             {
                 shadedPanel4.Visible = false;
-             
+
+                int columnumber = tableLayoutPanel1.GetColumn(shadedPanel4);
+                tableLayoutPanel1.ColumnStyles[columnumber].Width = 0;
+
+                
+
+                
+                
+
+
             }
 
 
@@ -659,6 +668,9 @@ namespace ButtonDeck.Forms
         {
             Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
             panel1.Controls.Clear();
+            warning_label.Visible = true;
+            warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
+            panel1.Visible = false;
             Invoke(new Action(() =>
             {
                 List<Control> toAdd = new List<Control>();
@@ -937,7 +949,10 @@ namespace ButtonDeck.Forms
                           
                            Globals.can_refresh = true;
                           RefreshAllButtons(true);
-
+                            panel1.Visible = true;
+                            warning_label.Visible = false;
+                            ApplyTheme(panel1);
+                            
                                 //            break;
 
                             }
@@ -1989,13 +2004,16 @@ namespace ButtonDeck.Forms
             });
             if (loadplugins)
             {
+              
                 createPluginButton();
+               
+               
             }
 
 
         }
 
-
+        
 
 
 
@@ -2726,7 +2744,7 @@ namespace ButtonDeck.Forms
             // testando.script = script;
 
 
-
+            List<Control> toAdd = new List<Control>();
 
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
@@ -2737,17 +2755,8 @@ namespace ButtonDeck.Forms
             MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate
             {
                 //Globals.launcher_principal.ShadedPanel1.Controls.Clear();
-                Label teste = new Label()
-                {
-                    Padding = categoryPadding,
-                    TextAlign = ContentAlignment.MiddleLeft,
-                    Font = categoryFont,
-                    Dock = DockStyle.Top,
-                    Text = name,
-                    Tag = "header",
-
-                };
-
+                
+              
 
                 //  PluginLuaGenerator testando = new PluginLuaGenerator();
                 //  PluginLuaGenerator.name = name_button;
@@ -2764,8 +2773,8 @@ namespace ButtonDeck.Forms
 
                 var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
-                List<Control> toAdd = new List<Control>();
 
+               
 
 
 
@@ -2819,7 +2828,7 @@ namespace ButtonDeck.Forms
                             };
 
 
-                            MainForm.instance.ShadedPanel1.Controls.Add(item);
+                            toAdd.Add(item);
                             //  i2.SetConfigs(name, script);
 
 
@@ -2834,14 +2843,18 @@ namespace ButtonDeck.Forms
                     }
                 }
 
-
+                
                 Debug.WriteLine("GRANDO SIDEBAR " + name);
             });
 
 
 
 
-
+toAdd.AsEnumerable().Reverse().All(m =>
+                {
+                    ShadedPanel1.Controls.Add(m);
+                    return true;
+                });
 
 
 
@@ -2953,7 +2966,23 @@ namespace ButtonDeck.Forms
         }
         public void createPluginButton()
         {
+            Padding categoryPadding = new Padding(5, 0, 0, 0);
+            Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
+            Padding itemPadding = new Padding(25, 0, 0, 0);
+            Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
+            Label TextTitle = new Label()
+            {
+                Padding = categoryPadding,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Font = categoryFont,
+                Dock = DockStyle.Top,
+                Text = Texts.rm.GetString("GENERATESIDEBARTITLEPLUGINS", Texts.cultereinfo),
+                Height = TextRenderer.MeasureText(Text, categoryFont).Height,
+                Tag = "header"
 
+            };
+           
+           
 
             Package[] installedPackages = Workshop.GetInstalled();
 
@@ -2969,7 +2998,7 @@ namespace ButtonDeck.Forms
                 //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
 
             });
-
+            shadedPanel1.Controls.Add(TextTitle);
         }
 
 
@@ -3247,7 +3276,7 @@ namespace ButtonDeck.Forms
             });
             createPluginButton();
 
-
+            ApplySidebarTheme(shadedPanel1);
 
 
         }
@@ -3259,6 +3288,7 @@ namespace ButtonDeck.Forms
             shadedPanel1.Controls.Clear();
 
             GenerateSidebar(shadedPanel1, false);
+            ApplySidebarTheme(shadedPanel1);
         }
 
         public void openConsoleDeveloper()
@@ -3352,6 +3382,16 @@ namespace ButtonDeck.Forms
                 this.WindowState = FormWindowState.Normal;
                 this.Show();
             }
+        }
+
+        private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TableLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
+        {
+
         }
     }
     #endregion

@@ -27,54 +27,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.colorSchemePreviewControl2 = new ButtonDeck.Controls.ColorSchemePreviewControl();
             this.colorSchemePreviewControl1 = new ButtonDeck.Controls.ColorSchemePreviewControl();
             this.colorSchemePreviewControl3 = new ButtonDeck.Controls.ColorSchemePreviewControl();
+            this.colorSchemePreviewControl4 = new ButtonDeck.Controls.ColorSchemePreviewControl();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Customization.\r\n";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(110, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(235, 21);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Everyone likes customizing stuff.";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(3, 42);
+            this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(536, 21);
             this.label4.TabIndex = 0;
             this.label4.Text = "That\'s why we provide you a small set of themes that you can choose to use.\r\n";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(3, 21);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(299, 21);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Be it hotkeys, or even application themes. ";
             // 
             // colorSchemePreviewControl2
             // 
@@ -112,32 +80,44 @@
             this.colorSchemePreviewControl3.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
             this.colorSchemePreviewControl3.Click += new System.EventHandler(this.ColorSchemePreviewControl2_Click);
             // 
+            // colorSchemePreviewControl4
+            // 
+            this.colorSchemePreviewControl4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.colorSchemePreviewControl4.DescriptionText = "Neptune";
+            this.colorSchemePreviewControl4.ForeColor = System.Drawing.Color.White;
+            this.colorSchemePreviewControl4.Location = new System.Drawing.Point(584, 72);
+            this.colorSchemePreviewControl4.Name = "colorSchemePreviewControl4";
+            this.colorSchemePreviewControl4.Size = new System.Drawing.Size(177, 167);
+            this.colorSchemePreviewControl4.TabIndex = 2;
+            this.colorSchemePreviewControl4.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl4.Click += new System.EventHandler(this.ColorSchemePreviewControl2_Click);
+            // 
             // ThemeSelectionPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.Controls.Add(this.colorSchemePreviewControl4);
             this.Controls.Add(this.colorSchemePreviewControl1);
             this.Controls.Add(this.colorSchemePreviewControl3);
             this.Controls.Add(this.colorSchemePreviewControl2);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.White;
+            this.MaximumSize = new System.Drawing.Size(800, 244);
+            this.MinimumSize = new System.Drawing.Size(800, 244);
             this.Name = "ThemeSelectionPage";
+            this.Size = new System.Drawing.Size(800, 244);
+            this.Load += new System.EventHandler(this.ThemeSelectionPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private Controls.ColorSchemePreviewControl colorSchemePreviewControl2;
         private Controls.ColorSchemePreviewControl colorSchemePreviewControl1;
         private Controls.ColorSchemePreviewControl colorSchemePreviewControl3;
+        private Controls.ColorSchemePreviewControl colorSchemePreviewControl4;
     }
 }

@@ -117,12 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL1" xml:space="preserve">
+    <value>Hello, welcome to DisplayKeys.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL2" xml:space="preserve">
+    <value>DisplayKeys is a software that allows you to use any Android™ device to
+execute actions (macros) on a computer.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL3" xml:space="preserve">
+    <value>DisplayKeys can be used to facilitate the use of various application shortcuts</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL4" xml:space="preserve">
+    <value>To start the setup, press Next.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL5" xml:space="preserve">
+    <value>Android is a trademark of Google LLC.
+This application is not related to Elgato Systems GmbH in any way.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6" xml:space="preserve">
+    <value>Whether in simple apps, or apps like DisplayKeys.
+Personalization is a really cool thing to have anywhere.
+Choose a theme available below to customize your user interface.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_LABEL1" xml:space="preserve">
+    <value>Now that you've selected a theme, it's time to name this device.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_LABEL2" xml:space="preserve">
+    <value>The name will only be visible if there are multiple devices on
+the same network with desktop application open.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_LABEL3" xml:space="preserve">
+    <value>Start application with Windows</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_LABEL4" xml:space="preserve">
+    <value>After you've entered a device name, press Finish.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL1" xml:space="preserve">
+    <value>DisplayKeys allows you to choose the number of rows and columns in your button array. Choose the matrix according to the screen size of your android device. Very large arrays take time to render.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL2" xml:space="preserve">
+    <value>Line:</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL3" xml:space="preserve">
+    <value>Column:</value>
+  </data>
   <data name="APPLICATIONNAME_DESCRIPTION" xml:space="preserve">
     <value>Cool options that you can configure to your liking to improve
 the use of ButtonDeck. Don't forget to give your feedback.</value>
   </data>
   <data name="APPLICATION_MENU" xml:space="preserve">
-    <value>ButtonDeck - Menu</value>
+    <value>DisplayKeys - Menu</value>
   </data>
   <data name="BACKFOLDER" xml:space="preserve">
     <value>Back folder</value>
@@ -175,14 +219,11 @@ the use of ButtonDeck. Don't forget to give your feedback.</value>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Key</value>
   </data>
-  <data name="IFTTMAKERKEYTEXT1" xml:space="preserve">
-    <value>IFTT Maker Key</value>
-  </data>
   <data name="IMPORTPROFILE" xml:space="preserve">
     <value>Import profile</value>
   </data>
   <data name="INITIALIZER_MODE_FORMMENUOPTIONS_TEXT" xml:space="preserve">
-    <value>Button Deck - Starter</value>
+    <value>DisplayKeys - Starter</value>
   </data>
   <data name="ISTHISDISABLED" xml:space="preserve">
     <value>DISABLED</value>
@@ -216,6 +257,9 @@ the use of ButtonDeck. Don't forget to give your feedback.</value>
   </data>
   <data name="MATRIZCHANGER" xml:space="preserve">
     <value>Change matriz</value>
+  </data>
+  <data name="MATRIZGENERATORLABELLOADING" xml:space="preserve">
+    <value>Loading...</value>
   </data>
   <data name="OBSCONNECTION" xml:space="preserve">
     <value>Start OBS connection</value>

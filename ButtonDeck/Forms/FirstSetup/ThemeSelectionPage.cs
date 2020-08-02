@@ -20,11 +20,27 @@ namespace ButtonDeck.Forms.FirstSetup
         {
             InitializeComponent();
             //Set the default theme
-            colorSchemePreviewControl1.Tag = true;
-            colorSchemePreviewControl2.AppTheme = ColorSchemeCentral.DarkSide;
-            colorSchemePreviewControl2.UnderlyingAppTheme = AppSettings.AppTheme.DarkSide;
+
+
+
+      colorSchemePreviewControl1.Tag = true;
+
+            colorSchemePreviewControl1.AppTheme = ColorSchemeCentral.DarkSide;
+   colorSchemePreviewControl1.UnderlyingAppTheme = AppSettings.AppTheme.DarkSide;
+
+            colorSchemePreviewControl2.Tag = true;
             colorSchemePreviewControl2.AppTheme = ColorSchemeCentral.KindaGreen;
             colorSchemePreviewControl2.UnderlyingAppTheme = AppSettings.AppTheme.KindaGreen;
+
+            colorSchemePreviewControl3.Tag = true;
+            colorSchemePreviewControl3.AppTheme = ColorSchemeCentral.Neptune;
+            colorSchemePreviewControl3.UnderlyingAppTheme = AppSettings.AppTheme.Neptune;
+
+            colorSchemePreviewControl4.Tag = true;
+            colorSchemePreviewControl4.AppTheme = ColorSchemeCentral.PinkNanda;
+            colorSchemePreviewControl4.UnderlyingAppTheme = AppSettings.AppTheme.PinkNanda;
+
+
         }
         
 
@@ -55,6 +71,15 @@ namespace ButtonDeck.Forms.FirstSetup
                 ApplicationSettingsManager.Settings.Theme = ctrl.UnderlyingAppTheme;
                 ColorSchemeCentral.OnThemeChanged(this);
             }
+        }
+
+        private void ThemeSelectionPage_Load(object sender, EventArgs e)
+        {
+
+            Texts.initilizeLang();
+            this.Refresh();
+            label4.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6", Texts.cultereinfo);
+
         }
     }
 }
