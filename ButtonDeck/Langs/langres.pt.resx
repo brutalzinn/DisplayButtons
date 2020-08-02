@@ -117,13 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL1" xml:space="preserve">
+    <value>Olá, bem-vindo ao DisplayKeys.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL2" xml:space="preserve">
+    <value>O DisplayKeys é um software que permite usar qualquer dispositivo Android ™ para
+executar ações (macros) em um computador.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL3" xml:space="preserve">
+    <value>As DisplayKeys pode ser usado para facilitar o uso de atalhos de diversos aplicativos</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL4" xml:space="preserve">
+    <value>Para iniciar a configuração, pressione Avançar.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL5" xml:space="preserve">
+    <value>Android é uma marca comercial da Google LLC.
+Este aplicativo não está relacionado à Elgato Systems GmbH de forma alguma.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_LABEL1" xml:space="preserve">
+    <value>Agora que você selecionou um tema, é hora de nomear este dispositivo.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_LABEL2" xml:space="preserve">
+    <value>O nome só estará visível se houver vários dispositivos no
+a mesma rede com o aplicativo de desktop aberto.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_LABEL3" xml:space="preserve">
+    <value>Iniciar aplicativo com o windows.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_LABEL4" xml:space="preserve">
+    <value>Depois que digitar o nome do dispositivo, pressione finalizar.</value>
+  </data>
+  <data name="APPLICATIONNAME" xml:space="preserve">
+    <value>DisplayKeys</value>
+  </data>
   <data name="APPLICATIONNAME_DESCRIPTION" xml:space="preserve">
     <value>Opções legais que você pode configurar a seu gosto para melhorar  
 o uso do ButtonDeck. Não esqueça de dar seu feedback.
 </value>
   </data>
   <data name="APPLICATION_MENU" xml:space="preserve">
-    <value>ButtonDeck - Menu</value>
+    <value>DisplayKeys - Menu</value>
   </data>
   <data name="BACKFOLDER" xml:space="preserve">
     <value>Pasta anterior</value>
@@ -180,7 +213,7 @@ o uso do ButtonDeck. Não esqueça de dar seu feedback.
     <value>Importar perfil</value>
   </data>
   <data name="INITIALIZER_MODE_FORMMENUOPTIONS_TEXT" xml:space="preserve">
-    <value>Button Deck - Inicializador</value>
+    <value>DisplayKeys - Inicializador</value>
   </data>
   <data name="ISTHISDISABLED" xml:space="preserve">
     <value>Desabilitado</value>

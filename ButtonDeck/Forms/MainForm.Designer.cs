@@ -67,7 +67,7 @@ namespace ButtonDeck.Forms
             this.appBar1.OverrideParentText = false;
             this.appBar1.Size = new System.Drawing.Size(1075, 50);
             this.appBar1.TabIndex = 0;
-            this.appBar1.Text = "ButtonDeck";
+            this.appBar1.Text = "DisplayKeys";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             this.appBar1.ToolTip = null;
             this.appBar1.Click += new System.EventHandler(this.appBar1_Click);
@@ -285,7 +285,7 @@ namespace ButtonDeck.Forms
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "";
-            this.Text = "ButtonDeck";
+            this.Text = "DisplayKeys";
             this.TransparencyKey = System.Drawing.Color.Magenta;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Click += new System.EventHandler(this.Buttons_Unfocus);
