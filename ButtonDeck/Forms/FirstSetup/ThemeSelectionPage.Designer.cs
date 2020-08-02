@@ -90,6 +90,7 @@
             this.colorSchemePreviewControl4.Size = new System.Drawing.Size(177, 167);
             this.colorSchemePreviewControl4.TabIndex = 2;
             this.colorSchemePreviewControl4.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl4.Click += new System.EventHandler(this.ColorSchemePreviewControl2_Click);
             // 
             // ThemeSelectionPage
             // 
@@ -105,6 +106,7 @@
             this.MaximumSize = new System.Drawing.Size(800, 244);
             this.Name = "ThemeSelectionPage";
             this.Size = new System.Drawing.Size(800, 244);
+            this.Load += new System.EventHandler(this.ThemeSelectionPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

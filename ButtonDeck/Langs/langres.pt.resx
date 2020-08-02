@@ -150,6 +150,15 @@ a mesma rede com o aplicativo de desktop aberto.</value>
   <data name="APPLICATIONFIRSTSETUPAGE1_LABEL4" xml:space="preserve">
     <value>Depois que digitar o nome do dispositivo, pressione finalizar.</value>
   </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL1" xml:space="preserve">
+    <value>O DisplayKeys permite que você escolha o número de linhas e colunas da sua matriz de botões. Escolha a matriz de acordo com o tamanho da tela do seu dispositivo android. Matrizes muito grandes demoram a ser renderizadas.</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL2" xml:space="preserve">
+    <value>Linha:</value>
+  </data>
+  <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL3" xml:space="preserve">
+    <value>Coluna:</value>
+  </data>
   <data name="APPLICATIONNAME" xml:space="preserve">
     <value>DisplayKeys</value>
   </data>
