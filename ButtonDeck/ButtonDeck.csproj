@@ -60,6 +60,9 @@
     <StartupObject>ButtonDeck.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoUpdater.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autoupdater.NET.Official.1.6.0\lib\net40\AutoUpdater.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
     </Reference>
@@ -338,6 +341,12 @@
     <Compile Include="Forms\ActionHelperForms\ToolDelayActionHelper.Designer.cs">
       <DependentUpon>ToolDelayActionHelper.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AutoUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AutoUpdateForm.Designer.cs">
+      <DependentUpon>AutoUpdateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ColorPickerDialogDemoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -542,6 +551,9 @@
     <EmbeddedResource Include="Forms\ActionHelperForms\LayerMultiActionHelper.resx">
       <DependentUpon>LayerMultiActionHelper.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AutoUpdateForm.resx">
+      <DependentUpon>AutoUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FirstSetup\MatrizSelector.resx">
       <DependentUpon>MatrizSelector.cs</DependentUpon>
     </EmbeddedResource>
@@ -735,6 +747,13 @@
     <Content Include="ModernUIDoneRight\obj\Debug\ModernUIDoneRight.csproj.FileListAbsolute.txt" />
     <Content Include="ModernUIDoneRight\obj\Debug\ModernUIDoneRight.dll" />
     <Content Include="ModernUIDoneRight\obj\Debug\ModernUIDoneRight.pdb" />
+    <None Include="Resources\settings, preferences, options, gear, cog.png" />
+    <None Include="Resources\user, account, profile, avatar, person.png" />
+    <None Include="Resources\drawer, archive, files, documents, office.png" />
+    <None Include="Resources\bug, virus, insect, malware, pest.png" />
+    <None Include="Resources\bug, virus, insect, malware, pest - Copia.png" />
+    <None Include="Resources\bug, virus, insect, malware, pest_white.png" />
+    <None Include="Resources\drawer, archive, files, documents, office_white.png" />
     <Content Include="Updater.exe" />
     <Resource Include="Resources\Stop_grey_16x.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

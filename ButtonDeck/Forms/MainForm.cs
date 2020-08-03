@@ -1,4 +1,5 @@
-﻿using ButtonDeck.Backend.Networking;
+﻿using AutoUpdaterDotNET;
+using ButtonDeck.Backend.Networking;
 using ButtonDeck.Backend.Networking.Implementation;
 using ButtonDeck.Backend.Objects;
 using ButtonDeck.Backend.Objects.Implementation;
@@ -9,6 +10,7 @@ using ButtonDeck.Controls;
 using ButtonDeck.Misc;
 using ButtonDeck.Properties;
 using Cyotek.Windows.Forms;
+using Newtonsoft.Json;
 using NHotkey;
 using NHotkey.WindowsForms;
 using NickAc.ModernUIDoneRight.Controls;
@@ -190,6 +192,8 @@ namespace ButtonDeck.Forms
             var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
             var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
             var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.Folder_grey_16x : Resources.Folder_grey_16x;
+            var imageMiscelanius = ColorScheme.ForegroundColor == Color.White ? Resources.drawer__archive__files__documents__office_white : Resources.drawer__archive__files__documents__office_white;
+            var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.bug__virus__insect__malware__pest_white : Resources.bug__virus__insect__malware__pest_white;
 
             AppAction item = new AppAction()
             {
@@ -200,7 +204,27 @@ namespace ButtonDeck.Forms
                 //TODO: Settings
                 new SettingsForm().ShowDialog();
             };
+
             appBar1.Actions.Add(item);
+   string jsonPath = Path.Combine(Environment.CurrentDirectory, "persistenceprovider.json");
+            AppAction autoupdate = new AppAction()
+            {
+                Image = imageUpdate
+            };
+            autoupdate.Click += (s, ee) =>
+            {
+                //TODO: Settings
+        
+            
+                AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
+             
+                AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(jsonPath);
+                AutoUpdater.PersistenceProvider.SetSkippedVersion(null);
+                //   AutoUpdater.LetUserSelectRemindLater = false;
+                //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
+                AutoUpdater.Start(Globals.updateurl);
+            };
+            appBar1.Actions.Add(autoupdate);
 
             AppAction itemTrash = new AppAction()
             {
@@ -218,23 +242,17 @@ namespace ButtonDeck.Forms
             };
             appBar1.Actions.Add(itemTrash);
 
-            AppAction itemMagnetite = new AppAction();
+            AppAction itemMagnetite = new AppAction()
+            {
+                Image = imageMiscelanius
+            };
 
             itemMagnetite.Click += (s, ee) =>
             {
                 new MagnetiteForm().ShowDialog();
             };
 
-            AppAction itemPlugins = new AppAction()
-            {
-                Image = imagePlugins
-            };
-
-            itemPlugins.Click += (s, ee) =>
-            {
-                Core.Initialize();
-                //     new ScribeBot.Interface.Window().Show();
-            };
+          
 
             AppAction itemBiblioteca = new AppAction()
             {
@@ -249,7 +267,7 @@ namespace ButtonDeck.Forms
             Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
 
             appBar1.Actions.Add(itemMagnetite);
-            appBar1.Actions.Add(itemPlugins);
+           
             appBar1.Actions.Add(itemBiblioteca);
             // ApplyTheme(panel1);
             GenerateSidebar(shadedPanel1, true);
@@ -295,10 +313,35 @@ namespace ButtonDeck.Forms
 
 
             }
+            AutoUpdater.ShowSkipButton = true;
 
+            AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(jsonPath);
+            AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
+            AutoUpdater.Start(Globals.updateurl);
 
 
             warning_label.ForeColor = ColorScheme.SecondaryColor;
+        }
+        private void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
+        {
+            dynamic json = JsonConvert.DeserializeObject(args.RemoteData);
+            args.UpdateInfo = new UpdateInfoEventArgs
+            {
+                CurrentVersion = json.version,
+                ChangelogURL = json.changelog,
+                DownloadURL = json.url,
+                Mandatory = new Mandatory
+                {
+                    Value = json.mandatory.value,
+                    UpdateMode = json.mandatory.mode,
+                    MinimumVersion = json.mandatory.minVersion
+                },
+                CheckSum = new CheckSum
+                {
+                    Value = json.checksum.value,
+                    HashingAlgorithm = json.checksum.hashingAlgorithm
+                }
+            };
         }
         public void setupLanguage()
         {

@@ -61,6 +61,26 @@ namespace ButtonDeck.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bug__virus__insect__malware__pest {
+            get {
+                object obj = ResourceManager.GetObject("bug__virus__insect__malware__pest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bug__virus__insect__malware__pest_white {
+            get {
+                object obj = ResourceManager.GetObject("bug__virus__insect__malware__pest_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon button_deck {
@@ -86,6 +106,26 @@ namespace ButtonDeck.Properties {
         internal static System.Drawing.Bitmap Close_16x {
             get {
                 object obj = ResourceManager.GetObject("Close_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap drawer__archive__files__documents__office {
+            get {
+                object obj = ResourceManager.GetObject("drawer__archive__files__documents__office", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap drawer__archive__files__documents__office_white {
+            get {
+                object obj = ResourceManager.GetObject("drawer__archive__files__documents__office_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -393,9 +433,29 @@ namespace ButtonDeck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap settings__preferences__options__gear__cog {
+            get {
+                object obj = ResourceManager.GetObject("settings__preferences__options__gear__cog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Stop_grey_16x {
             get {
                 object obj = ResourceManager.GetObject("Stop_grey_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user__account__profile__avatar__person {
+            get {
+                object obj = ResourceManager.GetObject("user__account__profile__avatar__person", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
