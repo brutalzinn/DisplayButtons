@@ -20,6 +20,6 @@ namespace ButtonDeck
         public static int ConsoleOpenned { get; set; }
         public static bool can_refresh { get; set; } = false;
         public static int coluna { get; set; }
-        public static string updateurl = "http://127.0.0.1/update.json";
+        public static string updateurl = "http://127.0.0.1/update.xml";
     }
 }

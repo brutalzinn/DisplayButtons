@@ -9,7 +9,7 @@
     <ProjectGuid>{2E4934B5-FFBC-4F7C-8CD5-5F3B3DEB86F1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ButtonDeck</RootNamespace>
-    <AssemblyName>ButtonDeck</AssemblyName>
+    <AssemblyName>DisplayKeys</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -60,8 +60,8 @@
     <StartupObject>ButtonDeck.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoUpdater.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autoupdater.NET.Official.1.6.0\lib\net40\AutoUpdater.NET.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.6.7\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
@@ -69,6 +69,9 @@
     <Reference Include="Cyotek.Windows.Forms.ColorPicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=58daa28b0b2de221, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Cyotek.Windows.Forms.ColorPicker.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.13.8.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.13.8\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
@@ -89,8 +92,8 @@
     <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="obs-websocket-dotnet, Version=4.2.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\obs-websocket-dotnet.4.2.0-beta3\lib\net40\obs-websocket-dotnet.dll</HintPath>
@@ -238,6 +241,79 @@
     <Compile Include="Backend\Utils\XMLUtils.cs" />
     <Compile Include="Bibliotecas\CustomButtonJsonsModel.cs" />
     <Compile Include="Bibliotecas\GlobalHotKeys.cs" />
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\CheckingForUpdatesWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\CheckingForUpdatesWindow.Designer.cs">
+      <DependentUpon>CheckingForUpdatesWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.Designer.cs">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\MessageNotificationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\MessageNotificationWindow.Designer.cs">
+      <DependentUpon>MessageNotificationWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\ToastNotifier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\ToastNotifier.designer.cs">
+      <DependentUpon>ToastNotifier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UIFactory.cs" />
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.Designer.cs">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bibliotecas\NetSparkle\AppCastHandlers\XMLAppCast.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\AppCastItem.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\AssemblyAccessors\AssemblyDiagnosticsAccessor.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\AssemblyAccessors\AssemblyReflectionAccessor.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Configurations\Configuration.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Configurations\JSONConfiguration.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Configurations\RegistryConfiguration.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Configurations\SavedConfigurationData.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Downloaders\WebClientFileDownloader.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Downloaders\WebRequestAppCastDataDownloader.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Enums\NextUpdateAction.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Enums\SecurityMode.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Enums\UpdateAvailableResult.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Enums\UpdateStatus.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Enums\UserInteractionMode.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Enums\ValidationResult.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Events\DownloadInstallEventArgs.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Events\ItemDownloadProgressEventArgs.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Events\UpdateDetectedEventArgs.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Events\UpdateResponseEventArgs.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\IAppCastDataDownloader.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\IAppCastHandler.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\IAssemblyAccessor.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\ICheckingForUpdates.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\IDownloadProgress.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\ILogger.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\ISignatureVerifier.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\IUIFactory.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\IUpdateAvailable.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Interfaces\IUpdateDownloader.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Libraries\MarkdownSharp.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\LogWriter.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\NetSparkleDelegates.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\NetSparkleException.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Properties\Resources.Designer.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\ReleaseNotesGrabber.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\SignatureVerifiers\DSAChecker.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\SignatureVerifiers\Ed25519Checker.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\SparkleUpdater.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\SparkleUpdaterEvents.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\UpdateInfo.cs" />
+    <Compile Include="Bibliotecas\NetSparkle\Utilities.cs" />
     <Compile Include="Bibliotecas\NHotkey.WindowsForms\ExtensionAttribute.cs" />
     <Compile Include="Bibliotecas\NHotkey.WindowsForms\Extensions.cs" />
     <Compile Include="Bibliotecas\NHotkey.WindowsForms\HotkeyManager.cs" />
@@ -530,6 +606,88 @@
     <Compile Include="Scripter.cs" />
     <Compile Include="Texts.cs" />
     <Compile Include="Workshop.cs" />
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\CheckingForUpdatesWindow.resx">
+      <DependentUpon>CheckingForUpdatesWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.bg.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.de.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.es-MX.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.fr.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.it.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.lt.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.nl.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.pt-BR.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.ru.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.zh-CN.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\DownloadProgressWindow.zh-TW.resx">
+      <DependentUpon>DownloadProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\MessageNotificationWindow.resx">
+      <DependentUpon>MessageNotificationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\ToastNotifier.resx">
+      <DependentUpon>ToastNotifier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.bg.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.de.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.es-MX.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.fr.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.it.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.lt.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.nl.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.pt-BR.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.ru.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.zh-CN.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.zh-TW.resx">
+      <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bibliotecas\NetSparkle\Properties\Resources.resx" />
     <EmbeddedResource Include="Controls\ColorSchemePreviewControl.resx">
       <DependentUpon>ColorSchemePreviewControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -626,6 +784,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\NetSparkle.UI.WinForms.NetCore.csproj" />
+    <None Include="Bibliotecas\NetSparkle\bin\Debug\NetSparkle.New.2.0.0-preview20200726001.nupkg" />
+    <None Include="Bibliotecas\NetSparkle\NetSparkle.csproj" />
     <None Include="Data\Extensions\table.lua" />
     <None Include="Data\Extensions\wait.lua" />
     <None Include="Data\Fonts\OfficeCodePro-Bold.ttf" />
@@ -655,6 +816,8 @@
     <None Include="Backend\Resources\img_item_start_stream.png" />
     <None Include="Backend\Resources\img_item_stop_recording.png" />
     <None Include="Backend\Resources\img_item_stop_stream.png" />
+    <Content Include="Bibliotecas\NetSparkle\ArtWork\software-update-available.ico" />
+    <Content Include="Bibliotecas\NetSparkle\ArtWork\software-update-available.png" />
     <Content Include="Bibliotecas\NHotkey.WindowsForms\NHotkey.WindowsForms.csproj" />
     <Content Include="Bibliotecas\NHotkey\NHotkey.csproj" />
     <Content Include="info.json">

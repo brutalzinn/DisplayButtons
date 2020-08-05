@@ -9,7 +9,6 @@ using ButtonDeck.Backend.Objects;
 using ButtonDeck.Bibliotecas;
 using Newtonsoft.Json;
 
-
 namespace ButtonDeck.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer)]

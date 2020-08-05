@@ -287,6 +287,7 @@ namespace ButtonDeck.Forms
             this.Tag = "";
             this.Text = "DisplayKeys";
             this.TransparencyKey = System.Drawing.Color.Magenta;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.Resize += new System.EventHandler(this.MainForm_Resize);

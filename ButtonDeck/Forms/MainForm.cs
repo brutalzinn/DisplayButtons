@@ -1,4 +1,4 @@
-﻿using AutoUpdaterDotNET;
+﻿
 using ButtonDeck.Backend.Networking;
 using ButtonDeck.Backend.Networking.Implementation;
 using ButtonDeck.Backend.Objects;
@@ -10,6 +10,10 @@ using ButtonDeck.Controls;
 using ButtonDeck.Misc;
 using ButtonDeck.Properties;
 using Cyotek.Windows.Forms;
+
+using NetSparkleUpdater;
+using NetSparkleUpdater.Configurations;
+using NetSparkleUpdater.SignatureVerifiers;
 using Newtonsoft.Json;
 using NHotkey;
 using NHotkey.WindowsForms;
@@ -27,7 +31,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.ServiceModel;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ButtonDeck.Backend.Objects.AbstractDeckAction;
 using Timer = System.Windows.Forms.Timer;
@@ -52,7 +58,7 @@ namespace ButtonDeck.Forms
 
         #region Constructors
 
-
+        private static SparkleUpdater _sparkle { get; set; }
         public MainForm()
         {
 
@@ -206,7 +212,7 @@ namespace ButtonDeck.Forms
             };
 
             appBar1.Actions.Add(item);
-   string jsonPath = Path.Combine(Environment.CurrentDirectory, "persistenceprovider.json");
+            string jsonPath = Path.Combine(Environment.CurrentDirectory, "persistenceprovider.json");
             AppAction autoupdate = new AppAction()
             {
                 Image = imageUpdate
@@ -214,15 +220,13 @@ namespace ButtonDeck.Forms
             autoupdate.Click += (s, ee) =>
             {
                 //TODO: Settings
-        
-            
-                AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
-             
-                AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(jsonPath);
-                AutoUpdater.PersistenceProvider.SetSkippedVersion(null);
+
+
+
                 //   AutoUpdater.LetUserSelectRemindLater = false;
                 //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
-                AutoUpdater.Start(Globals.updateurl);
+                _sparkle.CheckForUpdatesAtUserRequest();
+                //AutoUpdater.Start(Globals.updateurl);
             };
             appBar1.Actions.Add(autoupdate);
 
@@ -252,7 +256,7 @@ namespace ButtonDeck.Forms
                 new MagnetiteForm().ShowDialog();
             };
 
-          
+
 
             AppAction itemBiblioteca = new AppAction()
             {
@@ -267,11 +271,11 @@ namespace ButtonDeck.Forms
             Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
 
             appBar1.Actions.Add(itemMagnetite);
-           
+
             appBar1.Actions.Add(itemBiblioteca);
             // ApplyTheme(panel1);
             GenerateSidebar(shadedPanel1, true);
-           ApplySidebarTheme(shadedPanel1);
+            ApplySidebarTheme(shadedPanel1);
 
             ApplySidebarTheme(painel_developer);
             //shadedPanel2.Hide();
@@ -281,7 +285,7 @@ namespace ButtonDeck.Forms
 
             ChangeDeveloperMode();
             MatrizGenerator();
-            
+
             Refresh();
 
 
@@ -306,42 +310,40 @@ namespace ButtonDeck.Forms
                 int columnumber = tableLayoutPanel1.GetColumn(shadedPanel4);
                 tableLayoutPanel1.ColumnStyles[columnumber].Width = 0;
 
-                
 
-                
-                
+
+
+
 
 
             }
-            AutoUpdater.ShowSkipButton = true;
-
-            AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(jsonPath);
-            AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
-            AutoUpdater.Start(Globals.updateurl);
-
 
             warning_label.ForeColor = ColorScheme.SecondaryColor;
+            Checkupdates();
         }
-        private void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
+        private void Checkupdates()
         {
-            dynamic json = JsonConvert.DeserializeObject(args.RemoteData);
-            args.UpdateInfo = new UpdateInfoEventArgs
+
+            string TargetDirectory = Assembly.GetExecutingAssembly().Location;
+            _sparkle = new SparkleUpdater(
+      "http://127.0.0.1/appcast.xml", // link to your app cast file
+      new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
+  )
             {
-                CurrentVersion = json.version,
-                ChangelogURL = json.changelog,
-                DownloadURL = json.url,
-                Mandatory = new Mandatory
-                {
-                    Value = json.mandatory.value,
-                    UpdateMode = json.mandatory.mode,
-                    MinimumVersion = json.mandatory.minVersion
-                },
-                CheckSum = new CheckSum
-                {
-                    Value = json.checksum.value,
-                    HashingAlgorithm = json.checksum.hashingAlgorithm
-                }
+
+            
+                UIFactory = new NetSparkleUpdater.UI.WinForms.UIFactory(Resources.button_deck) // or null or choose some other UI factory or build your own!
+
             };
+
+         
+            _sparkle.CustomInstallerArguments = @"/c WZUNZIP.EXE - ye - o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory;
+            _sparkle.StartLoop(true,true); // `true` to run an initial check online -- only call StartLoop once for a given SparkleUpdater instance!
+
+        }
+        public void ExtractFileToDirectory(string zipFileName, string outputDirectory)
+        {
+  
         }
         public void setupLanguage()
         {
@@ -3265,7 +3267,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
         {
 
         }
-
+      
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -3435,6 +3437,57 @@ toAdd.AsEnumerable().Reverse().All(m =>
         private void TableLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
         {
 
+        }
+     
+        public  void executeCMD()
+        {
+
+            try
+            {
+
+                string TargetDirectory = Assembly.GetExecutingAssembly().Location;
+
+
+                System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", @"/c  WZUNZIP.EXE -ye -o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory);
+                procStartInfo.UseShellExecute = true;
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+             proc.WaitForExit();
+
+
+                // label1.Text = Globals.minecraftlocalpath + @"\launcher\Sanchez.Patcher.exe";
+                //     startInfo.Arguments = "/C start copy " + Globals.minecraftlocalpath + @"\launcher\Sanchez.Patcher.exe " + Globals.minecraftlocalpath;
+                //      startInfo.Arguments = "/min";
+
+
+                // Application.Exit();
+
+
+
+
+
+
+
+            }
+            catch
+            {
+                string createText = "Erro ao encontrar o launcher novo. Não foi possível realizar atualização automática.  /n Código: 404CEFG";
+                // 
+
+                File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory + @"\changelog.txt", createText);
+
+
+            }
+            
+            
+
+                
+            }
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           // executeCMD();
+          //  Checkupdates();
         }
     }
     #endregion

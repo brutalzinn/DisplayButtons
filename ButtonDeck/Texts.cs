@@ -44,7 +44,7 @@ namespace ButtonDeck
             return null;
         }
         public static CultureInfo cultereinfo = new CultureInfo("pt-BR");
-        public static Assembly a = Assembly.Load("ButtonDeck");
+        public static Assembly a = Assembly.Load("DisplayKeys");
         public static ResourceManager rm = new ResourceManager("ButtonDeck.Langs.langres", a);
         public static void initilizeLang()
         {
