@@ -8,12 +8,18 @@ using System.Threading;
 using System.IO;
 using NetSparkleUpdater.Enums;
 using System.Net;
+using System.Diagnostics;
+using System.Web.UI.HtmlControls;
+using System.Security.Permissions;
 
 namespace NetSparkleUpdater
 {
     /// <summary>
     /// Grabs release notes formatted as Markdown from the server and allows you to view them as HTML
     /// </summary>
+    /// 
+  
+   
     public class ReleaseNotesGrabber
     {
         /// <summary>
@@ -102,12 +108,19 @@ namespace NetSparkleUpdater
         }
         public virtual async Task<string> DownloadAllReleaseNotesWithButtons(List<AppCastItem> items, AppCastItem latestVersion, CancellationToken cancellationToken)
         {
+
             _sparkle.LogWriter.PrintMessage("Preparing to initialize release notes...");
             StringBuilder sb = new StringBuilder(_initialHTML);
+            int i = 0;
             foreach (AppCastItem castItem in items)
             {
              
-                sb.Append("<input type=\"button\" value=\"Put Your Text Here\" onclick=\"window.location.href = 'https://w3docs.com'; \" />");
+                sb.Append("<html><head><script>" +
+            "function test(message) { alert(message); }" +
+            "</script></head><body><button " +
+            "onclick=\"window.external.Test('called from script code')\">" +
+            "call client code from script code</button>" +
+            "</body></html>");
                 _sparkle.LogWriter.PrintMessage("Initializing release notes for {0}", castItem.Version);
                 // TODO: could we optimize this by doing multiple downloads at once?
                 var releaseNotes = await GetReleaseNotes(castItem, _sparkle, cancellationToken);
@@ -116,6 +129,7 @@ namespace NetSparkleUpdater
                                         castItem.PublicationDate.ToString("D"), // was dd MMM yyyy
                                         releaseNotes,
                                         latestVersion.Version.Equals(castItem.Version) ? "#ABFF82" : "#AFD7FF"));
+                i++;
             }
             sb.Append("</body></html>");
 
@@ -132,6 +146,9 @@ namespace NetSparkleUpdater
         /// <param name="cancellationToken">token that can be used to cancel a release notes 
         /// grabbing operation</param>
         /// <returns></returns>
+        /// 
+     
+      
         protected virtual async Task<string> GetReleaseNotes(AppCastItem item, SparkleUpdater sparkle, CancellationToken cancellationToken)
         {
             string criticalUpdate = item.IsCriticalUpdate ? "Critical Update" : "";

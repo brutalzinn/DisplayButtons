@@ -7,12 +7,18 @@ using NetSparkleUpdater.Enums;
 using System.Threading;
 using System.Collections.Generic;
 using NetSparkleUpdater.Events;
+using System.Security.Permissions;
 
 namespace NetSparkleUpdater.UI.WinForms
 {
+
+
+    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     /// <summary>
     /// The main form
     /// </summary>
+    /// 
     public partial class UpdateAvailableWindow : Form, IUpdateAvailable
     {
         private readonly SparkleUpdater _sparkle;
@@ -133,13 +139,19 @@ namespace NetSparkleUpdater.UI.WinForms
             ReleaseNotesBrowser.Invoke((MethodInvoker)delegate
             {
                 // see https://stackoverflow.com/a/15209861/3938401
-              
+                ReleaseNotesBrowser.ObjectForScripting = this;
+
+
                 ReleaseNotesBrowser.Navigate("about:blank");
                 ReleaseNotesBrowser.Document.OpenNew(true);
                 ReleaseNotesBrowser.Document.Write(releaseNotes);
                 ReleaseNotesBrowser.DocumentText = releaseNotes;
                
             });
+        }
+        public void Test(String message)
+        {
+            MessageBox.Show(message, "client code");
         }
 
         private void UpdateAvailableWindow_FormClosing(object sender, FormClosingEventArgs e)
