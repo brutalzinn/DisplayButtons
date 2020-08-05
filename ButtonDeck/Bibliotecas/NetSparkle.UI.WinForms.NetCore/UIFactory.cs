@@ -2,10 +2,11 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using NetSparkleUpdater.Interfaces;
-using NetSparkleUpdater.Properties;
+
 using NetSparkleUpdater.Enums;
 using System.Threading;
 using System.Collections.Generic;
+using ButtonDeck.Properties;
 
 namespace NetSparkleUpdater.UI.WinForms
 {

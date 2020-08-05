@@ -238,4 +238,33 @@
   <data name="user__account__profile__avatar__person" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user, account, profile, avatar, person.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DefaultUIFactory_ErrorTitle" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="DefaultUIFactory_MessageTitle" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="DefaultUIFactory_ShowCannotDownloadAppcastMessage" xml:space="preserve">
+    <value>Sorry, either you aren't connected to the internet, or our server is having a problem.</value>
+  </data>
+  <data name="DefaultUIFactory_ShowDownloadErrorMessage" xml:space="preserve">
+    <value>Sorry, there was a problem attempting to download the update
+
+{0}</value>
+  </data>
+  <data name="DefaultUIFactory_ShowUnknownInstallerFormatMessageText" xml:space="preserve">
+    <value>Updater not supported, please execute {0} manually</value>
+  </data>
+  <data name="DefaultUIFactory_ShowVersionIsSkippedByUserRequestMessage" xml:space="preserve">
+    <value>You have elected to skip this version.</value>
+  </data>
+  <data name="DefaultUIFactory_ShowVersionIsUpToDateMessage" xml:space="preserve">
+    <value>Your current version is up to date.</value>
+  </data>
+  <data name="DefaultUIFactory_ToastCallToAction" xml:space="preserve">
+    <value>More information</value>
+  </data>
+  <data name="DefaultUIFactory_ToastMessage" xml:space="preserve">
+    <value>New Version Available</value>
+  </data>
 </root>

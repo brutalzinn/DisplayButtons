@@ -306,7 +306,6 @@
     <Compile Include="Bibliotecas\NetSparkle\LogWriter.cs" />
     <Compile Include="Bibliotecas\NetSparkle\NetSparkleDelegates.cs" />
     <Compile Include="Bibliotecas\NetSparkle\NetSparkleException.cs" />
-    <Compile Include="Bibliotecas\NetSparkle\Properties\Resources.Designer.cs" />
     <Compile Include="Bibliotecas\NetSparkle\ReleaseNotesGrabber.cs" />
     <Compile Include="Bibliotecas\NetSparkle\SignatureVerifiers\DSAChecker.cs" />
     <Compile Include="Bibliotecas\NetSparkle\SignatureVerifiers\Ed25519Checker.cs" />
@@ -687,7 +686,6 @@
     <EmbeddedResource Include="Bibliotecas\NetSparkle.UI.WinForms.NetCore\UpdateAvailableWindow.zh-TW.resx">
       <DependentUpon>UpdateAvailableWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bibliotecas\NetSparkle\Properties\Resources.resx" />
     <EmbeddedResource Include="Controls\ColorSchemePreviewControl.resx">
       <DependentUpon>ColorSchemePreviewControl.cs</DependentUpon>
     </EmbeddedResource>

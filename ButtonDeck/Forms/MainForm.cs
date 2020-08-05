@@ -220,11 +220,18 @@ namespace ButtonDeck.Forms
             autoupdate.Click += async (s, ee) =>
             {
                 //TODO: Settings
+               
+                    var updateInfo = await _sparkle.CheckForUpdatesQuietly();
+ if (updateInfo != null)
+                {
+                  
+                    var form = _sparkle.UIFactory.CreateUpdateAvailableWindow(_sparkle, updateInfo.Updates);
+                 
+                    //form.HideRemindMeLaterButton();
+                  //  form.HideSkipButton();
 
-                var updateInfo = await _sparkle.CheckForUpdatesQuietly();
-
-                _sparkle.UIFactory.CreateUpdateAvailableWindow(_sparkle, updateInfo.Updates, true);
-                
+                    form.Show(true);
+                }
                 //   AutoUpdater.LetUserSelectRemindLater = false;
                 //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
                 //  _sparkle.CheckForUpdatesAtUserRequest();
