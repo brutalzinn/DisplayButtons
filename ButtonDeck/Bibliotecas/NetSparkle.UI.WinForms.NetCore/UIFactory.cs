@@ -70,7 +70,23 @@ namespace NetSparkleUpdater.UI.WinForms
             }
             return window;
         }
-
+        public virtual IUpdateAvailable CreateAllReleaseDownloadList(SparkleUpdater sparkle, List<AppCastItem> updates, bool isUpdateAlreadyDownloaded,  bool  isforallversions= false)
+        {
+            var window = new UpdateAvailableWindow(sparkle, updates, _applicationIcon, isUpdateAlreadyDownloaded, "","",isforallversions);
+            if (HideReleaseNotes)
+            {
+                (window as IUpdateAvailable).HideReleaseNotes();
+            }
+            if (HideSkipButton)
+            {
+                (window as IUpdateAvailable).HideSkipButton();
+            }
+            if (HideRemindMeLaterButton)
+            {
+                (window as IUpdateAvailable).HideRemindMeLaterButton();
+            }
+            return window;
+        }
         /// <summary>
         /// Create download progress window
         /// </summary>

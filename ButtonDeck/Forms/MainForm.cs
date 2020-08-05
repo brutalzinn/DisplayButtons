@@ -220,18 +220,21 @@ namespace ButtonDeck.Forms
             autoupdate.Click += async (s, ee) =>
             {
                 //TODO: Settings
-               
-                    var updateInfo = await _sparkle.CheckForUpdatesQuietly();
- if (updateInfo != null)
-                {
-                  
-                    var form = _sparkle.UIFactory.CreateUpdateAvailableWindow(_sparkle, updateInfo.Updates);
-                 
-                    //form.HideRemindMeLaterButton();
-                  //  form.HideSkipButton();
 
+
+
+                var list =  _sparkle.AppCastHandler.GetAvailableUpdates();
+        
+
+                var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list,true,true);
+
+                //form.HideRemindMeLaterButton();
+                //  form.HideSkipButton();
+           
                     form.Show(true);
-                }
+                
+
+
                 //   AutoUpdater.LetUserSelectRemindLater = false;
                 //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
                 //  _sparkle.CheckForUpdatesAtUserRequest();
@@ -345,7 +348,7 @@ namespace ButtonDeck.Forms
 
             };
 
-         
+            
       //      _sparkle.CustomInstallerArguments = @"/c WZUNZIP.EXE - ye - o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory;
             _sparkle.StartLoop(true,true); // `true` to run an initial check online -- only call StartLoop once for a given SparkleUpdater instance!
 

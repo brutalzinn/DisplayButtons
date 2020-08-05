@@ -45,7 +45,7 @@ namespace NetSparkleUpdater.UI.WinForms
         /// <param name="separatorTemplate">HTML template for every single note. Use {0} = Version. {1} = Date. {2} = Note Body</param>
         /// <param name="headAddition">Additional text they will inserted into HTML Head. For Stylesheets.</param>
         public UpdateAvailableWindow(SparkleUpdater sparkle, List<AppCastItem> items, Icon applicationIcon = null, bool isUpdateAlreadyDownloaded = false, 
-            string separatorTemplate = "", string headAddition = "")
+            string separatorTemplate = "", string headAddition = "", bool isforallversions = false)
         {
             _sparkle = sparkle;
             _updates = items;
@@ -112,14 +112,24 @@ namespace NetSparkleUpdater.UI.WinForms
 
             ReleaseNotesBrowser.DocumentText = _releaseNotesGrabber.GetLoadingText();
             EnsureDialogShown();
-            LoadReleaseNotes(items);
+            LoadReleaseNotes(items, isforallversions);
             FormClosing += UpdateAvailableWindow_FormClosing;
         }
 
-        private async void LoadReleaseNotes(List<AppCastItem> items)
+        private async void LoadReleaseNotes(List<AppCastItem> items, bool isforallversions = false)
         {
             AppCastItem latestVersion = items.OrderByDescending(p => p.Version).FirstOrDefault();
-            string releaseNotes = await _releaseNotesGrabber.DownloadAllReleaseNotes(items, latestVersion, _cancellationToken);
+            string releaseNotes = "";
+            if (!isforallversions)
+            {
+                 releaseNotes = await _releaseNotesGrabber.DownloadAllReleaseNotes(items, latestVersion, _cancellationToken);
+            }
+            else
+            {
+
+                 releaseNotes = await _releaseNotesGrabber.DownloadAllReleaseNotesWithButtons(items, latestVersion, _cancellationToken);
+
+            }
             ReleaseNotesBrowser.Invoke((MethodInvoker)delegate
             {
                 // see https://stackoverflow.com/a/15209861/3938401

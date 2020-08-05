@@ -100,7 +100,27 @@ namespace NetSparkleUpdater
             _sparkle.LogWriter.PrintMessage("Done initializing release notes!");
             return sb.ToString();
         }
+        public virtual async Task<string> DownloadAllReleaseNotesWithButtons(List<AppCastItem> items, AppCastItem latestVersion, CancellationToken cancellationToken)
+        {
+            _sparkle.LogWriter.PrintMessage("Preparing to initialize release notes...");
+            StringBuilder sb = new StringBuilder(_initialHTML);
+            foreach (AppCastItem castItem in items)
+            {
+                sb.Append("<button type=\"button\">Click Me!</button>");
+                _sparkle.LogWriter.PrintMessage("Initializing release notes for {0}", castItem.Version);
+                // TODO: could we optimize this by doing multiple downloads at once?
+                var releaseNotes = await GetReleaseNotes(castItem, _sparkle, cancellationToken);
+                sb.Append(string.Format(_separatorTemplate,
+                                        castItem.Version,
+                                        castItem.PublicationDate.ToString("D"), // was dd MMM yyyy
+                                        releaseNotes,
+                                        latestVersion.Version.Equals(castItem.Version) ? "#ABFF82" : "#AFD7FF"));
+            }
+            sb.Append("</body></html>");
 
+            _sparkle.LogWriter.PrintMessage("Done initializing release notes!");
+            return sb.ToString();
+        }
         /// <summary>
         /// Grab the release notes for the given item and return their release notes
         /// in HTML format so that they can be displayed to the user.

@@ -16,6 +16,9 @@ namespace NetSparkleUpdater.Interfaces
         /// <param name="isUpdateAlreadyDownloaded">If true, make sure UI text shows that the user is about to install the file instead of download it.</param>
         IUpdateAvailable CreateUpdateAvailableWindow(SparkleUpdater sparkle, List<AppCastItem> updates, bool isUpdateAlreadyDownloaded = false);
 
+
+        IUpdateAvailable CreateAllReleaseDownloadList(SparkleUpdater sparkle, List<AppCastItem> updates, bool isUpdateAlreadyDownloaded, bool isforallversions = false);
+
         /// <summary>
         /// Create download progress window
         /// </summary>
