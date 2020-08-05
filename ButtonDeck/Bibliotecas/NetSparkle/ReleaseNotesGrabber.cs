@@ -106,7 +106,8 @@ namespace NetSparkleUpdater
             StringBuilder sb = new StringBuilder(_initialHTML);
             foreach (AppCastItem castItem in items)
             {
-                sb.Append("<button type=\"button\">Click Me!</button>");
+             
+                sb.Append("<input type=\"button\" value=\"Put Your Text Here\" onclick=\"window.location.href = 'https://w3docs.com'; \" />");
                 _sparkle.LogWriter.PrintMessage("Initializing release notes for {0}", castItem.Version);
                 // TODO: could we optimize this by doing multiple downloads at once?
                 var releaseNotes = await GetReleaseNotes(castItem, _sparkle, cancellationToken);

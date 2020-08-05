@@ -133,10 +133,12 @@ namespace NetSparkleUpdater.UI.WinForms
             ReleaseNotesBrowser.Invoke((MethodInvoker)delegate
             {
                 // see https://stackoverflow.com/a/15209861/3938401
+              
                 ReleaseNotesBrowser.Navigate("about:blank");
                 ReleaseNotesBrowser.Document.OpenNew(true);
                 ReleaseNotesBrowser.Document.Write(releaseNotes);
                 ReleaseNotesBrowser.DocumentText = releaseNotes;
+               
             });
         }
 
