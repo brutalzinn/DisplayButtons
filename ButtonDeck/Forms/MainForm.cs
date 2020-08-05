@@ -217,15 +217,17 @@ namespace ButtonDeck.Forms
             {
                 Image = imageUpdate
             };
-            autoupdate.Click += (s, ee) =>
+            autoupdate.Click += async (s, ee) =>
             {
                 //TODO: Settings
 
+                var updateInfo = await _sparkle.CheckForUpdatesQuietly();
 
-
+                _sparkle.UIFactory.CreateUpdateAvailableWindow(_sparkle, updateInfo.Updates, true);
+                
                 //   AutoUpdater.LetUserSelectRemindLater = false;
                 //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
-                _sparkle.CheckForUpdatesAtUserRequest();
+                //  _sparkle.CheckForUpdatesAtUserRequest();
                 //AutoUpdater.Start(Globals.updateurl);
             };
             appBar1.Actions.Add(autoupdate);
@@ -337,7 +339,7 @@ namespace ButtonDeck.Forms
             };
 
          
-            _sparkle.CustomInstallerArguments = @"/c WZUNZIP.EXE - ye - o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory;
+      //      _sparkle.CustomInstallerArguments = @"/c WZUNZIP.EXE - ye - o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory;
             _sparkle.StartLoop(true,true); // `true` to run an initial check online -- only call StartLoop once for a given SparkleUpdater instance!
 
         }

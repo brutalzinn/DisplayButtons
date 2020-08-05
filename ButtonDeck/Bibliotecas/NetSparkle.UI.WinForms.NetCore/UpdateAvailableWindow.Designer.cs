@@ -116,6 +116,7 @@ namespace NetSparkleUpdater.UI.WinForms
             this.MaximizeBox = false;
             this.Name = "UpdateAvailableWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+            this.Load += new System.EventHandler(this.UpdateAvailableWindow_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgAppIcon)).EndInit();
             this.ResumeLayout(false);

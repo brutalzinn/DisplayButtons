@@ -1239,9 +1239,27 @@ namespace NetSparkleUpdater
                     }
                     if (IsZipDownload(downloadFilePath)) // .zip on macOS or .tar.gz on Linux
                     {
-                        string assemblylocation = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                         output = $@"tar -xf {downloadFilePath}";
-               
+                        
+                        string zip = $@"tar -xf {downloadFilePath}";
+                    output =  $@"
+                        set /A counter=0                       
+                        setlocal ENABLEDELAYEDEXPANSION
+                        :loop
+                        set /A counter=!counter!+1
+                        if !counter! == 90 (
+                            goto :afterinstall
+                        )
+                        tasklist | findstr ""\<{processID}\>"" > nul
+                        if not errorlevel 1 (
+                            timeout /t 1 > nul
+                            goto :loop
+                        )
+                        :install
+                        {zip}
+                        {relaunchAfterUpdate}
+                        :afterinstall
+                        endlocal";
+
                     }
                     else
                     {

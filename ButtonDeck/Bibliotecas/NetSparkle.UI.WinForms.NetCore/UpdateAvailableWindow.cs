@@ -309,5 +309,10 @@ namespace NetSparkleUpdater.UI.WinForms
         {
             skipButton.Visible = false;
         }
+
+        private void UpdateAvailableWindow_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
