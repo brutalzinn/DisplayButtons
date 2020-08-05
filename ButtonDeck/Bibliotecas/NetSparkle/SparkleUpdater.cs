@@ -1162,16 +1162,18 @@ namespace NetSparkleUpdater
 
         private bool IsZipDownload(string downloadFilePath)
         {
-#if NETCORE
+
             string installerExt = Path.GetExtension(downloadFilePath);
             bool isMacOS = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
             bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+            bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
             if ((isMacOS && DoExtensionsMatch(installerExt, ".zip")) ||
-                (isLinux && downloadFilePath.EndsWith(".tar.gz")))
+                (isLinux && downloadFilePath.EndsWith(".tar.gz")) || (isWindows && DoExtensionsMatch(installerExt, ".zip")))
             {
                 return true;
             }
-#endif
+
+
             return false;
         }
 
@@ -1228,14 +1230,24 @@ namespace NetSparkleUpdater
                     // This way, any DLLs or other items can be replaced properly.
                     // Code from: http://stackoverflow.com/a/22559462/3938401
                     string relaunchAfterUpdate = "";
+                    string output = "";
                     if (RelaunchAfterUpdate)
                     {
                         relaunchAfterUpdate = $@"
                         cd {workingDir}
                         {cmdLine}";
                     }
+                    if (IsZipDownload(downloadFilePath)) // .zip on macOS or .tar.gz on Linux
+                    {
+                        string assemblylocation = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                         output = $@"tar -xf {downloadFilePath}";
+               
+                    }
+                    else
+                    {
 
-                    string output = $@"
+                    
+                         output = $@"
                         set /A counter=0                       
                         setlocal ENABLEDELAYEDEXPANSION
                         :loop
@@ -1253,7 +1265,7 @@ namespace NetSparkleUpdater
                         {relaunchAfterUpdate}
                         :afterinstall
                         endlocal";
-
+                    }
 
                     write.Write(output);
                     write.Close();
