@@ -8,6 +8,7 @@ using System.Threading;
 using System.Collections.Generic;
 using NetSparkleUpdater.Events;
 using System.Security.Permissions;
+using NickAc.ModernUIDoneRight.Objects;
 
 namespace NetSparkleUpdater.UI.WinForms
 {
@@ -149,9 +150,17 @@ namespace NetSparkleUpdater.UI.WinForms
                
             });
         }
-        public void Test(String message)
+        public async void Test(string appcast)
         {
-            MessageBox.Show(message, "client code");
+
+            AppCastItem item =  _sparkle.AppCastHandler.GetAvailableUpdates().Where(e => e.DownloadSignature == appcast).FirstOrDefault();
+            //         MessageBox.Show(item.DownloadLink, "client code");
+
+
+           await _sparkle.InitAndBeginDownload(item);
+
+        //    await _sparkle.InstallUpdate(update, _downloadPath);
+            //      UserResponded?.Invoke(this, new UpdateResponseEventArgs(UpdateAvailableResult.InstallUpdate, item));
         }
 
         private void UpdateAvailableWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -169,9 +178,11 @@ namespace NetSparkleUpdater.UI.WinForms
         /// </summary>
         AppCastItem IUpdateAvailable.CurrentItem => CurrentItem;
 
+     
         public AppCastItem CurrentItem
         {
             get { return _updates.Count() > 0 ? _updates[0] : null; }
+  
         }
 
         /// <summary>

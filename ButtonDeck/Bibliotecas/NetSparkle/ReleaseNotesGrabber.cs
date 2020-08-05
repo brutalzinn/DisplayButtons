@@ -115,12 +115,9 @@ namespace NetSparkleUpdater
             foreach (AppCastItem castItem in items)
             {
              
-                sb.Append("<html><head><script>" +
-            "function test(message) { alert(message); }" +
-            "</script></head><body><button " +
-            "onclick=\"window.external.Test('called from script code')\">" +
-            "call client code from script code</button>" +
-            "</body></html>");
+                sb.Append("<button onclick=\"window.external.Test('"+castItem.DownloadSignature+"')\"> Fazer Download</button>");
+           
+        
                 _sparkle.LogWriter.PrintMessage("Initializing release notes for {0}", castItem.Version);
                 // TODO: could we optimize this by doing multiple downloads at once?
                 var releaseNotes = await GetReleaseNotes(castItem, _sparkle, cancellationToken);

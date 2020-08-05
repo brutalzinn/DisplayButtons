@@ -222,15 +222,15 @@ namespace ButtonDeck.Forms
                 //TODO: Settings
 
 
+               
+                      var list =  _sparkle.AppCastHandler.GetAvailableUpdates();
 
-                var list =  _sparkle.AppCastHandler.GetAvailableUpdates();
-        
-
+              
                 var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list,true,true);
 
-                //form.HideRemindMeLaterButton();
-                //  form.HideSkipButton();
-           
+                form.HideRemindMeLaterButton();
+               form.HideSkipButton();
+         
                     form.Show(true);
                 
 
