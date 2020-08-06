@@ -227,7 +227,7 @@ namespace ButtonDeck.Forms
 
               
                 var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list,true,true);
-
+               
                 form.HideRemindMeLaterButton();
                form.HideSkipButton();
          

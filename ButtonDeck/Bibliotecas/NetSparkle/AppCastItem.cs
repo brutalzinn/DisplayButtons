@@ -24,6 +24,8 @@ namespace NetSparkleUpdater
         /// The item title
         /// </summary>
         public string Title { get; set; }
+        public string AndroidVersion { get; set; }
+
         /// <summary>
         /// The available version
         /// </summary>
@@ -150,6 +152,7 @@ namespace NetSparkleUpdater
         private const string _releaseNotesLinkNode = "releaseNotesLink";
         private const string _descriptionNode = "description";
         private const string _versionAttribute = "version";
+        private const string _versionAndroidAttribute = "androidVersion";
         private const string _shortVersionAttribute = "shortVersionString";
         private const string _dsaSignatureAttribute = "dsaSignature";
         private const string _ed25519SignatureAttribute = "edSignature";
@@ -186,8 +189,9 @@ namespace NetSparkleUpdater
             };
 
             //title
+           
             newAppCastItem.Title = item.Element(_titleNode)?.Value ?? string.Empty;
-
+ newAppCastItem.AndroidVersion = item.Element(_versionAndroidAttribute)?.Value ?? string.Empty;
             //release notes
             var releaseNotesElement = item.Element(XMLAppCast.SparkleNamespace + _releaseNotesLinkNode);
             newAppCastItem.ReleaseNotesSignature = releaseNotesElement?.Attribute(XMLAppCast.SparkleNamespace + _signatureAttribute)?.Value ?? string.Empty;
