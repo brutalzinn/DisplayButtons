@@ -325,7 +325,19 @@ namespace NetSparkleUpdater
                 {
                     enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _shortVersionAttribute, ShortVersion));
                 }
+                if (!string.IsNullOrEmpty(AndroidVersion))
+                {
+                    enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _versionAndroidAttribute, ShortVersion));
+                }
 
+                if (!string.IsNullOrEmpty(AndroidVersionMaximum))
+                {
+                    enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _versionAndroidMaximumAttribute, ShortVersion));
+                }
+                if (!string.IsNullOrEmpty(AndroidVersionMinimum))
+                {
+                    enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _versionAndroidMinimumAttribute, ShortVersion));
+                }
                 enclosure.Add(new XAttribute(_lengthAttribute, UpdateSize));
                 enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _operatingSystemAttribute, OperatingSystemString ?? _defaultOperatingSystem));
                 enclosure.Add(new XAttribute(_typeAttribute, MIMEType ?? _defaultType));
