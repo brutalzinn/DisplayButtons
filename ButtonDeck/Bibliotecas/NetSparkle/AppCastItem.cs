@@ -195,9 +195,7 @@ namespace NetSparkleUpdater
             //title
            
             newAppCastItem.Title = item.Element(_titleNode)?.Value ?? string.Empty;
- newAppCastItem.AndroidVersion = item.Element(_versionAndroidAttribute)?.Value ?? string.Empty;
-            newAppCastItem.AndroidVersionMaximum = item.Element(_versionAndroidMaximumAttribute)?.Value ?? string.Empty;
-            newAppCastItem.AndroidVersionMinimum = item.Element(_versionAndroidMinimumAttribute)?.Value ?? string.Empty;
+ 
             //release notes
             var releaseNotesElement = item.Element(XMLAppCast.SparkleNamespace + _releaseNotesLinkNode);
             newAppCastItem.ReleaseNotesSignature = releaseNotesElement?.Attribute(XMLAppCast.SparkleNamespace + _signatureAttribute)?.Value ?? string.Empty;
@@ -218,6 +216,21 @@ namespace NetSparkleUpdater
             var enclosureElement = item.Element(_enclosureNode) ?? item.Element(XMLAppCast.SparkleNamespace + _enclosureNode);
 
             newAppCastItem.Version = enclosureElement?.Attribute(XMLAppCast.SparkleNamespace + _versionAttribute)?.Value ?? string.Empty;
+
+
+
+            newAppCastItem.AndroidVersion = enclosureElement?.Attribute(XMLAppCast.SparkleNamespace + _versionAndroidAttribute)?.Value ?? string.Empty;
+
+
+            newAppCastItem.AndroidVersionMaximum = enclosureElement?.Attribute(XMLAppCast.SparkleNamespace + _versionAndroidMaximumAttribute)?.Value ?? string.Empty;
+
+            newAppCastItem.AndroidVersionMinimum = enclosureElement?.Attribute(XMLAppCast.SparkleNamespace + _versionAndroidMinimumAttribute)?.Value ?? string.Empty;
+
+
+
+
+
+
             newAppCastItem.ShortVersion = enclosureElement?.Attribute(XMLAppCast.SparkleNamespace + _shortVersionAttribute)?.Value ?? string.Empty;
             newAppCastItem.DownloadLink = enclosureElement?.Attribute(_urlAttribute)?.Value ?? string.Empty;
             if (!string.IsNullOrEmpty(newAppCastItem.DownloadLink) && !newAppCastItem.DownloadLink.Contains("/"))
@@ -327,16 +340,16 @@ namespace NetSparkleUpdater
                 }
                 if (!string.IsNullOrEmpty(AndroidVersion))
                 {
-                    enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _versionAndroidAttribute, ShortVersion));
+                    enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _versionAndroidAttribute, AndroidVersion));
                 }
 
                 if (!string.IsNullOrEmpty(AndroidVersionMaximum))
                 {
-                    enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _versionAndroidMaximumAttribute, ShortVersion));
+                    enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _versionAndroidMaximumAttribute, AndroidVersionMaximum));
                 }
                 if (!string.IsNullOrEmpty(AndroidVersionMinimum))
                 {
-                    enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _versionAndroidMinimumAttribute, ShortVersion));
+                    enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _versionAndroidMinimumAttribute, AndroidVersionMinimum));
                 }
                 enclosure.Add(new XAttribute(_lengthAttribute, UpdateSize));
                 enclosure.Add(new XAttribute(XMLAppCast.SparkleNamespace + _operatingSystemAttribute, OperatingSystemString ?? _defaultOperatingSystem));
