@@ -114,8 +114,8 @@ namespace NetSparkleUpdater
             int i = 0;
             foreach (AppCastItem castItem in items)
             {
-             
-                sb.Append("<button onclick=\"window.external.Test('"+castItem.DownloadSignature+"')\"> Fazer Download</button>");
+                sb.Append("<button onclick=\"window.external.Test('" + castItem.DownloadSignature + "')\"> Fazer Download</button>");
+                sb.Append("<br>Minimum android version required:" + castItem.AndroidVersionMinimum);
            
         
                 _sparkle.LogWriter.PrintMessage("Initializing release notes for {0}", castItem.Version);
