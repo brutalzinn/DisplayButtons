@@ -221,9 +221,19 @@ namespace ButtonDeck.Forms
             {
                 //TODO: Settings
 
+                _sparkle = new SparkleUpdater(
+   Globals.updateurl, // link to your app cast file
+   new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
+)
+                {
 
-               
-                      var list =  _sparkle.AppCastHandler.GetAvailableUpdates();
+
+                    UIFactory = new NetSparkleUpdater.UI.WinForms.UIFactory(Resources.button_deck) // or null or choose some other UI factory or build your own!
+
+                };
+
+               await _sparkle.CheckForUpdatesAtUserRequest();
+                var list =  _sparkle.AppCastHandler.GetAvailableUpdates();
 
               
                 var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list,true,true);
@@ -338,7 +348,7 @@ namespace ButtonDeck.Forms
 
             string TargetDirectory = Assembly.GetExecutingAssembly().Location;
             _sparkle = new SparkleUpdater(
-      "http://127.0.0.1/appcast.xml", // link to your app cast file
+      Globals.updateurl, // link to your app cast file
       new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
   )
             {
