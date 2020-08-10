@@ -9,7 +9,7 @@ using System.IO;
 using NetSparkleUpdater.Enums;
 using System.Net;
 using System.Diagnostics;
-using System.Web.UI.HtmlControls;
+
 using System.Security.Permissions;
 using ButtonDeck;
 

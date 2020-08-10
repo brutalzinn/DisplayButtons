@@ -29,27 +29,27 @@ namespace ScribeBot.Engine.Wrappers
 		/// <param name="w"></param>
 		/// <param name="h"></param>
 		/// <returns>The predicted text</returns>
-		public static string Recognize(int x, int y, int w, int h)
-		{
-			var engine = new TesseractEngine(@"Library Data/Tessdata", "eng", EngineMode.Default);
+		//public static string Recognize(int x, int y, int w, int h)
+		//{
+		//	var engine = new TesseractEngine(@"Library Data/Tessdata", "eng", EngineMode.Default);
 
-			var image = Native.API.CopyScreenArea(x, y, w, h);
+		//	var image = Native.API.CopyScreenArea(x, y, w, h);
 
-			return engine.Process(image).GetText();
-		}
+		//	return engine.Process(image).GetText();
+		//}
 
-		public static string Recognize(int x, int y, int w, int h, float scale)
-		{
-			var engine = new TesseractEngine(@"Library Data/Tessdata", "eng", EngineMode.Default);
+		//public static string Recognize(int x, int y, int w, int h, float scale)
+		//{
+		//	var engine = new TesseractEngine(@"Library Data/Tessdata", "eng", EngineMode.Default);
 
-			var image = Native.API.CopyScreenArea(x, y, w, h);
+		//	var image = Native.API.CopyScreenArea(x, y, w, h);
 
-			var scaled = new Bitmap(image, new Size((int)(image.Width * scale), (int)(image.Height * scale)));
+		//	var scaled = new Bitmap(image, new Size((int)(image.Width * scale), (int)(image.Height * scale)));
 
-			var output = engine.Process(scaled).GetText();
+		//	var output = engine.Process(scaled).GetText();
 
-			return output ?? string.Empty;
-		}
+		//	return output ?? string.Empty;
+		//}
 
 		/// <summary>
 		/// Get an area of screen as an array of colors.
