@@ -63,7 +63,7 @@ namespace NetSparkleUpdater
                 !string.IsNullOrEmpty(separatorTemplate) ?
                     separatorTemplate :
                     "<div style=\"border: #ccc 1px solid;\"><div style=\"background: {3}; padding: 5px;\"><span style=\"float: right;\">" +
-                    "{1}</span>{0}</div><div style=\"padding: 5px;\">{2}</div></div><br/>";
+                    "{1}</span>{0}</div><div style=\"padding: 5px;\">{2}{4}</div></div><br/>";
             _initialHTML = "<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/><title>Sparkle</title>" + 
                 htmlHeadAddition + "</head><body>";
             _sparkle = sparkle;
@@ -111,25 +111,28 @@ namespace NetSparkleUpdater
 
             _sparkle.LogWriter.PrintMessage("Preparing to initialize release notes...");
             StringBuilder sb = new StringBuilder(_initialHTML);
+            StringBuilder releasesAllBlocksHtml = new StringBuilder(_initialHTML);
             int i = 0;
             foreach (AppCastItem castItem in items)
             {
-                sb.Append("<button onclick=\"window.external.Test('" + castItem.DownloadSignature + "')\"> Fazer Download</button>");
-                sb.Append("<br>Minimum android version required:" + castItem.AndroidVersionMinimum);
-           
-        
+                releasesAllBlocksHtml.Append("<br>Minimum android version required:" + castItem.AndroidVersionMinimum);
+                releasesAllBlocksHtml.Append("<button onclick=\"window.external.Test('" + castItem.DownloadSignature + "')\"> Fazer Download</button>");
+             
+
                 _sparkle.LogWriter.PrintMessage("Initializing release notes for {0}", castItem.Version);
                 // TODO: could we optimize this by doing multiple downloads at once?
                 var releaseNotes = await GetReleaseNotes(castItem, _sparkle, cancellationToken);
+
                 sb.Append(string.Format(_separatorTemplate,
                                         castItem.Version,
                                         castItem.PublicationDate.ToString("D"), // was dd MMM yyyy
                                         releaseNotes,
-                                        latestVersion.Version.Equals(castItem.Version) ? "#ABFF82" : "#AFD7FF"));
+                                        latestVersion.Version.Equals(castItem.Version) ? "#ABFF82" : "#AFD7FF", releasesAllBlocksHtml));
+           
                 i++;
             }
             sb.Append("</body></html>");
-
+         
             _sparkle.LogWriter.PrintMessage("Done initializing release notes!");
             return sb.ToString();
         }
