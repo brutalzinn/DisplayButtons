@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using NetSparkleUpdater.Events;
 using System.Security.Permissions;
 using NickAc.ModernUIDoneRight.Objects;
+using ButtonDeck;
 
 namespace NetSparkleUpdater.UI.WinForms
 {
@@ -73,7 +74,7 @@ namespace NetSparkleUpdater.UI.WinForms
 
             AppCastItem item = items.FirstOrDefault();
 
-            var downloadInstallText = isUpdateAlreadyDownloaded ? "install" : "download";
+            var downloadInstallText = isUpdateAlreadyDownloaded ? Texts.rm.GetString("UPDATEINSTALL", Texts.cultereinfo) : Texts.rm.GetString("UPDATEINSTALLDOWNLOAD", Texts.cultereinfo);
             lblHeader.Text = lblHeader.Text.Replace("APP", item != null ? item.AppName : "the application");
             if (item != null)
             {
@@ -89,13 +90,13 @@ namespace NetSparkleUpdater.UI.WinForms
                 {
                     versionString = "?";
                 }
-                lblInfoText.Text = string.Format("{0} {3} is now available (you have {1}). Would you like to {2} it now?", item.AppName, versionString, 
+                lblInfoText.Text = string.Format(Texts.rm.GetString("UPDATEAVAIBLEWINDOWSTEXTISUPDATEAVAIBLE", Texts.cultereinfo), item.AppName, versionString, 
                     downloadInstallText, item.Version);
             }
             else
             {
                 // TODO: string translations (even though I guess this window should never be called with 0 app cast items...)
-                lblInfoText.Text = string.Format("Would you like to {0} it now?", downloadInstallText);
+                lblInfoText.Text = string.Format(Texts.rm.GetString("UPDATEYOUWANTIS", Texts.cultereinfo), downloadInstallText);
             }
 
             bool isUserMissingCriticalUpdate = items.Any(x => x.IsCriticalUpdate);

@@ -11,6 +11,7 @@ using System.Net;
 using System.Diagnostics;
 using System.Web.UI.HtmlControls;
 using System.Security.Permissions;
+using ButtonDeck;
 
 namespace NetSparkleUpdater
 {
@@ -115,8 +116,24 @@ namespace NetSparkleUpdater
             int i = 0;
             foreach (AppCastItem castItem in items)
             {
-                releasesAllBlocksHtml.Append("<br>Minimum android version required:" + castItem.AndroidVersionMinimum);
-                releasesAllBlocksHtml.Append("<button onclick=\"window.external.Test('" + castItem.DownloadSignature + "')\"> Fazer Download</button>");
+                releasesAllBlocksHtml.Append(Texts.rm.GetString("RELEASENOTESGRABBERREQUERIMENTS", Texts.cultereinfo) + "<br>");
+
+                if (!String.IsNullOrEmpty(castItem.AndroidVersionMinimum))
+                {
+                releasesAllBlocksHtml.Append("<br>" +Texts.rm.GetString("RELEASENOTESGRABBERMINIMUMANDROIDDISPLAYBUTTONS", Texts.cultereinfo) + castItem.AndroidVersionMinimum);
+
+                }
+                if (!String.IsNullOrEmpty(castItem.AndroidVersionMaximum))
+                {
+                    releasesAllBlocksHtml.Append("<br>"+Texts.rm.GetString("RELEASENOTESGRABBERMAXIMUMANDROIDDISPLAYBUTTONS", Texts.cultereinfo)  + castItem.AndroidVersionMinimum);
+                    
+                }
+                if (!String.IsNullOrEmpty(castItem.AndroidVersion))
+                {
+                    releasesAllBlocksHtml.Append("<br>"+Texts.rm.GetString("RELEASENOTESGRABBERANDROIDDISPLAYBUTTONS", Texts.cultereinfo) + castItem.AndroidVersionMinimum);
+                    
+                }
+                releasesAllBlocksHtml.Append("<button onclick=\"window.external.Test('" + castItem.DownloadSignature + "')\">" + Texts.rm.GetString("RELEASENOTESGRABBERDOWNLOADS", Texts.cultereinfo)  + "</button>");
              
 
                 _sparkle.LogWriter.PrintMessage("Initializing release notes for {0}", castItem.Version);

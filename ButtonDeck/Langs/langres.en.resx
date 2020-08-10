@@ -192,6 +192,35 @@ the use of ButtonDeck. Don't forget to give your feedback.</value>
   <data name="CONNECTEDDEVICES" xml:space="preserve">
     <value>Connected device</value>
   </data>
+  <data name="DefaultUIFactory_ErrorTitle" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="DefaultUIFactory_MessageTitle" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="DefaultUIFactory_ShowCannotDownloadAppcastMessage" xml:space="preserve">
+    <value>Sorry, either you aren't connected to the internet, or our server is having a problem.</value>
+  </data>
+  <data name="DefaultUIFactory_ShowDownloadErrorMessage" xml:space="preserve">
+    <value>Sorry, there was a problem attempting to download the update
+
+{0}</value>
+  </data>
+  <data name="DefaultUIFactory_ShowUnknownInstallerFormatMessageText" xml:space="preserve">
+    <value>Updater not supported, please execute {0} manually</value>
+  </data>
+  <data name="DefaultUIFactory_ShowVersionIsSkippedByUserRequestMessage" xml:space="preserve">
+    <value>You have elected to skip this version.</value>
+  </data>
+  <data name="DefaultUIFactory_ShowVersionIsUpToDateMessage" xml:space="preserve">
+    <value>Your current version is up to date.</value>
+  </data>
+  <data name="DefaultUIFactory_ToastCallToAction" xml:space="preserve">
+    <value>More information</value>
+  </data>
+  <data name="DefaultUIFactory_ToastMessage" xml:space="preserve">
+    <value>New Version Available</value>
+  </data>
   <data name="DEVELOPERMODE" xml:space="preserve">
     <value>Developer mode</value>
   </data>
@@ -321,6 +350,21 @@ the use of ButtonDeck. Don't forget to give your feedback.</value>
   <data name="PRINCIPALFOLDER" xml:space="preserve">
     <value>Principal folder</value>
   </data>
+  <data name="RELEASENOTESGRABBERANDROIDDISPLAYBUTTONS" xml:space="preserve">
+    <value>Displaybuttons version required:</value>
+  </data>
+  <data name="RELEASENOTESGRABBERDOWNLOADS" xml:space="preserve">
+    <value>Download update</value>
+  </data>
+  <data name="RELEASENOTESGRABBERMAXIMUMANDROIDDISPLAYBUTTONS" xml:space="preserve">
+    <value>Maximum android displaybuttons version:</value>
+  </data>
+  <data name="RELEASENOTESGRABBERMINIMUMANDROIDDISPLAYBUTTONS" xml:space="preserve">
+    <value>Minimum displaybuttons version required:</value>
+  </data>
+  <data name="RELEASENOTESGRABBERREQUERIMENTS" xml:space="preserve">
+    <value>Requeriments</value>
+  </data>
   <data name="STARTTCPSERVER" xml:space="preserve">
     <value>START TCP Server</value>
   </data>
@@ -332,5 +376,20 @@ the use of ButtonDeck. Don't forget to give your feedback.</value>
   </data>
   <data name="THEME" xml:space="preserve">
     <value>Theme</value>
+  </data>
+  <data name="UPDATEAVAIBLEWINDOWSTEXTISUPDATEAVAIBLE" xml:space="preserve">
+    <value>{0} {3} is now available (you have {1}). Would you like to {2} now?</value>
+  </data>
+  <data name="UPDATEINSTALL" xml:space="preserve">
+    <value>Install</value>
+  </data>
+  <data name="UPDATEINSTALLDOWNLOAD" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="UPDATEINSTALLTHEAPP" xml:space="preserve">
+    <value>The app</value>
+  </data>
+  <data name="UPDATEYOUWANTIS" xml:space="preserve">
+    <value>Would you like {0} now?</value>
   </data>
 </root>

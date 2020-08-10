@@ -232,7 +232,7 @@ namespace ButtonDeck.Forms
 
                 };
 
-               await _sparkle.CheckForUpdatesAtUserRequest();
+              await _sparkle.CheckForUpdatesQuietly();
                 var list =  _sparkle.AppCastHandler.GetAvailableUpdates();
 
               

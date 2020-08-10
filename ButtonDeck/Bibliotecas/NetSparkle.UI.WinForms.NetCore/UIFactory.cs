@@ -7,6 +7,7 @@ using NetSparkleUpdater.Enums;
 using System.Threading;
 using System.Collections.Generic;
 using ButtonDeck.Properties;
+using ButtonDeck;
 
 namespace NetSparkleUpdater.UI.WinForms
 {
@@ -121,7 +122,7 @@ namespace NetSparkleUpdater.UI.WinForms
         public virtual void ShowUnknownInstallerFormatMessage(string downloadFileName)
         {
             ShowMessage(Resources.DefaultUIFactory_MessageTitle, 
-                string.Format(Resources.DefaultUIFactory_ShowUnknownInstallerFormatMessageText, downloadFileName));
+                string.Format(Texts.rm.GetString("DefaultUIFactory_ShowUnknownInstallerFormatMessageText", Texts.cultereinfo), downloadFileName));
         }
 
         /// <summary>
@@ -129,7 +130,7 @@ namespace NetSparkleUpdater.UI.WinForms
         /// </summary>
         public virtual void ShowVersionIsUpToDate()
         {
-            ShowMessage(Resources.DefaultUIFactory_MessageTitle, Resources.DefaultUIFactory_ShowVersionIsUpToDateMessage);
+            ShowMessage(Resources.DefaultUIFactory_MessageTitle, Texts.rm.GetString("DefaultUIFactory_ShowVersionIsUpToDateMessage", Texts.cultereinfo));
         }
 
         /// <summary>
@@ -137,7 +138,7 @@ namespace NetSparkleUpdater.UI.WinForms
         /// </summary>
         public virtual void ShowVersionIsSkippedByUserRequest()
         {
-            ShowMessage(Resources.DefaultUIFactory_MessageTitle, Resources.DefaultUIFactory_ShowVersionIsSkippedByUserRequestMessage);
+            ShowMessage(Resources.DefaultUIFactory_MessageTitle, Texts.rm.GetString("DefaultUIFactory_ShowVersionIsSkippedByUserRequestMessage", Texts.cultereinfo));
         }
 
         /// <summary>
@@ -146,8 +147,9 @@ namespace NetSparkleUpdater.UI.WinForms
         /// <param name="appcastUrl">the URL for the appcast file</param>
         public virtual void ShowCannotDownloadAppcast(string appcastUrl)
         {
-            ShowMessage(Resources.DefaultUIFactory_ErrorTitle, Resources.DefaultUIFactory_ShowCannotDownloadAppcastMessage);
+            ShowMessage(Resources.DefaultUIFactory_ErrorTitle, Texts.rm.GetString("DefaultUIFactory_ShowCannotDownloadAppcastMessage", Texts.cultereinfo));
         }
+        
 
         public virtual bool CanShowToastMessages()
         {
@@ -168,7 +170,7 @@ namespace NetSparkleUpdater.UI.WinForms
                     ClickAction = clickHandler,
                     Updates = updates
                 };
-                toast.Show(Resources.DefaultUIFactory_ToastMessage, Resources.DefaultUIFactory_ToastCallToAction, 5);
+                toast.Show(Resources.DefaultUIFactory_ToastMessage, Texts.rm.GetString("DefaultUIFactory_ToastCallToAction", Texts.cultereinfo) , 5);
                 Application.Run(toast);
             });
             thread.SetApartmentState(ApartmentState.STA);
@@ -182,7 +184,7 @@ namespace NetSparkleUpdater.UI.WinForms
         /// <param name="appcastUrl">the URL for the appcast file</param>
         public virtual void ShowDownloadErrorMessage(string message, string appcastUrl)
         {
-            ShowMessage(Resources.DefaultUIFactory_ErrorTitle, string.Format(Resources.DefaultUIFactory_ShowDownloadErrorMessage, message));
+            ShowMessage(Resources.DefaultUIFactory_ErrorTitle, string.Format(Texts.rm.GetString("DefaultUIFactory_ShowDownloadErrorMessage", Texts.cultereinfo), message));
         }
 
         private void ShowMessage(string title, string message)
