@@ -65,7 +65,7 @@ namespace DisplayButtons.Forms
             InitializeComponent();
 
             //Globals.launcher_principal = this;
-            panel1.Freeze();
+        
 
             DevicesTitlebarButton item = new DevicesTitlebarButton(this);
             TitlebarButtons.Add(item);
@@ -758,7 +758,7 @@ namespace DisplayButtons.Forms
 
 
                         control.Name = "modernButton" + id;
-
+                        control.UseVisualStyleBackColor = false;
                         control.Size = new Size(80, 80);
                         control.Location = new Point(lin * 110 + 10, con * 110 + 10);
                         id += 1;
