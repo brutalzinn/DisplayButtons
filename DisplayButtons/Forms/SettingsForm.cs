@@ -1,6 +1,6 @@
-﻿using ButtonDeck.Controls;
-using ButtonDeck.Misc;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Controls;
+using DisplayButtons.Misc;
+using DisplayButtons.Backend.Utils;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Reflection;
 using System.Resources;
 using System.Globalization;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
     public partial class SettingsForm : TemplateForm
     {

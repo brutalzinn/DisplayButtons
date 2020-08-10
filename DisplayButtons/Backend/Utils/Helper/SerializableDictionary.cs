@@ -1,11 +1,11 @@
-﻿using ButtonDeck.Backend.Objects;
+﻿using DisplayButtons.Backend.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Utils
+namespace DisplayButtons.Backend.Utils
 {
     //Code taken from http://weblogs.asp.net/pwelter34/archive/2006/05/03/444961.aspx
     //All credits go to its creators

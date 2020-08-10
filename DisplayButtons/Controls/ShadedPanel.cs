@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
   public  class ShadedPanel : Panel
     {

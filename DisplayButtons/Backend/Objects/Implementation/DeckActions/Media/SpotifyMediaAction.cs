@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Backend.Utils.Native;
-using ButtonDeck.Properties;
+﻿using DisplayButtons.Backend.Utils.Native;
+using DisplayButtons.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Media
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.Media
 {
     public class SpotifyMediaAction : AbstractDeckAction
     {

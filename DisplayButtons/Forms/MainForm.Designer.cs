@@ -1,8 +1,8 @@
-﻿using ButtonDeck.Controls;
+﻿using DisplayButtons.Controls;
 using System;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
     partial class MainForm
     {
@@ -36,17 +36,17 @@ namespace ButtonDeck.Forms
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.panel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
             this.warning_label = new System.Windows.Forms.Label();
-            this.shadedPanel1 = new ButtonDeck.Forms.ShadedPanel();
-            this.shadedPanel2 = new ButtonDeck.Forms.ShadedPanel();
+            this.shadedPanel1 = new DisplayButtons.Forms.ShadedPanel();
+            this.shadedPanel2 = new DisplayButtons.Forms.ShadedPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.action_label = new System.Windows.Forms.Label();
-            this.imageModernButton1 = new ButtonDeck.Controls.ImageModernButton();
-            this.painel_developer = new ButtonDeck.Forms.ShadedPanel();
-            this.imageModernButton5 = new ButtonDeck.Controls.ImageModernButton();
-            this.imageModernButton4 = new ButtonDeck.Controls.ImageModernButton();
-            this.imageModernButton3 = new ButtonDeck.Controls.ImageModernButton();
-            this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
-            this.shadedPanel4 = new ButtonDeck.Forms.ShadedPanel();
+            this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
+            this.painel_developer = new DisplayButtons.Forms.ShadedPanel();
+            this.imageModernButton5 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton4 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
+            this.shadedPanel4 = new DisplayButtons.Forms.ShadedPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
@@ -68,7 +68,7 @@ namespace ButtonDeck.Forms
             this.appBar1.Size = new System.Drawing.Size(1075, 50);
             this.appBar1.TabIndex = 0;
             this.appBar1.Text = "DisplayKeys";
-            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.appBar1.ToolTip = null;
             this.appBar1.Click += new System.EventHandler(this.appBar1_Click);
             // 
@@ -90,7 +90,7 @@ namespace ButtonDeck.Forms
             // 
             this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.warning_label.BackColor = System.Drawing.Color.Transparent;
-            this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.warning_label.Location = new System.Drawing.Point(95, 218);
             this.warning_label.Name = "warning_label";
             this.warning_label.Size = new System.Drawing.Size(424, 69);
@@ -139,7 +139,7 @@ namespace ButtonDeck.Forms
             // 
             // action_label
             // 
-            this.action_label.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.action_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.action_label.Location = new System.Drawing.Point(102, 13);
             this.action_label.Name = "action_label";
             this.action_label.Size = new System.Drawing.Size(142, 36);
@@ -281,7 +281,6 @@ namespace ButtonDeck.Forms
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.appBar1);
-            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "";

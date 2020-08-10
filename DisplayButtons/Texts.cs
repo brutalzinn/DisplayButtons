@@ -1,4 +1,4 @@
-﻿using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ButtonDeck
+namespace DisplayButtons
 {
     class Texts
     {

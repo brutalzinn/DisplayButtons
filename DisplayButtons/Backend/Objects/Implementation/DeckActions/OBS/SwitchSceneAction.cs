@@ -1,4 +1,4 @@
-﻿using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
     public class SwitchSceneAction : AbstractDeckAction
     {
@@ -17,7 +17,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS
         public void SceneNameHelper()
         {
             var oldScene = new String(SceneName.ToCharArray());
-            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.OBS.OBSSceneChangeHelper")) as Form;
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.OBS.OBSSceneChangeHelper")) as Form;
             var execAction = CloneAction() as SwitchSceneAction;
             execAction.SceneName = SceneName;
             form.ModifiableAction = execAction;

@@ -1,7 +1,7 @@
-﻿using ButtonDeck.Backend.Networking.Attributes;
-using ButtonDeck.Backend.Networking.IO;
-using ButtonDeck.Backend.Networking.TcpLib;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Networking.Attributes;
+using DisplayButtons.Backend.Networking.IO;
+using DisplayButtons.Backend.Networking.TcpLib;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Networking.Implementation
+namespace DisplayButtons.Backend.Networking.Implementation
 {
    // [Architecture(PacketArchitecture.ClientToServer)]
     public class HelloPacket : INetworkPacket

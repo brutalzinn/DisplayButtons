@@ -11,7 +11,7 @@ using System.Net;
 using System.Diagnostics;
 
 using System.Security.Permissions;
-using ButtonDeck;
+using DisplayButtons;
 
 namespace NetSparkleUpdater
 {

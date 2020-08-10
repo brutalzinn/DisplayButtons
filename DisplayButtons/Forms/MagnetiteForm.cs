@@ -1,6 +1,6 @@
-﻿using ButtonDeck.Backend.Networking.Implementation;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,16 +10,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ButtonDeck.Backend.Networking.Implementation;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Backend.Objects.Implementation;
-using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
-using ButtonDeck.Backend.Utils;
-using ButtonDeck.Controls;
-using ButtonDeck.Misc;
-using ButtonDeck.Properties;
+using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Objects.Implementation;
+using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
+using DisplayButtons.Backend.Utils;
+using DisplayButtons.Controls;
+using DisplayButtons.Misc;
+using DisplayButtons.Properties;
 
-using ButtonDeck.Backend.Networking;
+using DisplayButtons.Backend.Networking;
 
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Objects;
@@ -37,14 +37,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using static ButtonDeck.Backend.Objects.AbstractDeckAction;
+using static DisplayButtons.Backend.Objects.AbstractDeckAction;
 using System.Threading;
 using Timer = System.Windows.Forms.Timer;
-using static ButtonDeck.Backend.Utils.DevicePersistManager;
-using ButtonDeck.Backend.Networking.TcpLib;
-using static ButtonDeck.Backend.Utils.AppSettings;
+using static DisplayButtons.Backend.Utils.DevicePersistManager;
+using DisplayButtons.Backend.Networking.TcpLib;
+using static DisplayButtons.Backend.Utils.AppSettings;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
     public partial class MagnetiteForm : TemplateForm
     {
@@ -90,7 +90,7 @@ namespace ButtonDeck.Forms
         private void ModernButton7_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("ButtonDeck Dump:");
+            sb.AppendLine("DisplayButtons Dump:");
             sb.AppendLine($"    - Protocol Version: {Constants.PROTOCOL_VERSION}");
             sb.AppendLine($"    - Port Number: {Constants.PORT_NUMBER}");
             sb.AppendLine($"    - Persisted Devices: {DevicePersistManager.PersistedDevices.Count}");
@@ -214,7 +214,7 @@ namespace ButtonDeck.Forms
         {
 
             var keyInfo = new KeyInfoAppSettingsGlobal(ApplicationSettingsManager.Settings.keyBackFolder.ModifierKeys, ApplicationSettingsManager.Settings.keyBackFolder.Keys);
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("ButtonDeck.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
 
             var execAction = new AppSettings() as AppSettings;
             execAction.keyBackFolder = ApplicationSettingsManager.Settings.keyBackFolder;
@@ -237,7 +237,7 @@ namespace ButtonDeck.Forms
 
             
             var keyInfo = new KeyInfoAppSettingsGlobal(ApplicationSettingsManager.Settings.keyMainFolder.ModifierKeys, ApplicationSettingsManager.Settings.keyMainFolder.Keys);
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("ButtonDeck.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
 
             var execAction = new AppSettings() as AppSettings;
             execAction.keyMainFolder = ApplicationSettingsManager.Settings.keyMainFolder;

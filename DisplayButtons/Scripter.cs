@@ -7,7 +7,7 @@ using System.Diagnostics;
 using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
 using ScribeBot.Engine.Proxies;
-using ButtonDeck.Engine.Wrappers;
+using DisplayButtons.Engine.Wrappers;
 
 namespace ScribeBot
 {

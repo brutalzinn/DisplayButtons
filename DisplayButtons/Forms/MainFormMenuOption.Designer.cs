@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Forms.ActionHelperForms
+﻿namespace DisplayButtons.Forms.ActionHelperForms
 {
     partial class MainFormMenuOption
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.shadedPanel1 = new ButtonDeck.Forms.ShadedPanel();
+            this.shadedPanel1 = new DisplayButtons.Forms.ShadedPanel();
             this.modernButton4 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.shadedPanel1.SuspendLayout();

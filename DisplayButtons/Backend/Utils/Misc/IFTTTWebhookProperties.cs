@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Utils.Misc
+namespace DisplayButtons.Backend.Utils.Misc
 {
     public class IFTTTWebhookProperties
     {

@@ -1,7 +1,7 @@
-﻿using ButtonDeck.Backend.Networking.Attributes;
-using ButtonDeck.Backend.Networking.IO;
+﻿using DisplayButtons.Backend.Networking.Attributes;
+using DisplayButtons.Backend.Networking.IO;
 
-namespace ButtonDeck.Backend.Networking.Implementation
+namespace DisplayButtons.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ServerToClient)]
     public class HeartbeatPacket : INetworkPacket

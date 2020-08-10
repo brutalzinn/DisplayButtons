@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ButtonDeck;
+using DisplayButtons;
 using MoonSharp.Interpreter;
-using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
+using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
 using ScribeBot.Engine.Containers;
 
 namespace ScribeBot.Engine.Wrappers
@@ -43,7 +43,7 @@ namespace ScribeBot.Engine.Wrappers
         public static void creator_button(string name_button, MoonSharp.Interpreter.ScriptFunctionDelegate buttondowm, string buttonup,string category)
            
         {
-         //   ButtonDeck.Forms.MainForm.button_creator(name_button, buttondowm, buttonup,category);
+         //   DisplayButtons.Forms.MainForm.button_creator(name_button, buttondowm, buttonup,category);
 
 
         }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ButtonDeck.Properties {
+namespace DisplayButtons.Properties {
     using System;
     
     

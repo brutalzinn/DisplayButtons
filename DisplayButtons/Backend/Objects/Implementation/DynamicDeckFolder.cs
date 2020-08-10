@@ -1,16 +1,16 @@
-﻿using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ButtonDeck.Backend.Utils.Native;
+using DisplayButtons.Backend.Utils.Native;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using static ButtonDeck.Backend.Objects.Implementation.DeckActions.General.KeyPressAction;
+using static DisplayButtons.Backend.Objects.Implementation.DeckActions.General.KeyPressAction;
 using shortid;
 
-namespace ButtonDeck.Backend.Objects.Implementation
+namespace DisplayButtons.Backend.Objects.Implementation
 {
     [Serializable]
     public class DynamicDeckFolder : IDeckFolder
@@ -179,7 +179,7 @@ namespace ButtonDeck.Backend.Objects.Implementation
             {
            
                 var keyInfo = new KeyInfoGlobal(KeyGlobalValue.ModifierKeys, KeyGlobalValue.Keys);
-                dynamic form = Activator.CreateInstance(UsbMode.FindType("ButtonDeck.Forms.ActionHelperForms.FolderGlobalHotKey")) as Form;
+                dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.ActionHelperForms.FolderGlobalHotKey")) as Form;
           
                 var execAction = new DynamicDeckFolder() as DynamicDeckFolder;
                 execAction.KeyGlobalValue = KeyGlobalValue;

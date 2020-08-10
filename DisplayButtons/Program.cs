@@ -1,8 +1,8 @@
 ﻿//#define FORCE_SILENCE
 
-using ButtonDeck.Forms;
-using ButtonDeck.Misc;
-using ButtonDeck.Backend.Utils;
+using DisplayButtons.Forms;
+using DisplayButtons.Misc;
+using DisplayButtons.Backend.Utils;
 using ScribeBot;
 using System;
 using System.Collections.Generic;
@@ -17,10 +17,10 @@ using NAudio.CoreAudioApi;
 using SharpAdbClient;
 using System.Net;
 using System.Threading;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Forms.ActionHelperForms;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Forms.ActionHelperForms;
 
-namespace ButtonDeck
+namespace DisplayButtons
 {
 
     
@@ -163,7 +163,7 @@ namespace ButtonDeck
             OBSUtils.PrepareOBSIntegration();
 
 
-            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
       
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -209,7 +209,7 @@ namespace ButtonDeck
 
 
 
-                    //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", client.GetDevices().First(), null);
+                    //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", client.GetDevices().First(), null);
 
 
                     client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
@@ -251,7 +251,7 @@ namespace ButtonDeck
                 foreach (var device in client.GetDevices().ToList())
             {
                     
-             //   client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", device, null);
+             //   client.ExecuteRemoteCommand("am force-stop net.nickac.DisplayButtons", device, null);
                    // client.ExecuteRemoteCommand("kill-server", device, null);
 
                  //   client.KillAdb();

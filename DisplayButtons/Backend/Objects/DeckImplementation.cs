@@ -1,9 +1,9 @@
-﻿using ButtonDeck.Backend.Networking;
-using ButtonDeck.Backend.Networking.Implementation;
-using ButtonDeck.Backend.Networking.TcpLib;
-using ButtonDeck.Backend.Utils;
-using ButtonDeck.Forms;
-using ButtonDeck.Misc;
+﻿using DisplayButtons.Backend.Networking;
+using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Networking.TcpLib;
+using DisplayButtons.Backend.Utils;
+using DisplayButtons.Forms;
+using DisplayButtons.Misc;
 using SharpAdbClient;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Objects
+namespace DisplayButtons.Backend.Objects
 {
 
  

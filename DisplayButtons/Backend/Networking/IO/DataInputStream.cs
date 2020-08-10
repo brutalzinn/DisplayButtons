@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ButtonDeck.Backend.Networking.IO
+namespace DisplayButtons.Backend.Networking.IO
 {
     /**
     * A data input stream lets an application read primitive Java data

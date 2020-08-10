@@ -1,8 +1,8 @@
-﻿using ButtonDeck.Forms;
-using ButtonDeck.Backend.Networking;
-using ButtonDeck.Backend.Networking.Implementation;
-using ButtonDeck.Backend.Networking.TcpLib;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Forms;
+using DisplayButtons.Backend.Networking;
+using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Networking.TcpLib;
+using DisplayButtons.Backend.Utils;
 using NickAc.ModernUIDoneRight.Forms;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using SharpAdbClient;
 
-namespace ButtonDeck.Misc
+namespace DisplayButtons.Misc
 {
     public class DevicesTitlebarButton : NickAc.ModernUIDoneRight.Objects.Interaction.ModernTitlebarButton
     {
@@ -265,9 +265,9 @@ private void UpdateConnectedDevices()
                                 Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
                                 Program.client.RemoveAllForwards(item.DeviceUsb);
                                 Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
-                                //  Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", item.DeviceUsb, null);
+                                //  Program.client.ExecuteRemoteCommand("am force-stop net.nickac.DisplayButtons", item.DeviceUsb, null);
                                 //     Thread.Sleep(1400);
-                                //      Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", item.DeviceUsb, null);
+                                //      Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", item.DeviceUsb, null);
                                 //        Thread.Sleep(1200);
                                 Program.ClientThread.Stop();
                                 Program.ClientThread = new Misc.ClientThread();

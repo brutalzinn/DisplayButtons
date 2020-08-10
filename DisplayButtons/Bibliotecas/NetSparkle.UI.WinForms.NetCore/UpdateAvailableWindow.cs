@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using NetSparkleUpdater.Events;
 using System.Security.Permissions;
 using NickAc.ModernUIDoneRight.Objects;
-using ButtonDeck;
+using DisplayButtons;
 
 namespace NetSparkleUpdater.UI.WinForms
 {

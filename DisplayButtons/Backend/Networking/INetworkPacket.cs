@@ -1,7 +1,7 @@
-﻿using ButtonDeck.Backend.Networking.Attributes;
-using ButtonDeck.Backend.Networking.Implementation;
-using ButtonDeck.Backend.Networking.IO;
-using ButtonDeck.Backend.Networking.TcpLib;
+﻿using DisplayButtons.Backend.Networking.Attributes;
+using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Networking.IO;
+using DisplayButtons.Backend.Networking.TcpLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Networking
+namespace DisplayButtons.Backend.Networking
 {
     public static class NetworkPacketExtensions
     {

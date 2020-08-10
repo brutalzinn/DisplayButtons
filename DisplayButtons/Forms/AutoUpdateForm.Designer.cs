@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Forms
+﻿namespace DisplayButtons.Forms
 {
     partial class AutoUpdateForm
     {

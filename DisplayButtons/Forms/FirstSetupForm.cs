@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Forms.FirstSetup;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Forms.FirstSetup;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
     public partial class FirstSetupForm : TemplateForm
     {

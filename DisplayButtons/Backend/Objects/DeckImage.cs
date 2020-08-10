@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Drawing.Imaging;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Objects
+namespace DisplayButtons.Backend.Objects
 {
     [Serializable]
     public class DeckImage

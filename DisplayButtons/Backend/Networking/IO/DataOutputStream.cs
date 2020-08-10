@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Networking.IO
+namespace DisplayButtons.Backend.Networking.IO
 {
     /**
     * A data output stream lets an application write primitive Java data

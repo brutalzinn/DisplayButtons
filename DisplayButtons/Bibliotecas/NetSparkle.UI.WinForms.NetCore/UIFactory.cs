@@ -6,8 +6,8 @@ using NetSparkleUpdater.Interfaces;
 using NetSparkleUpdater.Enums;
 using System.Threading;
 using System.Collections.Generic;
-using ButtonDeck.Properties;
-using ButtonDeck;
+using DisplayButtons.Properties;
+using DisplayButtons;
 
 namespace NetSparkleUpdater.UI.WinForms
 {

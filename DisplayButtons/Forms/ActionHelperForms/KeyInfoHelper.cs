@@ -1,4 +1,4 @@
-﻿using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
+﻿using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms.ActionHelperForms
+namespace DisplayButtons.Forms.ActionHelperForms
 {
     public partial class KeyInfoHelper : TemplateForm
     {

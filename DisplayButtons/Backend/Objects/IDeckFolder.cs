@@ -1,4 +1,4 @@
-﻿using ButtonDeck.Backend.Objects.Implementation;
+﻿using DisplayButtons.Backend.Objects.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Objects
+namespace DisplayButtons.Backend.Objects
 {
     [XmlInclude(typeof(DynamicDeckFolder))]
     public abstract class IDeckFolder : IDeckItem

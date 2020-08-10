@@ -1,4 +1,4 @@
-﻿using ButtonDeck.Backend.Objects;
+﻿using DisplayButtons.Backend.Objects;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Utils
+namespace DisplayButtons.Backend.Utils
 {
     class XMLUtils
     {

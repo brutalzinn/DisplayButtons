@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.MultiAction
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.MultiAction
 {
 
 
@@ -27,7 +27,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.MultiAction
         public void ToExecuteHelper()
         {
             // var originalToExec = new String(ToExecute.ToCharArray());
-            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ToolDelayActionHelper")) as Form;
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.ToolDelayActionHelper")) as Form;
 
             form.delay_timer = delay_timer;
             if (form.ShowDialog() == DialogResult.OK)

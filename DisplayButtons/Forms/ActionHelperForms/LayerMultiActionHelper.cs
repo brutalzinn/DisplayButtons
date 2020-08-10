@@ -1,7 +1,7 @@
-﻿using ButtonDeck.Backend.Objects;
-using ButtonDeck.Backend.Objects.Implementation;
-using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Objects.Implementation;
+using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,10 +14,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ButtonDeck.Backend.Objects.AbstractDeckAction;
+using static DisplayButtons.Backend.Objects.AbstractDeckAction;
 
 
-namespace ButtonDeck.Forms.ActionHelperForms
+namespace DisplayButtons.Forms.ActionHelperForms
 {
     public partial class  LayerMultiActionHelper : TemplateForm
     {

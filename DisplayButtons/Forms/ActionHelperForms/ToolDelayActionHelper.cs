@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms.ActionHelperForms
+namespace DisplayButtons.Forms.ActionHelperForms
 {
     public partial class ToolDelayActionHelper : TemplateForm
     {

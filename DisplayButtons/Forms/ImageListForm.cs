@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
     public partial class ImageListForm : Form
     {
@@ -68,13 +68,13 @@ namespace ButtonDeck.Forms
         private void listViewFile_MouseClick(object sender, MouseEventArgs e)
         {
 
-            ContextMenu cm = new ContextMenu();
-            listViewFile.ContextMenu = cm;
-            var mi = new MenuItem("Rename");
+         //   Contextb cm = new ContextMenu();
+           // listViewFile.ContextMenu = cm;
+           // var mi = new MenuItem("Rename");
 
-            mi.MenuItems.Add(mi);
-            mi.Click += OnMenuItemClick;
-            cm.MenuItems.Add(mi);
+    //        mi.MenuItems.Add(mi);
+  //          mi.Click += OnMenuItemClick;
+//            cm.MenuItems.Add(mi);
 
         }
         private void OnMenuItemClick(object sender, EventArgs e)

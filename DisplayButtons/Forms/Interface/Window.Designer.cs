@@ -213,7 +213,7 @@ namespace ScribeBot.Interface
             this.consoleClearButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.consoleClearButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
             this.consoleClearButton.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.consoleClearButton.Image = global::ButtonDeck.Properties.Resources.CleanData_16x;
+            this.consoleClearButton.Image = global::DisplayButtons.Properties.Resources.CleanData_16x;
             this.consoleClearButton.Location = new System.Drawing.Point(420, 0);
             this.consoleClearButton.Margin = new System.Windows.Forms.Padding(0);
             this.consoleClearButton.Name = "consoleClearButton";
@@ -292,7 +292,7 @@ namespace ScribeBot.Interface
             // scriptStop
             // 
             this.scriptStop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptStop.Image = global::ButtonDeck.Properties.Resources.Stop_grey_16x;
+            this.scriptStop.Image = global::DisplayButtons.Properties.Resources.Stop_grey_16x;
             this.scriptStop.Location = new System.Drawing.Point(32, 0);
             this.scriptStop.Margin = new System.Windows.Forms.Padding(0);
             this.scriptStop.Name = "scriptStop";
@@ -308,7 +308,7 @@ namespace ScribeBot.Interface
             // openPackagesFolderButton
             // 
             this.openPackagesFolderButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.openPackagesFolderButton.Image = global::ButtonDeck.Properties.Resources.Folder_grey_16x;
+            this.openPackagesFolderButton.Image = global::DisplayButtons.Properties.Resources.Folder_grey_16x;
             this.openPackagesFolderButton.Location = new System.Drawing.Point(0, 0);
             this.openPackagesFolderButton.Margin = new System.Windows.Forms.Padding(0);
             this.openPackagesFolderButton.Name = "openPackagesFolderButton";
@@ -486,7 +486,7 @@ namespace ScribeBot.Interface
             // packageSelectFolder
             // 
             this.packageSelectFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.packageSelectFolder.Image = global::ButtonDeck.Properties.Resources.Folder_grey_16x;
+            this.packageSelectFolder.Image = global::DisplayButtons.Properties.Resources.Folder_grey_16x;
             this.packageSelectFolder.Location = new System.Drawing.Point(0, 0);
             this.packageSelectFolder.Margin = new System.Windows.Forms.Padding(0);
             this.packageSelectFolder.Name = "packageSelectFolder";

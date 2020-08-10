@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Backend.Utils;
-using ButtonDeck.Forms;
+﻿using DisplayButtons.Backend.Utils;
+using DisplayButtons.Forms;
 using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
 
  
@@ -316,7 +316,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         {
 
             //   var originalToExec = new String(ToScript.ToCharArray());
-            form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ActionPlugin")) as Form;
+            form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.ActionPlugin")) as Form;
 
             ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol(this);
 

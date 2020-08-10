@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms.ActionHelperForms.OBS
+namespace DisplayButtons.Forms.ActionHelperForms.OBS
 {
     public partial class OBSSceneItemVisibilityHelper : TemplateForm
     {

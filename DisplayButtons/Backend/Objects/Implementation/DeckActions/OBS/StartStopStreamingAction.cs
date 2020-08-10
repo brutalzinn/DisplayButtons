@@ -1,7 +1,7 @@
-﻿using ButtonDeck.Backend.Utils;
-using ButtonDeck.Properties;
+﻿using DisplayButtons.Backend.Utils;
+using DisplayButtons.Properties;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
     public class StartStopStreamingAction : AbstractDeckAction
     {

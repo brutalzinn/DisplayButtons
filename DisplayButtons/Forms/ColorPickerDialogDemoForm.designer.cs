@@ -1,6 +1,6 @@
-using ButtonDeck.Forms;
+using DisplayButtons.Forms;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
     internal partial class ColorPickerDialogDemoForm
     {
@@ -36,8 +36,8 @@ namespace ButtonDeck.Forms
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.browseColorButton = new System.Windows.Forms.Button();
             this.demoLabel = new System.Windows.Forms.Label();
-            this.dialogColorPreviewPanel = new ButtonDeck.Forms.ColorPreviewBox();
-            this.colorPreviewPanel = new ButtonDeck.Forms.ColorPreviewBox();
+            this.dialogColorPreviewPanel = new DisplayButtons.Forms.ColorPreviewBox();
+            this.colorPreviewPanel = new DisplayButtons.Forms.ColorPreviewBox();
             this.showAlphaChannelCheckBox = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();

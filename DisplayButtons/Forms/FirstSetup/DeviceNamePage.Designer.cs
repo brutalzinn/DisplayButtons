@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Forms.FirstSetup
+﻿namespace DisplayButtons.Forms.FirstSetup
 {
     partial class DeviceNamePage
     {

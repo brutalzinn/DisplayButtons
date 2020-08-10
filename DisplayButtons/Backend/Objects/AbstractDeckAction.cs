@@ -1,10 +1,10 @@
-﻿using ButtonDeck.Backend.Objects.Implementation.DeckActions;
-using ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS;
+﻿using DisplayButtons.Backend.Objects.Implementation.DeckActions;
+using DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS;
 using System;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Objects
+namespace DisplayButtons.Backend.Objects
 {
 
     

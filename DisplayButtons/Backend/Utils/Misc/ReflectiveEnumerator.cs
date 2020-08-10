@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Utils
+namespace DisplayButtons.Backend.Utils
 {
     //Code taken and adapted from https://stackoverflow.com/a/6944605.
     //All credits go to Repo Man (https://stackoverflow.com/users/140126/repo-man)

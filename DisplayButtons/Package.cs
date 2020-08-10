@@ -9,8 +9,8 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Forms;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Forms;
 
 //TO-DO: Remake this entire class
 namespace ScribeBot

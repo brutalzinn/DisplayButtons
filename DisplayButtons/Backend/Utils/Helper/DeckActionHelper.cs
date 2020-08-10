@@ -1,11 +1,11 @@
-﻿using ButtonDeck.Backend.Objects;
+﻿using DisplayButtons.Backend.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Utils
+namespace DisplayButtons.Backend.Utils
 {
     public class DeckActionHelper
     {

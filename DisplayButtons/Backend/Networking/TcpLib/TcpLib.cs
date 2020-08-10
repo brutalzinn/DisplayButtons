@@ -5,10 +5,10 @@ using System.Threading;
 using System.Text;
 using System.Collections;
 using System.ServiceModel;
-using ButtonDeck.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Networking.Implementation;
 using System.Diagnostics;
 
-namespace ButtonDeck.Backend.Networking.TcpLib
+namespace DisplayButtons.Backend.Networking.TcpLib
 {
     /// <summary>
     /// This class holds useful information for keeping track of each client connected

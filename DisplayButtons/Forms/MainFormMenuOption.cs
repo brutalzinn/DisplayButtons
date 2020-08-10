@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Backend.Utils;
-using ButtonDeck.Misc;
+﻿using DisplayButtons.Backend.Utils;
+using DisplayButtons.Misc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms.ActionHelperForms
+namespace DisplayButtons.Forms.ActionHelperForms
 {
     public partial class MainFormMenuOption : TemplateForm
     {

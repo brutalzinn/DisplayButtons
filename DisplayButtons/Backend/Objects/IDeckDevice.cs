@@ -1,4 +1,4 @@
-﻿using ButtonDeck.Backend.Networking.Implementation;
+﻿using DisplayButtons.Backend.Networking.Implementation;
 using SharpAdbClient;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Objects
+namespace DisplayButtons.Backend.Objects
 {
     [Serializable]
     public class DeckDevice

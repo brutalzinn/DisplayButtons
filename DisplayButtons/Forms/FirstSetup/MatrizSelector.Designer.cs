@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Forms.FirstSetup
+﻿namespace DisplayButtons.Forms.FirstSetup
 {
     partial class MatrizSelector
     {
@@ -62,7 +62,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(220, 21);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Hello, welcome to ButtonDeck.";
+            this.label1.Text = "Hello, welcome to DisplayButtons.";
             // 
             // label2
             // 

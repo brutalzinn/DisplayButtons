@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ButtonDeck.Backend.Networking.Attributes
+namespace DisplayButtons.Backend.Networking.Attributes
 {
     [Flags]
     enum PacketArchitecture

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Backend.Utils
+namespace DisplayButtons.Backend.Utils
 {
     public static class OBSUtils
     {
@@ -175,7 +175,7 @@ namespace ButtonDeck.Backend.Utils
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("An OBS instance was found!");
                     sb.AppendLine("");
-                    sb.AppendLine("Do you want to automatically download the necessary OBS plugin to enable compatibility with ButtonDeck?");
+                    sb.AppendLine("Do you want to automatically download the necessary OBS plugin to enable compatibility with DisplayButtons?");
                     sb.AppendLine("You won't be prompted again in the future.");
                     if (MessageBox.Show(sb.ToString(), "OBS Interaction", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                         //Now we download the websocket plugin from the web

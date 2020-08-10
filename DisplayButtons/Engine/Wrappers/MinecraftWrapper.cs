@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Engine.Wrappers
+namespace DisplayButtons.Engine.Wrappers
 {
     [MoonSharpUserData]
     class MinecraftWrapper

@@ -1,13 +1,13 @@
 ﻿
-using ButtonDeck.Properties;
-using ButtonDeck.Backend.Utils;
+using DisplayButtons.Properties;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
     public class StartStopRecordingAction : AbstractDeckAction
     {

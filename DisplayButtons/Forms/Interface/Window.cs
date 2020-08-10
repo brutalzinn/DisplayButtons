@@ -1,5 +1,5 @@
-﻿using ButtonDeck;
-using ButtonDeck.Forms;
+﻿using DisplayButtons;
+using DisplayButtons.Forms;
 using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;

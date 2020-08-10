@@ -1,6 +1,6 @@
-﻿using ButtonDeck.Backend.Networking.Implementation;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace ButtonDeck.Backend.Networking.TcpLib
+namespace DisplayButtons.Backend.Networking.TcpLib
 {
     public class DeckServiceProvider : TcpServiceProvider
     {

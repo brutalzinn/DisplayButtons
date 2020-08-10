@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Controls
+﻿namespace DisplayButtons.Controls
 {
     partial class ColorSchemePreviewControl
     {
@@ -32,7 +32,7 @@
             this.modernButton4 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton5 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.titlebarPanel = new ButtonDeck.Forms.ShadedPanel();
+            this.titlebarPanel = new DisplayButtons.Forms.ShadedPanel();
             this.SuspendLayout();
             // 
             // modernButton1

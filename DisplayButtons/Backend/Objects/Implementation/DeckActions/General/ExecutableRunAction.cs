@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
     public class ExecutableRunAction : AbstractDeckAction
     {
@@ -24,7 +24,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public void ToExecuteHelper()
         {
             var originalToExec = new String(ToExecute.ToCharArray());
-            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.ExecutableRunHelper")) as Form;
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.ExecutableRunHelper")) as Form;
             var execAction = CloneAction() as ExecutableRunAction;
             execAction.ToExecute = ToExecute;
             

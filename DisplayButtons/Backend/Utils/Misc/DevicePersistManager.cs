@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Backend.Networking.TcpLib;
-using ButtonDeck.Backend.Objects;
+﻿using DisplayButtons.Backend.Networking.TcpLib;
+using DisplayButtons.Backend.Objects;
 using NHotkey.WindowsForms;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Utils
+namespace DisplayButtons.Backend.Utils
 {
     public static class DevicePersistManager
     {

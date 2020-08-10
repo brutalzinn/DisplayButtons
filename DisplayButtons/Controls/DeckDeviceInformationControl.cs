@@ -1,8 +1,8 @@
-﻿using ButtonDeck.Backend.Objects;
-using ButtonDeck.Backend.Utils;
-using ButtonDeck.Misc;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Utils;
+using DisplayButtons.Misc;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Utils;
 using NickAc.ModernUIDoneRight.Objects;
 using System;
 using System.Collections.Generic;
@@ -12,12 +12,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ButtonDeck.Backend.Utils.DevicePersistManager;
+using static DisplayButtons.Backend.Utils.DevicePersistManager;
 using SharpAdbClient;
 using System.Net;
 using System.Threading;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
     class DeckDeviceInformationControl : Control
     {
@@ -85,9 +85,9 @@ namespace ButtonDeck.Forms
                             {
                                 Program.client.RemoveAllForwards(DeckUsb);
                                 Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
-                                Program.client.ExecuteRemoteCommand("am force-stop net.nickac.buttondeck", DeckUsb, null);
+                                Program.client.ExecuteRemoteCommand("am force-stop net.nickac.DisplayButtons", DeckUsb, null);
                                 Thread.Sleep(1400);
-                                Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.buttondeck/.MainActivity", DeckUsb, null);
+                                Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", DeckUsb, null);
                                 Thread.Sleep(1200);
                                 Program.ClientThread.Stop();
                                 Program.ClientThread = new Misc.ClientThread();

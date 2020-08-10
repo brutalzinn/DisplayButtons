@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ButtonDeck.Misc;
-using ButtonDeck.Controls;
-using ButtonDeck.Backend.Utils;
+using DisplayButtons.Misc;
+using DisplayButtons.Controls;
+using DisplayButtons.Backend.Utils;
 using NickAc.ModernUIDoneRight.Utils;
 
-namespace ButtonDeck.Forms.FirstSetup
+namespace DisplayButtons.Forms.FirstSetup
 {
     public partial class ThemeSelectionPage : PageTemplate
     {

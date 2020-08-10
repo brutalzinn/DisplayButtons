@@ -1,7 +1,7 @@
-﻿using ButtonDeck.Backend.Networking.Attributes;
-using ButtonDeck.Backend.Networking.IO;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Bibliotecas;
+﻿using DisplayButtons.Backend.Networking.Attributes;
+using DisplayButtons.Backend.Networking.IO;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Bibliotecas;
 
 using Newtonsoft.Json;
 using System;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ButtonDeck.Backend.Networking.Implementation
+namespace DisplayButtons.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer | PacketArchitecture.ServerToClient)]
     public class SlotUniversalChangeChunkPacket : INetworkPacket

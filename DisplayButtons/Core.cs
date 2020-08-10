@@ -15,10 +15,10 @@ using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
 using Newtonsoft.Json;
 using ScribeBot.Engine.Wrappers;
-using static ButtonDeck.Backend.Objects.AbstractDeckAction;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Backend.Utils;
-using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
+using static DisplayButtons.Backend.Objects.AbstractDeckAction;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Utils;
+using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
 
 namespace ScribeBot
 {

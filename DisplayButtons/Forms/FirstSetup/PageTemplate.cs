@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Misc;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Misc;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms.FirstSetup
+namespace DisplayButtons.Forms.FirstSetup
 {
     public class PageTemplate : UserControl
     {

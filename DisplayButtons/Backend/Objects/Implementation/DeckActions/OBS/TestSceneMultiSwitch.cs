@@ -1,6 +1,6 @@
-﻿using ButtonDeck.Backend.Networking;
-using ButtonDeck.Backend.Networking.TcpLib;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Networking;
+using DisplayButtons.Backend.Networking.TcpLib;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,9 +9,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static ButtonDeck.Backend.Objects.DeckDevice;
+using static DisplayButtons.Backend.Objects.DeckDevice;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
     public class TestSceneMultiSwitch : AbstractDeckAction
     {
@@ -101,7 +101,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS
                     var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 
                     Type callType = assemblies.SelectMany(a => a.GetTypes())
-                    .Single(t => t.FullName == "ButtonDeck.Misc.IDeckDeviceExtensions");
+                    .Single(t => t.FullName == "DisplayButtons.Misc.IDeckDeviceExtensions");
 
                     var method = callType.GetMethod("GetConnection", BindingFlags.Static | BindingFlags.Public);
 

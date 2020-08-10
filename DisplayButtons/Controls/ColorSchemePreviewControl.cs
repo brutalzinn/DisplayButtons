@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ButtonDeck.Backend.Utils.AppSettings;
-using ButtonDeck.Misc;
+using static DisplayButtons.Backend.Utils.AppSettings;
+using DisplayButtons.Misc;
 
-namespace ButtonDeck.Controls
+namespace DisplayButtons.Controls
 {
     public partial class ColorSchemePreviewControl : UserControl
     {
@@ -68,7 +68,7 @@ namespace ButtonDeck.Controls
         }
 
         private ApplicationColorScheme _appTheme = ColorSchemeCentral.Neptune;
-        private AppTheme _underlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
+        private AppTheme _underlyingAppTheme = DisplayButtons.Backend.Utils.AppSettings.AppTheme.Neptune;
 
         protected override void OnLoad(EventArgs e)
         {

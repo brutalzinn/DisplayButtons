@@ -1,4 +1,4 @@
-﻿using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
     public class SceneItemVisibilityAction : AbstractDeckAction
     {
@@ -31,7 +31,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.OBS
         {
             var oldSceneName = new String(SceneName.ToCharArray());
             var oldScene = new String(SceneItem.ToCharArray());
-            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.OBS.OBSSceneItemVisibilityHelper")) as Form;
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.OBS.OBSSceneItemVisibilityHelper")) as Form;
             var execAction = CloneAction() as SceneItemVisibilityAction;
             execAction.SceneName = SceneName;
             execAction.SceneItem = SceneItem;

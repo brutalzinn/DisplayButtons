@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Forms.ActionHelperForms
+﻿namespace DisplayButtons.Forms.ActionHelperForms
 {
     partial class LayerMultiActionHelper
     {
@@ -34,9 +34,9 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.imageModernButton3 = new ButtonDeck.Controls.ImageModernButton();
+            this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.imageModernButton4 = new ButtonDeck.Controls.ImageModernButton();
+            this.imageModernButton4 = new DisplayButtons.Controls.ImageModernButton();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();

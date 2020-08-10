@@ -1,4 +1,4 @@
-﻿using ButtonDeck.Backend.Objects.Implementation;
+﻿using DisplayButtons.Backend.Objects.Implementation;
 using System;
 
 namespace NHotkey

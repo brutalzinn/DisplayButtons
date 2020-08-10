@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Backend.Networking.TcpLib;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Networking.TcpLib;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-    namespace ButtonDeck.Misc
+    namespace DisplayButtons.Misc
     {
         public class ClientThread
         {

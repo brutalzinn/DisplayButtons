@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Forms.ActionHelperForms
+﻿namespace DisplayButtons.Forms.ActionHelperForms
 {
     partial class ToolDelayActionHelper
     {

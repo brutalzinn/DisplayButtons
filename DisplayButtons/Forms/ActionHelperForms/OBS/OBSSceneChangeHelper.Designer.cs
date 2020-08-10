@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Forms.ActionHelperForms.OBS
+﻿namespace DisplayButtons.Forms.ActionHelperForms.OBS
 {
     partial class OBSSceneChangeHelper
     {

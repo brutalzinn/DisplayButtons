@@ -1,7 +1,7 @@
-﻿using ButtonDeck.Controls;
-using ButtonDeck.Misc;
-using ButtonDeck.Properties;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Controls;
+using DisplayButtons.Misc;
+using DisplayButtons.Properties;
+using DisplayButtons.Backend.Utils;
 using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Utils;
@@ -13,10 +13,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ButtonDeck.Backend.Utils.AppSettings;
+using static DisplayButtons.Backend.Utils.AppSettings;
 using System.ComponentModel;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
 
    

@@ -1,11 +1,11 @@
-﻿using ButtonDeck.Backend.Utils.Native;
+﻿using DisplayButtons.Backend.Utils.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
     public class KeyToggleAction : KeyPressAction
     {

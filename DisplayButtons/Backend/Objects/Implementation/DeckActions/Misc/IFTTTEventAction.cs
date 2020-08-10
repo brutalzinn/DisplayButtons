@@ -1,11 +1,11 @@
-﻿using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Misc
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.Misc
 {
     public class IFTTTEventAction : AbstractDeckAction
     {

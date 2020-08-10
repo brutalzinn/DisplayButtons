@@ -1,14 +1,14 @@
 ﻿
-using ButtonDeck.Backend.Networking;
-using ButtonDeck.Backend.Networking.Implementation;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Backend.Objects.Implementation;
-using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
-using ButtonDeck.Backend.Utils;
-using ButtonDeck.Bibliotecas;
-using ButtonDeck.Controls;
-using ButtonDeck.Misc;
-using ButtonDeck.Properties;
+using DisplayButtons.Backend.Networking;
+using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Objects.Implementation;
+using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
+using DisplayButtons.Backend.Utils;
+using DisplayButtons.Bibliotecas;
+using DisplayButtons.Controls;
+using DisplayButtons.Misc;
+using DisplayButtons.Properties;
 using Cyotek.Windows.Forms;
 using NetSparkleUpdater;
 using NetSparkleUpdater.Configurations;
@@ -34,12 +34,12 @@ using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ButtonDeck.Backend.Objects.AbstractDeckAction;
+using static DisplayButtons.Backend.Objects.AbstractDeckAction;
 using Timer = System.Windows.Forms.Timer;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
     public partial class MainForm : TemplateForm
     {
@@ -1221,7 +1221,7 @@ namespace ButtonDeck.Forms
             Thread.Sleep(1500);
             var receiver = new ConsoleOutputReceiver();
 
-            Program.client.ExecuteRemoteCommand("pm path net.nickac.buttondeck", e.Device, receiver);
+            Program.client.ExecuteRemoteCommand("pm path net.nickac.DisplayButtons", e.Device, receiver);
 
             if (receiver != null)
             {
@@ -2817,7 +2817,7 @@ namespace ButtonDeck.Forms
             Padding itemPadding = new Padding(25, 0, 0, 0);
             Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
             IList<PluginLuaGenerator> list = new List<PluginLuaGenerator>();
-            // ButtonDeck.Forms.MainForm.testando(value);
+            // DisplayButtons.Forms.MainForm.testando(value);
             MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate
             {
                 //Globals.launcher_principal.ShadedPanel1.Controls.Clear();

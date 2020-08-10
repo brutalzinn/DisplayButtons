@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using ButtonDeck.Backend.Utils.Misc;
+using DisplayButtons.Backend.Utils.Misc;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Utils
+namespace DisplayButtons.Backend.Utils
 {
     public class IFTTTWebHookClient
     {

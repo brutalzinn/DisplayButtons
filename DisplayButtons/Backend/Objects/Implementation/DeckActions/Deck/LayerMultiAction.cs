@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Deck
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.Deck
 {
     public class LayerMultiAction : AbstractDeckAction
     {
@@ -29,7 +29,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.Deck
         public void ToExecuteHelper()
         {
            // var originalToExec = new String(ToExecute.ToCharArray());
-            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.LayerMultiActionHelper")) as Form;
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.LayerMultiActionHelper")) as Form;
       
             form.list_actions = list_actions;
             if (form.ShowDialog() == DialogResult.OK)

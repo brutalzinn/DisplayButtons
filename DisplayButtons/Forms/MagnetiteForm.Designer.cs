@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Forms
+﻿namespace DisplayButtons.Forms
 {
     partial class MagnetiteForm
     {
@@ -30,9 +30,9 @@
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.label1 = new System.Windows.Forms.Label();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
-            this.shadedPanel1 = new ButtonDeck.Forms.ShadedPanel();
+            this.shadedPanel1 = new DisplayButtons.Forms.ShadedPanel();
             this.label4 = new System.Windows.Forms.Label();
-            this.imageModernButton1 = new ButtonDeck.Controls.ImageModernButton();
+            this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.modernButton10 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
@@ -55,9 +55,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.modernButton5 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton6 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.shadedPanel2 = new ButtonDeck.Forms.ShadedPanel();
+            this.shadedPanel2 = new DisplayButtons.Forms.ShadedPanel();
             this.label5 = new System.Windows.Forms.Label();
-            this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
+            this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
             this.modernShadowPanel1.SuspendLayout();
             this.shadedPanel1.SuspendLayout();
             this.panel7.SuspendLayout();

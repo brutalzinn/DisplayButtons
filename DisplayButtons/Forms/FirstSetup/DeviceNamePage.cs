@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ButtonDeck.Backend.Utils;
+using DisplayButtons.Backend.Utils;
 using Microsoft.Win32;
 
-namespace ButtonDeck.Forms.FirstSetup
+namespace DisplayButtons.Forms.FirstSetup
 {
     public partial class DeviceNamePage : PageTemplate
     {
-        private const string registryAppName = "ButtonDeckByNickAc";
+        private const string registryAppName = "DisplayButtonsByNickAc";
 
         public static void AddApplicationToStartup()
         {

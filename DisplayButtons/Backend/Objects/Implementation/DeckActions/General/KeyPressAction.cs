@@ -1,4 +1,4 @@
-﻿using ButtonDeck.Backend.Utils.Native;
+﻿using DisplayButtons.Backend.Utils.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
+namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
     public class KeyPressAction : AbstractDeckAction
     {
@@ -32,7 +32,7 @@ namespace ButtonDeck.Backend.Objects.Implementation.DeckActions.General
         public void KeyInfoValueHelper()
         {
             var keyInfo = new KeyInfo(KeyInfoValue.ModifierKeys, KeyInfoValue.Keys);
-            dynamic form = Activator.CreateInstance(FindType("ButtonDeck.Forms.ActionHelperForms.KeyInfoHelper")) as Form;
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.KeyInfoHelper")) as Form;
             var execAction = CloneAction() as KeyPressAction;
             execAction.KeyInfoValue = KeyInfoValue;
             form.ModifiableAction = execAction;

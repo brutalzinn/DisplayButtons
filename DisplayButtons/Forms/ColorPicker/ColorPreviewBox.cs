@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using ButtonDeck.Forms;
+using DisplayButtons.Forms;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
   // Cyotek Color Picker controls library
   // Copyright © 2013-2017 Cyotek Ltd.

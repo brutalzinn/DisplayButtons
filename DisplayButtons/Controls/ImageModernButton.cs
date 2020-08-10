@@ -1,8 +1,8 @@
-﻿using ButtonDeck.Forms;
-using ButtonDeck.Backend.Networking;
-using ButtonDeck.Backend.Networking.TcpLib;
-using ButtonDeck.Backend.Objects;
-using ButtonDeck.Backend.Utils;
+﻿using DisplayButtons.Forms;
+using DisplayButtons.Backend.Networking;
+using DisplayButtons.Backend.Networking.TcpLib;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Utils;
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
@@ -12,11 +12,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ButtonDeck.Backend.Networking.Implementation;
-using ButtonDeck.Backend.Objects.Implementation;
+using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Objects.Implementation;
 
 
-namespace ButtonDeck.Controls
+namespace DisplayButtons.Controls
 {
     public class ImageModernButton : ModernButton
     {

@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Backend.Objects.Implementation;
-using ButtonDeck.Forms;
+﻿using DisplayButtons.Backend.Objects.Implementation;
+using DisplayButtons.Forms;
 using NHotkey;
 using NHotkey.WindowsForms;
 using shortid;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-namespace ButtonDeck.Bibliotecas
+namespace DisplayButtons.Bibliotecas
 {
     class GlobalHotKeys
     {

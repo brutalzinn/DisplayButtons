@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace ButtonDeck.Backend.Objects.Implementation
+namespace DisplayButtons.Backend.Objects.Implementation
 {
     [Serializable]
     public class DynamicDeckItem : IDeckItem

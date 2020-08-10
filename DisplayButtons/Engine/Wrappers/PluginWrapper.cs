@@ -1,5 +1,5 @@
-﻿using ButtonDeck.Backend.Objects.Implementation.DeckActions.General;
-using ButtonDeck.Forms;
+﻿using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
+using DisplayButtons.Forms;
 using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Engine.Wrappers
+namespace DisplayButtons.Engine.Wrappers
 {
     [MoonSharpUserData]
     class PluginWrapper

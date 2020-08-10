@@ -1,13 +1,13 @@
-﻿using ButtonDeck.Backend.Networking.IO;
-using ButtonDeck.Backend.Networking.Attributes;
-using ButtonDeck.Backend.Networking.IO;
+﻿using DisplayButtons.Backend.Networking.IO;
+using DisplayButtons.Backend.Networking.Attributes;
+using DisplayButtons.Backend.Networking.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Networking.Implementation
+namespace DisplayButtons.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer)]
     public class DesktopDisconnectPacket : INetworkPacket

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeck.Backend.Networking.Attributes
+namespace DisplayButtons.Backend.Networking.Attributes
 {
     [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     sealed class ArchitectureAttribute : Attribute

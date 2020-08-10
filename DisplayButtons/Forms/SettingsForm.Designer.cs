@@ -1,4 +1,4 @@
-﻿namespace ButtonDeck.Forms
+﻿namespace DisplayButtons.Forms
 {
     partial class SettingsForm
     {
@@ -32,14 +32,14 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.colorSchemePreviewControl1 = new ButtonDeck.Controls.ColorSchemePreviewControl();
-            this.colorSchemePreviewControl2 = new ButtonDeck.Controls.ColorSchemePreviewControl();
+            this.colorSchemePreviewControl1 = new DisplayButtons.Controls.ColorSchemePreviewControl();
+            this.colorSchemePreviewControl2 = new DisplayButtons.Controls.ColorSchemePreviewControl();
             this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.colorSchemePreviewControl3 = new ButtonDeck.Controls.ColorSchemePreviewControl();
+            this.colorSchemePreviewControl3 = new DisplayButtons.Controls.ColorSchemePreviewControl();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
-            this.colorSchemePreviewControl4 = new ButtonDeck.Controls.ColorSchemePreviewControl();
+            this.colorSchemePreviewControl4 = new DisplayButtons.Controls.ColorSchemePreviewControl();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.modernShadowPanel1.SuspendLayout();
@@ -56,7 +56,7 @@
             this.appBar1.OverrideParentText = false;
             this.appBar1.Size = new System.Drawing.Size(807, 50);
             this.appBar1.TabIndex = 0;
-            this.appBar1.Text = "ButtonDeck - Settings";
+            this.appBar1.Text = "DisplayButtons - Settings";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
             // label1
@@ -106,7 +106,7 @@
             this.colorSchemePreviewControl1.Name = "colorSchemePreviewControl1";
             this.colorSchemePreviewControl1.Size = new System.Drawing.Size(177, 167);
             this.colorSchemePreviewControl1.TabIndex = 9;
-            this.colorSchemePreviewControl1.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl1.UnderlyingAppTheme = DisplayButtons.Backend.Utils.AppSettings.AppTheme.Neptune;
             this.colorSchemePreviewControl1.Click += new System.EventHandler(this.ColorScheme_Selected);
             // 
             // colorSchemePreviewControl2
@@ -117,7 +117,7 @@
             this.colorSchemePreviewControl2.Name = "colorSchemePreviewControl2";
             this.colorSchemePreviewControl2.Size = new System.Drawing.Size(177, 167);
             this.colorSchemePreviewControl2.TabIndex = 9;
-            this.colorSchemePreviewControl2.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl2.UnderlyingAppTheme = DisplayButtons.Backend.Utils.AppSettings.AppTheme.Neptune;
             this.colorSchemePreviewControl2.Click += new System.EventHandler(this.ColorScheme_Selected);
             // 
             // modernButton1
@@ -141,7 +141,7 @@
             this.colorSchemePreviewControl3.Name = "colorSchemePreviewControl3";
             this.colorSchemePreviewControl3.Size = new System.Drawing.Size(177, 167);
             this.colorSchemePreviewControl3.TabIndex = 9;
-            this.colorSchemePreviewControl3.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl3.UnderlyingAppTheme = DisplayButtons.Backend.Utils.AppSettings.AppTheme.Neptune;
             this.colorSchemePreviewControl3.Click += new System.EventHandler(this.ColorScheme_Selected);
             // 
             // label3
@@ -182,7 +182,7 @@
             this.colorSchemePreviewControl4.Name = "colorSchemePreviewControl4";
             this.colorSchemePreviewControl4.Size = new System.Drawing.Size(177, 167);
             this.colorSchemePreviewControl4.TabIndex = 10;
-            this.colorSchemePreviewControl4.UnderlyingAppTheme = ButtonDeck.Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl4.UnderlyingAppTheme = DisplayButtons.Backend.Utils.AppSettings.AppTheme.Neptune;
             this.colorSchemePreviewControl4.Click += new System.EventHandler(this.ColorScheme_Selected);
             // 
             // comboBox1
@@ -230,7 +230,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "SettingsForm";
-            this.Text = "ButtonDeck - Settings";
+            this.Text = "DisplayButtons - Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.modernShadowPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

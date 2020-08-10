@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace ButtonDeck.Controls
+namespace DisplayButtons.Controls
 {
     class PlaceHolderTextBox : System.Windows.Forms.TextBox
     {
