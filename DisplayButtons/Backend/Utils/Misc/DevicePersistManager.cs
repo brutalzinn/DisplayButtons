@@ -157,7 +157,7 @@ namespace DisplayButtons.Backend.Utils
                 CompressFolders(c);
                 c.SetParent(folder);
                 if (c.GetParent() != null) {
-                    HotkeyManager.Current.Remove(c.GetParent().GetItemIndex(c) + "");
+                    
                     c.Remove(1);
                 }
 
