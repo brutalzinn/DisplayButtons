@@ -1043,7 +1043,7 @@ namespace DisplayButtons.Forms
 
             if (Globals.can_refresh == false) { return; }
 
-            // Buttons_Unfocus(this, EventArgs.Empty);
+            Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
 
 
@@ -1064,30 +1064,31 @@ namespace DisplayButtons.Forms
                 item = folder.GetDeckItems()[i];
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
 
-                // Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
 
                 //     var ser = item.GetItemImage().BitmapSerialized;
-
-                if (item is DynamicDeckItem FF && FF.DeckAction is PluginLuaGenerator TT)
+                if (item != null)
                 {
-                    // Debug.WriteLine("PluginLuaGenerator: " + GetPropertiesPlugins(FF, "ScriptNamePoint"));
+                    if (item is DynamicDeckItem FF && FF.DeckAction is PluginLuaGenerator TT)
+                    {
+                        // Debug.WriteLine("PluginLuaGenerator: " + GetPropertiesPlugins(FF, "ScriptNamePoint"));
 
 
-                    LoadPropertiesPlugins(FF, GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
-                    TT.SetConfigs(GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
+                        LoadPropertiesPlugins(FF, GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
+                        TT.SetConfigs(GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
 
 
 
 
 
+                    }
+                    if (item is DynamicDeckFolder EE && EE.KeyGlobalValue != null && EE.UniqueID != null)
+                    {
+                        new GlobalHotKeys().refreshFolder(EE);
+
+                    }
                 }
-                if (item is DynamicDeckFolder EE && EE != null && EE.KeyGlobalValue != null && EE.UniqueID != null)
-                {
-                    new GlobalHotKeys().refreshFolder(EE);
-
-                }
-
                 //control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
+                var ser = item.GetItemImage().BitmapSerialized;
 
                 control.NormalImage = item?.GetItemImage().Bitmap;
 
@@ -1113,14 +1114,8 @@ namespace DisplayButtons.Forms
 
             IDeckFolder folder = CurrentDevice?.CurrentFolder;
             ImageModernButton control1 = GetButtonControl(slot);
-            //Label control_label = GetLabelControl(slot);
-            // Label title_control = Controls.Find("titleLabel" + slot, true).FirstOrDefault() as Label;
-
             control1.NormalImage = null;
             control1.Tag = null;
-            control1.Text = "";
-
-
             if (folder == null) control1.Invoke(new Action(control1.Refresh));
 
             if (folder == null) return;
@@ -1130,41 +1125,19 @@ namespace DisplayButtons.Forms
                 item = folder.GetDeckItems()[i];
 
                 if (folder.GetItemIndex(item) != slot) continue;
-                ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-                Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
 
-                //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
+                ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
                 if (item != null)
                 {
-                    var ser = item?.GetItemImage().BitmapSerialized;
-                    //  control.NormalImage = null
-
-
-
-
-
-
-
+                    var ser = item.GetItemImage().BitmapSerialized;
                     control.NormalImage = item?.GetItemImage().Bitmap;
-                    // control2.Text = item.DeckName;
-
-
-                    //control.NormalImage = item?.GetItemImage().Bitmap; //Write_name_Image(dI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
-
-
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
-
-
-
                 }
             }
             CurrentDevice.CheckCurrentFolder();
             if (sendToDevice)
-            {
                 SendItemsToDevice(CurrentDevice, folder);
-
-            }
             // 
         }
 
