@@ -1,4 +1,5 @@
 ﻿using DisplayButtons.Controls;
+using NickAc.ModernUIDoneRight.Controls;
 using System;
 using System.Windows.Forms;
 
@@ -49,7 +50,7 @@ namespace DisplayButtons.Forms
             this.shadedPanel4 = new DisplayButtons.Forms.ShadedPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
@@ -258,7 +259,6 @@ namespace DisplayButtons.Forms
             // 
             this.panel1.AutoScroll = true;
             this.panel1.AutoScrollMargin = new System.Drawing.Size(30, 30);
-            this.panel1.AutoSize = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Controls.Add(this.warning_label);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -266,6 +266,7 @@ namespace DisplayButtons.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(662, 465);
             this.panel1.TabIndex = 7;
+            this.panel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             // 
             // MainForm
             // 
@@ -318,7 +319,7 @@ namespace DisplayButtons.Forms
         private NotifyIcon notifyIcon1;
         public TableLayoutPanel tableLayoutPanel1;
         public ShadedPanel shadedPanel1;
-        private Panel panel1;
+        private NickAc.ModernUIDoneRight.Controls.ModernShadowPanel panel1;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

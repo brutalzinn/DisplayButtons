@@ -758,7 +758,7 @@ namespace DisplayButtons.Forms
 
 
                         control.Name = "modernButton" + id;
-                        control.UseVisualStyleBackColor = false;
+                       // control.UseVisualStyleBackColor = false;
                         control.Size = new Size(80, 80);
                         control.Location = new Point(lin * 110 + 10, con * 110 + 10);
                         id += 1;
@@ -1085,10 +1085,8 @@ namespace DisplayButtons.Forms
                     {
                         new GlobalHotKeys().refreshFolder(EE);
 
-                    }
-                }
-                //control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
-                var ser = item.GetItemImage().BitmapSerialized;
+                    }  
+                    var ser = item.GetItemImage().BitmapSerialized;
 
                 control.NormalImage = item?.GetItemImage().Bitmap;
 
@@ -1096,6 +1094,9 @@ namespace DisplayButtons.Forms
 
                 control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
+                }
+                //control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
+              
 
                 CurrentDevice.CheckCurrentFolder();
                 if (sendToDevice)
