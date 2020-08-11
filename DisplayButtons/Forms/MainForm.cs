@@ -1136,7 +1136,7 @@ namespace DisplayButtons.Forms
                 //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
                 if (item != null)
                 {
-                    var ser = item.GetItemImage().BitmapSerialized;
+                    var ser = item?.GetItemImage().BitmapSerialized;
                     //  control.NormalImage = null
 
 
