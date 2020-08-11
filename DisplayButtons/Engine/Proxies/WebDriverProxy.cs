@@ -91,10 +91,10 @@ namespace ScribeBot.Engine.Proxies
 
                 var prop = (string)(typeof(Keys).GetField(key).GetValue(null));
 
-                Driver.Keyboard.PressKey(prop);
+              //  Driver.Keyboard.PressKey(prop);
             }
-            else
-                Driver.Keyboard.PressKey(key);
+            
+        //     Driver..PressKey(key);
         }
 
         /// <summary>
@@ -109,10 +109,10 @@ namespace ScribeBot.Engine.Proxies
 
                 var prop = (string)(typeof(Keys).GetField(key).GetValue(null));
 
-                Driver.Keyboard.ReleaseKey(prop);
+              //  Driver.Keyboard.ReleaseKey(prop);
             }
-            else
-                Driver.Keyboard.ReleaseKey(key);
+        
+            //    Driver.Keyboard.ReleaseKey(key);
         }
 
         public void SendKeys(params string[] keys)
@@ -125,10 +125,10 @@ namespace ScribeBot.Engine.Proxies
 
                     var prop = (string)(typeof(Keys).GetField(key).GetValue(null));
 
-                    Driver.Keyboard.SendKeys(prop);
+                  //  Driver.Keyboard.SendKeys(prop);
                 }
-                else
-                    Driver.Keyboard.SendKeys(x);
+                
+                 //   Driver.Keyboard.SendKeys(x);
             });
         }
 

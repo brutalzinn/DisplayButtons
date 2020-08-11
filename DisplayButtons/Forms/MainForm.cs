@@ -321,7 +321,7 @@ namespace DisplayButtons.Forms
             //       DeckServiceProvider.StartTimers();
 
 
-
+            ApplyTheme(panel1);
             Texts.initilizeLang();
 
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
@@ -734,9 +734,9 @@ namespace DisplayButtons.Forms
         {
             Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
             panel1.Controls.Clear();
-            warning_label.Visible = true;
-            warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
-            panel1.Visible = false;
+        
+           // warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
+         
             Invoke(new Action(() =>
             {
                 List<Control> toAdd = new List<Control>();
@@ -879,10 +879,11 @@ namespace DisplayButtons.Forms
                                                 newFolder.ParentFolder = CurrentDevice.CurrentFolder;
                                                 newFolder.Add(1, folderUpItem);
 
-                                                CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
+                                                CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder); 
+                                                RefreshAllButtons(true);
                                                 FolderCallBack(newFolder);
                                                     //CurrentDevice.CurrentFolder = newFolder;
-                                                    RefreshAllButtons(true);
+                                                   
 
                                             }
                                         };
@@ -1001,7 +1002,7 @@ namespace DisplayButtons.Forms
                             toAdd.Add(control);
 
 
-                        if (toAdd.Count >= Globals.calc)
+                        if (toAdd.Count == Globals.calc)
                         {
 
                             toAdd.AsEnumerable().Reverse().All(m =>
@@ -1013,11 +1014,11 @@ namespace DisplayButtons.Forms
                                 return true;
                             });
                           
-                           Globals.can_refresh = true;
+                          Globals.can_refresh = true;
                           RefreshAllButtons(true);
-                            panel1.Visible = true;
-                            warning_label.Visible = false;
-                            ApplyTheme(panel1);
+                        //    panel1.Visible = true;
+                      //      warning_label.Visible = false;
+                            
                             
                                 //            break;
 
