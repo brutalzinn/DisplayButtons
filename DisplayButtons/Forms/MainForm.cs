@@ -3411,10 +3411,13 @@ toAdd.AsEnumerable().Reverse().All(m =>
         }
         protected override void OnResize(EventArgs e)
         {
-            base.OnResize(e);
+        
 
             if (ApplicationSettingsManager.Settings.isAutoMinimizer)
             {
+
+
+    base.OnResize(e);
                 bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
 
                 if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
