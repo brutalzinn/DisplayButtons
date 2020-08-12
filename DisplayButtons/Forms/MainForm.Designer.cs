@@ -100,11 +100,15 @@ namespace DisplayButtons.Forms
 =======
             this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
+<<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
             this.warning_label.Location = new System.Drawing.Point(424, 210);
 >>>>>>> parent of ae52631... adicionando responsividade ao form:ButtonDeck/Forms/MainForm.Designer.cs
 =======
             this.warning_label.Location = new System.Drawing.Point(503, 210);
 >>>>>>> parent of 6db2c96... design responsivo:ButtonDeck/Forms/MainForm.Designer.cs
+=======
+            this.warning_label.Location = new System.Drawing.Point(100, 229);
+>>>>>>> ae52631... adicionando responsividade ao form:ButtonDeck/Forms/MainForm.Designer.cs
             this.warning_label.Name = "warning_label";
             this.warning_label.Size = new System.Drawing.Size(424, 69);
             this.warning_label.TabIndex = 3;
