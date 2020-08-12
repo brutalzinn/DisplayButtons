@@ -1,0 +1,558 @@
+[33mcommit 925377f8f86b8ce49dd83c7ef5863b4b65801fae[m[33m ([m[1;36mHEAD -> [m[1;32muser-implementation-easy[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 12 15:59:54 2020 -0300
+
+    Revert "testnado consertando"
+    
+    This reverts commit 7359228736e9777a92d761f64aa2a60d595e668b.
+
+[33mcommit 1eaf6e3e6601d013504698f31574d56350472bfb[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 12 15:59:52 2020 -0300
+
+    Revert "testnado consertando"
+    
+    This reverts commit e4fe7afc76cc3ac3794faf9490b913aa27d1a735.
+
+[33mcommit 333fbdeccb3b97a90345fd0af0714b4c1e6aba9f[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 12 15:59:47 2020 -0300
+
+    Revert "testnado consertando"
+    
+    This reverts commit 0549c76870e40acc7e88e8a80e60496d65d7ce36.
+
+[33mcommit 0549c76870e40acc7e88e8a80e60496d65d7ce36[m[33m ([m[1;31morigin/user-implementation-easy[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 12 15:40:18 2020 -0300
+
+    testnado consertando
+
+[33mcommit e4fe7afc76cc3ac3794faf9490b913aa27d1a735[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 12 15:38:13 2020 -0300
+
+    testnado consertando
+
+[33mcommit 7359228736e9777a92d761f64aa2a60d595e668b[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 12 15:37:53 2020 -0300
+
+    testnado consertando
+
+[33mcommit ce6a0dbf7da64658b6154a9e86552926f6a5913a[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 12 15:37:02 2020 -0300
+
+    testnado consertando
+
+[33mcommit a4904a5b7159d376d4ffa039301e7892ff7eb172[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Tue Aug 11 19:12:16 2020 -0300
+
+    testnado consertando
+
+[33mcommit 2b0bfd0862cabecf5744e6f36860dadf50af2f05[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Tue Aug 11 16:36:48 2020 -0300
+
+    Update DevicePersistManager.cs
+
+[33mcommit 2cd4089391d5fe396a4b2c9797b8f3b5c8fd1f57[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Tue Aug 11 14:42:17 2020 -0300
+
+    testando
+
+[33mcommit 2124d2ed48c3ccabdecd8c5ab16973cd45234d8b[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Tue Aug 11 13:51:06 2020 -0300
+
+    Update MainForm.cs
+
+[33mcommit 964e738772a2250d4dcdf4df5b5c38a114a6fdd2[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Tue Aug 11 13:24:50 2020 -0300
+
+    Update MainForm.cs
+
+[33mcommit 9469188a34a758a68d0b9d24da1dca8aa0a9a1ac[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/add-datagrid-mainform[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mproduction[m[33m, [m[1;32mmaster[m[33m, [m[1;32madd-datagrid-mainform[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Tue Aug 11 11:34:47 2020 -0300
+
+    correções
+
+[33mcommit 7d29e81b69f8ccff5c7116d58fdde5bc73392e12[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Mon Aug 10 19:33:32 2020 -0300
+
+    atualizando
+
+[33mcommit e2311c5ef1f13a0318ffb05544375deb146f2305[m[33m ([m[1;31morigin/chaning-to-net-core[m[33m, [m[1;31morigin/auto-update-system[m[33m, [m[1;32mchaning-to-net-core[m[33m, [m[1;32mauto-update-system[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Mon Aug 10 15:09:13 2020 -0300
+
+    atualizando e comitando mudanças críticas
+
+[33mcommit d1228661c76249183037aa30ab1cdd55881564ab[m[33m ([m[1;32mtestando[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Mon Aug 10 14:33:35 2020 -0300
+
+    net core reference
+
+[33mcommit 81f02ef71fc9c8c7a8bc047185f0aeb878a960b6[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Mon Aug 10 14:15:53 2020 -0300
+
+    add reference
+
+[33mcommit cf5561675d22315781542bbfd2bf11cd2635f53e[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Mon Aug 10 14:11:03 2020 -0300
+
+    design changes
+
+[33mcommit 3f5c6da9e95ae1f6cbbb47c71bdd9a903e19adcf[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Mon Aug 10 12:33:15 2020 -0300
+
+    atualziações ui
+
+[33mcommit 169c594f0c84ee47ce92976f121733ce5dd8c256[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Mon Aug 10 11:34:45 2020 -0300
+
+    mudanças no html
+
+[33mcommit 733b00361240654726edd9b6388035b20407b527[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 8 20:52:43 2020 -0300
+
+    atualizando
+
+[33mcommit a56a98aed7655e9fee3d9fcdd1aae38178b0f8fd[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 8 20:51:48 2020 -0300
+
+    atualizando
+
+[33mcommit f22c5ba5615194ab1441ad93532969bc6c28b458[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 8 20:14:52 2020 -0300
+
+    atualizando sistema
+
+[33mcommit 87663fc88f5a889acb8e35189bac04ce66b8f247[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Aug 7 21:29:59 2020 -0300
+
+    atualizando
+
+[33mcommit 09c8da1a3f8a374225ef0900b89c7271836c1a72[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Aug 7 15:49:52 2020 -0300
+
+    novo element
+
+[33mcommit ad7c5f9d83da84f8310b828466c32a3c624982b7[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Aug 6 04:10:34 2020 -0300
+
+    android gerencier
+
+[33mcommit 98667ded01c14811279786a3e4a1cf724efa7945[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 5 20:42:29 2020 -0300
+
+    sistema funcionando
+
+[33mcommit 680bf1d875744a14990bec88466999754367dfb1[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 5 18:46:01 2020 -0300
+
+    botão chamado
+
+[33mcommit edf9176bd10cef7a2f9a9232516c5b9d941cfb0c[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 5 16:13:28 2020 -0300
+
+    subindo
+
+[33mcommit cb801906003724be6787fefdb53adfaad6c71341[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 5 15:36:50 2020 -0300
+
+    adicionado botão no form
+
+[33mcommit 615c3a7b2ca1a491f73623c3a971eb1c1b4115a2[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 5 11:16:54 2020 -0300
+
+    resources
+
+[33mcommit 64887a477eb5350a21248369df7cd8db1d061781[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 5 10:31:14 2020 -0300
+
+    realmente atualizando
+
+[33mcommit c6d72ac6ff50d4680d7f7f8cf83bc0c1f6f5c34f[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Aug 5 00:31:58 2020 -0300
+
+    update funciona por zip
+
+[33mcommit 004f6afd5df4024ae8a9d25c19310e630411b485[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Tue Aug 4 21:14:42 2020 -0300
+
+    importando nova biblioteca
+
+[33mcommit 6ce04d7e993b5ebc3ecd212d94dc22656012b1b1[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Mon Aug 3 18:45:40 2020 -0300
+
+    auto update
+
+[33mcommit d055d0353adc31ba55e4864665379a93e404a40e[m
+Merge: dc37aad 30ebda0
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 16:47:52 2020 -0300
+
+    Merge branch 'add-datagrid-mainform'
+
+[33mcommit 30ebda03d8456abcd36ca35aa36ff9e58324c6dc[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 16:47:37 2020 -0300
+
+    comitando ramificação e dando merge
+
+[33mcommit 097f0e5f43037850d1b5eab76f939f38e91cad64[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 16:44:57 2020 -0300
+
+    first setup restaurado
+
+[33mcommit 9cc8871b6c476e6b926ff6793ee8aeb173d3f6bf[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 16:37:44 2020 -0300
+
+    atualização importante de design
+
+[33mcommit 9b6c6c0758f74cf1f306cb09d38afe7cd03ab39f[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 16:11:16 2020 -0300
+
+    commit changes
+
+[33mcommit 8ff17ffbeccbf5d2a30e59f5737f588e0d92e08b[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 16:03:56 2020 -0300
+
+    atualização firstsetup
+
+[33mcommit 59d9f4c1df9652400b7cac2d069db99a5878a30e[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 15:58:27 2020 -0300
+
+    linguagem
+
+[33mcommit 6521d8d8786bb7a4378e3309d207f7c66a0f7703[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 15:53:42 2020 -0300
+
+    firstpage
+
+[33mcommit fe24e7bc69e94df6e4cd7a0a74395b02ca8cd8ea[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 15:50:43 2020 -0300
+
+    comitando
+
+[33mcommit d45de5a3bc2039de89d2236f7cfb1ca5298fbd47[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 15:42:10 2020 -0300
+
+    changes
+
+[33mcommit 84fb4927a82f65194257fdae8c9ae0865faab8bc[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 15:34:27 2020 -0300
+
+    atualizando
+
+[33mcommit 76758cbbca43cd9653bb40c232f68c0e8ec05e00[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 15:30:27 2020 -0300
+
+    mudanças na linguagem
+
+[33mcommit c24cd546448452eba4684812cd5ca6bd676124b0[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 15:07:37 2020 -0300
+
+    atualizando
+
+[33mcommit ae5263126fb2534f2358fb07e6508701959b2cfb[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sun Aug 2 15:02:25 2020 -0300
+
+    adicionando responsividade ao form
+
+[33mcommit 304676a3d5bb950408f56edace322bf9223dfd69[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 1 18:38:19 2020 -0300
+
+    mainform update
+
+[33mcommit 6db2c962e8f10a2f55c6e32893d85bdb69e74b2f[m[33m ([m[1;33mtag: 8[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 1 18:17:39 2020 -0300
+
+    design responsivo
+
+[33mcommit 799a1f00efc59e1ff421a4b9f66c8f750579913c[m[33m ([m[1;33mtag: 1[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 1 18:02:07 2020 -0300
+
+    comitando mudanças
+
+[33mcommit 5b3a355f82b546b53bc129fad680f72b7f0b3de7[m[33m ([m[1;33mtag: 2[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 1 16:16:15 2020 -0300
+
+    comitando
+
+[33mcommit b492f3e4a631619682b16dcd940c5ab2b7a90ba0[m[33m ([m[1;33mtag: 3[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 1 16:08:43 2020 -0300
+
+    adicionando responsividade
+
+[33mcommit 0f36c70009189e465862f08da221773d6745e352[m[33m ([m[1;33mtag: 4[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 1 15:52:57 2020 -0300
+
+    commit responsive
+
+[33mcommit a1c711c8011b0555df1de9dbc2c39665a47368e3[m[33m ([m[1;33mtag: 5[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 1 15:50:44 2020 -0300
+
+    tablelayout
+
+[33mcommit 70c866fca1cb8b4076b0eb843a0d246d50d93f5c[m[33m ([m[1;33mtag: 6[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 1 15:43:59 2020 -0300
+
+    tablelayout
+
+[33mcommit 97363dcf898aff6a2d38a038d70653779ca2bf51[m[33m ([m[1;33mtag: 7[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Sat Aug 1 15:26:49 2020 -0300
+
+    adicionando tablelayout
+
+[33mcommit dc37aad6dcb746526a794a4762cf0f2e17eedb3d[m
+Merge: 0e98bf2 f3dedd1
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 22:25:00 2020 -0300
+
+    Merge branch 'user-facilites-implementation'
+
+[33mcommit f3dedd1afc7239ac4fb483c86d590fc5a242b6b1[m[33m ([m[1;31morigin/user-facilites-implementation[m[33m, [m[1;32muser-facilites-implementation[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 22:21:00 2020 -0300
+
+    comitando
+
+[33mcommit 69a73f6d5b20ce2509779c371ff2b187dc9ba963[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 22:19:48 2020 -0300
+
+    comitando
+
+[33mcommit c006116fbfcf46579e0f94a7e1130e016666015b[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 21:33:33 2020 -0300
+
+    design pattern aplicado
+
+[33mcommit 2c3b19cae295939e2c109bfd3a67f3a0e4d12fc6[m[33m ([m[1;31morigin/run-as-process[m[33m, [m[1;32mrun-as-process[m[33m)[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 21:05:32 2020 -0300
+
+    auto minimizer
+
+[33mcommit ad7ac6ac0da20c313e3c6edfd216f7c89c9123b7[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 20:57:18 2020 -0300
+
+    opção para desabilitar auto minimizer
+
+[33mcommit 86535c99c56f941832e60202d3df25753a8f8571[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 20:43:23 2020 -0300
+
+    Opção para executar em segundo plano ao minimizar
+    
+    execução em segundo plano adicionada.
+
+[33mcommit 0e98bf2ba844ec7355a0dd8fd0a72539b5d92a9f[m
+Merge: 9d8230d 1aaf157
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 20:23:16 2020 -0300
+
+    Merge branch 'user-facilites-implementation'
+
+[33mcommit 1aaf157e87b2f1b016f937a7dded7b5ca9503966[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 20:22:03 2020 -0300
+
+    comitando mudanças
+
+[33mcommit 4ea09b03cdeab93b5f449cda6354543398ecad05[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 20:19:41 2020 -0300
+
+    design interativo
+
+[33mcommit 47ed2c2ac0eddbafcf4cf422d47fe27afa006674[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 19:45:03 2020 -0300
+
+    implementação de design
+    
+    organizando alguams coisas
+
+[33mcommit 7e48321ace450051d0ce4e0f327854481ec2a45f[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 19:30:06 2020 -0300
+
+    pegando de volta
+
+[33mcommit 8b156e1719729edf08184d0875ed6d9191962d56[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 17:59:06 2020 -0300
+
+    comitando
+
+[33mcommit c0ee7e3772dda44658dbe665415829445665cc8b[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 15:30:28 2020 -0300
+
+    removendo dependencias
+
+[33mcommit b4a07f91025788ca3aa5c583009daa962a12fbd9[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 15:27:02 2020 -0300
+
+    removendo dependencias
+
+[33mcommit 9d8230d54f6131a5dbabecb62e14ad03a96f8957[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Fri Jul 31 13:12:10 2020 -0300
+
+    tradução
+
+[33mcommit 76f52fa26f2166633014fabe9bd11fd2b249ca4c[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 21:34:12 2020 -0300
+
+    atualização
+    
+    sistema de multi idioma
+
+[33mcommit 21f7b8845449a60c4fb5096ff8ea0abd638d7773[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 21:30:29 2020 -0300
+
+    traduzindo app
+
+[33mcommit 2a0ccb73a74b9dc43386a25079b8e802894bcf0a[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 20:47:35 2020 -0300
+
+    atualizando algumas coisas
+
+[33mcommit 52e1fdf18ab1f156b26a4f742248c1f7728ba42b[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 20:33:02 2020 -0300
+
+    sistema de multi linguagem
+
+[33mcommit a3bfa0e931469e0135c9c520fab17456385ed98e[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 12:49:17 2020 -0300
+
+    início da tradução
+
+[33mcommit 54eef088ff5abd4a0cb661f1c91d1f670d10592a[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 10:49:43 2020 -0300
+
+    sincronizando commit
+    
+    -modo desenvolvedor responsivo
+    -aumento no desempenho do envio de pacotes
+    -menu de pastas
+    -design responsivo na maioria dos forms.
+    -otimização ao iniciar o aplicativo.
+
+[33mcommit 262893fb5ee1da52c732805817071b5835222adc[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 10:39:59 2020 -0300
+
+    visualizador de pastas funcionando
+    
+    implementação básica
+
+[33mcommit 7d8997b14e46935521af90cfa71d14a0f875f382[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 10:24:18 2020 -0300
+
+    comitando
+
+[33mcommit cb259c4a9d2a66eab094c96580764fcee3f7bfc6[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 10:08:38 2020 -0300
+
+    commit
+
+[33mcommit c198656f352b941641a175f2db6ecafaca91b6b0[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 08:29:39 2020 -0300
+
+    navegador de pastas
+
+[33mcommit e10ceb65f14442fe2188009f78bfc4c017d2976f[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 07:11:28 2020 -0300
+
+    performace
+
+[33mcommit e06d9c2c886ca9ff32e1a01c357ab872d4ae9a26[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 07:10:41 2020 -0300
+
+    corrigido alguns bugs do sistema de atalho
+
+[33mcommit 10df429940c903059f84ff7d7d205cf3a2f8ddba[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 07:08:32 2020 -0300
+
+    atalho funcionando
+
+[33mcommit b61baac150c0a6700a228c7f3abdf6dc7d91d65e[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Thu Jul 30 06:37:32 2020 -0300
+
+    desempenho restaurado
+
+[33mcommit 336f24aa7da463c68fb7fc9c72cc7bd809061832[m
+Author: roberto <robertocpaes@hotmail.com>
+Date:   Wed Jul 29 17:35:51 2020 -0300
+
+    comitando
+    
+    erro nos pacotes

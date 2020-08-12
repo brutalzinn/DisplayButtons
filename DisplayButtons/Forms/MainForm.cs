@@ -1016,10 +1016,14 @@ namespace DisplayButtons.Forms
                           
                           Globals.can_refresh = true;
                           RefreshAllButtons(true);
+<<<<<<< HEAD:DisplayButtons/Forms/MainForm.cs
                         //    panel1.Visible = true;
                       //      warning_label.Visible = false;
                             
                             
+=======
+
+>>>>>>> parent of 6db2c96... design responsivo:ButtonDeck/Forms/MainForm.cs
                                 //            break;
 
                             }
