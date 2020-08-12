@@ -77,8 +77,13 @@ namespace DisplayButtons.Forms
             // 
             this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.warning_label.BackColor = System.Drawing.Color.Transparent;
+<<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
             this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.warning_label.Location = new System.Drawing.Point(114, 305);
+=======
+            this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warning_label.Location = new System.Drawing.Point(95, 218);
+>>>>>>> c24cd54... atualizando:ButtonDeck/Forms/MainForm.Designer.cs
             this.warning_label.Name = "warning_label";
             this.warning_label.Size = new System.Drawing.Size(424, 69);
             this.warning_label.TabIndex = 3;
