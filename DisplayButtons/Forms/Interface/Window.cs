@@ -1,5 +1,9 @@
+<<<<<<< HEAD:DisplayButtons/Forms/Interface/Window.cs
 ﻿using DisplayButtons;
 using DisplayButtons.Forms;
+=======
+﻿using ButtonDeck;
+>>>>>>> 9d8230d... tradução:ButtonDeck/Interface/Window.cs
 using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
@@ -338,14 +342,21 @@ namespace ScribeBot.Interface
 
         private void Window_Load(object sender, EventArgs e)
         {
+<<<<<<< HEAD:DisplayButtons/Forms/Interface/Window.cs
 
+=======
+>>>>>>> 9d8230d... tradução:ButtonDeck/Interface/Window.cs
             this.Text = Texts.rm.GetString("PLUGINGERENCIER", Texts.cultereinfo);
             ConsoleRun.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_EXECUTOR", Texts.cultereinfo);
             ScriptStop.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_STOP", Texts.cultereinfo);
             scriptsPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_PACKS", Texts.cultereinfo);
             workshopPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_WORKSHOP", Texts.cultereinfo);
     
+<<<<<<< HEAD:DisplayButtons/Forms/Interface/Window.cs
             //settingsPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_OPTIONS", Texts.cultereinfo);
+=======
+            settingsPage.Text = Texts.rm.GetString("PLUGINGERENCIER_TABCONTROL_OPTIONS", Texts.cultereinfo);
+>>>>>>> 9d8230d... tradução:ButtonDeck/Interface/Window.cs
             workshopFetchButton.Text = Texts.rm.GetString("PLUGINGERENCIER_FETCH_BUTTON", Texts.cultereinfo);
 
 
@@ -356,7 +367,10 @@ namespace ScribeBot.Interface
             PackageCreateFolder.Text = Texts.rm.GetString("PLUGINGERENCIER_BUTTON_CREATE", Texts.cultereinfo);
 
 
+<<<<<<< HEAD:DisplayButtons/Forms/Interface/Window.cs
 
+=======
+>>>>>>> 9d8230d... tradução:ButtonDeck/Interface/Window.cs
         }
 
         private void LayoutPanel_Paint(object sender, PaintEventArgs e)
