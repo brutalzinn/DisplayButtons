@@ -330,6 +330,17 @@ namespace DisplayButtons.Forms
 
                 int columnumber = tableLayoutPanel1.GetColumn(shadedPanel4);
                 tableLayoutPanel1.ColumnStyles[columnumber].Width = 0;
+<<<<<<< HEAD:DisplayButtons/Forms/MainForm.cs
+=======
+
+                
+
+                
+                
+
+
+            }
+>>>>>>> 304676a... mainform update:ButtonDeck/Forms/MainForm.cs
 
 
 
