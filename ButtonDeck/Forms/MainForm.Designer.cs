@@ -1,8 +1,8 @@
-﻿using ButtonDeck.Controls;
+﻿using DisplayButtons.Controls;
 using System;
 using System.Windows.Forms;
 
-namespace ButtonDeck.Forms
+namespace DisplayButtons.Forms
 {
     partial class MainForm
     {
@@ -36,18 +36,18 @@ namespace ButtonDeck.Forms
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.panel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
             this.warning_label = new System.Windows.Forms.Label();
-            this.shadedPanel1 = new ButtonDeck.Forms.ShadedPanel();
-            this.shadedPanel2 = new ButtonDeck.Forms.ShadedPanel();
+            this.shadedPanel1 = new DisplayButtons.Forms.ShadedPanel();
+            this.shadedPanel2 = new DisplayButtons.Forms.ShadedPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.action_label = new System.Windows.Forms.Label();
-            this.imageModernButton1 = new ButtonDeck.Controls.ImageModernButton();
-            this.painel_developer = new ButtonDeck.Forms.ShadedPanel();
-            this.shadedPanel3 = new ButtonDeck.Forms.ShadedPanel();
-            this.imageModernButton5 = new ButtonDeck.Controls.ImageModernButton();
-            this.imageModernButton4 = new ButtonDeck.Controls.ImageModernButton();
-            this.imageModernButton3 = new ButtonDeck.Controls.ImageModernButton();
-            this.imageModernButton2 = new ButtonDeck.Controls.ImageModernButton();
-            this.shadedPanel4 = new ButtonDeck.Forms.ShadedPanel();
+            this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
+            this.painel_developer = new DisplayButtons.Forms.ShadedPanel();
+            this.shadedPanel3 = new DisplayButtons.Forms.ShadedPanel();
+            this.imageModernButton5 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton4 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
+            this.shadedPanel4 = new DisplayButtons.Forms.ShadedPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel1.SuspendLayout();
             this.shadedPanel1.SuspendLayout();
@@ -66,7 +66,7 @@ namespace ButtonDeck.Forms
             this.appBar1.OverrideParentText = false;
             this.appBar1.Size = new System.Drawing.Size(1070, 50);
             this.appBar1.TabIndex = 0;
-            this.appBar1.Text = "ButtonDeck";
+            this.appBar1.Text = "DisplayButtons";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             this.appBar1.ToolTip = null;
             this.appBar1.Click += new System.EventHandler(this.appBar1_Click);
@@ -264,7 +264,7 @@ namespace ButtonDeck.Forms
             this.MinimumSize = new System.Drawing.Size(915, 535);
             this.Name = "MainForm";
             this.Tag = "";
-            this.Text = "ButtonDeck";
+            this.Text = "DisplayButtons";
             this.TransparencyKey = System.Drawing.Color.Magenta;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Click += new System.EventHandler(this.Buttons_Unfocus);

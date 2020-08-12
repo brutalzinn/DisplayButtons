@@ -328,8 +328,8 @@ namespace DisplayButtons.Forms
             {
                 shadedPanel4.Visible = false;
 
-                int columnumber = tableLayoutPanel1.GetColumn(shadedPanel4);
-                tableLayoutPanel1.ColumnStyles[columnumber].Width = 0;
+            //    int columnumber = tableLayoutPanel1.GetColumn(shadedPanel4);
+        //        tableLayoutPanel1.ColumnStyles[columnumber].Width = 0;
 
 
 
