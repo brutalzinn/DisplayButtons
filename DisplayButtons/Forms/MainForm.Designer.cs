@@ -103,15 +103,11 @@ namespace DisplayButtons.Forms
             this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
-<<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
             this.warning_label.Location = new System.Drawing.Point(424, 210);
 >>>>>>> parent of ae52631... adicionando responsividade ao form:ButtonDeck/Forms/MainForm.Designer.cs
 =======
             this.warning_label.Location = new System.Drawing.Point(503, 210);
 >>>>>>> parent of 6db2c96... design responsivo:ButtonDeck/Forms/MainForm.Designer.cs
-=======
-            this.warning_label.Location = new System.Drawing.Point(147, 210);
->>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
 =======
             this.warning_label.Location = new System.Drawing.Point(147, 210);
 >>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
@@ -133,7 +129,6 @@ namespace DisplayButtons.Forms
             this.shadedPanel1.Controls.Add(this.shadedPanel2);
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
-<<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
             this.shadedPanel1.Location = new System.Drawing.Point(853, 52);
             this.shadedPanel1.Name = "shadedPanel1";
             this.shadedPanel1.Size = new System.Drawing.Size(207, 465);
@@ -142,11 +137,6 @@ namespace DisplayButtons.Forms
             this.shadedPanel1.Name = "shadedPanel1";
             this.shadedPanel1.Size = new System.Drawing.Size(283, 465);
 >>>>>>> parent of 6db2c96... design responsivo:ButtonDeck/Forms/MainForm.Designer.cs
-=======
-            this.shadedPanel1.Location = new System.Drawing.Point(817, 3);
-            this.shadedPanel1.Name = "shadedPanel1";
-            this.shadedPanel1.Size = new System.Drawing.Size(241, 464);
->>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
 =======
             this.shadedPanel1.Location = new System.Drawing.Point(817, 3);
             this.shadedPanel1.Name = "shadedPanel1";
@@ -166,14 +156,10 @@ namespace DisplayButtons.Forms
             this.shadedPanel2.Name = "shadedPanel2";
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
-<<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
             this.shadedPanel2.Size = new System.Drawing.Size(207, 260);
 =======
             this.shadedPanel2.Size = new System.Drawing.Size(283, 260);
 >>>>>>> parent of 6db2c96... design responsivo:ButtonDeck/Forms/MainForm.Designer.cs
-=======
-            this.shadedPanel2.Size = new System.Drawing.Size(241, 260);
->>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
 =======
             this.shadedPanel2.Size = new System.Drawing.Size(241, 260);
 >>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
@@ -219,7 +205,6 @@ namespace DisplayButtons.Forms
             this.painel_developer.Controls.Add(this.imageModernButton3);
             this.painel_developer.Controls.Add(this.imageModernButton2);
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
-<<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
             this.painel_developer.Dock = System.Windows.Forms.DockStyle.Fill;
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
             this.painel_developer.Location = new System.Drawing.Point(185, 3);
@@ -230,11 +215,6 @@ namespace DisplayButtons.Forms
             this.painel_developer.Name = "painel_developer";
             this.painel_developer.Size = new System.Drawing.Size(714, 43);
 >>>>>>> parent of 6db2c96... design responsivo:ButtonDeck/Forms/MainForm.Designer.cs
-=======
-            this.painel_developer.Location = new System.Drawing.Point(4, 89);
-            this.painel_developer.Name = "painel_developer";
-            this.painel_developer.Size = new System.Drawing.Size(570, 41);
->>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
 =======
             this.painel_developer.Location = new System.Drawing.Point(4, 89);
             this.painel_developer.Name = "painel_developer";
@@ -308,14 +288,10 @@ namespace DisplayButtons.Forms
             this.shadedPanel4.Name = "shadedPanel4";
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
-<<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
             this.shadedPanel4.Size = new System.Drawing.Size(176, 465);
 =======
             this.shadedPanel4.Size = new System.Drawing.Size(60, 465);
 >>>>>>> parent of 6db2c96... design responsivo:ButtonDeck/Forms/MainForm.Designer.cs
-=======
-            this.shadedPanel4.Size = new System.Drawing.Size(60, 464);
->>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
 =======
             this.shadedPanel4.Size = new System.Drawing.Size(60, 464);
 >>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
@@ -344,7 +320,6 @@ namespace DisplayButtons.Forms
 =======
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 <<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
-<<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 720F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 1);
@@ -355,15 +330,12 @@ namespace DisplayButtons.Forms
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 83);
 =======
-=======
->>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.2505F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.7495F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.shadedPanel4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.shadedPanel1, 2, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 133);
-<<<<<<< HEAD:DisplayButtons/Forms/MainForm.Designer.cs
 >>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -377,12 +349,6 @@ namespace DisplayButtons.Forms
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1075, 520);
 >>>>>>> parent of 6db2c96... design responsivo:ButtonDeck/Forms/MainForm.Designer.cs
 =======
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1061, 470);
->>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
-=======
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1061, 470);
 >>>>>>> parent of 799a1f0... comitando mudanças:ButtonDeck/Forms/MainForm.Designer.cs
             this.tableLayoutPanel1.TabIndex = 7;
