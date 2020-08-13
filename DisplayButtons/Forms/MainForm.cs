@@ -760,7 +760,24 @@ namespace DisplayButtons.Forms
                         control.Name = "modernButton" + id;
                         control.UseVisualStyleBackColor = false;
                         control.Size = new Size(80, 80);
-                        control.Location = new Point(lin * 110 + 10, con * 110 + 10);
+                        if(Globals.calc >= 15)
+                        {
+                            control.Location = new Point(lin * 120 - (lin * 30), con * 120 - (con * 30));
+                            if(con > 5 && lin > 5)
+                            {
+                                //panel1.scrolb
+                             //   panel1.AutoScroll = true;
+                             //   panel1.AutoScrollMargin = 50;
+                              MainForm.Instance.Size += new Size(lin * 120 - (lin * 30), con * 120 - (con * 30));
+                                Refresh();
+                            }
+                        }
+                        else
+                        {
+
+control.Location = new Point(lin * 120, con * 120);
+                        }
+                        
                         id += 1;
                         control.MouseUp += (sender, e) =>
                         {

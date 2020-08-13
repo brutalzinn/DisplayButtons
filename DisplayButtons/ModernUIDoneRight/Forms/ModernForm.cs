@@ -49,7 +49,7 @@ namespace NickAc.ModernUIDoneRight.Forms
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.ContainerControl, true);
             SetStyle(ControlStyles.ResizeRedraw, true);
-
+    
             _titlebarButtons = new List<ModernTitlebarButton>();
             _nativeTitlebarButtons = GenerateNativeButtons(DefaultTitlebarHeight, this);
 
