@@ -67,7 +67,7 @@ namespace DisplayButtons.Forms
             this.appBar1.Size = new System.Drawing.Size(1070, 50);
             this.appBar1.TabIndex = 0;
             this.appBar1.Text = "DisplayButtons";
-            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             this.appBar1.ToolTip = null;
             this.appBar1.Click += new System.EventHandler(this.appBar1_Click);
             // 
@@ -87,7 +87,7 @@ namespace DisplayButtons.Forms
             // 
             this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.warning_label.BackColor = System.Drawing.Color.Transparent;
-            this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.warning_label.Location = new System.Drawing.Point(96, 209);
             this.warning_label.Name = "warning_label";
             this.warning_label.Size = new System.Drawing.Size(424, 69);
@@ -131,7 +131,7 @@ namespace DisplayButtons.Forms
             // 
             // action_label
             // 
-            this.action_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.action_label.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.action_label.Location = new System.Drawing.Point(102, 13);
             this.action_label.Name = "action_label";
             this.action_label.Size = new System.Drawing.Size(142, 36);
@@ -260,6 +260,7 @@ namespace DisplayButtons.Forms
             this.Controls.Add(this.shadedPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.appBar1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(915, 535);
             this.Name = "MainForm";
             this.Tag = "";
