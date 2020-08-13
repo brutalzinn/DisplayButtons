@@ -660,6 +660,24 @@ namespace NickAc.ModernUIDoneRight.Forms
             BackColor = Color.White;
         }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // ModernForm
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "ModernForm";
+            this.Load += new System.EventHandler(this.ModernForm_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void ModernForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void ResetColorScheme()
         {
             ColorScheme = DefaultColorSchemes.Blue;
