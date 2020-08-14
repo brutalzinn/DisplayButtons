@@ -73,12 +73,12 @@ namespace DisplayButtons.Forms
             // 
             // shadedPanel1
             // 
-            this.shadedPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.shadedPanel1.ColorScheme = null;
             this.shadedPanel1.Controls.Add(this.shadedPanel2);
-            this.shadedPanel1.Location = new System.Drawing.Point(828, 3);
+            this.shadedPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.shadedPanel1.Location = new System.Drawing.Point(771, 3);
             this.shadedPanel1.Name = "shadedPanel1";
-            this.shadedPanel1.Size = new System.Drawing.Size(257, 478);
+            this.shadedPanel1.Size = new System.Drawing.Size(314, 478);
             this.shadedPanel1.TabIndex = 4;
             this.shadedPanel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             // 
@@ -91,7 +91,7 @@ namespace DisplayButtons.Forms
             this.shadedPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.shadedPanel2.Location = new System.Drawing.Point(0, 216);
             this.shadedPanel2.Name = "shadedPanel2";
-            this.shadedPanel2.Size = new System.Drawing.Size(257, 262);
+            this.shadedPanel2.Size = new System.Drawing.Size(314, 262);
             this.shadedPanel2.TabIndex = 0;
             this.shadedPanel2.Visible = false;
             // 
@@ -224,6 +224,10 @@ namespace DisplayButtons.Forms
             // 
             // panel_buttons
             // 
+            this.panel_buttons.AutoScroll = true;
+            this.panel_buttons.AutoSize = true;
+            this.panel_buttons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel_buttons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_buttons.Location = new System.Drawing.Point(131, 3);
             this.panel_buttons.Name = "panel_buttons";
             this.panel_buttons.Size = new System.Drawing.Size(634, 478);
@@ -276,6 +280,7 @@ namespace DisplayButtons.Forms
             this.shadedPanel2.ResumeLayout(false);
             this.painel_developer.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
