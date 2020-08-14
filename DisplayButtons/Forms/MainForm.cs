@@ -339,7 +339,7 @@ namespace DisplayButtons.Forms
 
             }
 
-            warning_label.ForeColor = ColorScheme.SecondaryColor;
+            //warning_label.ForeColor = ColorScheme.SecondaryColor;
             Checkupdates();
         }
         private void Checkupdates()
@@ -733,10 +733,10 @@ namespace DisplayButtons.Forms
         public void MatrizGenerator()
         {
             Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
-            panel1.Controls.Clear();
-            warning_label.Visible = true;
-            warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
-            panel1.Visible = false;
+            flowLayoutPanel1.Controls.Clear();
+            //warning_label.Visible = true;
+         //   warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
+       //     panel1.Visible = false;
             Invoke(new Action(() =>
             {
                 List<Control> toAdd = new List<Control>();
@@ -759,28 +759,11 @@ namespace DisplayButtons.Forms
 
                         control.Name = "modernButton" + id;
 
-                        WindowState = WindowState == FormWindowState.Maximized
-                              ? FormWindowState.Normal
-                              : FormWindowState.Maximized;
-                        if (Globals.calc >= 15)
-                        {
-
-                            control.Size = new Size(80, 80);
-                            //panel1.scrolb
-                            //   panel1.AutoScroll = true;
-                            //   panel1.AutoScrollMargin = 50;
-                           
-                                this.Width += lin * 120 - (lin * 30);
-                           
-                            control.Location = new Point(lin * 120 - (lin * 30), con * 120 - (con * 30));
-                                Application.DoEvents();
-                            
-                        }
-                        else
-                        {
+                    
+                       
                             control.Size = new Size(80, 80);
                             control.Location = new Point(lin * 120, con * 120);
-                        }
+                        
                         
                         id += 1;
                         control.MouseUp += (sender, e) =>
@@ -1027,7 +1010,7 @@ namespace DisplayButtons.Forms
 
                             toAdd.AsEnumerable().Reverse().All(m =>
                             {
-                                panel1.Controls.Add(m);
+                                panel_buttons.Controls.Add(m);
 
                                 toAdd.Remove(m);
 
@@ -1036,9 +1019,9 @@ namespace DisplayButtons.Forms
                           
                            Globals.can_refresh = true;
                           RefreshAllButtons(true);
-                            panel1.Visible = true;
-                            warning_label.Visible = false;
-                            ApplyTheme(panel1);
+                          //  panel1.Visible = true;
+                            //warning_label.Visible = false;
+                            ApplyTheme(panel_buttons);
                             
                                 //            break;
 

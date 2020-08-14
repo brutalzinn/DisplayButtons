@@ -35,7 +35,6 @@ namespace DisplayButtons.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.panel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
-            this.warning_label = new System.Windows.Forms.Label();
             this.shadedPanel1 = new DisplayButtons.Forms.ShadedPanel();
             this.shadedPanel2 = new DisplayButtons.Forms.ShadedPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -49,7 +48,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel4 = new DisplayButtons.Forms.ShadedPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.panel1.SuspendLayout();
+            this.panel_buttons = new System.Windows.Forms.Panel();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
@@ -74,27 +73,13 @@ namespace DisplayButtons.Forms
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.warning_label);
-            this.panel1.Location = new System.Drawing.Point(147, 126);
+            this.panel1.Location = new System.Drawing.Point(640, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(680, 490);
+            this.panel1.Size = new System.Drawing.Size(97, 60);
             this.panel1.TabIndex = 2;
             this.panel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.Resize += new System.EventHandler(this.Panel1_Resize);
-            // 
-            // warning_label
-            // 
-            this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.warning_label.BackColor = System.Drawing.Color.Transparent;
-            this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.warning_label.Location = new System.Drawing.Point(30, 228);
-            this.warning_label.Name = "warning_label";
-            this.warning_label.Size = new System.Drawing.Size(424, 69);
-            this.warning_label.TabIndex = 3;
-            this.warning_label.Text = "The buttons will appear after you connect the device.";
-            this.warning_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.warning_label.Visible = false;
             // 
             // shadedPanel1
             // 
@@ -157,6 +142,7 @@ namespace DisplayButtons.Forms
             this.painel_developer.Controls.Add(this.imageModernButton5);
             this.painel_developer.Controls.Add(this.imageModernButton4);
             this.painel_developer.Controls.Add(this.imageModernButton3);
+            this.painel_developer.Controls.Add(this.panel1);
             this.painel_developer.Controls.Add(this.imageModernButton2);
             this.painel_developer.Dock = System.Windows.Forms.DockStyle.Top;
             this.painel_developer.Location = new System.Drawing.Point(1, 83);
@@ -246,6 +232,15 @@ namespace DisplayButtons.Forms
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseClick);
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseDoubleClick);
             // 
+            // panel_buttons
+            // 
+            this.panel_buttons.Location = new System.Drawing.Point(158, 134);
+            this.panel_buttons.Name = "panel_buttons";
+            this.panel_buttons.Size = new System.Drawing.Size(661, 482);
+            this.panel_buttons.TabIndex = 7;
+            this.panel_buttons.Click += new System.EventHandler(this.Buttons_Unfocus);
+            this.panel_buttons.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -256,10 +251,10 @@ namespace DisplayButtons.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.panel_buttons);
             this.Controls.Add(this.shadedPanel4);
             this.Controls.Add(this.painel_developer);
             this.Controls.Add(this.shadedPanel1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.appBar1);
             this.MinimumSize = new System.Drawing.Size(915, 535);
             this.Name = "MainForm";
@@ -271,7 +266,6 @@ namespace DisplayButtons.Forms
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
-            this.panel1.ResumeLayout(false);
             this.shadedPanel1.ResumeLayout(false);
             this.shadedPanel2.ResumeLayout(false);
             this.painel_developer.ResumeLayout(false);
@@ -283,7 +277,6 @@ namespace DisplayButtons.Forms
 
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
         private NickAc.ModernUIDoneRight.Controls.ModernShadowPanel panel1;
-        private System.Windows.Forms.Label warning_label;
         private ShadedPanel shadedPanel2;
         private ImageModernButton imageModernButton1;
         private System.Windows.Forms.Label action_label;
@@ -297,6 +290,7 @@ namespace DisplayButtons.Forms
         private ShadedPanel shadedPanel3;
         private ShadedPanel shadedPanel4;
         private NotifyIcon notifyIcon1;
+        private Panel panel_buttons;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }
