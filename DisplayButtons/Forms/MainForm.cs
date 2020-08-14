@@ -758,24 +758,28 @@ namespace DisplayButtons.Forms
 
 
                         control.Name = "modernButton" + id;
-                        control.UseVisualStyleBackColor = false;
-                        control.Size = new Size(80, 80);
-                        if(Globals.calc >= 15)
+
+                        WindowState = WindowState == FormWindowState.Maximized
+                              ? FormWindowState.Normal
+                              : FormWindowState.Maximized;
+                        if (Globals.calc >= 15)
                         {
+
+                            control.Size = new Size(80, 80);
+                            //panel1.scrolb
+                            //   panel1.AutoScroll = true;
+                            //   panel1.AutoScrollMargin = 50;
+                           
+                                this.Width += lin * 120 - (lin * 30);
+                           
                             control.Location = new Point(lin * 120 - (lin * 30), con * 120 - (con * 30));
-                            if(con > 5 && lin > 5)
-                            {
-                                //panel1.scrolb
-                             //   panel1.AutoScroll = true;
-                             //   panel1.AutoScrollMargin = 50;
-                              MainForm.Instance.Size += new Size(lin * 120 - (lin * 30), con * 120 - (con * 30));
-                                Refresh();
-                            }
+                                Application.DoEvents();
+                            
                         }
                         else
                         {
-
-control.Location = new Point(lin * 120, con * 120);
+                            control.Size = new Size(80, 80);
+                            control.Location = new Point(lin * 120, con * 120);
                         }
                         
                         id += 1;

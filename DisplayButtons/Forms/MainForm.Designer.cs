@@ -64,7 +64,7 @@ namespace DisplayButtons.Forms
             this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
             this.appBar1.OverrideParentText = false;
-            this.appBar1.Size = new System.Drawing.Size(1087, 50);
+            this.appBar1.Size = new System.Drawing.Size(1088, 50);
             this.appBar1.TabIndex = 0;
             this.appBar1.Text = "DisplayButtons";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -73,13 +73,11 @@ namespace DisplayButtons.Forms
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.warning_label);
-            this.panel1.Location = new System.Drawing.Point(1, 83);
+            this.panel1.Location = new System.Drawing.Point(147, 126);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1087, 533);
+            this.panel1.Size = new System.Drawing.Size(680, 490);
             this.panel1.TabIndex = 2;
             this.panel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -90,7 +88,7 @@ namespace DisplayButtons.Forms
             this.warning_label.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.warning_label.BackColor = System.Drawing.Color.Transparent;
             this.warning_label.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.warning_label.Location = new System.Drawing.Point(179, 244);
+            this.warning_label.Location = new System.Drawing.Point(30, 228);
             this.warning_label.Name = "warning_label";
             this.warning_label.Size = new System.Drawing.Size(424, 69);
             this.warning_label.TabIndex = 3;
@@ -100,12 +98,11 @@ namespace DisplayButtons.Forms
             // 
             // shadedPanel1
             // 
-            this.shadedPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.shadedPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.shadedPanel1.Controls.Add(this.shadedPanel2);
             this.shadedPanel1.Location = new System.Drawing.Point(832, 83);
             this.shadedPanel1.Name = "shadedPanel1";
-            this.shadedPanel1.Size = new System.Drawing.Size(256, 533);
+            this.shadedPanel1.Size = new System.Drawing.Size(257, 533);
             this.shadedPanel1.TabIndex = 4;
             this.shadedPanel1.Click += new System.EventHandler(this.Buttons_Unfocus);
             // 
@@ -118,7 +115,7 @@ namespace DisplayButtons.Forms
             this.shadedPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.shadedPanel2.Location = new System.Drawing.Point(0, 271);
             this.shadedPanel2.Name = "shadedPanel2";
-            this.shadedPanel2.Size = new System.Drawing.Size(256, 262);
+            this.shadedPanel2.Size = new System.Drawing.Size(257, 262);
             this.shadedPanel2.TabIndex = 0;
             this.shadedPanel2.Visible = false;
             // 
@@ -164,7 +161,7 @@ namespace DisplayButtons.Forms
             this.painel_developer.Dock = System.Windows.Forms.DockStyle.Top;
             this.painel_developer.Location = new System.Drawing.Point(1, 83);
             this.painel_developer.Name = "painel_developer";
-            this.painel_developer.Size = new System.Drawing.Size(1087, 43);
+            this.painel_developer.Size = new System.Drawing.Size(1088, 43);
             this.painel_developer.TabIndex = 5;
             this.painel_developer.Visible = false;
             this.painel_developer.Paint += new System.Windows.Forms.PaintEventHandler(this.Painel_developer_Paint);
@@ -253,7 +250,7 @@ namespace DisplayButtons.Forms
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1089, 617);
+            this.ClientSize = new System.Drawing.Size(1090, 617);
             this.ColorScheme.isToIgnoreForegroundColor = false;
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
