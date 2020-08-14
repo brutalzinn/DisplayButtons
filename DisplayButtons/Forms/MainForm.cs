@@ -733,7 +733,7 @@ namespace DisplayButtons.Forms
         public void MatrizGenerator()
         {
             Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
-            flowLayoutPanel1.Controls.Clear();
+            panel_buttons.Controls.Clear();
             //warning_label.Visible = true;
          //   warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
        //     panel1.Visible = false;
