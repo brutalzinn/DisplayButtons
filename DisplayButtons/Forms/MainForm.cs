@@ -198,7 +198,7 @@ namespace DisplayButtons.Forms
             var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
             var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.Folder_grey_16x : Resources.Folder_grey_16x;
             var imageMiscelanius = ColorScheme.ForegroundColor == Color.White ? Resources.drawer__archive__files__documents__office_white : Resources.drawer__archive__files__documents__office_white;
-            var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.do : Resources.bug__virus__insect__malware__pest_white;
+            var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.bug__virus__insect__malware__pest_white : Resources.bug__virus__insect__malware__pest_white;
 
             AppAction item = new AppAction()
             {
