@@ -34,6 +34,7 @@ namespace DisplayButtons.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
+     
             this.shadedPanel1 = new DisplayButtons.Forms.ShadedPanel();
             this.shadedPanel2 = new DisplayButtons.Forms.ShadedPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();

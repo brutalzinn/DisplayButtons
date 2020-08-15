@@ -22,7 +22,7 @@ namespace DisplayButtons.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DisplayButtons.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DisplayButtons.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace DisplayButtons.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bug__virus__insect__malware__pest {
+        public static System.Drawing.Bitmap bug__virus__insect__malware__pest {
             get {
                 object obj = ResourceManager.GetObject("bug__virus__insect__malware__pest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bug__virus__insect__malware__pest_white {
+        public static System.Drawing.Bitmap bug__virus__insect__malware__pest_white {
             get {
                 object obj = ResourceManager.GetObject("bug__virus__insect__malware__pest_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon button_deck {
+        public static System.Drawing.Icon button_deck {
             get {
                 object obj = ResourceManager.GetObject("button_deck", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -93,7 +93,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CleanData_16x {
+        public static System.Drawing.Bitmap CleanData_16x {
             get {
                 object obj = ResourceManager.GetObject("CleanData_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Close_16x {
+        public static System.Drawing.Bitmap Close_16x {
             get {
                 object obj = ResourceManager.GetObject("Close_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Error!.
         /// </summary>
-        internal static string DefaultUIFactory_ErrorTitle {
+        public static string DefaultUIFactory_ErrorTitle {
             get {
                 return ResourceManager.GetString("DefaultUIFactory_ErrorTitle", resourceCulture);
             }
@@ -122,7 +122,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Info.
         /// </summary>
-        internal static string DefaultUIFactory_MessageTitle {
+        public static string DefaultUIFactory_MessageTitle {
             get {
                 return ResourceManager.GetString("DefaultUIFactory_MessageTitle", resourceCulture);
             }
@@ -131,7 +131,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Sorry, either you aren&apos;t connected to the internet, or our server is having a problem..
         /// </summary>
-        internal static string DefaultUIFactory_ShowCannotDownloadAppcastMessage {
+        public static string DefaultUIFactory_ShowCannotDownloadAppcastMessage {
             get {
                 return ResourceManager.GetString("DefaultUIFactory_ShowCannotDownloadAppcastMessage", resourceCulture);
             }
@@ -142,7 +142,7 @@ namespace DisplayButtons.Properties {
         ///
         ///{0}.
         /// </summary>
-        internal static string DefaultUIFactory_ShowDownloadErrorMessage {
+        public static string DefaultUIFactory_ShowDownloadErrorMessage {
             get {
                 return ResourceManager.GetString("DefaultUIFactory_ShowDownloadErrorMessage", resourceCulture);
             }
@@ -151,7 +151,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Updater not supported, please execute {0} manually.
         /// </summary>
-        internal static string DefaultUIFactory_ShowUnknownInstallerFormatMessageText {
+        public static string DefaultUIFactory_ShowUnknownInstallerFormatMessageText {
             get {
                 return ResourceManager.GetString("DefaultUIFactory_ShowUnknownInstallerFormatMessageText", resourceCulture);
             }
@@ -160,7 +160,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized string similar to You have elected to skip this version..
         /// </summary>
-        internal static string DefaultUIFactory_ShowVersionIsSkippedByUserRequestMessage {
+        public static string DefaultUIFactory_ShowVersionIsSkippedByUserRequestMessage {
             get {
                 return ResourceManager.GetString("DefaultUIFactory_ShowVersionIsSkippedByUserRequestMessage", resourceCulture);
             }
@@ -169,7 +169,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Your current version is up to date..
         /// </summary>
-        internal static string DefaultUIFactory_ShowVersionIsUpToDateMessage {
+        public static string DefaultUIFactory_ShowVersionIsUpToDateMessage {
             get {
                 return ResourceManager.GetString("DefaultUIFactory_ShowVersionIsUpToDateMessage", resourceCulture);
             }
@@ -178,7 +178,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized string similar to More information.
         /// </summary>
-        internal static string DefaultUIFactory_ToastCallToAction {
+        public static string DefaultUIFactory_ToastCallToAction {
             get {
                 return ResourceManager.GetString("DefaultUIFactory_ToastCallToAction", resourceCulture);
             }
@@ -187,7 +187,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized string similar to New Version Available.
         /// </summary>
-        internal static string DefaultUIFactory_ToastMessage {
+        public static string DefaultUIFactory_ToastMessage {
             get {
                 return ResourceManager.GetString("DefaultUIFactory_ToastMessage", resourceCulture);
             }
@@ -196,7 +196,27 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap drawer__archive__files__documents__office {
+        public static System.Drawing.Bitmap download_arrow_black {
+            get {
+                object obj = ResourceManager.GetObject("download_arrow_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap download_arrow_white {
+            get {
+                object obj = ResourceManager.GetObject("download_arrow_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap drawer__archive__files__documents__office {
             get {
                 object obj = ResourceManager.GetObject("drawer__archive__files__documents__office", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -206,7 +226,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap drawer__archive__files__documents__office_white {
+        public static System.Drawing.Bitmap drawer__archive__files__documents__office_white {
             get {
                 object obj = ResourceManager.GetObject("drawer__archive__files__documents__office_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -216,7 +236,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Edit_grey_16x {
+        public static System.Drawing.Bitmap Edit_grey_16x {
             get {
                 object obj = ResourceManager.GetObject("Edit_grey_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -226,7 +246,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Execute_16x {
+        public static System.Drawing.Bitmap Execute_16x {
             get {
                 object obj = ResourceManager.GetObject("Execute_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -236,7 +256,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Export_16x {
+        public static System.Drawing.Bitmap Export_16x {
             get {
                 object obj = ResourceManager.GetObject("Export_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -246,7 +266,17 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Folder_grey_16x {
+        public static System.Drawing.Bitmap folder_black {
+            get {
+                object obj = ResourceManager.GetObject("folder_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Folder_grey_16x {
             get {
                 object obj = ResourceManager.GetObject("Folder_grey_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -256,7 +286,17 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ic_delete_black_48dp_2x {
+        public static System.Drawing.Bitmap folder_white {
+            get {
+                object obj = ResourceManager.GetObject("folder_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ic_delete_black_48dp_2x {
             get {
                 object obj = ResourceManager.GetObject("ic_delete_black_48dp_2x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -266,7 +306,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ic_delete_white_48dp_2x {
+        public static System.Drawing.Bitmap ic_delete_white_48dp_2x {
             get {
                 object obj = ResourceManager.GetObject("ic_delete_white_48dp_2x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -276,7 +316,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ic_settings_black_48dp_2x {
+        public static System.Drawing.Bitmap ic_settings_black_48dp_2x {
             get {
                 object obj = ResourceManager.GetObject("ic_settings_black_48dp_2x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -286,7 +326,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ic_settings_white_48dp_2x {
+        public static System.Drawing.Bitmap ic_settings_white_48dp_2x {
             get {
                 object obj = ResourceManager.GetObject("ic_settings_white_48dp_2x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -296,7 +336,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_folder {
+        public static System.Drawing.Bitmap img_folder {
             get {
                 object obj = ResourceManager.GetObject("img_folder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -306,7 +346,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_folder_up {
+        public static System.Drawing.Bitmap img_folder_up {
             get {
                 object obj = ResourceManager.GetObject("img_folder_up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -316,7 +356,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_default {
+        public static System.Drawing.Bitmap img_item_default {
             get {
                 object obj = ResourceManager.GetObject("img_item_default", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -326,7 +366,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_back {
+        public static System.Drawing.Bitmap img_item_media_back {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_back", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -336,7 +376,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_next {
+        public static System.Drawing.Bitmap img_item_media_next {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_next", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -346,7 +386,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_pause {
+        public static System.Drawing.Bitmap img_item_media_pause {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_pause", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -356,7 +396,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_play {
+        public static System.Drawing.Bitmap img_item_media_play {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_play", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -366,7 +406,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_playpause {
+        public static System.Drawing.Bitmap img_item_media_playpause {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_playpause", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -376,7 +416,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_stop {
+        public static System.Drawing.Bitmap img_item_media_stop {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -386,7 +426,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_volumedown {
+        public static System.Drawing.Bitmap img_item_media_volumedown {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_volumedown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -396,7 +436,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_volumeoff {
+        public static System.Drawing.Bitmap img_item_media_volumeoff {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_volumeoff", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -406,7 +446,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_volumeup {
+        public static System.Drawing.Bitmap img_item_media_volumeup {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_volumeup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -416,7 +456,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_start_recording {
+        public static System.Drawing.Bitmap img_item_start_recording {
             get {
                 object obj = ResourceManager.GetObject("img_item_start_recording", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -426,7 +466,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_start_stream {
+        public static System.Drawing.Bitmap img_item_start_stream {
             get {
                 object obj = ResourceManager.GetObject("img_item_start_stream", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -436,7 +476,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_stop_recording {
+        public static System.Drawing.Bitmap img_item_stop_recording {
             get {
                 object obj = ResourceManager.GetObject("img_item_stop_recording", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -446,7 +486,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_stop_stream {
+        public static System.Drawing.Bitmap img_item_stop_stream {
             get {
                 object obj = ResourceManager.GetObject("img_item_stop_stream", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -456,7 +496,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Import_16x {
+        public static System.Drawing.Bitmap Import_16x {
             get {
                 object obj = ResourceManager.GetObject("Import_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -466,7 +506,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Package_16x {
+        public static System.Drawing.Bitmap Package_16x {
             get {
                 object obj = ResourceManager.GetObject("Package_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -476,7 +516,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Run_grey_16x {
+        public static System.Drawing.Bitmap Run_grey_16x {
             get {
                 object obj = ResourceManager.GetObject("Run_grey_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -486,7 +526,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Save_16x {
+        public static System.Drawing.Bitmap Save_16x {
             get {
                 object obj = ResourceManager.GetObject("Save_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -496,7 +536,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SaveAll_16x {
+        public static System.Drawing.Bitmap SaveAll_16x {
             get {
                 object obj = ResourceManager.GetObject("SaveAll_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -506,7 +546,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Script_16x {
+        public static System.Drawing.Bitmap Script_16x {
             get {
                 object obj = ResourceManager.GetObject("Script_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -516,7 +556,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap settings__preferences__options__gear__cog {
+        public static System.Drawing.Bitmap settings__preferences__options__gear__cog {
             get {
                 object obj = ResourceManager.GetObject("settings__preferences__options__gear__cog", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -526,7 +566,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Stop_grey_16x {
+        public static System.Drawing.Bitmap Stop_grey_16x {
             get {
                 object obj = ResourceManager.GetObject("Stop_grey_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -536,7 +576,7 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap user__account__profile__avatar__person {
+        public static System.Drawing.Bitmap user__account__profile__avatar__person {
             get {
                 object obj = ResourceManager.GetObject("user__account__profile__avatar__person", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

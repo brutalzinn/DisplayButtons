@@ -36,6 +36,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DisplayButtons.Backend.Objects.AbstractDeckAction;
 using Timer = System.Windows.Forms.Timer;
+using NickAc.ModernUIDoneRight.Objects.MenuItems;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -196,9 +197,9 @@ namespace DisplayButtons.Forms
             var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
             var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
             var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
-            var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.Folder_grey_16x : Resources.Folder_grey_16x;
+            var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.folder_white : Resources.folder_black;
             var imageMiscelanius = ColorScheme.ForegroundColor == Color.White ? Resources.drawer__archive__files__documents__office_white : Resources.drawer__archive__files__documents__office_white;
-            var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.bug__virus__insect__malware__pest_white : Resources.bug__virus__insect__malware__pest_white;
+            var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.download_arrow_white : Resources.download_arrow_black;
 
             AppAction item = new AppAction()
             {
@@ -210,7 +211,7 @@ namespace DisplayButtons.Forms
                 new SettingsForm().ShowDialog();
             };
 
-            appBar1.Actions.Add(item);
+   
            
             AppAction autoupdate = new AppAction()
             {
@@ -249,7 +250,7 @@ namespace DisplayButtons.Forms
                 //  _sparkle.CheckForUpdatesAtUserRequest();
                 //AutoUpdater.Start(Globals.updateurl);
             };
-            appBar1.Actions.Add(autoupdate);
+           
 
             AppAction itemTrash = new AppAction()
             {
@@ -265,13 +266,18 @@ namespace DisplayButtons.Forms
                     RefreshAllButtons(false);
                 }
             };
+            appBar1.Actions.Add(autoupdate);
+           
             appBar1.Actions.Add(itemTrash);
-
+ appBar1.Actions.Add(item);
             AppAction itemMagnetite = new AppAction()
             {
-                Image = imageMiscelanius
+              
+       
+             Image = imageMiscelanius
+                
             };
-
+           
             itemMagnetite.Click += (s, ee) =>
             {
                 new MagnetiteForm().ShowDialog();
@@ -289,11 +295,13 @@ namespace DisplayButtons.Forms
                 new ImageListForm().ShowDialog();
                 //     new ScribeBot.Interface.Window().Show();
             };
+
             Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
-
+            
             appBar1.Actions.Add(itemMagnetite);
-
+        
             appBar1.Actions.Add(itemBiblioteca);
+          
             // ApplyTheme(panel1);
             GenerateSidebar(shadedPanel1, true);
             ApplySidebarTheme(shadedPanel1);

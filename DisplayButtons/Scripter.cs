@@ -8,6 +8,8 @@ using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
 using ScribeBot.Engine.Proxies;
 using DisplayButtons.Engine.Wrappers;
+using System.Windows.Forms;
+using System.Reflection;
 
 namespace ScribeBot
 {
@@ -39,7 +41,7 @@ namespace ScribeBot
             Script.WarmUp();
             Script.GlobalOptions.RethrowExceptionNested = true;
 
-            UserData.RegisterAssembly();
+            UserData.RegisterAssembly(Assembly.GetExecutingAssembly());
 
             Environment.Options.DebugPrint = value => Core.Write(new ColorContainer(0, 131, 63), value + System.Environment.NewLine);
             Environment.Options.CheckThreadAccess = false;

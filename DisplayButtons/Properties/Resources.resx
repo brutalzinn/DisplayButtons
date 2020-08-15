@@ -273,4 +273,10 @@
   <data name="download_arrow_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\download_arrow_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="folder_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
