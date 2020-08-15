@@ -129,7 +129,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 return result;
             }
 
-            public  void AddControlToUser(string key, string value)
+            public  void AddKeyvalue(string key, string value)
             {
                 if (instance.ToControls.ContainsKey(key))
                 {
@@ -236,7 +236,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
 
             }
-            public  string GetControlToUser(string key)
+            public  string GetKey(string key)
             {
                 string result = null;
                 try

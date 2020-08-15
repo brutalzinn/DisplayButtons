@@ -3386,7 +3386,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                 reloadExternButtons();
             }
-
+            ApplyTheme(panel_buttons);
 
 
 
