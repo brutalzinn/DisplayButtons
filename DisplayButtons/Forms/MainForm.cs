@@ -3529,8 +3529,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void imageModernButton6_Click_1(object sender, EventArgs e)
         {
-            event_interface teste = new event_interface();
-            teste.Show();
+            Events teste = new Events();
+            teste.ShowDialog();
         }
     }
     #endregion
