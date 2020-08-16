@@ -6,14 +6,18 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 {
   public  class Event
     {
-        public Event(string name, AbstractAction abstractAction)
+        public Event(string name,List<AbstractAction> list_actions)
         {
+            this.list_actions = list_actions;
             Name = name;
-            AbstractAction = abstractAction;
+         
         }
 
+        public List<AbstractAction> list_actions { get; set; } = new List<AbstractAction>();
+
+
         public string Name { get; set; }
-        public AbstractAction AbstractAction { get; set; }
+
 
     }
 }

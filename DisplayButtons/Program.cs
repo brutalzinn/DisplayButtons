@@ -19,6 +19,7 @@ using System.Net;
 using System.Threading;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Forms.ActionHelperForms;
+using DisplayButtons.Bibliotecas.DeckEvents;
 
 namespace DisplayButtons
 {
@@ -147,7 +148,7 @@ namespace DisplayButtons
             Application.ThreadException += Application_ThreadException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
               DevicePersistManager.LoadDevices();
-          
+            EventXml.LoadSettings();
 
             ApplicationSettingsManager.LoadSettings();
 
@@ -260,9 +261,11 @@ namespace DisplayButtons
 
             }
 
-         //   client.KillAdb();
+         //   client.KillAdb();   
+            EventXml.SaveSettings();
            ApplicationSettingsManager.SaveSettings();
              DevicePersistManager.SaveDevices();
+         
             NetworkChange.NetworkAddressChanged -= NetworkChange_NetworkAddressChanged;
             NetworkChange.NetworkAvailabilityChanged -= NetworkChange_NetworkAddressChanged;
             Trace.Flush();

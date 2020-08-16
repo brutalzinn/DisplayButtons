@@ -36,9 +36,10 @@
             // 
             // imageModernButton1
             // 
+            this.imageModernButton1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(505, 295);
+            this.imageModernButton1.Location = new System.Drawing.Point(347, 183);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
@@ -49,9 +50,10 @@
             // 
             // imageModernButton2
             // 
+            this.imageModernButton2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
-            this.imageModernButton2.Location = new System.Drawing.Point(32, 295);
+            this.imageModernButton2.Location = new System.Drawing.Point(26, 183);
             this.imageModernButton2.Name = "imageModernButton2";
             this.imageModernButton2.NormalImage = null;
             this.imageModernButton2.Origin = null;
@@ -62,9 +64,10 @@
             // 
             // imageModernButton3
             // 
+            this.imageModernButton3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(259, 295);
+            this.imageModernButton3.Location = new System.Drawing.Point(191, 183);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;
@@ -75,12 +78,11 @@
             // 
             // listBox1
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
+            this.listBox1.Location = new System.Drawing.Point(14, 9);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(660, 274);
+            this.listBox1.Size = new System.Drawing.Size(548, 169);
             this.listBox1.TabIndex = 2;
             // 
             // trigger_user_control
@@ -92,7 +94,7 @@
             this.Controls.Add(this.imageModernButton2);
             this.Controls.Add(this.imageModernButton1);
             this.Name = "trigger_user_control";
-            this.Size = new System.Drawing.Size(660, 348);
+            this.Size = new System.Drawing.Size(583, 243);
             this.ResumeLayout(false);
 
         }

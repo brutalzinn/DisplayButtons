@@ -40,14 +40,14 @@
             this.listBox1.ItemHeight = 15;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(666, 259);
+            this.listBox1.Size = new System.Drawing.Size(608, 214);
             this.listBox1.TabIndex = 0;
             // 
             // imageModernButton1
             // 
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(16, 281);
+            this.imageModernButton1.Location = new System.Drawing.Point(20, 229);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
@@ -60,7 +60,7 @@
             // 
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
-            this.imageModernButton2.Location = new System.Drawing.Point(274, 281);
+            this.imageModernButton2.Location = new System.Drawing.Point(249, 229);
             this.imageModernButton2.Name = "imageModernButton2";
             this.imageModernButton2.NormalImage = null;
             this.imageModernButton2.Origin = null;
@@ -73,7 +73,7 @@
             // 
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(515, 281);
+            this.imageModernButton3.Location = new System.Drawing.Point(478, 229);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;
@@ -91,7 +91,7 @@
             this.Controls.Add(this.imageModernButton1);
             this.Controls.Add(this.listBox1);
             this.Name = "action_user_control";
-            this.Size = new System.Drawing.Size(666, 338);
+            this.Size = new System.Drawing.Size(629, 293);
             this.ResumeLayout(false);
 
         }

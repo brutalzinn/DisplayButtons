@@ -25,5 +25,10 @@ namespace DisplayButtons.Forms.EventSystem
         {
 
         }
+
+        private void trigger_user_control1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
