@@ -34,7 +34,6 @@ namespace DisplayButtons.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
-     
             this.shadedPanel1 = new DisplayButtons.Forms.ShadedPanel();
             this.shadedPanel2 = new DisplayButtons.Forms.ShadedPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -49,6 +48,7 @@ namespace DisplayButtons.Forms
             this.shadedPanel4 = new DisplayButtons.Forms.ShadedPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel_buttons = new System.Windows.Forms.Panel();
+            this.imageModernButton6 = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
@@ -73,7 +73,7 @@ namespace DisplayButtons.Forms
             // shadedPanel1
             // 
             this.shadedPanel1.Controls.Add(this.shadedPanel2);
-            this.shadedPanel1.Location = new System.Drawing.Point(950, 131);
+            this.shadedPanel1.Location = new System.Drawing.Point(950, 152);
             this.shadedPanel1.Name = "shadedPanel1";
             this.shadedPanel1.Size = new System.Drawing.Size(302, 486);
             this.shadedPanel1.TabIndex = 4;
@@ -131,10 +131,9 @@ namespace DisplayButtons.Forms
             this.painel_developer.Controls.Add(this.imageModernButton4);
             this.painel_developer.Controls.Add(this.imageModernButton3);
             this.painel_developer.Controls.Add(this.imageModernButton2);
-            this.painel_developer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.painel_developer.Location = new System.Drawing.Point(1, 83);
+            this.painel_developer.Location = new System.Drawing.Point(172, 96);
             this.painel_developer.Name = "painel_developer";
-            this.painel_developer.Size = new System.Drawing.Size(1251, 43);
+            this.painel_developer.Size = new System.Drawing.Size(507, 47);
             this.painel_developer.TabIndex = 5;
             this.painel_developer.Visible = false;
             this.painel_developer.Paint += new System.Windows.Forms.PaintEventHandler(this.Painel_developer_Paint);
@@ -206,9 +205,9 @@ namespace DisplayButtons.Forms
             // shadedPanel4
             // 
             this.shadedPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.shadedPanel4.Location = new System.Drawing.Point(1, 131);
+            this.shadedPanel4.Location = new System.Drawing.Point(1, 152);
             this.shadedPanel4.Name = "shadedPanel4";
-            this.shadedPanel4.Size = new System.Drawing.Size(136, 473);
+            this.shadedPanel4.Size = new System.Drawing.Size(136, 486);
             this.shadedPanel4.TabIndex = 6;
             // 
             // notifyIcon1
@@ -224,21 +223,36 @@ namespace DisplayButtons.Forms
             this.panel_buttons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_buttons.AutoScroll = true;
             this.panel_buttons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel_buttons.Location = new System.Drawing.Point(143, 135);
+            this.panel_buttons.Location = new System.Drawing.Point(143, 149);
             this.panel_buttons.Name = "panel_buttons";
-            this.panel_buttons.Size = new System.Drawing.Size(801, 482);
+            this.panel_buttons.Size = new System.Drawing.Size(801, 489);
             this.panel_buttons.TabIndex = 7;
+            // 
+            // imageModernButton6
+            // 
+            this.imageModernButton6.CustomColorScheme = false;
+            this.imageModernButton6.Image = null;
+            this.imageModernButton6.Location = new System.Drawing.Point(23, 101);
+            this.imageModernButton6.Name = "imageModernButton6";
+            this.imageModernButton6.NormalImage = null;
+            this.imageModernButton6.Origin = null;
+            this.imageModernButton6.Size = new System.Drawing.Size(123, 37);
+            this.imageModernButton6.TabIndex = 8;
+            this.imageModernButton6.Text = "EventSystem";
+            this.imageModernButton6.UseVisualStyleBackColor = true;
+            this.imageModernButton6.Click += new System.EventHandler(this.imageModernButton6_Click_1);
             // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1253, 617);
+            this.ClientSize = new System.Drawing.Size(1253, 651);
             this.ColorScheme.isToIgnoreForegroundColor = false;
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.imageModernButton6);
             this.Controls.Add(this.panel_buttons);
             this.Controls.Add(this.shadedPanel1);
             this.Controls.Add(this.shadedPanel4);
@@ -278,6 +292,7 @@ namespace DisplayButtons.Forms
         private ShadedPanel shadedPanel4;
         private NotifyIcon notifyIcon1;
         private Panel panel_buttons;
+        private ImageModernButton imageModernButton6;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }
