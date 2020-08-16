@@ -39,7 +39,7 @@
             this.imageModernButton1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(347, 183);
+            this.imageModernButton1.Location = new System.Drawing.Point(415, 183);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
@@ -47,6 +47,7 @@
             this.imageModernButton1.TabIndex = 1;
             this.imageModernButton1.Text = "Novo";
             this.imageModernButton1.UseVisualStyleBackColor = true;
+            this.imageModernButton1.Click += new System.EventHandler(this.imageModernButton1_Click);
             // 
             // imageModernButton2
             // 

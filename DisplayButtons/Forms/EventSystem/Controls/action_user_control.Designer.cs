@@ -81,6 +81,7 @@
             this.imageModernButton3.TabIndex = 1;
             this.imageModernButton3.Text = "Novo";
             this.imageModernButton3.UseVisualStyleBackColor = true;
+            this.imageModernButton3.Click += new System.EventHandler(this.imageModernButton3_Click);
             // 
             // action_user_control
             // 

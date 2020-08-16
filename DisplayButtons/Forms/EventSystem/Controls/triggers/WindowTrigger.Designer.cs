@@ -1,6 +1,6 @@
-﻿namespace DisplayButtons.Forms.EventSystem.Controls.actions
+﻿namespace DisplayButtons.Forms.EventSystem.Controls.triggers
 {
-    partial class WindowAction
+    partial class WindowTrigger
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,34 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(101, 89);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(141, 23);
-            this.textBox1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 92);
+            this.label1.Location = new System.Drawing.Point(116, 111);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Window name";
+            this.label1.Size = new System.Drawing.Size(87, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "HELLO WORLD";
             // 
-            // WindowAction
+            // WindowTrigger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Name = "WindowAction";
-            this.Size = new System.Drawing.Size(263, 237);
+            this.Name = "WindowTrigger";
+            this.Size = new System.Drawing.Size(327, 237);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -63,7 +54,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
     }
 }

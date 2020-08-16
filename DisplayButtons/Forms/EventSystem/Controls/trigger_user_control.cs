@@ -14,5 +14,14 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         {
             InitializeComponent();
         }
+
+        private void imageModernButton1_Click(object sender, EventArgs e)
+        {
+            EventCreateNew teste = new EventCreateNew();
+            teste.init(true);
+            teste.Show();
+
+
+        }
     }
 }
