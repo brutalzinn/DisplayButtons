@@ -37,6 +37,7 @@ using System.Windows.Forms;
 using static DisplayButtons.Backend.Objects.AbstractDeckAction;
 using Timer = System.Windows.Forms.Timer;
 using NickAc.ModernUIDoneRight.Objects.MenuItems;
+using DisplayButtons.Forms.EventSystem;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -3528,7 +3529,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void imageModernButton6_Click_1(object sender, EventArgs e)
         {
-
+            event_interface teste = new event_interface();
+            teste.Show();
         }
     }
     #endregion
