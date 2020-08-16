@@ -14,7 +14,10 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             return "Window Event";
         }
 
-        
+        public override Type GetActionType()
+        {
+            throw new NotImplementedException();
+        }
 
         public override void OnExecute()
         {

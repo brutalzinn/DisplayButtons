@@ -7,6 +7,7 @@ using System.Windows.Forms;
 namespace DisplayButtons.Bibliotecas.DeckEvents
 {
 
+
     public abstract class AbstractTrigger
 
     {
@@ -14,8 +15,8 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
             Window
 
-
         }
+        public abstract Type GetActionType();
         public abstract string GetActionName();
         public abstract UserControl OnSelect();
 
