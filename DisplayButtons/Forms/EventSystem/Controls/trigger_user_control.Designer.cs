@@ -38,7 +38,7 @@
             // 
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(15, 295);
+            this.imageModernButton1.Location = new System.Drawing.Point(505, 295);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
@@ -51,7 +51,7 @@
             // 
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
-            this.imageModernButton2.Location = new System.Drawing.Point(515, 295);
+            this.imageModernButton2.Location = new System.Drawing.Point(32, 295);
             this.imageModernButton2.Name = "imageModernButton2";
             this.imageModernButton2.NormalImage = null;
             this.imageModernButton2.Origin = null;

@@ -30,15 +30,15 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_geral_button = new System.Windows.Forms.TabPage();
-            this.tab_trigger_button = new System.Windows.Forms.TabPage();
-            this.tab_actions_button = new System.Windows.Forms.TabPage();
             this.general_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.general_user_control();
+            this.tab_trigger_button = new System.Windows.Forms.TabPage();
             this.trigger_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.trigger_user_control();
-            this.actions_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.actions_user_control();
+            this.tab_actions_button = new System.Windows.Forms.TabPage();
+            this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
             this.tabControl1.SuspendLayout();
             this.tab_geral_button.SuspendLayout();
             this.tab_trigger_button.SuspendLayout();
-            this.tab_actions_button.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -64,6 +64,13 @@
             this.tab_geral_button.Text = "Geral";
             this.tab_geral_button.UseVisualStyleBackColor = true;
             // 
+            // general_user_control1
+            // 
+            this.general_user_control1.Location = new System.Drawing.Point(1, 3);
+            this.general_user_control1.Name = "general_user_control1";
+            this.general_user_control1.Size = new System.Drawing.Size(643, 300);
+            this.general_user_control1.TabIndex = 0;
+            // 
             // tab_trigger_button
             // 
             this.tab_trigger_button.Controls.Add(this.trigger_user_control1);
@@ -75,9 +82,15 @@
             this.tab_trigger_button.Text = "Disparadores";
             this.tab_trigger_button.UseVisualStyleBackColor = true;
             // 
+            // trigger_user_control1
+            // 
+            this.trigger_user_control1.Location = new System.Drawing.Point(4, 0);
+            this.trigger_user_control1.Name = "trigger_user_control1";
+            this.trigger_user_control1.Size = new System.Drawing.Size(644, 303);
+            this.trigger_user_control1.TabIndex = 0;
+            // 
             // tab_actions_button
             // 
-            this.tab_actions_button.Controls.Add(this.actions_user_control1);
             this.tab_actions_button.Location = new System.Drawing.Point(4, 24);
             this.tab_actions_button.Name = "tab_actions_button";
             this.tab_actions_button.Padding = new System.Windows.Forms.Padding(3);
@@ -86,28 +99,33 @@
             this.tab_actions_button.Text = "Ações";
             this.tab_actions_button.UseVisualStyleBackColor = true;
             // 
-            // general_user_control1
+            // imageModernButton1
             // 
-            this.general_user_control1.Location = new System.Drawing.Point(1, 3);
-            this.general_user_control1.Name = "general_user_control1";
-            this.general_user_control1.Size = new System.Drawing.Size(643, 300);
-            this.general_user_control1.TabIndex = 0;
+            this.imageModernButton1.CustomColorScheme = false;
+            this.imageModernButton1.Image = null;
+            this.imageModernButton1.Location = new System.Drawing.Point(545, 380);
+            this.imageModernButton1.Name = "imageModernButton1";
+            this.imageModernButton1.NormalImage = null;
+            this.imageModernButton1.Origin = null;
+            this.imageModernButton1.Size = new System.Drawing.Size(118, 57);
+            this.imageModernButton1.TabIndex = 1;
+            this.imageModernButton1.Text = "Save";
+            this.imageModernButton1.UseVisualStyleBackColor = true;
             // 
-            // trigger_user_control1
+            // imageModernButton2
             // 
-            this.trigger_user_control1.Location = new System.Drawing.Point(4, 0);
-            this.trigger_user_control1.Name = "trigger_user_control1";
-            this.trigger_user_control1.Size = new System.Drawing.Size(644, 303);
-            this.trigger_user_control1.TabIndex = 0;
+            this.imageModernButton2.CustomColorScheme = false;
+            this.imageModernButton2.Image = null;
+            this.imageModernButton2.Location = new System.Drawing.Point(20, 380);
+            this.imageModernButton2.Name = "imageModernButton2";
+            this.imageModernButton2.NormalImage = null;
+            this.imageModernButton2.Origin = null;
+            this.imageModernButton2.Size = new System.Drawing.Size(118, 57);
+            this.imageModernButton2.TabIndex = 1;
+            this.imageModernButton2.Text = "Back";
+            this.imageModernButton2.UseVisualStyleBackColor = true;
             // 
-            // actions_user_control1
-            // 
-            this.actions_user_control1.Location = new System.Drawing.Point(3, 3);
-            this.actions_user_control1.Name = "actions_user_control1";
-            this.actions_user_control1.Size = new System.Drawing.Size(642, 298);
-            this.actions_user_control1.TabIndex = 0;
-            // 
-            // Form1
+            // event_interface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -117,15 +135,16 @@
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.imageModernButton2);
+            this.Controls.Add(this.imageModernButton1);
             this.Controls.Add(this.tabControl1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Name = "Form1";
+            this.Name = "event_interface";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tab_geral_button.ResumeLayout(false);
             this.tab_trigger_button.ResumeLayout(false);
-            this.tab_actions_button.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -138,6 +157,7 @@
         private System.Windows.Forms.TabPage tab_actions_button;
         private Controls.general_user_control general_user_control1;
         private Controls.trigger_user_control trigger_user_control1;
-        private Controls.actions_user_control actions_user_control1;
+        private DisplayButtons.Controls.ImageModernButton imageModernButton1;
+        private DisplayButtons.Controls.ImageModernButton imageModernButton2;
     }
 }

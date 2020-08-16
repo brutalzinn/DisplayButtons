@@ -1,6 +1,6 @@
 ﻿namespace DisplayButtons.Forms.EventSystem.Controls
 {
-    partial class actions_user_control
+    partial class action_user_control
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,17 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
-            this.actions_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.actions_user_control();
             this.SuspendLayout();
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(0, 0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(666, 244);
+            this.listBox1.TabIndex = 0;
             // 
             // imageModernButton1
             // 
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(556, 345);
+            this.imageModernButton1.Location = new System.Drawing.Point(22, 258);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
@@ -51,53 +60,47 @@
             // 
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
-            this.imageModernButton2.Location = new System.Drawing.Point(15, 345);
+            this.imageModernButton2.Location = new System.Drawing.Point(276, 258);
             this.imageModernButton2.Name = "imageModernButton2";
             this.imageModernButton2.NormalImage = null;
             this.imageModernButton2.Origin = null;
             this.imageModernButton2.Size = new System.Drawing.Size(130, 44);
             this.imageModernButton2.TabIndex = 1;
-            this.imageModernButton2.Text = "Novo";
+            this.imageModernButton2.Text = "Configurar";
             this.imageModernButton2.UseVisualStyleBackColor = true;
             // 
             // imageModernButton3
             // 
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(286, 345);
+            this.imageModernButton3.Location = new System.Drawing.Point(521, 258);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;
             this.imageModernButton3.Size = new System.Drawing.Size(130, 44);
             this.imageModernButton3.TabIndex = 1;
-            this.imageModernButton3.Text = "Configurar";
+            this.imageModernButton3.Text = "Novo";
             this.imageModernButton3.UseVisualStyleBackColor = true;
             // 
-            // actions_user_control1
-            // 
-            this.actions_user_control1.Location = new System.Drawing.Point(0, 0);
-            this.actions_user_control1.Name = "actions_user_control1";
-            this.actions_user_control1.Size = new System.Drawing.Size(704, 323);
-            this.actions_user_control1.TabIndex = 2;
-            // 
-            // actions_user_control
+            // action_user_control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.actions_user_control1);
             this.Controls.Add(this.imageModernButton3);
             this.Controls.Add(this.imageModernButton2);
             this.Controls.Add(this.imageModernButton1);
-            this.Name = "actions_user_control";
-            this.Size = new System.Drawing.Size(708, 401);
+            this.Controls.Add(this.listBox1);
+            this.Name = "action_user_control";
+            this.Size = new System.Drawing.Size(666, 312);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox listBox1;
         private DisplayButtons.Controls.ImageModernButton imageModernButton1;
         private DisplayButtons.Controls.ImageModernButton imageModernButton2;
         private DisplayButtons.Controls.ImageModernButton imageModernButton3;
-        private actions_user_control actions_user_control1;
     }
 }
