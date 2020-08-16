@@ -86,6 +86,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
         public AbstractAction abstractAction;
 
+        public AbstractTrigger abstractTrigger;
 
         public KeyInfoAppSettingsGlobal keyMainFolder { get; set; } = new KeyInfoAppSettingsGlobal();
         public KeyInfoAppSettingsGlobal keyBackFolder { get; set; } = new KeyInfoAppSettingsGlobal();

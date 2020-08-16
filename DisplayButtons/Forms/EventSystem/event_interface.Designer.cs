@@ -34,9 +34,9 @@
             this.tab_trigger_button = new System.Windows.Forms.TabPage();
             this.trigger_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.trigger_user_control();
             this.tab_actions_button = new System.Windows.Forms.TabPage();
+            this.action_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.action_user_control();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
-            this.action_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.action_user_control();
             this.tabControl1.SuspendLayout();
             this.tab_geral_button.SuspendLayout();
             this.tab_trigger_button.SuspendLayout();
@@ -105,6 +105,13 @@
             this.tab_actions_button.Text = "Ações";
             this.tab_actions_button.UseVisualStyleBackColor = true;
             // 
+            // action_user_control1
+            // 
+            this.action_user_control1.Location = new System.Drawing.Point(0, 3);
+            this.action_user_control1.Name = "action_user_control1";
+            this.action_user_control1.Size = new System.Drawing.Size(664, 306);
+            this.action_user_control1.TabIndex = 0;
+            // 
             // imageModernButton1
             // 
             this.imageModernButton1.CustomColorScheme = false;
@@ -130,13 +137,6 @@
             this.imageModernButton2.TabIndex = 1;
             this.imageModernButton2.Text = "Back";
             this.imageModernButton2.UseVisualStyleBackColor = true;
-            // 
-            // action_user_control1
-            // 
-            this.action_user_control1.Location = new System.Drawing.Point(1, 4);
-            this.action_user_control1.Name = "action_user_control1";
-            this.action_user_control1.Size = new System.Drawing.Size(664, 306);
-            this.action_user_control1.TabIndex = 0;
             // 
             // event_interface
             // 
