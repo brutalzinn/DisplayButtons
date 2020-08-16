@@ -29,28 +29,57 @@
         private void InitializeComponent()
         {
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
             this.SuspendLayout();
             // 
             // listBox1
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
             this.listBox1.Location = new System.Drawing.Point(1, 33);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(501, 287);
+            this.listBox1.Size = new System.Drawing.Size(713, 289);
             this.listBox1.TabIndex = 0;
+            // 
+            // imageModernButton1
+            // 
+            this.imageModernButton1.CustomColorScheme = false;
+            this.imageModernButton1.Image = null;
+            this.imageModernButton1.Location = new System.Drawing.Point(552, 339);
+            this.imageModernButton1.Name = "imageModernButton1";
+            this.imageModernButton1.NormalImage = null;
+            this.imageModernButton1.Origin = null;
+            this.imageModernButton1.Size = new System.Drawing.Size(118, 57);
+            this.imageModernButton1.TabIndex = 1;
+            this.imageModernButton1.Text = "Save";
+            this.imageModernButton1.UseVisualStyleBackColor = true;
+            // 
+            // imageModernButton2
+            // 
+            this.imageModernButton2.CustomColorScheme = false;
+            this.imageModernButton2.Image = null;
+            this.imageModernButton2.Location = new System.Drawing.Point(27, 339);
+            this.imageModernButton2.Name = "imageModernButton2";
+            this.imageModernButton2.NormalImage = null;
+            this.imageModernButton2.Origin = null;
+            this.imageModernButton2.Size = new System.Drawing.Size(118, 57);
+            this.imageModernButton2.TabIndex = 1;
+            this.imageModernButton2.Text = "Back";
+            this.imageModernButton2.UseVisualStyleBackColor = true;
             // 
             // Events
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(503, 321);
+            this.ClientSize = new System.Drawing.Size(715, 409);
             this.ColorScheme.isToIgnoreForegroundColor = false;
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.imageModernButton2);
+            this.Controls.Add(this.imageModernButton1);
             this.Controls.Add(this.listBox1);
             this.Name = "Events";
             this.Text = "Events";
@@ -62,5 +91,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBox1;
+        private DisplayButtons.Controls.ImageModernButton imageModernButton1;
+        private DisplayButtons.Controls.ImageModernButton imageModernButton2;
     }
 }
