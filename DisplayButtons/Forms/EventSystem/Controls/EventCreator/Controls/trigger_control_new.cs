@@ -33,7 +33,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls
         {
             var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractAction>();
             var selected = items.Where(e => e.GetActionName() == comboBox1.Text).FirstOrDefault();
-            panel1.Controls.Add(selected.OnSelect());
+          panel1.Controls.Add(selected.OnSelect());
         }
     }
 }

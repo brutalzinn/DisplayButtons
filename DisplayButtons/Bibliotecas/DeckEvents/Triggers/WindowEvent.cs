@@ -1,4 +1,5 @@
 ﻿using DisplayButtons.Forms.EventSystem.Controls.actions;
+using DisplayButtons.Forms.EventSystem.Controls.triggers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,7 +29,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         public override UserControl OnSelect()
         {
 
-            return new WindowAction();
+            return new WindowTrigger();
         }
 
        
