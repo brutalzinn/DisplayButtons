@@ -10,8 +10,18 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 {
     public partial class general_user_control : UserControl
     {
+        private static general_user_control instance;
+
+        public static general_user_control Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
         public general_user_control()
         {
+            instance = this;
             InitializeComponent();
         }
 
