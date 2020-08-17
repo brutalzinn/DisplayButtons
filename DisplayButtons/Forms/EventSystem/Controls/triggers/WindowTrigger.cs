@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using DisplayButtons.Bibliotecas.DeckEvents;
+using DisplayButtons.Bibliotecas.DeckEvents.Actions;
 
 namespace DisplayButtons.Forms.EventSystem.Controls.triggers
 {
@@ -13,6 +15,11 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
         public WindowTrigger()
         {
             InitializeComponent();
+        }
+
+        private void imageModernButton1_Click(object sender, EventArgs e)
+        {
+            new FactoryForms().SaveButton(textBox1.Text, new WindowEvent());
         }
     }
 }

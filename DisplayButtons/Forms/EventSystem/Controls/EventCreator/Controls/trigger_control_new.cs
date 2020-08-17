@@ -31,7 +31,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls
         }
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
-            var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractAction>();
+            var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
             var selected = items.Where(e => e.GetActionName() == comboBox1.Text).FirstOrDefault();
           panel1.Controls.Add(selected.OnSelect());
         }

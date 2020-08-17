@@ -96,6 +96,7 @@
             this.Controls.Add(this.imageModernButton1);
             this.Name = "trigger_user_control";
             this.Size = new System.Drawing.Size(583, 243);
+            this.Load += new System.EventHandler(this.trigger_user_control_Load);
             this.ResumeLayout(false);
 
         }
@@ -104,6 +105,6 @@
         private DisplayButtons.Controls.ImageModernButton imageModernButton1;
         private DisplayButtons.Controls.ImageModernButton imageModernButton2;
         private DisplayButtons.Controls.ImageModernButton imageModernButton3;
-        private System.Windows.Forms.ListBox listBox1;
+        public System.Windows.Forms.ListBox listBox1;
     }
 }
