@@ -66,12 +66,35 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 
         private void imageModernButton3_Click(object sender, EventArgs e)
         {
-            Object selectedItem = listBox1.SelectedItem;
-            var item = selectedItem as AbstractTrigger;
-
+        
+            var item = CurrentItem as AbstractTrigger;
+            event_interface.Instance.tabControl1.SelectedTab.Controls.Clear();
+            event_interface.Instance.tabControl1.SelectedTab.Controls.Add( item.OnSelect());
           //  item.OnSelect()
 
 
         }
+
+        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+           
+        }
+        public object CurrentItem;
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndices.Count <= 0)
+            {
+                return;
+            }
+            int intselectedindex = listBox1.SelectedIndices[0];
+            if (intselectedindex >= 0)
+            {
+                CurrentItem = listBox1.Items[intselectedindex];
+
+                //do something
+                //MessageBox.Show(listView1.Items[intselectedindex].Text); 
+            }
+        
+    }
     }
 }

@@ -164,8 +164,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tab_geral_button;
         private System.Windows.Forms.TabPage tab_trigger_button;
         private System.Windows.Forms.TabPage tab_actions_button;
@@ -174,5 +172,6 @@
         private DisplayButtons.Controls.ImageModernButton imageModernButton1;
         private DisplayButtons.Controls.ImageModernButton imageModernButton2;
         private Controls.action_user_control action_user_control1;
+        public System.Windows.Forms.TabControl tabControl1;
     }
 }
