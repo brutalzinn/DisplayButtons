@@ -21,10 +21,10 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         {
             action_user_control.Instance.Add(type);
         }
-        public class AbstracActionControl
+        public class GlobalControl
         {
             public string Text { get; set; }
-            public AbstractAction Value { get; set; }
+            public object Value { get; set; }
 
             public override string ToString()
             {
@@ -32,27 +32,6 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
             }
         }
 
-        public class DynamicFolderComboBox
-        {
-
-            public string Text { get; set; }
-            public DynamicDeckFolder Value { get; set; }
-
-            public override string ToString()
-            {
-                return Text;
-            }
-
-        }
-        public class AbstractTriggerControl
-        {
-            public string Text { get; set; }
-            public AbstractTrigger Value { get; set; }
-
-            public override string ToString()
-            {
-                return Text;
-            }
-        }
+       
     }
 }

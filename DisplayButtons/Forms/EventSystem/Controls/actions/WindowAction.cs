@@ -36,7 +36,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
 
                 foreach (DynamicDeckFolder present in items)
                 {
-                    FactoryForms.DynamicFolderComboBox ComboBoxNew = new FactoryForms.DynamicFolderComboBox();
+                    FactoryForms.GlobalControl ComboBoxNew = new FactoryForms.GlobalControl();
 
                     ComboBoxNew.Text = present.DeckName;
                     ComboBoxNew.Value = present;

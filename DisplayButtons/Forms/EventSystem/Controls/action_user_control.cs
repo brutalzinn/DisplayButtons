@@ -28,7 +28,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         }
         public void Add(AbstractAction trigger)
         {
-            FactoryForms.AbstracActionControl listview = new FactoryForms.AbstracActionControl();
+            FactoryForms.GlobalControl listview = new FactoryForms.GlobalControl();
             listview.Text = trigger.GetActionName();
             listview.Value = trigger;
             listBox1.Items.Add(listview);
