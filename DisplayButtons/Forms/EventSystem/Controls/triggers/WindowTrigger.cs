@@ -19,7 +19,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
-            new FactoryForms().SaveButton(textBox1.Text, new WindowEvent());
+            new FactoryForms().SaveButton( new WindowEvent(), textBox1.Text);
         }
     }
 }

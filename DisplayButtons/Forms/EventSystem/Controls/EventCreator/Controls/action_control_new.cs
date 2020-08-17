@@ -25,7 +25,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls
                 comboBox1.Items.Add(item.GetActionName());
             }
         }
-
+      
         private void action_control_new_Load(object sender, EventArgs e)
         {
 
