@@ -29,7 +29,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         }
         public void Add(AbstractAction trigger)
         {
-            FactoryForms.GlobalControl listview = new FactoryForms.GlobalControl();
+            FactoryForms.FactoryActionControl listview = new FactoryForms.FactoryActionControl();
             listview.Text = trigger.GetActionName();
             listview.Value = trigger;
             listBox1.Items.Add(listview);

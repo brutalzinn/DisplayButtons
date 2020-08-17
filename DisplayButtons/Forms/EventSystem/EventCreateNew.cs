@@ -2,13 +2,15 @@
 using DisplayButtons.Bibliotecas.DeckEvents;
 using DisplayButtons.Bibliotecas.DeckEvents.Actions;
 using DisplayButtons.Forms.EventSystem.Controls.actions;
-using DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls;
+
 using DisplayButtons.Forms.EventSystem.Controls.triggers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -20,6 +22,30 @@ namespace DisplayButtons.Forms.EventSystem
         {
             InitializeComponent();
         }
+        private AbstractAction _modifiableAction;
+  
+        public AbstractAction ModifiableAction
+        {
+            get { return _modifiableAction; }
+            set
+            {
+                _modifiableAction = value;
+
+
+            }
+        }
+        private AbstractTrigger _modifiableTrigger;
+
+        public AbstractTrigger ModifableTrigger
+        {
+            get { return _modifiableTrigger; }
+            set
+            {
+                _modifiableTrigger = value;
+
+
+            }
+        }
         public bool _type;
         // if true, create a trigger 
         // if false, create a action
@@ -29,34 +55,24 @@ namespace DisplayButtons.Forms.EventSystem
             {
                
                 panel1.Controls.Clear();
-                panel1.Controls.Add(new trigger_control_new());
+           //     panel1.Controls.Add(new trigger_control_new());
             }
             else
             {
                 panel1.Controls.Clear();
-                panel1.Controls.Add(new action_control_new());
+             //   panel1.Controls.Add(new action_control_new());
             }
             _type = type;
         }
 
-
-        public void ShouldUpdate(object value)
+        public void ToUpdate(AbstractTrigger value)
         {
-            if( value is WindowEvent FF) { 
-        
+       //     var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
        
-                panel1.Controls.Add(FF.OnSelect());
-               
+         
 
-                //    trigger_control_new
-
-            }
-            else
-            {
-                panel1.Controls.Clear();
-                panel1.Controls.Add(new WindowAction());
-            }
            
+
 
         }
 

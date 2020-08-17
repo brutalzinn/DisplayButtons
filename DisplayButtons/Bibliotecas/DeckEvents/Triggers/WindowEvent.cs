@@ -1,4 +1,5 @@
-﻿using DisplayButtons.Forms.EventSystem.Controls.actions;
+﻿using DisplayButtons.Backend.Objects;
+using DisplayButtons.Forms.EventSystem.Controls.actions;
 using DisplayButtons.Forms.EventSystem.Controls.triggers;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,27 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             throw new NotImplementedException();
         }
 
-     
+        public void ToExecuteHelper()
+        {
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
+
+            var execAction = new WindowEvent();
+       //     execAction.keyBackFolder = ApplicationSettingsManager.Settings.keyBackFolder;
+      
+           /// form.ModifiableAction = execAction;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+            
+
+            }
+            else
+            {
+                
+            }
+
+
+        }
         public override UserControl OnSelect()
         {
 

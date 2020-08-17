@@ -6,6 +6,10 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using DisplayButtons.Bibliotecas.DeckEvents;
+using DisplayButtons.Bibliotecas.DeckEvents.Actions;
+using DisplayButtons.Backend.Objects;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace DisplayButtons.Forms.EventSystem.Controls
 {
@@ -20,7 +24,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
                 return instance;
             }
         }
-        public object CurrentItem;
+        public FactoryForms.FactoryTriggerControl CurrentItem { get; set; }
         public trigger_user_control()
         {
             instance = this;
@@ -28,7 +32,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         }
         public void Add(AbstractTrigger trigger)
         {
-            FactoryForms.GlobalControl listview = new FactoryForms.GlobalControl();
+            FactoryForms.FactoryTriggerControl listview = new FactoryForms.FactoryTriggerControl();
             listview.Text = trigger.GetActionName();
             listview.Value = trigger;
             listBox1.Items.Add(listview);
@@ -69,10 +73,14 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         {
       
             if(CurrentItem != null)
-            { 
-            EventCreateNew _window = new EventCreateNew();     
-     _window.ShouldUpdate(CurrentItem);
-     _window.Show();
+            {
+                MethodInfo helperMethod = CurrentItem.Value.GetType().GetMethod("ToExecuteHelper");
+                if (helperMethod != null)
+{
+                   
+                    helperMethod.Invoke(CurrentItem.Value,null);
+
+                }
 
             }
            
@@ -98,7 +106,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             int intselectedindex = listBox1.SelectedIndices[0];
             if (intselectedindex >= 0)
             {
-                CurrentItem = listBox1.Items[intselectedindex];
+                CurrentItem = (FactoryForms.FactoryTriggerControl)listBox1.Items[intselectedindex];
 
                 //do something
                 //MessageBox.Show(listView1.Items[intselectedindex].Text); 
