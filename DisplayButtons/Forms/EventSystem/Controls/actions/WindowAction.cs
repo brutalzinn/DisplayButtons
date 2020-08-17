@@ -25,7 +25,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
             ChangeFolder windowevent = new ChangeFolder();
 
  
-           windowevent.folder = (DynamicDeckFolder)comboBox1.SelectedItem;
+           windowevent.folder = comboBox1.SelectedItem as DynamicDeckFolder;
             new FactoryForms().SaveButton(windowevent);
         }
         public void loadFolders()

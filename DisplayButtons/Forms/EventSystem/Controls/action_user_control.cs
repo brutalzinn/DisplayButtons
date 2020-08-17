@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using DisplayButtons.Bibliotecas.DeckEvents;
+using OpenQA.Selenium.Remote;
 
 namespace DisplayButtons.Forms.EventSystem.Controls
 {
@@ -43,6 +44,16 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         private void action_user_control_Load(object sender, EventArgs e)
         {
 
+        }
+        public void Remove()
+        {
+
+            listBox1.Items.Remove(listBox1.SelectedItem);
+
+        }
+        private void imageModernButton1_Click(object sender, EventArgs e)
+        {
+            Remove();
         }
     }
 }

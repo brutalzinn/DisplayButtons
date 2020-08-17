@@ -62,6 +62,7 @@
             this.imageModernButton2.TabIndex = 1;
             this.imageModernButton2.Text = "Remover";
             this.imageModernButton2.UseVisualStyleBackColor = true;
+            this.imageModernButton2.Click += new System.EventHandler(this.imageModernButton2_Click);
             // 
             // imageModernButton3
             // 

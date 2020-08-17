@@ -53,5 +53,15 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         {
 
         }
+        public void Remove()
+        {
+
+            listBox1.Items.Remove(listBox1.SelectedItem);
+
+        }
+        private void imageModernButton2_Click(object sender, EventArgs e)
+        {
+            Remove();
+        }
     }
 }
