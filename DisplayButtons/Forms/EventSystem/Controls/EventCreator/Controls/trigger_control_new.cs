@@ -35,5 +35,15 @@ namespace DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls
             var selected = items.Where(e => e.GetActionName() == comboBox1.Text).FirstOrDefault();
           panel1.Controls.Add(selected.OnSelect());
         }
+
+        private void imageModernButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void imageModernButton2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

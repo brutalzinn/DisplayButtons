@@ -25,13 +25,21 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             instance = this;
             InitializeComponent();
         }
-        public void Add(string item, AbstractTrigger trigger)
+        public void Add(AbstractTrigger trigger)
         {
             FactoryForms.AbstractTriggerControl listview = new FactoryForms.AbstractTriggerControl();
-            listview.Text = item;
+            listview.Text = trigger.GetActionName();
             listview.Value = trigger;
             listBox1.Items.Add(listview);
         }
+
+        public void Remove(AbstractTrigger trigger)
+        {
+
+            listBox1.Items.Remove(listBox1.SelectedItem);
+
+        }
+
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
             EventCreateNew teste = new EventCreateNew();

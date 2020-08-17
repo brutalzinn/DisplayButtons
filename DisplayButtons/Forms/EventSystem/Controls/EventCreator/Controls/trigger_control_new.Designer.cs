@@ -62,6 +62,7 @@
             this.imageModernButton1.TabIndex = 2;
             this.imageModernButton1.Text = "SAVE";
             this.imageModernButton1.UseVisualStyleBackColor = true;
+            this.imageModernButton1.Click += new System.EventHandler(this.imageModernButton1_Click);
             // 
             // imageModernButton2
             // 
@@ -75,6 +76,7 @@
             this.imageModernButton2.TabIndex = 2;
             this.imageModernButton2.Text = "CANCEL";
             this.imageModernButton2.UseVisualStyleBackColor = true;
+            this.imageModernButton2.Click += new System.EventHandler(this.imageModernButton2_Click);
             // 
             // trigger_control_new
             // 

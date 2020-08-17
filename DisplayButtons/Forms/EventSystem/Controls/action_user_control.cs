@@ -26,10 +26,10 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             instance = this;
             InitializeComponent();
         }
-        public void Add(string item, AbstractAction trigger)
+        public void Add(AbstractAction trigger)
         {
             FactoryForms.AbstracActionControl listview = new FactoryForms.AbstracActionControl();
-            listview.Text = item;
+            listview.Text = trigger.GetActionName();
             listview.Value = trigger;
             listBox1.Items.Add(listview);
         }

@@ -9,7 +9,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 {
     public class WindowEvent : AbstractTrigger
     {
-      
+        public string AppName;
         public override string GetActionName()
         {
             return "Window Event";

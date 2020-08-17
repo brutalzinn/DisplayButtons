@@ -1,4 +1,5 @@
-﻿using DisplayButtons.Forms.EventSystem;
+﻿using DisplayButtons.Backend.Objects.Implementation;
+using DisplayButtons.Forms.EventSystem;
 using DisplayButtons.Forms.EventSystem.Controls;
 using DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls;
 using System;
@@ -11,14 +12,14 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
     {
 
        
-        public void SaveButton( AbstractTrigger type,params object[] values)
+        public void SaveButton( AbstractTrigger type)
         {
             
-             trigger_user_control.Instance.Add(values[0].ToString(), type);
+             trigger_user_control.Instance.Add(type);
         }
-        public void SaveButton(AbstractAction type, params object[] values)
+        public void SaveButton(AbstractAction type)
         {
-            action_user_control.Instance.Add(values[0].ToString(), type);
+            action_user_control.Instance.Add(type);
         }
         public class AbstracActionControl
         {
@@ -31,6 +32,18 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
             }
         }
 
+        public class DynamicFolderComboBox
+        {
+
+            public string Text { get; set; }
+            public DynamicDeckFolder Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+
+        }
         public class AbstractTriggerControl
         {
             public string Text { get; set; }
