@@ -1,4 +1,9 @@
-﻿using DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls;
+﻿using DisplayButtons.Backend.Utils;
+using DisplayButtons.Bibliotecas.DeckEvents;
+using DisplayButtons.Bibliotecas.DeckEvents.Actions;
+using DisplayButtons.Forms.EventSystem.Controls.actions;
+using DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls;
+using DisplayButtons.Forms.EventSystem.Controls.triggers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,10 +42,19 @@ namespace DisplayButtons.Forms.EventSystem
 
         public void ShouldUpdate(object value)
         {
-            if(_type)
-            {
-             //    trigger_control_new
+            if( value is WindowEvent FF) { 
+        
+       
+                panel1.Controls.Add(FF.OnSelect());
+               
 
+                //    trigger_control_new
+
+            }
+            else
+            {
+                panel1.Controls.Clear();
+                panel1.Controls.Add(new WindowAction());
             }
            
 

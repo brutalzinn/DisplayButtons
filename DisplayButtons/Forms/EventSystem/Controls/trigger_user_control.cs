@@ -20,6 +20,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
                 return instance;
             }
         }
+        public object CurrentItem;
         public trigger_user_control()
         {
             instance = this;
@@ -66,10 +67,18 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 
         private void imageModernButton3_Click(object sender, EventArgs e)
         {
-        
-            var item = CurrentItem as AbstractTrigger;
-            event_interface.Instance.tabControl1.SelectedTab.Controls.Clear();
-            event_interface.Instance.tabControl1.SelectedTab.Controls.Add( item.OnSelect());
+      
+            if(CurrentItem != null)
+            { 
+            EventCreateNew _window = new EventCreateNew();     
+     _window.ShouldUpdate(CurrentItem);
+     _window.Show();
+
+            }
+           
+         
+         //   event_interface.Instance.tabControl1.SelectedTab.Controls.Clear();
+       //     event_interface.Instance.tabControl1.SelectedTab.Controls.Add( item.OnSelect());
           //  item.OnSelect()
 
 
@@ -79,7 +88,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         {
            
         }
-        public object CurrentItem;
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndices.Count <= 0)

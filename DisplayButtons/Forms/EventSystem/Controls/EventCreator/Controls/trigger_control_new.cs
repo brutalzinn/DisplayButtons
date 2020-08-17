@@ -13,9 +13,21 @@ namespace DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls
 {
     public partial class trigger_control_new : UserControl
     {
+
+        private static trigger_control_new instance;
+
+        public static trigger_control_new Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
         public trigger_control_new()
         {
+            instance = this;
             InitializeComponent();
+            
             var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
 
             foreach (var item in items)

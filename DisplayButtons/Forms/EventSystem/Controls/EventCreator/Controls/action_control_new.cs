@@ -13,8 +13,20 @@ namespace DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls
 {
     public partial class action_control_new : UserControl
     {
+
+
+        private static action_control_new instance;
+
+        public static action_control_new Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
         public action_control_new()
         {
+            instance = this;
             InitializeComponent();
 
             var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractAction>();

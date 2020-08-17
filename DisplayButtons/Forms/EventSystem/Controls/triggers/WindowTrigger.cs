@@ -12,11 +12,31 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
 {
     public partial class WindowTrigger : UserControl
     {
+
+        private static WindowTrigger instance;
+
+        public static WindowTrigger Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
         public WindowTrigger()
         {
+            instance = this;
             InitializeComponent();
         }
+        public void loadInfo(AbstractTrigger value)
+        {
+            if(value is WindowEvent FF)
+            {
+                textBox1.Text = FF.AppName;
 
+            }
+
+
+        }
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
             WindowEvent windowevent = new WindowEvent();

@@ -93,9 +93,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Panel panel1;
         private DisplayButtons.Controls.ImageModernButton imageModernButton1;
         private DisplayButtons.Controls.ImageModernButton imageModernButton2;
+        public System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.Panel panel1;
     }
 }
