@@ -93,6 +93,7 @@
             this.Controls.Add(this.listBox1);
             this.Name = "action_user_control";
             this.Size = new System.Drawing.Size(629, 293);
+            this.Load += new System.EventHandler(this.action_user_control_Load);
             this.ResumeLayout(false);
 
         }

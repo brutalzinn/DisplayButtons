@@ -11,8 +11,19 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 {
     public partial class action_user_control : UserControl
     {
+        private static action_user_control instance;
+
+        public static action_user_control Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
         public action_user_control()
         {
+            instance = this;
             InitializeComponent();
         }
         public void Add(string item, AbstractAction trigger)
@@ -27,6 +38,11 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             EventCreateNew teste = new EventCreateNew();
             teste.init(false);
             teste.Show();
+        }
+
+        private void action_user_control_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

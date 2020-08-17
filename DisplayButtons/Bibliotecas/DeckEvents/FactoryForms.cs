@@ -1,4 +1,5 @@
-﻿using DisplayButtons.Forms.EventSystem.Controls;
+﻿using DisplayButtons.Forms.EventSystem;
+using DisplayButtons.Forms.EventSystem.Controls;
 using DisplayButtons.Forms.EventSystem.Controls.EventCreator.Controls;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
        
         public void SaveButton( AbstractTrigger type,params object[] values)
         {
+            
             new trigger_user_control().Add(values[0].ToString(), type);
         }
         public void SaveButton(AbstractAction type, params object[] values)

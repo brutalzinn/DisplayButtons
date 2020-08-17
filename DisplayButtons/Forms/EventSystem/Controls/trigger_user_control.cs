@@ -11,8 +11,18 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 {
     public partial class trigger_user_control : UserControl
     {
+        private static trigger_user_control instance;
+
+        public static trigger_user_control Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
         public trigger_user_control()
         {
+            instance = this;
             InitializeComponent();
         }
         public void Add(string item, AbstractTrigger trigger)
