@@ -30,14 +30,20 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         {
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
 
-            var execAction = new WindowEvent();
+            form.Show();
+    //  form.comboBox.Visible = false;
+            form.Controls.Remove(form.comboBox);
+           form.panel1.Controls.Clear();
+            form.panel1.Controls.Add( new WindowTrigger(this));
+           
+           
        //     execAction.keyBackFolder = ApplicationSettingsManager.Settings.keyBackFolder;
       
            /// form.ModifiableAction = execAction;
 
-            if (form.ShowDialog() == DialogResult.OK)
+            if (form.DialogResult == DialogResult.OK)
             {
-            
+              
 
             }
             else
@@ -50,7 +56,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         public override UserControl OnSelect()
         {
 
-            return new WindowTrigger();
+            return new WindowTrigger(this);
         }
 
        

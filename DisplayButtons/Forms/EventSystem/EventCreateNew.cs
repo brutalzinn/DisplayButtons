@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -21,6 +22,21 @@ namespace DisplayButtons.Forms.EventSystem
         public EventCreateNew()
         {
             InitializeComponent();
+
+            var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
+
+            foreach (var item in items)
+            {
+               
+                comboBox.Items.Add(item.GetActionName());
+            }
+        }
+
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+            var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
+            var selected = items.Where(e => e.GetActionName() == comboBox.Text).FirstOrDefault();
+            panel1.Controls.Add(selected.OnSelect());
         }
         private AbstractAction _modifiableAction;
   
@@ -46,35 +62,12 @@ namespace DisplayButtons.Forms.EventSystem
 
             }
         }
+
         public bool _type;
         // if true, create a trigger 
         // if false, create a action
-        public void init(bool type)
-        {
-            if (type)
-            {
-               
-                panel1.Controls.Clear();
-           //     panel1.Controls.Add(new trigger_control_new());
-            }
-            else
-            {
-                panel1.Controls.Clear();
-             //   panel1.Controls.Add(new action_control_new());
-            }
-            _type = type;
-        }
+      
 
-        public void ToUpdate(AbstractTrigger value)
-        {
-       //     var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
-       
-         
-
-           
-
-
-        }
 
 
         private void EventCreateNew_Load(object sender, EventArgs e)

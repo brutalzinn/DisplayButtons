@@ -45,7 +45,7 @@
             // 
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(216, 169);
+            this.imageModernButton1.Location = new System.Drawing.Point(220, 169);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
@@ -87,6 +87,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "WindowTrigger";
             this.Size = new System.Drawing.Size(327, 237);
+            this.Load += new System.EventHandler(this.WindowTrigger_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -21,28 +21,31 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
             {
                 return instance;
             }
-        }
-        public WindowTrigger()
+        }   
+        public string AppNameTeste;
+
+        public WindowTrigger(WindowEvent value)
         {
             instance = this;
             InitializeComponent();
+            AppNameTeste = value.AppName;
+            textBox1.Text = AppNameTeste;
         }
-        public void loadInfo(AbstractTrigger value)
-        {
-            if(value is WindowEvent FF)
-            {
-                textBox1.Text = FF.AppName;
+      
 
-            }
-
-
-        }
+   
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
             WindowEvent windowevent = new WindowEvent();
 
                 windowevent.AppName = textBox1.Text;
             new FactoryForms().SaveButton(windowevent);
+        }
+
+        private void WindowTrigger_Load(object sender, EventArgs e)
+        {
+
+        
         }
     }
 }
