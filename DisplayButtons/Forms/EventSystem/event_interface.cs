@@ -11,8 +11,18 @@ namespace DisplayButtons.Forms.EventSystem
 {
     public partial class event_interface : TemplateForm
     {
+        private static event_interface instance;
+
+        public static event_interface Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
         public event_interface()
         {
+            instance = this;
             InitializeComponent();
         }
 

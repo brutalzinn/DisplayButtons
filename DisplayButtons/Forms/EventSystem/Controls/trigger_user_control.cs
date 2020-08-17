@@ -63,5 +63,15 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         {
             Remove();
         }
+
+        private void imageModernButton3_Click(object sender, EventArgs e)
+        {
+            Object selectedItem = listBox1.SelectedItem;
+            var item = selectedItem as AbstractTrigger;
+
+          //  item.OnSelect()
+
+
+        }
     }
 }

@@ -69,7 +69,7 @@
             this.imageModernButton3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(191, 183);
+            this.imageModernButton3.Location = new System.Drawing.Point(204, 183);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;
@@ -77,6 +77,7 @@
             this.imageModernButton3.TabIndex = 1;
             this.imageModernButton3.Text = "Configurar";
             this.imageModernButton3.UseVisualStyleBackColor = true;
+            this.imageModernButton3.Click += new System.EventHandler(this.imageModernButton3_Click);
             // 
             // listBox1
             // 
