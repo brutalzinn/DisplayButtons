@@ -14,11 +14,11 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public void SaveButton( AbstractTrigger type,params object[] values)
         {
             
-            new trigger_user_control().Add(values[0].ToString(), type);
+             trigger_user_control.Instance.Add(values[0].ToString(), type);
         }
         public void SaveButton(AbstractAction type, params object[] values)
         {
-            new action_user_control().Add(values[0].ToString(), type);
+            action_user_control.Instance.Add(values[0].ToString(), type);
         }
         public class AbstracActionControl
         {
