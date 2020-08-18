@@ -8,6 +8,7 @@ using DisplayButtons.Forms.EventSystem.Controls.triggers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -60,20 +61,14 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public void ToExecuteFormGeneral()
         {
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
-      
-
-            form.ShowDialog();
-       
-            form.panel1.Controls.Clear();
-          
+     
             
-            if (form.DialogResult == DialogResult.OK)
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
-                AbstractTrigger selected = items.Where(e => e.GetActionName() == form.comboBox.Text).FirstOrDefault();
-                // form.panel1.Controls.Add(selected.CloneAction());
 
-             new FactoryForms().SaveButton(selected.CloneAction().);
+
+                SaveButton(form.global_trigger.getClassImplementTrigger);
+
             }
             else
             {

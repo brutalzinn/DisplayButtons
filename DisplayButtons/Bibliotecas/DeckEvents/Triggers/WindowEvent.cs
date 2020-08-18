@@ -51,7 +51,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
 
         }
-        public override UserControl OnSelect()
+        public override PanelControl OnSelect()
         {
 
             return new WindowTrigger(this);

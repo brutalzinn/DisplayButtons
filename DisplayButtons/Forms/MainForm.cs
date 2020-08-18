@@ -38,6 +38,7 @@ using static DisplayButtons.Backend.Objects.AbstractDeckAction;
 using Timer = System.Windows.Forms.Timer;
 using NickAc.ModernUIDoneRight.Objects.MenuItems;
 using DisplayButtons.Forms.EventSystem;
+using DisplayButtons.Forms.EventSystem.Controls.triggers;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -1145,7 +1146,7 @@ namespace DisplayButtons.Forms
                 if (folder.GetItemIndex(item) != slot) continue;
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
                 Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
-
+            
                 //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
                 if (item != null)
                 {

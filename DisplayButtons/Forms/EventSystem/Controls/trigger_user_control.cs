@@ -13,7 +13,7 @@ using System.Reflection;
 
 namespace DisplayButtons.Forms.EventSystem.Controls
 {
-    public partial class trigger_user_control : UserControl
+    public partial class trigger_user_control : PanelControl
     {
         private static trigger_user_control instance;
 

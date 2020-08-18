@@ -10,7 +10,7 @@ using DisplayButtons.Bibliotecas.DeckEvents.Actions;
 
 namespace DisplayButtons.Forms.EventSystem.Controls.triggers
 {
-    public partial class WindowTrigger : UserControl
+    public partial class WindowTrigger : PanelControl
     {
 
         private static WindowTrigger instance;
@@ -21,27 +21,33 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
             {
                 return instance;
             }
-        }   
+        }
+        public WindowEvent window;
         public string AppNameTeste;
 
-        public WindowTrigger(WindowEvent value = null)
+        public WindowTrigger(WindowEvent value)
         {
             instance = this;
             InitializeComponent();
-            if(value != null)
+            window = value;
+            if (value != null)
             {
   AppNameTeste = value.AppName;
             textBox1.Text = AppNameTeste;
             }
           
         }
-
-
-        private void CloseWithResult(DialogResult result)
+        public override void SaveConfig()
         {
-      
+
+            WindowEvent teste = new WindowEvent();
+            teste.AppName = textBox1.Text;
+     
+     
         }
 
+        public override UserControl getControl { get => this; }
+        public override AbstractTrigger getClassImplementTrigger { get => window; }
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
           //  WindowEvent windowevent = new WindowEvent();

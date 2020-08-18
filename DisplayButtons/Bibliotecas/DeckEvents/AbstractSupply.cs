@@ -18,7 +18,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         }
         public abstract Type GetActionType();
         public abstract string GetActionName();
-        public abstract UserControl OnSelect();
+        public abstract PanelControl OnSelect();
         public abstract AbstractTrigger CloneAction();
       
 
