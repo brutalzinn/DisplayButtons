@@ -40,7 +40,7 @@ namespace DisplayButtons.Forms.EventSystem
                     comboBox.Items.Add(item.GetActionName());
                 }
             }
-            else if(type == 1)
+            if(type == 1)
             {
                 abstrackaction_list =  ReflectiveEnumerator.GetEnumerableOfType<AbstractAction>();
                 foreach (var item in abstrackaction_list)
@@ -49,7 +49,7 @@ namespace DisplayButtons.Forms.EventSystem
                     comboBox.Items.Add(item.GetActionName());
                 }
             }
-
+   _type = type;
 
         }
         public int _type { get; set; } 
@@ -59,7 +59,7 @@ namespace DisplayButtons.Forms.EventSystem
         public PanelControl global_panelControl { get;set; }
         public void UpdateForm(PanelControl value,int type)
         {
-            _type = type;
+         
             FillComboBox(type);
            
             panel1.Controls.Clear();
@@ -81,7 +81,7 @@ namespace DisplayButtons.Forms.EventSystem
           
 
             }
-            else if (_type == 1)
+             if (_type == 1)
             {
 
                  AbstractAction selected = abstrackaction_list.Where(e => e.GetActionName() == comboBox.Text).FirstOrDefault();
