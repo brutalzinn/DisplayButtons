@@ -23,8 +23,12 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
             if (value != null)
             {
                 window = value;
+               if(value.folder != null)
+                {
 
-              comboBox1.SelectedItem = value.folder;
+ comboBox1.SelectedItem = value.folder;
+                }
+             
             }
 
             loadFolders();
@@ -32,11 +36,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
-            ChangeFolder windowevent = new ChangeFolder();
-
- 
-           windowevent.folder = comboBox1.SelectedItem as DynamicDeckFolder;
-            new FactoryForms().SaveButtonAction(windowevent);
+           
         }
         public void loadFolders()
         {
@@ -60,7 +60,12 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
 
             if (window != null)
             {
-           //     window.AppName = textBox1.Text;
+
+
+                window.folder = (DynamicDeckFolder)comboBox1.SelectedItem;
+           
+             
+                //     window.AppName = textBox1.Text;
             }
 
         }

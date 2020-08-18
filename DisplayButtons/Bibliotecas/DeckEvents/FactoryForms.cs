@@ -62,8 +62,8 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public void ToExecuteFormGeneral(int type)
         {
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
-     
-            
+
+            form.FillComboBox(type);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 if (type == 0)
@@ -71,10 +71,10 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
                     form.global_panelControl.SaveConfig();
                     new FactoryForms().SaveButtonTrigger(form.global_panelControl.getClassImplementTrigger);
                 }
-                else
+                if(type == 1)
                 {
                     form.global_panelControl.SaveConfig();
-                    new FactoryForms().SaveButtonTrigger(form.global_panelControl.getClassImplementAction);
+                    new FactoryForms().SaveButtonAction(form.global_panelControl.getClassImplementAction);
 
                 }
             }

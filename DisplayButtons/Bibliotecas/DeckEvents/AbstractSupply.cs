@@ -38,7 +38,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
         public abstract string GetActionName();
         public abstract PanelControl OnSelect();
-
+        public abstract AbstractAction CloneAction();
         public virtual bool OnExit()
         {
 

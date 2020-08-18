@@ -25,11 +25,11 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             //  form.comboBox.Visible = false;
             form.Controls.Remove(form.comboBox);
             var instance = new WindowAction(this);
-            form.UpdateForm(instance);
+            form.UpdateForm(instance,1);
 
             if (form.ShowDialog() == DialogResult.OK)
             {
-                folder = form.textBox1.Text;
+                folder = (DynamicDeckFolder)instance.comboBox1.SelectedItem;
                
             }
             else
@@ -39,7 +39,10 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
 
         }
-
+        public override AbstractAction CloneAction()
+        {
+            return new ChangeFolder();
+        }
         public override void OnExecute()
         {
             throw new NotImplementedException();

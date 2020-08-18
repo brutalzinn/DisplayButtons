@@ -23,22 +23,45 @@ namespace DisplayButtons.Forms.EventSystem
         public EventCreateNew()
         {
             InitializeComponent();
-
-            var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
-
-            foreach (var item in items)
-            {
-               
-                comboBox.Items.Add(item.GetActionName());
-            }
+         
+                
         }
-
-
-     
-        public PanelControl global_panelControl { get;set; }
-        public void UpdateForm(PanelControl value)
+        public void FillComboBox(int type)
         {
 
+            
+            if (type == 0){
+
+
+                abstracktrigger_list = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
+                foreach (var item in abstracktrigger_list)
+                {
+
+                    comboBox.Items.Add(item.GetActionName());
+                }
+            }
+            else if(type == 1)
+            {
+                abstrackaction_list =  ReflectiveEnumerator.GetEnumerableOfType<AbstractAction>();
+                foreach (var item in abstrackaction_list)
+                {
+
+                    comboBox.Items.Add(item.GetActionName());
+                }
+            }
+
+
+        }
+        public int _type { get; set; } 
+        public IEnumerable<AbstractTrigger> abstracktrigger_list;
+
+        public IEnumerable<AbstractAction> abstrackaction_list;
+        public PanelControl global_panelControl { get;set; }
+        public void UpdateForm(PanelControl value,int type)
+        {
+            _type = type;
+            FillComboBox(type);
+           
             panel1.Controls.Clear();
             //    global_panelControl = value.OnSelect();
             global_panelControl = value;
@@ -48,11 +71,25 @@ namespace DisplayButtons.Forms.EventSystem
         }
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
-            var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
-            AbstractTrigger selected = items.Where(e => e.GetActionName() == comboBox.Text).FirstOrDefault();
-            
-            panel1.Controls.Clear();
-            global_panelControl = selected.OnSelect();
+           
+
+ panel1.Controls.Clear();
+            if (_type == 0 )
+            { 
+                AbstractTrigger selected = abstracktrigger_list.Where(e => e.GetActionName() == comboBox.Text).FirstOrDefault();
+                global_panelControl = selected.OnSelect();
+          
+
+            }
+            else if (_type == 1)
+            {
+
+                 AbstractAction selected = abstrackaction_list.Where(e => e.GetActionName() == comboBox.Text).FirstOrDefault();
+                global_panelControl = selected.OnSelect();
+            }
+
+           
+           
             panel1.Controls.Add(global_panelControl);
            
         //    panel1.Controls.Add(global_trigger.getControl);
@@ -83,7 +120,7 @@ namespace DisplayButtons.Forms.EventSystem
             }
         }
 
-        public bool _type;
+     
         // if true, create a trigger 
         // if false, create a action
 

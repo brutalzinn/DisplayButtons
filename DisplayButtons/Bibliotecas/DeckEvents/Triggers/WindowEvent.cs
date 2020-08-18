@@ -42,7 +42,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             // form.comboBox.SelectedItem = GetActionName();
           form.Controls.Remove(form.comboBox);
             var instance = new WindowTrigger(this);
-            form.UpdateForm(instance) ;
+            form.UpdateForm(instance, 0);
    
             if (form.ShowDialog() == DialogResult.OK)
             {
