@@ -36,7 +36,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         }
         private void imageModernButton3_Click(object sender, EventArgs e)
         {
-       
+            new FactoryForms().ToExecuteFormGeneral(1);
 
 
 
