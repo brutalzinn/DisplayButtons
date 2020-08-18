@@ -41,7 +41,7 @@ namespace DisplayButtons.Forms.EventSystem
             panel1.Controls.Clear();
             global_trigger = selected.OnSelect();
             panel1.Controls.Add(global_trigger);
-          
+         
         //    panel1.Controls.Add(global_trigger.getControl);
 
         }
@@ -89,6 +89,7 @@ namespace DisplayButtons.Forms.EventSystem
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
+          
             CloseWithResult(DialogResult.OK);
         }
 

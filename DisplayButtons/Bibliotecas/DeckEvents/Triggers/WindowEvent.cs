@@ -33,16 +33,16 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         {
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
 
-            form.ShowDialog();
+        
             //  form.comboBox.Visible = false;
             form.Controls.Remove(form.comboBox);
            form.panel1.Controls.Clear();
             form.panel1.Controls.Add(new WindowTrigger(this)) ;
 
-            if (form.DialogResult == DialogResult.OK)
+            if (form.ShowDialog() == DialogResult.OK)
             {
                 AppName = form.textBox1.Text;
-                new FactoryForms().SaveButton(this);
+                new FactoryForms().SaveButtonTrigger(this);
             }
             else
             {

@@ -18,12 +18,12 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
     {
 
        
-        public void SaveButton( AbstractTrigger type)
+        public void SaveButtonTrigger( AbstractTrigger type)
         {
             
              trigger_user_control.Instance.Add(type);
         }
-        public void SaveButton(AbstractAction type)
+        public void SaveButtonAction(AbstractAction type)
         {
             action_user_control.Instance.Add(type);
         }
@@ -66,8 +66,8 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
             if (form.ShowDialog() == DialogResult.OK)
             {
 
-
-                SaveButton(form.global_trigger.getClassImplementTrigger);
+                form.global_trigger.SaveConfig();
+                new FactoryForms().SaveButtonTrigger(form.global_trigger.getClassImplementTrigger);
 
             }
             else

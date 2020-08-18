@@ -23,26 +23,28 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
             }
         }
         public WindowEvent window;
-        public string AppNameTeste;
+   
 
         public WindowTrigger(WindowEvent value)
         {
             instance = this;
             InitializeComponent();
-            window = value;
+          
             if (value != null)
             {
-  AppNameTeste = value.AppName;
-            textBox1.Text = AppNameTeste;
+                window = value;
+
+            textBox1.Text = value.AppName;
             }
           
         }
         public override void SaveConfig()
         {
 
-            WindowEvent teste = new WindowEvent();
-            teste.AppName = textBox1.Text;
-     
+            if (window != null)
+            {
+                window.AppName = textBox1.Text;
+            }
      
         }
 
