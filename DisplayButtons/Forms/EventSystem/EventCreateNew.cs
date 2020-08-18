@@ -31,11 +31,13 @@ namespace DisplayButtons.Forms.EventSystem
                 comboBox.Items.Add(item.GetActionName());
             }
         }
-
+        public AbstractTrigger trigger { get; set; }
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
             var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
-            var selected = items.Where(e => e.GetActionName() == comboBox.Text).FirstOrDefault();
+            AbstractTrigger selected = items.Where(e => e.GetActionName() == comboBox.Text).FirstOrDefault();
+        
+           
             panel1.Controls.Add(selected.OnSelect());
         }
         private AbstractAction _modifiableAction;
@@ -66,13 +68,28 @@ namespace DisplayButtons.Forms.EventSystem
         public bool _type;
         // if true, create a trigger 
         // if false, create a action
-      
+
+        private void CloseWithResult(DialogResult result)
+        {
+            DialogResult = result;
+            Close();
+        }
 
 
 
         private void EventCreateNew_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void imageModernButton1_Click(object sender, EventArgs e)
+        {
+            CloseWithResult(DialogResult.OK);
+        }
+
+        private void imageModernButton2_Click(object sender, EventArgs e)
+        {
+            CloseWithResult(DialogResult.Cancel);
         }
     }
 }

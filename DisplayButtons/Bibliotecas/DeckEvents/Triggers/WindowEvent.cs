@@ -25,30 +25,28 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         {
             throw new NotImplementedException();
         }
-
+        public override AbstractTrigger CloneAction()
+        {
+            return new WindowEvent();
+        }
         public void ToExecuteHelper()
         {
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
 
-            form.Show();
-    //  form.comboBox.Visible = false;
+            form.ShowDialog();
+            //  form.comboBox.Visible = false;
             form.Controls.Remove(form.comboBox);
            form.panel1.Controls.Clear();
-            form.panel1.Controls.Add( new WindowTrigger(this));
-           
-           
-       //     execAction.keyBackFolder = ApplicationSettingsManager.Settings.keyBackFolder;
-      
-           /// form.ModifiableAction = execAction;
+            form.panel1.Controls.Add(new WindowTrigger(this)) ;
 
             if (form.DialogResult == DialogResult.OK)
             {
-              
-
+                AppName = form.textBox1.Text;
+                new FactoryForms().SaveButton(this);
             }
             else
             {
-                
+                form.Close();
             }
 
 

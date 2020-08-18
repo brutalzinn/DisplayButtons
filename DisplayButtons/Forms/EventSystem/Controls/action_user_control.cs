@@ -36,9 +36,12 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         }
         private void imageModernButton3_Click(object sender, EventArgs e)
         {
-            EventCreateNew teste = new EventCreateNew();
-          //  teste.init(false);
-            teste.Show();
+       
+
+
+
+
+
         }
 
         private void action_user_control_Load(object sender, EventArgs e)

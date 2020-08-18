@@ -24,6 +24,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
                 return instance;
             }
         }
+        public int type = 0;
         public FactoryForms.FactoryTriggerControl CurrentItem { get; set; }
         public trigger_user_control()
         {
@@ -47,10 +48,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
-            EventCreateNew teste = new EventCreateNew();
-        //    teste.init(true);
-            teste.Show();
-
+           new FactoryForms().ToExecuteFormGeneral();
 
         }
 
