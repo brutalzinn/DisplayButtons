@@ -13,21 +13,13 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
     public partial class WindowTrigger : PanelControl
     {
 
-        private static WindowTrigger instance;
-
-        public static WindowTrigger Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        
         public WindowEvent window;
    
 
         public WindowTrigger(WindowEvent value)
         {
-            instance = this;
+            
             InitializeComponent();
           
             if (value != null)
@@ -43,12 +35,15 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
 
             if (window != null)
             {
-                window.AppName = textBox1.Text;
+                window.AppName = textBox1.Text;  
+          
             }
-     
-        }
 
-        public override UserControl getControl { get => this; }
+          
+
+        }
+  
+       public override UserControl getControl { get => this; }
         public override AbstractTrigger getClassImplementTrigger { get => window; }
         private void imageModernButton1_Click(object sender, EventArgs e)
         {

@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DisplayButtons.Bibliotecas.DeckEvents;
 using OpenQA.Selenium.Remote;
+using System.Reflection;
 
 namespace DisplayButtons.Forms.EventSystem.Controls
 {
@@ -21,7 +22,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
                 return instance;
             }
         }
-
+        public FactoryForms.FactoryTriggerControl CurrentItem { get; set; }
         public action_user_control()
         {
             instance = this;
@@ -57,6 +58,37 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
             Remove();
+        }
+
+        private void imageModernButton2_Click(object sender, EventArgs e)
+        {
+            if (CurrentItem != null)
+            {
+                MethodInfo helperMethod = CurrentItem.Value.GetType().GetMethod("ToExecuteHelper");
+                if (helperMethod != null)
+                {
+
+                    helperMethod.Invoke(CurrentItem.Value, null);
+
+                }
+
+            }
+        }
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndices.Count <= 0)
+            {
+                return;
+            }
+            int intselectedindex = listBox1.SelectedIndices[0];
+            if (intselectedindex >= 0)
+            {
+                CurrentItem = (FactoryForms.FactoryTriggerControl)listBox1.Items[intselectedindex];
+
+                //do something
+                //MessageBox.Show(listView1.Items[intselectedindex].Text); 
+            }
+
         }
     }
 }

@@ -37,7 +37,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
     {
 
         public abstract string GetActionName();
-        public abstract UserControl OnSelect();
+        public abstract PanelControl OnSelect();
 
         public virtual bool OnExit()
         {

@@ -12,11 +12,11 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
     {
 
 
-        public virtual void SaveConfig()
+        public virtual void SaveConfig( )
         {
-
+           
         }
-
+    
         public virtual UserControl getControl { get; }
         public virtual AbstractTrigger getClassImplementTrigger { get; }
 

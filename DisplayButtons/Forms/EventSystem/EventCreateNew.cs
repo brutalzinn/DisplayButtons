@@ -32,16 +32,29 @@ namespace DisplayButtons.Forms.EventSystem
                 comboBox.Items.Add(item.GetActionName());
             }
         }
- public PanelControl global_panelControl { get;set; }
+
+
+     
+        public PanelControl global_panelControl { get;set; }
+        public void UpdateForm(PanelControl value)
+        {
+
+            panel1.Controls.Clear();
+            //    global_panelControl = value.OnSelect();
+            global_panelControl = value;
+            panel1.Controls.Add(value);
+          ///  TextBox control = global_panelControl.getControl.Controls.Find("textBox1", true).FirstOrDefault() as TextBox;
+        
+        }
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
             var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
             AbstractTrigger selected = items.Where(e => e.GetActionName() == comboBox.Text).FirstOrDefault();
-
+            
             panel1.Controls.Clear();
             global_panelControl = selected.OnSelect();
             panel1.Controls.Add(global_panelControl);
-
+           
         //    panel1.Controls.Add(global_trigger.getControl);
 
         }

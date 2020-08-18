@@ -9,14 +9,24 @@ using DisplayButtons.Bibliotecas.DeckEvents.Actions;
 using DisplayButtons.Bibliotecas.DeckEvents;
 using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Misc;
+using DisplayButtons.Backend.Objects;
 
 namespace DisplayButtons.Forms.EventSystem.Controls.actions
 {
-    public partial class WindowAction : UserControl
+    public partial class WindowAction : PanelControl
     {
-        public WindowAction()
+        public ChangeFolder window;
+        public WindowAction(ChangeFolder value)
         {
             InitializeComponent();
+
+            if (value != null)
+            {
+                window = value;
+
+              comboBox1.SelectedItem = value.folder;
+            }
+
             loadFolders();
         }
 
@@ -45,6 +55,18 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
             }
 
         }
+        public override void SaveConfig()
+        {
+
+            if (window != null)
+            {
+           //     window.AppName = textBox1.Text;
+            }
+
+        }
+
+        public override UserControl getControl { get => this; }
+        public override AbstractAction getClassImplementAction { get => window; }
         private void WindowAction_Load(object sender, EventArgs e)
         {
          

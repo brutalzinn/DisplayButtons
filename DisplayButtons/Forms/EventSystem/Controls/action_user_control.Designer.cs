@@ -42,6 +42,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(608, 214);
             this.listBox1.TabIndex = 0;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // imageModernButton1
             // 
@@ -69,6 +70,7 @@
             this.imageModernButton2.TabIndex = 1;
             this.imageModernButton2.Text = "Configurar";
             this.imageModernButton2.UseVisualStyleBackColor = true;
+            this.imageModernButton2.Click += new System.EventHandler(this.imageModernButton2_Click);
             // 
             // imageModernButton3
             // 

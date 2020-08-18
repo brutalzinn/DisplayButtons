@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
+using DisplayButtons.Forms;
+using System.Linq;
+
 namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 {
     public class WindowEvent : AbstractTrigger
@@ -13,6 +16,8 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         public string AppName;
         public override string GetActionName()
         {
+
+           
             return "Window Event";
         }
 
@@ -34,14 +39,21 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
 
         
-            //  form.comboBox.Visible = false;
-            form.Controls.Remove(form.comboBox);
+            // form.comboBox.SelectedItem = GetActionName();
+          form.Controls.Remove(form.comboBox);
            form.panel1.Controls.Clear();
-            form.panel1.Controls.Add(new WindowTrigger(this)) ;
+            form.UpdateForm(new WindowTrigger(this)) ;
 
             if (form.ShowDialog() == DialogResult.OK)
             {
-                AppName = form.textBox1.Text;
+
+                // TextBox teste = form.global_panelControl.getControl.Controls.Find("textBox1", false).FirstOrDefault() as TextBox;
+                TextBox control = form.global_panelControl.getControl.Controls.Find("textBox1", true).FirstOrDefault() as TextBox;
+                if (control != null)
+                {
+                    AppName = control.Text;
+                }
+              //  form.global_panelControl.SaveConfig();
                 new FactoryForms().SaveButtonTrigger(this);
             }
             else
