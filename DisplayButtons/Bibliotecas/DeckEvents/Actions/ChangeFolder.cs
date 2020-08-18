@@ -16,7 +16,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         {
             return "Change to folder";
         }
-
+    
         public void ToExecuteHelper()
         {
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
@@ -24,13 +24,13 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
             //  form.comboBox.Visible = false;
             form.Controls.Remove(form.comboBox);
-            form.panel1.Controls.Clear();
-            form.panel1.Controls.Add(new WindowAction(this));
+            var instance = new WindowAction(this);
+            form.UpdateForm(instance);
 
             if (form.ShowDialog() == DialogResult.OK)
             {
                 folder = form.textBox1.Text;
-                new FactoryForms().SaveButtonAction(this);
+               
             }
             else
             {

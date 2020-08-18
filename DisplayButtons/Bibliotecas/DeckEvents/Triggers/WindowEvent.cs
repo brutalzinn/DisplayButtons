@@ -41,20 +41,14 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         
             // form.comboBox.SelectedItem = GetActionName();
           form.Controls.Remove(form.comboBox);
-           form.panel1.Controls.Clear();
-            form.UpdateForm(new WindowTrigger(this)) ;
-
+            var instance = new WindowTrigger(this);
+            form.UpdateForm(instance) ;
+   
             if (form.ShowDialog() == DialogResult.OK)
             {
 
-                // TextBox teste = form.global_panelControl.getControl.Controls.Find("textBox1", false).FirstOrDefault() as TextBox;
-                TextBox control = form.global_panelControl.getControl.Controls.Find("textBox1", true).FirstOrDefault() as TextBox;
-                if (control != null)
-                {
-                    AppName = control.Text;
-                }
-              //  form.global_panelControl.SaveConfig();
-                new FactoryForms().SaveButtonTrigger(this);
+                AppName = instance.textBox1.Text;
+           
             }
             else
             {
