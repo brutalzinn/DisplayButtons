@@ -57,18 +57,26 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
                 return Text;
             }
         }
-
-        public void ToExecuteFormGeneral()
+        //type = 0 is trigger
+        // type = 1 is action
+        public void ToExecuteFormGeneral(int type)
         {
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
      
             
             if (form.ShowDialog() == DialogResult.OK)
             {
+                if (type == 0)
+                {
+                    form.global_panelControl.SaveConfig();
+                    new FactoryForms().SaveButtonTrigger(form.global_panelControl.getClassImplementTrigger);
+                }
+                else
+                {
+                    form.global_panelControl.SaveConfig();
+                    new FactoryForms().SaveButtonTrigger(form.global_panelControl.getClassImplementAction);
 
-                form.global_trigger.SaveConfig();
-                new FactoryForms().SaveButtonTrigger(form.global_trigger.getClassImplementTrigger);
-
+                }
             }
             else
             {
