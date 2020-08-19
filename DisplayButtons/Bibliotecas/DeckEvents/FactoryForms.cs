@@ -58,6 +58,17 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
             }
         }
 
+        public class FactoryEventControl
+        {
+            public string Text { get; set; }
+            public Event Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
         public void CreateEvent()
         {
 

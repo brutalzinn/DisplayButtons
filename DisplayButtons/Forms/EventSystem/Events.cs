@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DisplayButtons.Bibliotecas.DeckEvents;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,16 @@ namespace DisplayButtons.Forms.EventSystem
         public Events()
         {
             InitializeComponent();
+            FactoryForms.FactoryEventControl listview = new FactoryForms.FactoryEventControl();
+          foreach(var item in EventXml.Settings.Events)
+            {
+
+                listview.Text = item.Name;//trigger.GetActionName();
+            listview.Value = item;// trigger;
+            listBox1.Items.Add(listview);
+
+            }
+        
         }
 
         private void Events_Load(object sender, EventArgs e)
