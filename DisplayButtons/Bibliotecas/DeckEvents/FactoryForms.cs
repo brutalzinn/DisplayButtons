@@ -57,6 +57,14 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
                 return Text;
             }
         }
+
+        public void CreateEvent()
+        {
+
+
+
+
+        }
         //type = 0 is trigger
         // type = 1 is action
         public void ToExecuteFormGeneral(int type)

@@ -1,4 +1,6 @@
 ﻿
+using DisplayButtons.Bibliotecas.DeckEvents;
+using DisplayButtons.Forms.EventSystem.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +41,13 @@ namespace DisplayButtons.Forms.EventSystem
         private void trigger_user_control1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void imageModernButton1_Click(object sender, EventArgs e)
+        {
+            Event _event = new Event(action_user_control.Instance.GetList(),trigger_user_control.Instance.GetList(),general_user_control.Instance.GetName());
+            EventXml.Settings.Events.Add(_event);
+            
         }
     }
 }

@@ -87,6 +87,7 @@
             // 
             // trigger_user_control1
             // 
+            this.trigger_user_control1.CurrentItem = null;
             this.trigger_user_control1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trigger_user_control1.Location = new System.Drawing.Point(3, 3);
             this.trigger_user_control1.Name = "trigger_user_control1";
@@ -107,6 +108,7 @@
             // 
             // action_user_control1
             // 
+            this.action_user_control1.CurrentItem = null;
             this.action_user_control1.Location = new System.Drawing.Point(0, 3);
             this.action_user_control1.Name = "action_user_control1";
             this.action_user_control1.Size = new System.Drawing.Size(664, 306);
@@ -124,6 +126,7 @@
             this.imageModernButton1.TabIndex = 1;
             this.imageModernButton1.Text = "Save";
             this.imageModernButton1.UseVisualStyleBackColor = true;
+            this.imageModernButton1.Click += new System.EventHandler(this.imageModernButton1_Click);
             // 
             // imageModernButton2
             // 

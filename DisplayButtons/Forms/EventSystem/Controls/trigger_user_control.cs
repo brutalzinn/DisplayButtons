@@ -31,6 +31,21 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             instance = this;
             InitializeComponent();
         }
+        public List<AbstractTrigger> list_actions { get; set; } = new List<AbstractTrigger>();
+
+        public List<AbstractTrigger> GetList()
+        {
+
+
+
+            foreach (FactoryForms.FactoryTriggerControl item in listBox1.Items)
+            {
+
+                list_actions.Add(item.Value);
+
+            }
+            return list_actions;
+        }
         public void Add(AbstractTrigger trigger)
         {
             FactoryForms.FactoryTriggerControl listview = new FactoryForms.FactoryTriggerControl();

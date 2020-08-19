@@ -27,6 +27,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
             return false;
         }
+        public abstract void OnInit();
         public abstract void OnExecute();
 
 
@@ -44,6 +45,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
             return false;
         }
+        public abstract void OnInit();
         public abstract void OnExecute();
 
 

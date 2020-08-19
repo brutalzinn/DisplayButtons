@@ -22,11 +22,25 @@ namespace DisplayButtons.Forms.EventSystem.Controls
                 return instance;
             }
         }
-        public FactoryForms.FactoryTriggerControl CurrentItem { get; set; }
+        public FactoryForms.FactoryActionControl CurrentItem { get; set; }
         public action_user_control()
         {
             instance = this;
             InitializeComponent();
+        }   
+        public List<AbstractAction> list_actions { get; set; } = new List<AbstractAction>();
+        public List<AbstractAction> GetList()
+        {
+
+        
+
+           foreach(FactoryForms.FactoryActionControl item in listBox1.Items)
+            {
+
+                list_actions.Add(item.Value);
+
+            }
+            return list_actions;
         }
         public void Add(AbstractAction trigger)
         {
@@ -83,7 +97,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             int intselectedindex = listBox1.SelectedIndices[0];
             if (intselectedindex >= 0)
             {
-                CurrentItem = (FactoryForms.FactoryTriggerControl)listBox1.Items[intselectedindex];
+                CurrentItem = (FactoryForms.FactoryActionControl)listBox1.Items[intselectedindex];
 
                 //do something
                 //MessageBox.Show(listView1.Items[intselectedindex].Text); 

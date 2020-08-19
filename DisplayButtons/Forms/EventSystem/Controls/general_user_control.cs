@@ -24,7 +24,11 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             instance = this;
             InitializeComponent();
         }
+        public  string  GetName(){
 
+
+            return textBox1.Text;
+            }
         private void UserControl1_Load(object sender, EventArgs e)
         {
 

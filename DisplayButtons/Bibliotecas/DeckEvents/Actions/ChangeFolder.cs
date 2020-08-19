@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 {
+
     public class ChangeFolder : AbstractAction
     {
 
@@ -55,6 +56,9 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             return new WindowAction(this);
         }
 
-       
+        public override void OnInit()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Linq;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 {
+   
     public class WindowEvent : AbstractTrigger
     {
         public string AppName;
@@ -63,6 +64,9 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             return new WindowTrigger(this);
         }
 
-       
+        public override void OnInit()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using DisplayButtons.Backend.Objects;
+using DisplayButtons.Bibliotecas.DeckEvents;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +15,8 @@ namespace DisplayButtons.Backend.Utils
     {
 
         protected static Type[] extraTypes;
-
+        protected static Type[] extraTypesTrigger;
+        protected static Type[] extraTypesAction;
         public static Type[] ExtraTypes {
             get
             {
@@ -22,7 +25,18 @@ namespace DisplayButtons.Backend.Utils
                 return extraTypes;
             }
         }
-
+        public static Type[] ExtraTypesEvents
+        {
+            get
+            {
+                if (extraTypes == null)
+                    extraTypesTrigger = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>().Select(c => c.GetType()).ToArray();
+                extraTypesAction = ReflectiveEnumerator.GetEnumerableOfType<AbstractAction>().Select(c => c.GetType()).ToArray();
+                extraTypes.Concat(extraTypesTrigger);
+                extraTypes.Concat(extraTypesAction);
+                return extraTypes;
+            }
+        }
         public static T FromXML<T>(string xml)
         {
             using (StringReader stringReader = new StringReader(xml)) {
@@ -34,10 +48,20 @@ namespace DisplayButtons.Backend.Utils
         public static string ToXML<T>(T obj)
         {
             using (StringWriter stringWriter = new StringWriter(new StringBuilder())) {
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(T), ExtraTypes);
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(T), extraTypesTrigger);
                 xmlSerializer.Serialize(stringWriter, obj);
                 return stringWriter.ToString();
             }
         }
+        public static string ToXmlEvents<T>(T obj)
+        {
+            using (StringWriter stringWriter = new StringWriter(new StringBuilder()))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(T), ExtraTypesEvents);
+                xmlSerializer.Serialize(stringWriter, obj);
+                return stringWriter.ToString();
+            }
+        }
+
     }
 }

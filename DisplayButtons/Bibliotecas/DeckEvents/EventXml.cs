@@ -53,7 +53,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
         public static void SaveSettings()
         {
-            File.WriteAllText(SETTINGS_FILE, XMLUtils.ToXML(settings));
+            File.WriteAllText(SETTINGS_FILE, XMLUtils.ToXmlEvents(settings));
         }
 
 
@@ -84,9 +84,8 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
 
 
-        public AbstractAction abstractAction;
+        public List<Event> Events { get; set; } = new List<Event>();
 
-        public AbstractTrigger abstractTrigger;
 
         public KeyInfoAppSettingsGlobal keyMainFolder { get; set; } = new KeyInfoAppSettingsGlobal();
         public KeyInfoAppSettingsGlobal keyBackFolder { get; set; } = new KeyInfoAppSettingsGlobal();
