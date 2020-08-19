@@ -28,8 +28,10 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public List<AbstractAction> list_actions { get; set; } = new List<AbstractAction>();
         [System.Xml.Serialization.XmlElementAttribute("EventTriggers", typeof(AbstractTrigger))]
         public List<AbstractTrigger> list_triggers { get; set; } = new List<AbstractTrigger>();
-       
+
+        [XmlElement("Name")]
         public string Name { get; set; }
+        [XmlElement("IsEnabled")]
         public bool IsEnabled { get; set; }
 
     }

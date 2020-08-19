@@ -64,20 +64,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
     [Serializable]
     public class AppSettings
     {
-        public class KeyInfoAppSettingsGlobal
-        {
-            public KeyInfoAppSettingsGlobal()
-            {
-            }
-            public KeyInfoAppSettingsGlobal(Keys[] modifierKeys, Keys[] keys)
-            {
-                ModifierKeys = modifierKeys;
-                Keys = keys;
-            }
-
-            public Keys[] ModifierKeys { get; set; } = new Keys[] { };
-            public Keys[] Keys { get; set; } = new Keys[] { };
-        }
+      
         /// <summary>
         /// Called to signal to subscribers that the theme was changed.
         /// </summary>
@@ -87,7 +74,6 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public List<Event> Events { get; set; } = new List<Event>();
 
 
-        public KeyInfoAppSettingsGlobal keyMainFolder { get; set; } = new KeyInfoAppSettingsGlobal();
-        public KeyInfoAppSettingsGlobal keyBackFolder { get; set; } = new KeyInfoAppSettingsGlobal();
+
     }
 }

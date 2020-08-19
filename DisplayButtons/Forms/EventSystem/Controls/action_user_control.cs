@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DisplayButtons.Bibliotecas.DeckEvents;
 using OpenQA.Selenium.Remote;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace DisplayButtons.Forms.EventSystem.Controls
 {
@@ -20,6 +21,10 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             get
             {
                 return instance;
+            }
+            set
+            {
+                instance = value;
             }
         }
         public FactoryForms.FactoryActionControl CurrentItem { get; set; }
@@ -103,6 +108,12 @@ namespace DisplayButtons.Forms.EventSystem.Controls
                 //MessageBox.Show(listView1.Items[intselectedindex].Text); 
             }
 
+        }
+
+        private void action_user_control_Leave(object sender, EventArgs e)
+        {
+            Debug.WriteLine("FECHANDO ACTION INSTANCE");
+        
         }
     }
 }

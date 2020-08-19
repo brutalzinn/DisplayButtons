@@ -14,10 +14,10 @@ namespace DisplayButtons.Forms.EventSystem
         public Events()
         {
             InitializeComponent();
-            FactoryForms.FactoryEventControl listview = new FactoryForms.FactoryEventControl();
+          
           foreach(var item in EventXml.Settings.Events)
             {
-
+  FactoryForms.FactoryEventControl listview = new FactoryForms.FactoryEventControl();
                 listview.Text = item.Name;//trigger.GetActionName();
             listview.Value = item;// trigger;
             listBox1.Items.Add(listview);

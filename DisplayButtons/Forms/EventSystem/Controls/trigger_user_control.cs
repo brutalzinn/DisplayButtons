@@ -23,6 +23,11 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             {
                 return instance;
             }
+            set
+            {
+
+                instance = value;
+            }
         }
         public int type = 0;
         public FactoryForms.FactoryTriggerControl CurrentItem { get; set; }

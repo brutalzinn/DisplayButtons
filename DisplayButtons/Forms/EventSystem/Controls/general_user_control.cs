@@ -18,6 +18,10 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             {
                 return instance;
             }
+            set
+            {
+                instance = value;
+            }
         }
         public general_user_control()
         {
