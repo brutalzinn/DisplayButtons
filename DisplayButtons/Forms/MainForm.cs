@@ -39,6 +39,7 @@ using Timer = System.Windows.Forms.Timer;
 using NickAc.ModernUIDoneRight.Objects.MenuItems;
 using DisplayButtons.Forms.EventSystem;
 using DisplayButtons.Forms.EventSystem.Controls.triggers;
+using DisplayButtons.Bibliotecas.DeckEvents;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -348,6 +349,7 @@ namespace DisplayButtons.Forms
 
 
             }
+            new FactoryEvents().Init();
 
             //warning_label.ForeColor = ColorScheme.SecondaryColor;
             Checkupdates();

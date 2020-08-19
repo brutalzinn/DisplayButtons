@@ -82,11 +82,14 @@ namespace DisplayButtons.Forms.EventSystem
             {
 
 
-                var item = EventXml.Settings.Events.Where(i => i == CurrentEvent).First();
+                var item = EventXml.Settings.Events.Where(i => i == CurrentEvent).FirstOrDefault();
                 var index = EventXml.Settings.Events.IndexOf(item);
 
                 if (index != -1)
-                    EventXml.Settings.Events[index] = _event;
+                {
+EventXml.Settings.Events[index] = _event;
+                }
+                    
                 //  EventXml.Settings.Events.Where(x => x.Equals(CurrentEvent) == _event : x);
 
 
