@@ -59,5 +59,11 @@ namespace DisplayButtons.Forms.EventSystem
             event_interface teste = new event_interface(CurrentItem.Value);
             teste.Show();
         }
+
+        private void imageModernButton1_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Remove(CurrentItem.Value);
+            EventXml.Settings.Events.Remove(CurrentItem.Value);
+        }
     }
 }

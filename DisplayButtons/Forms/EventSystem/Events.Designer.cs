@@ -49,7 +49,7 @@
             // 
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(185, 339);
+            this.imageModernButton1.Location = new System.Drawing.Point(199, 339);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
@@ -57,6 +57,7 @@
             this.imageModernButton1.TabIndex = 1;
             this.imageModernButton1.Text = "Delete";
             this.imageModernButton1.UseVisualStyleBackColor = true;
+            this.imageModernButton1.Click += new System.EventHandler(this.imageModernButton1_Click);
             // 
             // imageModernButton2
             // 
@@ -89,7 +90,7 @@
             // 
             this.imageModernButton4.CustomColorScheme = false;
             this.imageModernButton4.Image = null;
-            this.imageModernButton4.Location = new System.Drawing.Point(378, 339);
+            this.imageModernButton4.Location = new System.Drawing.Point(387, 339);
             this.imageModernButton4.Name = "imageModernButton4";
             this.imageModernButton4.NormalImage = null;
             this.imageModernButton4.Origin = null;
