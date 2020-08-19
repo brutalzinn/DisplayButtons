@@ -14,11 +14,15 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public Event(){
 
             }
-        public Event(List<AbstractAction> list_actions, List<AbstractTrigger> list_triggers, string name)
+
+     
+
+        public Event(List<AbstractAction> list_actions, List<AbstractTrigger> list_triggers, string name,bool isenabled)
         {
             this.list_actions = list_actions;
             this.list_triggers = list_triggers;
             Name = name;
+            IsEnabled = isenabled;
         }
         [System.Xml.Serialization.XmlElementAttribute("EventActions", typeof(AbstractAction))]
         public List<AbstractAction> list_actions { get; set; } = new List<AbstractAction>();
@@ -26,7 +30,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public List<AbstractTrigger> list_triggers { get; set; } = new List<AbstractTrigger>();
        
         public string Name { get; set; }
-
+        public bool IsEnabled { get; set; }
 
     }
 }

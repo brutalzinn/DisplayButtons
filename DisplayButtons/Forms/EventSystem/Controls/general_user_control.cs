@@ -29,6 +29,24 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 
             return textBox1.Text;
             }
+        public bool GetEnabled()
+        {
+
+
+            return checkBox1.Checked;
+        }
+        public void SetName(string name)
+        {
+
+
+          textBox1.Text = name;
+        }
+        public void SetEnabled(bool value)
+        {
+
+
+             checkBox1.Checked = value;
+        }
         private void UserControl1_Load(object sender, EventArgs e)
         {
 

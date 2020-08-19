@@ -25,7 +25,7 @@ namespace DisplayButtons.Forms.EventSystem
             }
         
         }
-
+        public FactoryForms.FactoryEventControl CurrentItem { get; set; }
         private void Events_Load(object sender, EventArgs e)
         {
 
@@ -36,6 +36,28 @@ namespace DisplayButtons.Forms.EventSystem
             event_interface teste = new event_interface();
             teste.Show();
                
+        }
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndices.Count <= 0)
+            {
+                return;
+            }
+            int intselectedindex = listBox1.SelectedIndices[0];
+            if (intselectedindex >= 0)
+            {
+                CurrentItem = (FactoryForms.FactoryEventControl)listBox1.Items[intselectedindex];
+
+                //do something
+                //MessageBox.Show(listView1.Items[intselectedindex].Text); 
+            }
+
+        }
+
+        private void imageModernButton4_Click(object sender, EventArgs e)
+        {
+            event_interface teste = new event_interface(CurrentItem.Value);
+            teste.Show();
         }
     }
 }

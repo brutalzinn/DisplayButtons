@@ -38,7 +38,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
                 try
                 {
-                    //File.Delete(SETTINGS_FILE);
+                 File.Delete(SETTINGS_FILE);
                 }
                 catch (Exception)
                 {
