@@ -73,6 +73,14 @@ namespace DisplayButtons.Backend.Utils
                 return stringWriter.ToString();
             }
         }
+        public static T FromXMLEvents<T>(string xml)
+        {
+            using (StringReader stringReader = new StringReader(xml))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(T), ExtraTypesEvents);
+                return (T)serializer.Deserialize(stringReader);
+            }
+        }
 
     }
 }
