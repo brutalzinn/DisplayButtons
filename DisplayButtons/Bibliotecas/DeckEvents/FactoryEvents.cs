@@ -24,15 +24,19 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
                 foreach(var events in EventXml.Settings.Events)
                 {
                  var totalFilterItems = events.list_triggers;
-            
-              
-                    IEnumerable<AbstractTrigger> noduplicates = totalFilterItems.Distinct();
-    foreach(var nodupe in noduplicates)
-                {
-                    nodupe.OnInit();
-                    Debug.WriteLine(events.Name);
 
+
+                var noduplicates = totalFilterItems.GroupBy(i => i.GetHashCode()).Select(i => i.FirstOrDefault()).ToList();
+
+                // 
+                foreach (var item in noduplicates)
+                {
+                    item.OnInit();
+Debug.WriteLine(item.GetActionName());
                 }
+                    
+
+                
                    
                 
                 

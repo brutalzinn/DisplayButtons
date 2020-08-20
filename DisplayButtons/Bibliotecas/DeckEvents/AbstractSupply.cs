@@ -42,6 +42,10 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
             //Check whether the products' properties are equal.
             return GetActionName().Equals(other.GetActionName());
         }
+
+        // If Equals() returns true for a pair of objects
+        // then GetHashCode() must return the same value for these objects.
+
         public override int GetHashCode()
         {
 
@@ -50,10 +54,11 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
             //Get hash code for the Code field.
 
-            return hashProductName;
-            //Calculate the hash code for the product.
 
+            //Calculate the hash code for the product.
+            return hashProductName;
         }
+
     }
 
     public abstract class AbstractAction
@@ -73,4 +78,9 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
 
     }
+
+
+    
+
+
 }
