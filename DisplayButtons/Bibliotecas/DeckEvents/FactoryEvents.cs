@@ -23,10 +23,18 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
                 
                 foreach(var events in EventXml.Settings.Events)
                 {
-                    
-                    var totalDupeItems = events.list_triggers.GroupBy(x => x).Count();
+                 var totalFilterItems = events.list_triggers;
+            
+              
+                    IEnumerable<AbstractTrigger> noduplicates = totalFilterItems.Distinct();
+    foreach(var nodupe in noduplicates)
+                {
+                    nodupe.OnInit();
+                    Debug.WriteLine(events.Name);
 
-                Debug.WriteLine(totalDupeItems);
+                }
+                   
+                
                 
                 }
             
