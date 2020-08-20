@@ -67,15 +67,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
         public override void OnInit()
         {
-            using (var eventHookFactory = new EventHookFactory())
-            {
-                var applicationWatcher = new EventHookFactory().GetApplicationWatcher();
-                applicationWatcher.Start();
-                applicationWatcher.OnApplicationWindowChange += (s, e) =>
-                {
-                    Console.WriteLine(string.Format("Application window of '{0}' with the title '{1}' was {2}", e.ApplicationData.AppName, e.ApplicationData.AppTitle, e.Event));
-                };
-            }
+           
         }
     }
 }
