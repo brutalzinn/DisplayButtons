@@ -17,6 +17,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
     public class WindowEvent : AbstractTrigger
     {
         public string AppName;
+        public int windowEvent;
         public override string GetActionName()
         {
 
@@ -31,13 +32,26 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
         public override void OnExecute()
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("EXECUTE ACTION HERE");
         }
         public override AbstractTrigger CloneAction()
         {
             return new WindowEvent();
         }
-        public void ToExecuteHelper()
+
+        public void ProcessHelper(Process process, int status)
+        {
+
+            Debug.WriteLine(String.Format("The process '{0}' is called, status: {1}", process.ProcessName, status));
+       
+        if(process.ProcessName == AppName && status == windowEvent)
+            {
+
+                OnExecute();
+            }
+        
+        }
+            public void ToExecuteHelper()
         {
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
 
@@ -49,7 +63,8 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
    
             if (form.ShowDialog() == DialogResult.OK)
             {
-                
+                int value = ((KeyValuePair<int, string>)instance.comboBox1.SelectedItem).Key;
+                windowEvent = value;
                 AppName = instance.textBox1.Text;
            
             }
