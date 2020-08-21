@@ -183,7 +183,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel2.Controls.Add(this.ColorDisplay, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.consoleClearButton, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.CursorPosDisplay, 0, 0);
@@ -200,10 +200,10 @@ namespace ScribeBot.Interface
             // 
             this.ColorDisplay.AutoSize = true;
             this.ColorDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ColorDisplay.Location = new System.Drawing.Point(140, 0);
+            this.ColorDisplay.Location = new System.Drawing.Point(136, 0);
             this.ColorDisplay.Margin = new System.Windows.Forms.Padding(0);
             this.ColorDisplay.Name = "ColorDisplay";
-            this.ColorDisplay.Size = new System.Drawing.Size(140, 32);
+            this.ColorDisplay.Size = new System.Drawing.Size(137, 32);
             this.ColorDisplay.TabIndex = 3;
             this.ColorDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -213,11 +213,11 @@ namespace ScribeBot.Interface
             this.consoleClearButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.consoleClearButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
             this.consoleClearButton.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.consoleClearButton.Image = global::DisplayButtons.Properties.Resources.CleanData_16x;
-            this.consoleClearButton.Location = new System.Drawing.Point(420, 0);
+            this.consoleClearButton.Image = ((System.Drawing.Image)(resources.GetObject("consoleClearButton.Image")));
+            this.consoleClearButton.Location = new System.Drawing.Point(410, 0);
             this.consoleClearButton.Margin = new System.Windows.Forms.Padding(0);
             this.consoleClearButton.Name = "consoleClearButton";
-            this.consoleClearButton.Size = new System.Drawing.Size(40, 32);
+            this.consoleClearButton.Size = new System.Drawing.Size(50, 32);
             this.consoleClearButton.TabIndex = 1;
             this.consoleClearButton.UseVisualStyleBackColor = false;
             this.consoleClearButton.Click += new System.EventHandler(this.consoleClearButton_Click);
@@ -229,7 +229,7 @@ namespace ScribeBot.Interface
             this.CursorPosDisplay.Location = new System.Drawing.Point(0, 0);
             this.CursorPosDisplay.Margin = new System.Windows.Forms.Padding(0);
             this.CursorPosDisplay.Name = "CursorPosDisplay";
-            this.CursorPosDisplay.Size = new System.Drawing.Size(140, 32);
+            this.CursorPosDisplay.Size = new System.Drawing.Size(136, 32);
             this.CursorPosDisplay.TabIndex = 2;
             this.CursorPosDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -292,7 +292,7 @@ namespace ScribeBot.Interface
             // scriptStop
             // 
             this.scriptStop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scriptStop.Image = global::DisplayButtons.Properties.Resources.Stop_grey_16x;
+            this.scriptStop.Image = ((System.Drawing.Image)(resources.GetObject("scriptStop.Image")));
             this.scriptStop.Location = new System.Drawing.Point(32, 0);
             this.scriptStop.Margin = new System.Windows.Forms.Padding(0);
             this.scriptStop.Name = "scriptStop";
@@ -308,7 +308,7 @@ namespace ScribeBot.Interface
             // openPackagesFolderButton
             // 
             this.openPackagesFolderButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.openPackagesFolderButton.Image = global::DisplayButtons.Properties.Resources.Folder_grey_16x;
+            this.openPackagesFolderButton.Image = ((System.Drawing.Image)(resources.GetObject("openPackagesFolderButton.Image")));
             this.openPackagesFolderButton.Location = new System.Drawing.Point(0, 0);
             this.openPackagesFolderButton.Margin = new System.Windows.Forms.Padding(0);
             this.openPackagesFolderButton.Name = "openPackagesFolderButton";
@@ -486,7 +486,7 @@ namespace ScribeBot.Interface
             // packageSelectFolder
             // 
             this.packageSelectFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.packageSelectFolder.Image = global::DisplayButtons.Properties.Resources.Folder_grey_16x;
+            this.packageSelectFolder.Image = ((System.Drawing.Image)(resources.GetObject("packageSelectFolder.Image")));
             this.packageSelectFolder.Location = new System.Drawing.Point(0, 0);
             this.packageSelectFolder.Margin = new System.Windows.Forms.Padding(0);
             this.packageSelectFolder.Name = "packageSelectFolder";
@@ -625,7 +625,6 @@ namespace ScribeBot.Interface
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(32, 39);
             this.Name = "Window";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

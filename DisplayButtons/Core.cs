@@ -173,14 +173,17 @@ namespace ScribeBot
         /// <param name="value">String to write</param>
         public static void Write(string value)
         {
-            if (CheckOpened(MainWindow.Text))
+            if (MainWindow != null)
             {
-                MainWindow?.Invoke(new Action(() =>
+                if (CheckOpened(MainWindow.Text))
                 {
-                    MainWindow.ConsoleOutput.AppendText(value);
-                }));
+                    MainWindow?.Invoke(new Action(() =>
+                    {
+                        MainWindow.ConsoleOutput.AppendText(value);
+                    }));
 
-                Log.Append(value);
+                    Log.Append(value);
+                }
             }
         }
 
@@ -213,17 +216,19 @@ namespace ScribeBot
         /// <param name="value">String to write</param>
         public static void WriteLine(string value)
         {
-            if (CheckOpened(MainWindow.Text))
+            if (MainWindow != null)
             {
-                MainWindow?.Invoke(new Action(() =>
-            {
-                MainWindow.ConsoleOutput.AppendText(value + Environment.NewLine);
-            }));
+                if (CheckOpened(MainWindow.Text))
+                {
+                    MainWindow?.Invoke(new Action(() =>
+                {
+                    MainWindow.ConsoleOutput.AppendText(value + Environment.NewLine);
+                }));
 
-                Log.Append(value + Environment.NewLine);
+                    Log.Append(value + Environment.NewLine);
+                }
             }
         }
-      
   
 
        

@@ -1,12 +1,39 @@
-﻿using System;
+﻿using MoonSharp.Interpreter;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents
 {
-   public class Condition
+    [MoonSharpUserData]
+    public class Condition
     {
+        [MoonSharpUserData]
+        public  class Events
+        {
+            private Condition instance;
+            public Events(Condition param)
+            {
+
+                instance = param;
+            }
+            public void Continue()
+            {
+               instance.canContinue = true;
+                Debug.WriteLine("LUA CONTINUE");
+            }
+            public void Cancel()
+            {
+                instance.canContinue = false;
+                Debug.WriteLine("LUA CANCEL");
+            }
+        }
+        [XmlIgnore]
+        public bool canContinue { get; set; }
         public bool timer_interval { get; set; }
         public bool timer_now { get; set; }
         public bool timer_after { get; set; }
@@ -45,6 +72,23 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
             return result;
 
+        }
+        public bool CheckLuaScript()
+        {
+            bool result= false;
+            string script = File.ReadAllText(lua_path);
+            ScribeBot.Scripter.Environment.Globals["events"] = new Events(this);
+            try
+            {
+            ScribeBot.Scripter.Execute(script, true);
+
+            }
+            finally
+            {
+                result = canContinue;
+            }
+
+            return result;
         }
         public bool CheckTimerAfter()
         {
@@ -126,7 +170,11 @@ result = CheckTimerInterval();
 
                 result = CheckTimerBefore();
             }
+            if (!String.IsNullOrEmpty(lua_path))
+            {
 
+                result = CheckLuaScript();
+            }
             return result;
 
 
