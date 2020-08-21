@@ -36,6 +36,15 @@ namespace DisplayButtons.Forms.EventSystem.Controls.conditions.timers
         {
             return textBox2.Text;
         }
+        public void setTimerStart(string value)
+        {
+            textBox1.Text = value;
+        }
+
+        public void setTimerEnd(string value)
+        {
+            textBox2.Text = value;
+        }
         private void timer_interval_Load(object sender, EventArgs e)
         {
 

@@ -28,6 +28,12 @@ namespace DisplayButtons.Forms.EventSystem.Controls.conditions.timers
            
             return textBox1.Text;
         }
+        public void setTimerExact(string value)
+        {
+
+
+            textBox1.Text = value;
+        }
         public timer_exact()
         {
             instance = this;

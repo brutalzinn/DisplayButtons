@@ -47,9 +47,23 @@ namespace DisplayButtons.Forms.EventSystem
 
                     trigger_user_control.Instance.Add(item_trigger);
                 }
-              
-               
-              
+                if (_event.conditions.timer_interval)
+                {
+                    conditions_user_control.Instance.set_timer(1);
+
+                }
+                if (_event.conditions.timer_extact)
+                {
+                    conditions_user_control.Instance.set_timer(2);
+
+                }
+                if (_event.conditions.timer_none)
+                {
+                    conditions_user_control.Instance.set_timer(0);
+
+                }
+                conditions_user_control.Instance.setLuaPath(_event.conditions.lua_path);
+
             }
         }
 

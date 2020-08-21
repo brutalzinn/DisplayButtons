@@ -45,6 +45,34 @@ namespace DisplayButtons.Forms.EventSystem.Controls
             return textBox1.Text;
         
         }
+        public void set_timer(int type)
+        {
+            switch (type)
+            {
+
+
+                case 0:
+                    timer_none_radio_button.Checked = true;
+                    break;
+
+                case 1:
+                    timer_interval_radio.Checked = true;
+                    break;
+                case 2:
+                    timer_exact_radio.Checked = true;
+                    break;
+                default:
+                    timer_none_radio_button.Checked = false;
+                    timer_interval_radio.Checked = false;
+                    timer_exact_radio.Checked = false;
+                    break;
+
+            }
+           
+
+        
+
+        }
         public int type_timer()
         {
             int type = 0;
@@ -85,6 +113,15 @@ namespace DisplayButtons.Forms.EventSystem.Controls
                 panel1.Controls.Clear();
 
             }
+        }
+        public void setLuaPath(string path) {
+
+
+
+            textBox1.Text = path;
+
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
