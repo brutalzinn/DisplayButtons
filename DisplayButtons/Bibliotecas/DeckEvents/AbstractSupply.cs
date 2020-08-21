@@ -28,8 +28,18 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
             return false;
         }
         public abstract void OnInit();
-        public abstract void OnExecute();
+        public virtual void OnExecute(Event value)
+        {
 
+            
+                foreach (var CurrentItem in value.list_actions)
+                {
+
+                CurrentItem.OnExecute();
+                }
+
+            
+        }
         public bool Equals(AbstractTrigger other)
         {
 

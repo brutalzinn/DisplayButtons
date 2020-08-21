@@ -30,16 +30,13 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             throw new NotImplementedException();
         }
 
-        public override void OnExecute()
-        {
-            Debug.WriteLine("EXECUTE ACTION HERE");
-        }
+       
         public override AbstractTrigger CloneAction()
         {
             return new WindowEvent();
         }
 
-        public void ProcessHelper(Process process, int status)
+        public void ProcessHelper(Process process, int status, Event events)
         {
 
             Debug.WriteLine(String.Format("The process '{0}' is called, status: {1}", process.ProcessName, status));
@@ -47,7 +44,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         if(process.ProcessName == AppName && status == windowEvent)
             {
 
-                OnExecute();
+                OnExecute(events);
             }
         
         }

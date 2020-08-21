@@ -28,9 +28,9 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             throw new NotImplementedException();
         }
 
-        public override void OnExecute()
+        public override void OnExecute(Event events)
         {
-            throw new NotImplementedException();
+         
         }
         public override AbstractTrigger CloneAction()
         {

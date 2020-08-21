@@ -3,6 +3,7 @@ using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Forms.EventSystem.Controls.actions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 
@@ -46,7 +47,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         }
         public override void OnExecute()
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("ON EXECUTE ACTION");
         }
 
      

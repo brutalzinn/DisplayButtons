@@ -82,7 +82,7 @@ if(item is WindowEvent)
                             if (helperMethod != null)
                             {
 
-                                helperMethod.Invoke(CurrentItem, new object[] { e.Process, 1 }) ;
+                                helperMethod.Invoke(CurrentItem, new object[] { e.Process, 1, events }) ;
 
                             }
                         }
@@ -102,7 +102,7 @@ if(item is WindowEvent)
                             if (helperMethod != null)
                             {
 
-                                helperMethod.Invoke(CurrentItem, new object[] { e.Process, 0 });
+                                helperMethod.Invoke(CurrentItem, new object[] { e.Process, 0, events });
 
                             }
                         }
