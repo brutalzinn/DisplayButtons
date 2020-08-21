@@ -61,6 +61,12 @@ namespace DisplayButtons.Forms.EventSystem.Controls
                 case 2:
                     timer_exact_radio.Checked = true;
                     break;
+                case 3:
+                    timer_before_radio.Checked = true;
+                    break;
+                case 4:
+                    time_after_radio.Checked = true;
+                    break;
                 default:
                     timer_none_radio_button.Checked = false;
                     timer_interval_radio.Checked = false;
@@ -91,6 +97,16 @@ namespace DisplayButtons.Forms.EventSystem.Controls
                 type = 0;
 
             }
+            if (time_after_radio.Checked)
+            {
+
+                type = 4;
+            }
+            if (timer_before_radio.Checked)
+            {
+
+                type = 3;
+            }
             return type;
 
         }
@@ -103,6 +119,18 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 
             }
             if (timer_exact_radio.Checked)
+            {
+                panel1.Controls.Clear();
+                panel1.Controls.Add(new timer_exact());
+
+            }
+            if (time_after_radio.Checked)
+            {
+                panel1.Controls.Clear();
+                panel1.Controls.Add(new timer_exact());
+
+            }
+            if (timer_before_radio.Checked)
             {
                 panel1.Controls.Clear();
                 panel1.Controls.Add(new timer_exact());

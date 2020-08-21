@@ -53,10 +53,22 @@ namespace DisplayButtons.Forms.EventSystem
        timer_interval.Instance.setTimerStart(_event.conditions.timer_interval_start);
                 timer_interval.Instance.setTimerEnd(_event.conditions.timer_interval_end);
                 }
-                if (_event.conditions.timer_extact)
+                if (_event.conditions.timer_now)
                 {
                     conditions_user_control.Instance.set_timer(2);
-                timer_exact.Instance.setTimerExact(_event.conditions.timer_exact);
+                timer_exact.Instance.setTimerExact(_event.conditions.timer_interval_now);
+
+                }
+                if (_event.conditions.timer_after)
+                {
+                    conditions_user_control.Instance.set_timer(4);
+                    timer_exact.Instance.setTimerExact(_event.conditions.timer_interval_after);
+
+                }
+                if (_event.conditions.timer_before)
+                {
+                    conditions_user_control.Instance.set_timer(3);
+                    timer_exact.Instance.setTimerExact(_event.conditions.timer_interval_before);
 
                 }
                 if (_event.conditions.timer_none)
@@ -103,10 +115,20 @@ namespace DisplayButtons.Forms.EventSystem
                     condition.timer_interval_end = timer_interval.Instance.timer_end();
                     condition.timer_interval = true;
                 }
+                if (conditions_user_control.Instance.type_timer() == 3)
+                {
+                    condition.timer_interval_before = timer_exact.Instance.TimerExact();
+                    condition.timer_before = true;
+                }
+                if (conditions_user_control.Instance.type_timer() == 4)
+                {
+                    condition.timer_interval_after = timer_exact.Instance.TimerExact();
+                    condition.timer_after = true;
+                }
                 if (conditions_user_control.Instance.type_timer() == 2)
                 {
-                    condition.timer_exact = timer_exact.Instance.TimerExact();
-                    condition.timer_extact = true;
+                    condition.timer_interval_now = timer_exact.Instance.TimerExact();
+                    condition.timer_now = true;
                 }
             }
             else

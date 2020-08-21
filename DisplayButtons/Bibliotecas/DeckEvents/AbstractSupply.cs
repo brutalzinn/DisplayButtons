@@ -31,13 +31,14 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public virtual void OnExecute(Event value)
         {
 
-            
+            if (value.conditions.CheckCondition())
+            {
                 foreach (var CurrentItem in value.list_actions)
                 {
 
-                CurrentItem.OnExecute();
+                    CurrentItem.OnExecute();
                 }
-
+            }
             
         }
         public bool Equals(AbstractTrigger other)
