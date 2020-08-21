@@ -23,8 +23,14 @@ namespace DisplayButtons.Forms.EventSystem.Controls.conditions.timers
                 instance = value;
             }
         }
+        public string TimerExact()
+        {
+           
+            return textBox1.Text;
+        }
         public timer_exact()
         {
+            instance = this;
             InitializeComponent();
         }
     }

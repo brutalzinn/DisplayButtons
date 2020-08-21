@@ -8,6 +8,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 {
 
     [Serializable]
+    [XmlInclude(typeof(Condition))]
     public class Event
     {
 
@@ -28,6 +29,8 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public List<AbstractAction> list_actions { get; set; } = new List<AbstractAction>();
         [System.Xml.Serialization.XmlElementAttribute("EventTriggers", typeof(AbstractTrigger))]
         public List<AbstractTrigger> list_triggers { get; set; } = new List<AbstractTrigger>();
+        [XmlElement("Condition")]
+        public Condition conditions { get; set; }
 
         [XmlElement("Name")]
         public string Name { get; set; }

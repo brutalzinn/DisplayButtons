@@ -1,6 +1,7 @@
 ﻿
 using DisplayButtons.Bibliotecas.DeckEvents;
 using DisplayButtons.Forms.EventSystem.Controls;
+using DisplayButtons.Forms.EventSystem.Controls.conditions.timers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -71,13 +72,29 @@ namespace DisplayButtons.Forms.EventSystem
         {
        
   Event _event = new Event();
-            
+            Condition condition = new Condition();
+
+
+            if (conditions_user_control.Instance.type_timer() != 0)
+            {
+                if (conditions_user_control.Instance.type_timer() == 1)
+                {
+                    condition.timer_interval_start = timer_interval.Instance.timer_start();
+                    condition.timer_interval_end = timer_interval.Instance.timer_end();
+                }
+                if (conditions_user_control.Instance.type_timer() == 2)
+                {
+                    condition.timer_exact = timer_exact.Instance.TimerExact();
+                }
+            }
+            condition.lua_path = conditions_user_control.Instance.getLuaPath();
+
 
             _event.list_actions = action_user_control.Instance.GetList();
             _event.list_triggers = trigger_user_control.Instance.GetList();
             _event.Name = general_user_control.Instance.GetName();
             _event.IsEnabled = general_user_control.Instance.GetEnabled();
-
+            _event.conditions = condition;
             if (isUpdate)
             {
 
