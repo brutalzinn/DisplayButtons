@@ -50,11 +50,13 @@ namespace DisplayButtons.Forms.EventSystem
                 if (_event.conditions.timer_interval)
                 {
                     conditions_user_control.Instance.set_timer(1);
-
+       timer_interval.Instance.setTimerStart(_event.conditions.timer_interval_start);
+                timer_interval.Instance.setTimerEnd(_event.conditions.timer_interval_end);
                 }
                 if (_event.conditions.timer_extact)
                 {
                     conditions_user_control.Instance.set_timer(2);
+                timer_exact.Instance.setTimerExact(_event.conditions.timer_exact);
 
                 }
                 if (_event.conditions.timer_none)
@@ -63,7 +65,11 @@ namespace DisplayButtons.Forms.EventSystem
 
                 }
                 conditions_user_control.Instance.setLuaPath(_event.conditions.lua_path);
+                
 
+
+              
+         
             }
         }
 
