@@ -28,18 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(event_interface));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_geral_button = new System.Windows.Forms.TabPage();
             this.general_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.general_user_control();
             this.tab_trigger_button = new System.Windows.Forms.TabPage();
             this.trigger_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.trigger_user_control();
+            this.conditions = new System.Windows.Forms.TabPage();
             this.tab_actions_button = new System.Windows.Forms.TabPage();
             this.action_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.action_user_control();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
+            this.conditions_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.conditions_user_control();
             this.tabControl1.SuspendLayout();
             this.tab_geral_button.SuspendLayout();
             this.tab_trigger_button.SuspendLayout();
+            this.conditions.SuspendLayout();
             this.tab_actions_button.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,10 +52,11 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tab_geral_button);
             this.tabControl1.Controls.Add(this.tab_trigger_button);
+            this.tabControl1.Controls.Add(this.conditions);
             this.tabControl1.Controls.Add(this.tab_actions_button);
             this.tabControl1.Location = new System.Drawing.Point(2, 35);
             this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 2;
+            this.tabControl1.SelectedIndex = 3;
             this.tabControl1.Size = new System.Drawing.Size(674, 339);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
@@ -94,6 +99,17 @@
             this.trigger_user_control1.Size = new System.Drawing.Size(660, 305);
             this.trigger_user_control1.TabIndex = 0;
             this.trigger_user_control1.Load += new System.EventHandler(this.trigger_user_control1_Load);
+            // 
+            // conditions
+            // 
+            this.conditions.Controls.Add(this.conditions_user_control1);
+            this.conditions.Location = new System.Drawing.Point(4, 24);
+            this.conditions.Name = "conditions";
+            this.conditions.Padding = new System.Windows.Forms.Padding(3);
+            this.conditions.Size = new System.Drawing.Size(666, 311);
+            this.conditions.TabIndex = 3;
+            this.conditions.Text = "Condição";
+            this.conditions.UseVisualStyleBackColor = true;
             // 
             // tab_actions_button
             // 
@@ -141,6 +157,13 @@
             this.imageModernButton2.Text = "Back";
             this.imageModernButton2.UseVisualStyleBackColor = true;
             // 
+            // conditions_user_control1
+            // 
+            this.conditions_user_control1.Location = new System.Drawing.Point(5, 1);
+            this.conditions_user_control1.Name = "conditions_user_control1";
+            this.conditions_user_control1.Size = new System.Drawing.Size(664, 309);
+            this.conditions_user_control1.TabIndex = 0;
+            // 
             // event_interface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -161,6 +184,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tab_geral_button.ResumeLayout(false);
             this.tab_trigger_button.ResumeLayout(false);
+            this.conditions.ResumeLayout(false);
             this.tab_actions_button.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -176,5 +200,7 @@
         private DisplayButtons.Controls.ImageModernButton imageModernButton2;
         private Controls.action_user_control action_user_control1;
         public System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage conditions;
+        private Controls.conditions_user_control conditions_user_control1;
     }
 }
