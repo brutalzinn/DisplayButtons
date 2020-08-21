@@ -81,11 +81,19 @@ namespace DisplayButtons.Forms.EventSystem
                 {
                     condition.timer_interval_start = timer_interval.Instance.timer_start();
                     condition.timer_interval_end = timer_interval.Instance.timer_end();
+                    condition.timer_interval = true;
                 }
                 if (conditions_user_control.Instance.type_timer() == 2)
                 {
                     condition.timer_exact = timer_exact.Instance.TimerExact();
+                    condition.timer_extact = true;
                 }
+            }
+            else
+            {
+                condition.timer_none = true;
+              
+
             }
             condition.lua_path = conditions_user_control.Instance.getLuaPath();
 

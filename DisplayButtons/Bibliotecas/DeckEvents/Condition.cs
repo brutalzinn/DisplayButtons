@@ -9,7 +9,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         public bool timer_interval { get; set; }
         public bool timer_extact { get; set; }
         public bool timer_after { get; set; }
-
+        public bool timer_none { get; set; }
         public string lua_path { get; set; }
 
         public string timer_interval_start { get; set; }

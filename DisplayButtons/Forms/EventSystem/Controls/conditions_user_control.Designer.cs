@@ -72,7 +72,7 @@
             // 
             this.panel1.Location = new System.Drawing.Point(131, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(481, 85);
+            this.panel1.Size = new System.Drawing.Size(481, 104);
             this.panel1.TabIndex = 1;
             // 
             // radioButton3
