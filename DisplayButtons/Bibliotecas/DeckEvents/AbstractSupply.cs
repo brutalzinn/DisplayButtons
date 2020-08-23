@@ -27,7 +27,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
             return false;
         }
-        public abstract void OnInit();
+        public abstract void OnInit(Event value);
         public virtual void OnExecute(Event value)
         {
 

@@ -183,7 +183,7 @@ namespace ScribeBot.Interface
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.Controls.Add(this.ColorDisplay, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.consoleClearButton, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.CursorPosDisplay, 0, 0);
@@ -203,7 +203,7 @@ namespace ScribeBot.Interface
             this.ColorDisplay.Location = new System.Drawing.Point(136, 0);
             this.ColorDisplay.Margin = new System.Windows.Forms.Padding(0);
             this.ColorDisplay.Name = "ColorDisplay";
-            this.ColorDisplay.Size = new System.Drawing.Size(137, 32);
+            this.ColorDisplay.Size = new System.Drawing.Size(136, 32);
             this.ColorDisplay.TabIndex = 3;
             this.ColorDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -214,10 +214,10 @@ namespace ScribeBot.Interface
             this.consoleClearButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
             this.consoleClearButton.ForeColor = System.Drawing.SystemColors.InfoText;
             this.consoleClearButton.Image = ((System.Drawing.Image)(resources.GetObject("consoleClearButton.Image")));
-            this.consoleClearButton.Location = new System.Drawing.Point(410, 0);
+            this.consoleClearButton.Location = new System.Drawing.Point(408, 0);
             this.consoleClearButton.Margin = new System.Windows.Forms.Padding(0);
             this.consoleClearButton.Name = "consoleClearButton";
-            this.consoleClearButton.Size = new System.Drawing.Size(50, 32);
+            this.consoleClearButton.Size = new System.Drawing.Size(52, 32);
             this.consoleClearButton.TabIndex = 1;
             this.consoleClearButton.UseVisualStyleBackColor = false;
             this.consoleClearButton.Click += new System.EventHandler(this.consoleClearButton_Click);

@@ -10,6 +10,7 @@ using DisplayButtons.Forms;
 using System.Linq;
 using EventHook;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 {
@@ -76,41 +77,40 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
             return new TimerTrigger(this);
         }
-        public delegate void my_delegate();
 
-       public void Run()
-        {
-
-            Console.WriteLine("TESTEEE");
-            MessageBox.Show("DEU RUIK");
-        }
 
 
         public void eventHelper(Event events)
         {
 
+       
+          
+                 
+        }
+        void Display(Event value)
+        {
+            Debug.WriteLine("TESTINNGg.." + value.Name);
+        }
+      
+        public override void OnInit(Event value)
+        {
 
-            my_delegate obj = Run;
-
-
+      
             if (recurring)
             {
-               new SharpShedule.SheduleBase().RunIn(obj.Invoke, Interval);
+            
             }
             else
             {
-                new SharpShedule.SheduleBase().Shedule(obj.Invoke, Start, TimeSpan.FromMilliseconds(1000));
-
-            }
-                 
+              
+            } 
+          
         }
-        public override void OnInit()
+
+        private void TimerEvent_OnError(object sender, Exception e)
         {
-
-           
-           
-
+            Debug.WriteLine(e);
         }
-       
     }
+
 }

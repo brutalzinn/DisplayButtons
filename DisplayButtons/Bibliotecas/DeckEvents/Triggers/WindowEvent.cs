@@ -78,7 +78,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             return new WindowTrigger(this);
         }
 
-        public override void OnInit()
+        public override void OnInit(Event value)
         {
          
         }

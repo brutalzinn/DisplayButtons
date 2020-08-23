@@ -21,12 +21,12 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
         public void Init()
         {
-
+         
             var reflexive_class = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
-          
-       //start especial events
-                
-                foreach(var events in EventXml.Settings.Events)
+           
+            //start especial events
+
+            foreach (var events in EventXml.Settings.Events)
                 {
                  var totalFilterItems = events.list_triggers;
 
@@ -42,11 +42,14 @@ if(item is WindowEvent)
                         EventProcess();
                         goto final;
                     }
+
+
                 }
     
                 }
             final:;
-                //start commum events
+       
+            //start commum events
             foreach (var events in EventXml.Settings.Events)
             {
 
@@ -54,13 +57,11 @@ if(item is WindowEvent)
                 {
                     if (item is TimerEvent)
                     {
-                        MethodInfo helperMethod = item.GetType().GetMethod("eventHelper");
-                        if (helperMethod != null)
-                        {
-
-                            helperMethod.Invoke(item, new object[] { events });
-
-                        }
+                        item.OnInit(events);
+                        SharpShedule.Sheduler teste = new SharpShedule.Sheduler();
+                        teste.Shedule(Display, DateTime.Now.AddSeconds(5), events);
+                        teste.Start();
+                            
                     }
              //       item.OnInit();
                 }
@@ -80,6 +81,10 @@ if(item is WindowEvent)
 
 
             }
+        void Display(Event value)
+        {
+            Debug.WriteLine("TESTINNGg.." + value.Name);
+        }
         public void EventProcess()
         {
 
