@@ -76,8 +76,9 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
             return new TimerTrigger(this);
         }
-   
-        void Run()
+        public delegate void my_delegate();
+
+       public void Run()
         {
 
             Console.WriteLine("TESTEEE");
@@ -87,14 +88,18 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
         public void eventHelper(Event events)
         {
-            Action dividir = OnExecute(events);
+
+
+            my_delegate obj = Run;
+
+
             if (recurring)
             {
-               new SharpShedule.SheduleBase().RunIn(dividir, Interval);
+               new SharpShedule.SheduleBase().RunIn(obj.Invoke, Interval);
             }
             else
             {
-                new SharpShedule.SheduleBase().Shedule(dividir, Start, TimeSpan.FromMilliseconds(1000));
+                new SharpShedule.SheduleBase().Shedule(obj.Invoke, Start, TimeSpan.FromMilliseconds(1000));
 
             }
                  

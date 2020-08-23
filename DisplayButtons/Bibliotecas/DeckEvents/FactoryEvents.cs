@@ -52,12 +52,15 @@ if(item is WindowEvent)
 
          foreach(var item in events.list_triggers)
                 {
-                    MethodInfo helperMethod = item.GetType().GetMethod("eventHelper");
-                    if (helperMethod != null)
+                    if (item is TimerEvent)
                     {
+                        MethodInfo helperMethod = item.GetType().GetMethod("eventHelper");
+                        if (helperMethod != null)
+                        {
 
-                        helperMethod.Invoke(item, new object[] { events });
+                            helperMethod.Invoke(item, new object[] { events });
 
+                        }
                     }
              //       item.OnInit();
                 }
