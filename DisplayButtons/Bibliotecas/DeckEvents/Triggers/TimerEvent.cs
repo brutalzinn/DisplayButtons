@@ -79,34 +79,22 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         }
 
 
-
-        public void eventHelper(Event events)
-        {
-
-       
-          
-                 
-        }
-        void Display(Event value)
-        {
-            Debug.WriteLine("TESTINNGg.." + value.Name);
-        }
-      
         public override void OnInit(Event value)
         {
+            SharpShedule.Sheduler teste = new SharpShedule.Sheduler();
 
-      
             if (recurring)
             {
             
             }
             else
             {
-              
+                teste.Shedule(OnExecute, DateTime.Now.AddSeconds(5), value);
+                
             } 
-          
+          teste.Start();
         }
-
+     
         private void TimerEvent_OnError(object sender, Exception e)
         {
             Debug.WriteLine(e);

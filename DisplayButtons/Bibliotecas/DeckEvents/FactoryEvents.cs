@@ -58,9 +58,9 @@ if(item is WindowEvent)
                     if (item is TimerEvent)
                     {
                         item.OnInit(events);
-                        SharpShedule.Sheduler teste = new SharpShedule.Sheduler();
-                        teste.Shedule(Display, DateTime.Now.AddSeconds(5), events);
-                        teste.Start();
+                     //   SharpShedule.Sheduler teste = new SharpShedule.Sheduler();
+                    //    teste.Shedule(Display, DateTime.Now.AddSeconds(5), events);
+                    //    teste.Start();
                             
                     }
              //       item.OnInit();

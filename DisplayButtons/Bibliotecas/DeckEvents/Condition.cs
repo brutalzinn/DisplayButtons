@@ -175,6 +175,11 @@ result = CheckTimerInterval();
 
                 result = CheckLuaScript();
             }
+            if (timer_none)
+            {
+
+                result = true;
+            }
             return result;
 
 
