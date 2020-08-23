@@ -12,6 +12,14 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
             Stop,
             Toggle
         }
+        public enum RecordStateToggle
+        {
+            Recording,
+            Stopped
+
+
+        }
+        public RecordStateToggle ToggleAction { get; set; } = RecordStateToggle.Stopped;
         [ActionPropertyInclude]
         [ActionPropertyDescription("Action")]
         [ActionPropertyUpdateImageOnChanged]
@@ -66,6 +74,20 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                         break;
                     case StreamingState.Stop:
                         OBSUtils.StopStreaming();
+                        break;
+
+                    case StreamingState.Toggle:
+                        switch (ToggleAction)
+                        {
+                            case RecordStateToggle.Stopped:
+                                ToggleAction = RecordStateToggle.Recording;
+                                OBSUtils.StartRecording();
+                                break;
+                            case RecordStateToggle.Recording:
+                                ToggleAction = RecordStateToggle.Stopped;
+                                OBSUtils.StopRecording();
+                                break;
+                        }
                         break;
                 }
             }
