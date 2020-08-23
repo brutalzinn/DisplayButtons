@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using DisplayButtons.Forms;
 using System.Linq;
 using EventHook;
+using System.Diagnostics;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 {
@@ -16,6 +17,10 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
     public class TimerEvent : AbstractTrigger
     {
         public string AppName;
+        public bool recurring;
+
+        public DateTime Start = DateTime.Now;
+        public TimeSpan Interval;
         public override string GetActionName()
         {
 
@@ -28,10 +33,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             throw new NotImplementedException();
         }
 
-        public override void OnExecute(Event events)
-        {
-         
-        }
+      
         public override AbstractTrigger CloneAction()
         {
             return new TimerEvent();
@@ -48,9 +50,19 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
    
             if (form.ShowDialog() == DialogResult.OK)
             {
+            
+                if (instance.recurring_timer_radio.Checked)
+                {
+                    Interval = TimeSpan.Parse(instance.textBox1.Text);
+                }
+                if (instance.Datetime_radio.Checked)
+                {
 
-                AppName = instance.textBox1.Text;
-           
+    Start = instance.dateTimePicker1.Value;
+                }
+               
+              //  AppName = instance.textBox1.Text;
+
             }
             else
             {
@@ -64,10 +76,36 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
             return new TimerTrigger(this);
         }
+   
+        void Run()
+        {
 
+            Console.WriteLine("TESTEEE");
+            MessageBox.Show("DEU RUIK");
+        }
+
+
+        public void eventHelper(Event events)
+        {
+            Action dividir = OnExecute(events);
+            if (recurring)
+            {
+               new SharpShedule.SheduleBase().RunIn(dividir, Interval);
+            }
+            else
+            {
+                new SharpShedule.SheduleBase().Shedule(dividir, Start, TimeSpan.FromMilliseconds(1000));
+
+            }
+                 
+        }
         public override void OnInit()
         {
+
            
+           
+
         }
+       
     }
 }

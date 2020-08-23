@@ -28,42 +28,76 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.Datetime_radio = new System.Windows.Forms.RadioButton();
+            this.recurring_timer_radio = new System.Windows.Forms.RadioButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "dd-MM-yyyy hh:mm:ss";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(47, 118);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(2001, 12, 12, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(246, 23);
+            this.dateTimePicker1.TabIndex = 3;
+            this.dateTimePicker1.Value = new System.DateTime(2020, 8, 29, 0, 0, 0, 0);
+            // 
+            // Datetime_radio
+            // 
+            this.Datetime_radio.AutoSize = true;
+            this.Datetime_radio.Location = new System.Drawing.Point(67, 59);
+            this.Datetime_radio.Name = "Datetime_radio";
+            this.Datetime_radio.Size = new System.Drawing.Size(75, 19);
+            this.Datetime_radio.TabIndex = 4;
+            this.Datetime_radio.TabStop = true;
+            this.Datetime_radio.Text = "DateTime";
+            this.Datetime_radio.UseVisualStyleBackColor = true;
+            this.Datetime_radio.CheckedChanged += new System.EventHandler(this.recurring_timer_radio_CheckedChanged);
+            // 
+            // recurring_timer_radio
+            // 
+            this.recurring_timer_radio.AutoSize = true;
+            this.recurring_timer_radio.Location = new System.Drawing.Point(188, 59);
+            this.recurring_timer_radio.Name = "recurring_timer_radio";
+            this.recurring_timer_radio.Size = new System.Drawing.Size(105, 19);
+            this.recurring_timer_radio.TabIndex = 4;
+            this.recurring_timer_radio.TabStop = true;
+            this.recurring_timer_radio.Text = "Recurring Time";
+            this.recurring_timer_radio.UseVisualStyleBackColor = true;
+            this.recurring_timer_radio.CheckedChanged += new System.EventHandler(this.recurring_timer_radio_CheckedChanged);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(92, 90);
+            this.textBox1.Location = new System.Drawing.Point(67, 89);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(219, 23);
-            this.textBox1.TabIndex = 0;
+            this.textBox1.Size = new System.Drawing.Size(222, 23);
+            this.textBox1.TabIndex = 5;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 93);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "AppName:";
-            // 
-            // WindowTrigger
+            // TimerTrigger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
-            this.Name = "WindowTrigger";
+            this.Controls.Add(this.recurring_timer_radio);
+            this.Controls.Add(this.Datetime_radio);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Name = "TimerTrigger";
             this.Size = new System.Drawing.Size(327, 237);
-          
+            this.Load += new System.EventHandler(this.TimerTrigger_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
+
+        public System.Windows.Forms.DateTimePicker dateTimePicker1;
+        public System.Windows.Forms.RadioButton Datetime_radio;
+        public System.Windows.Forms.RadioButton recurring_timer_radio;
         public System.Windows.Forms.TextBox textBox1;
     }
 }

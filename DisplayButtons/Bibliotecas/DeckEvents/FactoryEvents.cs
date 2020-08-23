@@ -24,7 +24,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
             var reflexive_class = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
           
-       
+       //start especial events
                 
                 foreach(var events in EventXml.Settings.Events)
                 {
@@ -46,10 +46,24 @@ if(item is WindowEvent)
     
                 }
             final:;
-          
+                //start commum events
+            foreach (var events in EventXml.Settings.Events)
+            {
+
+         foreach(var item in events.list_triggers)
+                {
+                    MethodInfo helperMethod = item.GetType().GetMethod("eventHelper");
+                    if (helperMethod != null)
+                    {
+
+                        helperMethod.Invoke(item, new object[] { events });
+
+                    }
+             //       item.OnInit();
+                }
+            }
 
 
-                
                 //waiting here to keep this thread running           
                 //Console.Read();
 
@@ -59,10 +73,10 @@ if(item is WindowEvent)
                 //clipboardWatcher.Stop();
                 //applicationWatcher.Stop();
                 //printWatcher.Stop();
-            
 
 
-        }
+
+            }
         public void EventProcess()
         {
 

@@ -80,6 +80,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Bibliotecas\SharpShedule\SharpShedule.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EventHook\EventHook\EventHook.csproj" />
   </ItemGroup>
 
