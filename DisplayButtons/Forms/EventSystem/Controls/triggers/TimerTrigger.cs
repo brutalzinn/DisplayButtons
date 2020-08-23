@@ -25,9 +25,10 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
             if (value != null)
             {
                 window = value;
-                dateTimePicker1.CustomFormat = "dd-MM-yyyy hh:mm:ss";
+            //    dateTimePicker1.CustomFormat = "dd-MM-yyyy hh:mm:ss";
                 if (value.recurring)
                 {
+                    
                     recurring_timer_radio.Checked = true;
                     Datetime_radio.Checked = false;
                 }

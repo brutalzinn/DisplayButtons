@@ -55,11 +55,13 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
                 if (instance.recurring_timer_radio.Checked)
                 {
                     Interval = TimeSpan.Parse(instance.textBox1.Text);
+                    recurring = true;
                 }
                 if (instance.Datetime_radio.Checked)
                 {
 
     Start = instance.dateTimePicker1.Value;
+                    recurring = false;
                 }
                
               //  AppName = instance.textBox1.Text;
@@ -85,11 +87,11 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
             if (recurring)
             {
-            
+                teste.RunIn(OnExecute, Interval, value);
             }
             else
             {
-                teste.Shedule(OnExecute, DateTime.Now.AddSeconds(5), value);
+                teste.Shedule(OnExecute, Start, value, Interval);
                 
             } 
           teste.Start();

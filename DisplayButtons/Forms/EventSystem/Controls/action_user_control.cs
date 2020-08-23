@@ -112,7 +112,9 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 
         private void action_user_control_Leave(object sender, EventArgs e)
         {
-            Debug.WriteLine("FECHANDO ACTION INSTANCE");
+
+
+        //    Debug.WriteLine("FECHANDO ACTION INSTANCE");
         
         }
     }
