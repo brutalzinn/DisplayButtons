@@ -34,13 +34,14 @@ namespace DisplayButtons.Bibliotecas
     
         public void RegisterHotKeyCollector(DynamicDeckFolder folder)
         {
-            folder.UniqueID = ShortId.Generate(true, false, 12);
+            if (folder != null)
+                folder.UniqueID = ShortId.Generate(true, false, 12);
 
         }
         public void GarbageHotKeyCollector(DynamicDeckFolder folder)
         {
 
-
+            if(folder != null)
 
             if (!String.IsNullOrEmpty(folder.UniqueID))
             {

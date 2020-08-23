@@ -193,22 +193,25 @@ namespace ScribeBot
         /// <param name="args">Strings prepended by colors ex: Color.Red, "text", Color.Yellow, "text2".</param>
         public static void Write(params object[] args)
         {
-            if (CheckOpened(MainWindow.Text))
+            if (MainWindow != null)
             {
-                MainWindow?.Invoke(new Action(() =>
-            {
-                MainWindow.ConsoleOutput.AppendText(args);
-            }));
-
-                var text = new StringBuilder();
-                for (int i = 0; i < args.Length; i += 2)
+                if (CheckOpened(MainWindow.Text))
                 {
-                    text.Append((String)args[i + 1]);
-                }
+                    MainWindow?.Invoke(new Action(() =>
+                {
+                    MainWindow.ConsoleOutput.AppendText(args);
+                }));
 
-                Log.Append(text);
+                    var text = new StringBuilder();
+                    for (int i = 0; i < args.Length; i += 2)
+                    {
+                        text.Append((String)args[i + 1]);
+                    }
+
+                    Log.Append(text);
+                }
             }
-        }
+            }
 
         /// <summary>
         /// Write a string of text and append it with a linebreak.
