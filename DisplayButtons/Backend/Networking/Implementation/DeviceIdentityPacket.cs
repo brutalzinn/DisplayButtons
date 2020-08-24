@@ -12,6 +12,7 @@ using DisplayButtons.Backend.Utils;
 using System.Diagnostics;
 using DisplayButtons.Forms;
 
+
 namespace DisplayButtons.Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer | PacketArchitecture.ServerToClient)]
@@ -46,9 +47,13 @@ namespace DisplayButtons.Backend.Networking.Implementation
 
         public override void Execute(ConnectionState state)
         {
-            DeckDevice deckDevice = new DeckDevice(DeviceGuid, DeviceName);
+            
+         
 
-           DevicePersistManager.PersistDevice(deckDevice);
+            DeckDevice deckDevice = new DeckDevice(DeviceGuid, DeviceName);
+  
+
+            DevicePersistManager.PersistDevice(deckDevice);
             DevicePersistManager.ChangeConnectedState(state, deckDevice);
             /*
             var deckImage = new DeckImage(new System.Drawing.Bitmap("streamdeck_key.png"));
@@ -58,8 +63,8 @@ namespace DisplayButtons.Backend.Networking.Implementation
             packet.AddToQueue(5, deckImage);
             packet.AddToQueue(15, deckImage);
             state.SendPacket(packet);*/
-    
-            if(Program.mode == 1)
+             
+            if (Program.mode == 1)
             {
 //                UsbMode teste = new UsbMode();
               
@@ -75,7 +80,6 @@ namespace DisplayButtons.Backend.Networking.Implementation
             DevicePersistManager.OnDeviceConnected(this, deckDevice);
             Debug.WriteLine("MOSTRANDO GUID PARA: " + DeviceName);
             Debug.WriteLine("MOSTRANDO GUID PARA: " + DeviceGuid);
-
 
 
         }

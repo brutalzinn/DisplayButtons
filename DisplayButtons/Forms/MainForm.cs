@@ -40,6 +40,8 @@ using NickAc.ModernUIDoneRight.Objects.MenuItems;
 using DisplayButtons.Forms.EventSystem;
 using DisplayButtons.Forms.EventSystem.Controls.triggers;
 using DisplayButtons.Bibliotecas.DeckEvents;
+using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
+using static DisplayButtons.Backend.Objects.ProfileDeckHelper;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -331,7 +333,7 @@ namespace DisplayButtons.Forms
 
             //       DeckServiceProvider.StartTimers();
 
-
+          
 
             Texts.initilizeLang();
 
@@ -1339,7 +1341,7 @@ namespace DisplayButtons.Forms
                 //   GenerateFolderList(shadedPanel1);
                 //      MatrizGenerator();
                 Start_configs();
-
+                FillPerfil();
 
 
             }));
@@ -3534,6 +3536,66 @@ toAdd.AsEnumerable().Reverse().All(m =>
         {
             Events teste = new Events();
             teste.ShowDialog();
+        }
+        public GlobalPerfilBox CurrentPerfil { get; set; }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (perfilselector.Items.Count <= 0)
+            {
+                return;
+            }
+            int intselectedindex = perfilselector.SelectedIndex;
+            if (intselectedindex >= 0)
+            {
+                CurrentPerfil = (GlobalPerfilBox)perfilselector.Items[intselectedindex];
+
+                //do something
+                //MessageBox.Show(listView1.Items[intselectedindex].Text); 
+            }
+
+
+            CurrentDevice.CurrentProfile = (GlobalPerfilBox)CurrentPerfil;
+
+
+
+        }
+        public void FillPerfil()
+        {
+            perfilselector.Items.Clear();
+            foreach(var perfil in CurrentDevice.profiles)
+            {
+
+            GlobalControl teste = new GlobalControl();
+                teste.Text = perfil.Name;
+                teste.Value = perfil;
+                perfilselector.Items.Add(teste);
+            
+            }
+
+        }
+        private void imageModernButton7_Click(object sender, EventArgs e)
+        {
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.PerfilEditor")) as Form;
+
+
+            // form.comboBox.SelectedItem = GetActionName();
+        
+     
+     
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Profile teste = new Profile();
+                teste.Name = form.textBox1.Text;
+                teste.Mainfolder = new DynamicDeckFolder();
+                CurrentDevice.profiles.Add(teste);
+                FillPerfil();
+
+            }
+            else
+            {
+                form.Close();
+            }
         }
     }
     #endregion

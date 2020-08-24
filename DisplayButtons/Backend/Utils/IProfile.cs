@@ -13,13 +13,13 @@ namespace DisplayButtons.Backend.Utils
         {
         private string name;
         private MatrizObject matriz;
-        private IDeckFolder mainfolder = new DynamicDeckFolder();
+        private IDeckFolder mainfolder;
         public Profile() { }
-        public Profile(string name, MatrizObject matriz)
+        public Profile(string name, MatrizObject matriz, IDeckFolder _mainfolder )
         {
             this.name = name;
             this.matriz = matriz;
-            this.Mainfolder = new DynamicDeckFolder();
+            this.mainfolder = _mainfolder;
         }
 
         public string Name { get => name; set => name = value; }

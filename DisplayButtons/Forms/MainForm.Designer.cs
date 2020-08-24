@@ -49,6 +49,9 @@ namespace DisplayButtons.Forms
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel_buttons = new System.Windows.Forms.Panel();
             this.imageModernButton6 = new DisplayButtons.Controls.ImageModernButton();
+            this.perfilselector = new System.Windows.Forms.ComboBox();
+            this.imageModernButton7 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton8 = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
@@ -131,7 +134,7 @@ namespace DisplayButtons.Forms
             this.painel_developer.Controls.Add(this.imageModernButton4);
             this.painel_developer.Controls.Add(this.imageModernButton3);
             this.painel_developer.Controls.Add(this.imageModernButton2);
-            this.painel_developer.Location = new System.Drawing.Point(172, 96);
+            this.painel_developer.Location = new System.Drawing.Point(357, 89);
             this.painel_developer.Name = "painel_developer";
             this.painel_developer.Size = new System.Drawing.Size(507, 47);
             this.painel_developer.TabIndex = 5;
@@ -232,7 +235,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton6.CustomColorScheme = false;
             this.imageModernButton6.Image = null;
-            this.imageModernButton6.Location = new System.Drawing.Point(23, 101);
+            this.imageModernButton6.Location = new System.Drawing.Point(208, 101);
             this.imageModernButton6.Name = "imageModernButton6";
             this.imageModernButton6.NormalImage = null;
             this.imageModernButton6.Origin = null;
@@ -241,6 +244,42 @@ namespace DisplayButtons.Forms
             this.imageModernButton6.Text = "EventSystem";
             this.imageModernButton6.UseVisualStyleBackColor = true;
             this.imageModernButton6.Click += new System.EventHandler(this.imageModernButton6_Click_1);
+            // 
+            // perfilselector
+            // 
+            this.perfilselector.FormattingEnabled = true;
+            this.perfilselector.Location = new System.Drawing.Point(13, 104);
+            this.perfilselector.Name = "perfilselector";
+            this.perfilselector.Size = new System.Drawing.Size(86, 23);
+            this.perfilselector.TabIndex = 9;
+            this.perfilselector.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // imageModernButton7
+            // 
+            this.imageModernButton7.CustomColorScheme = false;
+            this.imageModernButton7.Image = null;
+            this.imageModernButton7.Location = new System.Drawing.Point(110, 98);
+            this.imageModernButton7.Name = "imageModernButton7";
+            this.imageModernButton7.NormalImage = null;
+            this.imageModernButton7.Origin = null;
+            this.imageModernButton7.Size = new System.Drawing.Size(27, 32);
+            this.imageModernButton7.TabIndex = 10;
+            this.imageModernButton7.Text = "+";
+            this.imageModernButton7.UseVisualStyleBackColor = true;
+            this.imageModernButton7.Click += new System.EventHandler(this.imageModernButton7_Click);
+            // 
+            // imageModernButton8
+            // 
+            this.imageModernButton8.CustomColorScheme = false;
+            this.imageModernButton8.Image = null;
+            this.imageModernButton8.Location = new System.Drawing.Point(143, 98);
+            this.imageModernButton8.Name = "imageModernButton8";
+            this.imageModernButton8.NormalImage = null;
+            this.imageModernButton8.Origin = null;
+            this.imageModernButton8.Size = new System.Drawing.Size(27, 32);
+            this.imageModernButton8.TabIndex = 10;
+            this.imageModernButton8.Text = "-";
+            this.imageModernButton8.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -252,6 +291,9 @@ namespace DisplayButtons.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.imageModernButton8);
+            this.Controls.Add(this.imageModernButton7);
+            this.Controls.Add(this.perfilselector);
             this.Controls.Add(this.imageModernButton6);
             this.Controls.Add(this.panel_buttons);
             this.Controls.Add(this.shadedPanel1);
@@ -293,6 +335,9 @@ namespace DisplayButtons.Forms
         private NotifyIcon notifyIcon1;
         private Panel panel_buttons;
         private ImageModernButton imageModernButton6;
+        private ComboBox perfilselector;
+        private ImageModernButton imageModernButton7;
+        private ImageModernButton imageModernButton8;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

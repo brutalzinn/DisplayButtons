@@ -27,6 +27,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         {
             action_user_control.Instance.Add(type);
         }
+     
         public class GlobalControl
         {
             public string Text { get; set; }

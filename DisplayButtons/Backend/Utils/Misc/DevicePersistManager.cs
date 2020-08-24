@@ -1,5 +1,6 @@
 ﻿using DisplayButtons.Backend.Networking.TcpLib;
 using DisplayButtons.Backend.Objects;
+
 using NHotkey.WindowsForms;
 using System;
 using System.Collections.Generic;
@@ -111,8 +112,9 @@ namespace DisplayButtons.Backend.Utils
         public static void PersistDevice(DeckDevice device)
         {
             if (IsDevicePersisted(device)) {
+                
                 device.DeviceName = PersistedDevices.First(m => m.DeviceGuid == device.DeviceGuid).DeviceName;
-                device.CurrentProfile.Mainfolder = PersistedDevices.First(m => m.DeviceGuid == device.DeviceGuid).CurrentProfile.Mainfolder;
+                device.CurrentProfile.Mainfolder = PersistedDevices.FirstOrDefault(m => m.DeviceGuid == device.DeviceGuid).CurrentProfile.Mainfolder;
                 PersistedDevices.RemoveAll(m => m.DeviceGuid == device.DeviceGuid);
             }
             PersistedDevices.Add(device);

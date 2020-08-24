@@ -1,5 +1,6 @@
 ﻿using DisplayButtons.Backend.Networking.Implementation;
 using DisplayButtons.Backend.Utils;
+
 using SharpAdbClient;
 using System;
 using System.Collections.Generic;
@@ -41,27 +42,30 @@ namespace DisplayButtons.Backend.Objects
         }
 
         public DeckDevice()
-        {}
+        { }
 
         public DeckDevice(Guid deviceGuid, string deviceName)
         {
             DeviceGuid = deviceGuid;
             DeviceName = deviceName;
-            CurrentProfile.Mainfolder = new Implementation.DynamicDeckFolder();
-           
+            // CurrentProfile.Mainfolder = new Implementation.DynamicDeckFolder();
+
+            //Profile profile = new Profile("DEFAULT", matriz, new Implementation.DynamicDeckFolder());
+            profiles.Add(CurrentProfile);
         }
         [XmlIgnore]
         public DeviceData DeviceUsb { get; set; }
 
         public Guid DeviceGuid { get; set; }
         public String DeviceName { get; set; }
-       // public IDeckFolder MainFolder { get; set; }
+        // public IDeckFolder MainFolder { get; set; }
 
         public List<Profile> profiles = new List<Profile>();
         [XmlIgnore]
         public IDeckFolder CurrentFolder { get; set; }
+
         [XmlIgnore]
-        public Profile CurrentProfile { get; set; }
+        public Profile CurrentProfile { get; set; } =  new Profile("DEFAULT", new MatrizObject(1, 1), new Implementation.DynamicDeckFolder());
         public virtual void CheckCurrentFolder()
         {
             if (CurrentProfile.Mainfolder != null && CurrentFolder == null)
