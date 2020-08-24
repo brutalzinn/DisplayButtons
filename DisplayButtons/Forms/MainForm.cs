@@ -264,7 +264,7 @@ namespace DisplayButtons.Forms
                 if (CurrentDevice == null) return;
                 if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    CurrentDevice.MainFolder = new DynamicDeckFolder();
+                    CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
                     SendItemsToDevice(CurrentDevice, true);
                     RefreshAllButtons(false);
                 }
@@ -446,7 +446,7 @@ namespace DisplayButtons.Forms
             switch (e.Name)
             {
                 case "main_folder":
-                    CurrentDevice.CurrentFolder = CurrentDevice.MainFolder;
+                    CurrentDevice.CurrentFolder = CurrentDevice.CurrentProfile.Mainfolder;
                     RefreshAllButtons(true);
                     break;
                 case "back_folder":
@@ -1532,7 +1532,7 @@ namespace DisplayButtons.Forms
 
         private void FixFolders(DeckDevice device)
         {
-            FixFolders(device.MainFolder);
+            FixFolders(device.CurrentProfile.Mainfolder);
         }
 
         private static DeckImage defaultDeckImage = new DeckImage(Resources.img_folder_up);
@@ -1839,10 +1839,10 @@ namespace DisplayButtons.Forms
 
                     if (abacate.GetSubFolders().Count == 0)
                     {
-                        if (CurrentDevice.MainFolder.GetSubFolders().Count - 1 > root)
+                        if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders().Count - 1 > root)
                         {
 
-                            if (CurrentDevice.MainFolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
+                            if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
                                 folder_form.Add(new folders(pastapai.DeckName, pastapai, true, root));
                             }
@@ -1851,7 +1851,7 @@ namespace DisplayButtons.Forms
                         }
                         else
                         {
-                            if (CurrentDevice.MainFolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
+                            if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
                                 folder_form.Add(new folders(pastapai.DeckName, pastapai, true, root));
                             }
@@ -1864,7 +1864,7 @@ namespace DisplayButtons.Forms
                         }
                         //  Debug.WriteLine("NUMINDEX:" + root);
 
-                        GetAllFolders(CurrentDevice.MainFolder.GetSubFolders()[root]);
+                        GetAllFolders(CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root]);
 
                     }
                     else
@@ -1914,7 +1914,7 @@ namespace DisplayButtons.Forms
             main_foolder.Click += (s, ee) =>
             {
 
-                CurrentDevice.CurrentFolder = CurrentDevice.MainFolder;
+                CurrentDevice.CurrentFolder = CurrentDevice.CurrentProfile.Mainfolder;
 
                 //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
                 RefreshAllButtons(true);
@@ -1933,7 +1933,7 @@ namespace DisplayButtons.Forms
 
                 int i = 0;
 
-                foreach (DynamicDeckFolder item in CurrentDevice.MainFolder.GetSubFolders().ToList())
+                foreach (DynamicDeckFolder item in CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders().ToList())
                 {
                     Label folder = new Label();
 

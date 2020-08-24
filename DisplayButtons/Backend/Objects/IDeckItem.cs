@@ -1,4 +1,5 @@
 ﻿using DisplayButtons.Backend.Objects.Implementation;
+using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace DisplayButtons.Backend.Objects
 {
     [XmlInclude(typeof(DynamicDeckFolder))]
     [XmlInclude(typeof(DynamicDeckItem))]
+    [XmlInclude(typeof(Profile))]
+    [XmlInclude(typeof(MatrizObject))]
     public abstract class IDeckItem
     {
         public string DeckName { get; set; } = "-";

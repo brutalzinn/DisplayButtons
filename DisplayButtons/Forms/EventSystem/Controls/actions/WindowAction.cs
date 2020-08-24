@@ -42,7 +42,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
         {
             if (MainForm.Instance.CurrentDevice.GetConnection() != null)
             {
-                var items = MainForm.ListFolders(MainForm.Instance.CurrentDevice.MainFolder as DynamicDeckFolder);
+                var items = MainForm.ListFolders(MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder as DynamicDeckFolder);
 
                 foreach (DynamicDeckFolder present in items)
                 {

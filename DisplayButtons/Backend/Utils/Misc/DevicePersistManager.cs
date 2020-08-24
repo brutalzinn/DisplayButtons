@@ -112,7 +112,7 @@ namespace DisplayButtons.Backend.Utils
         {
             if (IsDevicePersisted(device)) {
                 device.DeviceName = PersistedDevices.First(m => m.DeviceGuid == device.DeviceGuid).DeviceName;
-                device.MainFolder = PersistedDevices.First(m => m.DeviceGuid == device.DeviceGuid).MainFolder;
+                device.CurrentProfile.Mainfolder = PersistedDevices.First(m => m.DeviceGuid == device.DeviceGuid).CurrentProfile.Mainfolder;
                 PersistedDevices.RemoveAll(m => m.DeviceGuid == device.DeviceGuid);
             }
             PersistedDevices.Add(device);
@@ -169,7 +169,7 @@ namespace DisplayButtons.Backend.Utils
         public static void SaveDevices()
         {
             foreach (var device in persistedDevices) {
-                CompressFolders(device.MainFolder);
+                CompressFolders(device.CurrentProfile.Mainfolder);
             }
             if (persistedDevices != null) {
                 File.WriteAllText(DEVICES_FILENAME, XMLUtils.ToXML(persistedDevices));
