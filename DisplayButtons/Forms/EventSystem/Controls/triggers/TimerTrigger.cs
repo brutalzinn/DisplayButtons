@@ -26,24 +26,25 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
             {
                 window = value;
             //    dateTimePicker1.CustomFormat = "dd-MM-yyyy hh:mm:ss";
-                if (value.recurring)
-                {
-                    
+               
                     recurring_timer_radio.Checked = true;
                     Datetime_radio.Checked = false;
-                }
-                else
-                {
+               
                     recurring_timer_radio.Checked = false;
                     Datetime_radio.Checked = true;
-                    dateTimePicker1.Visible = true;
+            
                     if(value.Start != null)
                     {
 
     dateTimePicker1.Value = value.Start;
                     }
+                    if(value.Interval != null)
+                    {
+
+                        textBox1.Text = value.Interval.ToString();
+                    }
                 
-                }
+                
 
             }
           
@@ -68,8 +69,9 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
                     
                     window.recurring = false;
                     Datetime_radio.Checked = true;
-                 window.Start = dateTimePicker1.Value; 
-                   // dateTimePicker1.Value 
+                 window.Start = dateTimePicker1.Value;
+                    window.Interval = TimeSpan.Parse(textBox1.Text);
+                    // dateTimePicker1.Value 
                 }
 
             }
