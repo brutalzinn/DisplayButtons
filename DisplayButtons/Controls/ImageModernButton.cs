@@ -147,7 +147,7 @@ namespace DisplayButtons.Controls
                         if (Tag is DynamicDeckItem item) {
                             var device = frm.CurrentDevice;
                             device.CheckCurrentFolder();
-                            device.CurrentFolder.Add(slot, item);
+                            device.CurrentProfile.Currentfolder.Add(slot, item);
                         }
                     }
                 }

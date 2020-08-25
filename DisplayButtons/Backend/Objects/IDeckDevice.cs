@@ -62,8 +62,7 @@ namespace DisplayButtons.Backend.Objects
         // public IDeckFolder MainFolder { get; set; }
 
         public List<Profile> profiles = new List<Profile>();
-        [XmlIgnore]
-        public IDeckFolder CurrentFolder { get; set; }
+  
         [XmlIgnore]
         private  Profile _currentprofile;
          
@@ -93,8 +92,8 @@ namespace DisplayButtons.Backend.Objects
         }
         public virtual void CheckCurrentFolder()
         {
-            if (CurrentProfile.Mainfolder != null && CurrentFolder == null)
-                CurrentFolder = CurrentProfile.Mainfolder;
+            if (CurrentProfile.Mainfolder != null && CurrentProfile.Currentfolder == null)
+                CurrentProfile.Currentfolder = CurrentProfile.Mainfolder;
         }
     }
 }

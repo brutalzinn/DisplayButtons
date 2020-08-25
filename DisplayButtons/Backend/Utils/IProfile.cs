@@ -5,26 +5,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DisplayButtons.Backend.Utils
 {
     [Serializable]
     public  class Profile
         {
-        private string name;
-        private MatrizObject matriz;
-        private IDeckFolder mainfolder;
+        private string _name;
+        private MatrizObject _matriz;
+        private IDeckFolder _mainfolder;
+        
+        private IDeckFolder _currentfolder; 
         public Profile() { }
-        public Profile(string name, MatrizObject matriz, IDeckFolder _mainfolder )
+
+        public Profile(string name, MatrizObject matriz, IDeckFolder mainfolder, IDeckFolder currentfolder = null)
         {
-            this.name = name;
-            this.matriz = matriz;
-            this.mainfolder = _mainfolder;
+            _name = name;
+            _matriz = matriz;
+            _mainfolder = mainfolder;
+            _currentfolder = currentfolder;
         }
 
-        public string Name { get => name; set => name = value; }
-        public MatrizObject Matriz { get => matriz; set => matriz = value; }
-        public IDeckFolder Mainfolder { get => mainfolder; set => mainfolder = value; }
-   
+        public string Name { get => _name; set => _name = value; }
+        public MatrizObject Matriz { get => _matriz; set => _matriz = value; }
+        public IDeckFolder Mainfolder { get => _mainfolder; set => _mainfolder = value; }
+        [XmlIgnore]
+        public IDeckFolder Currentfolder { get => _currentfolder; set => _currentfolder = value; }
     }
 }

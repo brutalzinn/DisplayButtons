@@ -172,7 +172,7 @@ namespace DisplayButtons.Backend.Utils
         {
             foreach (var device in persistedDevices)
             {
-                device.CurrentProfile.Mainfolder = device.CurrentFolder;
+                device.CurrentProfile.Mainfolder = device.CurrentProfile.Currentfolder;
             }
         }
         public static void SaveDevices()

@@ -68,7 +68,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                 Size imageSize = new Size(512, 512);
                 DynamicDeckFolder folder = new DynamicDeckFolder();
                 Font defaultFont = new Font("Arial", 80, GraphicsUnit.Point);
-                folder.SetParent(deckDevice.CurrentFolder);
+                folder.SetParent(deckDevice.CurrentProfile.Currentfolder);
 
                 var scenes = OBSUtils.GetScenes();
                 int index = 0;
@@ -110,18 +110,18 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 
 
 
-                    deckDevice.CurrentFolder = folder;
+                    deckDevice.CurrentProfile.Currentfolder = folder;
 
 
                     //This is a local fuction. Don't be scared, because this can happen.
                     void fakeFolderHandle(object s, ButtonInteractionEventArgs e)
                     {
-                        if (deckDevice.CurrentFolder != folder) return;
+                        if (deckDevice.CurrentProfile.Currentfolder != folder) return;
                         if (e.PerformedAction != Networking.Implementation.ButtonInteractPacket.ButtonAction.ButtonUp) return;
-                        if (deckDevice.CurrentFolder.GetDeckItems().Any(c => deckDevice.CurrentFolder.GetItemIndex(c) == e.SlotID)) {
-                            var item = deckDevice.CurrentFolder.GetDeckItems().Where(c => deckDevice.CurrentFolder.GetItemIndex(c) == e.SlotID);
+                        if (deckDevice.CurrentProfile.Currentfolder.GetDeckItems().Any(c => deckDevice.CurrentProfile.Currentfolder.GetItemIndex(c) == e.SlotID)) {
+                            var item = deckDevice.CurrentProfile.Currentfolder.GetDeckItems().Where(c => deckDevice.CurrentProfile.Currentfolder.GetItemIndex(c) == e.SlotID);
                             if (item is IDeckItem && e.SlotID == 1) {
-                                deckDevice.CurrentFolder = folder.ParentFolder;
+                                deckDevice.CurrentProfile.Currentfolder = folder.ParentFolder;
                                 SendFolder(connection, folder.ParentFolder);
                                 deckDevice.ButtonInteraction -= fakeFolderHandle;
                                 return;

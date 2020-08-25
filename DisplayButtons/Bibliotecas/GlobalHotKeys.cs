@@ -103,7 +103,7 @@ public void MyEventHandler(object sender, HotkeyEventArgs e)
         {
 
                 Debug.WriteLine("Trocando para pasta: "+  FolderPrincipal.DeckName + " Atalho: "  + e.Name);
-                MainForm.Instance.CurrentDevice.CurrentFolder = FolderPrincipal;
+                MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = FolderPrincipal;
                 MainForm.Instance.RefreshAllButtons(true);
          e.Handled = true;
         }
