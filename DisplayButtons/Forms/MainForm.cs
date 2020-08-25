@@ -332,8 +332,8 @@ namespace DisplayButtons.Forms
 
 
             //       DeckServiceProvider.StartTimers();
+            FillPerfil();
 
-          
 
             Texts.initilizeLang();
 
@@ -1341,7 +1341,7 @@ namespace DisplayButtons.Forms
                 //   GenerateFolderList(shadedPanel1);
                 //      MatrizGenerator();
                 Start_configs();
-                FillPerfil();
+               
 
 
             }));
@@ -3537,7 +3537,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
             Events teste = new Events();
             teste.ShowDialog();
         }
-        public GlobalPerfilBox CurrentPerfil { get; set; }
+        public ProfileDeckHelper.GlobalPerfilBox CurrentPerfil { get; set; }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -3548,29 +3548,52 @@ toAdd.AsEnumerable().Reverse().All(m =>
             int intselectedindex = perfilselector.SelectedIndex;
             if (intselectedindex >= 0)
             {
-                CurrentPerfil = (GlobalPerfilBox)perfilselector.Items[intselectedindex];
-
+                CurrentPerfil = (ProfileDeckHelper.GlobalPerfilBox)perfilselector.Items[intselectedindex];
+                if (DevicePersistManager.IsDeviceOnline(CurrentDevice))
+                {
+  CurrentDevice.CurrentProfile = CurrentPerfil.Value;
+                }
+              
                 //do something
                 //MessageBox.Show(listView1.Items[intselectedindex].Text); 
             }
 
 
-            CurrentDevice.CurrentProfile = (GlobalPerfilBox)CurrentPerfil;
+          
 
 
 
         }
+        public void PerfilSelector()
+        {
+
+            foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
+            {
+                if(DevicePersistManager.IsDeviceOnline(perfil)){
+                   
+                       if(CurrentDevice.CurrentProfile == null)
+                    {
+                        
+
+                    }
+                    
+                }
+
+
+            }
+        }
         public void FillPerfil()
         {
             perfilselector.Items.Clear();
-            foreach(var perfil in CurrentDevice.profiles)
+            foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
             {
+                foreach (var list in perfil.profiles) {
+                    ProfileDeckHelper.GlobalPerfilBox teste = new ProfileDeckHelper.GlobalPerfilBox();
+                    teste.Text = list.Name;
+                    teste.Value = list;
+                    perfilselector.Items.Add(teste);
 
-            GlobalControl teste = new GlobalControl();
-                teste.Text = perfil.Name;
-                teste.Value = perfil;
-                perfilselector.Items.Add(teste);
-            
+                }
             }
 
         }
@@ -3589,6 +3612,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 teste.Name = form.textBox1.Text;
                 teste.Mainfolder = new DynamicDeckFolder();
                 CurrentDevice.profiles.Add(teste);
+
                 FillPerfil();
 
             }

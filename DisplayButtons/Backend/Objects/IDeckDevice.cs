@@ -48,10 +48,11 @@ namespace DisplayButtons.Backend.Objects
         {
             DeviceGuid = deviceGuid;
             DeviceName = deviceName;
+    
             // CurrentProfile.Mainfolder = new Implementation.DynamicDeckFolder();
 
             //Profile profile = new Profile("DEFAULT", matriz, new Implementation.DynamicDeckFolder());
-            profiles.Add(CurrentProfile);
+
         }
         [XmlIgnore]
         public DeviceData DeviceUsb { get; set; }
@@ -63,9 +64,33 @@ namespace DisplayButtons.Backend.Objects
         public List<Profile> profiles = new List<Profile>();
         [XmlIgnore]
         public IDeckFolder CurrentFolder { get; set; }
+        [XmlIgnore]
+        private  Profile _currentprofile;
+         
 
         [XmlIgnore]
-        public Profile CurrentProfile { get; set; } =  new Profile("DEFAULT", new MatrizObject(1, 1), new Implementation.DynamicDeckFolder());
+        public Profile CurrentProfile { 
+            
+            
+            get {
+                if(_currentprofile == null)
+                {
+                    Profile teste = new Profile("DEFAULT", new MatrizObject(0, 0), new Implementation.DynamicDeckFolder());
+                    _currentprofile = teste;
+                }
+                
+                return _currentprofile;
+            
+            }
+
+
+
+            set
+            {
+                _currentprofile = value;
+            }
+        
+        }
         public virtual void CheckCurrentFolder()
         {
             if (CurrentProfile.Mainfolder != null && CurrentFolder == null)

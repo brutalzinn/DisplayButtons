@@ -114,7 +114,7 @@ namespace DisplayButtons.Backend.Utils
             if (IsDevicePersisted(device)) {
                 
                 device.DeviceName = PersistedDevices.First(m => m.DeviceGuid == device.DeviceGuid).DeviceName;
-                device.CurrentProfile.Mainfolder = PersistedDevices.FirstOrDefault(m => m.DeviceGuid == device.DeviceGuid).CurrentProfile.Mainfolder;
+            device.CurrentProfile.Mainfolder = PersistedDevices.FirstOrDefault(m => m.DeviceGuid == device.DeviceGuid).CurrentProfile.Mainfolder;
                 PersistedDevices.RemoveAll(m => m.DeviceGuid == device.DeviceGuid);
             }
             PersistedDevices.Add(device);
@@ -159,7 +159,7 @@ namespace DisplayButtons.Backend.Utils
                 CompressFolders(c);
                 c.SetParent(folder);
                 if (c.GetParent() != null) {
-                    HotkeyManager.Current.Remove(c.GetParent().GetItemIndex(c) + "");
+                
                     c.Remove(1);
                 }
 
@@ -168,9 +168,19 @@ namespace DisplayButtons.Backend.Utils
             });
         }
 
+        public static void SaveProfileItems()
+        {
+            foreach (var device in persistedDevices)
+            {
+                device.CurrentProfile.Mainfolder = device.CurrentFolder;
+            }
+        }
         public static void SaveDevices()
         {
+            SaveProfileItems();
             foreach (var device in persistedDevices) {
+
+                  
                 CompressFolders(device.CurrentProfile.Mainfolder);
             }
             if (persistedDevices != null) {
