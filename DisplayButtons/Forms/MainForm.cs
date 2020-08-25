@@ -334,7 +334,7 @@ namespace DisplayButtons.Forms
             //       DeckServiceProvider.StartTimers();
             FillPerfil();
 
-
+            StaticHelper.SelectItemByValue(perfilselector, ApplicationSettingsManager.Settings.CurrentProfile);
             Texts.initilizeLang();
 
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
@@ -3524,7 +3524,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
             Events teste = new Events();
             teste.ShowDialog();
         }
-        public ProfileDeckHelper.GlobalPerfilBox CurrentPerfil { get; set; }
+    public ProfileDeckHelper.GlobalPerfilBox CurrentPerfil { get; set; }
+        
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -3537,11 +3538,13 @@ toAdd.AsEnumerable().Reverse().All(m =>
             {
                 CurrentPerfil = (ProfileDeckHelper.GlobalPerfilBox)perfilselector.Items[intselectedindex];
                 if (DevicePersistManager.IsDeviceOnline(CurrentDevice))
-                {
-  CurrentDevice.CurrentProfile = CurrentPerfil.Value;
-                    //CurrentDevice.CheckCurrentFolder();
-                
-                  CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Mainfolder;
+                {  
+                    CurrentDevice.CheckCurrentFolder();
+                    CurrentDevice.CurrentProfile = CurrentPerfil.Value;
+
+   CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Mainfolder;
+                    ApplicationSettingsManager.Settings.CurrentProfile = CurrentPerfil.Value;
+               
                     
                     ChangeToDevice(CurrentDevice);
                    
@@ -3563,21 +3566,18 @@ toAdd.AsEnumerable().Reverse().All(m =>
         public void PerfilSelector()
         {
 
-            foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
-            {
-                if(DevicePersistManager.IsDeviceOnline(perfil)){
-                   
-                       if(CurrentDevice.CurrentProfile == null)
-                    {
-                        
-
-                    }
-                    
-                }
 
 
-            }
+            //  perfilselector.SelectedIndex = perfilselector.Items.IndexOf(ApplicationSettingsManager.Settings.CurrentProfile);
+
+         
+
+
+
+
+
         }
+     
         public void FillPerfil()
         {
             perfilselector.Items.Clear();
@@ -3588,8 +3588,9 @@ toAdd.AsEnumerable().Reverse().All(m =>
                     teste.Text = list.Name;
                     teste.Value = list;
                     perfilselector.Items.Add(teste);
+                   
 
-                }
+                } 
             }
 
         }

@@ -177,7 +177,7 @@ namespace DisplayButtons.Backend.Utils
         }
         public static void SaveDevices()
         {
-            SaveProfileItems();
+            //SaveProfileItems();
             foreach (var device in persistedDevices) {
 
                   
