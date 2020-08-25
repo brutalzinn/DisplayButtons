@@ -32,5 +32,30 @@ namespace DisplayButtons.Backend.Utils
         public IDeckFolder Mainfolder { get => _mainfolder; set => _mainfolder = value; }
         [XmlIgnore]
         public IDeckFolder Currentfolder { get => _currentfolder; set => _currentfolder = value; }
+
+        public override bool Equals(System.Object obj)
+        {
+            if (obj == null)
+                return false;
+
+            Profile p = obj as Profile;
+            if ((System.Object)p == null)
+                return false;
+
+            return (Name == p.Name);
+        }
+
+        public bool Equals(Profile p)
+        {
+           if ((object)p == null)
+             return false;
+
+            return (Name == p.Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
     }
 }

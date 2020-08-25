@@ -1,4 +1,8 @@
 ﻿using DisplayButtons.Backend.Utils;
+using DisplayButtons.Forms;
+using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace DisplayButtons.Backend.Objects
@@ -18,32 +22,75 @@ namespace DisplayButtons.Backend.Objects
             }
 
         }
-     
-            
-       
-    
+
+
+
+
 
     }
-   public static class StaticHelper{
-
- public static void SelectItemByValue(this ComboBox cbo, object value)
+    public static class ProfileStaticHelper
+    {
+        public static void var_dump(object obj)
         {
-            for (int i = 0; i < cbo.Items.Count; i++)
+            Debug.WriteLine("{0,-18} {1}", "Name", "Value");
+            string ln = @"-------------------------------------  
+               ----------------------------";
+            Debug.WriteLine(ln);
+
+            Type t = obj.GetType();
+            PropertyInfo[] props = t.GetProperties();
+
+            for (int i = 0; i < props.Length; i++)
             {
-                var prop = cbo.Items[i].GetType().GetProperty(cbo.ValueMember);
-                if (prop != null && prop.GetValue(cbo.Items[i], null) == value)
+                try
                 {
-                    cbo.SelectedIndex = i;
-                    break;
+                    Debug.WriteLine("{0,-18} {1}",
+                      props[i].Name, props[i].GetValue(obj, null));
+                }
+                catch (Exception e)
+                {
+                    //Console.WriteLine(e);  
                 }
             }
+            //   Debug.WriteLine();
         }
+        public static void SelectCurrentDevicePerfil(Profile profile)
+        {
+            
+           MainForm.Instance.CurrentDevice.CurrentProfile = profile;
+
+            MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
+        
+MainForm.Instance.CurrentDevice.CheckCurrentFolder();
+
+            MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
 
 
+    ApplicationSettingsManager.Settings.CurrentProfile = profile;
+        }
+        public static void SelectItemByValue(this ComboBox cbo, Profile profile)
+        {
 
 
+            foreach (ProfileDeckHelper.GlobalPerfilBox item in cbo.Items)
+            {
+
+                if (item.Value.Equals(profile))
+                {
+                    cbo.SelectedItem = item;
+                    break;
+                }
+
+
+            }
+        }
+    }
 }
 
 
 
-}
+
+
+
+
+

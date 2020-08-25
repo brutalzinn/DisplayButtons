@@ -4,6 +4,7 @@ using DisplayButtons.Backend.Objects;
 using NHotkey.WindowsForms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -168,26 +169,38 @@ namespace DisplayButtons.Backend.Utils
             });
         }
 
-        public static void SaveProfileItems()
-        {
-            foreach (var device in persistedDevices)
-            {
-                device.CurrentProfile.Mainfolder = device.CurrentProfile.Currentfolder;
-            }
-        }
+        //public static void SaveProfileItems()
+        //{
+        //    foreach (var device in persistedDevices)
+        //    {
+        //        if (device.CurrentProfile != null)
+        //        {
+        //            device.CurrentProfile.Mainfolder = device.CurrentProfile.Currentfolder;
+        //        }
+        //    }
+        //}
         public static void SaveDevices()
         {
-            //SaveProfileItems();
-            foreach (var device in persistedDevices) {
+            //  SaveProfileItems();
+          
+                foreach (var device in persistedDevices)
+                {
 
-                  
-                CompressFolders(device.CurrentProfile.Mainfolder);
+
+                    CompressFolders(device.CurrentProfile.Mainfolder);
+                }
+
+                if (persistedDevices != null)
+                {
+                    File.WriteAllText(DEVICES_FILENAME, XMLUtils.ToXML(persistedDevices));
+                }
+                else
+                {
+                    Debug.WriteLine("DELETE " + DEVICES_FILENAME);
+                //    File.Delete(DEVICES_FILENAME);
+                }
             }
-            if (persistedDevices != null) {
-                File.WriteAllText(DEVICES_FILENAME, XMLUtils.ToXML(persistedDevices));
-            } else {
-                File.Delete(DEVICES_FILENAME);
-            }
+           
         }
     }
-}
+

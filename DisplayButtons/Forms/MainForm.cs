@@ -334,7 +334,7 @@ namespace DisplayButtons.Forms
             //       DeckServiceProvider.StartTimers();
             FillPerfil();
 
-            StaticHelper.SelectItemByValue(perfilselector, ApplicationSettingsManager.Settings.CurrentProfile);
+           ProfileStaticHelper.SelectItemByValue(perfilselector, ApplicationSettingsManager.Settings.CurrentProfile);
             Texts.initilizeLang();
 
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
@@ -1297,7 +1297,10 @@ namespace DisplayButtons.Forms
             }
             if (Globals.can_refresh)
             {
-
+                if (CurrentPerfil != null)
+                {
+                    ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
+                }
                 RefreshAllButtons(true);
             }
 
@@ -1356,7 +1359,7 @@ namespace DisplayButtons.Forms
             CurrentDevice = device;
 
             LoadItems(CurrentDevice.CurrentProfile.Currentfolder);
-
+           
         }
 
         //List<Tuple<Guid, int>> ignoreOnce = new List<Tuple<Guid, int>>();
@@ -3538,17 +3541,9 @@ toAdd.AsEnumerable().Reverse().All(m =>
             {
                 CurrentPerfil = (ProfileDeckHelper.GlobalPerfilBox)perfilselector.Items[intselectedindex];
                 if (DevicePersistManager.IsDeviceOnline(CurrentDevice))
-                {  
-                    CurrentDevice.CheckCurrentFolder();
-                    CurrentDevice.CurrentProfile = CurrentPerfil.Value;
-
-   CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Mainfolder;
-                    ApplicationSettingsManager.Settings.CurrentProfile = CurrentPerfil.Value;
-               
-                    
-                    ChangeToDevice(CurrentDevice);
-                   
-                   
+                {
+                    //CurrentDevice.CheckCurrentFolder();
+                    ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
                     RefreshAllButtons(true);
 
                 }
@@ -3592,7 +3587,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                 } 
             }
-
+            
         }
         private void imageModernButton7_Click(object sender, EventArgs e)
         {
