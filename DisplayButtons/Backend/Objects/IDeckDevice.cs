@@ -74,8 +74,18 @@ namespace DisplayButtons.Backend.Objects
             get {
                 if(_currentprofile == null)
                 {
+                    if(ApplicationSettingsManager.Settings.CurrentProfile != null)
+                    {
+
+                        _currentprofile = ApplicationSettingsManager.Settings.CurrentProfile;
+                    }
+                    else
+                    {
                     Profile teste = new Profile("DEFAULT", new MatrizObject(0, 0), new Implementation.DynamicDeckFolder());
-                    _currentprofile = teste;
+_currentprofile = teste;
+                    }    
+
+                    
                 }
                 
                 return _currentprofile;

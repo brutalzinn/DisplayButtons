@@ -41,7 +41,7 @@ using DisplayButtons.Forms.EventSystem;
 using DisplayButtons.Forms.EventSystem.Controls.triggers;
 using DisplayButtons.Bibliotecas.DeckEvents;
 using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
-using static DisplayButtons.Backend.Objects.ProfileDeckHelper;
+using static DisplayButtons.Backend.Objects.ProfileVoidHelper;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -330,10 +330,10 @@ namespace DisplayButtons.Forms
 
 
 
-
+         ProfileStaticHelper.SetupPerfil();
             //       DeckServiceProvider.StartTimers();
             FillPerfil();
-
+   
            ProfileStaticHelper.SelectItemByValue(perfilselector, ApplicationSettingsManager.Settings.CurrentProfile);
             Texts.initilizeLang();
 
@@ -3527,7 +3527,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
             Events teste = new Events();
             teste.ShowDialog();
         }
-    public ProfileDeckHelper.GlobalPerfilBox CurrentPerfil { get; set; }
+    public ProfileVoidHelper.GlobalPerfilBox CurrentPerfil { get; set; }
         
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -3539,7 +3539,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
             int intselectedindex = perfilselector.SelectedIndex;
             if (intselectedindex >= 0)
             {
-                CurrentPerfil = (ProfileDeckHelper.GlobalPerfilBox)perfilselector.Items[intselectedindex];
+                CurrentPerfil = (ProfileVoidHelper.GlobalPerfilBox)perfilselector.Items[intselectedindex];
                 if (DevicePersistManager.IsDeviceOnline(CurrentDevice))
                 {
                     //CurrentDevice.CheckCurrentFolder();
@@ -3579,10 +3579,10 @@ toAdd.AsEnumerable().Reverse().All(m =>
             foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
             {
                 foreach (var list in perfil.profiles) {
-                    ProfileDeckHelper.GlobalPerfilBox teste = new ProfileDeckHelper.GlobalPerfilBox();
+                    ProfileVoidHelper.GlobalPerfilBox teste = new ProfileVoidHelper.GlobalPerfilBox();
                     teste.Text = list.Name;
                     teste.Value = list;
-                    perfilselector.Items.Add(teste);
+                   perfilselector.Items.Add(teste);
                    
 
                 } 
@@ -3603,8 +3603,11 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 Profile teste = new Profile();
                 teste.Name = form.textBox1.Text;
                 teste.Mainfolder = new DynamicDeckFolder();
-                CurrentDevice.profiles.Add(teste);
-
+                teste.Currentfolder = teste.Mainfolder;
+                if (DevicePersistManager.IsDeviceOnline(CurrentDevice))
+                {
+                    CurrentDevice.profiles.Add(teste);
+                }
                 FillPerfil();
 
             }

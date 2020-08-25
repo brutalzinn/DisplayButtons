@@ -1,13 +1,15 @@
-﻿using DisplayButtons.Backend.Utils;
+﻿using DisplayButtons.Backend.Objects.Implementation;
+using DisplayButtons.Backend.Utils;
 using DisplayButtons.Forms;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
 namespace DisplayButtons.Backend.Objects
 {
-    public class ProfileDeckHelper
+    public class ProfileVoidHelper
     {
 
         public class GlobalPerfilBox
@@ -57,32 +59,50 @@ namespace DisplayButtons.Backend.Objects
         public static void SelectCurrentDevicePerfil(Profile profile)
         {
             
+
+          
            MainForm.Instance.CurrentDevice.CurrentProfile = profile;
 
-            MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
-        
-MainForm.Instance.CurrentDevice.CheckCurrentFolder();
+           MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
+        MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
+//
 
-            MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
-
+          MainForm.Instance.CurrentDevice.CheckCurrentFolder();    
 
     ApplicationSettingsManager.Settings.CurrentProfile = profile;
         }
         public static void SelectItemByValue(this ComboBox cbo, Profile profile)
         {
 
-
-            foreach (ProfileDeckHelper.GlobalPerfilBox item in cbo.Items)
+            if (profile != null)
             {
-
-                if (item.Value.Equals(profile))
+                foreach (ProfileVoidHelper.GlobalPerfilBox item in cbo.Items)
                 {
-                    cbo.SelectedItem = item;
-                    break;
+
+                    if (item.Value.Equals(profile))
+                    {
+                        cbo.SelectedItem = item;
+                        break;
+                    }
+
+
                 }
-
-
             }
+        }
+        public static void SetupPerfil()
+        {
+         
+            foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
+            {
+              if(perfil.profiles.Count != 0)
+                {
+                    
+                   
+           
+                  
+                }
+            }
+
         }
     }
 }
