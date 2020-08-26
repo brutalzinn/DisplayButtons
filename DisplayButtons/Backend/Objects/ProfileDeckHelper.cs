@@ -61,10 +61,13 @@ namespace DisplayButtons.Backend.Objects
             if (MainForm.Instance.CurrentDevice != null)
             {
                 MainForm.Instance.CurrentDevice.CurrentProfile = profile;
+                MainForm.Instance.MatrizGenerator();
                 MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
 
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
+                
                 ApplicationSettingsManager.Settings.CurrentProfile = profile;
+
             }
         }
         public static void SelectDevicePerfil(DeckDevice device,Profile profile)

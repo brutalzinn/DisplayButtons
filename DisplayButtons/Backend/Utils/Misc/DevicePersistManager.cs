@@ -127,21 +127,23 @@ namespace DisplayButtons.Backend.Utils
         }
             public static void PersistDevice(DeckDevice device)
         {
-
+if (device.CurrentProfile != null)
+                {
             if (IsDevicePersisted(device))
             {
-                if (device.CurrentProfile != null)
-                {
+                
                     device.DeviceName = PersistedDevices.First(m => m.DeviceGuid == device.DeviceGuid).DeviceName;
-                    var device_in_list = PersistedDevices.First(m => m.DeviceGuid == device.DeviceGuid);
+                    var device_in_list = PersistedDevices.First(m => m.DeviceGuid == device.DeviceGuid).profiles;
 
-                    var item = device_in_list.profiles.Where(a => a.Equals(device.CurrentProfile)).FirstOrDefault();
+                    var item = device_in_list.Where(a => a.Equals(device.CurrentProfile)).First();
                     device.CurrentProfile.Mainfolder = item.Mainfolder;
                     PersistedDevices.RemoveAll(m => m.DeviceGuid == device.DeviceGuid);
 
                 }
+ PersistedDevices.Add(device);
+
             }
-            PersistedDevices.Add(device);
+           
             
         }
 

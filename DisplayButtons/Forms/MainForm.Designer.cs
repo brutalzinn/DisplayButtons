@@ -333,11 +333,11 @@ namespace DisplayButtons.Forms
         private ShadedPanel shadedPanel3;
         private ShadedPanel shadedPanel4;
         private NotifyIcon notifyIcon1;
-        private Panel panel_buttons;
         private ImageModernButton imageModernButton6;
         private ComboBox perfilselector;
         private ImageModernButton imageModernButton7;
         private ImageModernButton imageModernButton8;
+        public Panel panel_buttons;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

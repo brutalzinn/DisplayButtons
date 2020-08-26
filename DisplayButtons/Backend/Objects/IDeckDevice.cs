@@ -48,9 +48,7 @@ namespace DisplayButtons.Backend.Objects
         {
             DeviceGuid = deviceGuid;
             DeviceName = deviceName;
-            Profile teste = new Profile();
-            teste.Mainfolder = new Implementation.DynamicDeckFolder();
-            teste.Name = "DEFAULT";
+    
            
        
             //if(CurrentProfile == null)

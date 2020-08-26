@@ -329,8 +329,8 @@ namespace DisplayButtons.Forms
             RegisterBackFolderHotKey();
 
 
+            ProfileStaticHelper.SetupPerfil();
 
-   
             //       DeckServiceProvider.StartTimers();
             FillPerfil();
    
@@ -518,7 +518,7 @@ namespace DisplayButtons.Forms
             });
         }
 
-        private void ApplyTheme(Control parent)
+        public void ApplyTheme(Control parent)
         {
 
             //IMPORTANT
@@ -569,6 +569,7 @@ namespace DisplayButtons.Forms
                                             DeckAction = action.DeckAction.CloneAction()
                                         };
                                         var id2 = deckFolder.Add(deckItemToAdd);
+                                       
                                         deckItemToAdd.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
                                         CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
@@ -1062,7 +1063,7 @@ namespace DisplayButtons.Forms
             if (Globals.can_refresh == false) { return; }
 
             // Buttons_Unfocus(this, EventArgs.Empty);
-            IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
+            IDeckFolder folder = CurrentDevice?.CurrentProfile?.Currentfolder;
 
 
             for (int j = 0; j < Globals.calc; j++)
@@ -3610,7 +3611,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 teste.Name = form.textBox1.Text;
                 teste.Mainfolder = new DynamicDeckFolder();
               //  teste.Currentfolder = teste.Mainfolder;
-                foreach (var device in DevicePersistManager.PersistedDevices)
+                foreach (var device in DevicePersistManager.PersistedDevices.ToList())
                 {
                     device.profiles.Add(teste);
                 }
