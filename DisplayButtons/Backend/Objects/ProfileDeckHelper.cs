@@ -63,7 +63,8 @@ namespace DisplayButtons.Backend.Objects
                 MainForm.Instance.CurrentDevice.CurrentProfile = profile;
                 MainForm.Instance.MatrizGenerator();
                 MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
-
+               
+        
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
                 
                 ApplicationSettingsManager.Settings.CurrentProfile = profile;

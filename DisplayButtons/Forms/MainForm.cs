@@ -498,7 +498,7 @@ namespace DisplayButtons.Forms
 
 
         }
-        private void ApplySidebarTheme(Control parent)
+        public void ApplySidebarTheme(Control parent)
         {
             //Headers have the theme's secondary color as background
             //and the theme's foreground color as text color
@@ -1033,11 +1033,11 @@ namespace DisplayButtons.Forms
                             });
                           
                            Globals.can_refresh = true;
-                          RefreshAllButtons(true);
                           //  panel1.Visible = true;
                             //warning_label.Visible = false;
                             ApplyTheme(panel_buttons);
-                            
+                             RefreshAllButtons(true);
+
                                 //            break;
 
                             }
@@ -2025,7 +2025,7 @@ namespace DisplayButtons.Forms
             });
         }
 
-        private void GenerateSidebar(Control parent, bool loadplugins = false)
+        public void GenerateSidebar(Control parent, bool loadplugins = false)
         {
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(parent.Font.FontFamily, 13, FontStyle.Bold);
@@ -2690,7 +2690,7 @@ namespace DisplayButtons.Forms
         private void LoadProperties(DynamicDeckItem item, FlowLayoutPanel panel)
         {
 
-            ProfileStaticHelper.var_dump(item);
+           
             var props = item.DeckAction.GetType().GetProperties().Where(
                 prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
             foreach (var prop in props)
@@ -2779,7 +2779,7 @@ namespace DisplayButtons.Forms
                 }
             }
 
-      ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
+  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
 
         private string GetPropertiesPlugins(DynamicDeckItem item, string properties)

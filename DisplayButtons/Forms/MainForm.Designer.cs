@@ -324,7 +324,6 @@ namespace DisplayButtons.Forms
         private ImageModernButton imageModernButton1;
         private System.Windows.Forms.Label action_label;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private ShadedPanel shadedPanel1;
         private ShadedPanel painel_developer;
         private ImageModernButton imageModernButton3;
         private ImageModernButton imageModernButton2;
@@ -338,6 +337,7 @@ namespace DisplayButtons.Forms
         private ImageModernButton imageModernButton7;
         private ImageModernButton imageModernButton8;
         public Panel panel_buttons;
+        public ShadedPanel shadedPanel1;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

@@ -66,13 +66,19 @@ namespace DisplayButtons.Forms
         public void ModifyColorScheme(IEnumerable<Control> cccc)
         {
             cccc.All(c => {
+                if(c.Tag == null)
+                {
+                    return false;
+                }
                 if (c.Tag != null && c.Tag.ToString() == "noColor")
                     return true;
                 ModifyColorScheme(c.Controls.OfType<Control>());
-                try {
+                try
+                {
                     dynamic cc = c;
 
-                    if (c is TextBox txtBx) {
+                    if (c is TextBox txtBx)
+                    {
                         txtBx.BorderStyle = BorderStyle.FixedSingle;
                         cc.BackColor = _applicationColorScheme.BackgroundColor;
                         c.ForeColor = GetReadableForeColor(_applicationColorScheme.BackgroundColor);
@@ -81,7 +87,9 @@ namespace DisplayButtons.Forms
                     cc.ForeColor = _applicationColorScheme.ForeColorShaded;
                     cc.ColorScheme = ColorScheme;
                     return true;
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     return true;
                 }
             });/*
@@ -89,8 +97,6 @@ namespace DisplayButtons.Forms
     c.AppTheme = ColorSchemeCentral.FromAppTheme(c.UnderlyingAppTheme);
     return true; });*/
         }
-
-
 
         private void LoadTheme(AppTheme theme)
         {
