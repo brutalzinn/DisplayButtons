@@ -318,7 +318,7 @@ namespace DisplayButtons.Forms
 
 
             ChangeDeveloperMode();
-            MatrizGenerator();
+           // MatrizGenerator();
 
             Refresh();
 
@@ -747,7 +747,7 @@ namespace DisplayButtons.Forms
 
         public void MatrizGenerator()
         {
-            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
+ 
             panel_buttons.Controls.Clear();
             //warning_label.Visible = true;
          //   warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
@@ -760,9 +760,9 @@ namespace DisplayButtons.Forms
                 int x = 0;
                 int y = 0;
                 int id = 1;
-                for (int con = 0; con < ApplicationSettingsManager.Settings.linha; con++)
+                for (int con = 0; con < CurrentDevice?.CurrentProfile.Matriz.Lin; con++)
                 {
-                    for (int lin = 0; lin < ApplicationSettingsManager.Settings.coluna; lin++)
+                    for (int lin = 0; lin < CurrentDevice?.CurrentProfile.Matriz.Column; lin++)
                     {
 
 
@@ -1020,7 +1020,7 @@ namespace DisplayButtons.Forms
                             toAdd.Add(control);
 
 
-                        if (toAdd.Count >= Globals.calc)
+                        if (toAdd.Count >= CurrentDevice?.CurrentProfile.Matriz.Calc)
                         {
 
                             toAdd.AsEnumerable().Reverse().All(m =>
@@ -1288,14 +1288,7 @@ namespace DisplayButtons.Forms
             //      ApplyTheme(panel1);
 
             var con = MainForm.Instance.CurrentDevice.GetConnection();
-            if (con != null)
-            {
-
-
-                var Matriz = new MatrizPacket();
-                con.SendPacket(Matriz);
-
-            }
+           
             if (Globals.can_refresh)
             {
                 if (CurrentPerfil != null)
@@ -1313,7 +1306,14 @@ namespace DisplayButtons.Forms
             }
            
           //  GetAllFolders(CurrentDevice.MainFolder);
+ if (con != null)
+            {
 
+
+                var Matriz = new MatrizPacket(CurrentDevice.CurrentProfile);
+                con.SendPacket(Matriz);
+
+            }
 
         }
         public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)

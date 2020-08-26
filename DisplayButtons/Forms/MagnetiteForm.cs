@@ -127,14 +127,16 @@ namespace DisplayButtons.Forms
            
                 if (con != null)
             {
-            //  MainForm.ButtonCreator();
-                    
-              ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
-                ApplicationSettingsManager.Settings.linha= Convert.ToInt32(linha.Text);
-              
-              
-                     var Matriz = new MatrizPacket();
-                con.SendPacket(Matriz);
+                    //  MainForm.ButtonCreator();
+
+                    // ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
+                    //   ApplicationSettingsManager.Settings.linha= Convert.ToInt32(linha.Text);
+                    MatrizObject new_matriz = new MatrizObject(Convert.ToInt32(linha.Text), Convert.ToInt32(coluna.Text));
+                    MainForm.Instance.CurrentDevice.CurrentProfile.Matriz = new_matriz;
+
+                     var matriz_packet = new MatrizPacket(MainForm.Instance.CurrentDevice.CurrentProfile);
+                   
+                con.SendPacket(matriz_packet);
                   
             }
 

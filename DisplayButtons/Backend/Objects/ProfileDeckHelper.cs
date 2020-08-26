@@ -68,13 +68,36 @@ namespace DisplayButtons.Backend.Objects
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
                 
                 ApplicationSettingsManager.Settings.CurrentProfile = profile;
+                SelectPerfilMatriz(profile);
+            }
+        }
+        public static bool CheckProfileMatriz(Profile profile)
+        {
+            if (profile.Matriz != null)
+            {
+                return true;
+            }
+            else
+            {
+              return  false;
+            }
+        }
+        public static void SelectPerfilMatriz(Profile profile)
+        {
+            if (CheckProfileMatriz(profile) == false)
+            {
+
+                MatrizObject matriz_new = new MatrizObject(3, 5);
+                profile.Matriz = matriz_new;
 
             }
+
+
         }
         public static void SelectDevicePerfil(DeckDevice device,Profile profile)
         {
             device.CurrentProfile = profile;
-     
+          
         }
         public static void SelectItemByValue(this ComboBox cbo, Profile profile)
         {
@@ -109,6 +132,8 @@ namespace DisplayButtons.Backend.Objects
 
 
                 }
+             
+               
             }
 
         }
