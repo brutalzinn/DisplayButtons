@@ -58,18 +58,19 @@ namespace DisplayButtons.Backend.Objects
         }
         public static void SelectCurrentDevicePerfil(Profile profile)
         {
-            
+            if (MainForm.Instance.CurrentDevice != null)
+            {
+                MainForm.Instance.CurrentDevice.CurrentProfile = profile;
+                MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
 
-          
-           MainForm.Instance.CurrentDevice.CurrentProfile = profile;
-
-           MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
-        MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
-//
-
-          MainForm.Instance.CurrentDevice.CheckCurrentFolder();    
-
-    ApplicationSettingsManager.Settings.CurrentProfile = profile;
+                MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
+                ApplicationSettingsManager.Settings.CurrentProfile = profile;
+            }
+        }
+        public static void SelectDevicePerfil(DeckDevice device,Profile profile)
+        {
+            device.CurrentProfile = profile;
+     
         }
         public static void SelectItemByValue(this ComboBox cbo, Profile profile)
         {
@@ -92,14 +93,17 @@ namespace DisplayButtons.Backend.Objects
         public static void SetupPerfil()
         {
          
-            foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
+            foreach (var device in DevicePersistManager.PersistedDevices.ToList())
             {
-              if(perfil.profiles.Count != 0)
+              if(device.profiles.Count == 0)
                 {
-                    
-                   
-           
-                  
+
+                    Profile new_folder = new Profile();
+                    new_folder.Mainfolder = new DynamicDeckFolder();
+                    new_folder.Name = "DEFAULT";
+                    SelectDevicePerfil(device,new_folder);
+
+
                 }
             }
 

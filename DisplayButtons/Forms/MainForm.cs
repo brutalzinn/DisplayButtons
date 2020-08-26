@@ -150,7 +150,7 @@ namespace DisplayButtons.Forms
             }
             ColorSchemeCentral.ThemeChanged += (s, e) =>
             ApplySidebarTheme(shadedPanel1);
-
+          
 
         }
 
@@ -188,7 +188,7 @@ namespace DisplayButtons.Forms
         {
             base.OnLoad(e);
 
-
+         
 
             StartUsbMode();
 
@@ -330,7 +330,7 @@ namespace DisplayButtons.Forms
 
 
 
-         ProfileStaticHelper.SetupPerfil();
+   
             //       DeckServiceProvider.StartTimers();
             FillPerfil();
    
@@ -1357,9 +1357,10 @@ namespace DisplayButtons.Forms
         {
          
             CurrentDevice = device;
-
-            LoadItems(CurrentDevice.CurrentProfile.Currentfolder);
-           
+            if (CurrentDevice.CurrentProfile != null)
+            {
+                LoadItems(CurrentDevice.CurrentProfile.Currentfolder);
+            }
         }
 
         //List<Tuple<Guid, int>> ignoreOnce = new List<Tuple<Guid, int>>();
@@ -1419,9 +1420,12 @@ namespace DisplayButtons.Forms
 
         private static void SendItemsToDevice(DeckDevice device, bool destroyCurrent = false)
         {
-            if (destroyCurrent) device.CurrentProfile.Currentfolder = null;
-            device.CheckCurrentFolder();
-            SendItemsToDevice(device, device.CurrentProfile.Currentfolder);
+            if (device.CurrentProfile != null)
+            {
+                if (destroyCurrent) device.CurrentProfile.Currentfolder = null;
+                device.CheckCurrentFolder();
+                SendItemsToDevice(device, device.CurrentProfile.Currentfolder);
+            }
         }
 
 
@@ -1524,7 +1528,10 @@ namespace DisplayButtons.Forms
 
         private void FixFolders(DeckDevice device)
         {
-            FixFolders(device.CurrentProfile.Mainfolder);
+            if (DevicePersistManager.HasPerfilCreated(device))
+            {
+                FixFolders(device.CurrentProfile.Mainfolder);
+            }
         }
 
         private static DeckImage defaultDeckImage = new DeckImage(Resources.img_folder_up);
@@ -3540,13 +3547,12 @@ toAdd.AsEnumerable().Reverse().All(m =>
             if (intselectedindex >= 0)
             {
                 CurrentPerfil = (ProfileVoidHelper.GlobalPerfilBox)perfilselector.Items[intselectedindex];
-                if (DevicePersistManager.IsDeviceOnline(CurrentDevice))
-                {
+                
                     //CurrentDevice.CheckCurrentFolder();
                     ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
                     RefreshAllButtons(true);
 
-                }
+                
               
                 //do something
                 //MessageBox.Show(listView1.Items[intselectedindex].Text); 
@@ -3603,12 +3609,13 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 Profile teste = new Profile();
                 teste.Name = form.textBox1.Text;
                 teste.Mainfolder = new DynamicDeckFolder();
-                teste.Currentfolder = teste.Mainfolder;
-                if (DevicePersistManager.IsDeviceOnline(CurrentDevice))
+              //  teste.Currentfolder = teste.Mainfolder;
+                foreach (var device in DevicePersistManager.PersistedDevices)
                 {
-                    CurrentDevice.profiles.Add(teste);
+                    device.profiles.Add(teste);
                 }
-                FillPerfil();
+
+                    FillPerfil();
 
             }
             else

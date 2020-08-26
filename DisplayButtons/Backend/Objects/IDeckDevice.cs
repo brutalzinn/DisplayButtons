@@ -48,17 +48,22 @@ namespace DisplayButtons.Backend.Objects
         {
             DeviceGuid = deviceGuid;
             DeviceName = deviceName;
-    
-            // CurrentProfile.Mainfolder = new Implementation.DynamicDeckFolder();
-
-            //Profile profile = new Profile("DEFAULT", matriz, new Implementation.DynamicDeckFolder());
-
+            Profile teste = new Profile();
+            teste.Mainfolder = new Implementation.DynamicDeckFolder();
+            teste.Name = "DEFAULT";
+           
+       
+            //if(CurrentProfile == null)
+            //{
+            //    return;
+            //}
         }
         [XmlIgnore]
         public DeviceData DeviceUsb { get; set; }
 
         public Guid DeviceGuid { get; set; }
         public String DeviceName { get; set; }
+
         // public IDeckFolder MainFolder { get; set; }
 
         public List<Profile> profiles = new List<Profile>();
@@ -68,42 +73,15 @@ namespace DisplayButtons.Backend.Objects
          
 
         [XmlIgnore]
-        public Profile CurrentProfile { 
-            
-            
-            get {
-                if(_currentprofile == null)
-                {
-                    if(ApplicationSettingsManager.Settings.CurrentProfile != null)
-                    {
+    public Profile CurrentProfile { get => _currentprofile; set => _currentprofile = value; }
 
-                        _currentprofile = ApplicationSettingsManager.Settings.CurrentProfile;
-                    }
-                    else
-                    {
-                    Profile teste = new Profile("DEFAULT", new MatrizObject(0, 0), new Implementation.DynamicDeckFolder());
-_currentprofile = teste;
-                    }    
-
-                    
-                }
-                
-                return _currentprofile;
-            
-            }
-
-
-
-            set
-            {
-                _currentprofile = value;
-            }
-        
-        }
         public virtual void CheckCurrentFolder()
         {
-            if (CurrentProfile.Mainfolder != null && CurrentProfile.Currentfolder == null)
-                CurrentProfile.Currentfolder = CurrentProfile.Mainfolder;
+            if (CurrentProfile != null)
+            {
+                if (CurrentProfile.Mainfolder != null && CurrentProfile.Currentfolder == null)
+                    CurrentProfile.Currentfolder = CurrentProfile.Mainfolder;
+            }
         }
     }
 }

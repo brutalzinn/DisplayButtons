@@ -48,9 +48,9 @@ namespace DisplayButtons.Backend.Networking.Implementation
         public override void Execute(ConnectionState state)
         {
 
-         
+                
+
             DeckDevice deckDevice = new DeckDevice(DeviceGuid, DeviceName);
-  
 
             DevicePersistManager.PersistDevice(deckDevice);
             DevicePersistManager.ChangeConnectedState(state, deckDevice);
