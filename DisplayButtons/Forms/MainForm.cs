@@ -617,7 +617,7 @@ namespace DisplayButtons.Forms
                                     };
                                     mb.Image = ((DynamicDeckItem)mb.Tag).DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default;
 
-                                    FocusItem(mb, mb.Tag as IDeckItem);
+                                FocusItem(mb, mb.Tag as IDeckItem);
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is PluginLuaGenerator YY)
                                     {
                                         LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName);
@@ -2566,7 +2566,7 @@ namespace DisplayButtons.Forms
                 PositionComboBox.SelectedValue = dI.DeckPosition;
                 if (dI is DynamicDeckItem TT)
                 {
-                    LoadProperties(TT, flowLayoutPanel1);
+                 LoadProperties(TT, flowLayoutPanel1);
 
                 }
                 if (dI is DynamicDeckFolder AA)
@@ -2690,11 +2690,12 @@ namespace DisplayButtons.Forms
         private void LoadProperties(DynamicDeckItem item, FlowLayoutPanel panel)
         {
 
-
+            ProfileStaticHelper.var_dump(item);
             var props = item.DeckAction.GetType().GetProperties().Where(
                 prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
             foreach (var prop in props)
             {
+
                 bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
                 MethodInfo helperMethod = item.DeckAction.GetType().GetMethod(prop.Name + "Helper");
                 if (helperMethod != null)
@@ -2778,7 +2779,7 @@ namespace DisplayButtons.Forms
                 }
             }
 
-            ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
+      ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
 
         private string GetPropertiesPlugins(DynamicDeckItem item, string properties)
