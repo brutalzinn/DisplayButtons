@@ -1,6 +1,9 @@
-﻿using DisplayButtons.Backend.Objects.Implementation;
+﻿using DisplayButtons.Backend.Networking;
+using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Backend.Utils;
 using DisplayButtons.Forms;
+using DisplayButtons.Misc;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -11,7 +14,7 @@ namespace DisplayButtons.Backend.Objects
 {
     public class ProfileVoidHelper
     {
-
+ 
         public class GlobalPerfilBox
 
         {
@@ -32,6 +35,7 @@ namespace DisplayButtons.Backend.Objects
     }
     public static class ProfileStaticHelper
     {
+        public static Profile DeviceSelected { get; set; }
         public static void var_dump(object obj)
         {
             Debug.WriteLine("{0,-18} {1}", "Name", "Value");
@@ -59,18 +63,20 @@ namespace DisplayButtons.Backend.Objects
         public static void SelectCurrentDevicePerfil(Profile profile)
         {
             if (MainForm.Instance.CurrentDevice != null)
-            {  
-                
+            {
+                var con = MainForm.Instance.CurrentDevice.GetConnection();
                 SelectPerfilMatriz(profile);
-                MainForm.Instance.CurrentDevice.CurrentProfile = profile;
+                DevicePersistManager.DeckDevicesFromConnection.First().Value.CurrentProfile = profile;
                 MainForm.Instance.MatrizGenerator(profile);
+                var Matriz = new MatrizPacket(profile);
+                con.SendPacket(Matriz);
                 MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
                
         
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
-                
+                DeviceSelected = profile;
                 ApplicationSettingsManager.Settings.CurrentProfile = profile;
-             
+               
             }
         }
         public static bool CheckProfileMatriz(Profile profile)

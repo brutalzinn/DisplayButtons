@@ -333,8 +333,8 @@ namespace DisplayButtons.Forms
 
             //       DeckServiceProvider.StartTimers();
             FillPerfil();
-   
-           ProfileStaticHelper.SelectItemByValue(perfilselector, ApplicationSettingsManager.Settings.CurrentProfile);
+
+            ProfileStaticHelper.SelectItemByValue(perfilselector, ApplicationSettingsManager.Settings.CurrentProfile);
             Texts.initilizeLang();
 
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
@@ -1283,7 +1283,7 @@ namespace DisplayButtons.Forms
         }
         public void Start_configs()
         {
-            var con = MainForm.Instance.CurrentDevice.GetConnection();
+           
            
                if(CurrentPerfil == null)
             {
@@ -1304,14 +1304,7 @@ namespace DisplayButtons.Forms
 
             //  GetAllFolders(CurrentDevice.MainFolder);
          
-            if (CurrentPerfil != null)
-            {
-
-                MatrizGenerator(CurrentPerfil.Value);
-                var Matriz = new MatrizPacket(CurrentPerfil.Value);
-                con.SendPacket(Matriz);
-
-            }  
+           
        
             
         }
@@ -3569,41 +3562,71 @@ toAdd.AsEnumerable().Reverse().All(m =>
         public void FillPerfil()
         {
             perfilselector.Items.Clear();
-            foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
+            if (DevicePersistManager.PersistedDevices.Count == 0)
             {
-                
-                foreach (var list in perfil.profiles) {
-                    ProfileVoidHelper.GlobalPerfilBox teste = new ProfileVoidHelper.GlobalPerfilBox();
-                    teste.Text = list.Name;
-                    teste.Value = list;
-                   perfilselector.Items.Add(teste);
-                   
+                foreach (var device_con in DevicePersistManager.DeckDevicesFromConnection)
+                {
+                    foreach (var list in device_con.Value.profiles)
+                    {
+                        ProfileVoidHelper.GlobalPerfilBox teste = new ProfileVoidHelper.GlobalPerfilBox();
+                        teste.Text = list.Name;
+                        teste.Value = list;
+                        perfilselector.Items.Add(teste);
 
-                } 
+
+                    }
+                }
+            }
+            else
+            {
+                foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
+                {
+
+                    foreach (var list in perfil.profiles)
+                    {
+                        ProfileVoidHelper.GlobalPerfilBox teste = new ProfileVoidHelper.GlobalPerfilBox();
+                        teste.Text = list.Name;
+                        teste.Value = list;
+                        perfilselector.Items.Add(teste);
+
+
+                    }
+                }
             }
             
+        }
+        public void Add_Perfil()
+        {
+
+         
+
         }
         private void imageModernButton7_Click(object sender, EventArgs e)
         {
             dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.PerfilEditor")) as Form;
-
-
-            // form.comboBox.SelectedItem = GetActionName();
-        
-     
-     
+            
             if (form.ShowDialog() == DialogResult.OK)
             {
                 Profile teste = new Profile();
                 teste.Name = form.textBox1.Text;
                 teste.Mainfolder = new DynamicDeckFolder();
-              //  teste.Currentfolder = teste.Mainfolder;
-                foreach (var device in DevicePersistManager.PersistedDevices.ToList())
+                //  teste.Currentfolder = teste.Mainfolder;
+                if (DevicePersistManager.PersistedDevices.Count == 0)
                 {
-                    device.profiles.Add(teste);
+                    foreach (var device_con in DevicePersistManager.DeckDevicesFromConnection)
+                    {
+                        device_con.Value.profiles.Add(teste);
+                    }
                 }
+                else
+                {
+                    foreach (var device in DevicePersistManager.PersistedDevices.ToList())
+                    {
+                        device.profiles.Add(teste);
+                    }
 
-                    FillPerfil();
+                }
+                FillPerfil();
 
             }
             else
