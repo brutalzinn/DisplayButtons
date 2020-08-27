@@ -140,7 +140,7 @@ namespace DisplayButtons.Forms
                   
             }
 
-                MainForm.Instance.MatrizGenerator();
+                MainForm.Instance.MatrizGenerator(MainForm.Instance.CurrentDevice.CurrentProfile);
             }
             catch(Exception ea)
             {

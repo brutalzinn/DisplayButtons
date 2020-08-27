@@ -59,16 +59,18 @@ namespace DisplayButtons.Backend.Objects
         public static void SelectCurrentDevicePerfil(Profile profile)
         {
             if (MainForm.Instance.CurrentDevice != null)
-            {
+            {  
+                
+                SelectPerfilMatriz(profile);
                 MainForm.Instance.CurrentDevice.CurrentProfile = profile;
-                MainForm.Instance.MatrizGenerator();
+                MainForm.Instance.MatrizGenerator(profile);
                 MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
                
         
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
                 
                 ApplicationSettingsManager.Settings.CurrentProfile = profile;
-                SelectPerfilMatriz(profile);
+             
             }
         }
         public static bool CheckProfileMatriz(Profile profile)
@@ -117,26 +119,52 @@ namespace DisplayButtons.Backend.Objects
                 }
             }
         }
-        public static void SetupPerfil()
+        public static void SetupPerfil(bool isDeviceOn)
         {
-         
-            foreach (var device in DevicePersistManager.PersistedDevices.ToList())
+            if (isDeviceOn)
             {
-              if(device.profiles.Count == 0)
+                foreach (var device in DevicePersistManager.DeckDevicesFromConnection)
                 {
+                    if (device.Value.profiles.Count == 0)
+                    {
 
-                    Profile new_folder = new Profile();
-                    new_folder.Mainfolder = new DynamicDeckFolder();
-                    new_folder.Name = "DEFAULT";
-                    SelectDevicePerfil(device,new_folder);
+                        Profile new_folder = new Profile();
+                        new_folder.Mainfolder = new DynamicDeckFolder();
+                        new_folder.Name = "DEFAULT";
+
+                        device.Value.profiles.Add(new_folder);
+                        SelectCurrentDevicePerfil(new_folder);
+
+                        MainForm.Instance.FillPerfil();
+                    }
 
 
                 }
-             
-               
+            }
+            else
+            {
+                foreach (var device in DevicePersistManager.PersistedDevices)
+                {
+                    if (device.profiles.Count == 0)
+                    {
+
+                        Profile new_folder = new Profile();
+                        new_folder.Mainfolder = new DynamicDeckFolder();
+                        new_folder.Name = "DEFAULT";
+
+                        device.profiles.Add(new_folder);
+                        SelectCurrentDevicePerfil(new_folder);
+
+                        MainForm.Instance.FillPerfil();
+                    }
+
+
+                }
+
             }
 
         }
+
     }
 }
 

@@ -329,7 +329,7 @@ namespace DisplayButtons.Forms
             RegisterBackFolderHotKey();
 
 
-            ProfileStaticHelper.SetupPerfil();
+          ProfileStaticHelper.SetupPerfil(false);
 
             //       DeckServiceProvider.StartTimers();
             FillPerfil();
@@ -745,9 +745,10 @@ namespace DisplayButtons.Forms
         }
 
 
-        public void MatrizGenerator()
+        public void MatrizGenerator(Profile profile)
         {
- 
+
+        
             panel_buttons.Controls.Clear();
             //warning_label.Visible = true;
          //   warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
@@ -760,9 +761,9 @@ namespace DisplayButtons.Forms
                 int x = 0;
                 int y = 0;
                 int id = 1;
-                for (int con = 0; con < CurrentDevice?.CurrentProfile.Matriz.Lin; con++)
+                for (int con = 0; con < profile.Matriz.Lin; con++)
                 {
-                    for (int lin = 0; lin < CurrentDevice?.CurrentProfile.Matriz.Column; lin++)
+                    for (int lin = 0; lin < profile.Matriz.Column; lin++)
                     {
 
 
@@ -827,7 +828,7 @@ namespace DisplayButtons.Forms
                                             Buttons_Unfocus(sender, e);
 
 
-                                            CurrentDevice.CurrentProfile.Currentfolder.Remove(senderB.CurrentSlot);
+                                            CurrentPerfil.Value.Currentfolder.Remove(senderB.CurrentSlot);
 
 
                                         }
@@ -1020,7 +1021,7 @@ namespace DisplayButtons.Forms
                             toAdd.Add(control);
 
 
-                        if (toAdd.Count >= CurrentDevice?.CurrentProfile.Matriz.Calc)
+                        if (toAdd.Count >= profile.Matriz.Calc)
                         {
 
                             toAdd.AsEnumerable().Reverse().All(m =>
@@ -1036,7 +1037,7 @@ namespace DisplayButtons.Forms
                           //  panel1.Visible = true;
                             //warning_label.Visible = false;
                             ApplyTheme(panel_buttons);
-                             RefreshAllButtons(true);
+                            RefreshAllButtons(true);
 
                                 //            break;
 
@@ -1066,7 +1067,7 @@ namespace DisplayButtons.Forms
             IDeckFolder folder = CurrentDevice?.CurrentProfile?.Currentfolder;
 
 
-            for (int j = 0; j < Globals.calc; j++)
+            for (int j = 0; j < CurrentDevice.CurrentProfile.Matriz.Calc; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
                 //  Label control2 = GetLabelControl(j + 1);
@@ -1155,7 +1156,7 @@ namespace DisplayButtons.Forms
                 //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
                 if (item != null)
                 {
-                    var ser = item.GetItemImage().BitmapSerialized;
+                    //var ser = item.GetItemImage().BitmapSerialized;
                     //  control.NormalImage = null
 
 
@@ -1282,72 +1283,56 @@ namespace DisplayButtons.Forms
         }
         public void Start_configs()
         {
-
-
-            //   thread1.Join();
-            //      ApplyTheme(panel1);
-
             var con = MainForm.Instance.CurrentDevice.GetConnection();
            
-            if (Globals.can_refresh)
+               if(CurrentPerfil == null)
             {
+                ProfileStaticHelper.SetupPerfil(true);
+            }
                 if (CurrentPerfil != null)
                 {
                     ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
                 }
-                RefreshAllButtons(true);
-            }
 
+          
             //     folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
 
             if (ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
             {
                 GenerateFolderList(shadedPanel4);
             }
-           
-          //  GetAllFolders(CurrentDevice.MainFolder);
- if (con != null)
+
+            //  GetAllFolders(CurrentDevice.MainFolder);
+         
+            if (CurrentPerfil != null)
             {
 
-
-                var Matriz = new MatrizPacket(CurrentDevice.CurrentProfile);
+                MatrizGenerator(CurrentPerfil.Value);
+                var Matriz = new MatrizPacket(CurrentPerfil.Value);
                 con.SendPacket(Matriz);
 
-            }
-
+            }  
+       
+            
         }
         public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
 
             Invoke(new Action(() =>
             {
-
-
-
-
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);
                 shadedPanel2.Hide();
                 Refresh();
-
-
                 e.Device.CheckCurrentFolder();
                 FixFolders(e.Device);
-
                 if (CurrentDevice == null)
                 {
                     ChangeToDevice(e.Device);
+                }          
 
-
-
-                }
-                SendItemsToDevice(CurrentDevice, true);
-                //   GenerateFolderList(shadedPanel1);
-                //      MatrizGenerator();
-                Start_configs();
-               
-
-
+               Start_configs(); 
+    SendItemsToDevice(CurrentDevice, true);
             }));
 
             e.Device.ButtonInteraction += Device_ButtonInteraction;
@@ -3586,6 +3571,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
             perfilselector.Items.Clear();
             foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
             {
+                
                 foreach (var list in perfil.profiles) {
                     ProfileVoidHelper.GlobalPerfilBox teste = new ProfileVoidHelper.GlobalPerfilBox();
                     teste.Text = list.Name;

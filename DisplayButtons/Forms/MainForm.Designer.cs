@@ -48,6 +48,7 @@ namespace DisplayButtons.Forms
             this.shadedPanel4 = new DisplayButtons.Forms.ShadedPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel_buttons = new System.Windows.Forms.Panel();
+            this.warning_label = new System.Windows.Forms.Label();
             this.imageModernButton6 = new DisplayButtons.Controls.ImageModernButton();
             this.perfilselector = new System.Windows.Forms.ComboBox();
             this.imageModernButton7 = new DisplayButtons.Controls.ImageModernButton();
@@ -55,6 +56,7 @@ namespace DisplayButtons.Forms
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
+            this.panel_buttons.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar1
@@ -226,10 +228,21 @@ namespace DisplayButtons.Forms
             this.panel_buttons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_buttons.AutoScroll = true;
             this.panel_buttons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel_buttons.Controls.Add(this.warning_label);
             this.panel_buttons.Location = new System.Drawing.Point(143, 149);
             this.panel_buttons.Name = "panel_buttons";
             this.panel_buttons.Size = new System.Drawing.Size(801, 489);
             this.panel_buttons.TabIndex = 7;
+            // 
+            // warning_label
+            // 
+            this.warning_label.AutoSize = true;
+            this.warning_label.Font = new System.Drawing.Font("Arial", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.warning_label.Location = new System.Drawing.Point(20, 240);
+            this.warning_label.Name = "warning_label";
+            this.warning_label.Size = new System.Drawing.Size(765, 40);
+            this.warning_label.TabIndex = 0;
+            this.warning_label.Text = "CREATE A PERFIL TO USE DISPLAYBUTTONS";
             // 
             // imageModernButton6
             // 
@@ -313,6 +326,8 @@ namespace DisplayButtons.Forms
             this.shadedPanel1.ResumeLayout(false);
             this.shadedPanel2.ResumeLayout(false);
             this.painel_developer.ResumeLayout(false);
+            this.panel_buttons.ResumeLayout(false);
+            this.panel_buttons.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -338,6 +353,7 @@ namespace DisplayButtons.Forms
         private ImageModernButton imageModernButton8;
         public Panel panel_buttons;
         public ShadedPanel shadedPanel1;
+        private Label warning_label;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

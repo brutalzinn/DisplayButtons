@@ -45,8 +45,9 @@ namespace DisplayButtons.Backend.Networking.Implementation
         {
             //To client
            
-          writer.WriteInt(profile.Matriz.Lin);
-            writer.WriteInt(profile.Matriz.Column);
+                writer.WriteInt(profile.Matriz.Lin);
+                writer.WriteInt(profile.Matriz.Column);
+           
         }
 
         public override object Clone()
