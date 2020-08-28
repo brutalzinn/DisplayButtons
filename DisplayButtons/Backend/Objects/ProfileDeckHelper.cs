@@ -71,7 +71,7 @@ namespace DisplayButtons.Backend.Objects
                 MainForm.Instance.MatrizGenerator(profile);
                 var Matriz = new MatrizPacket(profile);
                 con.SendPacket(Matriz);
-                MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
+                MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = profile.Mainfolder;
                
         
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
