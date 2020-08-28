@@ -66,7 +66,8 @@ namespace DisplayButtons.Backend.Objects
             {
                 var con = MainForm.Instance.CurrentDevice.GetConnection();
                 SelectPerfilMatriz(profile);
-                DevicePersistManager.DeckDevicesFromConnection.First().Value.CurrentProfile = profile;
+                
+                DevicePersistManager.DeckDevicesFromConnection.FirstOrDefault().Value.CurrentProfile = profile;
                 MainForm.Instance.MatrizGenerator(profile);
                 var Matriz = new MatrizPacket(profile);
                 con.SendPacket(Matriz);
