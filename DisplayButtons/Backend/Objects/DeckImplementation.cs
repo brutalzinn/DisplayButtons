@@ -119,34 +119,19 @@ namespace DisplayButtons.Backend.Objects
 
                 if (Program.device_list.Count == 1)
                 {
-
                     Program.client.RemoveAllForwards(Program.device_list.First());
-                    Program.client.CreateForward(Program.device_list.First(), "tcp:5095", "tcp:5095", true);
-                    if (DevicePersistManager.IsDeviceOnline(DevicePersistManager.DeckDevicesFromConnection.FirstOrDefault().Value))
-                    {
-Program.ClientThread.Stop();
-                    }
-                    
+                    Thread.Sleep(1000);
+                    Program.client.CreateForward(Program.device_list.First(), "tcp:5095", "tcp:5095", true);              
+            Program.ClientThread.Stop();
                     Program.ClientThread = new Misc.ClientThread();
                     Program.ClientThread.Start();
+      
 
                 }
-
-                // Program.ClientThread.Stop();
-
-
-
-                //      DevicePersistManager.PersistUsbMode(Program.client.GetDevices().First());
-
-
 
 
                 foreach (var item in DevicePersistManager.PersistedDevices.ToList())
                 {
-
-
-
-
 
                     if (DevicePersistManager.IsDeviceOnline(item))
                     {
@@ -154,17 +139,13 @@ Program.ClientThread.Stop();
                         MainForm.Instance.Invoke(new Action(() =>
                             {
 
-
                                 Debug.WriteLine("Reconectado.");
-                              
-
-                               
-                                //DevicePersistManager.PersistUsbMode(Program.client.GetDevices().First());
-                                //teste.MountUsbDevices();
-                               
+                                MainForm.Instance.StartUsbMode();
+                                
+                                DevicePersistManager.ChangeConnectedState(item.GetConnection(), item);
+                       // MainForm.Instance.Start_configs();
+                               MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
                                 MainForm.Instance.CurrentDevice = item;
-                            
-                                //     ProfileStaticHelper.SelectCurrentDevicePerfil(MainForm.Instance.CurrentPerfil.Value);
 
 
 

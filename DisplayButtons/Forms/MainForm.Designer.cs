@@ -354,7 +354,7 @@ namespace DisplayButtons.Forms
         private ImageModernButton imageModernButton8;
         public Panel panel_buttons;
         public ShadedPanel shadedPanel1;
-        private Label warning_label;
+        public Label warning_label;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

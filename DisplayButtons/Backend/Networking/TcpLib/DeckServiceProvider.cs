@@ -1,6 +1,7 @@
 ﻿using DisplayButtons.Backend.Networking.Implementation;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Utils;
+using DisplayButtons.Forms;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -63,9 +64,15 @@ namespace DisplayButtons.Backend.Networking.TcpLib
    
         public override void OnRetryConnect(ConnectionState state, bool isErrorOnConnected)
         {
+        
+
+
+            
+            
             if (Program.mode == 1)
             {
-
+            
+               
 
                 aTimer.Enabled = true;
 

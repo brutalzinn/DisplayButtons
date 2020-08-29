@@ -28,7 +28,17 @@ namespace DisplayButtons.Backend.Objects
             }
 
         }
+        public void UndonePerfilSelector()
+        {
 
+            MainForm.Instance.Invoke(new Action(() =>
+            {
+
+                MainForm.Instance.ClearMatriz();
+
+            }));
+
+        }
 
 
         public void AddPerfil()
@@ -97,12 +107,7 @@ namespace DisplayButtons.Backend.Objects
         }
 
 
-        public static void UndonePerfilSelector()
-        {
-            MainForm.Instance.CurrentDevice = null;
-       
-
-        }
+    
         public static Profile SelectPerfilByName(string profilename)
         {
             Profile result = null;

@@ -3457,7 +3457,11 @@ toAdd.AsEnumerable().Reverse().All(m =>
         {
 
         }
-     
+     public void ClearMatriz()
+        {
+            
+            
+        }
         public  void executeCMD()
         {
 

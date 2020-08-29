@@ -65,16 +65,12 @@ namespace DisplayButtons.Backend.Networking.Implementation
              
             if (Program.mode == 1)
             {
-//                UsbMode teste = new UsbMode();
-              
-          MainForm.Instance.StartUsbMode();
-                //MainForm.Instance.CurrentDevice = deckDevice;
-                //                //   teste.MountUsbDevices();
 
-                DevicePersistManager.PersistUsbMode(deckDevice);
+         // MainForm.Instance.StartUsbMode();
+         
+          //      DevicePersistManager.PersistUsbMode(deckDevice);
 
-
-//                teste.MountUsbDevices();
+        //   teste.MountUsbDevices();
             }
             DevicePersistManager.OnDeviceConnected(this, deckDevice);
             Debug.WriteLine("MOSTRANDO GUID PARA: " + DeviceName);
