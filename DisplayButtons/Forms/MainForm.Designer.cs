@@ -293,6 +293,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton8.TabIndex = 10;
             this.imageModernButton8.Text = "-";
             this.imageModernButton8.UseVisualStyleBackColor = true;
+            this.imageModernButton8.Click += new System.EventHandler(this.imageModernButton8_Click);
             // 
             // MainForm
             // 

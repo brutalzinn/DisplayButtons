@@ -1242,7 +1242,7 @@ namespace DisplayButtons.Forms
             var receiver = new ConsoleOutputReceiver();
 
             Program.client.ExecuteRemoteCommand("pm path net.nickac.DisplayButtons", e.Device, receiver);
-
+ 
             if (receiver != null)
             {
                 var product_name = new ConsoleOutputReceiver();
@@ -3595,44 +3595,20 @@ toAdd.AsEnumerable().Reverse().All(m =>
             }
             
         }
-        public void Add_Perfil()
-        {
-
-         
-
-        }
+        
+        
         private void imageModernButton7_Click(object sender, EventArgs e)
         {
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.PerfilEditor")) as Form;
-            
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                Profile teste = new Profile();
-                teste.Name = form.textBox1.Text;
-                teste.Mainfolder = new DynamicDeckFolder();
-                //  teste.Currentfolder = teste.Mainfolder;
-                if (DevicePersistManager.PersistedDevices.Count == 0)
-                {
-                    foreach (var device_con in DevicePersistManager.DeckDevicesFromConnection)
-                    {
-                        device_con.Value.profiles.Add(teste);
-                    }
-                }
-                else
-                {
-                    foreach (var device in DevicePersistManager.PersistedDevices.ToList())
-                    {
-                        device.profiles.Add(teste);
-                    }
+            new ProfileVoidHelper().AddPerfil();
+        }
 
-                }
-                FillPerfil();
-
-            }
-            else
+        private void imageModernButton8_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(String.Format(imageModernButton1.Text = Texts.rm.GetString("MESSAGEBOXPERFIL", Texts.cultereinfo), CurrentPerfil.Value.Name), Texts.rm.GetString("MESSAGEBOXPERFIL_ALERT", Texts.cultereinfo), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                form.Close();
+                ProfileStaticHelper.RemovePerfil(CurrentPerfil.Value);
             }
+           
         }
     }
     #endregion

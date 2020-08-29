@@ -52,29 +52,34 @@ namespace DisplayButtons.Backend.Networking.TcpLib
 
         public override void OnAcceptConnection(ConnectionState state)
         {
-            
-//aTimer.Enabled = false;
-     
-              
-            
+            if (Program.mode == 1)
+            {
+                aTimer.Enabled = false;
+
+            }
+
+
         }
    
         public override void OnRetryConnect(ConnectionState state, bool isErrorOnConnected)
         {
-
-            if(state._conn.Available == 0)
+            if (Program.mode == 1)
             {
-    UsbMode devices_refresh = new UsbMode();
-           devices_refresh.RefreshCurrentUsb();
-                devices_refresh.MountUsbDevices();
 
+
+                aTimer.Enabled = true;
+
+                aTimer.Interval = 5000;
+
+                aTimer.Elapsed += OnTimedEvent;
             }
-       
-        
+
         }
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-         
+     
+         new UsbMode().RefreshCurrentUsb();
+               // devices_refresh.MountUsbDevices();
           
         }
         public override void OnDropConnection(ConnectionState state)

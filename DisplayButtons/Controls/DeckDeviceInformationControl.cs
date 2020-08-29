@@ -92,13 +92,13 @@ namespace DisplayButtons.Forms
                                 Program.ClientThread.Stop();
                                 Program.ClientThread = new Misc.ClientThread();
                                 Program.ClientThread.Start();
-
-                                MainForm.Instance.StartLoad(true);
-                                MainForm.Instance.Start_configs();
+                             //   DevicePersistManager.PersistUsbMode(DeckUsb);
+                         //       MainForm.Instance.StartLoad(true);
+                             //   MainForm.Instance.Start_configs();
                             }
                             else
                             {
-
+                           //     DevicePersistManager.PersistUsbMode(DeckUsb);
                                 foreach (DeviceData device in Program.device_list)
                                 {
  Program.client.RemoveAllForwards(device);

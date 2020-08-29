@@ -2,6 +2,7 @@
 using DisplayButtons.Backend.Objects;
 
 using NHotkey.WindowsForms;
+using SharpAdbClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -150,6 +151,10 @@ namespace DisplayButtons.Backend.Utils
             
         }
 
+        public static void PersistUsbMode(DeckDevice device)
+        {
+            device.DeviceUsb = Program.device_list.FirstOrDefault();
+        }
         public static void RemoveConnectionState(ConnectionState state)
         {
             if (deckDevicesFromConnection.Keys.Contains(state.ConnectionGuid)) {

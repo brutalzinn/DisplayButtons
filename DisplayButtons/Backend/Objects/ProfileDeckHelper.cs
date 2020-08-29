@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace DisplayButtons.Backend.Objects
@@ -30,7 +31,41 @@ namespace DisplayButtons.Backend.Objects
 
 
 
+        public void AddPerfil()
+        {
 
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.PerfilEditor")) as Form;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Profile teste = new Profile();
+                teste.Name = form.textBox1.Text;
+                teste.Mainfolder = new DynamicDeckFolder();
+                //  teste.Currentfolder = teste.Mainfolder;
+                if (DevicePersistManager.PersistedDevices.Count == 0)
+                {
+                    foreach (var device_con in DevicePersistManager.DeckDevicesFromConnection)
+                    {
+                        device_con.Value.profiles.Add(teste);
+                    }
+                }
+                else
+                {
+                    foreach (var device in DevicePersistManager.PersistedDevices.ToList())
+                    {
+                        device.profiles.Add(teste);
+                    }
+
+                }
+                MainForm.Instance.FillPerfil();
+
+            }
+            else
+            {
+                form.Close();
+            }
+
+        }
 
     }
     public static class ProfileStaticHelper
@@ -59,6 +94,24 @@ namespace DisplayButtons.Backend.Objects
                 }
             }
             //   Debug.WriteLine();
+        }
+
+
+        public static void UndonePerfilSelector()
+        {
+            MainForm.Instance.CurrentDevice = null;
+       
+
+        }
+        public static Profile SelectPerfilByName(string profilename)
+        {
+            Profile result = null;
+            foreach (var device in DevicePersistManager.PersistedDevices)
+            {
+
+                result =  device.profiles.Where(e => e.Name == profilename).FirstOrDefault();
+            }
+            return result;
         }
         public static void SelectCurrentDevicePerfil(Profile profile)
         {
@@ -172,8 +225,28 @@ namespace DisplayButtons.Backend.Objects
 
         }
 
+   
+     public static void RemovePerfil(Profile perfil)
+    {
+        foreach (var device in DevicePersistManager.PersistedDevices)
+        {
+            if (device.profiles.Count > 1)
+            { 
+                   
+ device.profiles.Remove(perfil);
+                    SelectCurrentDevicePerfil(device.profiles.Last());
+                   
+                MainForm.Instance.FillPerfil();
+            }
+
+
+        }
     }
-}
+    
+
+
+    }
+    }
 
 
 

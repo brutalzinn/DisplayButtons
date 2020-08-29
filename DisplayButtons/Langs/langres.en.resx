@@ -290,6 +290,12 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
   <data name="MATRIZGENERATORLABELLOADING" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="MESSAGEBOXPERFIL" xml:space="preserve">
+    <value>Are you sure you want to delete  the  perfil {0} ?</value>
+  </data>
+  <data name="MESSAGEBOXPERFIL_ALERT" xml:space="preserve">
+    <value>WARNING</value>
+  </data>
   <data name="OBSCONNECTION" xml:space="preserve">
     <value>Start OBS connection</value>
   </data>

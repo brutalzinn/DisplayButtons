@@ -55,9 +55,7 @@ namespace DisplayButtons.Backend.Networking
         /// </summary>
         public static bool SendPacket(this ConnectionState con, INetworkPacket packet)
         {
-            if (!packet.CanClientReceive()) {
-         //   throw new Exception($"Client can't receive NetworkPacket[ID: {packet.GetPacketNumber()}].");
-            }
+          
             byte[] bytesToSend = null;
             using (var memoryStream = new MemoryStream()) {
                 using (var binaryWriter = new DataOutputStream(memoryStream)) {
