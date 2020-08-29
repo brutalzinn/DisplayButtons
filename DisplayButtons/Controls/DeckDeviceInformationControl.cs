@@ -98,28 +98,12 @@ namespace DisplayButtons.Forms
                             }
                             else
                             {
-                           //     DevicePersistManager.PersistUsbMode(DeckUsb);
-                                foreach (DeviceData device in Program.device_list)
-                                {
- Program.client.RemoveAllForwards(device);
-
-                                }
-                               
-                                Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
-                                try
-                                {
+                                PersistUsbMode(DeckUsb);
                                 
-                                    Program.ClientThread.Stop();
-                                    Program.ClientThread = new Misc.ClientThread();
-                                    Program.ClientThread.Start();
 
-                            //MainForm.Instance.StartUsbMode();  
 
-                                }
-                                catch (Exception eee)
-                                {
 
-                                }
+
                             }
                         }
                     }

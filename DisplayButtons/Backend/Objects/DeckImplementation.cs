@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using static DisplayButtons.Backend.Utils.DevicePersistManager;
 
 namespace DisplayButtons.Backend.Objects
 {
@@ -117,18 +118,13 @@ namespace DisplayButtons.Backend.Objects
                
 
 
-                if (Program.device_list.Count == 1)
-                {
-                    Program.client.RemoveAllForwards(Program.device_list.First());
+               
+                    Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
                     Thread.Sleep(1000);
-                    Program.client.CreateForward(Program.device_list.First(), "tcp:5095", "tcp:5095", true);              
-            Program.ClientThread.Stop();
+                    Program.client.CreateForward(DevicePersistManager.DeviceUsb, "tcp:5095", "tcp:5095", true);
+                Program.ClientThread.Stop();
                     Program.ClientThread = new Misc.ClientThread();
                     Program.ClientThread.Start();
-      
-
-                }
-
 
                 foreach (var item in DevicePersistManager.PersistedDevices.ToList())
                 {
@@ -141,11 +137,15 @@ namespace DisplayButtons.Backend.Objects
 
                                 Debug.WriteLine("Reconectado.");
                                 MainForm.Instance.StartUsbMode();
-                                
                                 DevicePersistManager.ChangeConnectedState(item.GetConnection(), item);
-                       // MainForm.Instance.Start_configs();
-                               MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
+                                MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
                                 MainForm.Instance.CurrentDevice = item;
+                              
+                                
+                                //  DevicePersistManager.OnDeviceConnected(this, item);
+                                // MainForm.Instance.Start_configs();
+                                //MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
+                                // MainForm.Instance.CurrentDevice = item;
 
 
 
