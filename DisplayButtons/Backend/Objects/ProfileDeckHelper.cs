@@ -122,7 +122,10 @@ namespace DisplayButtons.Backend.Objects
         {
             if (MainForm.Instance.CurrentDevice != null)
             {
-                var con = MainForm.Instance.CurrentDevice.GetConnection();
+                MainForm.Instance.Invoke(new Action(() =>
+                {
+
+                    var con = MainForm.Instance.CurrentDevice.GetConnection();
                 SelectPerfilMatriz(profile);
                 
                 DevicePersistManager.DeckDevicesFromConnection.FirstOrDefault().Value.CurrentProfile = profile;
@@ -135,7 +138,8 @@ namespace DisplayButtons.Backend.Objects
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
                 DeviceSelected = profile;
                 ApplicationSettingsManager.Settings.CurrentProfile = profile;
-               
+
+                }));
             }
         }
         public static bool CheckProfileMatriz(Profile profile)

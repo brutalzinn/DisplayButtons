@@ -10,7 +10,7 @@
     <AssemblyName>DisplayButtons</AssemblyName>
     <PackageId>DisplayButtons</PackageId>
     <ApplicationIcon>button-deck.ico</ApplicationIcon>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
