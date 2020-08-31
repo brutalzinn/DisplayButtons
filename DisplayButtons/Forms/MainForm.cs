@@ -289,6 +289,7 @@ namespace DisplayButtons.Forms
             };
 
 
+            
 
             AppAction itemBiblioteca = new AppAction()
             {
@@ -3407,12 +3408,12 @@ toAdd.AsEnumerable().Reverse().All(m =>
         protected override void OnResize(EventArgs e)
         {
         
-
+    base.OnResize(e);
             if (ApplicationSettingsManager.Settings.isAutoMinimizer)
             {
 
 
-    base.OnResize(e);
+
                 bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
 
                 if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
@@ -3421,6 +3422,10 @@ toAdd.AsEnumerable().Reverse().All(m =>
                     this.ShowInTaskbar = false;
                     notifyIcon1.Visible = true;
                     this.Hide();
+                }
+                else
+                {
+                    notifyIcon1.Visible = false;
                 }
             }
         }
