@@ -137,7 +137,7 @@ namespace DisplayButtons.Backend.Objects
         
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
                 DeviceSelected = profile;
-                ApplicationSettingsManager.Settings.CurrentProfile = profile;
+                ApplicationSettingsManager.Settings.CurrentProfile = profile.Name;
 
                 }));
             }

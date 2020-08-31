@@ -313,18 +313,24 @@ namespace DisplayButtons.Forms
             ApplySidebarTheme(shadedPanel1);
 
             ApplySidebarTheme(painel_developer);
-            //shadedPanel2.Hide();
-            //shadedPanel1.Hide();
-
-
-
-            ChangeDeveloperMode();
-           // MatrizGenerator();
+      
 
             Refresh();
 
 
 
+           using(frmWaitForm frm = new frmWaitForm(StartupMethods))
+            {
+
+                frm.ShowDialog(this);
+            }
+
+            //warning_label.ForeColor = ColorScheme.SecondaryColor;
+           
+        }
+        public void StartupMethods()
+        { 
+            ChangeDeveloperMode();
             RegisterMainFolderHotKey();
 
             RegisterBackFolderHotKey();
@@ -333,29 +339,25 @@ namespace DisplayButtons.Forms
           ProfileStaticHelper.SetupPerfil(false);
 
             //       DeckServiceProvider.StartTimers();
-            FillPerfil();
 
-            ProfileStaticHelper.SelectItemByValue(perfilselector, ApplicationSettingsManager.Settings.CurrentProfile);
-            Texts.initilizeLang();
+            MainForm.Instance.Invoke(new Action(() =>
+            {
+                FillPerfil();
+         
+
+            ProfileStaticHelper.SelectItemByValue(perfilselector, ProfileStaticHelper.SelectPerfilByName(ApplicationSettingsManager.Settings.CurrentProfile)); 
+        
+           
 
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
             {
                 shadedPanel4.Visible = false;
-
-            //    int columnumber = tableLayoutPanel1.GetColumn(shadedPanel4);
-        //        tableLayoutPanel1.ColumnStyles[columnumber].Width = 0;
-
-
-
-
-
-
-
             }
-            new FactoryEvents().Init();
-
-            //warning_label.ForeColor = ColorScheme.SecondaryColor;
-            Checkupdates();
+                }));
+            
+            Texts.initilizeLang();
+ new FactoryEvents().Init();
+ Checkupdates();
         }
         private void Checkupdates()
         {
