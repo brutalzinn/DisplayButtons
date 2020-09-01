@@ -15,11 +15,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DisplayButtons.Backend.Utils.AppSettings;
 using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Net.Http.Headers;
 
 namespace DisplayButtons.Forms
 {
 
-   
+
     public class TemplateForm : ModernForm
     {
         public bool MinimizeToTrayRightMinimize { get; set; }
@@ -57,7 +59,7 @@ namespace DisplayButtons.Forms
             ModifyColorScheme(Controls.OfType<Control>());
 
         }
-       
+
         private static Color GetReadableForeColor(Color c)
         {
             return (((c.R + c.B + c.G) / 3) > 128) ? Color.Black : Color.White;
@@ -66,9 +68,9 @@ namespace DisplayButtons.Forms
         public void ModifyColorScheme(IEnumerable<Control> cccc)
         {
             cccc.All(c => {
-                if(c.Tag == null)
+                if (c.Tag == null)
                 {
-                    return false;
+                    c.Tag = "noColor";
                 }
                 if (c.Tag != null && c.Tag.ToString() == "noColor")
                     return true;
@@ -97,6 +99,8 @@ namespace DisplayButtons.Forms
     c.AppTheme = ColorSchemeCentral.FromAppTheme(c.UnderlyingAppTheme);
     return true; });*/
         }
+
+
 
         private void LoadTheme(AppTheme theme)
         {

@@ -23,7 +23,7 @@ namespace NickAc.ModernUIDoneRight.Objects
                 MouseDownColor = LightenColor(MouseDownColor, 0.2f);
                 MouseHoverColor = LightenColor(MouseDownColor, 0.25f);
             }
-            Debug.WriteLine(ignoreDarkness);
+          //  Debug.WriteLine(ignoreDarkness);
 
 
         }

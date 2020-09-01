@@ -165,8 +165,8 @@ namespace DisplayButtons.Forms
 
                 Control control = Controls["panel1"];
                 if (control != null) control.Visible = visible;
-                Control control3 = Controls["shadedPanel1"];
-                if (control3 != null) control3.Visible = visible;
+              //  Control control3 = Controls["shadedPanel1"];
+              //  if (control3 != null) control3.Visible = visible;
 
             }));
         }
@@ -331,20 +331,20 @@ namespace DisplayButtons.Forms
                 appBar1.Actions.Add(itemMagnetite);
 
                 appBar1.Actions.Add(itemBiblioteca);
-
+ 
                 // ApplyTheme(panel1);
                 GenerateSidebar(shadedPanel1, true);
-                ApplySidebarTheme(shadedPanel1);
+           
 
-                ApplySidebarTheme(painel_developer);
-
+             //   ApplySidebarTheme(painel_developer);
+  
 
                 Refresh();
 
 
 
                 FillPerfil();
-         
+           
 
                     ProfileStaticHelper.SelectItemByValue(perfilselector, ProfileStaticHelper.SelectPerfilByName(ApplicationSettingsManager.Settings.CurrentProfile)); 
 
@@ -353,9 +353,13 @@ namespace DisplayButtons.Forms
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
             {
                 shadedPanel4.Visible = false;
-            }
+                }
+                else
+                {
+                    ApplySidebarTheme(shadedPanel4);
+                }
                 }));
-            
+          ApplySidebarTheme(shadedPanel1);
             Texts.initilizeLang();
  new FactoryEvents().Init();
  Checkupdates();
@@ -2073,7 +2077,7 @@ namespace DisplayButtons.Forms
                
                
             }
-
+          
 
         }
 

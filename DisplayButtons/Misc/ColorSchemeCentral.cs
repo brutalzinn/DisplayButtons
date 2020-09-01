@@ -47,7 +47,7 @@ namespace DisplayButtons.Misc
         public static ApplicationColorScheme Neptune = new ApplicationColorScheme(DefaultColorSchemes.Blue, Color.FromArgb(245, 245, 245));
 
         // public static ApplicationColorScheme PinkNanda = new ApplicationColorScheme(new ColorScheme(Color.Magenta, Color.White), Color.FromArgb(255, 255, 255));
-        public static ApplicationColorScheme PinkNanda = new ApplicationColorScheme(new ColorScheme(Color.FromArgb(231, 4, 186), Color.FromArgb(231, 4, 186), true), Color.FromArgb(255,255,255));
+        public static ApplicationColorScheme PinkNanda = new ApplicationColorScheme(new ColorScheme(Color.FromArgb(231, 4, 186), Color.FromArgb(231, 4, 186)), Color.FromArgb(255,255,255));
 
 
         public static ApplicationColorScheme KindaGreen = new ApplicationColorScheme(DefaultColorSchemes.Green, Color.FromArgb(245, 245, 245));
