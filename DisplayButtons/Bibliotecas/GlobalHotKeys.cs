@@ -102,7 +102,7 @@ HotkeyManager.Current.Remove(folder.UniqueID) ;
 public void MyEventHandler(object sender, HotkeyEventArgs e)
         {
 
-                Debug.WriteLine("Trocando para pasta: "+  FolderPrincipal.DeckName + " Atalho: "  + e.Name);
+                Debug.WriteLine("Trocando para pasta: "+  FolderPrincipal.Deckname + " Atalho: "  + e.Name);
                 MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = FolderPrincipal;
                 MainForm.Instance.RefreshAllButtons(true);
          e.Handled = true;

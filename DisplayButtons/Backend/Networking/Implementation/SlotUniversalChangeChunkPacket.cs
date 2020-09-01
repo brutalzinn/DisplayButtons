@@ -21,10 +21,10 @@ namespace DisplayButtons.Backend.Networking.Implementation
         
   
         List<Labels> list_labels = new List<Labels>();
-        public void AddToQueue(int slot, string text, string font,int size, int position, string color, DeckImage image)
+        public void AddToQueue(int slot, IDeckItem item, DeckImage image)
         {
          
-            list_labels.Add (new Labels( slot, font, size, position,text, color, image));
+            list_labels.Add (new Labels( slot,item, image));
         }
         public void ClearPacket()
         {
@@ -54,13 +54,13 @@ namespace DisplayButtons.Backend.Networking.Implementation
 
            foreach (var item in list_labels)
            {
-              SendDeckLabel(writer, item.Id, item.Font,item.Size,item.Position,item.Text,item.Color, item.Image) ;
+              SendDeckLabel(writer, item.Id, item.Item, item.Image) ;
 
              }
 
         }
 
-        private void SendDeckLabel(DataOutputStream writer, int slot, string font,int size,int pos,string text,string color , DeckImage img)
+        private void SendDeckLabel(DataOutputStream writer, int slot, IDeckItem item , DeckImage img)
         {
 
             //Write the slot
@@ -74,13 +74,16 @@ namespace DisplayButtons.Backend.Networking.Implementation
                 writer.WriteInt(img.InternalBitmap.Length);
                 writer.Write(img.InternalBitmap);
 
-                headerContent.Font = font;
-                headerContent.Size = size;
-                headerContent.Position = pos;
-                headerContent.Text = text;
-                headerContent.Color = color;
-                
+                headerContent.Font = " ";
+                headerContent.Size = item.Decksize;
+                headerContent.Position = item.Deckposition;
+                headerContent.Text = item.Deckname;
+                headerContent.Color = item.Deckcolor;
 
+                headerContent.Stroke_color = item.Stroke_color;
+                headerContent.Stroke_dx = item.Stroke_dxtext;
+                headerContent.Stroke_radius = item.Stroke_radius;
+                headerContent.Stroke_dy = item.Stroke_Dy;
 
                 string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.None);
 

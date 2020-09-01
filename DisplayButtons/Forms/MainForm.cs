@@ -1446,7 +1446,7 @@ namespace DisplayButtons.Forms
                     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                     var seri = image.BitmapSerialized;
 
-                    packet.AddToQueue(folder.GetItemIndex(item), item?.DeckName, " ", item.DeckSize, item.DeckPosition, item?.DeckColor, image);
+                    packet.AddToQueue(folder.GetItemIndex(item), item, image);
 
                 }
 
@@ -1814,7 +1814,7 @@ namespace DisplayButtons.Forms
 
 
 
-                    folder_form.Add(new folders(PP.DeckName, PP, false, root));
+                    folder_form.Add(new folders(PP.Deckname, PP, false, root));
                     // AddFolderInPanelList(shadedPanel1, PP.folder_name, PP, root, false, root);
                     //   Debug.WriteLine(PP.folder_name + "CC:" + PP.GetSubFolders().Count);             
 
@@ -1825,7 +1825,7 @@ namespace DisplayButtons.Forms
 
                             if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
-                                folder_form.Add(new folders(pastapai.DeckName, pastapai, true, root));
+                                folder_form.Add(new folders(pastapai.Deckname, pastapai, true, root));
                             }
                             AddFolderInPanelList(root);
                             root++;
@@ -1834,7 +1834,7 @@ namespace DisplayButtons.Forms
                         {
                             if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
-                                folder_form.Add(new folders(pastapai.DeckName, pastapai, true, root));
+                                folder_form.Add(new folders(pastapai.Deckname, pastapai, true, root));
                             }
                             Debug.WriteLine("ROOT: " + root);
                             AddFolderInPanelList(root);
@@ -1930,8 +1930,8 @@ namespace DisplayButtons.Forms
                         folder.Font = itemFont;
 
                         folder.Dock = DockStyle.Top;
-                        folder.Text = item.DeckName;
-                        folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
+                        folder.Text = item.Deckname;
+                        folder.Height = TextRenderer.MeasureText(item.Deckname, itemFont).Height;
                         toAdd.Add(folder);
                         foreach (DynamicDeckFolder subitem in ListFolders(item).Skip(1))
                         {
@@ -1943,8 +1943,8 @@ namespace DisplayButtons.Forms
                             subfolder.Font = itemFont;
 
                             subfolder.Dock = DockStyle.Top;
-                            subfolder.Text = "..." + subitem.DeckName;
-                            subfolder.Height = TextRenderer.MeasureText("..." + subitem.DeckName, itemFont).Height;
+                            subfolder.Text = "..." + subitem.Deckname;
+                            subfolder.Height = TextRenderer.MeasureText("..." + subitem.Deckname, itemFont).Height;
                             subfolder.Click += (s, ee) =>
                                                    {
 
@@ -1968,8 +1968,8 @@ namespace DisplayButtons.Forms
                         folder.Font = itemFont;
 
                         folder.Dock = DockStyle.Top;
-                        folder.Text = item.DeckName;
-                        folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
+                        folder.Text = item.Deckname;
+                        folder.Height = TextRenderer.MeasureText(item.Deckname, itemFont).Height;
                         toAdd.Add(folder);
                     }
 
@@ -2426,6 +2426,7 @@ namespace DisplayButtons.Forms
 
                 ModernButton myButton = new ModernButton();
                 ModernButton myColor = new ModernButton();
+                ModernButton myColorShadow = new ModernButton();
                 Label myTextNameInformation = new Label();
                 Label sizeLabelInfo = new Label();
                 Label positionLabelInfo = new Label();
@@ -2433,30 +2434,42 @@ namespace DisplayButtons.Forms
                 ComboBox PositionComboBox = new ComboBox();
                 TextBox myNameText = new TextBox();
                 TextBox myColorText = new TextBox();
+                TextBox shadow_stroke_radiustextfloat = new TextBox();
+                TextBox shadow_stroke_dxtextfloat = new TextBox();
+                TextBox shadow_stroke_dytextfloat = new TextBox();
+                TextBox shadow_stroke_color = new TextBox();
                 myColor.Size = new Size(70, 30);
                 myColor.Text = "Selecionar Cor";
-
+                myColorShadow.Size = new Size(70, 30);
+                myColorShadow.Text = "Selecionar Cor";
                 FlowLayoutPanel painel_name = new FlowLayoutPanel();
                 FlowLayoutPanel painel_color = new FlowLayoutPanel();
                 FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
                 FlowLayoutPanel painel_position = new FlowLayoutPanel();
+                FlowLayoutPanel painel_shadowstroke= new FlowLayoutPanel();
                 myColor.Dock = DockStyle.None;
                 myColorText.Dock = DockStyle.None;
                 sizeLabelTextBox.Dock = DockStyle.None;
                 sizeLabelInfo.Dock = DockStyle.None;
                 positionLabelInfo.Dock = DockStyle.None;
                 PositionComboBox.Dock = DockStyle.None;
+                shadow_stroke_radiustextfloat.Dock = DockStyle.None;
+                shadow_stroke_dxtextfloat.Dock = DockStyle.None;
+                shadow_stroke_dytextfloat.Dock = DockStyle.None;
+                shadow_stroke_color.Dock = DockStyle.None;
+                myNameText.Text = dI.Deckname;
+                myColorText.Text = dI.Deckcolor;
 
-                myNameText.Text = dI.DeckName;
-                myColorText.Text = dI.DeckColor;
 
-                myColorText.Text = dI.DeckColor;
-
+                shadow_stroke_color.Text = dI.Stroke_color;
+                shadow_stroke_dytextfloat.Text = dI.Stroke_Dy.ToString();
+                shadow_stroke_dxtextfloat.Text = dI.Stroke_dxtext.ToString();
+                shadow_stroke_radiustextfloat.Text = dI.Stroke_radius.ToString();
                 // PositionComboBox.SelectedValue = (int)dI.DeckPosition;
 
 
 
-                sizeLabelTextBox.Text = dI.DeckSize.ToString();
+                sizeLabelTextBox.Text = dI.Decksize.ToString();
                 myColor.Click += (s, e) =>
                 {
 
@@ -2469,6 +2482,25 @@ namespace DisplayButtons.Forms
                             //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
                             string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
                             myColorText.Text = result;
+                        }
+
+                        dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
+                    }
+
+                };
+
+                myColorShadow.Click += (s, e) =>
+                {
+
+                    using (ColorPickerDialog dialog = new ColorPickerDialog())
+                    {
+                        dialog.PreviewColorChanged += this.DialogColorChangedHandler;
+
+                        if (dialog.ShowDialog(this) == DialogResult.OK)
+                        {
+                            //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
+                            string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
+                            shadow_stroke_color.Text = result;
                         }
 
                         dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
@@ -2490,14 +2522,15 @@ namespace DisplayButtons.Forms
 
 
 
-
-
                 painel_position.Size = new Size(190, 60);
 
                 painel_color.Size = new Size(190, 30);
 
                 painel_name.Size = new Size(190, 50);
                 painel_tamanho.Size = new Size(190, 50);
+                painel_shadowstroke.Size = new Size(190, 130);
+                painel_shadowstroke.WrapContents = true;
+      
                 painel_tamanho.WrapContents = true;
                 painel_name.WrapContents = true;
                 //painel 1
@@ -2507,6 +2540,11 @@ namespace DisplayButtons.Forms
 
                 painel_position.Controls.Add(PositionComboBox);
 
+                painel_shadowstroke.Controls.Add(shadow_stroke_radiustextfloat);
+                painel_shadowstroke.Controls.Add(shadow_stroke_dxtextfloat);
+                painel_shadowstroke.Controls.Add(shadow_stroke_dytextfloat);
+                painel_shadowstroke.Controls.Add(shadow_stroke_color);
+                painel_shadowstroke.Controls.Add(myColorShadow);
 
                 painel_color.Controls.Add(myColor);
                 painel_color.Controls.Add(myColorText);
@@ -2519,13 +2557,14 @@ namespace DisplayButtons.Forms
 
 
 
-
+               
                 flowLayoutPanel1.Controls.Add(painel_name);
                 flowLayoutPanel1.Controls.Add(painel_color);
                 flowLayoutPanel1.Controls.Add(painel_tamanho);
                 flowLayoutPanel1.Controls.Add(painel_position);
+                flowLayoutPanel1.Controls.Add(painel_shadowstroke);
 
-                flowLayoutPanel1.Controls.Add(myButton);
+                flowLayoutPanel1.Controls.Add(myButton); 
                 myButton.Text = "Salvar";
 
                 myTextNameInformation.Text = "Nome:";
@@ -2535,16 +2574,19 @@ namespace DisplayButtons.Forms
                 setEnumValues(PositionComboBox, typeof(Position));
                 myButton.Click += (s, e) =>
                 {
-                    dI.DeckName = myNameText.Text;
-                    dI.DeckColor = myColorText.Text;
-                    dI.DeckSize = Convert.ToInt32(sizeLabelTextBox.Text);
-
-                    dI.DeckPosition = (int)PositionComboBox.SelectedValue;
+                    dI.Deckname = myNameText.Text;
+                    dI.Deckcolor = myColorText.Text;
+                    dI.Decksize = Convert.ToInt32(sizeLabelTextBox.Text);
+                    dI.Stroke_radius = Convert.ToSingle(shadow_stroke_radiustextfloat.Text);
+                    dI.Stroke_Dy = Convert.ToSingle(shadow_stroke_dytextfloat.Text);
+                    dI.Stroke_dxtext = Convert.ToSingle(shadow_stroke_dxtextfloat.Text);
+                    dI.Stroke_color = shadow_stroke_color.Text;
+                    dI.Deckposition = (int)PositionComboBox.SelectedValue;
 
                 };
 
 
-                PositionComboBox.SelectedValue = dI.DeckPosition;
+                PositionComboBox.SelectedValue = dI.Deckposition;
                 if (dI is DynamicDeckItem TT)
                 {
                  LoadProperties(TT, flowLayoutPanel1);
