@@ -188,148 +188,25 @@ namespace DisplayButtons.Forms
         {
             base.OnLoad(e);
 
-         
-
-            StartUsbMode();
-
-
-
-
-
-
-
-
-            var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
-            var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
-            var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
-            var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.folder_white : Resources.folder_black;
-            var imageMiscelanius = ColorScheme.ForegroundColor == Color.White ? Resources.drawer__archive__files__documents__office_white : Resources.drawer__archive__files__documents__office_white;
-            var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.download_arrow_white : Resources.download_arrow_black;
-
-            AppAction item = new AppAction()
-            {
-                Image = image
-            };
-            item.Click += (s, ee) =>
-            {
-                //TODO: Settings
-                new SettingsForm().ShowDialog();
-            };
-
-   
-           
-            AppAction autoupdate = new AppAction()
-            {
-                Image = imageUpdate
-            };
-            autoupdate.Click += async (s, ee) =>
-            {
-                //TODO: Settings
-
-                _sparkle = new SparkleUpdater(
-   Globals.updateurl, // link to your app cast file
-   new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
-)
-                {
-
-
-                    UIFactory = new NetSparkleUpdater.UI.WinForms.UIFactory(Resources.button_deck) // or null or choose some other UI factory or build your own!
-
-                };
-
-              await _sparkle.CheckForUpdatesQuietly();
-                var list =  _sparkle.AppCastHandler.GetAvailableUpdates();
-
-              
-                var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list,true,true);
-               
-                form.HideRemindMeLaterButton();
-               form.HideSkipButton();
-         
-                    form.Show(true);
-                
-
-
-                //   AutoUpdater.LetUserSelectRemindLater = false;
-                //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
-                //  _sparkle.CheckForUpdatesAtUserRequest();
-                //AutoUpdater.Start(Globals.updateurl);
-            };
-           
-
-            AppAction itemTrash = new AppAction()
-            {
-                Image = imageTrash
-            };
-            itemTrash.Click += (s, ee) =>
-            {
-                if (CurrentDevice == null) return;
-                if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
-                    SendItemsToDevice(CurrentDevice, true);
-                    RefreshAllButtons(false);
-                }
-            };
-            appBar1.Actions.Add(autoupdate);
-           
-            appBar1.Actions.Add(itemTrash);
- appBar1.Actions.Add(item);
-            AppAction itemMagnetite = new AppAction()
-            {
-              
-       
-             Image = imageMiscelanius
-                
-            };
-           
-            itemMagnetite.Click += (s, ee) =>
-            {
-                new MagnetiteForm().ShowDialog();
-            };
-
-
-            
-
-            AppAction itemBiblioteca = new AppAction()
-            {
-                Image = imageBiblioteca
-            };
-
-            itemBiblioteca.Click += (s, ee) =>
-            {
-                new ImageListForm().ShowDialog();
-                //     new ScribeBot.Interface.Window().Show();
-            };
-
-            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
-            
-            appBar1.Actions.Add(itemMagnetite);
-        
-            appBar1.Actions.Add(itemBiblioteca);
           
-            // ApplyTheme(panel1);
-            GenerateSidebar(shadedPanel1, true);
-            ApplySidebarTheme(shadedPanel1);
-
-            ApplySidebarTheme(painel_developer);
-      
-
-            Refresh();
 
 
-
-           using(frmWaitForm frm = new frmWaitForm(StartupMethods))
+            using (frmWaitForm frm = new frmWaitForm(StartupMethods))
             {
-
                 frm.ShowDialog(this);
             }
 
             //warning_label.ForeColor = ColorScheme.SecondaryColor;
            
         }
+   
         public void StartupMethods()
-        { 
+        {
+
+
+            StartUsbMode();
+
+
             ChangeDeveloperMode();
             RegisterMainFolderHotKey();
 
@@ -342,11 +219,135 @@ namespace DisplayButtons.Forms
 
             MainForm.Instance.Invoke(new Action(() =>
             {
+
+
+
+
+                var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
+                var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
+                var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
+                var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.folder_white : Resources.folder_black;
+                var imageMiscelanius = ColorScheme.ForegroundColor == Color.White ? Resources.drawer__archive__files__documents__office_white : Resources.drawer__archive__files__documents__office_white;
+                var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.download_arrow_white : Resources.download_arrow_black;
+
+                AppAction item = new AppAction()
+                {
+                    Image = image
+                };
+                item.Click += (s, ee) =>
+                {
+                    //TODO: Settings
+                    new SettingsForm().ShowDialog();
+                };
+
+
+
+                AppAction autoupdate = new AppAction()
+                {
+                    Image = imageUpdate
+                };
+                autoupdate.Click += async (s, ee) =>
+                {
+                    //TODO: Settings
+
+                    _sparkle = new SparkleUpdater(
+       Globals.updateurl, // link to your app cast file
+       new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
+    )
+                    {
+
+
+                        UIFactory = new NetSparkleUpdater.UI.WinForms.UIFactory(Resources.button_deck) // or null or choose some other UI factory or build your own!
+
+                    };
+
+                    await _sparkle.CheckForUpdatesQuietly();
+                    var list = _sparkle.AppCastHandler.GetAvailableUpdates();
+
+
+                    var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list, true, true);
+
+                    form.HideRemindMeLaterButton();
+                    form.HideSkipButton();
+
+                    form.Show(true);
+
+
+
+                    //   AutoUpdater.LetUserSelectRemindLater = false;
+                    //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
+                    //  _sparkle.CheckForUpdatesAtUserRequest();
+                    //AutoUpdater.Start(Globals.updateurl);
+                };
+
+
+                AppAction itemTrash = new AppAction()
+                {
+                    Image = imageTrash
+                };
+                itemTrash.Click += (s, ee) =>
+                {
+                    if (CurrentDevice == null) return;
+                    if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
+                        SendItemsToDevice(CurrentDevice, true);
+                        RefreshAllButtons(false);
+                    }
+                };
+                appBar1.Actions.Add(autoupdate);
+
+                appBar1.Actions.Add(itemTrash);
+                appBar1.Actions.Add(item);
+                AppAction itemMagnetite = new AppAction()
+                {
+
+
+                    Image = imageMiscelanius
+
+                };
+
+                itemMagnetite.Click += (s, ee) =>
+                {
+                    new MagnetiteForm().ShowDialog();
+                };
+
+
+
+
+                AppAction itemBiblioteca = new AppAction()
+                {
+                    Image = imageBiblioteca
+                };
+
+                itemBiblioteca.Click += (s, ee) =>
+                {
+                    new ImageListForm().ShowDialog();
+                    //     new ScribeBot.Interface.Window().Show();
+                };
+
+                Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
+
+                appBar1.Actions.Add(itemMagnetite);
+
+                appBar1.Actions.Add(itemBiblioteca);
+
+                // ApplyTheme(panel1);
+                GenerateSidebar(shadedPanel1, true);
+                ApplySidebarTheme(shadedPanel1);
+
+                ApplySidebarTheme(painel_developer);
+
+
+                Refresh();
+
+
+
                 FillPerfil();
          
 
-            ProfileStaticHelper.SelectItemByValue(perfilselector, ProfileStaticHelper.SelectPerfilByName(ApplicationSettingsManager.Settings.CurrentProfile)); 
-        
+                    ProfileStaticHelper.SelectItemByValue(perfilselector, ProfileStaticHelper.SelectPerfilByName(ApplicationSettingsManager.Settings.CurrentProfile)); 
+
            
 
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
