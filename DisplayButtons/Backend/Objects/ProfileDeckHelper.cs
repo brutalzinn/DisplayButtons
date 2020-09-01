@@ -130,15 +130,17 @@ namespace DisplayButtons.Backend.Objects
                 
                 DevicePersistManager.DeckDevicesFromConnection.FirstOrDefault().Value.CurrentProfile = profile;
                 MainForm.Instance.MatrizGenerator(profile);
+                  
                 var Matriz = new MatrizPacket(profile);
                 con.SendPacket(Matriz);
+
                 MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = profile.Mainfolder;
                
         
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
                 DeviceSelected = profile;
                 ApplicationSettingsManager.Settings.CurrentProfile = profile.Name;
-
+  MainForm.Instance.RefreshAllButtons(true);
                 }));
             }
         }

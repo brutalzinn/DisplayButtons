@@ -35,11 +35,11 @@
             this.tab_trigger_button = new System.Windows.Forms.TabPage();
             this.trigger_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.trigger_user_control();
             this.conditions = new System.Windows.Forms.TabPage();
+            this.conditions_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.conditions_user_control();
             this.tab_actions_button = new System.Windows.Forms.TabPage();
             this.action_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.action_user_control();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
-            this.conditions_user_control1 = new DisplayButtons.Forms.EventSystem.Controls.conditions_user_control();
             this.tabControl1.SuspendLayout();
             this.tab_geral_button.SuspendLayout();
             this.tab_trigger_button.SuspendLayout();
@@ -111,6 +111,13 @@
             this.conditions.Text = "Condição";
             this.conditions.UseVisualStyleBackColor = true;
             // 
+            // conditions_user_control1
+            // 
+            this.conditions_user_control1.Location = new System.Drawing.Point(5, 1);
+            this.conditions_user_control1.Name = "conditions_user_control1";
+            this.conditions_user_control1.Size = new System.Drawing.Size(664, 309);
+            this.conditions_user_control1.TabIndex = 0;
+            // 
             // tab_actions_button
             // 
             this.tab_actions_button.Controls.Add(this.action_user_control1);
@@ -156,13 +163,7 @@
             this.imageModernButton2.TabIndex = 1;
             this.imageModernButton2.Text = "Back";
             this.imageModernButton2.UseVisualStyleBackColor = true;
-            // 
-            // conditions_user_control1
-            // 
-            this.conditions_user_control1.Location = new System.Drawing.Point(5, 1);
-            this.conditions_user_control1.Name = "conditions_user_control1";
-            this.conditions_user_control1.Size = new System.Drawing.Size(664, 309);
-            this.conditions_user_control1.TabIndex = 0;
+            this.imageModernButton2.Click += new System.EventHandler(this.imageModernButton2_Click);
             // 
             // event_interface
             // 

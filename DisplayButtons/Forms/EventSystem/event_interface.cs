@@ -168,14 +168,29 @@ EventXml.Settings.Events[index] = _event;
               
              EventXml.Settings.Events.Add(_event);
             }
-         
-         //   action_user_control.Instance = null;
-         //   trigger_user_control.Instance = null;
-         //   general_user_control.Instance = null;
+
+
+
+            Forms.EventSystem.Events.Instance.FillList();
+            //Events.
+            CloseWithResult(DialogResult.OK);
+            //   action_user_control.Instance = null;
+            //   trigger_user_control.Instance = null;
+            //   general_user_control.Instance = null;
         }
-     
+
+        private void imageModernButton2_Click(object sender, EventArgs e)
+        {
+            CloseWithResult(DialogResult.Cancel);
+        }
+
+        private void CloseWithResult(DialogResult result)
+        {
+            DialogResult = result;
+            Close();
+        }
     }
-   public static class GenericClass 
+    public static class GenericClass 
     {
 
         public static IEnumerable<T> Replace<T>(this IEnumerable<T> source, T oldValue, T newValue)
