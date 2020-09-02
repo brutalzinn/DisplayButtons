@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static NickAc.ModernUIDoneRight.Utils.GraphicUtils;
-   [assembly:InternalsVisibleTo("ColorScheme")]
 namespace NickAc.ModernUIDoneRight.Objects
 {
 

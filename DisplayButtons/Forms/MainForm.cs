@@ -3619,24 +3619,11 @@ toAdd.AsEnumerable().Reverse().All(m =>
      
         public void FillPerfil()
         {
-            perfilselector.Items.Clear();
-            if (DevicePersistManager.PersistedDevices.Count == 0)
+            MainForm.Instance.Invoke(new Action(() =>
             {
-                foreach (var device_con in DevicePersistManager.DeckDevicesFromConnection)
-                {
-                    foreach (var list in device_con.Value.profiles)
-                    {
-                        ProfileVoidHelper.GlobalPerfilBox teste = new ProfileVoidHelper.GlobalPerfilBox();
-                        teste.Text = list.Name;
-                        teste.Value = list;
-                        perfilselector.Items.Add(teste);
 
-
-                    }
-                }
-            }
-            else
-            {
+                perfilselector.Items.Clear();
+    
                 foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
                 {
 
@@ -3650,8 +3637,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                     }
                 }
-            }
             
+            }));
         }
         
         
