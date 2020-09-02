@@ -192,6 +192,39 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
   <data name="CONNECTEDDEVICES" xml:space="preserve">
     <value>Connected device</value>
   </data>
+  <data name="DECKITEMPOSITION" xml:space="preserve">
+    <value>Text Position</value>
+  </data>
+  <data name="DECKITEMSAVEBUTTON" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="DECKITEMSELECTCOLOR" xml:space="preserve">
+    <value>Select color</value>
+  </data>
+  <data name="DECKITEMSIZE" xml:space="preserve">
+    <value>Text Size</value>
+  </data>
+  <data name="DECKITEMSTROKE" xml:space="preserve">
+    <value>Stroke Effect</value>
+  </data>
+  <data name="DECKITEMSTROKECOLOR" xml:space="preserve">
+    <value>Stroke Color</value>
+  </data>
+  <data name="DECKITEMSTROKEDX" xml:space="preserve">
+    <value>Stroke Dx</value>
+  </data>
+  <data name="DECKITEMSTROKEDY" xml:space="preserve">
+    <value>Stroke Dy</value>
+  </data>
+  <data name="DECKITEMSTROKEENABLED" xml:space="preserve">
+    <value>Enable Stroke Effect on text</value>
+  </data>
+  <data name="DECKITEMSTROKERADIUS" xml:space="preserve">
+    <value>Stroke Radius</value>
+  </data>
+  <data name="DECKITEMTEXT" xml:space="preserve">
+    <value>Text</value>
+  </data>
   <data name="DefaultUIFactory_ErrorTitle" xml:space="preserve">
     <value>Error!</value>
   </data>

@@ -2425,22 +2425,33 @@ namespace DisplayButtons.Forms
                 Label sizeLabelInfo = new Label();
                 Label positionLabelInfo = new Label();
                 Label StrokeLabelInfo = new Label();
-
+                Label StrokeLabelColor = new Label();
+                Label StrokeLabelDX = new Label();
+                Label StrokeLabelDY = new Label();
+                Label StrokeLabelRADIUS = new Label();
                 TextBox sizeLabelTextBox = new TextBox();
                 ComboBox PositionComboBox = new ComboBox();
                 TextBox myNameText = new TextBox();
                 TextBox myColorText = new TextBox();
                 CheckBox IsStrokeCheckbox = new CheckBox();
-                IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
+               
                 TextBox shadow_stroke_radiustextfloat = new TextBox();
                 TextBox shadow_stroke_dxtextfloat = new TextBox();
                 TextBox shadow_stroke_dytextfloat = new TextBox();
                 TextBox shadow_stroke_color = new TextBox();
                 myColor.Size = new Size(70, 30);
-                myColor.Text = "Selecionar Cor";
+                IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
+                myColor.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
                 myColorShadow.Size = new Size(70, 30);
-                myColorShadow.Text = "Selecionar Cor";
-                StrokeLabelInfo.Text = "Stroke Effect";
+                myColorShadow.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
+                myTextNameInformation.Text = Texts.rm.GetString("DECKITEMTEXT", Texts.cultereinfo);
+                StrokeLabelInfo.Text = Texts.rm.GetString("DECKITEMSTROKE", Texts.cultereinfo);
+                StrokeLabelRADIUS.Text = Texts.rm.GetString("DECKITEMSTROKERADIUS", Texts.cultereinfo);
+                StrokeLabelDX.Text = Texts.rm.GetString("DECKITEMSTROKEDX", Texts.cultereinfo);
+                StrokeLabelDY.Text = Texts.rm.GetString("DECKITEMSTROKEDY", Texts.cultereinfo);
+                StrokeLabelColor.Text = Texts.rm.GetString("DECKITEMSTROKECOLOR", Texts.cultereinfo);
+                positionLabelInfo.Text = Texts.rm.GetString("DECKITEMPOSITION", Texts.cultereinfo);
+                sizeLabelInfo.Text = Texts.rm.GetString("DECKITEMSIZE", Texts.cultereinfo); 
                 FlowLayoutPanel painel_name = new FlowLayoutPanel();
                 FlowLayoutPanel painel_color = new FlowLayoutPanel();
                 FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
@@ -2528,7 +2539,7 @@ namespace DisplayButtons.Forms
 
                 painel_name.Size = new Size(190, 50);
                 painel_tamanho.Size = new Size(190, 50);
-                painel_shadowstroke.Size = new Size(190, 180);
+                painel_shadowstroke.Size = new Size(190, 300);
                 painel_shadowstroke.WrapContents = true;
       
                 painel_tamanho.WrapContents = true;
@@ -2541,9 +2552,13 @@ namespace DisplayButtons.Forms
                 painel_position.Controls.Add(PositionComboBox);
                 painel_shadowstroke.Controls.Add(StrokeLabelInfo);
                 painel_shadowstroke.Controls.Add(IsStrokeCheckbox);
+                painel_shadowstroke.Controls.Add(StrokeLabelRADIUS);
                 painel_shadowstroke.Controls.Add(shadow_stroke_radiustextfloat);
+                painel_shadowstroke.Controls.Add(StrokeLabelDX);
                 painel_shadowstroke.Controls.Add(shadow_stroke_dxtextfloat);
+                painel_shadowstroke.Controls.Add(StrokeLabelDY);
                 painel_shadowstroke.Controls.Add(shadow_stroke_dytextfloat);
+                painel_shadowstroke.Controls.Add(StrokeLabelColor);
                 painel_shadowstroke.Controls.Add(shadow_stroke_color);
                 painel_shadowstroke.Controls.Add(myColorShadow);
 
@@ -2568,9 +2583,9 @@ namespace DisplayButtons.Forms
                 flowLayoutPanel1.Controls.Add(myButton); 
                 myButton.Text = "Salvar";
 
-                myTextNameInformation.Text = "Nome:";
+          
 
-                sizeLabelInfo.Text = "Tamanho:";
+            
 
                 setEnumValues(PositionComboBox, typeof(Position));
                 myButton.Click += (s, e) =>

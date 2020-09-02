@@ -196,6 +196,39 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
   <data name="CONNECTEDDEVICES" xml:space="preserve">
     <value>Dispositivo conectado</value>
   </data>
+  <data name="DECKITEMPOSITION" xml:space="preserve">
+    <value>Posição do texto</value>
+  </data>
+  <data name="DECKITEMSAVEBUTTON" xml:space="preserve">
+    <value>Salvar</value>
+  </data>
+  <data name="DECKITEMSELECTCOLOR" xml:space="preserve">
+    <value>Selecionar cor</value>
+  </data>
+  <data name="DECKITEMSIZE" xml:space="preserve">
+    <value>Tamanho do texto</value>
+  </data>
+  <data name="DECKITEMSTROKE" xml:space="preserve">
+    <value>Efeito de traço</value>
+  </data>
+  <data name="DECKITEMSTROKECOLOR" xml:space="preserve">
+    <value>Cor</value>
+  </data>
+  <data name="DECKITEMSTROKEDX" xml:space="preserve">
+    <value>Dx</value>
+  </data>
+  <data name="DECKITEMSTROKEDY" xml:space="preserve">
+    <value>Dy</value>
+  </data>
+  <data name="DECKITEMSTROKEENABLED" xml:space="preserve">
+    <value>Ativar efeito de traço no texto</value>
+  </data>
+  <data name="DECKITEMSTROKERADIUS" xml:space="preserve">
+    <value>Raio</value>
+  </data>
+  <data name="DECKITEMTEXT" xml:space="preserve">
+    <value>Texto</value>
+  </data>
   <data name="DefaultUIFactory_ErrorTitle" xml:space="preserve">
     <value>Erro!</value>
   </data>
