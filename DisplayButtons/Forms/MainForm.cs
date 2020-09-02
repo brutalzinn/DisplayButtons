@@ -1137,7 +1137,7 @@ namespace DisplayButtons.Forms
         }
         public void RefreshButton(int slot, bool sendToDevice = true)
         {
-            Buttons_Unfocus(this, EventArgs.Empty);
+           // Buttons_Unfocus(this, EventArgs.Empty);
 
             IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
             ImageModernButton control1 = GetButtonControl(slot);
@@ -1159,26 +1159,15 @@ namespace DisplayButtons.Forms
 
                 if (folder.GetItemIndex(item) != slot) continue;
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-                Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
+                
             
-                //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
+            
                 if (item != null)
                 {
-                    //var ser = item.GetItemImage().BitmapSerialized;
-                    //  control.NormalImage = null
-
-
-
-
-
-
+           
 
                     control.NormalImage = item?.GetItemImage().Bitmap;
-                    // control2.Text = item.DeckName;
-
-
-                    //control.NormalImage = item?.GetItemImage().Bitmap; //Write_name_Image(dI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
-
+              
 
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
@@ -2435,10 +2424,14 @@ namespace DisplayButtons.Forms
                 Label myTextNameInformation = new Label();
                 Label sizeLabelInfo = new Label();
                 Label positionLabelInfo = new Label();
+                Label StrokeLabelInfo = new Label();
+
                 TextBox sizeLabelTextBox = new TextBox();
                 ComboBox PositionComboBox = new ComboBox();
                 TextBox myNameText = new TextBox();
                 TextBox myColorText = new TextBox();
+                CheckBox IsStrokeCheckbox = new CheckBox();
+                IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
                 TextBox shadow_stroke_radiustextfloat = new TextBox();
                 TextBox shadow_stroke_dxtextfloat = new TextBox();
                 TextBox shadow_stroke_dytextfloat = new TextBox();
@@ -2447,6 +2440,7 @@ namespace DisplayButtons.Forms
                 myColor.Text = "Selecionar Cor";
                 myColorShadow.Size = new Size(70, 30);
                 myColorShadow.Text = "Selecionar Cor";
+                StrokeLabelInfo.Text = "Stroke Effect";
                 FlowLayoutPanel painel_name = new FlowLayoutPanel();
                 FlowLayoutPanel painel_color = new FlowLayoutPanel();
                 FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
@@ -2457,6 +2451,7 @@ namespace DisplayButtons.Forms
                 sizeLabelTextBox.Dock = DockStyle.None;
                 sizeLabelInfo.Dock = DockStyle.None;
                 positionLabelInfo.Dock = DockStyle.None;
+                StrokeLabelInfo.Dock = DockStyle.None;
                 PositionComboBox.Dock = DockStyle.None;
                 shadow_stroke_radiustextfloat.Dock = DockStyle.None;
                 shadow_stroke_dxtextfloat.Dock = DockStyle.None;
@@ -2465,7 +2460,7 @@ namespace DisplayButtons.Forms
                 myNameText.Text = dI.Deckname;
                 myColorText.Text = dI.Deckcolor;
 
-
+                IsStrokeCheckbox.Checked = dI.IsStroke;
                 shadow_stroke_color.Text = dI.Stroke_color;
                 shadow_stroke_dytextfloat.Text = dI.Stroke_Dy.ToString();
                 shadow_stroke_dxtextfloat.Text = dI.Stroke_dxtext.ToString();
@@ -2533,7 +2528,7 @@ namespace DisplayButtons.Forms
 
                 painel_name.Size = new Size(190, 50);
                 painel_tamanho.Size = new Size(190, 50);
-                painel_shadowstroke.Size = new Size(190, 130);
+                painel_shadowstroke.Size = new Size(190, 180);
                 painel_shadowstroke.WrapContents = true;
       
                 painel_tamanho.WrapContents = true;
@@ -2544,7 +2539,8 @@ namespace DisplayButtons.Forms
                 painel_position.Controls.Add(positionLabelInfo);
 
                 painel_position.Controls.Add(PositionComboBox);
-
+                painel_shadowstroke.Controls.Add(StrokeLabelInfo);
+                painel_shadowstroke.Controls.Add(IsStrokeCheckbox);
                 painel_shadowstroke.Controls.Add(shadow_stroke_radiustextfloat);
                 painel_shadowstroke.Controls.Add(shadow_stroke_dxtextfloat);
                 painel_shadowstroke.Controls.Add(shadow_stroke_dytextfloat);
@@ -2587,6 +2583,13 @@ namespace DisplayButtons.Forms
                     dI.Stroke_dxtext = Convert.ToSingle(shadow_stroke_dxtextfloat.Text);
                     dI.Stroke_color = shadow_stroke_color.Text;
                     dI.Deckposition = (int)PositionComboBox.SelectedValue;
+                    dI.IsStroke = IsStrokeCheckbox.Checked;
+
+                  int slot =  CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(dI);
+                    RefreshButton(slot, true);
+
+
+
 
                 };
 

@@ -44,6 +44,7 @@ namespace DisplayButtons.Bibliotecas
         private float stroke_dxtext = 1.5f;
         private float dytextfloat = 1.3f;
         private string stroke_color = "#FFFFFF";
+        private bool _isforstroke = false;
         public Json()
 
             {
@@ -109,6 +110,7 @@ namespace DisplayButtons.Bibliotecas
         public float Stroke_dx { get => stroke_dxtext; set => stroke_dxtext = value; }
         public float Stroke_dy { get => dytextfloat; set => dytextfloat = value; }
         public string Stroke_color { get => stroke_color; set => stroke_color = value; }
+        public bool IsStroke { get => _isforstroke; set => _isforstroke = value; }
     }
     
 }
