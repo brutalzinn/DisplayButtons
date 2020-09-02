@@ -2052,10 +2052,10 @@ namespace DisplayButtons.Forms
                             Dock = DockStyle.Top,
                             Text = i2.GetActionName(),
                             Height = TextRenderer.MeasureText(i2.GetActionName(), itemFont).Height,
-                            Tag = i2,
+                            Tag = i2
 
                         };
-                        //    Debug.WriteLine("TAG VINDO: " + i2);
+                          Debug.WriteLine("TAG VINDO: " + i2);
                         item.MouseDown += (s, ee) =>
                         {
                             if (item.Tag is AbstractDeckAction act)
