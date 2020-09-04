@@ -280,7 +280,7 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
     <value>Exportar perfil</value>
   </data>
   <data name="GENERATESIDEBARTITLEPLUGINS" xml:space="preserve">
-    <value>Botões externos</value>
+    <value>Botões lua</value>
   </data>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Chave</value>
