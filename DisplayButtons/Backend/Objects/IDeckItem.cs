@@ -15,7 +15,7 @@ namespace DisplayButtons.Backend.Objects
     [XmlInclude(typeof(MatrizObject))]
     public abstract class IDeckItem
     {
-        private string _deckname  = "-";
+        private string _deckname  = "";
        private string _deckcolor  = "#FFFFFF";
         private int _decksize  = 30;
         private int _deckposition = 81;

@@ -190,11 +190,11 @@ namespace DisplayButtons.Backend.Objects
                 }
             }
         }
-        public static void SetupPerfil(bool isDeviceOn)
+        public static void SetupPerfil()
         {
        
           
-                foreach (var device in DevicePersistManager.PersistedDevices)
+                foreach (var device in DevicePersistManager.PersistedDevices.ToList())
                 {
                     if (device.profiles.Count == 0)
                     {

@@ -213,7 +213,7 @@ namespace DisplayButtons.Forms
             RegisterBackFolderHotKey();
 
 
-          ProfileStaticHelper.SetupPerfil(false);
+          ProfileStaticHelper.SetupPerfil();
 
             //       DeckServiceProvider.StartTimers();
 
@@ -1282,9 +1282,9 @@ namespace DisplayButtons.Forms
         {
            
            
-               if(CurrentPerfil == null)
+               if(perfilselector.Items.Count == 0)
             {
-                ProfileStaticHelper.SetupPerfil(true);
+                ProfileStaticHelper.SetupPerfil();
             }
                 if (CurrentPerfil != null)
                 {

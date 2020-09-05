@@ -24,7 +24,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
                 window = value;
                 if (value.profile != null)
                 {
-                    ProfileStaticHelper.SelectItemByValue(comboBox1, value.profile);
+                    ProfileStaticHelper.SelectItemByValue(comboBox1, ProfileStaticHelper.SelectPerfilByName(value.profile));
                   //  comboBox1.SelectedItem = value.profile;
                 }
 
@@ -57,7 +57,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
 
 
                 CurrentPerfil = (ProfileVoidHelper.GlobalPerfilBox)comboBox1.SelectedItem;
-                window.profile = CurrentPerfil.Value;
+                window.profile = CurrentPerfil.Value.Name;
 
                 //     window.AppName = textBox1.Text;
             }

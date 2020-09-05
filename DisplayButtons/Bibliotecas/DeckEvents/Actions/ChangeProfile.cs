@@ -11,7 +11,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 {
     public class ChangeProfile : AbstractAction
     {
-        public Profile profile;
+        public string profile;
         public override string GetActionName()
         {
             return "Change to profile";
@@ -29,7 +29,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
             if (form.ShowDialog() == DialogResult.OK)
             {
-                profile =  ((ProfileVoidHelper.GlobalPerfilBox)instance.comboBox1.SelectedItem).Value;
+                profile =  ((ProfileVoidHelper.GlobalPerfilBox)instance.comboBox1.SelectedItem).Value.Name;
             
               //  folder = (DynamicDeckFolder)instance.comboBox1.SelectedItem;
 
@@ -49,7 +49,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         {
             Debug.WriteLine("ON EXECUTE ACTION");
 
-            ProfileStaticHelper.SelectCurrentDevicePerfil(profile);
+            ProfileStaticHelper.SelectCurrentDevicePerfil( ProfileStaticHelper.SelectPerfilByName(profile));
         }
 
 
