@@ -20,6 +20,7 @@ using System.Threading;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Forms.ActionHelperForms;
 using DisplayButtons.Bibliotecas.DeckEvents;
+using MoreLinq;
 
 namespace DisplayButtons
 {
@@ -55,20 +56,22 @@ namespace DisplayButtons
         [STAThread]
         static void Main(string[] args) 
         {
-  
-            Trace.Listeners.Add(new TextWriterTraceListener(errorFileName));
-            Trace.AutoFlush = true;
+        
+          Trace.Listeners.Add(new TextWriterTraceListener(errorFileName));
+           Trace.AutoFlush = true;
 
             if (args.Any(c => c.ToLower() == "/armobs"))
             {
                 if (args.Length == 1)
                 {
+                 
                     var obs32List = Process.GetProcessesByName("obs32");
                     var obs64List = Process.GetProcessesByName("obs64");
                     if (obs32List.Length == 0 && obs64List.Length == 0)
                     {
                         //No OBS found. Cancel operation.
                         File.Delete(OBSUtils.obswszip);
+                    
                         return;
                     }
                     List<Process> obsProcesses = new List<Process>();
@@ -79,21 +82,29 @@ namespace DisplayButtons
                     {
                         //Multiple OBS instances found. Cancel operation.
                         File.Delete(OBSUtils.obswszip);
+                       
                         return;
                     }
                     var obsProcess = obsProcesses.First();
 
-                    string path = OBSUtils.GetProcessPath(obsProcess.Id);
+                    string path = OBSUtils.GetProcessPath(obsProcess.Id); 
+                    
+         
                     string zipTempPath = Path.GetFileNameWithoutExtension(OBSUtils.obswszip);
+                 
                     OBSUtils.ExtractZip(OBSUtils.obswszip, zipTempPath);
 
+                  
                     OBSUtils.DirectoryCopy(zipTempPath, OBSUtils.GetPathFromOBSExecutable(path), true);
+          
                     File.Delete(OBSUtils.obswszip);
                     Directory.Delete(zipTempPath, true);
-
-                    var obsGlobalFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "obs-studio", "global.ini");
+              
+                    var obsGlobalFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "obs-studio", "global.ini");
+                 
                     if (File.Exists(obsGlobalFilePath) && !File.ReadAllText(obsGlobalFilePath).Contains("[WebsocketAPI]"))
                     {
+                    
 
                         while (!obsProcess.HasExited)
                         {
@@ -154,14 +165,14 @@ namespace DisplayButtons
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+      OBSUtils.PrepareOBSIntegration();
             if (ApplicationSettingsManager.Settings.FirstRun)
             {
                 FirstSetupForm firstRunForm = new FirstSetupForm();
                 Application.Run(firstRunForm);
                 if (!firstRunForm.FinishedSetup) return;
             }
-            OBSUtils.PrepareOBSIntegration();
+      
 
 
             dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
