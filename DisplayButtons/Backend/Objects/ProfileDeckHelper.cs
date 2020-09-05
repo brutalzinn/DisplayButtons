@@ -192,28 +192,8 @@ namespace DisplayButtons.Backend.Objects
         }
         public static void SetupPerfil(bool isDeviceOn)
         {
-            if (isDeviceOn)
-            {
-                foreach (var device in DevicePersistManager.DeckDevicesFromConnection)
-                {
-                    if (device.Value.profiles.Count == 0)
-                    {
-
-                        Profile new_folder = new Profile();
-                        new_folder.Mainfolder = new DynamicDeckFolder();
-                        new_folder.Name = "DEFAULT";
-
-                        device.Value.profiles.Add(new_folder);
-                        SelectCurrentDevicePerfil(new_folder);
-
-                        MainForm.Instance.FillPerfil();
-                    }
-
-
-                }
-            }
-            else
-            {
+       
+          
                 foreach (var device in DevicePersistManager.PersistedDevices)
                 {
                     if (device.profiles.Count == 0)
@@ -232,7 +212,7 @@ namespace DisplayButtons.Backend.Objects
 
                 }
 
-            }
+            
 
         }
 
