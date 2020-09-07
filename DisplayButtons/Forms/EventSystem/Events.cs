@@ -16,7 +16,12 @@ namespace DisplayButtons.Forms.EventSystem
         {
             instance = this;
             InitializeComponent();
-
+            imageModernButton3.Text = Texts.rm.GetString("EVENTSYSTEMNEWBUTTON", Texts.cultereinfo);
+            imageModernButton4.Text = Texts.rm.GetString("EVENTSYSTEMCONFIGBUTTON", Texts.cultereinfo);
+            imageModernButton5.Text = Texts.rm.GetString("EVENTSYSTEMREFRESHBUTTON", Texts.cultereinfo);
+            imageModernButton1.Text = Texts.rm.GetString("EVENTSYSTEMDELETEBUTTON", Texts.cultereinfo);
+            imageModernButton2.Text = Texts.rm.GetString("EVENTSYSTEMBACKBUTTON", Texts.cultereinfo);
+            this.Text = Texts.rm.GetString("EVENTSYSTEMBUTTON", Texts.cultereinfo);
             FillList();
 
 

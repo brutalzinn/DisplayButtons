@@ -31,6 +31,13 @@ namespace DisplayButtons.Forms.EventSystem
         {
             instance = this;
             InitializeComponent();
+
+
+          tab_geral_button.Text = Texts.rm.GetString("EVENTSYSTEMGERAL", Texts.cultereinfo);
+            tab_actions_button.Text = Texts.rm.GetString("EVENTSYSTEMACTIONS", Texts.cultereinfo);
+            tab_trigger_button.Text = Texts.rm.GetString("EVENTSYSTEMTRIGGER", Texts.cultereinfo);
+            conditions.Text = Texts.rm.GetString("EVENTSYSTEMCONDITIONS", Texts.cultereinfo);
+            this.Text = Texts.rm.GetString("EVENTSYSTEMBUTTON", Texts.cultereinfo);
             if (_event != null)
             { 
                 CurrentEvent = _event; 

@@ -23,8 +23,9 @@ namespace DisplayButtons.Forms.EventSystem
         public EventCreateNew()
         {
             InitializeComponent();
-         
-                
+         imageModernButton1.Text = Texts.rm.GetString("EVENTSYSTEMSAVEBUTTON", Texts.cultereinfo);
+            imageModernButton1.Text = Texts.rm.GetString("EVENTSYSTEMCANCELBUTTON", Texts.cultereinfo);
+            this.Text = Texts.rm.GetString("EVENTSYSTEMBUTTON", Texts.cultereinfo);
         }
         public void FillComboBox(int type)
         {

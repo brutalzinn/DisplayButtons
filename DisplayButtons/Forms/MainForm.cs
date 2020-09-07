@@ -109,44 +109,8 @@ namespace DisplayButtons.Forms
                 t.Start();
 
 
-                NotifyIcon icon = new NotifyIcon
-                {
-                    Icon = Icon,
-                    Text = Text
-                };
-                icon.DoubleClick += (sender, e) =>
-                {
-                    Show();
-                };
-                ContextMenuStrip menu = new ContextMenuStrip();
-                menu.Items.Add("Open application").Click += (s, e) =>
-                {
-                    Show();
-                };
-                menu.Items.Add("-");
-                menu.Items.Add("Exit application").Click += (s, e) =>
-                {
-                    Application.Exit();
-                };
-                FormClosing += (s, e) =>
-                {
-                    if (e.CloseReason == CloseReason.UserClosing)
-                    {
-                        Hide();
-                        e.Cancel = true;
-                    }
-                    else if (e.CloseReason == CloseReason.ApplicationExitCall)
-                    {
-                        icon.Visible = false;
-                        icon.Dispose();
-                    }
-                };
-                menu.Opening += (s, e) =>
-                {
-                    menu.Items[0].Select();
-                };
-                icon.ContextMenuStrip = menu;
-                icon.Visible = true;
+               
+              
             }
             ColorSchemeCentral.ThemeChanged += (s, e) =>
             ApplySidebarTheme(shadedPanel1);
@@ -199,11 +163,11 @@ namespace DisplayButtons.Forms
             //warning_label.ForeColor = ColorScheme.SecondaryColor;
            
         }
-   
+  
         public void StartupMethods()
         {
 
-
+    
             StartUsbMode();
 
 
@@ -219,8 +183,74 @@ namespace DisplayButtons.Forms
 
             MainForm.Instance.Invoke(new Action(() =>
             {
+                link.Click += (sender, e) =>
+                {
+
+                    Process myProcess = new Process();
+
+                    try
+                    {
+                        // true is the default, but it is important not to set it to false
+                        myProcess.StartInfo.UseShellExecute = true;
+                        myProcess.StartInfo.FileName = "http://displaybuttons.com";
+                        myProcess.Start();
+                    }
+                    catch (Exception ee)
+                    {
+                        Console.WriteLine(ee.Message);
+                    }
 
 
+                };
+                info.Click += (sender, e) =>
+                {
+
+                    new About().ShowDialog();
+
+                };
+                imageModernButton6.Text = Texts.rm.GetString("EVENTSYSTEMBUTTON", Texts.cultereinfo);
+                if (ApplicationSettingsManager.Settings.isAutoMinimizer) { 
+                    NotifyIcon icon = new NotifyIcon
+                {
+                    Icon = Icon,
+                    Text = Text
+                };
+                icon.DoubleClick += (sender, e) =>
+                {
+                    Show();
+                };
+                ContextMenuStrip menu = new ContextMenuStrip();
+                menu.Items.Add(Texts.rm.GetString("RESIZETEXTOPEN", Texts.cultereinfo)).Click += (s, e) =>
+                {
+                    Show();
+                };
+                menu.Items.Add("-");
+                menu.Items.Add(Texts.rm.GetString("RESIZETEXTCLOSE", Texts.cultereinfo)).Click += (s, e) =>
+                {
+                    Application.Exit();
+                };
+                FormClosing += (s, e) =>
+                {
+                   
+                        if (e.CloseReason == CloseReason.UserClosing)
+                        {
+                            Hide();
+                            e.Cancel = true;
+                        }
+                        else if (e.CloseReason == CloseReason.ApplicationExitCall)
+                        {
+                            icon.Visible = false;
+                            icon.Dispose();
+                        }
+               
+                };
+                menu.Opening += (s, e) =>
+                {
+                    menu.Items[0].Select();
+                };
+                icon.ContextMenuStrip = menu;
+                icon.Visible = true;
+ }
 
 
                 var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
@@ -234,11 +264,14 @@ namespace DisplayButtons.Forms
                 {
                     Image = image
                 };
+              
                 item.Click += (s, ee) =>
                 {
-                    //TODO: Settings
-                    new SettingsForm().ShowDialog();
-                };
+              
+                   
+
+                        new SettingsForm().ShowDialog();
+                    };
 
 
 
@@ -302,11 +335,12 @@ namespace DisplayButtons.Forms
                 AppAction itemMagnetite = new AppAction()
                 {
 
-
+                  
                     Image = imageMiscelanius
+                    
 
                 };
-
+               
                 itemMagnetite.Click += (s, ee) =>
                 {
                     new MagnetiteForm().ShowDialog();
@@ -3472,30 +3506,30 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
 
         }
-        protected override void OnResize(EventArgs e)
-        {
+    //    protected override void OnResize(EventArgs e)
+    //    {
         
-    base.OnResize(e);
-            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
-            {
+    //base.OnResize(e);
+    //        if (ApplicationSettingsManager.Settings.isAutoMinimizer)
+    //        {
 
 
 
-                bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
+    //            bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
 
-                if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
-                {
+    //            if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
+    //            {
 
-                    this.ShowInTaskbar = false;
-                    notifyIcon1.Visible = true;
-                    this.Hide();
-                }
-                else
-                {
-                    notifyIcon1.Visible = false;
-                }
-            }
-        }
+    //                this.ShowInTaskbar = false;
+    //                notifyIcon1.Visible = true;
+    //                this.Hide();
+    //            }
+    //            else
+    //            {
+    //                notifyIcon1.Visible = false;
+    //            }
+    //        }
+    //    }
         private void MainForm_Resize(object sender, EventArgs e)
         {
 
@@ -3513,11 +3547,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
-            {
-                this.WindowState = FormWindowState.Normal;
-                this.Show();
-            }
+           
         }
 
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -3529,56 +3559,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
         {
 
         }
-     public void ClearMatriz()
-        {
-            
-            
-        }
-        public  void executeCMD()
-        {
-
-            try
-            {
-
-                string TargetDirectory = Assembly.GetExecutingAssembly().Location;
-
-
-                System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", @"/c  WZUNZIP.EXE -ye -o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory);
-                procStartInfo.UseShellExecute = true;
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo = procStartInfo;
-                proc.Start();
-             proc.WaitForExit();
-
-
-                // label1.Text = Globals.minecraftlocalpath + @"\launcher\Sanchez.Patcher.exe";
-                //     startInfo.Arguments = "/C start copy " + Globals.minecraftlocalpath + @"\launcher\Sanchez.Patcher.exe " + Globals.minecraftlocalpath;
-                //      startInfo.Arguments = "/min";
-
-
-                // Application.Exit();
-
-
-
-
-
-
-
-            }
-            catch
-            {
-                string createText = "Erro ao encontrar o launcher novo. Não foi possível realizar atualização automática.  /n Código: 404CEFG";
-                // 
-
-                File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory + @"\changelog.txt", createText);
-
-
-            }
-            
-            
-
-                
-            }
+  
+     
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
            // executeCMD();
@@ -3672,6 +3654,13 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 ProfileStaticHelper.RemovePerfil(CurrentPerfil.Value);
             }
            
+        }
+
+      
+
+        private void statusStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        
         }
     }
     #endregion

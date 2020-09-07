@@ -50,11 +50,11 @@
             // 
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(155, 339);
+            this.imageModernButton1.Location = new System.Drawing.Point(161, 337);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.Origin = null;
-            this.imageModernButton1.Size = new System.Drawing.Size(102, 57);
+            this.imageModernButton1.Size = new System.Drawing.Size(124, 57);
             this.imageModernButton1.TabIndex = 1;
             this.imageModernButton1.Text = "Delete";
             this.imageModernButton1.UseVisualStyleBackColor = true;
@@ -64,11 +64,11 @@
             // 
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
-            this.imageModernButton2.Location = new System.Drawing.Point(27, 339);
+            this.imageModernButton2.Location = new System.Drawing.Point(31, 337);
             this.imageModernButton2.Name = "imageModernButton2";
             this.imageModernButton2.NormalImage = null;
             this.imageModernButton2.Origin = null;
-            this.imageModernButton2.Size = new System.Drawing.Size(106, 57);
+            this.imageModernButton2.Size = new System.Drawing.Size(124, 57);
             this.imageModernButton2.TabIndex = 1;
             this.imageModernButton2.Text = "Back";
             this.imageModernButton2.UseVisualStyleBackColor = true;
@@ -78,11 +78,11 @@
             // 
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(568, 339);
+            this.imageModernButton3.Location = new System.Drawing.Point(551, 337);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;
-            this.imageModernButton3.Size = new System.Drawing.Size(118, 57);
+            this.imageModernButton3.Size = new System.Drawing.Size(124, 57);
             this.imageModernButton3.TabIndex = 1;
             this.imageModernButton3.Text = "New";
             this.imageModernButton3.UseVisualStyleBackColor = true;
@@ -92,11 +92,11 @@
             // 
             this.imageModernButton4.CustomColorScheme = false;
             this.imageModernButton4.Image = null;
-            this.imageModernButton4.Location = new System.Drawing.Point(426, 339);
+            this.imageModernButton4.Location = new System.Drawing.Point(421, 337);
             this.imageModernButton4.Name = "imageModernButton4";
             this.imageModernButton4.NormalImage = null;
             this.imageModernButton4.Origin = null;
-            this.imageModernButton4.Size = new System.Drawing.Size(123, 57);
+            this.imageModernButton4.Size = new System.Drawing.Size(124, 57);
             this.imageModernButton4.TabIndex = 1;
             this.imageModernButton4.Text = "Config";
             this.imageModernButton4.UseVisualStyleBackColor = true;
@@ -106,13 +106,13 @@
             // 
             this.imageModernButton5.CustomColorScheme = false;
             this.imageModernButton5.Image = null;
-            this.imageModernButton5.Location = new System.Drawing.Point(263, 338);
+            this.imageModernButton5.Location = new System.Drawing.Point(291, 337);
             this.imageModernButton5.Name = "imageModernButton5";
             this.imageModernButton5.NormalImage = null;
             this.imageModernButton5.Origin = null;
-            this.imageModernButton5.Size = new System.Drawing.Size(157, 58);
+            this.imageModernButton5.Size = new System.Drawing.Size(124, 57);
             this.imageModernButton5.TabIndex = 2;
-            this.imageModernButton5.Text = "imageModernButton5";
+            this.imageModernButton5.Text = "Refresh Events";
             this.imageModernButton5.UseVisualStyleBackColor = true;
             this.imageModernButton5.Click += new System.EventHandler(this.imageModernButton5_Click);
             // 

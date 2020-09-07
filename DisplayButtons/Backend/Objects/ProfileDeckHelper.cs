@@ -28,17 +28,7 @@ namespace DisplayButtons.Backend.Objects
             }
 
         }
-        public void UndonePerfilSelector()
-        {
-
-            MainForm.Instance.Invoke(new Action(() =>
-            {
-
-                MainForm.Instance.ClearMatriz();
-
-            }));
-
-        }
+        
 
 
         public void AddPerfil()

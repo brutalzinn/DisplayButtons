@@ -31,8 +31,6 @@ namespace DisplayButtons.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.shadedPanel1 = new DisplayButtons.Forms.ShadedPanel();
             this.shadedPanel2 = new DisplayButtons.Forms.ShadedPanel();
@@ -46,17 +44,23 @@ namespace DisplayButtons.Forms
             this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel4 = new DisplayButtons.Forms.ShadedPanel();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel_buttons = new System.Windows.Forms.Panel();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.link = new System.Windows.Forms.ToolStripStatusLabel();
+            this.info = new System.Windows.Forms.ToolStripStatusLabel();
             this.warning_label = new System.Windows.Forms.Label();
             this.imageModernButton6 = new DisplayButtons.Controls.ImageModernButton();
             this.perfilselector = new System.Windows.Forms.ComboBox();
             this.imageModernButton7 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton8 = new DisplayButtons.Controls.ImageModernButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
             this.panel_buttons.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar1
@@ -215,24 +219,42 @@ namespace DisplayButtons.Forms
             this.shadedPanel4.Size = new System.Drawing.Size(136, 486);
             this.shadedPanel4.TabIndex = 6;
             // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseClick);
-            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon1_MouseDoubleClick);
-            // 
             // panel_buttons
             // 
             this.panel_buttons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_buttons.AutoScroll = true;
             this.panel_buttons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel_buttons.Controls.Add(this.statusStrip2);
             this.panel_buttons.Controls.Add(this.warning_label);
             this.panel_buttons.Location = new System.Drawing.Point(143, 149);
             this.panel_buttons.Name = "panel_buttons";
             this.panel_buttons.Size = new System.Drawing.Size(801, 489);
             this.panel_buttons.TabIndex = 7;
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.link,
+            this.info});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 467);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.statusStrip2.Size = new System.Drawing.Size(801, 22);
+            this.statusStrip2.TabIndex = 1;
+            this.statusStrip2.Text = "statusStrip2";
+            this.statusStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip2_ItemClicked);
+            // 
+            // link
+            // 
+            this.link.Name = "link";
+            this.link.Size = new System.Drawing.Size(112, 17);
+            this.link.Text = "displaybuttons.com";
+            // 
+            // info
+            // 
+            this.info.Name = "info";
+            this.info.Size = new System.Drawing.Size(28, 17);
+            this.info.Text = "Info";
             // 
             // warning_label
             // 
@@ -248,7 +270,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton6.CustomColorScheme = false;
             this.imageModernButton6.Image = null;
-            this.imageModernButton6.Location = new System.Drawing.Point(208, 101);
+            this.imageModernButton6.Location = new System.Drawing.Point(202, 94);
             this.imageModernButton6.Name = "imageModernButton6";
             this.imageModernButton6.NormalImage = null;
             this.imageModernButton6.Origin = null;
@@ -295,6 +317,26 @@ namespace DisplayButtons.Forms
             this.imageModernButton8.UseVisualStyleBackColor = true;
             this.imageModernButton8.Click += new System.EventHandler(this.imageModernButton8_Click);
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 20);
+            this.toolStripDropDownButton1.Text = "Informações";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.toolStripMenuItem1.Text = "Sobre";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(170, 22);
+            this.toolStripMenuItem2.Text = "Bibliotecas usadas";
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -329,6 +371,8 @@ namespace DisplayButtons.Forms
             this.painel_developer.ResumeLayout(false);
             this.panel_buttons.ResumeLayout(false);
             this.panel_buttons.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -347,7 +391,6 @@ namespace DisplayButtons.Forms
         private ImageModernButton imageModernButton5;
         private ShadedPanel shadedPanel3;
         private ShadedPanel shadedPanel4;
-        private NotifyIcon notifyIcon1;
         private ImageModernButton imageModernButton6;
         private ComboBox perfilselector;
         private ImageModernButton imageModernButton7;
@@ -355,6 +398,13 @@ namespace DisplayButtons.Forms
         public Panel panel_buttons;
         public ShadedPanel shadedPanel1;
         public Label warning_label;
+        private ToolStripDropDownButton toolStripDropDownButton1;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem toolStripMenuItem2;
+        private StatusStrip statusStrip2;
+        private ToolStripStatusLabel link;
+        private ToolStripStatusLabel toolStripStatusLabel4;
+        private ToolStripStatusLabel info;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }
