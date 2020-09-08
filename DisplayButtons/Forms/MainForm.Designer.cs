@@ -160,7 +160,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton5.CustomColorScheme = false;
             this.imageModernButton5.Image = null;
-            this.imageModernButton5.Location = new System.Drawing.Point(127, 9);
+            this.imageModernButton5.Location = new System.Drawing.Point(127, 8);
             this.imageModernButton5.Name = "imageModernButton5";
             this.imageModernButton5.NormalImage = null;
             this.imageModernButton5.Origin = null;
@@ -174,11 +174,11 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton4.CustomColorScheme = false;
             this.imageModernButton4.Image = null;
-            this.imageModernButton4.Location = new System.Drawing.Point(369, 9);
+            this.imageModernButton4.Location = new System.Drawing.Point(369, 7);
             this.imageModernButton4.Name = "imageModernButton4";
             this.imageModernButton4.NormalImage = null;
             this.imageModernButton4.Origin = null;
-            this.imageModernButton4.Size = new System.Drawing.Size(118, 33);
+            this.imageModernButton4.Size = new System.Drawing.Size(115, 34);
             this.imageModernButton4.TabIndex = 1;
             this.imageModernButton4.Text = "Abrir console";
             this.imageModernButton4.UseVisualStyleBackColor = true;
@@ -188,7 +188,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(245, 9);
+            this.imageModernButton3.Location = new System.Drawing.Point(245, 8);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.Origin = null;
@@ -202,7 +202,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
-            this.imageModernButton2.Location = new System.Drawing.Point(14, 9);
+            this.imageModernButton2.Location = new System.Drawing.Point(14, 8);
             this.imageModernButton2.Name = "imageModernButton2";
             this.imageModernButton2.NormalImage = null;
             this.imageModernButton2.Origin = null;
@@ -271,7 +271,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton6.CustomColorScheme = false;
             this.imageModernButton6.Image = null;
-            this.imageModernButton6.Location = new System.Drawing.Point(252, 93);
+            this.imageModernButton6.Location = new System.Drawing.Point(249, 97);
             this.imageModernButton6.Name = "imageModernButton6";
             this.imageModernButton6.NormalImage = null;
             this.imageModernButton6.Origin = null;
@@ -294,11 +294,11 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton7.CustomColorScheme = false;
             this.imageModernButton7.Image = null;
-            this.imageModernButton7.Location = new System.Drawing.Point(153, 98);
+            this.imageModernButton7.Location = new System.Drawing.Point(153, 99);
             this.imageModernButton7.Name = "imageModernButton7";
             this.imageModernButton7.NormalImage = null;
             this.imageModernButton7.Origin = null;
-            this.imageModernButton7.Size = new System.Drawing.Size(27, 32);
+            this.imageModernButton7.Size = new System.Drawing.Size(27, 31);
             this.imageModernButton7.TabIndex = 10;
             this.imageModernButton7.Text = "+";
             this.imageModernButton7.UseVisualStyleBackColor = true;

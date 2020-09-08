@@ -313,7 +313,7 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
     <value>Device name</value>
   </data>
   <data name="EVENTSYSTEMACTIONS" xml:space="preserve">
-    <value>Ações</value>
+    <value>Actions</value>
   </data>
   <data name="EVENTSYSTEMBACKBUTTON" xml:space="preserve">
     <value>Back</value>
