@@ -44,7 +44,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
         public override string GetActionName()
         {
-            return "Media Key Press";
+            return Texts.rm.GetString("DECKGENERALMEDIAKEY", Texts.cultereinfo);
         }
 
         [Obsolete]

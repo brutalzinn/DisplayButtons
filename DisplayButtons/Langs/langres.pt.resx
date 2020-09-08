@@ -120,6 +120,18 @@
   <data name="ABOUTINFOAPPVERSIONLABEL" xml:space="preserve">
     <value>Versão: </value>
   </data>
+  <data name="ABOUTINFOLABELTEXT" xml:space="preserve">
+    <value>Sobre</value>
+  </data>
+  <data name="ABOUTINFOLINKMESSAGEMESSAGE" xml:space="preserve">
+    <value>Tem certeza que deseja acessar displaybuttons.com?</value>
+  </data>
+  <data name="ABOUTINFOLINKMESSAGETITLE" xml:space="preserve">
+    <value>Abrir navegador</value>
+  </data>
+  <data name="ABOUTLABELUSEDBIBLE" xml:space="preserve">
+    <value>Bibliotecas usadas</value>
+  </data>
   <data name="ABOUTNAMETEXT" xml:space="preserve">
     <value>Sobre o DisplayButtons</value>
   </data>
@@ -202,6 +214,21 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="CONNECTEDDEVICES" xml:space="preserve">
     <value>Dispositivo conectado</value>
   </data>
+  <data name="DECKGENERALKEYPRESS" xml:space="preserve">
+    <value>Simulador de tecla</value>
+  </data>
+  <data name="DECKGENERALMEDIAKEY" xml:space="preserve">
+    <value>Tecla de mídia</value>
+  </data>
+  <data name="DECKGENERALMULTIACTION" xml:space="preserve">
+    <value>Multi ação(beta)</value>
+  </data>
+  <data name="DECKGENERALTOEXECUTE" xml:space="preserve">
+    <value>Executor de aplicação</value>
+  </data>
+  <data name="DECKGENERALTOGGLEKEY" xml:space="preserve">
+    <value>Manter tecla pressionada</value>
+  </data>
   <data name="DECKITEMPOSITION" xml:space="preserve">
     <value>Posição do texto</value>
   </data>
@@ -234,6 +261,24 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   </data>
   <data name="DECKITEMTEXT" xml:space="preserve">
     <value>Texto</value>
+  </data>
+  <data name="DECKMISCIFTTT" xml:space="preserve">
+    <value>Conexão IFTTT </value>
+  </data>
+  <data name="DECKOBSMULTISCENE" xml:space="preserve">
+    <value>Multi cena seletor</value>
+  </data>
+  <data name="DECKOBSRECORD" xml:space="preserve">
+    <value>Iniciar / parar gravação</value>
+  </data>
+  <data name="DECKOBSSTREAMING" xml:space="preserve">
+    <value>Iniciar/ parar streaming</value>
+  </data>
+  <data name="DECKOBSSWITCHSCENE" xml:space="preserve">
+    <value>Trocar cena</value>
+  </data>
+  <data name="DECKOBSVISIBILITYSCENE" xml:space="preserve">
+    <value>Visibilidade de cena</value>
   </data>
   <data name="DefaultUIFactory_ErrorTitle" xml:space="preserve">
     <value>Erro!</value>
@@ -420,6 +465,9 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="OBS_SCENE_VISIBILITY_NAME_LABEL" xml:space="preserve">
     <value>Nome da cena</value>
   </data>
+  <data name="PERFILINFOLABEL" xml:space="preserve">
+    <value>Perfil: </value>
+  </data>
   <data name="PLUGINGERENCIER" xml:space="preserve">
     <value>Gerenciador de plugins</value>
   </data>
@@ -509,5 +557,8 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   </data>
   <data name="UPDATEYOUWANTIS" xml:space="preserve">
     <value>Você gostaria de {0} agora?</value>
+  </data>
+  <data name="WARNINGLABELTEXT" xml:space="preserve">
+    <value>Conecte o seu device ao Display Buttons.</value>
   </data>
 </root>

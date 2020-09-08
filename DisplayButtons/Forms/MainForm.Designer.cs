@@ -56,6 +56,7 @@ namespace DisplayButtons.Forms
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.perfil_info = new System.Windows.Forms.Label();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
@@ -140,7 +141,7 @@ namespace DisplayButtons.Forms
             this.painel_developer.Controls.Add(this.imageModernButton4);
             this.painel_developer.Controls.Add(this.imageModernButton3);
             this.painel_developer.Controls.Add(this.imageModernButton2);
-            this.painel_developer.Location = new System.Drawing.Point(357, 89);
+            this.painel_developer.Location = new System.Drawing.Point(392, 89);
             this.painel_developer.Name = "painel_developer";
             this.painel_developer.Size = new System.Drawing.Size(507, 47);
             this.painel_developer.TabIndex = 5;
@@ -270,7 +271,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton6.CustomColorScheme = false;
             this.imageModernButton6.Image = null;
-            this.imageModernButton6.Location = new System.Drawing.Point(202, 94);
+            this.imageModernButton6.Location = new System.Drawing.Point(252, 93);
             this.imageModernButton6.Name = "imageModernButton6";
             this.imageModernButton6.NormalImage = null;
             this.imageModernButton6.Origin = null;
@@ -283,7 +284,7 @@ namespace DisplayButtons.Forms
             // perfilselector
             // 
             this.perfilselector.FormattingEnabled = true;
-            this.perfilselector.Location = new System.Drawing.Point(13, 104);
+            this.perfilselector.Location = new System.Drawing.Point(61, 104);
             this.perfilselector.Name = "perfilselector";
             this.perfilselector.Size = new System.Drawing.Size(86, 23);
             this.perfilselector.TabIndex = 9;
@@ -293,7 +294,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton7.CustomColorScheme = false;
             this.imageModernButton7.Image = null;
-            this.imageModernButton7.Location = new System.Drawing.Point(110, 98);
+            this.imageModernButton7.Location = new System.Drawing.Point(153, 98);
             this.imageModernButton7.Name = "imageModernButton7";
             this.imageModernButton7.NormalImage = null;
             this.imageModernButton7.Origin = null;
@@ -307,7 +308,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton8.CustomColorScheme = false;
             this.imageModernButton8.Image = null;
-            this.imageModernButton8.Location = new System.Drawing.Point(143, 98);
+            this.imageModernButton8.Location = new System.Drawing.Point(186, 99);
             this.imageModernButton8.Name = "imageModernButton8";
             this.imageModernButton8.NormalImage = null;
             this.imageModernButton8.Origin = null;
@@ -337,6 +338,15 @@ namespace DisplayButtons.Forms
             this.toolStripMenuItem2.Size = new System.Drawing.Size(170, 22);
             this.toolStripMenuItem2.Text = "Bibliotecas usadas";
             // 
+            // perfil_info
+            // 
+            this.perfil_info.AutoSize = true;
+            this.perfil_info.Location = new System.Drawing.Point(13, 108);
+            this.perfil_info.Name = "perfil_info";
+            this.perfil_info.Size = new System.Drawing.Size(38, 15);
+            this.perfil_info.TabIndex = 11;
+            this.perfil_info.Text = "label1";
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -347,6 +357,7 @@ namespace DisplayButtons.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.perfil_info);
             this.Controls.Add(this.imageModernButton8);
             this.Controls.Add(this.imageModernButton7);
             this.Controls.Add(this.perfilselector);
@@ -374,6 +385,7 @@ namespace DisplayButtons.Forms
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -405,6 +417,7 @@ namespace DisplayButtons.Forms
         private ToolStripStatusLabel link;
         private ToolStripStatusLabel toolStripStatusLabel4;
         private ToolStripStatusLabel info;
+        private Label perfil_info;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

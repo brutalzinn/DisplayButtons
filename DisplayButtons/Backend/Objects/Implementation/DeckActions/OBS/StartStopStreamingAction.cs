@@ -38,7 +38,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         {
             if (!firstTime) {
                 firstTime ^= true;
-                return "Start/Stop Streaming";
+                return Texts.rm.GetString("DECKOBSSTREAMING", Texts.cultereinfo);
             }
             switch (StreamAction) {
                 case StreamingState.Start:
@@ -46,7 +46,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                 case StreamingState.Stop:
                     return "Stop Streaming";
             }
-            return "Start/Stop Streaming";
+            return Texts.rm.GetString("DECKOBSSTREAMING", Texts.cultereinfo);
         }
 
         public override DeckImage GetDefaultItemImage()

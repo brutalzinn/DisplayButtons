@@ -38,7 +38,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.Misc
 
         public override string GetActionName()
         {
-            return "IFTTT Action";
+            return Texts.rm.GetString("DECKMISCIFTTT", Texts.cultereinfo);
         }
 
         public override void OnButtonDown(DeckDevice deckDevice)

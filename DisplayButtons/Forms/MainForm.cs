@@ -183,25 +183,35 @@ namespace DisplayButtons.Forms
 
             MainForm.Instance.Invoke(new Action(() =>
             {
+
+                perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo); 
+                warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
                 link.Click += (sender, e) =>
                 {
+                    if (MessageBox.Show(Texts.rm.GetString("ABOUTINFOLINKMESSAGEMESSAGE", Texts.cultereinfo), Texts.rm.GetString("ABOUTINFOLINKMESSAGETITLE", Texts.cultereinfo), MessageBoxButtons.OKCancel) == DialogResult.OK)
 
-                    Process myProcess = new Process();
-
-                    try
                     {
-                        // true is the default, but it is important not to set it to false
-                        myProcess.StartInfo.UseShellExecute = true;
-                        myProcess.StartInfo.FileName = "http://displaybuttons.com";
-                        myProcess.Start();
-                    }
-                    catch (Exception ee)
-                    {
-                        Console.WriteLine(ee.Message);
-                    }
 
+                        //Do something here if OK was clicked.
+
+
+                        Process myProcess = new Process();
+
+                        try
+                        {
+                            // true is the default, but it is important not to set it to false
+                            myProcess.StartInfo.UseShellExecute = true;
+                            myProcess.StartInfo.FileName = "http://displaybuttons.com";
+                            myProcess.Start();
+                        }
+                        catch (Exception ee)
+                        {
+                            Console.WriteLine(ee.Message);
+                        }
+                    }
 
                 };
+                info.Text = Texts.rm.GetString("ABOUTINFOLABELTEXT", Texts.cultereinfo);
                 info.Click += (sender, e) =>
                 {
 

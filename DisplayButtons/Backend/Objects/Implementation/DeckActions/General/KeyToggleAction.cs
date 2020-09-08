@@ -33,7 +33,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
         public override string GetActionName()
         {
-            return "Toggle Keypress";
+            return Texts.rm.GetString("DECKGENERALTOGGLEKEY", Texts.cultereinfo);
         }
 
     }

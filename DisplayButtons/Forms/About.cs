@@ -16,6 +16,7 @@ namespace DisplayButtons.Forms
             InitializeComponent();
             label1.Text = Texts.rm.GetString("APPLICATIONNAME", Texts.cultereinfo);
             label2.Text = Texts.rm.GetString("ABOUTINFOAPPVERSIONLABEL", Texts.cultereinfo) + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            label3.Text = Texts.rm.GetString("ABOUTLABELUSEDBIBLE", Texts.cultereinfo);
             this.Text = Texts.rm.GetString("ABOUTNAMETEXT", Texts.cultereinfo);
             LibraryHelper instance = new LibraryHelper();
             instance.prepareLibraryList();
