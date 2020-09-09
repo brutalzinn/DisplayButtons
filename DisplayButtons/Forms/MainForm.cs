@@ -295,7 +295,7 @@ namespace DisplayButtons.Forms
 
                     _sparkle = new SparkleUpdater(
        Globals.updateurl, // link to your app cast file
-       new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
+       new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Unsafe) // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
     )
                     {
 
@@ -414,7 +414,7 @@ namespace DisplayButtons.Forms
             string TargetDirectory = Assembly.GetExecutingAssembly().Location;
             _sparkle = new SparkleUpdater(
       Globals.updateurl, // link to your app cast file
-      new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
+      new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Unsafe) // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
   )
             {
 
@@ -423,7 +423,7 @@ namespace DisplayButtons.Forms
 
             };
 
-            
+           // _sparkle.RelaunchAfterUpdate = true;
       //      _sparkle.CustomInstallerArguments = @"/c WZUNZIP.EXE - ye - o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory;
             _sparkle.StartLoop(true,true); // `true` to run an initial check online -- only call StartLoop once for a given SparkleUpdater instance!
 

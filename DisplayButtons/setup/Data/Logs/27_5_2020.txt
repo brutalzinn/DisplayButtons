@@ -1,0 +1,45 @@
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   em System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   em System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   em System.Collections.Generic.List`1.Add(T item)
+   em MoonSharp.Interpreter.Tree.Expression.ExprList(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 43
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionCallExpression..ctor(ScriptLoadingContext lcontext, Expression function, Token thisCallName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionCallExpression.cs:linha 62
+   em MoonSharp.Interpreter.Tree.Expression.PrimaryExp(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 208
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 56
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression.CreateBody(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 89
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean usesGlobalEnv, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 66
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 31
+   em MoonSharp.Interpreter.Tree.Statements.FunctionDefinitionStatement..ctor(ScriptLoadingContext lcontext, Boolean local, Token localToken) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\FunctionDefinitionStatement.cs:linha 86
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 40
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Statements.ChunkStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\ChunkStatement.cs:linha 20
+   em MoonSharp.Interpreter.Tree.Fast_Interface.Loader_Fast.LoadChunk(Script script, SourceCode source, ByteCode bytecode) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Fast_Interface\Loader_Fast.cs:linha 52
+   em MoonSharp.Interpreter.Script.LoadString(String code, Table globalTable, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 182
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+

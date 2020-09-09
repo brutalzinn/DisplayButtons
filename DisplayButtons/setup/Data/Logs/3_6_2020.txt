@@ -1,0 +1,7 @@
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+

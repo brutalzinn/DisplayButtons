@@ -124,24 +124,24 @@ namespace NetSparkleUpdater.UI.WinForms
             FormClosing += UpdateAvailableWindow_FormClosing;
         }
 
-        private async void LoadReleaseNotes(List<AppCastItem> items, bool isforallversions = false)
+        private async void LoadReleaseNotes(List<AppCastItem> items, bool isforallversions)
         {
             AppCastItem latestVersion = items.OrderByDescending(p => p.Version).FirstOrDefault();
-            string releaseNotes = "";
+            string releaseNotes = null;
             if (!isforallversions)
             {
-                 releaseNotes = await _releaseNotesGrabber.DownloadAllReleaseNotes(items, latestVersion, _cancellationToken);
+                 releaseNotes =  await _releaseNotesGrabber.DownloadAllReleaseNotes(items, latestVersion, _cancellationToken);
             }
             else
             {
 
-                 releaseNotes = await _releaseNotesGrabber.DownloadAllReleaseNotesWithButtons(items, latestVersion, _cancellationToken);
+               releaseNotes = await _releaseNotesGrabber.DownloadAllReleaseNotesWithButtons(items, latestVersion, _cancellationToken);
 
             }
             ReleaseNotesBrowser.Invoke((MethodInvoker)delegate
             {
                 // see https://stackoverflow.com/a/15209861/3938401
-                ReleaseNotesBrowser.ObjectForScripting = this;
+               ReleaseNotesBrowser.ObjectForScripting = this;
 
 
                 ReleaseNotesBrowser.Navigate("about:blank");
