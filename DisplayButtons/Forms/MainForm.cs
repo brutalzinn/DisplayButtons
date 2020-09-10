@@ -304,11 +304,11 @@ namespace DisplayButtons.Forms
 
                     };
 
-                    await _sparkle.CheckForUpdatesQuietly();
-                    var list = _sparkle.AppCastHandler.GetAvailableUpdates();
+                    var _updateInfo = await _sparkle.CheckForUpdatesQuietly();
+                     var list = _sparkle.AppCastHandler.GetAvailableUpdates(true);
 
-
-                    var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list, true, true);
+                    
+                   var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list, false, true);
 
                     form.HideRemindMeLaterButton();
                     form.HideSkipButton();

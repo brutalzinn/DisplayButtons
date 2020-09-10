@@ -176,7 +176,7 @@ namespace NetSparkleUpdater.AppCastHandlers
         /// <summary>
         /// Returns sorted list of updates between current and latest. Installed is not included.
         /// </summary>
-        public virtual List<AppCastItem> GetAvailableUpdates()
+        public virtual List<AppCastItem> GetAvailableUpdates(bool allversions = false)
         {
             Version installed = new Version(_config.InstalledVersion);
             var signatureNeeded = Utilities.IsSignatureNeeded(_signatureVerifier.SecurityMode, _signatureVerifier.HasValidKeyInformation(), false);
@@ -207,7 +207,17 @@ namespace NetSparkleUpdater.AppCastHandlers
                 // filter smaller versions
                 if (new Version(item.Version).CompareTo(installed) <= 0)
                 {
-                    return false;
+                    bool result = false;
+                    if (allversions)
+                    {
+
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                    return result;
                 }
                 // filter versions without signature if we need signatures. But accept version without downloads.
                 if (signatureNeeded && string.IsNullOrEmpty(item.DownloadSignature) && !string.IsNullOrEmpty(item.DownloadLink))

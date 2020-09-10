@@ -46,6 +46,6 @@ namespace NetSparkleUpdater.Interfaces
         /// successfully completed.
         /// </summary>
         /// <returns>a list of <see cref="AppCastItem"/> updates. Can be empty if no updates are available.</returns>
-        List<AppCastItem> GetAvailableUpdates();
+        List<AppCastItem> GetAvailableUpdates(bool allversions = false);
     }
 }

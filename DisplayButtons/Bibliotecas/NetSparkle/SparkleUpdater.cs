@@ -349,7 +349,7 @@ namespace NetSparkleUpdater
 
         /// <summary>
         /// The object responsible for parsing app cast information and checking to
-        /// see if any updates are available in a given app cast
+        /// see if any updates are available in a given app castge
         /// </summary>
         public IAppCastHandler AppCastHandler { get; set; }
 
