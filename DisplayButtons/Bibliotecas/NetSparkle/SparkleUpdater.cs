@@ -1240,7 +1240,7 @@ namespace NetSparkleUpdater
                     if (IsZipDownload(downloadFilePath)) // .zip on macOS or .tar.gz on Linux
                     {
                         
-                        string zip = $@"tar -xf {downloadFilePath}";
+                        string zip = $@"unzip.exe x {downloadFilePath} -aoa";
                     output =  $@"
                         set /A counter=0                       
                         setlocal ENABLEDELAYEDEXPANSION
