@@ -139,11 +139,13 @@
     <value>Olá, bem-vindo ao Display Buttons.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL2" xml:space="preserve">
-    <value>O DisplayKeys é um software que permite usar qualquer dispositivo Android ™ para
-executar ações (macros) em um computador.</value>
+    <value>O Display Buttons é um software que permite usar qualquer dispositivo Android ™ 
+para executar ações (macros) em um computador.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL3" xml:space="preserve">
-    <value>As DisplayKeys pode ser usado para facilitar o uso de atalhos de diversos aplicativos</value>
+    <value>O Display Buttons  pode ser usado para facilitar o uso de atalhos de 
+diversos aplicativos. Você pode programar seus próprios botões.
+ Acesse displaybuttons.com para saber mais.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL4" xml:space="preserve">
     <value>Para iniciar a configuração, pressione Avançar.</value>
@@ -180,7 +182,7 @@ a mesma rede com o aplicativo de desktop aberto.</value>
     <value>Coluna:</value>
   </data>
   <data name="APPLICATIONNAME" xml:space="preserve">
-    <value>Display Buttons</value>
+    <value>Display Buttons Server</value>
   </data>
   <data name="APPLICATIONNAME_DESCRIPTION" xml:space="preserve">
     <value>Opções legais que você pode configurar a seu gosto para melhorar  
@@ -395,6 +397,9 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   </data>
   <data name="EXPORTPERFIL" xml:space="preserve">
     <value>Exportar perfil</value>
+  </data>
+  <data name="FIRSTPAGEBUTTONAVANCE" xml:space="preserve">
+    <value>Avançar</value>
   </data>
   <data name="GENERATESIDEBARTITLEPLUGINS" xml:space="preserve">
     <value>Botões lua</value>

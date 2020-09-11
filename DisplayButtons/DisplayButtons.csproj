@@ -12,6 +12,7 @@
     <ApplicationIcon>button-deck.ico</ApplicationIcon>
     <Nullable>disable</Nullable>
     <Platforms>AnyCPU;x86</Platforms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

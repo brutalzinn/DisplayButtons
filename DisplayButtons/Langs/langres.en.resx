@@ -180,7 +180,7 @@ the same network with the open desktop application.</value>
     <value>Column:</value>
   </data>
   <data name="APPLICATIONNAME" xml:space="preserve">
-    <value>Display Buttons</value>
+    <value>Display Buttons Server</value>
   </data>
   <data name="APPLICATIONNAME_DESCRIPTION" xml:space="preserve">
     <value>Cool options that you can configure to your liking to improve
@@ -392,6 +392,9 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   </data>
   <data name="EXPORTPERFIL" xml:space="preserve">
     <value>Export profile</value>
+  </data>
+  <data name="FIRSTPAGEBUTTONAVANCE" xml:space="preserve">
+    <value>Next</value>
   </data>
   <data name="GENERATESIDEBARTITLEPLUGINS" xml:space="preserve">
     <value>Buttons  lua</value>
