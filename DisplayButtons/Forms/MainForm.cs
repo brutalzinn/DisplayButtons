@@ -183,7 +183,7 @@ namespace DisplayButtons.Forms
 
             MainForm.Instance.Invoke(new Action(() =>
             {
-
+                // teste
                 this.Text = Texts.rm.GetString("APPLICATIONNAME", Texts.cultereinfo);
                 perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo); 
                 warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
