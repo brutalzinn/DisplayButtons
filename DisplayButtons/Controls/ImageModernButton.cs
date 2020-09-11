@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using DisplayButtons.Backend.Networking.Implementation;
 using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Bibliotecas.DeckText;
+using System.Diagnostics;
 
 namespace DisplayButtons.Controls
 {
@@ -167,8 +168,20 @@ namespace DisplayButtons.Controls
                 {
                     using (Font font1 = new Font("Arial", TextButton.Size, FontStyle.Bold, GraphicsUnit.Point))
                     {
-                        
-                        RectangleF rectF1 = new RectangleF(0, 5, Image.Width, Image.Height);
+                        Graphics g = this.CreateGraphics();
+
+                        SizeF size = g.MeasureString(TextButton.Text,font1);
+                        StringFormat format = new StringFormat();
+                     
+                        int nLeft = Convert.ToInt32((this.ClientRectangle.Width / 2) - (size.Width / 2));
+                        int nTop = Convert.ToInt32(TextHelper.PercentOf(TextButton.Position,this.Size.Height));
+              
+
+
+
+                        RectangleF rectF1 = new RectangleF(nLeft, nTop, Image.Width, Image.Height);
+                        Debug.WriteLine("top result: " + nTop);
+                        Debug.WriteLine("TextButton.Position: " + TextButton.Position);
                         pevent.Graphics.DrawImage(Image, DisplayRectangle);
 
                         pevent.Graphics.DrawString(TextButton.Text, font1, TextButton.Brush, rectF1);

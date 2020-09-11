@@ -2,6 +2,7 @@
 using DisplayButtons.Backend.Objects.Implementation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 
@@ -13,7 +14,7 @@ namespace DisplayButtons.Bibliotecas.DeckText
         private string text;
         private Brush brush;
         private Font font;
-        private float position;
+        private int position;
         private int size;
 
 
@@ -23,9 +24,21 @@ namespace DisplayButtons.Bibliotecas.DeckText
         {
             FontFamily fontFamily = new FontFamily("Arial");
 
-
-
-            this.position = item.Deckposition;
+            int pos = 0;
+           Debug.WriteLine("DECKPOSITION> " + item.Deckposition);
+            switch (item.Deckposition)
+            {
+                case 81:
+                    pos = 50;
+                    break;
+                case 17:
+                    pos = 25;
+                        break;
+                case 49:
+                    pos = 1;
+                    break;
+            }
+            this.position = pos;
             this.Size = item.Decksize;
 
             this.text = item.Deckname;
@@ -41,7 +54,7 @@ namespace DisplayButtons.Bibliotecas.DeckText
         public string Text { get => text; set => text = value; }
         public Brush Brush { get => brush; set => brush = value; }
         public Font Font { get => font; set => font = value; }
-        public float Position { get => position; set => position = value; }
+        public int Position { get => position; set => position = value; }
         public int Size { get => size; set => size = value; }
     }
 }
