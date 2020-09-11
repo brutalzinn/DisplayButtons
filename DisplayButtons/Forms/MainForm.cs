@@ -42,6 +42,7 @@ using DisplayButtons.Forms.EventSystem.Controls.triggers;
 using DisplayButtons.Bibliotecas.DeckEvents;
 using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
 using static DisplayButtons.Backend.Objects.ProfileVoidHelper;
+using DisplayButtons.Bibliotecas.DeckText;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -1164,7 +1165,7 @@ namespace DisplayButtons.Forms
 
                 control.NormalImage = item?.GetItemImage().Bitmap;
 
-                control.TextLabel( item?.Deckname, null,item.Deckposition,null);
+                control.TextButton = new TextLabel(item);
 
                 control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
