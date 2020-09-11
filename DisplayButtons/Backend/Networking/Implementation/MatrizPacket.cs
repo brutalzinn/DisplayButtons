@@ -21,7 +21,17 @@ namespace DisplayButtons.Backend.Networking.Implementation
          //   state.SendPacket(new AlternativeHello());
             //state.EndConnection();
         }
+        public MatrizPacket()
+        {
+          
 
+        }
+        public MatrizPacket(Profile _profile)
+        {
+            profile = _profile;
+
+        }
+        private Profile profile { get; set; }
         public override void FromInputStream(DataInputStream reader)
         {
 
@@ -34,8 +44,10 @@ namespace DisplayButtons.Backend.Networking.Implementation
         public override void ToOutputStream(DataOutputStream writer)
         {
             //To client
-          writer.WriteInt(ApplicationSettingsManager.Settings.linha);
-            writer.WriteInt(ApplicationSettingsManager.Settings.coluna);
+           
+                writer.WriteInt(profile.Matriz.Lin);
+                writer.WriteInt(profile.Matriz.Column);
+           
         }
 
         public override object Clone()

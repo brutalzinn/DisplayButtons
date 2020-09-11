@@ -53,7 +53,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
         public override string GetActionName()
         {
-            return "Simulate Keypress";
+            return Texts.rm.GetString("DECKGENERALKEYPRESS", Texts.cultereinfo);
         }
 
         public override void OnButtonDown(DeckDevice deckDevice)

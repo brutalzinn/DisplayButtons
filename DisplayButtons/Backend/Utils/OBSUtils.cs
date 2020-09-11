@@ -27,7 +27,7 @@ namespace DisplayButtons.Backend.Utils
 
         #region Fields
 
-        public const string obsWsWebLocation = "https://github.com/Palakis/obs-websocket/releases/download/4.3.1/obs-websocket-4.3.1-Windows.zip";
+        public const string obsWsWebLocation = "https://github.com/Palakis/obs-websocket/releases/download/4.8.0/obs-websocket-4.8.0-Windows.zip";
         public const string obswszip = "obs-ws.zip";
 
         #endregion
@@ -112,7 +112,7 @@ namespace DisplayButtons.Backend.Utils
 
         public static void ExtractZip(string file, string path)
         {
-            ZipFile.ExtractToDirectory(file, path);
+            ZipFile.ExtractToDirectory(file, path,true);
         }
 
         public static string GetPathFromOBSExecutable(string execLocation)

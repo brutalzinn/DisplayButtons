@@ -37,6 +37,11 @@ using System.Windows.Forms;
 using static DisplayButtons.Backend.Objects.AbstractDeckAction;
 using Timer = System.Windows.Forms.Timer;
 using NickAc.ModernUIDoneRight.Objects.MenuItems;
+using DisplayButtons.Forms.EventSystem;
+using DisplayButtons.Forms.EventSystem.Controls.triggers;
+using DisplayButtons.Bibliotecas.DeckEvents;
+using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
+using static DisplayButtons.Backend.Objects.ProfileVoidHelper;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -104,48 +109,12 @@ namespace DisplayButtons.Forms
                 t.Start();
 
 
-                NotifyIcon icon = new NotifyIcon
-                {
-                    Icon = Icon,
-                    Text = Text
-                };
-                icon.DoubleClick += (sender, e) =>
-                {
-                    Show();
-                };
-                ContextMenuStrip menu = new ContextMenuStrip();
-                menu.Items.Add("Open application").Click += (s, e) =>
-                {
-                    Show();
-                };
-                menu.Items.Add("-");
-                menu.Items.Add("Exit application").Click += (s, e) =>
-                {
-                    Application.Exit();
-                };
-                FormClosing += (s, e) =>
-                {
-                    if (e.CloseReason == CloseReason.UserClosing)
-                    {
-                        Hide();
-                        e.Cancel = true;
-                    }
-                    else if (e.CloseReason == CloseReason.ApplicationExitCall)
-                    {
-                        icon.Visible = false;
-                        icon.Dispose();
-                    }
-                };
-                menu.Opening += (s, e) =>
-                {
-                    menu.Items[0].Select();
-                };
-                icon.ContextMenuStrip = menu;
-                icon.Visible = true;
+               
+              
             }
             ColorSchemeCentral.ThemeChanged += (s, e) =>
             ApplySidebarTheme(shadedPanel1);
-
+          
 
         }
 
@@ -160,8 +129,8 @@ namespace DisplayButtons.Forms
 
                 Control control = Controls["panel1"];
                 if (control != null) control.Visible = visible;
-                Control control3 = Controls["shadedPanel1"];
-                if (control3 != null) control3.Visible = visible;
+              //  Control control3 = Controls["shadedPanel1"];
+              //  if (control3 != null) control3.Visible = visible;
 
             }));
         }
@@ -183,172 +152,262 @@ namespace DisplayButtons.Forms
         {
             base.OnLoad(e);
 
+          
 
 
+            using (frmWaitForm frm = new frmWaitForm(StartupMethods))
+            {
+                frm.ShowDialog(this);
+            }
+
+            //warning_label.ForeColor = ColorScheme.SecondaryColor;
+           
+        }
+  
+        public void StartupMethods()
+        {
+
+    
             StartUsbMode();
 
 
-
-
-
-
-
-
-            var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
-            var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
-            var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
-            var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.folder_white : Resources.folder_black;
-            var imageMiscelanius = ColorScheme.ForegroundColor == Color.White ? Resources.drawer__archive__files__documents__office_white : Resources.drawer__archive__files__documents__office_white;
-            var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.download_arrow_white : Resources.download_arrow_black;
-
-            AppAction item = new AppAction()
-            {
-                Image = image
-            };
-            item.Click += (s, ee) =>
-            {
-                //TODO: Settings
-                new SettingsForm().ShowDialog();
-            };
-
-   
-           
-            AppAction autoupdate = new AppAction()
-            {
-                Image = imageUpdate
-            };
-            autoupdate.Click += async (s, ee) =>
-            {
-                //TODO: Settings
-
-                _sparkle = new SparkleUpdater(
-   Globals.updateurl, // link to your app cast file
-   new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
-)
-                {
-
-
-                    UIFactory = new NetSparkleUpdater.UI.WinForms.UIFactory(Resources.button_deck) // or null or choose some other UI factory or build your own!
-
-                };
-
-              await _sparkle.CheckForUpdatesQuietly();
-                var list =  _sparkle.AppCastHandler.GetAvailableUpdates();
-
-              
-                var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list,true,true);
-               
-                form.HideRemindMeLaterButton();
-               form.HideSkipButton();
-         
-                    form.Show(true);
-                
-
-
-                //   AutoUpdater.LetUserSelectRemindLater = false;
-                //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
-                //  _sparkle.CheckForUpdatesAtUserRequest();
-                //AutoUpdater.Start(Globals.updateurl);
-            };
-           
-
-            AppAction itemTrash = new AppAction()
-            {
-                Image = imageTrash
-            };
-            itemTrash.Click += (s, ee) =>
-            {
-                if (CurrentDevice == null) return;
-                if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    CurrentDevice.MainFolder = new DynamicDeckFolder();
-                    SendItemsToDevice(CurrentDevice, true);
-                    RefreshAllButtons(false);
-                }
-            };
-            appBar1.Actions.Add(autoupdate);
-           
-            appBar1.Actions.Add(itemTrash);
- appBar1.Actions.Add(item);
-            AppAction itemMagnetite = new AppAction()
-            {
-              
-       
-             Image = imageMiscelanius
-                
-            };
-           
-            itemMagnetite.Click += (s, ee) =>
-            {
-                new MagnetiteForm().ShowDialog();
-            };
-
-
-
-            AppAction itemBiblioteca = new AppAction()
-            {
-                Image = imageBiblioteca
-            };
-
-            itemBiblioteca.Click += (s, ee) =>
-            {
-                new ImageListForm().ShowDialog();
-                //     new ScribeBot.Interface.Window().Show();
-            };
-
-            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
-            
-            appBar1.Actions.Add(itemMagnetite);
-        
-            appBar1.Actions.Add(itemBiblioteca);
-          
-            // ApplyTheme(panel1);
-            GenerateSidebar(shadedPanel1, true);
-            ApplySidebarTheme(shadedPanel1);
-
-            ApplySidebarTheme(painel_developer);
-            //shadedPanel2.Hide();
-            //shadedPanel1.Hide();
-
-
-
             ChangeDeveloperMode();
-            MatrizGenerator();
-
-            Refresh();
-
-
-
             RegisterMainFolderHotKey();
 
             RegisterBackFolderHotKey();
 
 
-
+          ProfileStaticHelper.SetupPerfil();
 
             //       DeckServiceProvider.StartTimers();
 
+            MainForm.Instance.Invoke(new Action(() =>
+            {
+
+                this.Text = Texts.rm.GetString("APPLICATIONNAME", Texts.cultereinfo);
+                perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo); 
+                warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
+                link.Click += (sender, e) =>
+                {
+                    if (MessageBox.Show(Texts.rm.GetString("ABOUTINFOLINKMESSAGEMESSAGE", Texts.cultereinfo), Texts.rm.GetString("ABOUTINFOLINKMESSAGETITLE", Texts.cultereinfo), MessageBoxButtons.OKCancel) == DialogResult.OK)
+
+                    {
+
+                        //Do something here if OK was clicked.
 
 
-            Texts.initilizeLang();
+                        Process myProcess = new Process();
+
+                        try
+                        {
+                            // true is the default, but it is important not to set it to false
+                            myProcess.StartInfo.UseShellExecute = true;
+                            myProcess.StartInfo.FileName = "http://displaybuttons.com";
+                            myProcess.Start();
+                        }
+                        catch (Exception ee)
+                        {
+                            Console.WriteLine(ee.Message);
+                        }
+                    }
+
+                };
+                info.Text = Texts.rm.GetString("ABOUTINFOLABELTEXT", Texts.cultereinfo);
+                info.Click += (sender, e) =>
+                {
+
+                    new About().ShowDialog();
+
+                };
+                imageModernButton6.Text = Texts.rm.GetString("EVENTSYSTEMBUTTON", Texts.cultereinfo);
+                if (ApplicationSettingsManager.Settings.isAutoMinimizer) { 
+                    NotifyIcon icon = new NotifyIcon
+                {
+                    Icon = Icon,
+                    Text = Text
+                };
+                icon.DoubleClick += (sender, e) =>
+                {
+                    Show();
+                };
+                ContextMenuStrip menu = new ContextMenuStrip();
+                menu.Items.Add(Texts.rm.GetString("RESIZETEXTOPEN", Texts.cultereinfo)).Click += (s, e) =>
+                {
+                    Show();
+                };
+                menu.Items.Add("-");
+                menu.Items.Add(Texts.rm.GetString("RESIZETEXTCLOSE", Texts.cultereinfo)).Click += (s, e) =>
+                {
+                    Application.Exit();
+                };
+                FormClosing += (s, e) =>
+                {
+                   
+                        if (e.CloseReason == CloseReason.UserClosing)
+                        {
+                            Hide();
+                            e.Cancel = true;
+                        }
+                        else if (e.CloseReason == CloseReason.ApplicationExitCall)
+                        {
+                            icon.Visible = false;
+                            icon.Dispose();
+                        }
+               
+                };
+                menu.Opening += (s, e) =>
+                {
+                    menu.Items[0].Select();
+                };
+                icon.ContextMenuStrip = menu;
+                icon.Visible = true;
+ }
+
+
+                var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
+                var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
+                var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
+                var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.folder_white : Resources.folder_black;
+                var imageMiscelanius = ColorScheme.ForegroundColor == Color.White ? Resources.drawer__archive__files__documents__office_white : Resources.drawer__archive__files__documents__office_white;
+                var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.download_arrow_white : Resources.download_arrow_black;
+
+                AppAction item = new AppAction()
+                {
+                    Image = image
+                };
+              
+                item.Click += (s, ee) =>
+                {
+              
+                   
+
+                        new SettingsForm().ShowDialog();
+                    };
+
+
+
+                AppAction autoupdate = new AppAction()
+                {
+                    Image = imageUpdate
+                };
+                autoupdate.Click += async (s, ee) =>
+                {
+                    //TODO: Settings
+
+                    _sparkle = new SparkleUpdater(
+       Globals.updateurl, // link to your app cast file
+       new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Unsafe) // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
+    )
+                    {
+
+
+                        UIFactory = new NetSparkleUpdater.UI.WinForms.UIFactory(Resources.button_deck) // or null or choose some other UI factory or build your own!
+
+                    };
+
+                    var _updateInfo = await _sparkle.CheckForUpdatesQuietly();
+                     var list = _sparkle.AppCastHandler.GetAvailableUpdates(true);
+
+                    
+                   var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list, false, true);
+
+                    form.HideRemindMeLaterButton();
+                    form.HideSkipButton();
+
+                    form.Show(true);
+
+
+
+                    //   AutoUpdater.LetUserSelectRemindLater = false;
+                    //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
+                    //  _sparkle.CheckForUpdatesAtUserRequest();
+                    //AutoUpdater.Start(Globals.updateurl);
+                };
+
+
+                AppAction itemTrash = new AppAction()
+                {
+                    Image = imageTrash
+                };
+                itemTrash.Click += (s, ee) =>
+                {
+                    if (CurrentDevice == null) return;
+                    if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
+                        SendItemsToDevice(CurrentDevice, true);
+                        RefreshAllButtons(false);
+                    }
+                };
+                appBar1.Actions.Add(autoupdate);
+
+                appBar1.Actions.Add(itemTrash);
+                appBar1.Actions.Add(item);
+                AppAction itemMagnetite = new AppAction()
+                {
+
+                  
+                    Image = imageMiscelanius
+                    
+
+                };
+               
+                itemMagnetite.Click += (s, ee) =>
+                {
+                    new MagnetiteForm().ShowDialog();
+                };
+
+
+
+
+                AppAction itemBiblioteca = new AppAction()
+                {
+                    Image = imageBiblioteca
+                };
+
+                itemBiblioteca.Click += (s, ee) =>
+                {
+                    new ImageListForm().ShowDialog();
+                    //     new ScribeBot.Interface.Window().Show();
+                };
+
+                Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
+
+                appBar1.Actions.Add(itemMagnetite);
+
+                appBar1.Actions.Add(itemBiblioteca);
+ 
+                // ApplyTheme(panel1);
+                GenerateSidebar(shadedPanel1, true);
+           
+
+             //   ApplySidebarTheme(painel_developer);
+  
+
+                Refresh();
+
+
+
+                FillPerfil();
+           
+
+                    ProfileStaticHelper.SelectItemByValue(perfilselector, ProfileStaticHelper.SelectPerfilByName(ApplicationSettingsManager.Settings.CurrentProfile)); 
+
+           
 
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
             {
                 shadedPanel4.Visible = false;
-
-            //    int columnumber = tableLayoutPanel1.GetColumn(shadedPanel4);
-        //        tableLayoutPanel1.ColumnStyles[columnumber].Width = 0;
-
-
-
-
-
-
-
-            }
-
-            //warning_label.ForeColor = ColorScheme.SecondaryColor;
-            Checkupdates();
+                }
+                else
+                {
+                    ApplySidebarTheme(shadedPanel4);
+                }
+                }));
+          ApplySidebarTheme(shadedPanel1);
+            Texts.initilizeLang();
+ new FactoryEvents().Init();
+ Checkupdates();
         }
         private void Checkupdates()
         {
@@ -356,7 +415,7 @@ namespace DisplayButtons.Forms
             string TargetDirectory = Assembly.GetExecutingAssembly().Location;
             _sparkle = new SparkleUpdater(
       Globals.updateurl, // link to your app cast file
-      new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
+      new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Unsafe) // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
   )
             {
 
@@ -365,7 +424,7 @@ namespace DisplayButtons.Forms
 
             };
 
-            
+           // _sparkle.RelaunchAfterUpdate = true;
       //      _sparkle.CustomInstallerArguments = @"/c WZUNZIP.EXE - ye - o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory;
             _sparkle.StartLoop(true,true); // `true` to run an initial check online -- only call StartLoop once for a given SparkleUpdater instance!
 
@@ -442,13 +501,13 @@ namespace DisplayButtons.Forms
             switch (e.Name)
             {
                 case "main_folder":
-                    CurrentDevice.CurrentFolder = CurrentDevice.MainFolder;
+                    CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Mainfolder;
                     RefreshAllButtons(true);
                     break;
                 case "back_folder":
-                    if (CurrentDevice.CurrentFolder.GetParent() != null)
+                    if (CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null)
                     {
-                        CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
+                        CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Currentfolder.GetParent();
                         RefreshAllButtons(true);
                     }
                     break;
@@ -492,7 +551,7 @@ namespace DisplayButtons.Forms
 
 
         }
-        private void ApplySidebarTheme(Control parent)
+        public void ApplySidebarTheme(Control parent)
         {
             //Headers have the theme's secondary color as background
             //and the theme's foreground color as text color
@@ -512,7 +571,7 @@ namespace DisplayButtons.Forms
             });
         }
 
-        private void ApplyTheme(Control parent)
+        public void ApplyTheme(Control parent)
         {
 
             //IMPORTANT
@@ -526,12 +585,12 @@ namespace DisplayButtons.Forms
                     {
                         if (mb.Tag != null && mb.Tag is IDeckFolder folder && !(ee.Data.GetDataPresent(typeof(DeckItemMoveHelper))))
                         {
-                            CurrentDevice.CurrentFolder = folder;
+                            CurrentDevice.CurrentProfile.Currentfolder = folder;
                             RefreshAllButtons(true);
                         }
-                        else if (mb.Tag != null && CurrentDevice.CurrentFolder != null && CurrentDevice.CurrentFolder.GetParent() != null && mb.CurrentSlot == 1 && mb.Tag is IDeckItem upItem)
+                        else if (mb.Tag != null && CurrentDevice.CurrentProfile.Currentfolder != null && CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null && mb.CurrentSlot == 1 && mb.Tag is IDeckItem upItem)
                         {
-                            CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
+                            CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Currentfolder.GetParent();
                             RefreshAllButtons(true);
                         }
 
@@ -555,7 +614,7 @@ namespace DisplayButtons.Forms
                                 {
 
 
-                                    if (CurrentDevice.CurrentFolder.GetParent() != null && mb.CurrentSlot == 1) return;
+                                    if (CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null && mb.CurrentSlot == 1) return;
                                     if (item is IDeckFolder deckFolder)
                                     {
                                         var deckItemToAdd = new DynamicDeckItem
@@ -563,9 +622,10 @@ namespace DisplayButtons.Forms
                                             DeckAction = action.DeckAction.CloneAction()
                                         };
                                         var id2 = deckFolder.Add(deckItemToAdd);
+                                       
                                         deckItemToAdd.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
-                                        CurrentDevice.CurrentFolder = deckFolder;
+                                        CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
                                         RefreshAllButtons();
                                         //implementação dos plugins
 
@@ -581,7 +641,7 @@ namespace DisplayButtons.Forms
                                     };
                                     //Create a new folder instance
                                     CurrentDevice.CheckCurrentFolder();
-                                    folder.ParentFolder = CurrentDevice.CurrentFolder;
+                                    folder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     folder.Add(1, folderUpItem);
                                     folder.Add(item);
 
@@ -595,11 +655,11 @@ namespace DisplayButtons.Forms
 
                                     FocusItem(GetButtonControl(id), newItem);
 
-                                    CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, folder);
+                                    CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, folder);
 
                                     mb.Tag = folder;
                                     mb.Image = Resources.img_folder;
-                                    CurrentDevice.CurrentFolder = folder;
+                                    CurrentDevice.CurrentProfile.Currentfolder = folder;
                                     RefreshAllButtons();
                                 }
                                 else
@@ -610,7 +670,7 @@ namespace DisplayButtons.Forms
                                     };
                                     mb.Image = ((DynamicDeckItem)mb.Tag).DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default;
 
-                                    FocusItem(mb, mb.Tag as IDeckItem);
+                                FocusItem(mb, mb.Tag as IDeckItem);
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is PluginLuaGenerator YY)
                                     {
                                         LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName);
@@ -641,11 +701,11 @@ namespace DisplayButtons.Forms
                             IDeckItem item1 = shouldMove ? action1.DeckItem : action1.DeckItem.DeepClone();
                             if (item1 is IDeckFolder folder && !shouldMove)
                             {
-                                FixFolders(folder, false, CurrentDevice.CurrentFolder);
+                                FixFolders(folder, false, CurrentDevice.CurrentProfile.Currentfolder);
                             }
                             //alterando agora
 
-                            if (CurrentDevice.CurrentFolder.GetDeckItems().Any(cItem => CurrentDevice.CurrentFolder.GetItemIndex(cItem) == mb.CurrentSlot))
+                            if (CurrentDevice.CurrentProfile.Currentfolder.GetDeckItems().Any(cItem => CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(cItem) == mb.CurrentSlot))
                             {
                                 //We must create a folder if there is an item
                                 var oldItem = action1.OldFolder.GetDeckItems().First(cItem => action1.OldFolder.GetItemIndex(cItem) == mb.CurrentSlot);
@@ -663,13 +723,13 @@ namespace DisplayButtons.Forms
                                 if (oldItem is DynamicDeckFolder deckFolder)
                                 {
                                     CurrentDevice.CheckCurrentFolder();
-                                    deckFolder.ParentFolder = CurrentDevice.CurrentFolder;
+                                    deckFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     deckFolder.Add(1, folderUpItem);
                                     Debug.WriteLine("Mesclagem de pasta.");
                                     deckFolder.Add(action1.DeckItem);
-                                    CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, deckFolder);
+                                    CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, deckFolder);
 
-                                    CurrentDevice.CurrentFolder = deckFolder;
+                                    CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
 
 
                                     //   mb.DoDragDrop(new DeckItemMoveHelper(action1.DeckItem, deckFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
@@ -680,13 +740,13 @@ namespace DisplayButtons.Forms
                                 {
 
                                     CurrentDevice.CheckCurrentFolder();
-                                    newFolder.ParentFolder = CurrentDevice.CurrentFolder;
+                                    newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     newFolder.Add(1, folderUpItem);
 
                                     newFolder.Add(oldItem);
                                     newFolder.Add(action1.DeckItem);
-                                    CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
-                                    CurrentDevice.CurrentFolder = newFolder;
+                                    CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
+                                    CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                     Debug.WriteLine("Dois itens.");
                                     FolderCallBack(newFolder);
                                     // call event
@@ -700,7 +760,7 @@ namespace DisplayButtons.Forms
                             }
                             else
                             {
-                                CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, item1);
+                                CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, item1);
                                 RefreshButton(action1.OldSlot, true);
                                 RefreshButton(mb.CurrentSlot, true);
                             }
@@ -722,13 +782,13 @@ namespace DisplayButtons.Forms
 
             if (!isForDelete)
             {
-                GlobalHotKeys.Instance.RegisterHotKeyCollector(folder);
+        //        GlobalHotKeys.Instance.RegisterHotKeyCollector(folder);
 
             }
             else
             {
                 //    GlobalHotKeys.folder_form.Add(new GlobalHotKeys.folders(folder));
-                GlobalHotKeys.Instance.GarbageHotKeyCollector(folder);
+         //       GlobalHotKeys.Instance.GarbageHotKeyCollector(folder);
                 //   GlobalHotKeys.hotKeyManager.Unregister(GlobalHotKeys.VirtualKeyFromKey(folder.KeyGlobalValue.Keys), GlobalHotKeys.VirtualKeyFromKeyModifier(folder.KeyGlobalValue.ModifierKeys));
             }
             //   GlobalHotKeys.Instance.init();
@@ -738,9 +798,10 @@ namespace DisplayButtons.Forms
         }
 
 
-        public void MatrizGenerator()
+        public void MatrizGenerator(Profile profile)
         {
-            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
+
+        
             panel_buttons.Controls.Clear();
             //warning_label.Visible = true;
          //   warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
@@ -753,9 +814,9 @@ namespace DisplayButtons.Forms
                 int x = 0;
                 int y = 0;
                 int id = 1;
-                for (int con = 0; con < ApplicationSettingsManager.Settings.linha; con++)
+                for (int con = 0; con < profile.Matriz.Lin; con++)
                 {
-                    for (int lin = 0; lin < ApplicationSettingsManager.Settings.coluna; lin++)
+                    for (int lin = 0; lin < profile.Matriz.Column; lin++)
                     {
 
 
@@ -796,7 +857,7 @@ namespace DisplayButtons.Forms
 
 
                                 if (!senderB.DisplayRectangle.Contains(e.Location)) return;
-                                if (e.Button == MouseButtons.Right && CurrentDevice.CurrentFolder.GetDeckItems().Any(c => CurrentDevice.CurrentFolder.GetItemIndex(c) == senderB.CurrentSlot))
+                                if (e.Button == MouseButtons.Right && CurrentDevice.CurrentProfile.Currentfolder.GetDeckItems().Any(c => CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(c) == senderB.CurrentSlot))
                                 {
 
 
@@ -820,7 +881,7 @@ namespace DisplayButtons.Forms
                                             Buttons_Unfocus(sender, e);
 
 
-                                            CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
+                                            CurrentPerfil.Value.Currentfolder.Remove(senderB.CurrentSlot);
 
 
                                         }
@@ -883,17 +944,17 @@ namespace DisplayButtons.Forms
                                             if (sender is ImageModernButton mb)
                                             {
                                                 Debug.WriteLine("Adicionando pasta...");
-                                                CurrentDevice.CheckCurrentFolder();
+                                                CurrentDevice.CheckCurrentFolder() ;
                                                 var newFolder = new DynamicDeckFolder
                                                 {
                                                     DeckImage = new DeckImage(Resources.img_folder)
                                                 };
-                                                newFolder.ParentFolder = CurrentDevice.CurrentFolder;
+                                                newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                                 newFolder.Add(1, folderUpItem);
 
-                                                CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
+                                                CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
                                                 FolderCallBack(newFolder);
-                                                    //CurrentDevice.CurrentFolder = newFolder;
+                                                    //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                                     RefreshAllButtons(true);
 
                                             }
@@ -905,7 +966,7 @@ namespace DisplayButtons.Forms
 
                                             if (sender is ImageModernButton mb)
                                             {
-                                                    //CurrentDevice.CurrentFolder = newFolder;
+                                                    //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                                     RefreshAllButtons(true);
 
                                             }
@@ -923,7 +984,7 @@ namespace DisplayButtons.Forms
                             if (!mouseDown) return;
                             int distanceX = Math.Abs(mouseDownLoc.X - Cursor.Position.X);
                             int distanceY = Math.Abs(mouseDownLoc.Y - Cursor.Position.Y);
-                            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+                            IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
 
                             var finalPoint = new Point(distanceX, distanceY);
                             bool didMove = SystemInformation.DragSize.Width * 2 > finalPoint.X && SystemInformation.DragSize.Height * 2 > finalPoint.Y;
@@ -936,8 +997,8 @@ namespace DisplayButtons.Forms
                                     {
                                         bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
                                         if (isDoubleClick) return;
-                                        if ((CurrentDevice.CurrentFolder.GetParent() != null && (mb.CurrentSlot == 1))) return;
-                                        mb.DoDragDrop(new DeckItemMoveHelper(act, CurrentDevice.CurrentFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
+                                        if ((CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null && (mb.CurrentSlot == 1))) return;
+                                        mb.DoDragDrop(new DeckItemMoveHelper(act, CurrentDevice.CurrentProfile.Currentfolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
                                             //if (act is DynamicDeckItem dI && dI.DeckAction != null)
                                             //{
                                             //    Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(act), true).FirstOrDefault() as Label;
@@ -970,16 +1031,16 @@ namespace DisplayButtons.Forms
                                             goto end;
                                         }
                                             //Navigate to the folder
-                                            CurrentDevice.CurrentFolder = folder;
+                                            CurrentDevice.CurrentProfile.Currentfolder = folder;
                                         RefreshAllButtons();
                                         goto end;
                                     }
-                                    if (CurrentDevice.CurrentFolder.GetParent() != null)
+                                    if (CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null)
                                     {
                                             //Not on the main folder
                                             if (mb.CurrentSlot == 1)
                                         {
-                                            CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
+                                            CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Currentfolder.GetParent();
                                             RefreshAllButtons();
                                             lastClick.Reset();
                                             return;
@@ -1013,7 +1074,7 @@ namespace DisplayButtons.Forms
                             toAdd.Add(control);
 
 
-                        if (toAdd.Count >= Globals.calc)
+                        if (toAdd.Count >= profile.Matriz.Calc)
                         {
 
                             toAdd.AsEnumerable().Reverse().All(m =>
@@ -1026,11 +1087,11 @@ namespace DisplayButtons.Forms
                             });
                           
                            Globals.can_refresh = true;
-                          RefreshAllButtons(true);
                           //  panel1.Visible = true;
                             //warning_label.Visible = false;
                             ApplyTheme(panel_buttons);
-                            
+                            RefreshAllButtons(true);
+
                                 //            break;
 
                             }
@@ -1056,10 +1117,10 @@ namespace DisplayButtons.Forms
             if (Globals.can_refresh == false) { return; }
 
             // Buttons_Unfocus(this, EventArgs.Empty);
-            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+            IDeckFolder folder = CurrentDevice?.CurrentProfile?.Currentfolder;
 
 
-            for (int j = 0; j < Globals.calc; j++)
+            for (int j = 0; j < CurrentDevice.CurrentProfile.Matriz.Calc; j++)
             {
                 ImageModernButton control = GetButtonControl(j + 1);
                 //  Label control2 = GetLabelControl(j + 1);
@@ -1112,7 +1173,7 @@ namespace DisplayButtons.Forms
                 if (sendToDevice)
                 {
 
-                    SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentFolder);
+                    SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentProfile.Currentfolder);
 
                 }
 
@@ -1121,9 +1182,9 @@ namespace DisplayButtons.Forms
         }
         public void RefreshButton(int slot, bool sendToDevice = true)
         {
-            Buttons_Unfocus(this, EventArgs.Empty);
+           // Buttons_Unfocus(this, EventArgs.Empty);
 
-            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+            IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
             ImageModernButton control1 = GetButtonControl(slot);
             //Label control_label = GetLabelControl(slot);
             // Label title_control = Controls.Find("titleLabel" + slot, true).FirstOrDefault() as Label;
@@ -1143,26 +1204,15 @@ namespace DisplayButtons.Forms
 
                 if (folder.GetItemIndex(item) != slot) continue;
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-                Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
-
-                //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
+                
+            
+            
                 if (item != null)
                 {
-                    var ser = item.GetItemImage().BitmapSerialized;
-                    //  control.NormalImage = null
-
-
-
-
-
-
+           
 
                     control.NormalImage = item?.GetItemImage().Bitmap;
-                    // control2.Text = item.DeckName;
-
-
-                    //control.NormalImage = item?.GetItemImage().Bitmap; //Write_name_Image(dI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
-
+              
 
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
@@ -1234,7 +1284,7 @@ namespace DisplayButtons.Forms
             var receiver = new ConsoleOutputReceiver();
 
             Program.client.ExecuteRemoteCommand("pm path net.nickac.DisplayButtons", e.Device, receiver);
-
+ 
             if (receiver != null)
             {
                 var product_name = new ConsoleOutputReceiver();
@@ -1275,69 +1325,49 @@ namespace DisplayButtons.Forms
         }
         public void Start_configs()
         {
-
-
-            //   thread1.Join();
-            //      ApplyTheme(panel1);
-
-            var con = MainForm.Instance.CurrentDevice.GetConnection();
-            if (con != null)
+           
+           
+               if(perfilselector.Items.Count == 0)
             {
-
-
-                var Matriz = new MatrizPacket();
-                con.SendPacket(Matriz);
-
+                ProfileStaticHelper.SetupPerfil();
             }
-            if (Globals.can_refresh)
-            {
+                if (CurrentPerfil != null)
+                {
+                    ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
+                }
 
-                RefreshAllButtons(true);
-            }
-
+          
             //     folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
 
             if (ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
             {
                 GenerateFolderList(shadedPanel4);
             }
+
+            //  GetAllFolders(CurrentDevice.MainFolder);
+         
            
-          //  GetAllFolders(CurrentDevice.MainFolder);
-
-
+       
+            
         }
         public void DevicePersistManager_DeviceConnected(object sender, DevicePersistManager.DeviceEventArgs e)
         {
 
             Invoke(new Action(() =>
             {
-
-
-
-
                 shadedPanel1.Show();
                 //GenerateFolderList(shadedPanel1);
                 shadedPanel2.Hide();
                 Refresh();
-
-
                 e.Device.CheckCurrentFolder();
                 FixFolders(e.Device);
-
                 if (CurrentDevice == null)
                 {
                     ChangeToDevice(e.Device);
+                }          
 
-
-
-                }
-                SendItemsToDevice(CurrentDevice, true);
-                //   GenerateFolderList(shadedPanel1);
-                //      MatrizGenerator();
-                Start_configs();
-
-
-
+               Start_configs(); 
+    SendItemsToDevice(CurrentDevice, true);
             }));
 
             e.Device.ButtonInteraction += Device_ButtonInteraction;
@@ -1346,11 +1376,12 @@ namespace DisplayButtons.Forms
 
         public void ChangeToDevice(DeckDevice device)
         {
-
+         
             CurrentDevice = device;
-
-            LoadItems(CurrentDevice.CurrentFolder);
-
+            if (CurrentDevice.CurrentProfile != null)
+            {
+                LoadItems(CurrentDevice.CurrentProfile.Currentfolder);
+            }
         }
 
         //List<Tuple<Guid, int>> ignoreOnce = new List<Tuple<Guid, int>>();
@@ -1362,21 +1393,21 @@ namespace DisplayButtons.Forms
                     ignoreOnce.Remove(ignoreOnce.First(c => c.Item1 == device.DeviceGuid && c.Item2 == e.SlotID));
                     return;
                 }*/
-                var currentItems = device.CurrentFolder.GetDeckItems();
-                if (currentItems.Any(c => device.CurrentFolder.GetItemIndex(c) == e.SlotID + 1))
+                var currentItems = device.CurrentProfile.Currentfolder.GetDeckItems();
+                if (currentItems.Any(c => device.CurrentProfile.Currentfolder.GetItemIndex(c) == e.SlotID + 1))
                 {
-                    var item = currentItems.FirstOrDefault(c => device.CurrentFolder.GetItemIndex(c) == e.SlotID + 1);
+                    var item = currentItems.FirstOrDefault(c => device.CurrentProfile.Currentfolder.GetItemIndex(c) == e.SlotID + 1);
                     if (item is DynamicDeckItem deckItem && !(item is IDeckFolder))
                     {
-                        if (device.CurrentFolder.GetParent() != null)
+                        if (device.CurrentProfile.Currentfolder.GetParent() != null)
                         {
-                            if (device.CurrentFolder.GetItemIndex(item) == 1)
+                            if (device.CurrentProfile.Currentfolder.GetItemIndex(item) == 1)
                             {
                                 if (e.PerformedAction != ButtonInteractPacket.ButtonAction.ButtonUp) return;
                                 //Navigate one up!
-                                device.CurrentFolder = device.CurrentFolder.GetParent();
-                                SendItemsToDevice(CurrentDevice, device.CurrentFolder);
-                                //      AddWatermark(deckItem.DeckAction.GetActionName(), ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, device.CurrentFolder.GetParent());
+                                device.CurrentProfile.Currentfolder = device.CurrentProfile.Currentfolder.GetParent();
+                                SendItemsToDevice(CurrentDevice, device.CurrentProfile.Currentfolder);
+                                //      AddWatermark(deckItem.DeckAction.GetActionName(), ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, device.CurrentProfile.Currentfolder.GetParent());
 
                                 RefreshAllButtons(false);
                                 return;
@@ -1398,7 +1429,7 @@ namespace DisplayButtons.Forms
                     }
                     else if (item is DynamicDeckFolder deckFolder && e.PerformedAction == ButtonInteractPacket.ButtonAction.ButtonUp)
                     {
-                        device.CurrentFolder = deckFolder;
+                        device.CurrentProfile.Currentfolder = deckFolder;
                         //ignoreOnce.Add(new Tuple<Guid, int>(device.DeviceGuid, e.SlotID));
                         SendItemsToDevice(CurrentDevice, deckFolder);
                         //  AddWatermark(deckFolder.folder_name, ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, deckFolder);
@@ -1410,9 +1441,12 @@ namespace DisplayButtons.Forms
 
         private static void SendItemsToDevice(DeckDevice device, bool destroyCurrent = false)
         {
-            if (destroyCurrent) device.CurrentFolder = null;
-            device.CheckCurrentFolder();
-            SendItemsToDevice(device, device.CurrentFolder);
+            if (device.CurrentProfile != null)
+            {
+                if (destroyCurrent) device.CurrentProfile.Currentfolder = null;
+                device.CheckCurrentFolder();
+                SendItemsToDevice(device, device.CurrentProfile.Currentfolder);
+            }
         }
 
 
@@ -1451,7 +1485,7 @@ namespace DisplayButtons.Forms
                     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                     var seri = image.BitmapSerialized;
 
-                    packet.AddToQueue(folder.GetItemIndex(item), item?.DeckName, " ", item.DeckSize, item.DeckPosition, item?.DeckColor, image);
+                    packet.AddToQueue(folder.GetItemIndex(item), item, image);
 
                 }
 
@@ -1501,23 +1535,10 @@ namespace DisplayButtons.Forms
                 {
 
 
-                    //     item.GetItemImage().BitmapSerialized = converterDemo(AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White,item));
-                    //  item.GetItemImage().BitmapSerialized = converterDemo(item?.GetItemImage().Bitmap);
-                    //     var ser = item.GetItemImage().BitmapSerialized;
-                    //    item.BitmapSerialized = item?.GetItemImage().Bitmap;
-                    //   AddWatermark(DI.DeckAction.GetActionName(), image.Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
-                    //item.GetItemImage().BitmapSerialized = converterDemo( AddWatermark(DI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White)); 
-                    //   Write_name_Image("testeee", item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
-
                 }
 
                 //
                 control.NormalImage = image.Bitmap;
-
-
-
-
-
 
 
                 control.Refresh();
@@ -1528,7 +1549,10 @@ namespace DisplayButtons.Forms
 
         private void FixFolders(DeckDevice device)
         {
-            FixFolders(device.MainFolder);
+            if (DevicePersistManager.HasPerfilCreated(device))
+            {
+                FixFolders(device.CurrentProfile.Mainfolder);
+            }
         }
 
         private static DeckImage defaultDeckImage = new DeckImage(Resources.img_folder_up);
@@ -1756,7 +1780,7 @@ namespace DisplayButtons.Forms
 
 
 
-                            CurrentDevice.CurrentFolder = item.Parent;
+                            CurrentDevice.CurrentProfile.Currentfolder = item.Parent;
 
                             RefreshAllButtons(true);
 
@@ -1785,7 +1809,7 @@ namespace DisplayButtons.Forms
 
 
 
-                            CurrentDevice.CurrentFolder = item.Parent;
+                            CurrentDevice.CurrentProfile.Currentfolder = item.Parent;
 
                             RefreshAllButtons(true);
 
@@ -1829,27 +1853,27 @@ namespace DisplayButtons.Forms
 
 
 
-                    folder_form.Add(new folders(PP.DeckName, PP, false, root));
+                    folder_form.Add(new folders(PP.Deckname, PP, false, root));
                     // AddFolderInPanelList(shadedPanel1, PP.folder_name, PP, root, false, root);
                     //   Debug.WriteLine(PP.folder_name + "CC:" + PP.GetSubFolders().Count);             
 
                     if (abacate.GetSubFolders().Count == 0)
                     {
-                        if (CurrentDevice.MainFolder.GetSubFolders().Count - 1 > root)
+                        if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders().Count - 1 > root)
                         {
 
-                            if (CurrentDevice.MainFolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
+                            if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
-                                folder_form.Add(new folders(pastapai.DeckName, pastapai, true, root));
+                                folder_form.Add(new folders(pastapai.Deckname, pastapai, true, root));
                             }
                             AddFolderInPanelList(root);
                             root++;
                         }
                         else
                         {
-                            if (CurrentDevice.MainFolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
+                            if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
-                                folder_form.Add(new folders(pastapai.DeckName, pastapai, true, root));
+                                folder_form.Add(new folders(pastapai.Deckname, pastapai, true, root));
                             }
                             Debug.WriteLine("ROOT: " + root);
                             AddFolderInPanelList(root);
@@ -1860,7 +1884,7 @@ namespace DisplayButtons.Forms
                         }
                         //  Debug.WriteLine("NUMINDEX:" + root);
 
-                        GetAllFolders(CurrentDevice.MainFolder.GetSubFolders()[root]);
+                        GetAllFolders(CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root]);
 
                     }
                     else
@@ -1910,7 +1934,7 @@ namespace DisplayButtons.Forms
             main_foolder.Click += (s, ee) =>
             {
 
-                CurrentDevice.CurrentFolder = CurrentDevice.MainFolder;
+                CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Mainfolder;
 
                 //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
                 RefreshAllButtons(true);
@@ -1929,7 +1953,7 @@ namespace DisplayButtons.Forms
 
                 int i = 0;
 
-                foreach (DynamicDeckFolder item in CurrentDevice.MainFolder.GetSubFolders().ToList())
+                foreach (DynamicDeckFolder item in CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders().ToList())
                 {
                     Label folder = new Label();
 
@@ -1945,8 +1969,8 @@ namespace DisplayButtons.Forms
                         folder.Font = itemFont;
 
                         folder.Dock = DockStyle.Top;
-                        folder.Text = item.DeckName;
-                        folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
+                        folder.Text = item.Deckname;
+                        folder.Height = TextRenderer.MeasureText(item.Deckname, itemFont).Height;
                         toAdd.Add(folder);
                         foreach (DynamicDeckFolder subitem in ListFolders(item).Skip(1))
                         {
@@ -1958,12 +1982,12 @@ namespace DisplayButtons.Forms
                             subfolder.Font = itemFont;
 
                             subfolder.Dock = DockStyle.Top;
-                            subfolder.Text = "..." + subitem.DeckName;
-                            subfolder.Height = TextRenderer.MeasureText("..." + subitem.DeckName, itemFont).Height;
+                            subfolder.Text = "..." + subitem.Deckname;
+                            subfolder.Height = TextRenderer.MeasureText("..." + subitem.Deckname, itemFont).Height;
                             subfolder.Click += (s, ee) =>
                                                    {
 
-                                                       CurrentDevice.CurrentFolder = subitem;
+                                                       CurrentDevice.CurrentProfile.Currentfolder = subitem;
 
                                                    //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
                                                    RefreshAllButtons(true);
@@ -1983,8 +2007,8 @@ namespace DisplayButtons.Forms
                         folder.Font = itemFont;
 
                         folder.Dock = DockStyle.Top;
-                        folder.Text = item.DeckName;
-                        folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
+                        folder.Text = item.Deckname;
+                        folder.Height = TextRenderer.MeasureText(item.Deckname, itemFont).Height;
                         toAdd.Add(folder);
                     }
 
@@ -1993,7 +2017,7 @@ namespace DisplayButtons.Forms
                     folder.Click += (s, ee) =>
                     {
 
-                        CurrentDevice.CurrentFolder = item;
+                        CurrentDevice.CurrentProfile.Currentfolder = item;
 
                         //  Debug.WriteLine("Pasta selecionada:" + folder_name.Text);
                         RefreshAllButtons(true);
@@ -2021,7 +2045,7 @@ namespace DisplayButtons.Forms
             });
         }
 
-        private void GenerateSidebar(Control parent, bool loadplugins = false)
+        public void GenerateSidebar(Control parent, bool loadplugins = false)
         {
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(parent.Font.FontFamily, 13, FontStyle.Bold);
@@ -2062,10 +2086,10 @@ namespace DisplayButtons.Forms
                             Dock = DockStyle.Top,
                             Text = i2.GetActionName(),
                             Height = TextRenderer.MeasureText(i2.GetActionName(), itemFont).Height,
-                            Tag = i2,
+                            Tag = i2
 
                         };
-                        //    Debug.WriteLine("TAG VINDO: " + i2);
+                          Debug.WriteLine("TAG VINDO: " + i2);
                         item.MouseDown += (s, ee) =>
                         {
                             if (item.Tag is AbstractDeckAction act)
@@ -2087,7 +2111,7 @@ namespace DisplayButtons.Forms
                
                
             }
-
+          
 
         }
 
@@ -2155,16 +2179,16 @@ namespace DisplayButtons.Forms
                             goto end;
                         }
                         //Navigate to the folder
-                        CurrentDevice.CurrentFolder = folder;
+                        CurrentDevice.CurrentProfile.Currentfolder = folder;
                         RefreshAllButtons();
                         goto end;
                     }
-                    if (CurrentDevice.CurrentFolder.GetParent() != null)
+                    if (CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null)
                     {
                         //Not on the main folder
                         if (mb.CurrentSlot == 1)
                         {
-                            CurrentDevice.CurrentFolder = CurrentDevice.CurrentFolder.GetParent();
+                            CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Currentfolder.GetParent();
                             RefreshAllButtons();
                             lastClick.Reset();
                             return;
@@ -2210,7 +2234,7 @@ namespace DisplayButtons.Forms
 
 
                 if (!senderB.DisplayRectangle.Contains(e.Location)) return;
-                if (e.Button == MouseButtons.Right && CurrentDevice.CurrentFolder.GetDeckItems().Any(c => CurrentDevice.CurrentFolder.GetItemIndex(c) == senderB.CurrentSlot))
+                if (e.Button == MouseButtons.Right && CurrentDevice.CurrentProfile.Currentfolder.GetDeckItems().Any(c => CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(c) == senderB.CurrentSlot))
                 {
 
 
@@ -2237,7 +2261,7 @@ namespace DisplayButtons.Forms
                             Buttons_Unfocus(sender, e);
 
 
-                            CurrentDevice.CurrentFolder.Remove(senderB.CurrentSlot);
+                            CurrentDevice.CurrentProfile.Currentfolder.Remove(senderB.CurrentSlot);
                         }
                     };
 
@@ -2441,37 +2465,67 @@ namespace DisplayButtons.Forms
 
                 ModernButton myButton = new ModernButton();
                 ModernButton myColor = new ModernButton();
+                ModernButton myColorShadow = new ModernButton();
                 Label myTextNameInformation = new Label();
                 Label sizeLabelInfo = new Label();
                 Label positionLabelInfo = new Label();
+                Label StrokeLabelInfo = new Label();
+                Label StrokeLabelColor = new Label();
+                Label StrokeLabelDX = new Label();
+                Label StrokeLabelDY = new Label();
+                Label StrokeLabelRADIUS = new Label();
                 TextBox sizeLabelTextBox = new TextBox();
                 ComboBox PositionComboBox = new ComboBox();
                 TextBox myNameText = new TextBox();
                 TextBox myColorText = new TextBox();
+                CheckBox IsStrokeCheckbox = new CheckBox();
+               
+                TextBox shadow_stroke_radiustextfloat = new TextBox();
+                TextBox shadow_stroke_dxtextfloat = new TextBox();
+                TextBox shadow_stroke_dytextfloat = new TextBox();
+                TextBox shadow_stroke_color = new TextBox();
                 myColor.Size = new Size(70, 30);
-                myColor.Text = "Selecionar Cor";
-
+                IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
+                myColor.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
+                myColorShadow.Size = new Size(70, 30);
+                myColorShadow.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
+                myTextNameInformation.Text = Texts.rm.GetString("DECKITEMTEXT", Texts.cultereinfo);
+                StrokeLabelInfo.Text = Texts.rm.GetString("DECKITEMSTROKE", Texts.cultereinfo);
+                StrokeLabelRADIUS.Text = Texts.rm.GetString("DECKITEMSTROKERADIUS", Texts.cultereinfo);
+                StrokeLabelDX.Text = Texts.rm.GetString("DECKITEMSTROKEDX", Texts.cultereinfo);
+                StrokeLabelDY.Text = Texts.rm.GetString("DECKITEMSTROKEDY", Texts.cultereinfo);
+                StrokeLabelColor.Text = Texts.rm.GetString("DECKITEMSTROKECOLOR", Texts.cultereinfo);
+                positionLabelInfo.Text = Texts.rm.GetString("DECKITEMPOSITION", Texts.cultereinfo);
+                sizeLabelInfo.Text = Texts.rm.GetString("DECKITEMSIZE", Texts.cultereinfo); 
                 FlowLayoutPanel painel_name = new FlowLayoutPanel();
                 FlowLayoutPanel painel_color = new FlowLayoutPanel();
                 FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
                 FlowLayoutPanel painel_position = new FlowLayoutPanel();
+                FlowLayoutPanel painel_shadowstroke= new FlowLayoutPanel();
                 myColor.Dock = DockStyle.None;
                 myColorText.Dock = DockStyle.None;
                 sizeLabelTextBox.Dock = DockStyle.None;
                 sizeLabelInfo.Dock = DockStyle.None;
                 positionLabelInfo.Dock = DockStyle.None;
+                StrokeLabelInfo.Dock = DockStyle.None;
                 PositionComboBox.Dock = DockStyle.None;
+                shadow_stroke_radiustextfloat.Dock = DockStyle.None;
+                shadow_stroke_dxtextfloat.Dock = DockStyle.None;
+                shadow_stroke_dytextfloat.Dock = DockStyle.None;
+                shadow_stroke_color.Dock = DockStyle.None;
+                myNameText.Text = dI.Deckname;
+                myColorText.Text = dI.Deckcolor;
 
-                myNameText.Text = dI.DeckName;
-                myColorText.Text = dI.DeckColor;
-
-                myColorText.Text = dI.DeckColor;
-
+                IsStrokeCheckbox.Checked = dI.IsStroke;
+                shadow_stroke_color.Text = dI.Stroke_color;
+                shadow_stroke_dytextfloat.Text = dI.Stroke_Dy.ToString();
+                shadow_stroke_dxtextfloat.Text = dI.Stroke_dxtext.ToString();
+                shadow_stroke_radiustextfloat.Text = dI.Stroke_radius.ToString();
                 // PositionComboBox.SelectedValue = (int)dI.DeckPosition;
 
 
 
-                sizeLabelTextBox.Text = dI.DeckSize.ToString();
+                sizeLabelTextBox.Text = dI.Decksize.ToString();
                 myColor.Click += (s, e) =>
                 {
 
@@ -2484,6 +2538,25 @@ namespace DisplayButtons.Forms
                             //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
                             string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
                             myColorText.Text = result;
+                        }
+
+                        dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
+                    }
+
+                };
+
+                myColorShadow.Click += (s, e) =>
+                {
+
+                    using (ColorPickerDialog dialog = new ColorPickerDialog())
+                    {
+                        dialog.PreviewColorChanged += this.DialogColorChangedHandler;
+
+                        if (dialog.ShowDialog(this) == DialogResult.OK)
+                        {
+                            //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
+                            string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
+                            shadow_stroke_color.Text = result;
                         }
 
                         dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
@@ -2505,14 +2578,15 @@ namespace DisplayButtons.Forms
 
 
 
-
-
                 painel_position.Size = new Size(190, 60);
 
                 painel_color.Size = new Size(190, 30);
 
                 painel_name.Size = new Size(190, 50);
                 painel_tamanho.Size = new Size(190, 50);
+                painel_shadowstroke.Size = new Size(190, 300);
+                painel_shadowstroke.WrapContents = true;
+      
                 painel_tamanho.WrapContents = true;
                 painel_name.WrapContents = true;
                 //painel 1
@@ -2521,7 +2595,17 @@ namespace DisplayButtons.Forms
                 painel_position.Controls.Add(positionLabelInfo);
 
                 painel_position.Controls.Add(PositionComboBox);
-
+                painel_shadowstroke.Controls.Add(StrokeLabelInfo);
+                painel_shadowstroke.Controls.Add(IsStrokeCheckbox);
+                painel_shadowstroke.Controls.Add(StrokeLabelRADIUS);
+                painel_shadowstroke.Controls.Add(shadow_stroke_radiustextfloat);
+                painel_shadowstroke.Controls.Add(StrokeLabelDX);
+                painel_shadowstroke.Controls.Add(shadow_stroke_dxtextfloat);
+                painel_shadowstroke.Controls.Add(StrokeLabelDY);
+                painel_shadowstroke.Controls.Add(shadow_stroke_dytextfloat);
+                painel_shadowstroke.Controls.Add(StrokeLabelColor);
+                painel_shadowstroke.Controls.Add(shadow_stroke_color);
+                painel_shadowstroke.Controls.Add(myColorShadow);
 
                 painel_color.Controls.Add(myColor);
                 painel_color.Controls.Add(myColorText);
@@ -2534,35 +2618,46 @@ namespace DisplayButtons.Forms
 
 
 
-
+               
                 flowLayoutPanel1.Controls.Add(painel_name);
                 flowLayoutPanel1.Controls.Add(painel_color);
                 flowLayoutPanel1.Controls.Add(painel_tamanho);
                 flowLayoutPanel1.Controls.Add(painel_position);
+                flowLayoutPanel1.Controls.Add(painel_shadowstroke);
 
-                flowLayoutPanel1.Controls.Add(myButton);
+                flowLayoutPanel1.Controls.Add(myButton); 
                 myButton.Text = "Salvar";
 
-                myTextNameInformation.Text = "Nome:";
+          
 
-                sizeLabelInfo.Text = "Tamanho:";
+            
 
                 setEnumValues(PositionComboBox, typeof(Position));
                 myButton.Click += (s, e) =>
                 {
-                    dI.DeckName = myNameText.Text;
-                    dI.DeckColor = myColorText.Text;
-                    dI.DeckSize = Convert.ToInt32(sizeLabelTextBox.Text);
+                    dI.Deckname = myNameText.Text;
+                    dI.Deckcolor = myColorText.Text;
+                    dI.Decksize = Convert.ToInt32(sizeLabelTextBox.Text);
+                    dI.Stroke_radius = Convert.ToSingle(shadow_stroke_radiustextfloat.Text);
+                    dI.Stroke_Dy = Convert.ToSingle(shadow_stroke_dytextfloat.Text);
+                    dI.Stroke_dxtext = Convert.ToSingle(shadow_stroke_dxtextfloat.Text);
+                    dI.Stroke_color = shadow_stroke_color.Text;
+                    dI.Deckposition = (int)PositionComboBox.SelectedValue;
+                    dI.IsStroke = IsStrokeCheckbox.Checked;
 
-                    dI.DeckPosition = (int)PositionComboBox.SelectedValue;
+                  int slot =  CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(dI);
+                    RefreshButton(slot, true);
+
+
+
 
                 };
 
 
-                PositionComboBox.SelectedValue = dI.DeckPosition;
+                PositionComboBox.SelectedValue = dI.Deckposition;
                 if (dI is DynamicDeckItem TT)
                 {
-                    LoadProperties(TT, flowLayoutPanel1);
+                 LoadProperties(TT, flowLayoutPanel1);
 
                 }
                 if (dI is DynamicDeckFolder AA)
@@ -2686,11 +2781,12 @@ namespace DisplayButtons.Forms
         private void LoadProperties(DynamicDeckItem item, FlowLayoutPanel panel)
         {
 
-
+           
             var props = item.DeckAction.GetType().GetProperties().Where(
                 prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
             foreach (var prop in props)
             {
+
                 bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
                 MethodInfo helperMethod = item.DeckAction.GetType().GetMethod(prop.Name + "Helper");
                 if (helperMethod != null)
@@ -2774,7 +2870,7 @@ namespace DisplayButtons.Forms
                 }
             }
 
-            ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
+  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
 
         private string GetPropertiesPlugins(DynamicDeckItem item, string properties)
@@ -2943,7 +3039,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
         {
             Buttons_Unfocus(this, EventArgs.Empty);
 
-            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+            IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
             ImageModernButton control1 = GetButtonControl(slot);
             //Label control_label = GetLabelControl(slot);
             // Label title_control = Controls.Find("titleLabel" + slot, true).FirstOrDefault() as Label;
@@ -3092,7 +3188,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
 
             // Buttons_Unfocus(this, EventArgs.Empty);
-            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+            IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
 
 
             if (folder == null) return;
@@ -3115,7 +3211,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
         }
         private void UpdateIcon(bool shouldUpdateIcon)
         {
-            // IDeckFolder folder = CurrentDevice?.CurrentFolder;
+            // IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
             if (shouldUpdateIcon)
             {
 
@@ -3129,14 +3225,14 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 //   image.Annotate("caption:This is gergerga test.", Gravity.South); // caption:"This is a test."
                 // write the image to the appropriate directory
                 // image.Write(@"D:\testimage.jpg");
-                // SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentFolder,teste);
+                // SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentProfile.Currentfolder,teste);
 
                 imageModernButton1.Refresh();
             }
         }
         public void UpdatePluginImg()
         {
-            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+            IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
 
             if (folder == null) return;
             for (int i = 0; i < folder.GetDeckItems().Count; i++)
@@ -3229,11 +3325,11 @@ toAdd.AsEnumerable().Reverse().All(m =>
                                 {
                                     DeckImage = new DeckImage(Resources.img_folder)
                                 };
-                                newFolder.ParentFolder = CurrentDevice.CurrentFolder;
+                                newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                 newFolder.Add(1, folderUpItem);
 
-                                CurrentDevice.CurrentFolder.Add(mb.CurrentSlot, newFolder);
-                                //CurrentDevice.CurrentFolder = newFolder;
+                                CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
+                                //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                 RefreshAllButtons(true);
 
                             }
@@ -3245,7 +3341,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                             if (sender is ImageModernButton mb)
                             {
-                                //CurrentDevice.CurrentFolder = newFolder;
+                                //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                 RefreshAllButtons(true);
 
                             }
@@ -3269,7 +3365,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
             if (!mouseDown) return;
             int distanceX = Math.Abs(mouseDownLoc.X - Cursor.Position.X);
             int distanceY = Math.Abs(mouseDownLoc.Y - Cursor.Position.Y);
-            IDeckFolder folder = CurrentDevice?.CurrentFolder;
+            IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
 
             var finalPoint = new Point(distanceX, distanceY);
             bool didMove = SystemInformation.DragSize.Width * 2 > finalPoint.X && SystemInformation.DragSize.Height * 2 > finalPoint.Y;
@@ -3282,8 +3378,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
                     {
                         bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
                         if (isDoubleClick) return;
-                        if ((CurrentDevice.CurrentFolder.GetParent() != null && (mb.CurrentSlot == 1))) return;
-                        mb.DoDragDrop(new DeckItemMoveHelper(act, CurrentDevice.CurrentFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
+                        if ((CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null && (mb.CurrentSlot == 1))) return;
+                        mb.DoDragDrop(new DeckItemMoveHelper(act, CurrentDevice.CurrentProfile.Currentfolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
                         //if (act is DynamicDeckItem dI && dI.DeckAction != null)
                         //{
                         //    Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(act), true).FirstOrDefault() as Label;
@@ -3421,26 +3517,30 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
 
         }
-        protected override void OnResize(EventArgs e)
-        {
+    //    protected override void OnResize(EventArgs e)
+    //    {
         
+    //base.OnResize(e);
+    //        if (ApplicationSettingsManager.Settings.isAutoMinimizer)
+    //        {
 
-            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
-            {
 
 
-    base.OnResize(e);
-                bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
+    //            bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
 
-                if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
-                {
+    //            if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
+    //            {
 
-                    this.ShowInTaskbar = false;
-                    notifyIcon1.Visible = true;
-                    this.Hide();
-                }
-            }
-        }
+    //                this.ShowInTaskbar = false;
+    //                notifyIcon1.Visible = true;
+    //                this.Hide();
+    //            }
+    //            else
+    //            {
+    //                notifyIcon1.Visible = false;
+    //            }
+    //        }
+    //    }
         private void MainForm_Resize(object sender, EventArgs e)
         {
 
@@ -3458,11 +3558,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
-            {
-                this.WindowState = FormWindowState.Normal;
-                this.Show();
-            }
+           
         }
 
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -3474,56 +3570,108 @@ toAdd.AsEnumerable().Reverse().All(m =>
         {
 
         }
+  
      
-        public  void executeCMD()
-        {
-
-            try
-            {
-
-                string TargetDirectory = Assembly.GetExecutingAssembly().Location;
-
-
-                System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", @"/c  WZUNZIP.EXE -ye -o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory);
-                procStartInfo.UseShellExecute = true;
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo = procStartInfo;
-                proc.Start();
-             proc.WaitForExit();
-
-
-                // label1.Text = Globals.minecraftlocalpath + @"\launcher\Sanchez.Patcher.exe";
-                //     startInfo.Arguments = "/C start copy " + Globals.minecraftlocalpath + @"\launcher\Sanchez.Patcher.exe " + Globals.minecraftlocalpath;
-                //      startInfo.Arguments = "/min";
-
-
-                // Application.Exit();
-
-
-
-
-
-
-
-            }
-            catch
-            {
-                string createText = "Erro ao encontrar o launcher novo. Não foi possível realizar atualização automática.  /n Código: 404CEFG";
-                // 
-
-                File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory + @"\changelog.txt", createText);
-
-
-            }
-            
-            
-
-                
-            }
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
            // executeCMD();
           //  Checkupdates();
+        }
+
+        private void imageModernButton6_Click_1(object sender, EventArgs e)
+        {
+            Events teste = new Events();
+            teste.ShowDialog();
+        }
+    public ProfileVoidHelper.GlobalPerfilBox CurrentPerfil { get; set; }
+        
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (perfilselector.Items.Count <= 0)
+            {
+                return;
+            }
+            int intselectedindex = perfilselector.SelectedIndex;
+            if (intselectedindex >= 0)
+            {
+                CurrentPerfil = (ProfileVoidHelper.GlobalPerfilBox)perfilselector.Items[intselectedindex];
+                
+                    //CurrentDevice.CheckCurrentFolder();
+                    ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
+                    RefreshAllButtons(true);
+
+                
+              
+                //do something
+                //MessageBox.Show(listView1.Items[intselectedindex].Text); 
+            }
+
+
+          
+
+
+
+        }
+        public void PerfilSelector()
+        {
+
+
+
+            //  perfilselector.SelectedIndex = perfilselector.Items.IndexOf(ApplicationSettingsManager.Settings.CurrentProfile);
+
+         
+
+
+
+
+
+        }
+     
+        public void FillPerfil()
+        {
+            MainForm.Instance.Invoke(new Action(() =>
+            {
+
+                perfilselector.Items.Clear();
+    
+                foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
+                {
+
+                    foreach (var list in perfil.profiles)
+                    {
+                        ProfileVoidHelper.GlobalPerfilBox teste = new ProfileVoidHelper.GlobalPerfilBox();
+                        teste.Text = list.Name;
+                        teste.Value = list;
+                        perfilselector.Items.Add(teste);
+
+
+                    }
+                }
+            
+            }));
+        }
+        
+        
+        private void imageModernButton7_Click(object sender, EventArgs e)
+        {
+            new ProfileVoidHelper().AddPerfil();
+        }
+
+        private void imageModernButton8_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(String.Format(imageModernButton1.Text = Texts.rm.GetString("MESSAGEBOXPERFIL", Texts.cultereinfo), CurrentPerfil.Value.Name), Texts.rm.GetString("MESSAGEBOXPERFIL_ALERT", Texts.cultereinfo), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                ProfileStaticHelper.RemovePerfil(CurrentPerfil.Value);
+            }
+           
+        }
+
+      
+
+        private void statusStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        
         }
     }
     #endregion

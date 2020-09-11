@@ -20,7 +20,7 @@ namespace DisplayButtons
         public static int ConsoleOpenned { get; set; }
         public static bool can_refresh { get; set; } = false;
         public static int coluna { get; set; }
-        public static string domain = "127.0.0.1";
+        public static string domain = "update.displaybuttons.com";
         public static string updatefilename = "appcast.xml";
 
         public static string updateurl = "http://127.0.0.1/update.xml";

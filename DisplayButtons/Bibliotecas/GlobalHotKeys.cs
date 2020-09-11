@@ -34,13 +34,14 @@ namespace DisplayButtons.Bibliotecas
     
         public void RegisterHotKeyCollector(DynamicDeckFolder folder)
         {
-            folder.UniqueID = ShortId.Generate(true, false, 12);
+            if (folder != null)
+                folder.UniqueID = ShortId.Generate(true, false, 12);
 
         }
         public void GarbageHotKeyCollector(DynamicDeckFolder folder)
         {
 
-
+            if(folder != null)
 
             if (!String.IsNullOrEmpty(folder.UniqueID))
             {
@@ -101,8 +102,8 @@ HotkeyManager.Current.Remove(folder.UniqueID) ;
 public void MyEventHandler(object sender, HotkeyEventArgs e)
         {
 
-                Debug.WriteLine("Trocando para pasta: "+  FolderPrincipal.DeckName + " Atalho: "  + e.Name);
-                MainForm.Instance.CurrentDevice.CurrentFolder = FolderPrincipal;
+                Debug.WriteLine("Trocando para pasta: "+  FolderPrincipal.Deckname + " Atalho: "  + e.Name);
+                MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = FolderPrincipal;
                 MainForm.Instance.RefreshAllButtons(true);
          e.Handled = true;
         }

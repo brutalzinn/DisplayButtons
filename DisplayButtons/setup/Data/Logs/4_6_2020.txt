@@ -1,0 +1,735 @@
+Script executed in: 0ms
+Script executed in: 9ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+-- SCRIPTER INITIALIZED
+> function ButtonDown()
+  formdesignvoid.setButtonImg("facebook.png")
+GetFocusWindow("Whatsapp")
+print("button down")
+end
+
+function ButtonUP()
+
+    print("button UP")
+end
+
+function form_menu()
+
+   -- formdesign.setFormControl("teste","testeee","file",0,0,300,100)
+  --  testee  = formdesign.getFormControl("teste", "file")
+  formdesign.setFormControl("caindo","testeee","textbox",0,0,300,100)
+  
+
+  print(formdesignvoid.getFormControl("caindo", "textbox"))
+end
+
+function menu_ok()
+
+print("menu ok")
+
+end
+
+function menu_cancel()
+
+
+    print("menu cancel")
+end
+Script executed in: 0ms
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+Script executed in: 0ms
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   em System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   em System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   em System.Collections.Generic.List`1.Add(T item)
+   em MoonSharp.Interpreter.Tree.Expression.ExprList(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 43
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionCallExpression..ctor(ScriptLoadingContext lcontext, Expression function, Token thisCallName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionCallExpression.cs:linha 62
+   em MoonSharp.Interpreter.Tree.Expression.PrimaryExp(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 208
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 56
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression.CreateBody(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 89
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean usesGlobalEnv, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 66
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 31
+   em MoonSharp.Interpreter.Tree.Statements.FunctionDefinitionStatement..ctor(ScriptLoadingContext lcontext, Boolean local, Token localToken) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\FunctionDefinitionStatement.cs:linha 86
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 40
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Statements.ChunkStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\ChunkStatement.cs:linha 20
+   em MoonSharp.Interpreter.Tree.Fast_Interface.Loader_Fast.LoadChunk(Script script, SourceCode source, ByteCode bytecode) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Fast_Interface\Loader_Fast.cs:linha 52
+   em MoonSharp.Interpreter.Script.LoadString(String code, Table globalTable, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 182
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+-- SCRIPTER INITIALIZED
+
+Script executed in: 0ms
+Script executed in: 3ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+-- SCRIPTER INITIALIZED
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em MoonSharp.Interpreter.Tree.Lexer.CreateToken(TokenType tokenType, Int32 fromLine, Int32 fromCol, String text) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Lexer\Lexer.cs:linha 563
+   em MoonSharp.Interpreter.Tree.Lexer.CreateSingleCharToken(TokenType tokenType, Int32 fromLine, Int32 fromCol) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Lexer\Lexer.cs:linha 412
+   em MoonSharp.Interpreter.Tree.Lexer.ReadToken() na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Lexer\Lexer.cs:linha 218
+   em MoonSharp.Interpreter.Tree.Lexer.FetchNewToken() na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Lexer\Lexer.cs:linha 44
+   em MoonSharp.Interpreter.Tree.Expressions.LiteralExpression..ctor(ScriptLoadingContext lcontext, Token t) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\LiteralExpression.cs:linha 49
+   em MoonSharp.Interpreter.Tree.Expression.SimpleExp(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 142
+   em MoonSharp.Interpreter.Tree.Expression.SubExpr(ScriptLoadingContext lcontext, Boolean isPrimary) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 102
+   em MoonSharp.Interpreter.Tree.Expression.ExprList(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 43
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionCallExpression..ctor(ScriptLoadingContext lcontext, Expression function, Token thisCallName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionCallExpression.cs:linha 62
+   em MoonSharp.Interpreter.Tree.Expression.PrimaryExp(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 208
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 56
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression.CreateBody(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 89
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean usesGlobalEnv, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 66
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 31
+   em MoonSharp.Interpreter.Tree.Statements.FunctionDefinitionStatement..ctor(ScriptLoadingContext lcontext, Boolean local, Token localToken) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\FunctionDefinitionStatement.cs:linha 86
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 40
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Statements.ChunkStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\ChunkStatement.cs:linha 20
+   em MoonSharp.Interpreter.Tree.Fast_Interface.Loader_Fast.LoadChunk(Script script, SourceCode source, ByteCode bytecode) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Fast_Interface\Loader_Fast.cs:linha 52
+   em MoonSharp.Interpreter.Script.LoadString(String code, Table globalTable, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 182
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+Script executed in: 0ms
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   em System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   em System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   em System.Collections.Generic.List`1.Add(T item)
+   em MoonSharp.Interpreter.Tree.Expression.ExprList(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 43
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionCallExpression..ctor(ScriptLoadingContext lcontext, Expression function, Token thisCallName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionCallExpression.cs:linha 62
+   em MoonSharp.Interpreter.Tree.Expression.PrimaryExp(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 208
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 56
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression.CreateBody(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 89
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean usesGlobalEnv, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 66
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 31
+   em MoonSharp.Interpreter.Tree.Statements.FunctionDefinitionStatement..ctor(ScriptLoadingContext lcontext, Boolean local, Token localToken) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\FunctionDefinitionStatement.cs:linha 86
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 40
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Statements.ChunkStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\ChunkStatement.cs:linha 20
+   em MoonSharp.Interpreter.Tree.Fast_Interface.Loader_Fast.LoadChunk(Script script, SourceCode source, ByteCode bytecode) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Fast_Interface\Loader_Fast.cs:linha 52
+   em MoonSharp.Interpreter.Script.LoadString(String code, Table globalTable, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 182
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   em System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   em System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   em System.Collections.Generic.List`1.Add(T item)
+   em MoonSharp.Interpreter.Tree.Expression.ExprList(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 43
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionCallExpression..ctor(ScriptLoadingContext lcontext, Expression function, Token thisCallName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionCallExpression.cs:linha 62
+   em MoonSharp.Interpreter.Tree.Expression.PrimaryExp(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 208
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 56
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression.CreateBody(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 89
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean usesGlobalEnv, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 66
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 31
+   em MoonSharp.Interpreter.Tree.Statements.FunctionDefinitionStatement..ctor(ScriptLoadingContext lcontext, Boolean local, Token localToken) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\FunctionDefinitionStatement.cs:linha 86
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 40
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Statements.ChunkStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\ChunkStatement.cs:linha 20
+   em MoonSharp.Interpreter.Tree.Fast_Interface.Loader_Fast.LoadChunk(Script script, SourceCode source, ByteCode bytecode) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Fast_Interface\Loader_Fast.cs:linha 52
+   em MoonSharp.Interpreter.Script.LoadString(String code, Table globalTable, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 182
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   em System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   em System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   em System.Collections.Generic.List`1.Add(T item)
+   em MoonSharp.Interpreter.Tree.Expression.ExprList(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 43
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionCallExpression..ctor(ScriptLoadingContext lcontext, Expression function, Token thisCallName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionCallExpression.cs:linha 62
+   em MoonSharp.Interpreter.Tree.Expression.PrimaryExp(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expression_.cs:linha 208
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 56
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression.CreateBody(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 89
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean usesGlobalEnv, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 66
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 31
+   em MoonSharp.Interpreter.Tree.Statements.FunctionDefinitionStatement..ctor(ScriptLoadingContext lcontext, Boolean local, Token localToken) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\FunctionDefinitionStatement.cs:linha 86
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 40
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Statements.ChunkStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\ChunkStatement.cs:linha 20
+   em MoonSharp.Interpreter.Tree.Fast_Interface.Loader_Fast.LoadChunk(Script script, SourceCode source, ByteCode bytecode) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Fast_Interface\Loader_Fast.cs:linha 52
+   em MoonSharp.Interpreter.Script.LoadString(String code, Table globalTable, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 182
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Engine Error: System.IndexOutOfRangeException: O índice estava fora dos limites da matriz.
+   em System.Array.Clear(Array array, Int32 index, Int32 length)
+   em MoonSharp.Interpreter.DataStructs.FastStack`1.RemoveLast(Int32 cnt) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\DataStructs\FastStack.cs:linha 76
+   em MoonSharp.Interpreter.Execution.VM.Processor.PopToBasePointer() na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 594
+   em MoonSharp.Interpreter.Execution.VM.Processor.ExecRet(Instruction i) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 795
+   em MoonSharp.Interpreter.Execution.VM.Processor.Processing_Loop(Int32 instructionPtr) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 168
+   em MoonSharp.Interpreter.Execution.VM.Processor.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor.cs:linha 67
+   em MoonSharp.Interpreter.Script.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 483
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+button UP
+Script executed in: 0ms
+Exception: System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em MoonSharp.Interpreter.Execution.VM.Processor.GetUpvalueSymbol(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 425
+   em MoonSharp.Interpreter.Execution.VM.Processor.<ExecClosure>b__68_0(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 417
+   em System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em MoonSharp.Interpreter.Execution.VM.Processor.ExecClosure(Instruction i) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 416
+   em MoonSharp.Interpreter.Execution.VM.Processor.Processing_Loop(Int32 instructionPtr) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 156
+   em MoonSharp.Interpreter.Execution.VM.Processor.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor.cs:linha 67
+   em MoonSharp.Interpreter.Script.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 483
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Exception: System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em MoonSharp.Interpreter.Execution.VM.Processor.GetUpvalueSymbol(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 425
+   em MoonSharp.Interpreter.Execution.VM.Processor.<ExecClosure>b__68_0(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 417
+   em System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em MoonSharp.Interpreter.Execution.VM.Processor.ExecClosure(Instruction i) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 416
+   em MoonSharp.Interpreter.Execution.VM.Processor.Processing_Loop(Int32 instructionPtr) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 156
+   em MoonSharp.Interpreter.Execution.VM.Processor.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor.cs:linha 67
+   em MoonSharp.Interpreter.Script.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 483
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+button down
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+button down
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+button down
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+button down
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+button down
+button down
+Script executed in: 6ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+button down
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+button down
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Exception: System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em MoonSharp.Interpreter.Execution.VM.Processor.GetUpvalueSymbol(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 425
+   em MoonSharp.Interpreter.Execution.VM.Processor.<ExecClosure>b__68_0(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 417
+   em System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em MoonSharp.Interpreter.Execution.VM.Processor.ExecClosure(Instruction i) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 416
+   em MoonSharp.Interpreter.Execution.VM.Processor.Processing_Loop(Int32 instructionPtr) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 156
+   em MoonSharp.Interpreter.Execution.VM.Processor.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor.cs:linha 67
+   em MoonSharp.Interpreter.Script.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 483
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Exception: System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em MoonSharp.Interpreter.Execution.VM.Processor.GetUpvalueSymbol(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 425
+   em MoonSharp.Interpreter.Execution.VM.Processor.<ExecClosure>b__68_0(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 417
+   em System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em MoonSharp.Interpreter.Execution.VM.Processor.ExecClosure(Instruction i) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 416
+   em MoonSharp.Interpreter.Execution.VM.Processor.Processing_Loop(Int32 instructionPtr) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 156
+   em MoonSharp.Interpreter.Execution.VM.Processor.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor.cs:linha 67
+   em MoonSharp.Interpreter.Script.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 483
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button down
+button UP
+Script executed in: 0ms
+Exception: System.NullReferenceException: Referência de objeto não definida para uma instância de um objeto.
+   em MoonSharp.Interpreter.Execution.VM.Processor.GetUpvalueSymbol(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 425
+   em MoonSharp.Interpreter.Execution.VM.Processor.<ExecClosure>b__68_0(SymbolRef s) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 417
+   em System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   em System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   em System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   em MoonSharp.Interpreter.Execution.VM.Processor.ExecClosure(Instruction i) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 416
+   em MoonSharp.Interpreter.Execution.VM.Processor.Processing_Loop(Int32 instructionPtr) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 156
+   em MoonSharp.Interpreter.Execution.VM.Processor.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor.cs:linha 67
+   em MoonSharp.Interpreter.Script.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 483
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Script executed in: 2ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+-- SCRIPTER INITIALIZED
+> function ButtonDown()
+  formdesignvoid.setButtonImg("facebook.png")
+
+
+print("button down")
+end
+
+function ButtonUP()
+
+    print("button UP")
+end
+
+function form_menu()
+
+   -- formdesign.setFormControl("teste","testeee","file",0,0,300,100)
+  --  testee  = formdesign.getFormControl("teste", "file")
+  formdesign.setFormControl("caindo","testeee","textbox",0,0,300,100)
+  
+
+  print(formdesignvoid.getFormControl("caindo", "textbox"))
+end
+
+function menu_ok()
+
+print("menu ok")
+
+end
+
+function menu_cancel()
+
+
+    print("menu cancel")
+end
+Script executed in: 0ms
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Exception: System.InvalidOperationException: Não é possível chamar Invoke ou BeginInvoke em um controle antes da criação do identificador de janela.
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em System.Windows.Forms.Control.Invoke(Delegate method)
+   em ScribeBot.Core.WriteLine(String value) na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Core.cs:linha 198
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 105
+Exception: System.InvalidOperationException: Não é possível chamar Invoke ou BeginInvoke em um controle antes da criação do identificador de janela.
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em System.Windows.Forms.Control.Invoke(Delegate method)
+   em ScribeBot.Core.WriteLine(String value) na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Core.cs:linha 198
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 105
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+testeee
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Exception: System.InvalidOperationException: Não é possível chamar Invoke ou BeginInvoke em um controle antes da criação do identificador de janela.
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em System.Windows.Forms.Control.Invoke(Delegate method)
+   em ScribeBot.Core.WriteLine(String value) na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Core.cs:linha 198
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 105
+Exception: System.InvalidOperationException: Não é possível chamar Invoke ou BeginInvoke em um controle antes da criação do identificador de janela.
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em System.Windows.Forms.Control.Invoke(Delegate method)
+   em ScribeBot.Core.WriteLine(String value) na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Core.cs:linha 198
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 105
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+testeee
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Syntax Error: MoonSharp.Interpreter.SyntaxErrorException: chunk_5:38: 'end' expected near '<eof>' ---> MoonSharp.Interpreter.SyntaxErrorException: 'end' expected near '<eof>'
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression.CreateBody(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 92
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean usesGlobalEnv, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 66
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 31
+   em MoonSharp.Interpreter.Tree.Statements.FunctionDefinitionStatement..ctor(ScriptLoadingContext lcontext, Boolean local, Token localToken) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\FunctionDefinitionStatement.cs:linha 86
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 40
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Statements.ChunkStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\ChunkStatement.cs:linha 20
+   em MoonSharp.Interpreter.Tree.Fast_Interface.Loader_Fast.LoadChunk(Script script, SourceCode source, ByteCode bytecode) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Fast_Interface\Loader_Fast.cs:linha 52
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em MoonSharp.Interpreter.SyntaxErrorException.Rethrow() na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Errors\SyntaxErrorException.cs:linha 69
+   em MoonSharp.Interpreter.Tree.Fast_Interface.Loader_Fast.LoadChunk(Script script, SourceCode source, ByteCode bytecode) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Fast_Interface\Loader_Fast.cs:linha 74
+   em MoonSharp.Interpreter.Script.LoadString(String code, Table globalTable, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 182
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em MoonSharp.Interpreter.Tree.Statements.IfStatement.CreateElseBlock(ScriptLoadingContext lcontext)
+   em MoonSharp.Interpreter.Tree.Statements.IfStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\IfStatement.cs:linha 19
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 30
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression.CreateBody(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 89
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean usesGlobalEnv, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 66
+   em MoonSharp.Interpreter.Tree.Expressions.FunctionDefinitionExpression..ctor(ScriptLoadingContext lcontext, Boolean pushSelfParam, Boolean isLambda) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Expressions\FunctionDefinitionExpression.cs:linha 31
+   em MoonSharp.Interpreter.Tree.Statements.FunctionDefinitionStatement..ctor(ScriptLoadingContext lcontext, Boolean local, Token localToken) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\FunctionDefinitionStatement.cs:linha 86
+   em MoonSharp.Interpreter.Tree.Statement.CreateStatement(ScriptLoadingContext lcontext, Boolean& forceLast) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statement.cs:linha 40
+   em MoonSharp.Interpreter.Tree.Statements.CompositeStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\CompositeStatement.cs:linha 22
+   em MoonSharp.Interpreter.Tree.Statements.ChunkStatement..ctor(ScriptLoadingContext lcontext) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Statements\ChunkStatement.cs:linha 20
+   em MoonSharp.Interpreter.Tree.Fast_Interface.Loader_Fast.LoadChunk(Script script, SourceCode source, ByteCode bytecode) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Tree\Fast_Interface\Loader_Fast.cs:linha 52
+   em MoonSharp.Interpreter.Script.LoadString(String code, Table globalTable, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 182
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+-- SCRIPTER INITIALIZED
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+Engine Error: System.IndexOutOfRangeException: O índice estava fora dos limites da matriz.
+   em MoonSharp.Interpreter.Execution.VM.Processor.ExecArgs(Instruction I) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 634
+   em MoonSharp.Interpreter.Execution.VM.Processor.Processing_Loop(Int32 instructionPtr) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor_InstructionLoop.cs:linha 165
+   em MoonSharp.Interpreter.Execution.VM.Processor.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Execution\VM\Processor\Processor.cs:linha 67
+   em MoonSharp.Interpreter.Script.Call(DynValue function, DynValue[] args) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 483
+   em MoonSharp.Interpreter.Script.DoString(String code, Table globalContext, String codeFriendlyName) na Z:\git\my\moonsharp\src\MoonSharp.Interpreter\Script.cs:linha 330
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 101
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+Script executed in: 0ms
+button UP
+Script executed in: 0ms
+
+Script executed in: 0ms
+Script executed in: 0ms
+Exception: System.Threading.ThreadAbortException: O thread estava sendo anulado.
+   em System.Diagnostics.Stopwatch.StartNew()
+   em ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() na C:\Users\Roberto\Desktop\ButtonDeck\ButtonDeck\Scripter.cs:linha 99
+-- SCRIPTER INITIALIZED
+

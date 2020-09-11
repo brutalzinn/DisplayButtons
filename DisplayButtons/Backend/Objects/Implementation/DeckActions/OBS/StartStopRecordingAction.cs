@@ -18,10 +18,18 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
             Stop,
             Toggle
         }
+        public enum RecordStateToggle
+        {
+            Recording,
+            Stopped
+
+
+        }
         [ActionPropertyInclude]
         [ActionPropertyDescription("Action")]
         [ActionPropertyUpdateImageOnChanged]
         public RecordingState RecordAction { get; set; }
+        public RecordStateToggle ToggleAction { get; set; } = RecordStateToggle.Stopped;
         public override AbstractDeckAction CloneAction()
         {
             return new StartStopRecordingAction();
@@ -36,7 +44,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         {
             if (!firstTime) {
                 firstTime ^= true;
-                return "Start/Stop Recording";
+                return Texts.rm.GetString("DECKOBSRECORD", Texts.cultereinfo);
             }
             switch (RecordAction) {
                 case RecordingState.Start:
@@ -44,7 +52,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                 case RecordingState.Stop:
                     return "Stop Recording";
             }
-            return "Start/Stop Recording";
+            return Texts.rm.GetString("DECKOBSRECORD", Texts.cultereinfo);
         }
 
         public override DeckImage GetDefaultItemImage()
@@ -70,6 +78,23 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                         break;
                     case RecordingState.Stop:
                         OBSUtils.StopRecording();
+                        break;
+
+                    case RecordingState.Toggle:
+                        switch (ToggleAction)
+                        {
+                            case RecordStateToggle.Stopped:
+                                ToggleAction = RecordStateToggle.Recording;
+                                OBSUtils.StartRecording();
+                                break;
+                            case RecordStateToggle.Recording:
+                                ToggleAction = RecordStateToggle.Stopped;
+                                OBSUtils.StopRecording();
+                                break;
+                        }
+
+
+
                         break;
                 }
             }

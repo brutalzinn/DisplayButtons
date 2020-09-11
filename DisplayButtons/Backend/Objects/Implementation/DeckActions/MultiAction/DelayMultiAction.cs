@@ -41,6 +41,10 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.MultiAction
                 //   form.list_actions = list_actions;
             }
         }
+        public override bool IsPlugin()
+        {
+            return true;
+        }
         public override bool IsTool()
         {
             return true;

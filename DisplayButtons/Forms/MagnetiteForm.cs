@@ -126,19 +126,21 @@ namespace DisplayButtons.Forms
                 var con = MainForm.Instance.CurrentDevice.GetConnection() ;
            
                 if (con != null)
-            {
-            //  MainForm.ButtonCreator();
-                    
-              ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
-                ApplicationSettingsManager.Settings.linha= Convert.ToInt32(linha.Text);
-              
-              
-                     var Matriz = new MatrizPacket();
-                con.SendPacket(Matriz);
+            { 
+                  //  MainForm.ButtonCreator();
+
+                    // ApplicationSettingsManager.Settings.coluna = Convert.ToInt32(coluna.Text);
+                    //   ApplicationSettingsManager.Settings.linha= Convert.ToInt32(linha.Text);
+                    MatrizObject new_matriz = new MatrizObject(Convert.ToInt32(linha.Text), Convert.ToInt32(coluna.Text));
+                    MainForm.Instance.CurrentDevice.CurrentProfile.Matriz = new_matriz;
+                   
+                    var matriz_packet = new MatrizPacket(MainForm.Instance.CurrentDevice.CurrentProfile);
+                   
+                con.SendPacket(matriz_packet);
                   
             }
 
-                MainForm.Instance.MatrizGenerator();
+                MainForm.Instance.MatrizGenerator(MainForm.Instance.CurrentDevice.CurrentProfile);
             }
             catch(Exception ea)
             {
@@ -150,10 +152,16 @@ namespace DisplayButtons.Forms
 
         private void MagnetiteForm_Load(object sender, EventArgs e)
         {
-            coluna.Text = ApplicationSettingsManager.Settings.coluna.ToString();
-            linha.Text = ApplicationSettingsManager.Settings.linha.ToString();
 
-            modernButton2.Text = Texts.rm.GetString("IMPORTPROFILE", Texts.cultereinfo);
+            var con = MainForm.Instance.CurrentDevice.GetConnection();
+
+            if (con != null)
+            {
+                linha.Text = MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Lin.ToString();
+                coluna.Text = MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Column.ToString();
+
+            }
+                modernButton2.Text = Texts.rm.GetString("IMPORTPROFILE", Texts.cultereinfo);
             modernButton1.Text = Texts.rm.GetString("EXPORTPERFIL", Texts.cultereinfo);
             modernButton11.Text = Texts.rm.GetString("PRINCIPALFOLDER", Texts.cultereinfo);
             modernButton9.Text = Texts.rm.GetString("BACKFOLDER", Texts.cultereinfo);

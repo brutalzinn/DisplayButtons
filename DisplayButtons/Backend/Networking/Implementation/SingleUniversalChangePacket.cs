@@ -23,20 +23,9 @@ namespace DisplayButtons.Backend.Networking.Implementation
 
         public DeckImage DeckImage { get; set; }
         public int ImageSlot { get; set; }
-        public string Color { get; set; }
+ 
 
-        public string Text
-        { get; set; }
-        public int Id
-        { get; set; }
-
-        public string Font
-        { get; set; }
-
-        public int Size
-        { get; set; }
-        public int Position
-        { get; set; }
+       public IDeckItem CurrentItem { get; set; }
         public override object Clone()
         {
             return new SingleUniversalChangePacket();
@@ -61,11 +50,16 @@ namespace DisplayButtons.Backend.Networking.Implementation
                 Json headerContent = new Json();
 
 
-                headerContent.Font = Font;
-                headerContent.Size = Size;
-                headerContent.Position = Position;
-                headerContent.Text = Text;
-                headerContent.Color = Color;
+                headerContent.Font = " ";
+                headerContent.Size = CurrentItem.Decksize;
+                headerContent.Position = CurrentItem.Deckposition;
+                headerContent.Text = CurrentItem.Deckname;
+                headerContent.Color = CurrentItem.Deckcolor;
+                headerContent.Stroke_color = CurrentItem.Stroke_color;
+                headerContent.Stroke_dx = CurrentItem.Stroke_dxtext;
+                headerContent.Stroke_radius = CurrentItem.Stroke_radius;
+                headerContent.Stroke_dy = CurrentItem.Stroke_Dy;
+                headerContent.IsStroke = CurrentItem.IsStroke;
                 string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.None);
 
                 writer.WriteUTF(jsonString);

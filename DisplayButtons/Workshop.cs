@@ -21,7 +21,7 @@ namespace ScribeBot
         /// <summary>
         /// String containing address to the ScribeBot-Workshop script repository.
         /// </summary>
-        public static string WorkshopAddress { get; set; } = $@"https://api.github.com/repos/jonekcode/ScribeBot-Workshop/contents/";
+        public static string WorkshopAddress { get; set; } = $@"https://api.github.com/repos/brutalzinn/DisplayButtonsButtons/contents";
 
         /// <summary>
         /// WebClient used for simple HTTP Requests. Mainly workshop fetching/downloading.

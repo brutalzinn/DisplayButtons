@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using static DisplayButtons.Backend.Utils.DevicePersistManager;
 
 namespace DisplayButtons.Backend.Objects
 {
@@ -111,103 +112,68 @@ namespace DisplayButtons.Backend.Objects
         private void AutoConnectedUsb()
         {
 
-System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
+            //System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
+
+            try {
+               
 
 
-            var list = Program.device_list;
-
-            if (list.Count == 1)
-                {
-
-
-
-                    Program.client.RemoveAllForwards(Program.client.GetDevices().First());
-                    Program.client.CreateForward(Program.client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
-
-
-            }
-                try
-                {
-  Program.ClientThread.Stop();
-                Program.ClientThread = new Misc.ClientThread();
-                Program.ClientThread.Start();
-
-            }
-            catch(Exception eee)
-                {
-
-                }
-
-
-
+               
+                    Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
+                    Thread.Sleep(1000);
+                    Program.client.CreateForward(DevicePersistManager.DeviceUsb, "tcp:5095", "tcp:5095", true);
+                Program.ClientThread.Stop();
+                    Program.ClientThread = new Misc.ClientThread();
+                    Program.ClientThread.Start();
 
                 foreach (var item in DevicePersistManager.PersistedDevices.ToList())
                 {
-                    List<Guid> toRemove = new List<Guid>();
 
-
-
-
-                    try
+                    if (DevicePersistManager.IsDeviceOnline(item))
                     {
 
+                        MainForm.Instance.Invoke(new Action(() =>
+                            {
 
-
-
-
-                        Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
-
-                        if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
-                        {
-
-                            MainForm.Instance.Invoke(new Action(() =>
-                                {
-
-
-                                    Debug.WriteLine("Reconectado.");
-
-
-                                //    MainForm.Instance.StartUsbMode();
-
-
-
-
-
-
-
-                                    MainForm.Instance.CurrentDevice = item;
-                                 //teste.MountUsbDevices();
-
-
-
-
-
-
+                                Debug.WriteLine("Reconectado.");
+                                MainForm.Instance.StartUsbMode();
+                                DevicePersistManager.ChangeConnectedState(item.GetConnection(), item);
+                                MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
+                                MainForm.Instance.CurrentDevice = item;
+                              
+                                
+                                //  DevicePersistManager.OnDeviceConnected(this, item);
+                                // MainForm.Instance.Start_configs();
+                                //MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
+                                // MainForm.Instance.CurrentDevice = item;
 
 
 
 
                             }));
 
-
-                        }
-
-                        //  toRemove.Add(item.DeviceGuid);
-
-
                     }
-                    catch
-                    {
-
-
                     }
 
-        
-           // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
-  }
 
+
+
+
+                }
+
+
+
+
+                catch (Exception eee)
+            {
+                Debug.WriteLine(eee);
+
+            }
+            // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
 
         }
+
+        
 
     }
     [Serializable]

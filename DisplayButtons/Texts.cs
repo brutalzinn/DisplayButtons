@@ -54,12 +54,12 @@ namespace DisplayButtons
 
                 case "pt-BR":
                     cultereinfo = new CultureInfo("pt-BR");
-                    Globals.updateurl = $"http://{Globals.domain}/update/pt/{Globals.updatefilename}";
+                    Globals.updateurl = $"http://{Globals.domain}/pt/{Globals.updatefilename}";
                     break;
 
                 case "en-US":
             cultereinfo = new CultureInfo("en-US");
-                    Globals.updateurl = $"http://{Globals.domain}/update/en/{Globals.updatefilename}";
+                    Globals.updateurl = $"http://{Globals.domain}/en/{Globals.updatefilename}";
                     break;
                 case "es-EN":
                     cultereinfo = new CultureInfo("es-UN");

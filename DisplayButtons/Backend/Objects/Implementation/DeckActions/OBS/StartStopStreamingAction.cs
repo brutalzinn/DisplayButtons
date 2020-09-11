@@ -12,6 +12,14 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
             Stop,
             Toggle
         }
+        public enum StreamingStateToggle
+        {
+            Recording,
+            Stopped
+
+
+        }
+        public StreamingStateToggle ToggleStreamingAction { get; set; } = StreamingStateToggle.Stopped;
         [ActionPropertyInclude]
         [ActionPropertyDescription("Action")]
         [ActionPropertyUpdateImageOnChanged]
@@ -30,7 +38,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         {
             if (!firstTime) {
                 firstTime ^= true;
-                return "Start/Stop Streaming";
+                return Texts.rm.GetString("DECKOBSSTREAMING", Texts.cultereinfo);
             }
             switch (StreamAction) {
                 case StreamingState.Start:
@@ -38,7 +46,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                 case StreamingState.Stop:
                     return "Stop Streaming";
             }
-            return "Start/Stop Streaming";
+            return Texts.rm.GetString("DECKOBSSTREAMING", Texts.cultereinfo);
         }
 
         public override DeckImage GetDefaultItemImage()
@@ -66,6 +74,20 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                         break;
                     case StreamingState.Stop:
                         OBSUtils.StopStreaming();
+                        break;
+
+                    case StreamingState.Toggle:
+                        switch (ToggleStreamingAction)
+                        {
+                            case StreamingStateToggle.Stopped:
+                                ToggleStreamingAction = StreamingStateToggle.Recording;
+                                OBSUtils.StartRecording();
+                                break;
+                            case StreamingStateToggle.Recording:
+                                ToggleStreamingAction = StreamingStateToggle.Stopped;
+                                OBSUtils.StopRecording();
+                                break;
+                        }
                         break;
                 }
             }

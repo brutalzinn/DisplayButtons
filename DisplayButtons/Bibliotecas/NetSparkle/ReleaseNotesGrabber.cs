@@ -91,16 +91,24 @@ namespace NetSparkleUpdater
         {
             _sparkle.LogWriter.PrintMessage("Preparing to initialize release notes...");
             StringBuilder sb = new StringBuilder(_initialHTML);
+        
+       
             foreach (AppCastItem castItem in items)
             {
+              
+             
+               
                 _sparkle.LogWriter.PrintMessage("Initializing release notes for {0}", castItem.Version);
                 // TODO: could we optimize this by doing multiple downloads at once?
                 var releaseNotes = await GetReleaseNotes(castItem, _sparkle, cancellationToken);
+
                 sb.Append(string.Format(_separatorTemplate,
                                         castItem.Version,
                                         castItem.PublicationDate.ToString("D"), // was dd MMM yyyy
                                         releaseNotes,
-                                        latestVersion.Version.Equals(castItem.Version) ? "#ABFF82" : "#AFD7FF"));
+                                        latestVersion.Version.Equals(castItem.Version) ? "#ABFF82" : "#AFD7FF", ""));
+
+             
             }
             sb.Append("</body></html>");
 
@@ -112,10 +120,11 @@ namespace NetSparkleUpdater
 
             _sparkle.LogWriter.PrintMessage("Preparing to initialize release notes...");
             StringBuilder sb = new StringBuilder(_initialHTML);
-            StringBuilder releasesAllBlocksHtml = new StringBuilder(_initialHTML);
-            int i = 0;
+          
+   
             foreach (AppCastItem castItem in items)
-            {
+            {  
+                StringBuilder releasesAllBlocksHtml = new StringBuilder(_initialHTML);
                 releasesAllBlocksHtml.Append(Texts.rm.GetString("RELEASENOTESGRABBERREQUERIMENTS", Texts.cultereinfo) + "<br>");
 
                 if (!String.IsNullOrEmpty(castItem.AndroidVersionMinimum))
@@ -125,7 +134,7 @@ namespace NetSparkleUpdater
                 }
                 if (!String.IsNullOrEmpty(castItem.AndroidVersionMaximum))
                 {
-                    releasesAllBlocksHtml.Append("<br>"+Texts.rm.GetString("RELEASENOTESGRABBERMAXIMUMANDROIDDISPLAYBUTTONS", Texts.cultereinfo)  + castItem.AndroidVersionMinimum);
+                    releasesAllBlocksHtml.Append("<br>"+Texts.rm.GetString("RELEASENOTESGRABBERMAXIMUMANDROIDDISPLAYBUTTONS", Texts.cultereinfo)  + castItem.AndroidVersionMaximum);
                     
                 }
                 if (!String.IsNullOrEmpty(castItem.AndroidVersion))
@@ -146,7 +155,7 @@ namespace NetSparkleUpdater
                                         releaseNotes,
                                         latestVersion.Version.Equals(castItem.Version) ? "#ABFF82" : "#AFD7FF", releasesAllBlocksHtml));
            
-                i++;
+          
             }
             sb.Append("</body></html>");
          

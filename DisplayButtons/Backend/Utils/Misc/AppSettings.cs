@@ -116,6 +116,7 @@ namespace DisplayButtons.Backend.Utils
         public bool isAutoMinimizer { get; set; } = true;
         public string IFTTTAPIKey { get; set; }
         public string Language { get; set; }
+        public string CurrentProfile { get; set; }
         public bool isFolderBrowserEnabled { get; set; }
         public KeyInfoAppSettingsGlobal keyMainFolder { get; set; } = new KeyInfoAppSettingsGlobal();
         public KeyInfoAppSettingsGlobal keyBackFolder { get; set; } = new KeyInfoAppSettingsGlobal();

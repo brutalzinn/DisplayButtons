@@ -41,7 +41,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 
         public override string GetActionName()
         {
-            return "Switch Scene";
+            return Texts.rm.GetString("DECKOBSSWITCHSCENE", Texts.cultereinfo); 
         }
 
         public override void OnButtonDown(DeckDevice deckDevice)

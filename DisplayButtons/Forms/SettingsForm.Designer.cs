@@ -57,7 +57,8 @@
             this.appBar1.Size = new System.Drawing.Size(807, 50);
             this.appBar1.TabIndex = 0;
             this.appBar1.Text = "DisplayButtons - Settings";
-            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.appBar1.ToolTip = null;
             // 
             // label1
             // 
@@ -190,8 +191,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "pt-BR",
-            "en-US",
-            "es-EN"});
+            "en-US"});
             this.comboBox1.Location = new System.Drawing.Point(21, 193);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(733, 29);
@@ -212,6 +212,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.modernButton1;
             this.ClientSize = new System.Drawing.Size(809, 623);
+            this.ColorScheme.isToIgnoreForegroundColor = false;
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
@@ -227,8 +228,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.appBar1);
             this.Controls.Add(this.modernShadowPanel1);
-            this.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.Location = new System.Drawing.Point(0, 0);
+            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "SettingsForm";
             this.Text = "DisplayButtons - Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);

@@ -62,7 +62,7 @@ namespace DisplayButtons.Backend.Objects
             OBS,
             Misc,
             Deck,
-            Spotify,
+            Spotify
         }
 
      
