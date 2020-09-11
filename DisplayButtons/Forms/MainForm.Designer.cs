@@ -57,7 +57,6 @@ namespace DisplayButtons.Forms
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.perfil_info = new System.Windows.Forms.Label();
-            this.jghkghkghj = new System.Windows.Forms.Label();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
@@ -280,6 +279,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton6.TabIndex = 8;
             this.imageModernButton6.Text = "EventSystem";
             this.imageModernButton6.UseVisualStyleBackColor = true;
+            this.imageModernButton6.Visible = false;
             this.imageModernButton6.Click += new System.EventHandler(this.imageModernButton6_Click_1);
             // 
             // perfilselector
@@ -348,15 +348,6 @@ namespace DisplayButtons.Forms
             this.perfil_info.TabIndex = 11;
             this.perfil_info.Text = "label1";
             // 
-            // jghkghkghj
-            // 
-            this.jghkghkghj.AutoSize = true;
-            this.jghkghkghj.Location = new System.Drawing.Point(12, 128);
-            this.jghkghkghj.Name = "jghkghkghj";
-            this.jghkghkghj.Size = new System.Drawing.Size(31, 15);
-            this.jghkghkghj.TabIndex = 12;
-            this.jghkghkghj.Text = "hffvj";
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -367,7 +358,6 @@ namespace DisplayButtons.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
-            this.Controls.Add(this.jghkghkghj);
             this.Controls.Add(this.perfil_info);
             this.Controls.Add(this.imageModernButton8);
             this.Controls.Add(this.imageModernButton7);
@@ -429,7 +419,6 @@ namespace DisplayButtons.Forms
         private ToolStripStatusLabel toolStripStatusLabel4;
         private ToolStripStatusLabel info;
         private Label perfil_info;
-        private Label jghkghkghj;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }
