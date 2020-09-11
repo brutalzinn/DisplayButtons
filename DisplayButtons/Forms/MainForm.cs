@@ -1164,7 +1164,7 @@ namespace DisplayButtons.Forms
 
                 control.NormalImage = item?.GetItemImage().Bitmap;
 
-
+                control.TextLabel( item?.Deckname, null,item.Deckposition,null);
 
                 control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
@@ -1212,7 +1212,7 @@ namespace DisplayButtons.Forms
            
 
                     control.NormalImage = item?.GetItemImage().Bitmap;
-              
+                    control.Text = item?.Deckname;
 
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));

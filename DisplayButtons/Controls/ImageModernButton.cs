@@ -56,13 +56,32 @@ namespace DisplayButtons.Controls
 
         private PointF _pointf;
 
-        public void TextLabel(string text, Font font, Brush brush, PointF pointf)
+        public void TextLabel(string text , Brush brush, int position, Font font )
         {
+           
+            
+            
+            if(font ==null )
+            {
+                font = new Font("Arial", 40, FontStyle.Bold, GraphicsUnit.Point);
+            }
+            if(brush == null)
+            {
+
+                brush = Brushes.White;
+            }
+
+
+         
+            
+
 
             _text = text;
             _font = font;
             _brush = brush;
-            _pointf = pointf;
+          _pointf  = new Point(103, 200);
+            if (IsHandleCreated)
+                Invoke(new Action(Refresh));
 
         }
         public string ExtractNumber(string original)
