@@ -1,0 +1,12 @@
+
+
+Exception: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ScribeBot.Core.WriteLine(String value) in C:\Users\Roberto\Documents\My projects\ButtonDeck\DisplayButtons\Core.cs:line 216
+   at ScribeBot.Scripter.<>c__DisplayClass10_0.<Execute>b__0() in C:\Users\Roberto\Documents\My projects\ButtonDeck\DisplayButtons\Scripter.cs:line 107
+-- SCRIPTER INITIALIZED
+Script executed in: 0ms
+
+-- SCRIPTER INITIALIZED
+> events.Continue()
+Script executed in: 13ms
+

@@ -14,7 +14,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
 
       
-        public string name { get; set; } = "To execute";
+        public string name { get; set; } = Texts.rm.GetString("DECKGENERALTOEXECUTE", Texts.cultereinfo);
 
 
         [ActionPropertyInclude]

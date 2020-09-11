@@ -2,6 +2,7 @@
 using DisplayButtons.Backend.Objects;
 
 using NHotkey.WindowsForms;
+using SharpAdbClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,6 +17,7 @@ namespace DisplayButtons.Backend.Utils
     {
         private const string DEVICES_FILENAME = "devices.xml";
         public static bool IsVirtualDeviceConnected { get; set; }
+        public static DeviceData DeviceUsb { get; set; }
 
         private static IDictionary<Guid, DeckDevice> deckDevicesFromConnection = new Dictionary<Guid, DeckDevice>();
 
@@ -149,7 +151,14 @@ namespace DisplayButtons.Backend.Utils
            
             
         }
-
+        public static void PersistUsbGuid(DeviceData device_usb, Guid serial)
+        {
+            device_usb.Serial = serial.ToString();
+        }
+        public static void PersistUsbMode(DeviceData device_usb)
+        {
+            DeviceUsb = device_usb;
+        }
         public static void RemoveConnectionState(ConnectionState state)
         {
             if (deckDevicesFromConnection.Keys.Contains(state.ConnectionGuid)) {

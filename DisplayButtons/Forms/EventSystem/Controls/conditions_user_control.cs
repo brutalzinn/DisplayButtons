@@ -26,6 +26,19 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         {
             instance = this;
             InitializeComponent();
+
+
+            groupBox1.Text = Texts.rm.GetString("EVENTSYSTEMTIMERCONDITION", Texts.cultereinfo);
+
+
+          timer_interval_radio.Text =  Texts.rm.GetString("EVENTSYSTEMTIMERCONDITION_TIMERINTERVAL", Texts.cultereinfo);
+          timer_exact_radio.Text =  Texts.rm.GetString("EVENTSYSTEMTIMERCONDITION_TIMEREXACT", Texts.cultereinfo);
+            time_after_radio.Text = Texts.rm.GetString("EVENTSYSTEMTIMERCONDITION_TIMERAFTER", Texts.cultereinfo);
+            timer_before_radio.Text =  Texts.rm.GetString("EVENTSYSTEMTIMERCONDITION_TIMERBEFORE", Texts.cultereinfo);
+            timer_none_radio_button.Text = Texts.rm.GetString("EVENTSYSTEMTIMERCONDITION_NONE", Texts.cultereinfo);
+
+            groupBox2.Text = Texts.rm.GetString("EVENTSYSTEMLUASCRIPTGROUP", Texts.cultereinfo); 
+            button1.Text = Texts.rm.GetString("EVENTSYSTEMLUASSELECFILE", Texts.cultereinfo); 
         }
 
         private void conditions_user_control_Load(object sender, EventArgs e)

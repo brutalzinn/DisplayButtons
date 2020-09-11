@@ -44,7 +44,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         {
             if (!firstTime) {
                 firstTime ^= true;
-                return "Start/Stop Recording";
+                return Texts.rm.GetString("DECKOBSRECORD", Texts.cultereinfo);
             }
             switch (RecordAction) {
                 case RecordingState.Start:
@@ -52,7 +52,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                 case RecordingState.Stop:
                     return "Stop Recording";
             }
-            return "Start/Stop Recording";
+            return Texts.rm.GetString("DECKOBSRECORD", Texts.cultereinfo);
         }
 
         public override DeckImage GetDefaultItemImage()

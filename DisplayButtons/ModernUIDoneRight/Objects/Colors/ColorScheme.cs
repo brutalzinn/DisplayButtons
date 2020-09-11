@@ -2,11 +2,12 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static NickAc.ModernUIDoneRight.Utils.GraphicUtils;
-
 namespace NickAc.ModernUIDoneRight.Objects
 {
+
     [TypeConverter(typeof(ColorSchemeConverter))]
     public class ColorScheme
     {
@@ -23,7 +24,7 @@ namespace NickAc.ModernUIDoneRight.Objects
                 MouseDownColor = LightenColor(MouseDownColor, 0.2f);
                 MouseHoverColor = LightenColor(MouseDownColor, 0.25f);
             }
-            Debug.WriteLine(ignoreDarkness);
+          //  Debug.WriteLine(ignoreDarkness);
 
 
         }

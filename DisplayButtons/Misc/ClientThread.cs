@@ -51,7 +51,7 @@ using System.Threading.Tasks;
             public void Stop()
             {
             tcpClient?.Stop();
-                baseThread?.Abort();
+                baseThread?.Interrupt();
             }
         }
     }

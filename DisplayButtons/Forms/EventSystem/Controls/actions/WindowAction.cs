@@ -48,13 +48,14 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
                 {
                     FactoryForms.GlobalControl ComboBoxNew = new FactoryForms.GlobalControl();
 
-                    ComboBoxNew.Text = present.DeckName;
+                    ComboBoxNew.Text = present.Deckname;
                     ComboBoxNew.Value = present;
                     comboBox1.Items.Add(ComboBoxNew);
                 }
             }
 
         }
+   
         public override void SaveConfig()
         {
 

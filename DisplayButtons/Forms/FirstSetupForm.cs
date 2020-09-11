@@ -20,7 +20,6 @@ namespace DisplayButtons.Forms
         private List<PageTemplate> setupPages = new List<PageTemplate>() {
             new IntroPage(),
             new ThemeSelectionPage(),
-            new MatrizSelector(),
             new DeviceNamePage()
     
         };
@@ -28,6 +27,9 @@ namespace DisplayButtons.Forms
         public FirstSetupForm()
         {
             InitializeComponent();
+
+            modernButton1.Text = Texts.rm.GetString("FIRSTPAGEBUTTONAVANCE", Texts.cultereinfo);
+            modernButton2.Text = Texts.rm.GetString("EVENTSYSTEMBACKBUTTON", Texts.cultereinfo);
         }
 
         protected override void OnLoad(EventArgs e)

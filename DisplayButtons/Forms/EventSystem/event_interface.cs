@@ -31,6 +31,13 @@ namespace DisplayButtons.Forms.EventSystem
         {
             instance = this;
             InitializeComponent();
+
+
+          tab_geral_button.Text = Texts.rm.GetString("EVENTSYSTEMGERAL", Texts.cultereinfo);
+            tab_actions_button.Text = Texts.rm.GetString("EVENTSYSTEMACTIONS", Texts.cultereinfo);
+            tab_trigger_button.Text = Texts.rm.GetString("EVENTSYSTEMTRIGGER", Texts.cultereinfo);
+            conditions.Text = Texts.rm.GetString("EVENTSYSTEMCONDITIONS", Texts.cultereinfo);
+            this.Text = Texts.rm.GetString("EVENTSYSTEMBUTTON", Texts.cultereinfo);
             if (_event != null)
             { 
                 CurrentEvent = _event; 
@@ -168,14 +175,29 @@ EventXml.Settings.Events[index] = _event;
               
              EventXml.Settings.Events.Add(_event);
             }
-         
-         //   action_user_control.Instance = null;
-         //   trigger_user_control.Instance = null;
-         //   general_user_control.Instance = null;
+
+
+
+            Forms.EventSystem.Events.Instance.FillList();
+            //Events.
+            CloseWithResult(DialogResult.OK);
+            //   action_user_control.Instance = null;
+            //   trigger_user_control.Instance = null;
+            //   general_user_control.Instance = null;
         }
-     
+
+        private void imageModernButton2_Click(object sender, EventArgs e)
+        {
+            CloseWithResult(DialogResult.Cancel);
+        }
+
+        private void CloseWithResult(DialogResult result)
+        {
+            DialogResult = result;
+            Close();
+        }
     }
-   public static class GenericClass 
+    public static class GenericClass 
     {
 
         public static IEnumerable<T> Replace<T>(this IEnumerable<T> source, T oldValue, T newValue)

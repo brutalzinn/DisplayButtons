@@ -117,15 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ABOUTINFOAPPVERSIONLABEL" xml:space="preserve">
+    <value>Versão: </value>
+  </data>
+  <data name="ABOUTINFOLABELTEXT" xml:space="preserve">
+    <value>Sobre</value>
+  </data>
+  <data name="ABOUTINFOLINKMESSAGEMESSAGE" xml:space="preserve">
+    <value>Tem certeza que deseja acessar displaybuttons.com?</value>
+  </data>
+  <data name="ABOUTINFOLINKMESSAGETITLE" xml:space="preserve">
+    <value>Abrir navegador</value>
+  </data>
+  <data name="ABOUTLABELUSEDBIBLE" xml:space="preserve">
+    <value>Bibliotecas usadas</value>
+  </data>
+  <data name="ABOUTNAMETEXT" xml:space="preserve">
+    <value>Sobre o DisplayButtons</value>
+  </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL1" xml:space="preserve">
-    <value>Olá, bem-vindo ao DisplayKeys.</value>
+    <value>Olá, bem-vindo ao Display Buttons.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL2" xml:space="preserve">
-    <value>O DisplayKeys é um software que permite usar qualquer dispositivo Android ™ para
-executar ações (macros) em um computador.</value>
+    <value>O Display Buttons é um software que permite usar qualquer dispositivo Android ™ 
+para executar ações (macros) em um computador.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL3" xml:space="preserve">
-    <value>As DisplayKeys pode ser usado para facilitar o uso de atalhos de diversos aplicativos</value>
+    <value>O Display Buttons  pode ser usado para facilitar o uso de atalhos de 
+diversos aplicativos. Você pode programar seus próprios botões.
+ Acesse displaybuttons.com para saber mais.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL4" xml:space="preserve">
     <value>Para iniciar a configuração, pressione Avançar.</value>
@@ -135,7 +155,7 @@ executar ações (macros) em um computador.</value>
 Este aplicativo não está relacionado à Elgato Systems GmbH de forma alguma.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6" xml:space="preserve">
-    <value>Sejam em aplicativos simples, ou aplicativos como o DisplayKeys. 
+    <value>Sejam em aplicativos simples, ou aplicativos como o Display Buttons. 
 Personalização é uma coisa muito legal de se ter em qualquer lugar.  
 Escolha um tema disponível abaixo para customizar sua interface de usuário.</value>
   </data>
@@ -153,7 +173,7 @@ a mesma rede com o aplicativo de desktop aberto.</value>
     <value>Depois que digitar o nome do dispositivo, pressione finalizar.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL1" xml:space="preserve">
-    <value>O DisplayKeys permite que você escolha o número de linhas e colunas da sua matriz de botões. Escolha a matriz de acordo com o tamanho da tela do seu dispositivo android. Matrizes muito grandes demoram a ser renderizadas.</value>
+    <value>O Display Buttons permite que você escolha o número de linhas e colunas da sua matriz de botões. Escolha a matriz de acordo com o tamanho da tela do seu dispositivo android. Matrizes muito grandes demoram a ser renderizadas.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL2" xml:space="preserve">
     <value>Linha:</value>
@@ -162,15 +182,15 @@ a mesma rede com o aplicativo de desktop aberto.</value>
     <value>Coluna:</value>
   </data>
   <data name="APPLICATIONNAME" xml:space="preserve">
-    <value>DisplayKeys</value>
+    <value>Display Buttons Server</value>
   </data>
   <data name="APPLICATIONNAME_DESCRIPTION" xml:space="preserve">
     <value>Opções legais que você pode configurar a seu gosto para melhorar  
-o uso do DisplayButtons. Não esqueça de dar seu feedback.
+o uso do Display Buttons. Não esqueça de dar seu feedback.
 </value>
   </data>
   <data name="APPLICATION_MENU" xml:space="preserve">
-    <value>DisplayKeys - Menu</value>
+    <value>Display Buttons - Menu</value>
   </data>
   <data name="BACKFOLDER" xml:space="preserve">
     <value>Pasta anterior</value>
@@ -195,6 +215,72 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
   </data>
   <data name="CONNECTEDDEVICES" xml:space="preserve">
     <value>Dispositivo conectado</value>
+  </data>
+  <data name="DECKGENERALKEYPRESS" xml:space="preserve">
+    <value>Simulador de tecla</value>
+  </data>
+  <data name="DECKGENERALMEDIAKEY" xml:space="preserve">
+    <value>Tecla de mídia</value>
+  </data>
+  <data name="DECKGENERALMULTIACTION" xml:space="preserve">
+    <value>Multi ação(beta)</value>
+  </data>
+  <data name="DECKGENERALTOEXECUTE" xml:space="preserve">
+    <value>Executor de aplicação</value>
+  </data>
+  <data name="DECKGENERALTOGGLEKEY" xml:space="preserve">
+    <value>Manter tecla pressionada</value>
+  </data>
+  <data name="DECKITEMPOSITION" xml:space="preserve">
+    <value>Posição do texto</value>
+  </data>
+  <data name="DECKITEMSAVEBUTTON" xml:space="preserve">
+    <value>Salvar</value>
+  </data>
+  <data name="DECKITEMSELECTCOLOR" xml:space="preserve">
+    <value>Selecionar cor</value>
+  </data>
+  <data name="DECKITEMSIZE" xml:space="preserve">
+    <value>Tamanho do texto</value>
+  </data>
+  <data name="DECKITEMSTROKE" xml:space="preserve">
+    <value>Efeito de traço</value>
+  </data>
+  <data name="DECKITEMSTROKECOLOR" xml:space="preserve">
+    <value>Cor</value>
+  </data>
+  <data name="DECKITEMSTROKEDX" xml:space="preserve">
+    <value>Dx</value>
+  </data>
+  <data name="DECKITEMSTROKEDY" xml:space="preserve">
+    <value>Dy</value>
+  </data>
+  <data name="DECKITEMSTROKEENABLED" xml:space="preserve">
+    <value>Ativar efeito de traço no texto</value>
+  </data>
+  <data name="DECKITEMSTROKERADIUS" xml:space="preserve">
+    <value>Raio</value>
+  </data>
+  <data name="DECKITEMTEXT" xml:space="preserve">
+    <value>Texto</value>
+  </data>
+  <data name="DECKMISCIFTTT" xml:space="preserve">
+    <value>Conexão IFTTT </value>
+  </data>
+  <data name="DECKOBSMULTISCENE" xml:space="preserve">
+    <value>Multi cena seletor</value>
+  </data>
+  <data name="DECKOBSRECORD" xml:space="preserve">
+    <value>Iniciar / parar gravação</value>
+  </data>
+  <data name="DECKOBSSTREAMING" xml:space="preserve">
+    <value>Iniciar/ parar streaming</value>
+  </data>
+  <data name="DECKOBSSWITCHSCENE" xml:space="preserve">
+    <value>Trocar cena</value>
+  </data>
+  <data name="DECKOBSVISIBILITYSCENE" xml:space="preserve">
+    <value>Visibilidade de cena</value>
   </data>
   <data name="DefaultUIFactory_ErrorTitle" xml:space="preserve">
     <value>Erro!</value>
@@ -231,6 +317,72 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
   <data name="DEVICENAME" xml:space="preserve">
     <value>Nome do dispositivo</value>
   </data>
+  <data name="EVENTSYSTEMACTIONS" xml:space="preserve">
+    <value>Ações</value>
+  </data>
+  <data name="EVENTSYSTEMBACKBUTTON" xml:space="preserve">
+    <value>Voltar</value>
+  </data>
+  <data name="EVENTSYSTEMBUTTON" xml:space="preserve">
+    <value>Eventos</value>
+  </data>
+  <data name="EVENTSYSTEMCANCELBUTTON" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="EVENTSYSTEMCONDITIONS" xml:space="preserve">
+    <value>Condição</value>
+  </data>
+  <data name="EVENTSYSTEMCONFIGBUTTON" xml:space="preserve">
+    <value>Configurar</value>
+  </data>
+  <data name="EVENTSYSTEMDELETEBUTTON" xml:space="preserve">
+    <value>Deletar</value>
+  </data>
+  <data name="EVENTSYSTEMEVENTNAME" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="EVENTSYSTEMGERAL" xml:space="preserve">
+    <value>Geral</value>
+  </data>
+  <data name="EVENTSYSTEMISACTIVE" xml:space="preserve">
+    <value>Ativar evento</value>
+  </data>
+  <data name="EVENTSYSTEMLUASCRIPTGROUP" xml:space="preserve">
+    <value>Condição de script</value>
+  </data>
+  <data name="EVENTSYSTEMLUASSELECFILE" xml:space="preserve">
+    <value>Selecionar script lua</value>
+  </data>
+  <data name="EVENTSYSTEMNEWBUTTON" xml:space="preserve">
+    <value>Novo</value>
+  </data>
+  <data name="EVENTSYSTEMREFRESHBUTTON" xml:space="preserve">
+    <value>Reiniciar Eventos</value>
+  </data>
+  <data name="EVENTSYSTEMSAVEBUTTON" xml:space="preserve">
+    <value>Salvar</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION" xml:space="preserve">
+    <value>Condição de tempo</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_NONE" xml:space="preserve">
+    <value>Nenhum</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_TIMERAFTER" xml:space="preserve">
+    <value>Após certo tempo</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_TIMERBEFORE" xml:space="preserve">
+    <value>Até certo tempo</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_TIMEREXACT" xml:space="preserve">
+    <value>Tempo exato</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_TIMERINTERVAL" xml:space="preserve">
+    <value>Intervalo de tempo</value>
+  </data>
+  <data name="EVENTSYSTEMTRIGGER" xml:space="preserve">
+    <value>Disparadores</value>
+  </data>
   <data name="EXECUTABLE_RUN_ACTION" xml:space="preserve">
     <value>Executor de software - Editor</value>
   </data>
@@ -246,8 +398,11 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
   <data name="EXPORTPERFIL" xml:space="preserve">
     <value>Exportar perfil</value>
   </data>
+  <data name="FIRSTPAGEBUTTONAVANCE" xml:space="preserve">
+    <value>Avançar</value>
+  </data>
   <data name="GENERATESIDEBARTITLEPLUGINS" xml:space="preserve">
-    <value>Botões externos</value>
+    <value>Botões lua</value>
   </data>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Chave</value>
@@ -256,7 +411,7 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
     <value>Importar perfil</value>
   </data>
   <data name="INITIALIZER_MODE_FORMMENUOPTIONS_TEXT" xml:space="preserve">
-    <value>DisplayKeys - Inicializador</value>
+    <value>Display Buttons - Inicializador</value>
   </data>
   <data name="ISTHISDISABLED" xml:space="preserve">
     <value>Desabilitado</value>
@@ -291,6 +446,12 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
   <data name="MATRIZGENERATORLABELLOADING" xml:space="preserve">
     <value>Carregando...</value>
   </data>
+  <data name="MESSAGEBOXPERFIL" xml:space="preserve">
+    <value>Você tem certeza que deseja remover o perfil {0} ?</value>
+  </data>
+  <data name="MESSAGEBOXPERFIL_ALERT" xml:space="preserve">
+    <value>AVISO</value>
+  </data>
   <data name="OBSCONNECTION" xml:space="preserve">
     <value>Criar conexão OBS</value>
   </data>
@@ -308,6 +469,9 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
   </data>
   <data name="OBS_SCENE_VISIBILITY_NAME_LABEL" xml:space="preserve">
     <value>Nome da cena</value>
+  </data>
+  <data name="PERFILINFOLABEL" xml:space="preserve">
+    <value>Perfil: </value>
   </data>
   <data name="PLUGINGERENCIER" xml:space="preserve">
     <value>Gerenciador de plugins</value>
@@ -366,6 +530,12 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
   <data name="RELEASENOTESGRABBERREQUERIMENTS" xml:space="preserve">
     <value>Requerimentos</value>
   </data>
+  <data name="RESIZETEXTCLOSE" xml:space="preserve">
+    <value>Fechar Display Buttons</value>
+  </data>
+  <data name="RESIZETEXTOPEN" xml:space="preserve">
+    <value>Abrir Display Buttons</value>
+  </data>
   <data name="STARTTCPSERVER" xml:space="preserve">
     <value>Iniciar servidor TCP</value>
   </data>
@@ -392,5 +562,8 @@ o uso do DisplayButtons. Não esqueça de dar seu feedback.
   </data>
   <data name="UPDATEYOUWANTIS" xml:space="preserve">
     <value>Você gostaria de {0} agora?</value>
+  </data>
+  <data name="WARNINGLABELTEXT" xml:space="preserve">
+    <value>Conecte o seu device ao Display Buttons.</value>
   </data>
 </root>

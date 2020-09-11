@@ -109,44 +109,8 @@ namespace DisplayButtons.Forms
                 t.Start();
 
 
-                NotifyIcon icon = new NotifyIcon
-                {
-                    Icon = Icon,
-                    Text = Text
-                };
-                icon.DoubleClick += (sender, e) =>
-                {
-                    Show();
-                };
-                ContextMenuStrip menu = new ContextMenuStrip();
-                menu.Items.Add("Open application").Click += (s, e) =>
-                {
-                    Show();
-                };
-                menu.Items.Add("-");
-                menu.Items.Add("Exit application").Click += (s, e) =>
-                {
-                    Application.Exit();
-                };
-                FormClosing += (s, e) =>
-                {
-                    if (e.CloseReason == CloseReason.UserClosing)
-                    {
-                        Hide();
-                        e.Cancel = true;
-                    }
-                    else if (e.CloseReason == CloseReason.ApplicationExitCall)
-                    {
-                        icon.Visible = false;
-                        icon.Dispose();
-                    }
-                };
-                menu.Opening += (s, e) =>
-                {
-                    menu.Items[0].Select();
-                };
-                icon.ContextMenuStrip = menu;
-                icon.Visible = true;
+               
+              
             }
             ColorSchemeCentral.ThemeChanged += (s, e) =>
             ApplySidebarTheme(shadedPanel1);
@@ -165,8 +129,8 @@ namespace DisplayButtons.Forms
 
                 Control control = Controls["panel1"];
                 if (control != null) control.Visible = visible;
-                Control control3 = Controls["shadedPanel1"];
-                if (control3 != null) control3.Visible = visible;
+              //  Control control3 = Controls["shadedPanel1"];
+              //  if (control3 != null) control3.Visible = visible;
 
             }));
         }
@@ -188,173 +152,262 @@ namespace DisplayButtons.Forms
         {
             base.OnLoad(e);
 
-         
+          
 
+
+            using (frmWaitForm frm = new frmWaitForm(StartupMethods))
+            {
+                frm.ShowDialog(this);
+            }
+
+            //warning_label.ForeColor = ColorScheme.SecondaryColor;
+           
+        }
+  
+        public void StartupMethods()
+        {
+
+    
             StartUsbMode();
 
 
-
-
-
-
-
-
-            var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
-            var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
-            var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
-            var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.folder_white : Resources.folder_black;
-            var imageMiscelanius = ColorScheme.ForegroundColor == Color.White ? Resources.drawer__archive__files__documents__office_white : Resources.drawer__archive__files__documents__office_white;
-            var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.download_arrow_white : Resources.download_arrow_black;
-
-            AppAction item = new AppAction()
-            {
-                Image = image
-            };
-            item.Click += (s, ee) =>
-            {
-                //TODO: Settings
-                new SettingsForm().ShowDialog();
-            };
-
-   
-           
-            AppAction autoupdate = new AppAction()
-            {
-                Image = imageUpdate
-            };
-            autoupdate.Click += async (s, ee) =>
-            {
-                //TODO: Settings
-
-                _sparkle = new SparkleUpdater(
-   Globals.updateurl, // link to your app cast file
-   new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
-)
-                {
-
-
-                    UIFactory = new NetSparkleUpdater.UI.WinForms.UIFactory(Resources.button_deck) // or null or choose some other UI factory or build your own!
-
-                };
-
-              await _sparkle.CheckForUpdatesQuietly();
-                var list =  _sparkle.AppCastHandler.GetAvailableUpdates();
-
-              
-                var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list,true,true);
-               
-                form.HideRemindMeLaterButton();
-               form.HideSkipButton();
-         
-                    form.Show(true);
-                
-
-
-                //   AutoUpdater.LetUserSelectRemindLater = false;
-                //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
-                //  _sparkle.CheckForUpdatesAtUserRequest();
-                //AutoUpdater.Start(Globals.updateurl);
-            };
-           
-
-            AppAction itemTrash = new AppAction()
-            {
-                Image = imageTrash
-            };
-            itemTrash.Click += (s, ee) =>
-            {
-                if (CurrentDevice == null) return;
-                if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
-                    SendItemsToDevice(CurrentDevice, true);
-                    RefreshAllButtons(false);
-                }
-            };
-            appBar1.Actions.Add(autoupdate);
-           
-            appBar1.Actions.Add(itemTrash);
- appBar1.Actions.Add(item);
-            AppAction itemMagnetite = new AppAction()
-            {
-              
-       
-             Image = imageMiscelanius
-                
-            };
-           
-            itemMagnetite.Click += (s, ee) =>
-            {
-                new MagnetiteForm().ShowDialog();
-            };
-
-
-
-            AppAction itemBiblioteca = new AppAction()
-            {
-                Image = imageBiblioteca
-            };
-
-            itemBiblioteca.Click += (s, ee) =>
-            {
-                new ImageListForm().ShowDialog();
-                //     new ScribeBot.Interface.Window().Show();
-            };
-
-            Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
-            
-            appBar1.Actions.Add(itemMagnetite);
-        
-            appBar1.Actions.Add(itemBiblioteca);
-          
-            // ApplyTheme(panel1);
-            GenerateSidebar(shadedPanel1, true);
-            ApplySidebarTheme(shadedPanel1);
-
-            ApplySidebarTheme(painel_developer);
-            //shadedPanel2.Hide();
-            //shadedPanel1.Hide();
-
-
-
             ChangeDeveloperMode();
-           // MatrizGenerator();
-
-            Refresh();
-
-
-
             RegisterMainFolderHotKey();
 
             RegisterBackFolderHotKey();
 
 
-          ProfileStaticHelper.SetupPerfil(false);
+          ProfileStaticHelper.SetupPerfil();
 
             //       DeckServiceProvider.StartTimers();
-            FillPerfil();
 
-            ProfileStaticHelper.SelectItemByValue(perfilselector, ApplicationSettingsManager.Settings.CurrentProfile);
-            Texts.initilizeLang();
+            MainForm.Instance.Invoke(new Action(() =>
+            {
+
+                this.Text = Texts.rm.GetString("APPLICATIONNAME", Texts.cultereinfo);
+                perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo); 
+                warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
+                link.Click += (sender, e) =>
+                {
+                    if (MessageBox.Show(Texts.rm.GetString("ABOUTINFOLINKMESSAGEMESSAGE", Texts.cultereinfo), Texts.rm.GetString("ABOUTINFOLINKMESSAGETITLE", Texts.cultereinfo), MessageBoxButtons.OKCancel) == DialogResult.OK)
+
+                    {
+
+                        //Do something here if OK was clicked.
+
+
+                        Process myProcess = new Process();
+
+                        try
+                        {
+                            // true is the default, but it is important not to set it to false
+                            myProcess.StartInfo.UseShellExecute = true;
+                            myProcess.StartInfo.FileName = "http://displaybuttons.com";
+                            myProcess.Start();
+                        }
+                        catch (Exception ee)
+                        {
+                            Console.WriteLine(ee.Message);
+                        }
+                    }
+
+                };
+                info.Text = Texts.rm.GetString("ABOUTINFOLABELTEXT", Texts.cultereinfo);
+                info.Click += (sender, e) =>
+                {
+
+                    new About().ShowDialog();
+
+                };
+                imageModernButton6.Text = Texts.rm.GetString("EVENTSYSTEMBUTTON", Texts.cultereinfo);
+                if (ApplicationSettingsManager.Settings.isAutoMinimizer) { 
+                    NotifyIcon icon = new NotifyIcon
+                {
+                    Icon = Icon,
+                    Text = Text
+                };
+                icon.DoubleClick += (sender, e) =>
+                {
+                    Show();
+                };
+                ContextMenuStrip menu = new ContextMenuStrip();
+                menu.Items.Add(Texts.rm.GetString("RESIZETEXTOPEN", Texts.cultereinfo)).Click += (s, e) =>
+                {
+                    Show();
+                };
+                menu.Items.Add("-");
+                menu.Items.Add(Texts.rm.GetString("RESIZETEXTCLOSE", Texts.cultereinfo)).Click += (s, e) =>
+                {
+                    Application.Exit();
+                };
+                FormClosing += (s, e) =>
+                {
+                   
+                        if (e.CloseReason == CloseReason.UserClosing)
+                        {
+                            Hide();
+                            e.Cancel = true;
+                        }
+                        else if (e.CloseReason == CloseReason.ApplicationExitCall)
+                        {
+                            icon.Visible = false;
+                            icon.Dispose();
+                        }
+               
+                };
+                menu.Opening += (s, e) =>
+                {
+                    menu.Items[0].Select();
+                };
+                icon.ContextMenuStrip = menu;
+                icon.Visible = true;
+ }
+
+
+                var image = ColorScheme.ForegroundColor == Color.White ? Resources.ic_settings_white_48dp_2x : Resources.ic_settings_black_48dp_2x;
+                var imageTrash = ColorScheme.ForegroundColor == Color.White ? Resources.ic_delete_white_48dp_2x : Resources.ic_delete_black_48dp_2x;
+                var imagePlugins = ColorScheme.ForegroundColor == Color.White ? Resources.Package_16x : Resources.Package_16x;
+                var imageBiblioteca = ColorScheme.ForegroundColor == Color.White ? Resources.folder_white : Resources.folder_black;
+                var imageMiscelanius = ColorScheme.ForegroundColor == Color.White ? Resources.drawer__archive__files__documents__office_white : Resources.drawer__archive__files__documents__office_white;
+                var imageUpdate = ColorScheme.ForegroundColor == Color.White ? Resources.download_arrow_white : Resources.download_arrow_black;
+
+                AppAction item = new AppAction()
+                {
+                    Image = image
+                };
+              
+                item.Click += (s, ee) =>
+                {
+              
+                   
+
+                        new SettingsForm().ShowDialog();
+                    };
+
+
+
+                AppAction autoupdate = new AppAction()
+                {
+                    Image = imageUpdate
+                };
+                autoupdate.Click += async (s, ee) =>
+                {
+                    //TODO: Settings
+
+                    _sparkle = new SparkleUpdater(
+       Globals.updateurl, // link to your app cast file
+       new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Unsafe) // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
+    )
+                    {
+
+
+                        UIFactory = new NetSparkleUpdater.UI.WinForms.UIFactory(Resources.button_deck) // or null or choose some other UI factory or build your own!
+
+                    };
+
+                    var _updateInfo = await _sparkle.CheckForUpdatesQuietly();
+                     var list = _sparkle.AppCastHandler.GetAvailableUpdates(true);
+
+                    
+                   var form = _sparkle.UIFactory.CreateAllReleaseDownloadList(_sparkle, list, false, true);
+
+                    form.HideRemindMeLaterButton();
+                    form.HideSkipButton();
+
+                    form.Show(true);
+
+
+
+                    //   AutoUpdater.LetUserSelectRemindLater = false;
+                    //     AutoUpdater.ShowUpdateForm(AutoUpdater.arg);
+                    //  _sparkle.CheckForUpdatesAtUserRequest();
+                    //AutoUpdater.Start(Globals.updateurl);
+                };
+
+
+                AppAction itemTrash = new AppAction()
+                {
+                    Image = imageTrash
+                };
+                itemTrash.Click += (s, ee) =>
+                {
+                    if (CurrentDevice == null) return;
+                    if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
+                        SendItemsToDevice(CurrentDevice, true);
+                        RefreshAllButtons(false);
+                    }
+                };
+                appBar1.Actions.Add(autoupdate);
+
+                appBar1.Actions.Add(itemTrash);
+                appBar1.Actions.Add(item);
+                AppAction itemMagnetite = new AppAction()
+                {
+
+                  
+                    Image = imageMiscelanius
+                    
+
+                };
+               
+                itemMagnetite.Click += (s, ee) =>
+                {
+                    new MagnetiteForm().ShowDialog();
+                };
+
+
+
+
+                AppAction itemBiblioteca = new AppAction()
+                {
+                    Image = imageBiblioteca
+                };
+
+                itemBiblioteca.Click += (s, ee) =>
+                {
+                    new ImageListForm().ShowDialog();
+                    //     new ScribeBot.Interface.Window().Show();
+                };
+
+                Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
+
+                appBar1.Actions.Add(itemMagnetite);
+
+                appBar1.Actions.Add(itemBiblioteca);
+ 
+                // ApplyTheme(panel1);
+                GenerateSidebar(shadedPanel1, true);
+           
+
+             //   ApplySidebarTheme(painel_developer);
+  
+
+                Refresh();
+
+
+
+                FillPerfil();
+           
+
+                    ProfileStaticHelper.SelectItemByValue(perfilselector, ProfileStaticHelper.SelectPerfilByName(ApplicationSettingsManager.Settings.CurrentProfile)); 
+
+           
 
             if (!ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
             {
                 shadedPanel4.Visible = false;
-
-            //    int columnumber = tableLayoutPanel1.GetColumn(shadedPanel4);
-        //        tableLayoutPanel1.ColumnStyles[columnumber].Width = 0;
-
-
-
-
-
-
-
-            }
-            new FactoryEvents().Init();
-
-            //warning_label.ForeColor = ColorScheme.SecondaryColor;
-            Checkupdates();
+                }
+                else
+                {
+                    ApplySidebarTheme(shadedPanel4);
+                }
+                }));
+          ApplySidebarTheme(shadedPanel1);
+            Texts.initilizeLang();
+ new FactoryEvents().Init();
+ Checkupdates();
         }
         private void Checkupdates()
         {
@@ -362,7 +415,7 @@ namespace DisplayButtons.Forms
             string TargetDirectory = Assembly.GetExecutingAssembly().Location;
             _sparkle = new SparkleUpdater(
       Globals.updateurl, // link to your app cast file
-      new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Strict, "A2tEBvddEqvXjDj4c1Wfoyu6rlf4n2gNTKmKsx8x+eM=") // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
+      new Ed25519Checker(NetSparkleUpdater.Enums.SecurityMode.Unsafe) // your base 64 public key -- generate this with the NetSparkleUpdater.Tools AppCastGenerator on any OS
   )
             {
 
@@ -371,7 +424,7 @@ namespace DisplayButtons.Forms
 
             };
 
-            
+           // _sparkle.RelaunchAfterUpdate = true;
       //      _sparkle.CustomInstallerArguments = @"/c WZUNZIP.EXE - ye - o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory;
             _sparkle.StartLoop(true,true); // `true` to run an initial check online -- only call StartLoop once for a given SparkleUpdater instance!
 
@@ -1129,7 +1182,7 @@ namespace DisplayButtons.Forms
         }
         public void RefreshButton(int slot, bool sendToDevice = true)
         {
-            Buttons_Unfocus(this, EventArgs.Empty);
+           // Buttons_Unfocus(this, EventArgs.Empty);
 
             IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
             ImageModernButton control1 = GetButtonControl(slot);
@@ -1151,26 +1204,15 @@ namespace DisplayButtons.Forms
 
                 if (folder.GetItemIndex(item) != slot) continue;
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-                Label control2 = Controls.Find("label" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
+                
             
-                //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
+            
                 if (item != null)
                 {
-                    //var ser = item.GetItemImage().BitmapSerialized;
-                    //  control.NormalImage = null
-
-
-
-
-
-
+           
 
                     control.NormalImage = item?.GetItemImage().Bitmap;
-                    // control2.Text = item.DeckName;
-
-
-                    //control.NormalImage = item?.GetItemImage().Bitmap; //Write_name_Image(dI.DeckAction.GetActionName(), item?.GetItemImage().Bitmap, 10f, 10f, "Arial", 10);
-
+              
 
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
@@ -1242,7 +1284,7 @@ namespace DisplayButtons.Forms
             var receiver = new ConsoleOutputReceiver();
 
             Program.client.ExecuteRemoteCommand("pm path net.nickac.DisplayButtons", e.Device, receiver);
-
+ 
             if (receiver != null)
             {
                 var product_name = new ConsoleOutputReceiver();
@@ -1285,9 +1327,9 @@ namespace DisplayButtons.Forms
         {
            
            
-               if(CurrentPerfil == null)
+               if(perfilselector.Items.Count == 0)
             {
-                ProfileStaticHelper.SetupPerfil(true);
+                ProfileStaticHelper.SetupPerfil();
             }
                 if (CurrentPerfil != null)
                 {
@@ -1443,7 +1485,7 @@ namespace DisplayButtons.Forms
                     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                     var seri = image.BitmapSerialized;
 
-                    packet.AddToQueue(folder.GetItemIndex(item), item?.DeckName, " ", item.DeckSize, item.DeckPosition, item?.DeckColor, image);
+                    packet.AddToQueue(folder.GetItemIndex(item), item, image);
 
                 }
 
@@ -1811,7 +1853,7 @@ namespace DisplayButtons.Forms
 
 
 
-                    folder_form.Add(new folders(PP.DeckName, PP, false, root));
+                    folder_form.Add(new folders(PP.Deckname, PP, false, root));
                     // AddFolderInPanelList(shadedPanel1, PP.folder_name, PP, root, false, root);
                     //   Debug.WriteLine(PP.folder_name + "CC:" + PP.GetSubFolders().Count);             
 
@@ -1822,7 +1864,7 @@ namespace DisplayButtons.Forms
 
                             if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
-                                folder_form.Add(new folders(pastapai.DeckName, pastapai, true, root));
+                                folder_form.Add(new folders(pastapai.Deckname, pastapai, true, root));
                             }
                             AddFolderInPanelList(root);
                             root++;
@@ -1831,7 +1873,7 @@ namespace DisplayButtons.Forms
                         {
                             if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
-                                folder_form.Add(new folders(pastapai.DeckName, pastapai, true, root));
+                                folder_form.Add(new folders(pastapai.Deckname, pastapai, true, root));
                             }
                             Debug.WriteLine("ROOT: " + root);
                             AddFolderInPanelList(root);
@@ -1927,8 +1969,8 @@ namespace DisplayButtons.Forms
                         folder.Font = itemFont;
 
                         folder.Dock = DockStyle.Top;
-                        folder.Text = item.DeckName;
-                        folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
+                        folder.Text = item.Deckname;
+                        folder.Height = TextRenderer.MeasureText(item.Deckname, itemFont).Height;
                         toAdd.Add(folder);
                         foreach (DynamicDeckFolder subitem in ListFolders(item).Skip(1))
                         {
@@ -1940,8 +1982,8 @@ namespace DisplayButtons.Forms
                             subfolder.Font = itemFont;
 
                             subfolder.Dock = DockStyle.Top;
-                            subfolder.Text = "..." + subitem.DeckName;
-                            subfolder.Height = TextRenderer.MeasureText("..." + subitem.DeckName, itemFont).Height;
+                            subfolder.Text = "..." + subitem.Deckname;
+                            subfolder.Height = TextRenderer.MeasureText("..." + subitem.Deckname, itemFont).Height;
                             subfolder.Click += (s, ee) =>
                                                    {
 
@@ -1965,8 +2007,8 @@ namespace DisplayButtons.Forms
                         folder.Font = itemFont;
 
                         folder.Dock = DockStyle.Top;
-                        folder.Text = item.DeckName;
-                        folder.Height = TextRenderer.MeasureText(item.DeckName, itemFont).Height;
+                        folder.Text = item.Deckname;
+                        folder.Height = TextRenderer.MeasureText(item.Deckname, itemFont).Height;
                         toAdd.Add(folder);
                     }
 
@@ -2044,10 +2086,10 @@ namespace DisplayButtons.Forms
                             Dock = DockStyle.Top,
                             Text = i2.GetActionName(),
                             Height = TextRenderer.MeasureText(i2.GetActionName(), itemFont).Height,
-                            Tag = i2,
+                            Tag = i2
 
                         };
-                        //    Debug.WriteLine("TAG VINDO: " + i2);
+                          Debug.WriteLine("TAG VINDO: " + i2);
                         item.MouseDown += (s, ee) =>
                         {
                             if (item.Tag is AbstractDeckAction act)
@@ -2069,7 +2111,7 @@ namespace DisplayButtons.Forms
                
                
             }
-
+          
 
         }
 
@@ -2423,37 +2465,67 @@ namespace DisplayButtons.Forms
 
                 ModernButton myButton = new ModernButton();
                 ModernButton myColor = new ModernButton();
+                ModernButton myColorShadow = new ModernButton();
                 Label myTextNameInformation = new Label();
                 Label sizeLabelInfo = new Label();
                 Label positionLabelInfo = new Label();
+                Label StrokeLabelInfo = new Label();
+                Label StrokeLabelColor = new Label();
+                Label StrokeLabelDX = new Label();
+                Label StrokeLabelDY = new Label();
+                Label StrokeLabelRADIUS = new Label();
                 TextBox sizeLabelTextBox = new TextBox();
                 ComboBox PositionComboBox = new ComboBox();
                 TextBox myNameText = new TextBox();
                 TextBox myColorText = new TextBox();
+                CheckBox IsStrokeCheckbox = new CheckBox();
+               
+                TextBox shadow_stroke_radiustextfloat = new TextBox();
+                TextBox shadow_stroke_dxtextfloat = new TextBox();
+                TextBox shadow_stroke_dytextfloat = new TextBox();
+                TextBox shadow_stroke_color = new TextBox();
                 myColor.Size = new Size(70, 30);
-                myColor.Text = "Selecionar Cor";
-
+                IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
+                myColor.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
+                myColorShadow.Size = new Size(70, 30);
+                myColorShadow.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
+                myTextNameInformation.Text = Texts.rm.GetString("DECKITEMTEXT", Texts.cultereinfo);
+                StrokeLabelInfo.Text = Texts.rm.GetString("DECKITEMSTROKE", Texts.cultereinfo);
+                StrokeLabelRADIUS.Text = Texts.rm.GetString("DECKITEMSTROKERADIUS", Texts.cultereinfo);
+                StrokeLabelDX.Text = Texts.rm.GetString("DECKITEMSTROKEDX", Texts.cultereinfo);
+                StrokeLabelDY.Text = Texts.rm.GetString("DECKITEMSTROKEDY", Texts.cultereinfo);
+                StrokeLabelColor.Text = Texts.rm.GetString("DECKITEMSTROKECOLOR", Texts.cultereinfo);
+                positionLabelInfo.Text = Texts.rm.GetString("DECKITEMPOSITION", Texts.cultereinfo);
+                sizeLabelInfo.Text = Texts.rm.GetString("DECKITEMSIZE", Texts.cultereinfo); 
                 FlowLayoutPanel painel_name = new FlowLayoutPanel();
                 FlowLayoutPanel painel_color = new FlowLayoutPanel();
                 FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
                 FlowLayoutPanel painel_position = new FlowLayoutPanel();
+                FlowLayoutPanel painel_shadowstroke= new FlowLayoutPanel();
                 myColor.Dock = DockStyle.None;
                 myColorText.Dock = DockStyle.None;
                 sizeLabelTextBox.Dock = DockStyle.None;
                 sizeLabelInfo.Dock = DockStyle.None;
                 positionLabelInfo.Dock = DockStyle.None;
+                StrokeLabelInfo.Dock = DockStyle.None;
                 PositionComboBox.Dock = DockStyle.None;
+                shadow_stroke_radiustextfloat.Dock = DockStyle.None;
+                shadow_stroke_dxtextfloat.Dock = DockStyle.None;
+                shadow_stroke_dytextfloat.Dock = DockStyle.None;
+                shadow_stroke_color.Dock = DockStyle.None;
+                myNameText.Text = dI.Deckname;
+                myColorText.Text = dI.Deckcolor;
 
-                myNameText.Text = dI.DeckName;
-                myColorText.Text = dI.DeckColor;
-
-                myColorText.Text = dI.DeckColor;
-
+                IsStrokeCheckbox.Checked = dI.IsStroke;
+                shadow_stroke_color.Text = dI.Stroke_color;
+                shadow_stroke_dytextfloat.Text = dI.Stroke_Dy.ToString();
+                shadow_stroke_dxtextfloat.Text = dI.Stroke_dxtext.ToString();
+                shadow_stroke_radiustextfloat.Text = dI.Stroke_radius.ToString();
                 // PositionComboBox.SelectedValue = (int)dI.DeckPosition;
 
 
 
-                sizeLabelTextBox.Text = dI.DeckSize.ToString();
+                sizeLabelTextBox.Text = dI.Decksize.ToString();
                 myColor.Click += (s, e) =>
                 {
 
@@ -2466,6 +2538,25 @@ namespace DisplayButtons.Forms
                             //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
                             string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
                             myColorText.Text = result;
+                        }
+
+                        dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
+                    }
+
+                };
+
+                myColorShadow.Click += (s, e) =>
+                {
+
+                    using (ColorPickerDialog dialog = new ColorPickerDialog())
+                    {
+                        dialog.PreviewColorChanged += this.DialogColorChangedHandler;
+
+                        if (dialog.ShowDialog(this) == DialogResult.OK)
+                        {
+                            //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
+                            string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
+                            shadow_stroke_color.Text = result;
                         }
 
                         dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
@@ -2487,14 +2578,15 @@ namespace DisplayButtons.Forms
 
 
 
-
-
                 painel_position.Size = new Size(190, 60);
 
                 painel_color.Size = new Size(190, 30);
 
                 painel_name.Size = new Size(190, 50);
                 painel_tamanho.Size = new Size(190, 50);
+                painel_shadowstroke.Size = new Size(190, 300);
+                painel_shadowstroke.WrapContents = true;
+      
                 painel_tamanho.WrapContents = true;
                 painel_name.WrapContents = true;
                 //painel 1
@@ -2503,7 +2595,17 @@ namespace DisplayButtons.Forms
                 painel_position.Controls.Add(positionLabelInfo);
 
                 painel_position.Controls.Add(PositionComboBox);
-
+                painel_shadowstroke.Controls.Add(StrokeLabelInfo);
+                painel_shadowstroke.Controls.Add(IsStrokeCheckbox);
+                painel_shadowstroke.Controls.Add(StrokeLabelRADIUS);
+                painel_shadowstroke.Controls.Add(shadow_stroke_radiustextfloat);
+                painel_shadowstroke.Controls.Add(StrokeLabelDX);
+                painel_shadowstroke.Controls.Add(shadow_stroke_dxtextfloat);
+                painel_shadowstroke.Controls.Add(StrokeLabelDY);
+                painel_shadowstroke.Controls.Add(shadow_stroke_dytextfloat);
+                painel_shadowstroke.Controls.Add(StrokeLabelColor);
+                painel_shadowstroke.Controls.Add(shadow_stroke_color);
+                painel_shadowstroke.Controls.Add(myColorShadow);
 
                 painel_color.Controls.Add(myColor);
                 painel_color.Controls.Add(myColorText);
@@ -2516,32 +2618,43 @@ namespace DisplayButtons.Forms
 
 
 
-
+               
                 flowLayoutPanel1.Controls.Add(painel_name);
                 flowLayoutPanel1.Controls.Add(painel_color);
                 flowLayoutPanel1.Controls.Add(painel_tamanho);
                 flowLayoutPanel1.Controls.Add(painel_position);
+                flowLayoutPanel1.Controls.Add(painel_shadowstroke);
 
-                flowLayoutPanel1.Controls.Add(myButton);
+                flowLayoutPanel1.Controls.Add(myButton); 
                 myButton.Text = "Salvar";
 
-                myTextNameInformation.Text = "Nome:";
+          
 
-                sizeLabelInfo.Text = "Tamanho:";
+            
 
                 setEnumValues(PositionComboBox, typeof(Position));
                 myButton.Click += (s, e) =>
                 {
-                    dI.DeckName = myNameText.Text;
-                    dI.DeckColor = myColorText.Text;
-                    dI.DeckSize = Convert.ToInt32(sizeLabelTextBox.Text);
+                    dI.Deckname = myNameText.Text;
+                    dI.Deckcolor = myColorText.Text;
+                    dI.Decksize = Convert.ToInt32(sizeLabelTextBox.Text);
+                    dI.Stroke_radius = Convert.ToSingle(shadow_stroke_radiustextfloat.Text);
+                    dI.Stroke_Dy = Convert.ToSingle(shadow_stroke_dytextfloat.Text);
+                    dI.Stroke_dxtext = Convert.ToSingle(shadow_stroke_dxtextfloat.Text);
+                    dI.Stroke_color = shadow_stroke_color.Text;
+                    dI.Deckposition = (int)PositionComboBox.SelectedValue;
+                    dI.IsStroke = IsStrokeCheckbox.Checked;
 
-                    dI.DeckPosition = (int)PositionComboBox.SelectedValue;
+                  int slot =  CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(dI);
+                    RefreshButton(slot, true);
+
+
+
 
                 };
 
 
-                PositionComboBox.SelectedValue = dI.DeckPosition;
+                PositionComboBox.SelectedValue = dI.Deckposition;
                 if (dI is DynamicDeckItem TT)
                 {
                  LoadProperties(TT, flowLayoutPanel1);
@@ -3404,26 +3517,30 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
 
         }
-        protected override void OnResize(EventArgs e)
-        {
+    //    protected override void OnResize(EventArgs e)
+    //    {
         
+    //base.OnResize(e);
+    //        if (ApplicationSettingsManager.Settings.isAutoMinimizer)
+    //        {
 
-            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
-            {
 
 
-    base.OnResize(e);
-                bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
+    //            bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
 
-                if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
-                {
+    //            if (this.WindowState == FormWindowState.Minimized && cursorNotInBar)
+    //            {
 
-                    this.ShowInTaskbar = false;
-                    notifyIcon1.Visible = true;
-                    this.Hide();
-                }
-            }
-        }
+    //                this.ShowInTaskbar = false;
+    //                notifyIcon1.Visible = true;
+    //                this.Hide();
+    //            }
+    //            else
+    //            {
+    //                notifyIcon1.Visible = false;
+    //            }
+    //        }
+    //    }
         private void MainForm_Resize(object sender, EventArgs e)
         {
 
@@ -3441,11 +3558,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void NotifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (ApplicationSettingsManager.Settings.isAutoMinimizer)
-            {
-                this.WindowState = FormWindowState.Normal;
-                this.Show();
-            }
+           
         }
 
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -3457,52 +3570,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
         {
 
         }
+  
      
-        public  void executeCMD()
-        {
-
-            try
-            {
-
-                string TargetDirectory = Assembly.GetExecutingAssembly().Location;
-
-
-                System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", @"/c  WZUNZIP.EXE -ye -o " + _sparkle.TmpDownloadFilePath + " " + TargetDirectory);
-                procStartInfo.UseShellExecute = true;
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo = procStartInfo;
-                proc.Start();
-             proc.WaitForExit();
-
-
-                // label1.Text = Globals.minecraftlocalpath + @"\launcher\Sanchez.Patcher.exe";
-                //     startInfo.Arguments = "/C start copy " + Globals.minecraftlocalpath + @"\launcher\Sanchez.Patcher.exe " + Globals.minecraftlocalpath;
-                //      startInfo.Arguments = "/min";
-
-
-                // Application.Exit();
-
-
-
-
-
-
-
-            }
-            catch
-            {
-                string createText = "Erro ao encontrar o launcher novo. Não foi possível realizar atualização automática.  /n Código: 404CEFG";
-                // 
-
-                File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory + @"\changelog.txt", createText);
-
-
-            }
-            
-            
-
-                
-            }
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
            // executeCMD();
@@ -3561,24 +3630,11 @@ toAdd.AsEnumerable().Reverse().All(m =>
      
         public void FillPerfil()
         {
-            perfilselector.Items.Clear();
-            if (DevicePersistManager.PersistedDevices.Count == 0)
+            MainForm.Instance.Invoke(new Action(() =>
             {
-                foreach (var device_con in DevicePersistManager.DeckDevicesFromConnection)
-                {
-                    foreach (var list in device_con.Value.profiles)
-                    {
-                        ProfileVoidHelper.GlobalPerfilBox teste = new ProfileVoidHelper.GlobalPerfilBox();
-                        teste.Text = list.Name;
-                        teste.Value = list;
-                        perfilselector.Items.Add(teste);
 
-
-                    }
-                }
-            }
-            else
-            {
+                perfilselector.Items.Clear();
+    
                 foreach (var perfil in DevicePersistManager.PersistedDevices.ToList())
                 {
 
@@ -3592,47 +3648,30 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                     }
                 }
-            }
             
+            }));
         }
-        public void Add_Perfil()
-        {
-
-         
-
-        }
+        
+        
         private void imageModernButton7_Click(object sender, EventArgs e)
         {
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.PerfilEditor")) as Form;
-            
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                Profile teste = new Profile();
-                teste.Name = form.textBox1.Text;
-                teste.Mainfolder = new DynamicDeckFolder();
-                //  teste.Currentfolder = teste.Mainfolder;
-                if (DevicePersistManager.PersistedDevices.Count == 0)
-                {
-                    foreach (var device_con in DevicePersistManager.DeckDevicesFromConnection)
-                    {
-                        device_con.Value.profiles.Add(teste);
-                    }
-                }
-                else
-                {
-                    foreach (var device in DevicePersistManager.PersistedDevices.ToList())
-                    {
-                        device.profiles.Add(teste);
-                    }
+            new ProfileVoidHelper().AddPerfil();
+        }
 
-                }
-                FillPerfil();
-
-            }
-            else
+        private void imageModernButton8_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(String.Format(imageModernButton1.Text = Texts.rm.GetString("MESSAGEBOXPERFIL", Texts.cultereinfo), CurrentPerfil.Value.Name), Texts.rm.GetString("MESSAGEBOXPERFIL_ALERT", Texts.cultereinfo), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                form.Close();
+                ProfileStaticHelper.RemovePerfil(CurrentPerfil.Value);
             }
+           
+        }
+
+      
+
+        private void statusStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        
         }
     }
     #endregion

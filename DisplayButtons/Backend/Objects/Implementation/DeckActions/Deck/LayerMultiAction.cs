@@ -14,7 +14,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.Deck
     public class LayerMultiAction : AbstractDeckAction
     {
 
-        public string name { get; set; } = "Multi Action Button";
+        public string name { get; set; } = Texts.rm.GetString("DECKGENERALMULTIACTION", Texts.cultereinfo);
 
         [ActionPropertyInclude]
         public string ToExecute { get; set; } = "";

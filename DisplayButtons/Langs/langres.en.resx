@@ -117,43 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ABOUTINFOAPPVERSIONLABEL" xml:space="preserve">
+    <value>Version: </value>
+  </data>
+  <data name="ABOUTINFOLABELTEXT" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="ABOUTINFOLINKMESSAGEMESSAGE" xml:space="preserve">
+    <value>Are you sure you want to access displaybuttons.com?</value>
+  </data>
+  <data name="ABOUTINFOLINKMESSAGETITLE" xml:space="preserve">
+    <value>Open browser</value>
+  </data>
+  <data name="ABOUTLABELUSEDBIBLE" xml:space="preserve">
+    <value>Used libraries</value>
+  </data>
+  <data name="ABOUTNAMETEXT" xml:space="preserve">
+    <value>About DisplayButtons</value>
+  </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL1" xml:space="preserve">
-    <value>Hello, welcome to DisplayKeys.</value>
+    <value>Hello, welcome to Display Buttons.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL2" xml:space="preserve">
-    <value>DisplayKeys is a software that allows you to use any Android™ device to
-execute actions (macros) on a computer.</value>
+    <value>Display Buttons is software that allows you to use any Android ™ device to
+perform actions (macros) on a computer.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL3" xml:space="preserve">
-    <value>DisplayKeys can be used to facilitate the use of various application shortcuts</value>
+    <value>Display Buttons can be used to facilitate the use of shortcuts from various applications</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL4" xml:space="preserve">
-    <value>To start the setup, press Next.</value>
+    <value>To start the configuration, press Next.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL5" xml:space="preserve">
     <value>Android is a trademark of Google LLC.
 This application is not related to Elgato Systems GmbH in any way.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6" xml:space="preserve">
-    <value>Whether in simple apps, or apps like DisplayKeys.
+    <value>Whether in simple apps, or apps like Display Buttons.
 Personalization is a really cool thing to have anywhere.
 Choose a theme available below to customize your user interface.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_LABEL1" xml:space="preserve">
-    <value>Now that you've selected a theme, it's time to name this device.</value>
+    <value>Now that you’ve selected a theme, it’s time to name this device.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_LABEL2" xml:space="preserve">
-    <value>The name will only be visible if there are multiple devices on
-the same network with desktop application open.</value>
+    <value>The name will only be visible if there are multiple devices on the
+the same network with the open desktop application.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_LABEL3" xml:space="preserve">
-    <value>Start application with Windows</value>
+    <value>Launch application with windows.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_LABEL4" xml:space="preserve">
-    <value>After you've entered a device name, press Finish.</value>
+    <value>After entering the device name, press finish.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL1" xml:space="preserve">
-    <value>DisplayKeys allows you to choose the number of rows and columns in your button array. Choose the matrix according to the screen size of your android device. Very large arrays take time to render.</value>
+    <value>The Display Buttons allow you to choose the number of rows and columns in your button array. Choose the matrix according to the screen size of your android device. Very large arrays take time to render.</value>
   </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL2" xml:space="preserve">
     <value>Line:</value>
@@ -161,15 +179,18 @@ the same network with desktop application open.</value>
   <data name="APPLICATIONFIRSTSETUPAGE1_MATRIZ_LABEL3" xml:space="preserve">
     <value>Column:</value>
   </data>
+  <data name="APPLICATIONNAME" xml:space="preserve">
+    <value>Display Buttons Server</value>
+  </data>
   <data name="APPLICATIONNAME_DESCRIPTION" xml:space="preserve">
     <value>Cool options that you can configure to your liking to improve
-the use of DisplayButtons. Don't forget to give your feedback.</value>
+the use of Display Buttons. Don't forget to give your feedback.</value>
   </data>
   <data name="APPLICATION_MENU" xml:space="preserve">
-    <value>DisplayKeys - Menu</value>
+    <value>Display Buttons - Menu</value>
   </data>
   <data name="BACKFOLDER" xml:space="preserve">
-    <value>Back folder</value>
+    <value>Previous folder</value>
   </data>
   <data name="BUTTONCANCEL" xml:space="preserve">
     <value>Cancel</value>
@@ -178,13 +199,13 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
     <value>Open console</value>
   </data>
   <data name="BUTTONRELOADALL" xml:space="preserve">
-    <value>Refresh all</value>
+    <value>Reload all</value>
   </data>
   <data name="BUTTONRELOADBUTTONS" xml:space="preserve">
-    <value>Refresh buttons</value>
+    <value>Reload buttons</value>
   </data>
   <data name="BUTTONRELOADEXTERNBUTTON" xml:space="preserve">
-    <value>Refresh plugin buttons</value>
+    <value>Reload external buttons</value>
   </data>
   <data name="BUTTONSAVE" xml:space="preserve">
     <value>Save</value>
@@ -192,34 +213,98 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
   <data name="CONNECTEDDEVICES" xml:space="preserve">
     <value>Connected device</value>
   </data>
+  <data name="DECKGENERALKEYPRESS" xml:space="preserve">
+    <value>Key simulator</value>
+  </data>
+  <data name="DECKGENERALMEDIAKEY" xml:space="preserve">
+    <value>Media key</value>
+  </data>
+  <data name="DECKGENERALMULTIACTION" xml:space="preserve">
+    <value>Multi action (beta)</value>
+  </data>
+  <data name="DECKGENERALTOEXECUTE" xml:space="preserve">
+    <value>Application executor</value>
+  </data>
+  <data name="DECKGENERALTOGGLEKEY" xml:space="preserve">
+    <value>Hold down key</value>
+  </data>
+  <data name="DECKITEMPOSITION" xml:space="preserve">
+    <value>Text position</value>
+  </data>
+  <data name="DECKITEMSAVEBUTTON" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="DECKITEMSELECTCOLOR" xml:space="preserve">
+    <value>Select color</value>
+  </data>
+  <data name="DECKITEMSIZE" xml:space="preserve">
+    <value>Text size</value>
+  </data>
+  <data name="DECKITEMSTROKE" xml:space="preserve">
+    <value>Stroke effect</value>
+  </data>
+  <data name="DECKITEMSTROKECOLOR" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="DECKITEMSTROKEDX" xml:space="preserve">
+    <value>Dx</value>
+  </data>
+  <data name="DECKITEMSTROKEDY" xml:space="preserve">
+    <value>Dy</value>
+  </data>
+  <data name="DECKITEMSTROKEENABLED" xml:space="preserve">
+    <value>Enable stroke effect in text</value>
+  </data>
+  <data name="DECKITEMSTROKERADIUS" xml:space="preserve">
+    <value>Radius</value>
+  </data>
+  <data name="DECKITEMTEXT" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="DECKMISCIFTTT" xml:space="preserve">
+    <value>IFTTT connection</value>
+  </data>
+  <data name="DECKOBSMULTISCENE" xml:space="preserve">
+    <value>Multi scene selector</value>
+  </data>
+  <data name="DECKOBSRECORD" xml:space="preserve">
+    <value>Start / stop recording</value>
+  </data>
+  <data name="DECKOBSSTREAMING" xml:space="preserve">
+    <value>Start / stop streaming</value>
+  </data>
+  <data name="DECKOBSSWITCHSCENE" xml:space="preserve">
+    <value>Change scene</value>
+  </data>
+  <data name="DECKOBSVISIBILITYSCENE" xml:space="preserve">
+    <value>Scene visibility</value>
+  </data>
   <data name="DefaultUIFactory_ErrorTitle" xml:space="preserve">
     <value>Error!</value>
   </data>
   <data name="DefaultUIFactory_MessageTitle" xml:space="preserve">
-    <value>Info</value>
+    <value>Information</value>
   </data>
   <data name="DefaultUIFactory_ShowCannotDownloadAppcastMessage" xml:space="preserve">
-    <value>Sorry, either you aren't connected to the internet, or our server is having a problem.</value>
+    <value>Sorry, either you are not connected to the Internet or our server is having problems.</value>
   </data>
   <data name="DefaultUIFactory_ShowDownloadErrorMessage" xml:space="preserve">
-    <value>Sorry, there was a problem attempting to download the update
-
-{0}</value>
+    <value>Sorry, there was a problem trying to download update {0}</value>
   </data>
   <data name="DefaultUIFactory_ShowUnknownInstallerFormatMessageText" xml:space="preserve">
-    <value>Updater not supported, please execute {0} manually</value>
+    <value>Unsupported updater, run {0} manually</value>
   </data>
   <data name="DefaultUIFactory_ShowVersionIsSkippedByUserRequestMessage" xml:space="preserve">
-    <value>You have elected to skip this version.</value>
+    <value>You have chosen to skip this version.</value>
   </data>
   <data name="DefaultUIFactory_ShowVersionIsUpToDateMessage" xml:space="preserve">
-    <value>Your current version is up to date.</value>
+    <value>Your current version is updated.</value>
   </data>
   <data name="DefaultUIFactory_ToastCallToAction" xml:space="preserve">
     <value>More information</value>
   </data>
   <data name="DefaultUIFactory_ToastMessage" xml:space="preserve">
-    <value>New Version Available</value>
+    <value>New version available</value>
   </data>
   <data name="DEVELOPERMODE" xml:space="preserve">
     <value>Developer mode</value>
@@ -227,8 +312,71 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
   <data name="DEVICENAME" xml:space="preserve">
     <value>Device name</value>
   </data>
-  <data name="DEVICENAME1" xml:space="preserve">
-    <value>Device name</value>
+  <data name="EVENTSYSTEMACTIONS" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="EVENTSYSTEMBACKBUTTON" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="EVENTSYSTEMBUTTON" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="EVENTSYSTEMCANCELBUTTON" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="EVENTSYSTEMCONDITIONS" xml:space="preserve">
+    <value>Condition</value>
+  </data>
+  <data name="EVENTSYSTEMCONFIGBUTTON" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="EVENTSYSTEMDELETEBUTTON" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="EVENTSYSTEMEVENTNAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="EVENTSYSTEMGERAL" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="EVENTSYSTEMISACTIVE" xml:space="preserve">
+    <value>Enable event</value>
+  </data>
+  <data name="EVENTSYSTEMLUASCRIPTGROUP" xml:space="preserve">
+    <value>Script condition</value>
+  </data>
+  <data name="EVENTSYSTEMLUASSELECFILE" xml:space="preserve">
+    <value>Select lua script</value>
+  </data>
+  <data name="EVENTSYSTEMNEWBUTTON" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="EVENTSYSTEMREFRESHBUTTON" xml:space="preserve">
+    <value>Restart Events</value>
+  </data>
+  <data name="EVENTSYSTEMSAVEBUTTON" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION" xml:space="preserve">
+    <value>Time condition</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_NONE" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_TIMERAFTER" xml:space="preserve">
+    <value>After some time</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_TIMERBEFORE" xml:space="preserve">
+    <value>Until a certain time</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_TIMEREXACT" xml:space="preserve">
+    <value>Exact time</value>
+  </data>
+  <data name="EVENTSYSTEMTIMERCONDITION_TIMERINTERVAL" xml:space="preserve">
+    <value>Time interval</value>
+  </data>
+  <data name="EVENTSYSTEMTRIGGER" xml:space="preserve">
+    <value>Triggers</value>
   </data>
   <data name="EXECUTABLE_RUN_ACTION" xml:space="preserve">
     <value>Software Executor - Editor</value>
@@ -237,13 +385,19 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
     <value>Arguments</value>
   </data>
   <data name="EXECUTABLE_RUN_ACTION_ISTOWARNING" xml:space="preserve">
-    <value>Show alert on execute</value>
+    <value>Issue warning when running</value>
   </data>
   <data name="EXECUTABLE_RUN_ACTION_LOCATION" xml:space="preserve">
-    <value>Locate</value>
+    <value>Location</value>
   </data>
   <data name="EXPORTPERFIL" xml:space="preserve">
     <value>Export profile</value>
+  </data>
+  <data name="FIRSTPAGEBUTTONAVANCE" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="GENERATESIDEBARTITLEPLUGINS" xml:space="preserve">
+    <value>Buttons  lua</value>
   </data>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Key</value>
@@ -252,22 +406,19 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
     <value>Import profile</value>
   </data>
   <data name="INITIALIZER_MODE_FORMMENUOPTIONS_TEXT" xml:space="preserve">
-    <value>DisplayKeys - Starter</value>
+    <value>Display Buttons - Launcher</value>
   </data>
   <data name="ISTHISDISABLED" xml:space="preserve">
-    <value>DISABLED</value>
+    <value>Disabled</value>
   </data>
   <data name="ISTHISENABLED" xml:space="preserve">
-    <value>ENABLED</value>
+    <value>Enabled</value>
   </data>
   <data name="ISTHISSTATUS" xml:space="preserve">
     <value>Status</value>
   </data>
   <data name="KEYSELECTOR" xml:space="preserve">
     <value>Key Selector - Editor</value>
-  </data>
-  <data name="KEYSELECTOR1" xml:space="preserve">
-    <value>Key selector - Editor</value>
   </data>
   <data name="KEYSELECTOR_KEY" xml:space="preserve">
     <value>Key</value>
@@ -279,58 +430,67 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
     <value>Automatic minimizer</value>
   </data>
   <data name="MAGNETITEBROWSERFOLDERBUTTON" xml:space="preserve">
-    <value>Folder browser</value>
+    <value>Folder Browser</value>
   </data>
   <data name="MAGNETITECOOLSATALHOS" xml:space="preserve">
     <value>Quick shortcuts</value>
   </data>
   <data name="MATRIZCHANGER" xml:space="preserve">
-    <value>Change matriz</value>
+    <value>Change matrix</value>
   </data>
   <data name="MATRIZGENERATORLABELLOADING" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="MESSAGEBOXPERFIL" xml:space="preserve">
+    <value>Are you sure you want to remove the profile {0}?</value>
+  </data>
+  <data name="MESSAGEBOXPERFIL_ALERT" xml:space="preserve">
+    <value>WARNING</value>
+  </data>
   <data name="OBSCONNECTION" xml:space="preserve">
-    <value>Start OBS connection</value>
+    <value>Create OBS connection</value>
   </data>
   <data name="OBS_SCENE_CHANGE" xml:space="preserve">
     <value>OBS scene selector - Editor</value>
   </data>
   <data name="OBS_SCENE_CHANGE_LABEL" xml:space="preserve">
-    <value>Scene selected</value>
+    <value>Selected scene</value>
   </data>
   <data name="OBS_SCENE_VISIBILITY_ITEM" xml:space="preserve">
-    <value>OBS visibility item - Editor</value>
+    <value>OBS item visibility - Editor</value>
   </data>
   <data name="OBS_SCENE_VISIBILITY_ITEM_LABEL" xml:space="preserve">
-    <value>Scene item name</value>
+    <value>Scene item</value>
   </data>
   <data name="OBS_SCENE_VISIBILITY_NAME_LABEL" xml:space="preserve">
     <value>Scene name</value>
   </data>
+  <data name="PERFILINFOLABEL" xml:space="preserve">
+    <value>Profile:</value>
+  </data>
   <data name="PLUGINGERENCIER" xml:space="preserve">
-    <value>Button Manager</value>
+    <value>Plugin Manager</value>
   </data>
   <data name="PLUGINGERENCIER_AUTHORS_LABEL" xml:space="preserve">
     <value>Authors</value>
   </data>
   <data name="PLUGINGERENCIER_AUTORUN_FILE" xml:space="preserve">
-    <value>lua boot file</value>
+    <value>Lua boot file</value>
   </data>
   <data name="PLUGINGERENCIER_BUTTON_CREATE" xml:space="preserve">
     <value>Create package</value>
   </data>
   <data name="PLUGINGERENCIER_BUTTON_EXECUTOR" xml:space="preserve">
-    <value>Execute</value>
+    <value>Run</value>
   </data>
   <data name="PLUGINGERENCIER_BUTTON_STOP" xml:space="preserve">
     <value>Stop</value>
   </data>
   <data name="PLUGINGERENCIER_DESCRIPTION" xml:space="preserve">
-    <value>Description</value>
+    <value>description</value>
   </data>
   <data name="PLUGINGERENCIER_FETCH_BUTTON" xml:space="preserve">
-    <value>Fetch</value>
+    <value>Search</value>
   </data>
   <data name="PLUGINGERENCIER_NAME_LABEL" xml:space="preserve">
     <value>Name</value>
@@ -345,10 +505,10 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
     <value>Workshop</value>
   </data>
   <data name="PLUGINGERENCIER_VERSION" xml:space="preserve">
-    <value>VERSÃO</value>
+    <value>VERSION</value>
   </data>
   <data name="PRINCIPALFOLDER" xml:space="preserve">
-    <value>Principal folder</value>
+    <value>Parent folder</value>
   </data>
   <data name="RELEASENOTESGRABBERANDROIDDISPLAYBUTTONS" xml:space="preserve">
     <value>Displaybuttons version required:</value>
@@ -357,22 +517,28 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
     <value>Download update</value>
   </data>
   <data name="RELEASENOTESGRABBERMAXIMUMANDROIDDISPLAYBUTTONS" xml:space="preserve">
-    <value>Maximum android displaybuttons version:</value>
+    <value>Maximum displaybuttons android version:</value>
   </data>
   <data name="RELEASENOTESGRABBERMINIMUMANDROIDDISPLAYBUTTONS" xml:space="preserve">
     <value>Minimum displaybuttons version required:</value>
   </data>
   <data name="RELEASENOTESGRABBERREQUERIMENTS" xml:space="preserve">
-    <value>Requeriments</value>
+    <value>Requirements</value>
+  </data>
+  <data name="RESIZETEXTCLOSE" xml:space="preserve">
+    <value>Close Display Buttons</value>
+  </data>
+  <data name="RESIZETEXTOPEN" xml:space="preserve">
+    <value>Open Display Buttons</value>
   </data>
   <data name="STARTTCPSERVER" xml:space="preserve">
-    <value>START TCP Server</value>
+    <value>Start TCP server</value>
   </data>
   <data name="STOPOBSCONNECTION" xml:space="preserve">
     <value>Stop OBS connection</value>
   </data>
   <data name="STOPTCPSERVER" xml:space="preserve">
-    <value>Stop TCP Server</value>
+    <value>Stop TCP server</value>
   </data>
   <data name="THEME" xml:space="preserve">
     <value>Theme</value>
@@ -387,9 +553,12 @@ the use of DisplayButtons. Don't forget to give your feedback.</value>
     <value>Download</value>
   </data>
   <data name="UPDATEINSTALLTHEAPP" xml:space="preserve">
-    <value>The app</value>
+    <value>The application</value>
   </data>
   <data name="UPDATEYOUWANTIS" xml:space="preserve">
     <value>Would you like {0} now?</value>
+  </data>
+  <data name="WARNINGLABELTEXT" xml:space="preserve">
+    <value>Connect your device to the Display Buttons.</value>
   </data>
 </root>

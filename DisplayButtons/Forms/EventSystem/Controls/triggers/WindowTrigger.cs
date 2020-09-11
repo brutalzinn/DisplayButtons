@@ -33,7 +33,8 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
                 window = value;
 
             textBox1.Text = value.AppName;
-                comboBox1.SelectedItem = value.windowEvent;
+                // int value = ((KeyValuePair<int, string>)comboBox1.SelectedItem).Key;
+                comboBox1.SelectedValue = value.windowEvent;
             }
           
         }

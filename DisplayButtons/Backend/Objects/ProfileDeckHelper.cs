@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace DisplayButtons.Backend.Objects
@@ -27,10 +28,44 @@ namespace DisplayButtons.Backend.Objects
             }
 
         }
+        
 
 
+        public void AddPerfil()
+        {
 
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.PerfilEditor")) as Form;
 
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Profile teste = new Profile();
+                teste.Name = form.textBox1.Text;
+                teste.Mainfolder = new DynamicDeckFolder();
+                //  teste.Currentfolder = teste.Mainfolder;
+                if (DevicePersistManager.PersistedDevices.Count == 0)
+                {
+                    foreach (var device_con in DevicePersistManager.DeckDevicesFromConnection)
+                    {
+                        device_con.Value.profiles.Add(teste);
+                    }
+                }
+                else
+                {
+                    foreach (var device in DevicePersistManager.PersistedDevices.ToList())
+                    {
+                        device.profiles.Add(teste);
+                    }
+
+                }
+                MainForm.Instance.FillPerfil();
+
+            }
+            else
+            {
+                form.Close();
+            }
+
+        }
 
     }
     public static class ProfileStaticHelper
@@ -60,24 +95,43 @@ namespace DisplayButtons.Backend.Objects
             }
             //   Debug.WriteLine();
         }
+
+
+    
+        public static Profile SelectPerfilByName(string profilename)
+        {
+            Profile result = null;
+            foreach (var device in DevicePersistManager.PersistedDevices)
+            {
+
+                result =  device.profiles.Where(e => e.Name == profilename).FirstOrDefault();
+            }
+            return result;
+        }
         public static void SelectCurrentDevicePerfil(Profile profile)
         {
             if (MainForm.Instance.CurrentDevice != null)
             {
-                var con = MainForm.Instance.CurrentDevice.GetConnection();
+                MainForm.Instance.Invoke(new Action(() =>
+                {
+
+                    var con = MainForm.Instance.CurrentDevice.GetConnection();
                 SelectPerfilMatriz(profile);
                 
                 DevicePersistManager.DeckDevicesFromConnection.FirstOrDefault().Value.CurrentProfile = profile;
                 MainForm.Instance.MatrizGenerator(profile);
+                  
                 var Matriz = new MatrizPacket(profile);
                 con.SendPacket(Matriz);
-                MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder;
+
+                MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = profile.Mainfolder;
                
         
                 MainForm.Instance.ChangeToDevice(MainForm.Instance.CurrentDevice);
                 DeviceSelected = profile;
-                ApplicationSettingsManager.Settings.CurrentProfile = profile;
-               
+                ApplicationSettingsManager.Settings.CurrentProfile = profile.Name;
+  MainForm.Instance.RefreshAllButtons(true);
+                }));
             }
         }
         public static bool CheckProfileMatriz(Profile profile)
@@ -126,31 +180,11 @@ namespace DisplayButtons.Backend.Objects
                 }
             }
         }
-        public static void SetupPerfil(bool isDeviceOn)
+        public static void SetupPerfil()
         {
-            if (isDeviceOn)
-            {
-                foreach (var device in DevicePersistManager.DeckDevicesFromConnection)
-                {
-                    if (device.Value.profiles.Count == 0)
-                    {
-
-                        Profile new_folder = new Profile();
-                        new_folder.Mainfolder = new DynamicDeckFolder();
-                        new_folder.Name = "DEFAULT";
-
-                        device.Value.profiles.Add(new_folder);
-                        SelectCurrentDevicePerfil(new_folder);
-
-                        MainForm.Instance.FillPerfil();
-                    }
-
-
-                }
-            }
-            else
-            {
-                foreach (var device in DevicePersistManager.PersistedDevices)
+       
+          
+                foreach (var device in DevicePersistManager.PersistedDevices.ToList())
                 {
                     if (device.profiles.Count == 0)
                     {
@@ -168,12 +202,32 @@ namespace DisplayButtons.Backend.Objects
 
                 }
 
-            }
+            
 
         }
 
+   
+     public static void RemovePerfil(Profile perfil)
+    {
+        foreach (var device in DevicePersistManager.PersistedDevices)
+        {
+            if (device.profiles.Count > 1)
+            { 
+                   
+ device.profiles.Remove(perfil);
+                    SelectCurrentDevicePerfil(device.profiles.Last());
+                   
+                MainForm.Instance.FillPerfil();
+            }
+
+
+        }
     }
-}
+    
+
+
+    }
+    }
 
 
 

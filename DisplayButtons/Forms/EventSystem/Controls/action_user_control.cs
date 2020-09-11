@@ -32,6 +32,13 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         {
             instance = this;
             InitializeComponent();
+
+
+
+         imageModernButton1.Text =   Texts.rm.GetString("EVENTSYSTEMDELETEBUTTON", Texts.cultereinfo);
+        imageModernButton2.Text    = Texts.rm.GetString("EVENTSYSTEMCONFIGBUTTON", Texts.cultereinfo);
+        imageModernButton2.Text =     Texts.rm.GetString("EVENTSYSTEMNEWBUTTON", Texts.cultereinfo);
+
         }   
         public List<AbstractAction> list_actions { get; set; } = new List<AbstractAction>();
         public List<AbstractAction> GetList()

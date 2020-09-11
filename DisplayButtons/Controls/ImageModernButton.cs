@@ -135,13 +135,9 @@ namespace DisplayButtons.Controls
                                 state.SendPacket(new SingleUniversalChangePacket(deckImage)
                                 {
                                     ImageSlot = slot,
-                                    Color = itemNew.DeckColor,
-                                    Font = " ",
-                                    Text = itemNew.DeckName,
-                                    Size = itemNew.DeckSize,
-                                    Position = itemNew.DeckPosition
+                                    CurrentItem = itemNew
 
-                                });
+                                }); 
                             }
                         }
                         if (Tag is DynamicDeckItem item) {

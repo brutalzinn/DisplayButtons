@@ -58,9 +58,7 @@ if(item is WindowEvent)
                     if (item is TimerEvent)
                     {
                         item.OnInit(events);
-                     //   SharpShedule.Sheduler teste = new SharpShedule.Sheduler();
-                    //    teste.Shedule(Display, DateTime.Now.AddSeconds(5), events);
-                    //    teste.Start();
+               
                             
                     }
              //       item.OnInit();
@@ -95,17 +93,20 @@ if(item is WindowEvent)
             {
                 foreach (var events in EventXml.Settings.Events)
                 {
-                    foreach (var CurrentItem in events.list_triggers)
+                    if (events.IsEnabled)
                     {
-                        if (CurrentItem is WindowEvent)
+                        foreach (var CurrentItem in events.list_triggers)
                         {
-                            var totalFilterItems = events.list_triggers;
-                            MethodInfo helperMethod = CurrentItem.GetType().GetMethod("ProcessHelper");
-                            if (helperMethod != null)
+                            if (CurrentItem is WindowEvent)
                             {
+                                var totalFilterItems = events.list_triggers;
+                                MethodInfo helperMethod = CurrentItem.GetType().GetMethod("ProcessHelper");
+                                if (helperMethod != null)
+                                {
 
-                                helperMethod.Invoke(CurrentItem, new object[] { e.Process, 1, events }) ;
+                                    helperMethod.Invoke(CurrentItem, new object[] { e.Process, 1, events });
 
+                                }
                             }
                         }
                     }
@@ -115,17 +116,20 @@ if(item is WindowEvent)
             {
                 foreach (var events in EventXml.Settings.Events)
                 {
-                    foreach (var CurrentItem in events.list_triggers)
+                    if (events.IsEnabled)
                     {
-                        if (CurrentItem is WindowEvent)
+                        foreach (var CurrentItem in events.list_triggers)
                         {
-                            var totalFilterItems = events.list_triggers;
-                            MethodInfo helperMethod = CurrentItem.GetType().GetMethod("ProcessHelper");
-                            if (helperMethod != null)
+                            if (CurrentItem is WindowEvent)
                             {
+                                var totalFilterItems = events.list_triggers;
+                                MethodInfo helperMethod = CurrentItem.GetType().GetMethod("ProcessHelper");
+                                if (helperMethod != null)
+                                {
 
-                                helperMethod.Invoke(CurrentItem, new object[] { e.Process, 0, events });
+                                    helperMethod.Invoke(CurrentItem, new object[] { e.Process, 0, events });
 
+                                }
                             }
                         }
                     }

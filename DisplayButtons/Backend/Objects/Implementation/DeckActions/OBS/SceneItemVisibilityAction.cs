@@ -58,7 +58,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 
         public override string GetActionName()
         {
-            return "Scene Item Visibility";
+            return Texts.rm.GetString("DECKOBSVISIBILITYSCENE", Texts.cultereinfo);
         }
 
         public override void OnButtonDown(DeckDevice deckDevice)

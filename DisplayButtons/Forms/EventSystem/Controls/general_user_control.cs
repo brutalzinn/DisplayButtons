@@ -27,6 +27,9 @@ namespace DisplayButtons.Forms.EventSystem.Controls
         {
             instance = this;
             InitializeComponent();
+
+            label1.Text = Texts.rm.GetString("EVENTSYSTEMEVENTNAME", Texts.cultereinfo); 
+            checkBox1.Text = Texts.rm.GetString("EVENTSYSTEMISACTIVE", Texts.cultereinfo); 
         }
         public  string  GetName(){
 

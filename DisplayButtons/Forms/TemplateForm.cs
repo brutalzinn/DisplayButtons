@@ -14,12 +14,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DisplayButtons.Backend.Utils.AppSettings;
-using System.ComponentModel;
+using System.Linq.Expressions;
+
 
 namespace DisplayButtons.Forms
 {
 
-   
+
     public class TemplateForm : ModernForm
     {
         public bool MinimizeToTrayRightMinimize { get; set; }
@@ -57,7 +58,7 @@ namespace DisplayButtons.Forms
             ModifyColorScheme(Controls.OfType<Control>());
 
         }
-       
+      
         private static Color GetReadableForeColor(Color c)
         {
             return (((c.R + c.B + c.G) / 3) > 128) ? Color.Black : Color.White;
@@ -65,31 +66,40 @@ namespace DisplayButtons.Forms
 
         public void ModifyColorScheme(IEnumerable<Control> cccc)
         {
+         
             cccc.All(c => {
-                if(c.Tag == null)
-                {
-                    return false;
-                }
+              
                 if (c.Tag != null && c.Tag.ToString() == "noColor")
                     return true;
                 ModifyColorScheme(c.Controls.OfType<Control>());
                 try
                 {
                     dynamic cc = c;
+                    
+                        if (c is TextBox txtBx)
+                        {
+                            txtBx.BorderStyle = BorderStyle.FixedSingle;
+                            cc.BackColor = _applicationColorScheme.BackgroundColor;
+                            c.ForeColor = GetReadableForeColor(_applicationColorScheme.BackgroundColor);
+                        }
+cc.ForeColor = _applicationColorScheme.ForeColorShaded;
 
-                    if (c is TextBox txtBx)
+                    
+              if(c.GetType().GetProperties().Any(x => x.Name == "ColorScheme"))
                     {
-                        txtBx.BorderStyle = BorderStyle.FixedSingle;
-                        cc.BackColor = _applicationColorScheme.BackgroundColor;
-                        c.ForeColor = GetReadableForeColor(_applicationColorScheme.BackgroundColor);
-                    }
+   cc.ColorScheme = ColorScheme;
 
-                    cc.ForeColor = _applicationColorScheme.ForeColorShaded;
-                    cc.ColorScheme = ColorScheme;
+                    }
+                 
+
+            
+                       
+                    
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ee)
                 {
+                    Debug.WriteLine(ee);
                     return true;
                 }
             });/*
@@ -98,6 +108,7 @@ namespace DisplayButtons.Forms
     return true; });*/
         }
 
+     
         private void LoadTheme(AppTheme theme)
         {
             ApplicationColorScheme = ColorSchemeCentral.FromAppTheme(theme);

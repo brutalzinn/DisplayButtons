@@ -11,75 +11,25 @@ namespace DisplayButtons.Bibliotecas
         public class Labels
         {
             private int id;
-            private string font;
-            private int size;
-            private string text;
-            private int position;
-            private string color;
-            private DeckImage image;
-            public Labels(int id, string font, int size, int position, string text, string color, DeckImage img)
-            {
-                if (String.IsNullOrEmpty(text))
-                {
+        private IDeckItem item;
+        private DeckImage image;
 
-                    text = "-";
-                }
-                this.id = id;
-                this.font = font;
-                this.text = text;
-                this.size = size;
-                this.position = position;
-                this.color = color;
-                this.image = img;
-
-            }
-            public DeckImage Image
-            {
-
-                get { return image; }
-                set { image = value; }
-
-            }
-            public string Color
-            {
-
-                get { return color; }
-                set { color = value; }
-
-            }
-            public string Text
-            {
-                get { return text; }
-                set { text = value; }
-            }
-            public int Id
-            {
-
-                get { return id; }
-                set { id = value; }
-            }
-
-            public string Font
-            {
-
-                get { return font; }
-                set { font = value; }
-
-
-            }
-
-            public int Size
-            {
-                get { return size; }
-                set { size = value; }
-            }
-            public int Position
-            {
-                get { return position; }
-                set { position = value; }
-            }
-            // Should also override == and != operators.
+        public Labels(int id, IDeckItem item, DeckImage image)
+        {
+            this.id = id;
+            this.item = item;
+            this.image = image;
         }
+
+        public int Id { get => id; set => id = value; }
+        public IDeckItem Item { get => item; set => item = value; }
+        public DeckImage Image { get => image; set => image = value; }
+
+
+
+
+        // Should also override == and != operators.
+    }
         public class Json
         {
             private int slot;
@@ -90,8 +40,12 @@ namespace DisplayButtons.Bibliotecas
             private string text;
             private int position;
             private string color;
-
-            public Json()
+        private float _shadowradius = 2.6f;
+        private float stroke_dxtext = 1.5f;
+        private float dytextfloat = 1.3f;
+        private string stroke_color = "#FFFFFF";
+        private bool _isforstroke = false;
+        public Json()
 
             {
 
@@ -152,8 +106,11 @@ namespace DisplayButtons.Bibliotecas
                 set { position = value; }
             }
 
-
-
-        }
+        public float Stroke_radius { get => _shadowradius; set => _shadowradius = value; }
+        public float Stroke_dx { get => stroke_dxtext; set => stroke_dxtext = value; }
+        public float Stroke_dy { get => dytextfloat; set => dytextfloat = value; }
+        public string Stroke_color { get => stroke_color; set => stroke_color = value; }
+        public bool IsStroke { get => _isforstroke; set => _isforstroke = value; }
+    }
     
 }

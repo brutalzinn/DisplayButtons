@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.timer_before_radio = new System.Windows.Forms.RadioButton();
             this.timer_none_radio_button = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.time_after_radio = new System.Windows.Forms.RadioButton();
@@ -38,8 +39,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.timer_before_radio = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +57,18 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Timer condition";
+            // 
+            // timer_before_radio
+            // 
+            this.timer_before_radio.AutoSize = true;
+            this.timer_before_radio.Location = new System.Drawing.Point(5, 91);
+            this.timer_before_radio.Name = "timer_before_radio";
+            this.timer_before_radio.Size = new System.Drawing.Size(92, 19);
+            this.timer_before_radio.TabIndex = 0;
+            this.timer_before_radio.TabStop = true;
+            this.timer_before_radio.Text = "Timer before";
+            this.timer_before_radio.UseVisualStyleBackColor = true;
+            this.timer_before_radio.CheckedChanged += new System.EventHandler(this.timer_interval_radio_CheckedChanged);
             // 
             // timer_none_radio_button
             // 
@@ -152,32 +163,10 @@
             this.textBox1.Size = new System.Drawing.Size(254, 23);
             this.textBox1.TabIndex = 0;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(6, 266);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(618, 37);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Application condition";
-            // 
-            // timer_before_radio
-            // 
-            this.timer_before_radio.AutoSize = true;
-            this.timer_before_radio.Location = new System.Drawing.Point(5, 91);
-            this.timer_before_radio.Name = "timer_before_radio";
-            this.timer_before_radio.Size = new System.Drawing.Size(92, 19);
-            this.timer_before_radio.TabIndex = 0;
-            this.timer_before_radio.TabStop = true;
-            this.timer_before_radio.Text = "Timer before";
-            this.timer_before_radio.UseVisualStyleBackColor = true;
-            this.timer_before_radio.CheckedChanged += new System.EventHandler(this.timer_interval_radio_CheckedChanged);
-            // 
             // conditions_user_control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "conditions_user_control";
@@ -197,7 +186,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton time_after_radio;
         private System.Windows.Forms.RadioButton timer_exact_radio;
         private System.Windows.Forms.RadioButton timer_interval_radio;
