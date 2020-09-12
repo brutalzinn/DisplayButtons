@@ -13,47 +13,44 @@ namespace DisplayButtons.Bibliotecas.DeckText
 
         private string text;
         private Brush brush;
-        private Font font;
         private int position;
         private int size;
         private Color color;
 
 
-
-        public TextLabel(IDeckItem item)
+        public void setPosition(int position)
         {
-            FontFamily fontFamily = new FontFamily("Arial");
-
-            int pos = 0;
-           Debug.WriteLine("DECKPOSITION> " + item.Deckposition);
-            switch (item.Deckposition)
+     int pos = 0;
+            switch (position)
             {
                 case 81:
                     pos = 50;
                     break;
                 case 17:
                     pos = 25;
-                        break;
+                    break;
                 case 49:
                     pos = 1;
                     break;
             }
             this.position = pos;
+
+        }
+        public TextLabel(IDeckItem item)
+        {
+         
+            setPosition(item.Deckposition);
             this.size = item.Decksize;
             this.Color = System.Drawing.ColorTranslator.FromHtml(item.Deckcolor);
             this.text = item.Deckname;
             this.brush = new SolidBrush(this.Color); //Brushes.White;
-            this.font = new Font(
-   fontFamily,
-   16,
-   FontStyle.Regular,
-   GraphicsUnit.Pixel);
+   
           
         }
 
         public string Text { get => text; set => text = value; }
         public Brush Brush { get => brush; set => brush = value; }
-        public Font Font { get => font; set => font = value; }
+   
         public int Position { get => position; set => position = value; }
         public int Size { get => size; set => size = value; }
         public Color Color { get => color; set => color = value; }

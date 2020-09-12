@@ -172,16 +172,11 @@ namespace DisplayButtons.Controls
 
                         SizeF size = g.MeasureString(TextButton.Text,font1);
                         StringFormat format = new StringFormat();
-                     
+                
                         int nLeft = Convert.ToInt32((this.ClientRectangle.Width / 2) - (size.Width / 2));
                         int nTop = Convert.ToInt32(TextHelper.PercentOf(TextButton.Position,this.Size.Height));
-              
-
-
-
                         RectangleF rectF1 = new RectangleF(nLeft, nTop, Image.Width, Image.Height);
-                        Debug.WriteLine("top result: " + nTop);
-                        Debug.WriteLine("TextButton.Position: " + TextButton.Position);
+          
                         pevent.Graphics.DrawImage(Image, DisplayRectangle);
 
                         pevent.Graphics.DrawString(TextButton.Text, font1, TextButton.Brush, rectF1);
