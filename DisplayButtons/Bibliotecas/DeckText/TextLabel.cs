@@ -40,7 +40,7 @@ namespace DisplayButtons.Bibliotecas.DeckText
         {
          
             setPosition(item.Deckposition);
-            this.size = item.Decksize;
+            this.size = item.Decksize / 3;
             this.Color = System.Drawing.ColorTranslator.FromHtml(item.Deckcolor);
             this.text = item.Deckname;
             this.brush = new SolidBrush(this.Color); //Brushes.White;

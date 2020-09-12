@@ -24,6 +24,10 @@ namespace DisplayButtons.Backend.Objects
         private float dytextfloat = 1.3f;
         private string stroke_color = "#FFFFFF";
         private bool isstroke;
+        private bool ishinttext = false;
+        private bool isboldtext = false;
+        private bool isnormaltext = true;
+        private bool isitalictext = false;
         public string ToScript { get; set; } = "";
         public string Deckname { get => _deckname; set => _deckname = value; }
         public string Deckcolor { get => _deckcolor; set => _deckcolor = value; }
@@ -34,6 +38,10 @@ namespace DisplayButtons.Backend.Objects
         public float Stroke_Dy { get => dytextfloat; set => dytextfloat = value; }
         public string Stroke_color { get => stroke_color; set => stroke_color = value; }
         public bool IsStroke { get => isstroke; set => isstroke = value; }
+        public bool Ishinttext { get => ishinttext; set => ishinttext = value; }
+        public bool Isboldtext { get => isboldtext; set => isboldtext = value; }
+        public bool Isnormaltext { get => isnormaltext; set => isnormaltext = value; }
+        public bool Isitalictext { get => isitalictext; set => isitalictext = value; }
 
         public abstract DeckImage GetItemImage();
 

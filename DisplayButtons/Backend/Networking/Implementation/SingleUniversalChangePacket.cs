@@ -60,6 +60,10 @@ namespace DisplayButtons.Backend.Networking.Implementation
                 headerContent.Stroke_radius = CurrentItem.Stroke_radius;
                 headerContent.Stroke_dy = CurrentItem.Stroke_Dy;
                 headerContent.IsStroke = CurrentItem.IsStroke;
+                headerContent.Isboldtext = CurrentItem.Isboldtext;
+                headerContent.Isnormaltext = CurrentItem.Isnormaltext;
+                headerContent.Isitalictext = CurrentItem.Isitalictext;
+                headerContent.Ishinttext = CurrentItem.Ishinttext;
                 string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.None);
 
                 writer.WriteUTF(jsonString);
