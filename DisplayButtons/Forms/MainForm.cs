@@ -2489,10 +2489,10 @@ namespace DisplayButtons.Forms
                 TextBox shadow_stroke_dytextfloat = new TextBox();
                 TextBox shadow_stroke_color = new TextBox();
                 myColor.Size = new Size(70, 30);
-                IsHintText.Text = "Hint text";
-                IsBoldText.Text = "Bold text";
-                IsItalicText.Text = "Italic text";
-                IsNormalText.Text = "Normal Text";
+                IsHintText.Text = Texts.rm.GetString("DECKITEMHINTTEXT", Texts.cultereinfo);
+                IsBoldText.Text = Texts.rm.GetString("DECKITEMBOLDTEXT", Texts.cultereinfo);
+                IsItalicText.Text = Texts.rm.GetString("DECKITEMITALICTEXT", Texts.cultereinfo);
+                IsNormalText.Text = Texts.rm.GetString("DECKITEMNORMALTEXT", Texts.cultereinfo);
                 IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
                 myColor.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
                 myColorShadow.Size = new Size(70, 30);

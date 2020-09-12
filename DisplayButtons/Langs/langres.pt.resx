@@ -231,6 +231,18 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="DECKGENERALTOGGLEKEY" xml:space="preserve">
     <value>Manter tecla pressionada</value>
   </data>
+  <data name="DECKITEMBOLDTEXT" xml:space="preserve">
+    <value>Negrito</value>
+  </data>
+  <data name="DECKITEMHINTTEXT" xml:space="preserve">
+    <value>Caixa alta</value>
+  </data>
+  <data name="DECKITEMITALICTEXT" xml:space="preserve">
+    <value>Itálico</value>
+  </data>
+  <data name="DECKITEMNORMALTEXT" xml:space="preserve">
+    <value>Normal</value>
+  </data>
   <data name="DECKITEMPOSITION" xml:space="preserve">
     <value>Posição do texto</value>
   </data>

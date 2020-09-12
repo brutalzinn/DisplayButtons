@@ -228,6 +228,18 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   <data name="DECKGENERALTOGGLEKEY" xml:space="preserve">
     <value>Hold down key</value>
   </data>
+  <data name="DECKITEMBOLDTEXT" xml:space="preserve">
+    <value>Bold text</value>
+  </data>
+  <data name="DECKITEMHINTTEXT" xml:space="preserve">
+    <value>Hint text</value>
+  </data>
+  <data name="DECKITEMITALICTEXT" xml:space="preserve">
+    <value>Italic text</value>
+  </data>
+  <data name="DECKITEMNORMALTEXT" xml:space="preserve">
+    <value>Normal text</value>
+  </data>
   <data name="DECKITEMPOSITION" xml:space="preserve">
     <value>Text position</value>
   </data>
