@@ -16,6 +16,7 @@ namespace DisplayButtons
         public static bool status { get; set; }
         public static int calc  { get; set; } //ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
     public  static int linha  { get; set;}
+        public static Sharpy.EventManager events = new Sharpy.EventManager();
 
         public static int ConsoleOpenned { get; set; }
         public static bool can_refresh { get; set; } = false;

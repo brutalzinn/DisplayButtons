@@ -65,8 +65,8 @@ namespace DisplayButtons
                     cultereinfo = new CultureInfo("es-UN");
                     break;
             }
-     
-          
+
+            Globals.events.Trigger("languagechanged");
 
         }
     }

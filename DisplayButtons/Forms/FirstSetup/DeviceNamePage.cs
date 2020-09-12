@@ -14,7 +14,7 @@ namespace DisplayButtons.Forms.FirstSetup
 {
     public partial class DeviceNamePage : PageTemplate
     {
-        private const string registryAppName = "DisplayButtonsByNickAc";
+        private const string registryAppName = "DisplayButtons";
 
         public static void AddApplicationToStartup()
         {
@@ -46,19 +46,24 @@ namespace DisplayButtons.Forms.FirstSetup
         public DeviceNamePage()
         {
             InitializeComponent();
+            Globals.events.On("languagechanged", (e) => {
 
+                label1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL1", Texts.cultereinfo);
+                label2.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL2", Texts.cultereinfo);
+                label4.Text = Texts.rm.GetString("DEVICENAME", Texts.cultereinfo);
+                checkBox1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL3", Texts.cultereinfo);
+                label3.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL4", Texts.cultereinfo); 
+
+            });
 
 
         }
 
         private void DeviceNamePage_Load(object sender, EventArgs e)
         {
-            Texts.initilizeLang();
+            
             this.Refresh();
-            label1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL1", Texts.cultereinfo);
-            label2.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL2", Texts.cultereinfo);
-            label3.Text = Texts.rm.GetString("DEVICENAME", Texts.cultereinfo);
-            checkBox1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL3", Texts.cultereinfo);
+        
          //   checkBox1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL4", Texts.cultereinfo);
 
         }

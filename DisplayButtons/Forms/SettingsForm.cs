@@ -109,6 +109,7 @@ namespace DisplayButtons.Forms
             ApplicationSettingsManager.Settings.DeviceName = textBox1.Text;
             ApplicationSettingsManager.Settings.IFTTTAPIKey = textBox2.Text;
             Texts.initilizeLang();
+           
             Close();
         }
 

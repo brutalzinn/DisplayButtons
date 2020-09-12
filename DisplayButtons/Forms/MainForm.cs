@@ -114,8 +114,20 @@ namespace DisplayButtons.Forms
               
             }
             ColorSchemeCentral.ThemeChanged += (s, e) =>
-            ApplySidebarTheme(shadedPanel1);
-          
+            {
+                ApplySidebarTheme(shadedPanel1);
+            };
+            Globals.events.On("languagechanged", (e) => {
+
+
+                MainForm.Instance.Invoke(new Action(() =>
+                {
+                    this.Text = Texts.rm.GetString("APPLICATIONNAME", Texts.cultereinfo);
+                    perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo);
+                    warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
+                }));
+
+            });
 
         }
 
@@ -185,9 +197,7 @@ namespace DisplayButtons.Forms
             MainForm.Instance.Invoke(new Action(() =>
             {
                 // teste
-                this.Text = Texts.rm.GetString("APPLICATIONNAME", Texts.cultereinfo);
-                perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo); 
-                warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
+              
                 link.Click += (sender, e) =>
                 {
                     if (MessageBox.Show(Texts.rm.GetString("ABOUTINFOLINKMESSAGEMESSAGE", Texts.cultereinfo), Texts.rm.GetString("ABOUTINFOLINKMESSAGETITLE", Texts.cultereinfo), MessageBoxButtons.OKCancel) == DialogResult.OK)

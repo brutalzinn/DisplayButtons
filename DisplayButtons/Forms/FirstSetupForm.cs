@@ -28,9 +28,17 @@ namespace DisplayButtons.Forms
         {
             InitializeComponent();
 
-            modernButton1.Text = Texts.rm.GetString("FIRSTPAGEBUTTONAVANCE", Texts.cultereinfo);
-            modernButton2.Text = Texts.rm.GetString("EVENTSYSTEMBACKBUTTON", Texts.cultereinfo);
+
+            Globals.events.On("languagechanged", (e) => {
+
+                modernButton1.Text = Texts.rm.GetString("FIRSTPAGEBUTTONAVANCE", Texts.cultereinfo);
+                modernButton2.Text = Texts.rm.GetString("EVENTSYSTEMBACKBUTTON", Texts.cultereinfo);
+
+
+            });
+
         }
+    
 
         protected override void OnLoad(EventArgs e)
         {
