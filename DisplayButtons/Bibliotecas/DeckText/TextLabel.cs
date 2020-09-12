@@ -16,7 +16,7 @@ namespace DisplayButtons.Bibliotecas.DeckText
         private Font font;
         private int position;
         private int size;
-
+        private Color color;
 
 
 
@@ -39,10 +39,10 @@ namespace DisplayButtons.Bibliotecas.DeckText
                     break;
             }
             this.position = pos;
-            this.Size = item.Decksize;
-
+            this.size = item.Decksize;
+            this.Color = System.Drawing.ColorTranslator.FromHtml(item.Deckcolor);
             this.text = item.Deckname;
-            this.brush = Brushes.White;
+            this.brush = new SolidBrush(this.Color); //Brushes.White;
             this.font = new Font(
    fontFamily,
    16,
@@ -56,5 +56,6 @@ namespace DisplayButtons.Bibliotecas.DeckText
         public Font Font { get => font; set => font = value; }
         public int Position { get => position; set => position = value; }
         public int Size { get => size; set => size = value; }
+        public Color Color { get => color; set => color = value; }
     }
 }
