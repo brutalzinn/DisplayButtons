@@ -23,7 +23,7 @@ namespace ScribeBot.Engine.Wrappers
                 return instance;
             }
         }
-        private String msg;
+  
 
 
         public SocketWrapper()

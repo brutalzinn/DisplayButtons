@@ -88,7 +88,7 @@ namespace DisplayButtons.Backend.Objects
                     Debug.WriteLine("{0,-18} {1}",
                       props[i].Name, props[i].GetValue(obj, null));
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //Console.WriteLine(e);  
                 }

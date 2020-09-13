@@ -91,10 +91,14 @@ namespace ScribeBot.Engine.Proxies
 
                 var prop = (string)(typeof(Keys).GetField(key).GetValue(null));
 
+#pragma warning disable CS0618 // O tipo ou membro é obsoleto
                 Driver.Keyboard.PressKey(prop);
+#pragma warning restore CS0618 // O tipo ou membro é obsoleto
             }
             else
+#pragma warning disable CS0618 // O tipo ou membro é obsoleto
                 Driver.Keyboard.PressKey(key);
+#pragma warning restore CS0618 // O tipo ou membro é obsoleto
         }
 
         /// <summary>
@@ -109,10 +113,14 @@ namespace ScribeBot.Engine.Proxies
 
                 var prop = (string)(typeof(Keys).GetField(key).GetValue(null));
 
+#pragma warning disable CS0618 // O tipo ou membro é obsoleto
                 Driver.Keyboard.ReleaseKey(prop);
+#pragma warning restore CS0618 // O tipo ou membro é obsoleto
             }
             else
+#pragma warning disable CS0618 // O tipo ou membro é obsoleto
                 Driver.Keyboard.ReleaseKey(key);
+#pragma warning restore CS0618 // O tipo ou membro é obsoleto
         }
 
         public void SendKeys(params string[] keys)
@@ -125,10 +133,14 @@ namespace ScribeBot.Engine.Proxies
 
                     var prop = (string)(typeof(Keys).GetField(key).GetValue(null));
 
+#pragma warning disable CS0618 // O tipo ou membro é obsoleto
                     Driver.Keyboard.SendKeys(prop);
+#pragma warning restore CS0618 // O tipo ou membro é obsoleto
                 }
                 else
+#pragma warning disable CS0618 // O tipo ou membro é obsoleto
                     Driver.Keyboard.SendKeys(x);
+#pragma warning restore CS0618 // O tipo ou membro é obsoleto
             });
         }
 

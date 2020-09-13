@@ -460,7 +460,7 @@ namespace DisplayButtons.Forms
 
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //Debug.(ex.ToString());
                 }
@@ -489,7 +489,7 @@ namespace DisplayButtons.Forms
 
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //Debug.(ex.ToString());
                 }
@@ -540,9 +540,8 @@ namespace DisplayButtons.Forms
 
         const string OFFLINE_PREFIX = "[OFFLINE]";
         public new Padding Padding = new Padding(5);
-        private bool _selected;
-        private DeckDevice _deckDevice;
-        private string deviceNamePrefix;
+       
+  
         public void StartUsbMode()
         {
 
@@ -812,8 +811,7 @@ namespace DisplayButtons.Forms
                 List<Control> toAdd = new List<Control>();
 
              
-                int x = 0;
-                int y = 0;
+            
                 int id = 1;
                 for (int con = 0; con < profile.Matriz.Lin; con++)
                 {
@@ -1706,7 +1704,7 @@ namespace DisplayButtons.Forms
         public static List<int> additems_fold = new List<int>();
         public static List<IDeckFolder> items_fold = new List<IDeckFolder>();
 
-        bool canskip = false;
+       
         int root = 0;
         private void NextFolder()
         {
@@ -3069,7 +3067,7 @@ namespace DisplayButtons.Forms
                 }
 
                 
-                Debug.WriteLine("GRANDO SIDEBAR " + name);
+              
             });
 
 
@@ -3169,7 +3167,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                     result = "";
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 //    result = "";

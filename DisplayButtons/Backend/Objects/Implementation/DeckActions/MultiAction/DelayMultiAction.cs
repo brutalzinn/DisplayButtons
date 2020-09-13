@@ -52,17 +52,14 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.MultiAction
         public override DeckActionCategory GetActionCategory() => DeckActionCategory.General;
 
 
-        public override async void OnButtonDown(DeckDevice deckDevice)
+        public override void OnButtonDown(DeckDevice deckDevice)
         {
             Thread.Sleep(delay_timer);
 
 
 
         }
-        async Task PausaComTaskDelay()
-        {
-          //  await Task.Delay(delay_timer);
-        }
+        
         public override void OnButtonUp(DeckDevice deckDevice)
         {
         }

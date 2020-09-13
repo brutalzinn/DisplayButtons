@@ -355,7 +355,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                     //    ToScript = originalToExec;
                 }
             }
-            catch(Exception ii){}
+            catch(Exception ){}
         }
         public override DeckImage GetDefaultItemImage()
         {

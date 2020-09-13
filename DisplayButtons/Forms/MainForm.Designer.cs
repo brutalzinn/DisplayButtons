@@ -439,7 +439,7 @@ namespace DisplayButtons.Forms
         private ToolStripMenuItem toolStripMenuItem2;
         private StatusStrip statusStrip2;
         private ToolStripStatusLabel link;
-        private ToolStripStatusLabel toolStripStatusLabel4;
+  
         private ToolStripStatusLabel info;
         private Label perfil_info;
         public ComboBox perfilselector;

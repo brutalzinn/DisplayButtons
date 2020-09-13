@@ -66,11 +66,11 @@ namespace MinecraftServerRCON
 			    		var msg = new RCONMessageAnswer(reqId > -1, data, reqId);
 			    		this.answers.Add(msg);
 			    	}
-			    	catch(EndOfStreamException e)
+			    	catch(EndOfStreamException)
 			    	{
 			    		return;
 			    	}
-			    	catch(ObjectDisposedException e)
+			    	catch(ObjectDisposedException )
 			    	{
 			    		return;
 			    	}

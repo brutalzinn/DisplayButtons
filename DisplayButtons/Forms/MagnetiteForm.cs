@@ -2,46 +2,12 @@
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DisplayButtons.Backend.Networking.Implementation;
-using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Objects.Implementation;
-using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
-using DisplayButtons.Backend.Utils;
-using DisplayButtons.Controls;
 using DisplayButtons.Misc;
-using DisplayButtons.Properties;
 
 using DisplayButtons.Backend.Networking;
-
-using NickAc.ModernUIDoneRight.Controls;
-using NickAc.ModernUIDoneRight.Objects;
-using ScribeBot;
-using ScribeBot.Interface;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Windows.Forms;
-using static DisplayButtons.Backend.Objects.AbstractDeckAction;
-using System.Threading;
-using Timer = System.Windows.Forms.Timer;
-using static DisplayButtons.Backend.Utils.DevicePersistManager;
-using DisplayButtons.Backend.Networking.TcpLib;
 using static DisplayButtons.Backend.Utils.AppSettings;
 
 namespace DisplayButtons.Forms
@@ -49,15 +15,9 @@ namespace DisplayButtons.Forms
     public partial class MagnetiteForm : TemplateForm
     {
         bool isDebugBuild;
-        private static MagnetiteForm instance;
+       
 
-        public static MagnetiteForm Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+      
         public MagnetiteForm()
         {
             InitializeComponent();

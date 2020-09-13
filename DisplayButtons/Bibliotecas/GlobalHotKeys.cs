@@ -35,7 +35,9 @@ namespace DisplayButtons.Bibliotecas
         public void RegisterHotKeyCollector(DynamicDeckFolder folder)
         {
             if (folder != null)
+#pragma warning disable CS0618 // O tipo ou membro é obsoleto
                 folder.UniqueID = ShortId.Generate(true, false, 12);
+#pragma warning restore CS0618 // O tipo ou membro é obsoleto
 
         }
         public void GarbageHotKeyCollector(DynamicDeckFolder folder)
@@ -79,7 +81,7 @@ HotkeyManager.Current.Remove(folder.UniqueID) ;
                     
            
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //Debug.(ex.ToString());
                 }

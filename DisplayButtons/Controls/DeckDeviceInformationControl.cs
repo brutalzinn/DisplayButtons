@@ -1,20 +1,12 @@
 ﻿using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Utils;
 using DisplayButtons.Misc;
-using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Utils;
-using NickAc.ModernUIDoneRight.Objects;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DisplayButtons.Backend.Utils.DevicePersistManager;
 using SharpAdbClient;
-using System.Net;
 using System.Threading;
 
 namespace DisplayButtons.Forms

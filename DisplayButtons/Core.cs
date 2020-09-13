@@ -249,7 +249,7 @@ namespace ScribeBot
                     MainWindow.ConsoleOutput.AppendText(Environment.NewLine);
                 }));
             }
-            catch(Exception e)
+            catch(Exception )
             {
 
 

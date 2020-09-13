@@ -73,5 +73,20 @@ namespace MinecraftServerRCON
 		public static readonly RCONMessageType Command = new RCONMessageType(2);
 		public static readonly RCONMessageType Login = new RCONMessageType(3);
 		public static readonly RCONMessageType Invalid = new RCONMessageType(-1);
-	}
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+    }
 }

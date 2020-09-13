@@ -84,7 +84,7 @@ namespace DisplayButtons.Engine.Wrappers
 
 
 
-            catch (Exception e)
+            catch (Exception)
             {
 
                 return "";
@@ -268,7 +268,7 @@ namespace DisplayButtons.Engine.Wrappers
                     result = "";
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
                 //    result = "";

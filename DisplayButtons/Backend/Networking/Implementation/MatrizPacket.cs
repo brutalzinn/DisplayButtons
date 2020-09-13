@@ -1,6 +1,5 @@
 ﻿using DisplayButtons.Backend.Networking.IO;
 using DisplayButtons.Backend.Networking.Attributes;
-using DisplayButtons.Backend.Networking.IO;
 using DisplayButtons.Backend.Networking.TcpLib;
 using DisplayButtons.Backend.Utils;
 using System;
