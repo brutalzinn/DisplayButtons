@@ -420,6 +420,9 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   <data name="INITIALIZER_MODE_FORMMENUOPTIONS_TEXT" xml:space="preserve">
     <value>Display Buttons - Launcher</value>
   </data>
+  <data name="INTEGRATIONERROROCURRED" xml:space="preserve">
+    <value>An error has occurred! And it was saved in a file called {0} Send it to the email suporte@displaybuttons.com</value>
+  </data>
   <data name="ISTHISDISABLED" xml:space="preserve">
     <value>Disabled</value>
   </data>
@@ -459,8 +462,32 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   <data name="MESSAGEBOXPERFIL_ALERT" xml:space="preserve">
     <value>WARNING</value>
   </data>
+  <data name="OBSAINTEGRATIONOBSFOUND" xml:space="preserve">
+    <value>An OBS instance was found!</value>
+  </data>
   <data name="OBSCONNECTION" xml:space="preserve">
     <value>Create OBS connection</value>
+  </data>
+  <data name="OBSINTEGRATIONAPPLY" xml:space="preserve">
+    <value>Please close OBS and click OK to apply the final touches.</value>
+  </data>
+  <data name="OBSINTEGRATIONCONFIRMOBS" xml:space="preserve">
+    <value>Please open OBS and click OK to continue to the app.</value>
+  </data>
+  <data name="OBSINTEGRATIONFOUNDTHREE" xml:space="preserve">
+    <value>You won't be prompted again in the future.</value>
+  </data>
+  <data name="OBSINTEGRATIONFOUNDTMESSAGEBOX" xml:space="preserve">
+    <value>OBS Interaction</value>
+  </data>
+  <data name="OBSINTEGRATIONFOUNDTWO" xml:space="preserve">
+    <value>Do you want to automatically download the necessary OBS plugin to enable compatibility with DisplayButtons?</value>
+  </data>
+  <data name="OBSINTEGRATIONINSTALL" xml:space="preserve">
+    <value>OBS plugin install completed!</value>
+  </data>
+  <data name="OBSINTEGRATIONINSTALLSUCESSFULL" xml:space="preserve">
+    <value>OBS plugin install successfully!</value>
   </data>
   <data name="OBS_SCENE_CHANGE" xml:space="preserve">
     <value>OBS scene selector - Editor</value>

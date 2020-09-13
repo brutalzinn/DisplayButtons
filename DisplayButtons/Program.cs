@@ -100,19 +100,19 @@ namespace DisplayButtons
                     File.Delete(OBSUtils.obswszip);
                     Directory.Delete(zipTempPath, true);
               
-                    var obsGlobalFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "obs-studio", "global.ini");
-                 
+                    var obsGlobalFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "obs-studio", "global.ini");
+           
                     if (File.Exists(obsGlobalFilePath) && !File.ReadAllText(obsGlobalFilePath).Contains("[WebsocketAPI]"))
                     {
-                    
 
+                        Trace.WriteLine("File exist and not contain web socket.");
                         while (!obsProcess.HasExited)
                         {
-
+                            
                             StringBuilder sb = new StringBuilder();
-                            sb.AppendLine("OBS plugin install completed!");
+                            sb.AppendLine(Texts.rm.GetString("OBSINTEGRATIONINSTALL", Texts.cultereinfo));
                             sb.AppendLine("");
-                            sb.AppendLine("Please close OBS and click OK to apply the final touches.");
+                            sb.AppendLine(Texts.rm.GetString("OBSINTEGRATIONAPPLY", Texts.cultereinfo));
                             MessageBox.Show(sb.ToString());
                         }
 
@@ -134,11 +134,11 @@ namespace DisplayButtons
 
                             shouldRepeat = obs32List2.Length == 0 && obs64List2.Length == 0;
                             if (!shouldRepeat) break;
-
+                     
                             StringBuilder sb = new StringBuilder();
-                            sb.AppendLine("OBS plugin install successfully!");
+                            sb.AppendLine(Texts.rm.GetString("OBSINTEGRATIONINSTALLSUCESSFULL", Texts.cultereinfo));
                             sb.AppendLine("");
-                            sb.AppendLine("Please open OBS and click OK to continue to the app.");
+                            sb.AppendLine(Texts.rm.GetString("OBSINTEGRATIONCONFIRMOBS", Texts.cultereinfo));
                             MessageBox.Show(sb.ToString());
                         }
 
@@ -154,7 +154,7 @@ namespace DisplayButtons
             Silent = args.Any(c => c.ToLower() == "/s");
 #endif
      
-            errorText = $"An error occured! And it was saved to a file called {errorFileName}." + Environment.NewLine + "Please send this to the developer of the application.";
+            errorText = String.Format(Texts.rm.GetString("INTEGRATIONERROROCURRED", Texts.cultereinfo), errorFileName);
 
             Application.ThreadException += Application_ThreadException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
