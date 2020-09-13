@@ -21,7 +21,7 @@ namespace DisplayButtons.Forms.FirstSetup
         private void IntroPage_Load(object sender, EventArgs e)
         {
         
-            Texts.initilizeLang();
+           
             this.Refresh();
             label1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL1", Texts.cultereinfo);
             label2.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL2", Texts.cultereinfo);
@@ -33,6 +33,7 @@ namespace DisplayButtons.Forms.FirstSetup
 
         public override void SaveProgress()
         {
+            Texts.initilizeLang();
             ApplicationSettingsManager.Settings.Language = comboBox1.Text;
           
             ApplicationSettingsManager.SaveSettings();

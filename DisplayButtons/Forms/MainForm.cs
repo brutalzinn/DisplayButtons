@@ -42,6 +42,7 @@ using DisplayButtons.Forms.EventSystem.Controls.triggers;
 using DisplayButtons.Bibliotecas.DeckEvents;
 using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
 using static DisplayButtons.Backend.Objects.ProfileVoidHelper;
+using DisplayButtons.Bibliotecas.DeckText;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -113,8 +114,20 @@ namespace DisplayButtons.Forms
               
             }
             ColorSchemeCentral.ThemeChanged += (s, e) =>
-            ApplySidebarTheme(shadedPanel1);
-          
+            {
+                ApplySidebarTheme(shadedPanel1);
+            };
+            Globals.events.On("languagechanged", (e) => {
+
+
+                MainForm.Instance.Invoke(new Action(() =>
+                {
+                    this.Text = Texts.rm.GetString("APPLICATIONNAME", Texts.cultereinfo);
+                    perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo);
+                    warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
+                }));
+
+            });
 
         }
 
@@ -184,9 +197,7 @@ namespace DisplayButtons.Forms
             MainForm.Instance.Invoke(new Action(() =>
             {
                 // teste
-                this.Text = Texts.rm.GetString("APPLICATIONNAME", Texts.cultereinfo);
-                perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo); 
-                warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
+              
                 link.Click += (sender, e) =>
                 {
                     if (MessageBox.Show(Texts.rm.GetString("ABOUTINFOLINKMESSAGEMESSAGE", Texts.cultereinfo), Texts.rm.GetString("ABOUTINFOLINKMESSAGETITLE", Texts.cultereinfo), MessageBoxButtons.OKCancel) == DialogResult.OK)
@@ -1164,7 +1175,7 @@ namespace DisplayButtons.Forms
 
                 control.NormalImage = item?.GetItemImage().Bitmap;
 
-
+                control.TextButton = new TextLabel(item);
 
                 control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
@@ -1212,7 +1223,7 @@ namespace DisplayButtons.Forms
            
 
                     control.NormalImage = item?.GetItemImage().Bitmap;
-              
+                    control.Text = item?.Deckname;
 
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
@@ -2479,12 +2490,19 @@ namespace DisplayButtons.Forms
                 TextBox myNameText = new TextBox();
                 TextBox myColorText = new TextBox();
                 CheckBox IsStrokeCheckbox = new CheckBox();
-               
+                CheckBox IsHintText = new CheckBox();
+                CheckBox IsBoldText = new CheckBox();
+                CheckBox IsItalicText = new CheckBox();
+                CheckBox IsNormalText = new CheckBox();
                 TextBox shadow_stroke_radiustextfloat = new TextBox();
                 TextBox shadow_stroke_dxtextfloat = new TextBox();
                 TextBox shadow_stroke_dytextfloat = new TextBox();
                 TextBox shadow_stroke_color = new TextBox();
                 myColor.Size = new Size(70, 30);
+                IsHintText.Text = Texts.rm.GetString("DECKITEMHINTTEXT", Texts.cultereinfo);
+                IsBoldText.Text = Texts.rm.GetString("DECKITEMBOLDTEXT", Texts.cultereinfo);
+                IsItalicText.Text = Texts.rm.GetString("DECKITEMITALICTEXT", Texts.cultereinfo);
+                IsNormalText.Text = Texts.rm.GetString("DECKITEMNORMALTEXT", Texts.cultereinfo);
                 IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
                 myColor.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
                 myColorShadow.Size = new Size(70, 30);
@@ -2521,6 +2539,11 @@ namespace DisplayButtons.Forms
                 shadow_stroke_dytextfloat.Text = dI.Stroke_Dy.ToString();
                 shadow_stroke_dxtextfloat.Text = dI.Stroke_dxtext.ToString();
                 shadow_stroke_radiustextfloat.Text = dI.Stroke_radius.ToString();
+                IsNormalText.Checked = dI.Isnormaltext;
+                IsHintText.Checked = dI.Ishinttext;
+                IsItalicText.Checked = dI.Isitalictext;
+                IsBoldText.Checked = dI.Isboldtext;
+
                 // PositionComboBox.SelectedValue = (int)dI.DeckPosition;
 
 
@@ -2566,6 +2589,37 @@ namespace DisplayButtons.Forms
 
 
 
+                IsHintText.Click += (s, e) =>
+                {
+
+                    IsNormalText.Checked = false;
+  };
+                IsBoldText.Click += (s, e) =>
+
+                {
+
+                    IsNormalText.Checked = false;
+
+                };
+
+                IsItalicText.Click += (s, e) =>
+
+                {
+                    IsNormalText.Checked = false;
+
+                };
+
+            IsNormalText.Click += (s, e) =>
+                {
+                    if (IsNormalText.Checked)
+                    {
+                        IsHintText.Checked = false;
+                        IsBoldText.Checked = false;
+                        IsItalicText.Checked = false;
+                    }
+                
+                
+                };
 
 
 
@@ -2582,7 +2636,7 @@ namespace DisplayButtons.Forms
 
                 painel_color.Size = new Size(190, 30);
 
-                painel_name.Size = new Size(190, 50);
+                painel_name.Size = new Size(190, 180);
                 painel_tamanho.Size = new Size(190, 50);
                 painel_shadowstroke.Size = new Size(190, 300);
                 painel_shadowstroke.WrapContents = true;
@@ -2612,6 +2666,10 @@ namespace DisplayButtons.Forms
 
                 painel_name.Controls.Add(myTextNameInformation);
                 painel_name.Controls.Add(myNameText);
+                painel_name.Controls.Add(IsHintText);
+                painel_name.Controls.Add(IsItalicText);
+                painel_name.Controls.Add(IsBoldText);
+                painel_name.Controls.Add(IsNormalText);
                 painel_tamanho.Controls.Add(sizeLabelInfo);
                 painel_tamanho.Controls.Add(sizeLabelTextBox);
 
@@ -2644,7 +2702,10 @@ namespace DisplayButtons.Forms
                     dI.Stroke_color = shadow_stroke_color.Text;
                     dI.Deckposition = (int)PositionComboBox.SelectedValue;
                     dI.IsStroke = IsStrokeCheckbox.Checked;
-
+                    dI.Isboldtext = IsBoldText.Checked;
+                    dI.Ishinttext = IsHintText.Checked;
+                    dI.Isitalictext = IsItalicText.Checked;
+                    dI.Isnormaltext = IsNormalText.Checked;
                   int slot =  CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(dI);
                     RefreshButton(slot, true);
 

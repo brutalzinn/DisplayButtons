@@ -131,6 +131,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton1.Origin = null;
             this.imageModernButton1.Size = new System.Drawing.Size(80, 80);
             this.imageModernButton1.TabIndex = 2;
+            this.imageModernButton1.TextButton = null;
             this.imageModernButton1.UseVisualStyleBackColor = true;
             this.imageModernButton1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImageModernButton1_MouseClick);
             // 
@@ -167,6 +168,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton5.Size = new System.Drawing.Size(112, 33);
             this.imageModernButton5.TabIndex = 2;
             this.imageModernButton5.Text = "Recarregar botões externos";
+            this.imageModernButton5.TextButton = null;
             this.imageModernButton5.UseVisualStyleBackColor = true;
             this.imageModernButton5.Click += new System.EventHandler(this.ImageModernButton6_Click);
             // 
@@ -178,9 +180,10 @@ namespace DisplayButtons.Forms
             this.imageModernButton4.Name = "imageModernButton4";
             this.imageModernButton4.NormalImage = null;
             this.imageModernButton4.Origin = null;
-            this.imageModernButton4.Size = new System.Drawing.Size(115, 34);
+            this.imageModernButton4.Size = new System.Drawing.Size(124, 34);
             this.imageModernButton4.TabIndex = 1;
             this.imageModernButton4.Text = "Abrir console";
+            this.imageModernButton4.TextButton = null;
             this.imageModernButton4.UseVisualStyleBackColor = true;
             this.imageModernButton4.Click += new System.EventHandler(this.ImageModernButton4_Click);
             // 
@@ -195,6 +198,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton3.Size = new System.Drawing.Size(118, 33);
             this.imageModernButton3.TabIndex = 1;
             this.imageModernButton3.Text = "Recarregar botões";
+            this.imageModernButton3.TextButton = null;
             this.imageModernButton3.UseVisualStyleBackColor = true;
             this.imageModernButton3.Click += new System.EventHandler(this.ImageModernButton3_Click);
             // 
@@ -209,6 +213,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton2.Size = new System.Drawing.Size(107, 33);
             this.imageModernButton2.TabIndex = 0;
             this.imageModernButton2.Text = "Recarregar tudo";
+            this.imageModernButton2.TextButton = null;
             this.imageModernButton2.UseVisualStyleBackColor = true;
             this.imageModernButton2.Click += new System.EventHandler(this.ImageModernButton2_Click);
             // 
@@ -278,6 +283,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton6.Size = new System.Drawing.Size(123, 37);
             this.imageModernButton6.TabIndex = 8;
             this.imageModernButton6.Text = "EventSystem";
+            this.imageModernButton6.TextButton = null;
             this.imageModernButton6.UseVisualStyleBackColor = true;
             this.imageModernButton6.Visible = false;
             this.imageModernButton6.Click += new System.EventHandler(this.imageModernButton6_Click_1);
@@ -302,6 +308,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton7.Size = new System.Drawing.Size(27, 31);
             this.imageModernButton7.TabIndex = 10;
             this.imageModernButton7.Text = "+";
+            this.imageModernButton7.TextButton = null;
             this.imageModernButton7.UseVisualStyleBackColor = true;
             this.imageModernButton7.Click += new System.EventHandler(this.imageModernButton7_Click);
             // 
@@ -316,6 +323,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton8.Size = new System.Drawing.Size(27, 32);
             this.imageModernButton8.TabIndex = 10;
             this.imageModernButton8.Text = "-";
+            this.imageModernButton8.TextButton = null;
             this.imageModernButton8.UseVisualStyleBackColor = true;
             this.imageModernButton8.Click += new System.EventHandler(this.imageModernButton8_Click);
             // 
@@ -405,7 +413,6 @@ namespace DisplayButtons.Forms
         private ShadedPanel shadedPanel3;
         private ShadedPanel shadedPanel4;
         private ImageModernButton imageModernButton6;
-        private ComboBox perfilselector;
         private ImageModernButton imageModernButton7;
         private ImageModernButton imageModernButton8;
         public Panel panel_buttons;
@@ -419,6 +426,7 @@ namespace DisplayButtons.Forms
         private ToolStripStatusLabel toolStripStatusLabel4;
         private ToolStripStatusLabel info;
         private Label perfil_info;
+        public ComboBox perfilselector;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

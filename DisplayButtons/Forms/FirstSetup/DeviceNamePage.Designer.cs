@@ -69,9 +69,9 @@
             // textBox1
             // 
             this.textBox1.ForeColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(118, 84);
+            this.textBox1.Location = new System.Drawing.Point(173, 84);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(421, 29);
+            this.textBox1.Size = new System.Drawing.Size(366, 29);
             this.textBox1.TabIndex = 1;
             // 
             // label4

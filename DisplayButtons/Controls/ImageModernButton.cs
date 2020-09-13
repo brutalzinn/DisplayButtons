@@ -14,7 +14,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DisplayButtons.Backend.Networking.Implementation;
 using DisplayButtons.Backend.Objects.Implementation;
-
+using DisplayButtons.Bibliotecas.DeckText;
+using System.Diagnostics;
 
 namespace DisplayButtons.Controls
 {
@@ -50,20 +51,23 @@ namespace DisplayButtons.Controls
             }
 
         }
-      private string _text;
-        private Font _font;
-        private Brush _brush;
 
-        private PointF _pointf;
-
-        public void TextLabel(string text, Font font, Brush brush, PointF pointf)
+        private TextLabel _textlabel;
+        public TextLabel TextButton
         {
+            get => Origin?.TextButton ?? _textlabel;
+            set
+            {
+                if (Origin != null)
+                {
+                    Origin.TextButton = value;
+                    return;
+                }
+                _textlabel = value;
+                Refresh();
 
-            _text = text;
-            _font = font;
-            _brush = brush;
-            _pointf = pointf;
 
+            }
         }
         public string ExtractNumber(string original)
         {
@@ -153,12 +157,38 @@ namespace DisplayButtons.Controls
         protected override void OnPaint(PaintEventArgs pevent)
         {
             base.OnPaint(pevent);
-            if (Image != null) {
-                pevent.Graphics.DrawImage(Image, DisplayRectangle);
-            }
-            if(_text != null){
 
-                pevent.Graphics.DrawString(_text, _font, _brush, _pointf);
+
+
+
+
+            if (Image != null)
+            {
+                if (TextButton != null)
+                {
+                    using (Font font1 = new Font("Arial", TextButton.Size, FontStyle.Bold, GraphicsUnit.Point))
+                    {
+                        Graphics g = this.CreateGraphics();
+
+                        SizeF size = g.MeasureString(TextButton.Text,font1);
+                        StringFormat format = new StringFormat();
+                
+                        int nLeft = Convert.ToInt32((this.ClientRectangle.Width / 2) - (size.Width / 2));
+                        int nTop = Convert.ToInt32(TextHelper.PercentOf(TextButton.Position,this.Size.Height));
+                        RectangleF rectF1 = new RectangleF(nLeft, nTop, Image.Width, Image.Height);
+          
+                        pevent.Graphics.DrawImage(Image, DisplayRectangle);
+
+                        pevent.Graphics.DrawString(TextButton.Text, font1, TextButton.Brush, rectF1);
+
+                    }
+                }
+                else
+                {
+                    pevent.Graphics.DrawImage(Image, DisplayRectangle);
+
+                }
+
 
             }
         }

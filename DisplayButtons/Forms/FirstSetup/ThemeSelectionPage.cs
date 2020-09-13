@@ -21,9 +21,13 @@ namespace DisplayButtons.Forms.FirstSetup
             InitializeComponent();
             //Set the default theme
 
+            Globals.events.On("languagechanged", (e) => {
+                label4.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6", Texts.cultereinfo);
 
 
-      colorSchemePreviewControl1.Tag = true;
+            });
+
+            colorSchemePreviewControl1.Tag = true;
 
             colorSchemePreviewControl1.AppTheme = ColorSchemeCentral.DarkSide;
    colorSchemePreviewControl1.UnderlyingAppTheme = AppSettings.AppTheme.DarkSide;
@@ -76,9 +80,9 @@ namespace DisplayButtons.Forms.FirstSetup
         private void ThemeSelectionPage_Load(object sender, EventArgs e)
         {
 
-            Texts.initilizeLang();
+        
             this.Refresh();
-            label4.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6", Texts.cultereinfo);
+          
 
         }
     }
