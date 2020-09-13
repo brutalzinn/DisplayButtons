@@ -108,7 +108,7 @@ namespace DisplayButtons.Forms.EventSystem
 
         private void imageModernButton5_Click(object sender, EventArgs e)
         {
-            new FactoryEvents().Init();
+             FactoryEvents.Init();
         }
     }
 }

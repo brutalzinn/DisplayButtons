@@ -59,8 +59,8 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
                 }
                 if (instance.Datetime_radio.Checked)
                 {
-
-    Start = instance.dateTimePicker1.Value;
+                    Interval = TimeSpan.Parse(instance.textBox1.Text);
+                    Start = instance.dateTimePicker1.Value;
                     recurring = false;
                 }
                

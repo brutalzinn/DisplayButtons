@@ -32,15 +32,19 @@
             this.Datetime_radio = new System.Windows.Forms.RadioButton();
             this.recurring_timer_radio = new System.Windows.Forms.RadioButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.interval_label = new System.Windows.Forms.Label();
+            this.datehour_label = new System.Windows.Forms.Label();
+            this.datetime_groupbox = new System.Windows.Forms.GroupBox();
+            this.interval_groupbox = new System.Windows.Forms.GroupBox();
+            this.datetime_groupbox.SuspendLayout();
+            this.interval_groupbox.SuspendLayout();
             this.SuspendLayout();
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.CustomFormat = "dd-MM-yyyy HH:mm:ss";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(99, 86);
+            this.dateTimePicker1.Location = new System.Drawing.Point(84, 20);
             this.dateTimePicker1.MaxDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
             this.dateTimePicker1.MinDate = new System.DateTime(2001, 12, 12, 0, 0, 0, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
@@ -74,42 +78,66 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(99, 128);
+            this.textBox1.Location = new System.Drawing.Point(69, 23);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(194, 23);
             this.textBox1.TabIndex = 5;
             // 
-            // label1
+            // interval_label
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 131);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 15);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Intervalo";
+            this.interval_label.AutoSize = true;
+            this.interval_label.Location = new System.Drawing.Point(10, 26);
+            this.interval_label.Name = "interval_label";
+            this.interval_label.Size = new System.Drawing.Size(53, 15);
+            this.interval_label.TabIndex = 6;
+            this.interval_label.Text = "Intervalo";
             // 
-            // label2
+            // datehour_label
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 15);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Hora/Data";
+            this.datehour_label.AutoSize = true;
+            this.datehour_label.Location = new System.Drawing.Point(1, 26);
+            this.datehour_label.Name = "datehour_label";
+            this.datehour_label.Size = new System.Drawing.Size(62, 15);
+            this.datehour_label.TabIndex = 7;
+            this.datehour_label.Text = "Hora/Data";
+            // 
+            // datetime_groupbox
+            // 
+            this.datetime_groupbox.Controls.Add(this.datehour_label);
+            this.datetime_groupbox.Controls.Add(this.dateTimePicker1);
+            this.datetime_groupbox.Location = new System.Drawing.Point(15, 68);
+            this.datetime_groupbox.Name = "datetime_groupbox";
+            this.datetime_groupbox.Size = new System.Drawing.Size(291, 60);
+            this.datetime_groupbox.TabIndex = 8;
+            this.datetime_groupbox.TabStop = false;
+            this.datetime_groupbox.Text = "Date/hour control";
+            // 
+            // interval_groupbox
+            // 
+            this.interval_groupbox.Controls.Add(this.textBox1);
+            this.interval_groupbox.Controls.Add(this.interval_label);
+            this.interval_groupbox.Location = new System.Drawing.Point(15, 134);
+            this.interval_groupbox.Name = "interval_groupbox";
+            this.interval_groupbox.Size = new System.Drawing.Size(291, 55);
+            this.interval_groupbox.TabIndex = 9;
+            this.interval_groupbox.TabStop = false;
+            this.interval_groupbox.Text = "Interval";
             // 
             // TimerTrigger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.interval_groupbox);
+            this.Controls.Add(this.datetime_groupbox);
             this.Controls.Add(this.recurring_timer_radio);
             this.Controls.Add(this.Datetime_radio);
-            this.Controls.Add(this.dateTimePicker1);
             this.Name = "TimerTrigger";
-            this.Size = new System.Drawing.Size(340, 188);
+            this.Size = new System.Drawing.Size(340, 219);
             this.Load += new System.EventHandler(this.TimerTrigger_Load_1);
+            this.datetime_groupbox.ResumeLayout(false);
+            this.datetime_groupbox.PerformLayout();
+            this.interval_groupbox.ResumeLayout(false);
+            this.interval_groupbox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,7 +149,9 @@
         public System.Windows.Forms.RadioButton Datetime_radio;
         public System.Windows.Forms.RadioButton recurring_timer_radio;
         public System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label interval_label;
+        private System.Windows.Forms.Label datehour_label;
+        private System.Windows.Forms.GroupBox datetime_groupbox;
+        private System.Windows.Forms.GroupBox interval_groupbox;
     }
 }

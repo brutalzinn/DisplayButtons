@@ -198,6 +198,9 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="BUTTONCANCEL" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="BUTTONDECKMISCELLANEOUS" xml:space="preserve">
+    <value>Opções extras</value>
+  </data>
   <data name="BUTTONOPENCONSOLE" xml:space="preserve">
     <value>Abrir console</value>
   </data>
@@ -413,6 +416,9 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="FIRSTPAGEBUTTONAVANCE" xml:space="preserve">
     <value>Avançar</value>
   </data>
+  <data name="FOLDERPLACEHOLDER" xml:space="preserve">
+    <value>Pasta</value>
+  </data>
   <data name="GENERATESIDEBARTITLEPLUGINS" xml:space="preserve">
     <value>Botões lua</value>
   </data>
@@ -587,6 +593,27 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="THEME" xml:space="preserve">
     <value>Tema</value>
   </data>
+  <data name="TIMERPLACEHOLDER" xml:space="preserve">
+    <value>hh:mm:ss</value>
+  </data>
+  <data name="TIMERTRIGGERDATEHOURLABEL" xml:space="preserve">
+    <value>Data/hora</value>
+  </data>
+  <data name="TIMERTRIGGERDATETIMEGROUPBOX" xml:space="preserve">
+    <value>Data/Hora</value>
+  </data>
+  <data name="TIMERTRIGGERDATTIMERADIO" xml:space="preserve">
+    <value>Data/hora</value>
+  </data>
+  <data name="TIMERTRIGGERINTERVALGROUPBOX" xml:space="preserve">
+    <value>Intervalo</value>
+  </data>
+  <data name="TIMERTRIGGERINTERVALLABEL" xml:space="preserve">
+    <value>Intervalo</value>
+  </data>
+  <data name="TIMERTRIGGERINTERVALRADIO" xml:space="preserve">
+    <value>Tempo recorrente</value>
+  </data>
   <data name="UPDATEAVAIBLEWINDOWSTEXTISUPDATEAVAIBLE" xml:space="preserve">
     <value>{0} {3} agora está disponível (você tem {1}). Você gostaria de {2} agora?</value>
   </data>
@@ -604,5 +631,26 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   </data>
   <data name="WARNINGLABELTEXT" xml:space="preserve">
     <value>Conecte o seu device ao Display Buttons.</value>
+  </data>
+  <data name="WINDOWTRIGGERBUTTON" xml:space="preserve">
+    <value>Lista de processos</value>
+  </data>
+  <data name="WINDOWTRIGGERLABEL1" xml:space="preserve">
+    <value>Processo:</value>
+  </data>
+  <data name="WINDOWTRIGGERLABEL2" xml:space="preserve">
+    <value>Janela handle:</value>
+  </data>
+  <data name="WINDOWTRIGGERPROCESSLIST" xml:space="preserve">
+    <value>Nenhum processo com esse nome foi encontrado.</value>
+  </data>
+  <data name="WINDOWTRIGGERPROCESSLISTTITLE" xml:space="preserve">
+    <value>Gerenciador de processos</value>
+  </data>
+  <data name="WINDOWTRIGGERWINDOWTYPCLOSE" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="WINDOWTRIGGERWINDOWTYPEOPEN" xml:space="preserve">
+    <value>Abrir</value>
   </data>
 </root>

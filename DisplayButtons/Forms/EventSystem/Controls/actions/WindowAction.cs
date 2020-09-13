@@ -19,7 +19,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
         public WindowAction(ChangeFolder value)
         {
             InitializeComponent();
-
+            label1.Text = Texts.rm.GetString("FOLDERPLACEHOLDER", Texts.cultereinfo);
             if (value != null)
             {
                 window = value;

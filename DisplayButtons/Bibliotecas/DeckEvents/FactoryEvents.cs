@@ -17,9 +17,20 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
     class FactoryEvents
     {
 
-
-
-        public void Init()
+        public static TimedProcessWatcher processWatcher;
+        static readonly FactoryEvents _instance = new FactoryEvents();
+        public static FactoryEvents Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+        FactoryEvents()
+        {
+            // Initialize.
+        }
+        public static void Init()
         {
          
             var reflexive_class = ReflectiveEnumerator.GetEnumerableOfType<AbstractTrigger>();
@@ -39,6 +50,13 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
             //        item.OnInit();
 if(item is WindowEvent)
                     {
+                        if(processWatcher != null)
+                        {
+                           
+                            FactoryEvents.processWatcher.Stop();
+                        }
+
+                        FactoryEvents.processWatcher = new TimedProcessWatcher(1.0);
                         EventProcess();
                         goto final;
                     }
@@ -83,13 +101,13 @@ if(item is WindowEvent)
         {
             Debug.WriteLine("TESTINNGg.." + value.Name);
         }
-        public void EventProcess()
+        static void EventProcess()
         {
 
-            TimedProcessWatcher teste = new TimedProcessWatcher(1.0);
+            
 
-            teste.Start();
-            teste.ProcessStarted += (s, e) =>
+            FactoryEvents.processWatcher.Start();
+            FactoryEvents.processWatcher.ProcessStarted += (s, e) =>
             {
                 foreach (var events in EventXml.Settings.Events)
                 {
@@ -112,7 +130,7 @@ if(item is WindowEvent)
                     }
                 }
             };
-            teste.ProcessStopped += (s, e) =>
+            FactoryEvents.processWatcher.ProcessStopped += (s, e) =>
             {
                 foreach (var events in EventXml.Settings.Events)
                 {
@@ -136,7 +154,7 @@ if(item is WindowEvent)
                 }
             };
 
-
+       
         }
     }
 }

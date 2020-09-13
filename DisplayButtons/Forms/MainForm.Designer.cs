@@ -57,6 +57,7 @@ namespace DisplayButtons.Forms
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.perfil_info = new System.Windows.Forms.Label();
+            this.deckoptions_button = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.painel_developer.SuspendLayout();
@@ -142,9 +143,9 @@ namespace DisplayButtons.Forms
             this.painel_developer.Controls.Add(this.imageModernButton4);
             this.painel_developer.Controls.Add(this.imageModernButton3);
             this.painel_developer.Controls.Add(this.imageModernButton2);
-            this.painel_developer.Location = new System.Drawing.Point(392, 89);
+            this.painel_developer.Location = new System.Drawing.Point(545, 89);
             this.painel_developer.Name = "painel_developer";
-            this.painel_developer.Size = new System.Drawing.Size(507, 47);
+            this.painel_developer.Size = new System.Drawing.Size(500, 47);
             this.painel_developer.TabIndex = 5;
             this.painel_developer.Visible = false;
             this.painel_developer.Paint += new System.Windows.Forms.PaintEventHandler(this.Painel_developer_Paint);
@@ -276,7 +277,7 @@ namespace DisplayButtons.Forms
             // 
             this.imageModernButton6.CustomColorScheme = false;
             this.imageModernButton6.Image = null;
-            this.imageModernButton6.Location = new System.Drawing.Point(249, 97);
+            this.imageModernButton6.Location = new System.Drawing.Point(250, 93);
             this.imageModernButton6.Name = "imageModernButton6";
             this.imageModernButton6.NormalImage = null;
             this.imageModernButton6.Origin = null;
@@ -355,6 +356,21 @@ namespace DisplayButtons.Forms
             this.perfil_info.TabIndex = 11;
             this.perfil_info.Text = "label1";
             // 
+            // deckoptions_button
+            // 
+            this.deckoptions_button.CustomColorScheme = false;
+            this.deckoptions_button.Image = null;
+            this.deckoptions_button.Location = new System.Drawing.Point(390, 93);
+            this.deckoptions_button.Name = "deckoptions_button";
+            this.deckoptions_button.NormalImage = null;
+            this.deckoptions_button.Origin = null;
+            this.deckoptions_button.Size = new System.Drawing.Size(122, 37);
+            this.deckoptions_button.TabIndex = 12;
+            this.deckoptions_button.Text = "Deck options";
+            this.deckoptions_button.TextButton = null;
+            this.deckoptions_button.UseVisualStyleBackColor = true;
+            this.deckoptions_button.Click += new System.EventHandler(this.imageModernButton9_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -365,6 +381,7 @@ namespace DisplayButtons.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.deckoptions_button);
             this.Controls.Add(this.perfil_info);
             this.Controls.Add(this.imageModernButton8);
             this.Controls.Add(this.imageModernButton7);
@@ -426,6 +443,7 @@ namespace DisplayButtons.Forms
         private ToolStripStatusLabel info;
         private Label perfil_info;
         public ComboBox perfilselector;
+        private ImageModernButton deckoptions_button;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

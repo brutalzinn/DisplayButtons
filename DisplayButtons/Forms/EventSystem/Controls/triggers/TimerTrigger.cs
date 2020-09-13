@@ -21,15 +21,20 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
         {
             
             InitializeComponent();
-          
+
+
+            Datetime_radio.Text = Texts.rm.GetString("TIMERTRIGGERDATTIMERADIO", Texts.cultereinfo);
+           recurring_timer_radio.Text = Texts.rm.GetString("TIMERTRIGGERINTERVALRADIO", Texts.cultereinfo);
+            datetime_groupbox.Text = Texts.rm.GetString("TIMERTRIGGERDATETIMEGROUPBOX", Texts.cultereinfo);
+            interval_groupbox.Text = Texts.rm.GetString("TIMERTRIGGERINTERVALGROUPBOX", Texts.cultereinfo);
+            interval_label.Text = Texts.rm.GetString("TIMERTRIGGERINTERVALLABEL", Texts.cultereinfo);
+           datehour_label.Text = Texts.rm.GetString("TIMERTRIGGERDATEHOURLABEL", Texts.cultereinfo);
             if (value != null)
             {
                 window = value;
             //    dateTimePicker1.CustomFormat = "dd-MM-yyyy hh:mm:ss";
                
-                    recurring_timer_radio.Checked = true;
-                    Datetime_radio.Checked = false;
-               
+                   
                     recurring_timer_radio.Checked = false;
                     Datetime_radio.Checked = true;
             
@@ -47,8 +52,23 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
                 
 
             }
-          
-        }
+            recurring_timer_radio.Click += (s, e) =>
+            {
+               
+                    dateTimePicker1.Visible = false;
+                datehour_label.Visible = false;
+                interval_groupbox.Location = new Point(16, 68);
+           
+            };
+
+
+            Datetime_radio.Click += (s, e) =>
+            {
+                dateTimePicker1.Visible = true;
+                datehour_label.Visible = true;
+                interval_groupbox.Location = new Point(15, 134);
+            };
+    }
       
         public override void SaveConfig()
         {

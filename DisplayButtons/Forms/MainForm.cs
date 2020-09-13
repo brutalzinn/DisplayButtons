@@ -125,6 +125,8 @@ namespace DisplayButtons.Forms
                     this.Text = Texts.rm.GetString("APPLICATIONNAME", Texts.cultereinfo);
                     perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo);
                     warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
+                    deckoptions_button.Text = Texts.rm.GetString("BUTTONDECKMISCELLANEOUS", Texts.cultereinfo);
+
                 }));
 
             });
@@ -354,19 +356,7 @@ namespace DisplayButtons.Forms
 
                 appBar1.Actions.Add(itemTrash);
                 appBar1.Actions.Add(item);
-                AppAction itemMagnetite = new AppAction()
-                {
-
-                  
-                    Image = imageMiscelanius
-                    
-
-                };
-               
-                itemMagnetite.Click += (s, ee) =>
-                {
-                    new MagnetiteForm().ShowDialog();
-                };
+            
 
 
 
@@ -384,7 +374,7 @@ namespace DisplayButtons.Forms
 
                 Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
 
-                appBar1.Actions.Add(itemMagnetite);
+             
 
                 appBar1.Actions.Add(itemBiblioteca);
  
@@ -417,7 +407,7 @@ namespace DisplayButtons.Forms
                 }));
           ApplySidebarTheme(shadedPanel1);
             Texts.initilizeLang();
- new FactoryEvents().Init();
+  FactoryEvents.Init();
  Checkupdates();
         }
         private void Checkupdates()
@@ -3733,6 +3723,11 @@ toAdd.AsEnumerable().Reverse().All(m =>
         private void statusStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
         
+        }
+
+        private void imageModernButton9_Click(object sender, EventArgs e)
+        {
+            new MagnetiteForm().ShowDialog();
         }
     }
     #endregion

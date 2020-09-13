@@ -24,9 +24,13 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
         {
             
             InitializeComponent();
+
+            label1.Text = Texts.rm.GetString("WINDOWTRIGGERLABEL1", Texts.cultereinfo);
+            label2.Text = Texts.rm.GetString("WINDOWTRIGGERLABEL2", Texts.cultereinfo);
+            button1.Text = Texts.rm.GetString("WINDOWTRIGGERBUTTON", Texts.cultereinfo);
             Dictionary<int, string> test = new Dictionary<int, string>();
-            test.Add(0, "Fechar");
-            test.Add(1, "Abrir");
+            test.Add(0, Texts.rm.GetString("WINDOWTRIGGERWINDOWTYPEOPEN", Texts.cultereinfo));
+            test.Add(1, Texts.rm.GetString("WINDOWTRIGGERWINDOWTYPCLOSE", Texts.cultereinfo));
             comboBox1.DataSource = new BindingSource(test, null);
             comboBox1.DisplayMember = "Value";
             comboBox1.ValueMember = "Key";

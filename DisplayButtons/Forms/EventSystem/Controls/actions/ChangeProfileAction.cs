@@ -19,6 +19,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
         public ChangeProfileAction(ChangeProfile value)
         {
             InitializeComponent();
+          label1.Text =  Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo);
             if (value != null)
             {
                 window = value;

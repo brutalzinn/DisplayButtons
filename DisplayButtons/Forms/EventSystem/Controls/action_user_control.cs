@@ -37,7 +37,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls
 
          imageModernButton1.Text =   Texts.rm.GetString("EVENTSYSTEMDELETEBUTTON", Texts.cultereinfo);
         imageModernButton2.Text    = Texts.rm.GetString("EVENTSYSTEMCONFIGBUTTON", Texts.cultereinfo);
-        imageModernButton2.Text =     Texts.rm.GetString("EVENTSYSTEMNEWBUTTON", Texts.cultereinfo);
+        imageModernButton3.Text =     Texts.rm.GetString("EVENTSYSTEMNEWBUTTON", Texts.cultereinfo);
 
         }   
         public List<AbstractAction> list_actions { get; set; } = new List<AbstractAction>();

@@ -14,6 +14,9 @@ namespace DisplayButtons.Forms.EventSystem.misc.ProcessTrigger
         public ProcessList()
         {
             InitializeComponent();
+            imageModernButton1.Text = Texts.rm.GetString("EVENTSYSTEMSAVEBUTTON", Texts.cultereinfo);
+            imageModernButton2.Text = Texts.rm.GetString("BUTTONCANCEL", Texts.cultereinfo);
+            this.Text = Texts.rm.GetString("WINDOWTRIGGERPROCESSLISTTITLE", Texts.cultereinfo);
             Process[] processlist = Process.GetProcesses();
 
             foreach (Process theprocess in processlist)
@@ -37,7 +40,7 @@ namespace DisplayButtons.Forms.EventSystem.misc.ProcessTrigger
                 if (index != -1)
                     listBox1.SetSelected(index, true);
                 else
-                    MessageBox.Show("The search string did not match any items in the ListBox");
+                    MessageBox.Show(Texts.rm.GetString("WINDOWTRIGGERPROCESSLIST", Texts.cultereinfo));
             }
         }
 
