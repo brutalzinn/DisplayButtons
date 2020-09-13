@@ -162,7 +162,19 @@ namespace DisplayButtons.Backend.Objects
             device.CurrentProfile = profile;
           
         }
-        public static void SelectItemByValue(this ComboBox cbo, Profile profile)
+        public static Profile getCurrentPerfilComboBox(this ComboBox cbo)
+        {
+            Profile CurrentPerfil  = null;
+            MainForm.Instance.Invoke(new Action(() =>
+            {
+
+                CurrentPerfil = ((ProfileVoidHelper.GlobalPerfilBox) cbo.SelectedItem).Value;
+
+            })); 
+            return CurrentPerfil;
+           
+        }
+            public static void SelectItemByValue(this ComboBox cbo, Profile profile)
         {
 
             if (profile != null)
@@ -186,26 +198,30 @@ namespace DisplayButtons.Backend.Objects
           
                 foreach (var device in DevicePersistManager.PersistedDevices.ToList())
                 {
-                    if (device.profiles.Count == 0)
+                if (device.profiles.Count == 0)
+                {
+
+                    Profile new_folder = new Profile();
+                    new_folder.Mainfolder = new DynamicDeckFolder();
+                    new_folder.Name = "DEFAULT";
+
+                    device.profiles.Add(new_folder);
+
+                    SelectCurrentDevicePerfil(new_folder);
+
+
+
+
+                    MainForm.Instance.FillPerfil();
+                    MainForm.Instance.Invoke(new Action(() =>
                     {
 
-                        Profile new_folder = new Profile();
-                        new_folder.Mainfolder = new DynamicDeckFolder();
-                        new_folder.Name = "DEFAULT";
-
-                        device.profiles.Add(new_folder); 
-
-                        SelectCurrentDevicePerfil(new_folder);
-                
-                      
-
-                  
-                        MainForm.Instance.FillPerfil();                   
-                    SelectItemByValue(MainForm.Instance.perfilselector, new_folder);
-                    }
-
-
+                        SelectItemByValue(MainForm.Instance.perfilselector, new_folder);
+                    }));
                 }
+
+
+            }
 
             
 

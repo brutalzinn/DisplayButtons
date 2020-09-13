@@ -21,6 +21,7 @@ using DisplayButtons.Backend.Objects;
 using DisplayButtons.Forms.ActionHelperForms;
 using DisplayButtons.Bibliotecas.DeckEvents;
 using MoreLinq;
+using System.Reflection;
 
 namespace DisplayButtons
 {
@@ -33,6 +34,8 @@ namespace DisplayButtons
         public static bool Silent { get; set; } = false;
         private static string errorText = "";
         private const string errorFileName = "errors.log";
+        private static Mutex mutex = null;
+
         public static ServerThread ServerThread { get; set; }
         public static ClientThread ClientThread { get; set; }
         public static int mode { get; set; }
@@ -153,7 +156,31 @@ namespace DisplayButtons
 #else
             Silent = args.Any(c => c.ToLower() == "/s");
 #endif
-     
+            const string appName = "DisplayButtons";
+            bool createdNew;
+
+            mutex = new Mutex(true, appName, out createdNew);
+
+            if (!createdNew)
+            {
+                
+                //app is already running! Exiting the application  
+               if ( MessageBox.Show(Texts.rm.GetString("ALREADYDISPLAYBUTTONISOPEN", Texts.cultereinfo), Texts.rm.GetString("ALREADYDISPLAYBUTTONISOPENTITLE", Texts.cultereinfo), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {      
+                    var myapp = Process.GetProcessesByName(Assembly.GetCallingAssembly().GetName().Name);
+
+                    List<Process> obsProcesses = new List<Process>();
+                    obsProcesses.AddRange(myapp);
+
+
+                   if( obsProcesses.Count > 1)
+                    {
+                        var last = obsProcesses.First();
+                        last.Kill();
+                    }
+                }
+                //return;
+            }
             errorText = String.Format(Texts.rm.GetString("INTEGRATIONERROROCURRED", Texts.cultereinfo), errorFileName);
 
             Application.ThreadException += Application_ThreadException;
@@ -196,20 +223,15 @@ namespace DisplayButtons
                 mode = 1;
               
                 Adbserver = new AdbServer();
-    
-  AdbResult = Adbserver.StartServer(Application.StartupPath + @"\Data\adb\adb.exe", restartServerIfNewer: true);
               
-               monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
+  Adbserver.StartServer(Path.Combine(Application.StartupPath , @"Data\adb\adb.exe"), restartServerIfNewer: true);
+           
+                        monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort)));
                 client = new AdbClient(new IPEndPoint(IPAddress.Loopback, AdbClient.AdbServerPort), Factories.AdbSocketFactory);
 
                 monitor.DeviceConnected += MainForm.DeviceAdbConnected;
                 monitor.DeviceDisconnected += MainForm.DeviceAdbDisconnected;
                 monitor.Start();
-
-
-
-
-                
 
 
 
@@ -223,37 +245,26 @@ namespace DisplayButtons
 
                     //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", client.GetDevices().First(), null);
 
-                    DevicePersistManager.PersistUsbMode(Program.device_list.First());
+                       DevicePersistManager.PersistUsbMode(Program.device_list.First());
                     client.CreateForward(Program.device_list.First(), "tcp:5095", "tcp:5095", true);
+                
                     ClientThread = new ClientThread();
-                    ClientThread.Start();
+                  ClientThread.Start();
 
                 }
                 else
                 {
 
-                   
                     ClientThread = new ClientThread();
-                    
-                 
-                         // ClientThread.Start();
-                        
-
-                    
-                }
-
-
-
-
-
-
-
+                  
 
 
                 }
 
+                }
+Application.Run(new MainForm());
 
-              Application.Run(new MainForm());
+             
             //Application.Run(new MainFormMenuOption());
             OBSUtils.Disconnect();
             if (mode == 1)

@@ -536,7 +536,8 @@ namespace DisplayButtons.Backend.Networking.TcpLib
         {
             lock (this)
             {
-                _listener.Close();
+              
+  _listener.Close();
                 _listener = null;
                 //Close all active connections
                 foreach (object obj in _connections)

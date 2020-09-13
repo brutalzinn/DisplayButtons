@@ -135,6 +135,12 @@
   <data name="ABOUTNAMETEXT" xml:space="preserve">
     <value>Sobre o DisplayButtons</value>
   </data>
+  <data name="ALREADYDISPLAYBUTTONISOPEN" xml:space="preserve">
+    <value>Display Buttons já está em execução. Você deseja forçar a abertura? (isso encerrará o processo do Display Buttons que se encontra aberto.)</value>
+  </data>
+  <data name="ALREADYDISPLAYBUTTONISOPENTITLE" xml:space="preserve">
+    <value>Gerenciador de processos</value>
+  </data>
   <data name="APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL1" xml:space="preserve">
     <value>Olá, bem-vindo ao Display Buttons.</value>
   </data>

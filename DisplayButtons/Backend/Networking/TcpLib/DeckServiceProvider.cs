@@ -65,9 +65,6 @@ namespace DisplayButtons.Backend.Networking.TcpLib
         public override void OnRetryConnect(ConnectionState state, bool isErrorOnConnected)
         {
         
-
-
-            
             
             if (Program.mode == 1)
             {

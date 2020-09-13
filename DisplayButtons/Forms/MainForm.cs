@@ -1212,7 +1212,7 @@ namespace DisplayButtons.Forms
 
                     control.NormalImage = item?.GetItemImage().Bitmap;
                     control.Text = item?.Deckname;
-
+                    control.TextButton = new TextLabel(item);
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
 
@@ -1282,7 +1282,7 @@ namespace DisplayButtons.Forms
             Thread.Sleep(1500);
             var receiver = new ConsoleOutputReceiver();
 
-            Program.client.ExecuteRemoteCommand("pm path net.nickac.DisplayButtons", e.Device, receiver);
+            Program.client.ExecuteRemoteCommand("pm path net.robertocpaes.displaybuttons", e.Device, receiver);
  
             if (receiver != null)
             {

@@ -115,13 +115,14 @@ namespace DisplayButtons.Backend.Objects
             //System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
 
             try {
-               
 
 
-               
+
+              
                     Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
                     Thread.Sleep(1000);
                     Program.client.CreateForward(DevicePersistManager.DeviceUsb, "tcp:5095", "tcp:5095", true);
+                DevicePersistManager.PersistUsbMode(DevicePersistManager.DeviceUsb);
                 Program.ClientThread.Stop();
                     Program.ClientThread = new Misc.ClientThread();
                     Program.ClientThread.Start();
@@ -136,19 +137,14 @@ namespace DisplayButtons.Backend.Objects
                             {
 
                                 Debug.WriteLine("Reconectado.");
-                                MainForm.Instance.StartUsbMode();
-                                DevicePersistManager.ChangeConnectedState(item.GetConnection(), item);
-                                MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
-                                MainForm.Instance.CurrentDevice = item;
                               
-                                
-                                //  DevicePersistManager.OnDeviceConnected(this, item);
-                                // MainForm.Instance.Start_configs();
-                                //MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
-                                // MainForm.Instance.CurrentDevice = item;
+                                DevicePersistManager.PersistDevice(item);
+                                DevicePersistManager.ChangeConnectedState(item.GetConnection(), item); 
+                                DevicePersistManager.OnDeviceConnected(this, item); 
+                                MainForm.Instance.CurrentDevice = item;
 
-
-
+                                MainForm.Instance.CurrentDevice.CurrentProfile = ProfileStaticHelper.getCurrentPerfilComboBox(MainForm.Instance.perfilselector);
+                        
 
                             }));
 
