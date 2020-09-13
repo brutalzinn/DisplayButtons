@@ -193,10 +193,15 @@ namespace DisplayButtons.Backend.Objects
                         new_folder.Mainfolder = new DynamicDeckFolder();
                         new_folder.Name = "DEFAULT";
 
-                        device.profiles.Add(new_folder);
-                        SelectCurrentDevicePerfil(new_folder);
+                        device.profiles.Add(new_folder); 
 
-                        MainForm.Instance.FillPerfil();
+                        SelectCurrentDevicePerfil(new_folder);
+                
+                      
+
+                  
+                        MainForm.Instance.FillPerfil();                   
+                    SelectItemByValue(MainForm.Instance.perfilselector, new_folder);
                     }
 
 
@@ -216,7 +221,7 @@ namespace DisplayButtons.Backend.Objects
                    
  device.profiles.Remove(perfil);
                     SelectCurrentDevicePerfil(device.profiles.Last());
-                   
+                    
                 MainForm.Instance.FillPerfil();
             }
 
