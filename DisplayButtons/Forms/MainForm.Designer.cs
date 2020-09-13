@@ -285,7 +285,6 @@ namespace DisplayButtons.Forms
             this.imageModernButton6.Text = "EventSystem";
             this.imageModernButton6.TextButton = null;
             this.imageModernButton6.UseVisualStyleBackColor = true;
-            this.imageModernButton6.Visible = false;
             this.imageModernButton6.Click += new System.EventHandler(this.imageModernButton6_Click_1);
             // 
             // perfilselector

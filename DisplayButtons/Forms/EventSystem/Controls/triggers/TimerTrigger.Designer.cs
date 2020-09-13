@@ -51,7 +51,7 @@
             // Datetime_radio
             // 
             this.Datetime_radio.AutoSize = true;
-            this.Datetime_radio.Location = new System.Drawing.Point(99, 47);
+            this.Datetime_radio.Location = new System.Drawing.Point(82, 47);
             this.Datetime_radio.Name = "Datetime_radio";
             this.Datetime_radio.Size = new System.Drawing.Size(75, 19);
             this.Datetime_radio.TabIndex = 4;
@@ -63,7 +63,7 @@
             // recurring_timer_radio
             // 
             this.recurring_timer_radio.AutoSize = true;
-            this.recurring_timer_radio.Location = new System.Drawing.Point(188, 47);
+            this.recurring_timer_radio.Location = new System.Drawing.Point(201, 47);
             this.recurring_timer_radio.Name = "recurring_timer_radio";
             this.recurring_timer_radio.Size = new System.Drawing.Size(105, 19);
             this.recurring_timer_radio.TabIndex = 4;

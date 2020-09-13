@@ -45,7 +45,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.comboBox1);
             this.Name = "WindowAction";
-            this.Size = new System.Drawing.Size(324, 237);
+            this.Size = new System.Drawing.Size(324, 172);
             this.Load += new System.EventHandler(this.WindowAction_Load);
             this.ResumeLayout(false);
 
