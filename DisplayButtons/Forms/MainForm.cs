@@ -1474,15 +1474,16 @@ namespace DisplayButtons.Forms
                     }
 
                     if (item == null) break;
+                  
                     if (item is DynamicDeckFolder)
                     {
 
                         isFolder = true;
                     }
-
-
                     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                     var seri = image.BitmapSerialized;
+
+
 
                     packet.AddToQueue(folder.GetItemIndex(item), item, image);
 

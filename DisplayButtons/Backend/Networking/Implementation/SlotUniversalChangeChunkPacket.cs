@@ -1,8 +1,9 @@
 ﻿using DisplayButtons.Backend.Networking.Attributes;
 using DisplayButtons.Backend.Networking.IO;
 using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Bibliotecas;
-
+using DisplayButtons.Properties;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,15 @@ namespace DisplayButtons.Backend.Networking.Implementation
     [Architecture(PacketArchitecture.ClientToServer | PacketArchitecture.ServerToClient)]
     public class SlotUniversalChangeChunkPacket : INetworkPacket
     {
- 
-        
-  
-        List<Labels> list_labels = new List<Labels>();
+
+
+
+        IDictionary<int, IDeckItem> toSend = new Dictionary<int, IDeckItem>();
         public void AddToQueue(int slot, IDeckItem item, DeckImage image)
         {
-         
-            list_labels.Add (new Labels( slot,item, image));
+
+
+            toSend.Add(slot, item);
         }
         public void ClearPacket()
         {

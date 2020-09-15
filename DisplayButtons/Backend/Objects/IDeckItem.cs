@@ -28,6 +28,7 @@ namespace DisplayButtons.Backend.Objects
         private bool isboldtext = false;
         private bool isnormaltext = true;
         private bool isitalictext = false;
+        private DeckImage setDefault;
         public string ToScript { get; set; } = "";
         public string Deckname { get => _deckname; set => _deckname = value; }
         public string Deckcolor { get => _deckcolor; set => _deckcolor = value; }
@@ -42,6 +43,7 @@ namespace DisplayButtons.Backend.Objects
         public bool Isboldtext { get => isboldtext; set => isboldtext = value; }
         public bool Isnormaltext { get => isnormaltext; set => isnormaltext = value; }
         public bool Isitalictext { get => isitalictext; set => isitalictext = value; }
+        public DeckImage SetDefault { get => setDefault; set => setDefault = value; }
 
         public abstract DeckImage GetItemImage();
 

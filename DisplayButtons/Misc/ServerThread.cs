@@ -47,7 +47,7 @@ namespace DisplayButtons.Misc
         public void Stop()
         {
             tcpServer?.Stop();
-            baseThread?.Abort();
+            baseThread?.Interrupt();
         }
     }
 }
