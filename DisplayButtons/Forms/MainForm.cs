@@ -695,7 +695,7 @@ namespace DisplayButtons.Forms
                                     {
                                         action1.OldFolder.GetParent().Remove(slot);
                                         RefreshButton(slot);
-                                        ClearSingleItemToDevice(CurrentDevice,slot);
+                                   //     ClearSingleItemToDevice(CurrentDevice,slot);
                                     }
                                 }
                             }
@@ -763,7 +763,7 @@ namespace DisplayButtons.Forms
                             {
                                 CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, item1);
                                 RefreshButton(action1.OldSlot, true);
-                                ClearSingleItemToDevice(CurrentDevice, action1.OldSlot);
+                              //  ClearSingleItemToDevice(CurrentDevice, action1.OldSlot);
                                 RefreshButton(mb.CurrentSlot, true);
                             }
 
@@ -1193,7 +1193,7 @@ namespace DisplayButtons.Forms
             control1.NormalImage = null;
             control1.Tag = null;
             control1.Text = "";
-
+            ClearSingleItemToDevice(CurrentDevice, slot);
 
             if (folder == null) control1.Invoke(new Action(control1.Refresh));
 
