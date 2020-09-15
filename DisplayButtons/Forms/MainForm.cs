@@ -695,6 +695,7 @@ namespace DisplayButtons.Forms
                                     {
                                         action1.OldFolder.GetParent().Remove(slot);
                                         RefreshButton(slot);
+                                        ClearSingleItemToDevice(CurrentDevice,slot);
                                     }
                                 }
                             }
@@ -762,6 +763,7 @@ namespace DisplayButtons.Forms
                             {
                                 CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, item1);
                                 RefreshButton(action1.OldSlot, true);
+                                ClearSingleItemToDevice(CurrentDevice, action1.OldSlot);
                                 RefreshButton(mb.CurrentSlot, true);
                             }
 
@@ -1215,21 +1217,49 @@ namespace DisplayButtons.Forms
                     control.TextButton = new TextLabel(item);
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
+ CurrentDevice.CheckCurrentFolder();
+            if (sendToDevice)
+            {
+                SendSingleItemToDevice(CurrentDevice, slot, item);
 
+            }
 
 
                 }
+             
             }
-            CurrentDevice.CheckCurrentFolder();
-            if (sendToDevice)
-            {
-                SendItemsToDevice(CurrentDevice, folder);
-
-            }
+           
             // 
         }
+        public static void SendSingleItemToDevice(DeckDevice device,int slot, IDeckItem item)
+        {
+            var con = device.GetConnection();
+            if (con != null)
+            {
+                bool isFolder = false;
+              
+                var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
+                var seri = image.BitmapSerialized;
+                con.SendPacket(new SingleUniversalChangePacket(image)
+                {
+                    ImageSlot = slot,
+                    CurrentItem = item
 
-        private ImageModernButton GetButtonControl(int id)
+                });
+
+
+            }
+
+
+            }
+        public static void ClearSingleItemToDevice(DeckDevice device, int slot)
+        {
+            var con = device.GetConnection();
+            con.SendPacket(new SlotImageClearPacket(slot));
+     
+        }
+
+            private ImageModernButton GetButtonControl(int id)
         {
             return Controls.Find("modernButton" + id, true).FirstOrDefault() as ImageModernButton;
         }
@@ -1464,7 +1494,7 @@ namespace DisplayButtons.Forms
 
                 List<int> addedItems = new List<int>();
                 bool isFolder = false;
-                for (int i = 0; i < Globals.calc; i++)
+                for (int i = 0; i < Instance.CurrentDevice.CurrentProfile.Matriz.Calc; i++)
                 {
                     IDeckItem item = null;
                     if (items.ElementAtOrDefault(i) != null)
@@ -1494,18 +1524,15 @@ namespace DisplayButtons.Forms
                 //    con.SendPacket(packet_label);
                 var clearPacket = new SlotImageClearChunkPacket();
                 //  var clearPacket_labels = new SlotLabelButtonClearChunkPacket();
-                for (int i = 1; i < Globals.calc + 1; i++)
+                for (int i = 1; i < Instance.CurrentDevice.CurrentProfile.Matriz.Calc + 1; i++)
                 {
-                    if (addedItems.Contains(i)) continue;
+                    if (addedItems.Contains(i)) 
+                        continue;
                     //packet_label.ClearPacket();
                     clearPacket.AddToQueue(i);
                     //     clearPacket_labels.AddToQueue(i);
                 }
 
-
-
-
-                //  con.SendPacket(packet_label);
 
                 con.SendPacket(clearPacket);
 

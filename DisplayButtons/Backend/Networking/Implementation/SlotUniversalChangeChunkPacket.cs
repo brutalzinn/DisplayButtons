@@ -25,13 +25,13 @@ namespace DisplayButtons.Backend.Networking.Implementation
         public void AddToQueue(int slot, IDeckItem item, DeckImage image)
         {
 
-
+            item.SetDefault = image;
             toSend.Add(slot, item);
         }
         public void ClearPacket()
         {
 
-            list_labels.Clear();
+           
 
         }
         public override void FromInputStream(DataInputStream reader)
@@ -43,38 +43,31 @@ namespace DisplayButtons.Backend.Networking.Implementation
 
         public override void ToOutputStream(DataOutputStream writer)
         {
-            //The number of images to send
       
-
-       
-
-
-            //     Debug.WriteLine(jsonString)
-
-            writer.WriteInt(list_labels.Count);
+            writer.WriteInt(toSend.Count);
          //   writer.WriteUTF(jsonString);
 
-           foreach (var item in list_labels)
+           foreach (var item in toSend)
            {
-              SendDeckLabel(writer, item.Id, item.Item, item.Image) ;
+              SendDeckLabel(writer, item.Key, item.Value) ;
 
              }
 
         }
 
-        private void SendDeckLabel(DataOutputStream writer, int slot, IDeckItem item , DeckImage img)
+        private void SendDeckLabel(DataOutputStream writer, int slot, IDeckItem item)
         {
 
             //Write the slot
-            if (img != null)
+            if (item.SetDefault != null)
             {
                 Json headerContent = new Json();
 
      
                 writer.WriteInt(slot);
                 //Byte array lenght
-                writer.WriteInt(img.InternalBitmap.Length);
-                writer.Write(img.InternalBitmap);
+                writer.WriteInt(item.SetDefault.InternalBitmap.Length);
+                writer.Write(item.SetDefault.InternalBitmap);
 
                 headerContent.Font = " ";
                 headerContent.Size = item.Decksize;
