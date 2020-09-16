@@ -245,11 +245,11 @@ namespace DisplayButtons
 
                     //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", client.GetDevices().First(), null);
 
-                       DevicePersistManager.PersistUsbMode(Program.device_list.First());
-                    client.CreateForward(Program.device_list.First(), "tcp:5095", "tcp:5095", true);
+                       DevicePersistManager.PersistUsbMode(client.GetDevices().First());
+              //      client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
                 
                     ClientThread = new ClientThread();
-                  ClientThread.Start();
+                ClientThread.Start();
 
                 }
                 else

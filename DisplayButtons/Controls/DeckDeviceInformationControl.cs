@@ -91,7 +91,11 @@ namespace DisplayButtons.Forms
                             else
                             {
                                 PersistUsbMode(DeckUsb);
-                                
+                                Program.client.RemoveAllForwards(DeckUsb);
+                                Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
+                                Program.ClientThread.Stop();
+                                Program.ClientThread = new Misc.ClientThread();
+                                Program.ClientThread.Start();
 
 
 
@@ -336,7 +340,16 @@ namespace DisplayButtons.Forms
 
                     using (var sb2 = new SolidBrush(Color.FromArgb(150, ForeColor)))
                     {
-                     e.Graphics.DrawString("MODO: USB" , Font, sb, Padding.Left, Padding.Top + textHeight);
+                        string status;
+                        if (DevicePersistManager.IsPersistedUsbMode() == true )
+                        {
+                            status = "Connected";
+                        }
+                        else
+                        {
+                            status = "Disconnected";
+                        }
+                     e.Graphics.DrawString("MODO: USB" + "Persisted: " + status, Font, sb, Padding.Left, Padding.Top + textHeight);
                     }
                 }
                 }

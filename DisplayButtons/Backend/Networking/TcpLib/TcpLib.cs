@@ -116,7 +116,7 @@ namespace DisplayButtons.Backend.Networking.TcpLib
         {
             throw new Exception("Derived clases must override Clone method.");
         }
-        public abstract void OnRetryConnect(ConnectionState state, bool isErrorOnConnected);
+        public abstract void OnRetryConnect(ConnectionState state);
         /// <summary>
         /// Gets executed when the server accepts a new connection.
         /// </summary>
@@ -454,6 +454,7 @@ namespace DisplayButtons.Backend.Networking.TcpLib
             try { st._provider.OnAcceptConnection(st); }
             catch
             {
+                
                 Debug.WriteLine("DEBBUUG CONNECTION ERROR.");
           //      st._provider.OnRetryConnect(st, true);
 
@@ -472,7 +473,7 @@ namespace DisplayButtons.Backend.Networking.TcpLib
             catch
             {
 
-
+                st._provider.OnRetryConnect(st);
             }
             
           
@@ -500,7 +501,7 @@ namespace DisplayButtons.Backend.Networking.TcpLib
 
                     //   Stop();
                //st._provider.OnDropConnection(st);
-                  st._provider.OnRetryConnect(st,true);
+                  st._provider.OnRetryConnect(st);
                 DropConnection(st);
                     
                 }

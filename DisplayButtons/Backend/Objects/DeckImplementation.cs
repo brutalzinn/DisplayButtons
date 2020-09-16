@@ -112,60 +112,78 @@ namespace DisplayButtons.Backend.Objects
         private void AutoConnectedUsb()
         {
 
-            //System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
-
-            try {
 
 
+            try
+            {
+                if (DevicePersistManager.IsPersistedUsbMode())
+                {
 
-              
+                    // PersistUsbMode(DevicePersistManager.DeviceUsb);
                     Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     Program.client.CreateForward(DevicePersistManager.DeviceUsb, "tcp:5095", "tcp:5095", true);
-                DevicePersistManager.PersistUsbMode(DevicePersistManager.DeviceUsb);
-                Program.ClientThread.Stop();
+                    Thread.Sleep(500);
+                    Program.ClientThread.Stop();
                     Program.ClientThread = new Misc.ClientThread();
                     Program.ClientThread.Start();
 
-                foreach (var item in DevicePersistManager.PersistedDevices.ToList())
-                {
-
-                    if (DevicePersistManager.IsDeviceOnline(item))
+                    foreach (var item in DevicePersistManager.PersistedDevices.ToList())
                     {
 
-                        MainForm.Instance.Invoke(new Action(() =>
+                        if (DevicePersistManager.IsDeviceConnected(item.DeviceGuid))
+                        {
+
+                            MainForm.Instance.Invoke(new Action(() =>
                             {
 
                                 Debug.WriteLine("Reconectado.");
-                              
-                                DevicePersistManager.PersistDevice(item);
-                                DevicePersistManager.ChangeConnectedState(item.GetConnection(), item); 
-                                DevicePersistManager.OnDeviceConnected(this, item); 
-                                MainForm.Instance.CurrentDevice = item;
 
-                                MainForm.Instance.CurrentDevice.CurrentProfile = ProfileStaticHelper.getCurrentPerfilComboBox(MainForm.Instance.perfilselector);
-                        
+
+                                MainForm.Instance.CurrentDevice = item;
+                                MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
+                                IsVirtualDeviceConnected = true;
+                                OnDeviceConnected(this, item);
+                                MainForm.Instance.ChangeButtonsVisibility(true);
+                                MainForm.Instance.RefreshAllButtons(false);
+                                void tempConnected(object s, DeviceEventArgs ee)
+                                {
+                                    if (ee.Device.DeviceGuid == item.DeviceGuid) return;
+                                    DeviceConnected -= tempConnected;
+                                    if (IsVirtualDeviceConnected)
+                                    {
+                                        //We had a virtual device.
+                                        OnDeviceDisconnected(this, item);
+                                        IsVirtualDeviceConnected = false;
+                                        MainForm.Instance.ChangeButtonsVisibility(false);
+                                    }
+                                }
+                                DeviceConnected += tempConnected;
+
+
+
+                                //  DevicePersistManager.OnDeviceConnected(this, item);
+                                // MainForm.Instance.Start_configs();
+                                //MainForm.Instance.CurrentDevice.CurrentProfile = MainForm.Instance.CurrentPerfil.Value;
+                                // MainForm.Instance.CurrentDevice = item;
+
+
+
 
                             }));
 
+                        }
                     }
-                    }
-
-
-
-
+               
+                    // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
 
                 }
-
-
-
-
-                catch (Exception eee)
-            {
-                Debug.WriteLine(eee);
-
+                
             }
-            // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
 
         }
 

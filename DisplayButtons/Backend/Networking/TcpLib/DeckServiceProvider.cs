@@ -62,7 +62,7 @@ namespace DisplayButtons.Backend.Networking.TcpLib
 
         }
    
-        public override void OnRetryConnect(ConnectionState state, bool isErrorOnConnected)
+        public override void OnRetryConnect(ConnectionState state)
         {
         
             
@@ -81,8 +81,8 @@ namespace DisplayButtons.Backend.Networking.TcpLib
         }
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-     
-         new UsbMode().RefreshCurrentUsb();
+            UsbMode teste = new UsbMode();
+            teste.RefreshCurrentUsb();
                // devices_refresh.MountUsbDevices();
           
         }

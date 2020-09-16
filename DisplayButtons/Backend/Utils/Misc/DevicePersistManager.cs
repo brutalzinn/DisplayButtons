@@ -112,6 +112,7 @@ namespace DisplayButtons.Backend.Utils
         {
             return PersistedDevices.Any(w => w.DeviceGuid == deviceGuid);
         }
+   
 
         public static bool HasPerfilCreated(DeckDevice device)
         {
@@ -158,6 +159,18 @@ namespace DisplayButtons.Backend.Utils
         public static void PersistUsbMode(DeviceData device_usb)
         {
             DeviceUsb = device_usb;
+        }
+        public static bool IsPersistedUsbMode()
+        {
+            if(DeviceUsb != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+           
         }
         public static void RemoveConnectionState(ConnectionState state)
         {
