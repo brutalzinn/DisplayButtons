@@ -43,7 +43,7 @@ using System.Threading.Tasks;
 
             private void RunServer()
             {
-            tcpClient = new TcpClient(new DeckServiceProvider(), Constants.PORT_NUMBER);
+            tcpClient = new TcpClient(new DeckServiceProvider(), ApplicationSettingsManager.Settings.PORT);
             tcpClient.Start();
 
             }

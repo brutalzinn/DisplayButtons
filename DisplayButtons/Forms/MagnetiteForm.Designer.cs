@@ -30,6 +30,10 @@
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.label1 = new System.Windows.Forms.Label();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.port_textbox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.port_save_button = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.shadedPanel2 = new DisplayButtons.Forms.ShadedPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
@@ -59,6 +63,7 @@
             this.modernButton5 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernButton6 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.modernShadowPanel1.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.shadedPanel1.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -98,6 +103,7 @@
             // 
             // modernShadowPanel1
             // 
+            this.modernShadowPanel1.Controls.Add(this.panel8);
             this.modernShadowPanel1.Controls.Add(this.shadedPanel2);
             this.modernShadowPanel1.Controls.Add(this.shadedPanel1);
             this.modernShadowPanel1.Controls.Add(this.panel7);
@@ -109,8 +115,45 @@
             this.modernShadowPanel1.Controls.Add(this.panel1);
             this.modernShadowPanel1.Location = new System.Drawing.Point(17, 152);
             this.modernShadowPanel1.Name = "modernShadowPanel1";
-            this.modernShadowPanel1.Size = new System.Drawing.Size(653, 357);
+            this.modernShadowPanel1.Size = new System.Drawing.Size(653, 397);
             this.modernShadowPanel1.TabIndex = 2;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.port_textbox);
+            this.panel8.Controls.Add(this.label6);
+            this.panel8.Controls.Add(this.port_save_button);
+            this.panel8.Location = new System.Drawing.Point(457, 74);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(170, 101);
+            this.panel8.TabIndex = 3;
+            // 
+            // port_textbox
+            // 
+            this.port_textbox.Location = new System.Drawing.Point(12, 25);
+            this.port_textbox.Name = "port_textbox";
+            this.port_textbox.Size = new System.Drawing.Size(147, 23);
+            this.port_textbox.TabIndex = 2;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(64, 7);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 15);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Port:";
+            // 
+            // port_save_button
+            // 
+            this.port_save_button.CustomColorScheme = false;
+            this.port_save_button.Location = new System.Drawing.Point(12, 54);
+            this.port_save_button.Name = "port_save_button";
+            this.port_save_button.Size = new System.Drawing.Size(147, 37);
+            this.port_save_button.TabIndex = 0;
+            this.port_save_button.Text = "Save Port";
+            this.port_save_button.UseVisualStyleBackColor = true;
+            this.port_save_button.Click += new System.EventHandler(this.port_save_button_Click);
             // 
             // shadedPanel2
             // 
@@ -267,7 +310,7 @@
             this.panel5.Controls.Add(this.modernButton8);
             this.panel5.Controls.Add(this.linha);
             this.panel5.Controls.Add(this.coluna);
-            this.panel5.Location = new System.Drawing.Point(457, 138);
+            this.panel5.Location = new System.Drawing.Point(457, 181);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(170, 100);
             this.panel5.TabIndex = 2;
@@ -325,6 +368,7 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(170, 100);
             this.panel3.TabIndex = 3;
+            this.panel3.Visible = false;
             // 
             // modernButton2
             // 
@@ -336,6 +380,7 @@
             this.modernButton2.Text = "Import Profile";
             this.modernButton2.UseVisualStyleBackColor = true;
             this.modernButton2.Visible = false;
+            this.modernButton2.Click += new System.EventHandler(this.modernButton2_Click);
             // 
             // modernButton1
             // 
@@ -385,7 +430,7 @@
             // 
             this.panel1.Controls.Add(this.modernButton5);
             this.panel1.Controls.Add(this.modernButton6);
-            this.panel1.Location = new System.Drawing.Point(457, 244);
+            this.panel1.Location = new System.Drawing.Point(457, 287);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(170, 100);
             this.panel1.TabIndex = 1;
@@ -416,7 +461,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 522);
+            this.ClientSize = new System.Drawing.Size(690, 562);
             this.ColorScheme.isToIgnoreForegroundColor = false;
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
@@ -430,6 +475,8 @@
             this.Text = "Magnetite - Menu";
             this.Load += new System.EventHandler(this.MagnetiteForm_Load);
             this.modernShadowPanel1.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.shadedPanel2.ResumeLayout(false);
             this.shadedPanel2.PerformLayout();
             this.shadedPanel1.ResumeLayout(false);
@@ -482,5 +529,9 @@
         private ShadedPanel shadedPanel2;
         private System.Windows.Forms.Label label5;
         private Controls.ImageModernButton imageModernButton2;
+        private System.Windows.Forms.Panel panel8;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton port_save_button;
+        private System.Windows.Forms.TextBox port_textbox;
+        private System.Windows.Forms.Label label6;
     }
 }

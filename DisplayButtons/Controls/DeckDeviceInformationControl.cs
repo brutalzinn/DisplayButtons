@@ -76,7 +76,8 @@ namespace DisplayButtons.Forms
                             if (IsVirtualDeviceConnected)
                             {
                                 Program.client.RemoveAllForwards(DeckUsb);
-                                Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
+                                Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
+
                                 Program.client.ExecuteRemoteCommand("am force-stop net.nickac.DisplayButtons", DeckUsb, null);
                                 Thread.Sleep(1400);
                                 Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", DeckUsb, null);
@@ -91,7 +92,12 @@ namespace DisplayButtons.Forms
                             else
                             {
                                 PersistUsbMode(DeckUsb);
-                                
+                                Program.client.RemoveAllForwards(DeckUsb);
+                                Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
+
+                                Program.ClientThread.Stop();
+                                Program.ClientThread = new Misc.ClientThread();
+                                Program.ClientThread.Start();
 
 
 
@@ -336,7 +342,16 @@ namespace DisplayButtons.Forms
 
                     using (var sb2 = new SolidBrush(Color.FromArgb(150, ForeColor)))
                     {
-                     e.Graphics.DrawString("MODO: USB" , Font, sb, Padding.Left, Padding.Top + textHeight);
+                        string status;
+                        if (DevicePersistManager.IsPersistedUsbMode() == true )
+                        {
+                            status = "Connected";
+                        }
+                        else
+                        {
+                            status = "Disconnected";
+                        }
+                     e.Graphics.DrawString("MODO: USB" + "Persisted: " + status, Font, sb, Padding.Left, Padding.Top + textHeight);
                     }
                 }
                 }

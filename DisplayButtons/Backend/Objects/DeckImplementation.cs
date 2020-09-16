@@ -112,63 +112,37 @@ namespace DisplayButtons.Backend.Objects
         private void AutoConnectedUsb()
         {
 
-            //System.Threading.SpinWait.SpinUntil(() => Globals.can_refresh);
 
-            try {
-
-
-
-              
-                    Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
-                    Thread.Sleep(1000);
-                    Program.client.CreateForward(DevicePersistManager.DeviceUsb, "tcp:5095", "tcp:5095", true);
-                DevicePersistManager.PersistUsbMode(DevicePersistManager.DeviceUsb);
-                Program.ClientThread.Stop();
-                    Program.ClientThread = new Misc.ClientThread();
-                    Program.ClientThread.Start();
-
-                foreach (var item in DevicePersistManager.PersistedDevices.ToList())
+        
+                try
                 {
 
-                    if (DevicePersistManager.IsDeviceOnline(item))
-                    {
 
-                        MainForm.Instance.Invoke(new Action(() =>
-                            {
+                    // PersistUsbMode(DevicePersistManager.DeviceUsb);
+                    Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
+                    Program.client.CreateForward(DevicePersistManager.DeviceUsb, "tcp:5095", "tcp:5095", true);
+  
+                    Program.ClientThread.Stop();
+                    Program.ClientThread = new Misc.ClientThread();
+                    Program.ClientThread.Start();
+                
 
-                                Debug.WriteLine("Reconectado.");
-                              
-                                DevicePersistManager.PersistDevice(item);
-                                DevicePersistManager.ChangeConnectedState(item.GetConnection(), item); 
-                                DevicePersistManager.OnDeviceConnected(this, item); 
-                                MainForm.Instance.CurrentDevice = item;
+                        }
 
-                                MainForm.Instance.CurrentDevice.CurrentProfile = ProfileStaticHelper.getCurrentPerfilComboBox(MainForm.Instance.perfilselector);
+
+
                         
 
-                            }));
 
+                      
+
+                    catch (Exception e)
+                    {
+                        Debug.WriteLine(e);
                     }
-                    }
-
-
-
-
-
-                }
-
-
-
-
-                catch (Exception eee)
-            {
-                Debug.WriteLine(eee);
-
-            }
-            // toRemove.All(c => { DevicePersistManager.RemoveConnectionState(c); return true; });
-
+                  Thread.Sleep(1000);
+        
         }
-
         
 
     }
