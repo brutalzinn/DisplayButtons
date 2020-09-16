@@ -58,33 +58,27 @@ namespace DisplayButtons.Backend.Networking.TcpLib
             
 
         }
-        public void RefreshCurrentUsb()
-        {
-            Thread th = new Thread(AutoConnectedUsb);
-            th.Start();
-        }
+      
 
-        private void AutoConnectedUsb()
-        {
-            Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
-            Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
-
-            Program.ClientThread.Stop();
-            Program.ClientThread = new Misc.ClientThread();
-            Program.ClientThread.Start();
-            Thread.Sleep(5000);
-          }
+     
         public override void OnRetryConnect(ConnectionState state)
-        {
-        
+        { 
             
             if (Program.mode == 1)
             {
-            
-               
-  RefreshCurrentUsb();
+            UsbMode usb_mode = new UsbMode();
+                UsbMode._AREvt = new AutoResetEvent(false);
+                UsbMode.ThreadWorker worker = new UsbMode.ThreadWorker();
+              
+            worker.ThreadDone += usb_mode.HandleThreadDone;
+         
+
+                Thread th = new Thread(worker.Run);
+                th.Priority = ThreadPriority.Lowest;
+                th.Start();
                
             }
+            
 
         }
         private void OnTimedEvent(object source, ElapsedEventArgs e)

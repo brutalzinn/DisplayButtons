@@ -79,6 +79,48 @@ namespace DisplayButtons.Backend.Objects
 
 
         }
+        int _count;
+
+      public  void ButtonClick(object sender, EventArgs e)
+        {
+            ThreadWorker worker = new ThreadWorker();
+            worker.ThreadDone += HandleThreadDone;
+
+            Thread thread1 = new Thread(worker.Run);
+            thread1.Start();
+
+            _count = 1;
+        }
+        public void HandleThreadDone(object sender, EventArgs e)
+        {
+            // You should get the idea this is just an example
+
+            
+            
+            
+        }
+      public  static AutoResetEvent _AREvt;
+
+       
+        public class ThreadWorker
+        {
+            public event EventHandler ThreadDone;
+
+            public void Run()
+            {
+               
+                // Do a task
+                Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
+                Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
+
+                Program.ClientThread.Stop();
+                Program.ClientThread = new Misc.ClientThread();
+                Program.ClientThread.Start();
+                _AREvt.WaitOne(10, true);
+                if (ThreadDone != null)
+                    ThreadDone(this, EventArgs.Empty);
+            }
+        }
         public static Type FindType(string fullName)
         {
             return
