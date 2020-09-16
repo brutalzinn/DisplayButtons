@@ -39,7 +39,7 @@ namespace DisplayButtons.Misc
 
         private void RunServer()
         {
-            tcpServer = new TcpServer(new DeckServiceProvider(), Constants.PORT_NUMBER);
+            tcpServer = new TcpServer(new DeckServiceProvider(), ApplicationSettingsManager.Settings.PORT);
             tcpServer.Start();
             
         }

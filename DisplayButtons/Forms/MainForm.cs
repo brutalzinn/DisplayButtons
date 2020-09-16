@@ -372,7 +372,7 @@ namespace DisplayButtons.Forms
                     //     new ScribeBot.Interface.Window().Show();
                 };
 
-                Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
+               // Globals.calc = ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
 
              
 

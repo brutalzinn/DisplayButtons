@@ -67,13 +67,13 @@ namespace DisplayButtons.Backend.Networking.TcpLib
         private void AutoConnectedUsb()
         {
             Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
-            Program.client.CreateForward(DevicePersistManager.DeviceUsb, "tcp:5095", "tcp:5095", true);
+            Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
 
             Program.ClientThread.Stop();
             Program.ClientThread = new Misc.ClientThread();
             Program.ClientThread.Start();
-          
-        }
+            Thread.Sleep(5000);
+          }
         public override void OnRetryConnect(ConnectionState state)
         {
         

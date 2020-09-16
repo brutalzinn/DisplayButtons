@@ -109,8 +109,7 @@ namespace DisplayButtons.Backend.Utils
         public bool FirstRun { get; set; }
 
         public string DeviceName { get; set; }
-        public int coluna { get; set; } = 5;
-        public int linha { get; set; } = 3;
+        public int PORT { get; set; } = 5095;
         public bool OBSPluginNagged { get; set; }
         public bool isDevelopermode { get; set; } = false;
         public bool isAutoMinimizer { get; set; } = true;

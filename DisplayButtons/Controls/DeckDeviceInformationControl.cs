@@ -76,7 +76,8 @@ namespace DisplayButtons.Forms
                             if (IsVirtualDeviceConnected)
                             {
                                 Program.client.RemoveAllForwards(DeckUsb);
-                                Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
+                                Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
+
                                 Program.client.ExecuteRemoteCommand("am force-stop net.nickac.DisplayButtons", DeckUsb, null);
                                 Thread.Sleep(1400);
                                 Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", DeckUsb, null);
@@ -92,7 +93,8 @@ namespace DisplayButtons.Forms
                             {
                                 PersistUsbMode(DeckUsb);
                                 Program.client.RemoveAllForwards(DeckUsb);
-                                Program.client.CreateForward(DeckUsb, "tcp:5095", "tcp:5095", true);
+                                Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
+
                                 Program.ClientThread.Stop();
                                 Program.ClientThread = new Misc.ClientThread();
                                 Program.ClientThread.Start();

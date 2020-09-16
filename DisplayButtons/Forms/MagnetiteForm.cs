@@ -52,7 +52,7 @@ namespace DisplayButtons.Forms
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("DisplayButtons Dump:");
             sb.AppendLine($"    - Protocol Version: {Constants.PROTOCOL_VERSION}");
-            sb.AppendLine($"    - Port Number: {Constants.PORT_NUMBER}");
+            sb.AppendLine($"    - Port Number: {ApplicationSettingsManager.Settings.PORT}");
             sb.AppendLine($"    - Persisted Devices: {DevicePersistManager.PersistedDevices.Count}");
             sb.AppendLine($"    - Current Theme: {ApplicationSettingsManager.Settings.Theme}");
             sb.AppendLine($"    - Debug Build: {BooleanToString(isDebugBuild)}");
@@ -125,7 +125,7 @@ namespace DisplayButtons.Forms
             modernButton1.Text = Texts.rm.GetString("EXPORTPERFIL", Texts.cultereinfo);
             modernButton11.Text = Texts.rm.GetString("PRINCIPALFOLDER", Texts.cultereinfo);
             modernButton9.Text = Texts.rm.GetString("BACKFOLDER", Texts.cultereinfo);
-
+            port_textbox.Text = ApplicationSettingsManager.Settings.PORT.ToString();
 
             modernButton8.Text = Texts.rm.GetString("MATRIZCHANGER", Texts.cultereinfo);
 
@@ -307,6 +307,16 @@ namespace DisplayButtons.Forms
             }
 
             label5.Text = Texts.rm.GetString("ISTHISSTATUS", Texts.cultereinfo) + ": " + status;
+        }
+
+        private void modernButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void port_save_button_Click(object sender, EventArgs e)
+        {
+            ApplicationSettingsManager.Settings.PORT = Convert.ToInt32(port_textbox.Text);
         }
     }
 }
