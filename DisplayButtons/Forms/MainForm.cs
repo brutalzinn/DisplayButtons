@@ -1658,6 +1658,7 @@ namespace DisplayButtons.Forms
                 {
                     shadedPanel2.Hide();
                     shadedPanel1.Hide();
+                    panel_buttons.Controls.Clear();
                     Refresh();
                 }));
 
@@ -1672,7 +1673,7 @@ namespace DisplayButtons.Forms
             private bool is_father;
 
             private int folder_id;
-
+            
             public folders(string name, IDeckFolder parent, bool is_father, int folder_id)
             {
                 this.name = name;
@@ -1805,7 +1806,7 @@ namespace DisplayButtons.Forms
                         folder_root.Click += (s, ee) =>
                         {
 
-
+                            
 
                             CurrentDevice.CurrentProfile.Currentfolder = item.Parent;
 

@@ -2,12 +2,14 @@
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Utils;
 using DisplayButtons.Forms;
+using DisplayButtons.Misc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -53,15 +55,25 @@ namespace DisplayButtons.Backend.Networking.TcpLib
 
         public override void OnAcceptConnection(ConnectionState state)
         {
-            if (Program.mode == 1)
-            {
-                aTimer.Enabled = false;
-
-            }
-
+            
 
         }
-   
+        public void RefreshCurrentUsb()
+        {
+            Thread th = new Thread(AutoConnectedUsb);
+            th.Start();
+        }
+
+        private void AutoConnectedUsb()
+        {
+            Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
+            Program.client.CreateForward(DevicePersistManager.DeviceUsb, "tcp:5095", "tcp:5095", true);
+
+            Program.ClientThread.Stop();
+            Program.ClientThread = new Misc.ClientThread();
+            Program.ClientThread.Start();
+          
+        }
         public override void OnRetryConnect(ConnectionState state)
         {
         
@@ -70,19 +82,15 @@ namespace DisplayButtons.Backend.Networking.TcpLib
             {
             
                
-
-                aTimer.Enabled = true;
-
-                aTimer.Interval = 5000;
-
-                aTimer.Elapsed += OnTimedEvent;
+  RefreshCurrentUsb();
+               
             }
 
         }
-        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            UsbMode teste = new UsbMode();
-            teste.RefreshCurrentUsb();
+          
+     
                // devices_refresh.MountUsbDevices();
           
         }
