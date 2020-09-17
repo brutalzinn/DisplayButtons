@@ -464,7 +464,10 @@ namespace DisplayButtons.Backend.Networking.TcpLib
             //Starts the ReceiveData callback loop
             if (st._conn.Connected)
                 Debug.WriteLine("Starts the ReceiveData callback loop");
-            UsbMode.ConnectedSucessfull();
+            if (Program.mode == 1)
+            {
+                UsbMode.ConnectedSucessfull();
+            }
             try
             {
 

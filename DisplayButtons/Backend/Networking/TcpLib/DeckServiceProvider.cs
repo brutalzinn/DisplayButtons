@@ -62,7 +62,11 @@ namespace DisplayButtons.Backend.Networking.TcpLib
      
         public override void OnRetryConnect(ConnectionState state)
         {
-            UsbMode.RetryConnect();
+            if(Program.mode == 1)
+            {
+UsbMode.RetryConnect();
+            }
+            
 
         }
       
