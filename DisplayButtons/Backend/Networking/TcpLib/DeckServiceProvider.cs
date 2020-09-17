@@ -55,39 +55,17 @@ namespace DisplayButtons.Backend.Networking.TcpLib
 
         public override void OnAcceptConnection(ConnectionState state)
         {
-            
-
+          
         }
       
 
      
         public override void OnRetryConnect(ConnectionState state)
-        { 
-            
-            if (Program.mode == 1)
-            {
-            UsbMode usb_mode = new UsbMode();
-                UsbMode._AREvt = new AutoResetEvent(false);
-                UsbMode.ThreadWorker worker = new UsbMode.ThreadWorker();
-              
-            worker.ThreadDone += usb_mode.HandleThreadDone;
-         
-
-                Thread th = new Thread(worker.Run);
-                th.Priority = ThreadPriority.Lowest;
-                th.Start();
-               
-            }
-            
-
-        }
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-          
-     
-               // devices_refresh.MountUsbDevices();
-          
+            UsbMode.RetryConnect();
+
         }
+      
         public override void OnDropConnection(ConnectionState state)
         {
             //isConnected = false;

@@ -1310,34 +1310,40 @@ namespace DisplayButtons.Forms
         public static void DeviceAdbConnected(object sender, DeviceDataEventArgs e)
         {
             Thread.Sleep(1500);
-            var receiver = new ConsoleOutputReceiver();
-
-            Program.client.ExecuteRemoteCommand("pm path net.robertocpaes.displaybuttons", e.Device, receiver);
- 
-            if (receiver != null)
+            try
             {
-                var product_name = new ConsoleOutputReceiver();
-                var product_manufacter = new ConsoleOutputReceiver();
+                var receiver = new ConsoleOutputReceiver();
 
-                if (String.IsNullOrEmpty(e.Device.Model))
+                Program.client.ExecuteRemoteCommand("pm path net.robertocpaes.displaybuttons", e.Device, receiver);
+
+                if (receiver != null)
                 {
-                    Program.client.ExecuteRemoteCommand("getprop ro.product.name", e.Device, product_name);
-                    Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", e.Device, product_manufacter);
+                    var product_name = new ConsoleOutputReceiver();
+                    var product_manufacter = new ConsoleOutputReceiver();
+
+                    if (String.IsNullOrEmpty(e.Device.Model))
+                    {
+                        Program.client.ExecuteRemoteCommand("getprop ro.product.name", e.Device, product_name);
+                        Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", e.Device, product_manufacter);
 
 
 
-                    e.Device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                    e.Device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                        e.Device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                        e.Device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                    }
+
+                    Program.device_list.Add(e.Device);
+                    //       Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
+
+                    Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
+
+
                 }
-
-                Program.device_list.Add(e.Device);
-                //       Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
-
-                Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
-
+            }
+            catch(Exception ee)
+            {
 
             }
-
 
 
         }

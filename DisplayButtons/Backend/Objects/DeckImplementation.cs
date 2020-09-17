@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Xml.Serialization;
 using static DisplayButtons.Backend.Utils.DevicePersistManager;
 
@@ -79,48 +80,71 @@ namespace DisplayButtons.Backend.Objects
 
 
         }
-        int _count;
+   
 
-      public  void ButtonClick(object sender, EventArgs e)
-        {
-            ThreadWorker worker = new ThreadWorker();
-            worker.ThreadDone += HandleThreadDone;
+    
+        public static bool isRetryConnected = false;
+        public static bool isConnected = false;
 
-            Thread thread1 = new Thread(worker.Run);
-            thread1.Start();
 
-            _count = 1;
-        }
-        public void HandleThreadDone(object sender, EventArgs e)
-        {
-            // You should get the idea this is just an example
-
-            
-            
-            
-        }
-      public  static AutoResetEvent _AREvt;
-
+      
+     
+      
        
-        public class ThreadWorker
+            public static bool AlreadyCalled = false;
+        
+        public static void ConnectedSucessfull()
         {
-            public event EventHandler ThreadDone;
+            //  AlreadyCalled = false;
+            aTimer.Enabled = false;
+            AlreadyCalled = false;
+          
+        }
+       public static System.Timers.Timer aTimer = new System.Timers.Timer();
+        public  static void RetryConnect()
+        {
 
-            public void Run()
+
+            if (AlreadyCalled) {
+                return;
+            }
+            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            aTimer.Interval = 5000;
+            aTimer.Enabled = true;
+            AlreadyCalled = true;
+
+        }
+
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+
+        {
+            ThreadPool.QueueUserWorkItem(new WaitCallback(Run));
+
+        }
+
+            public static void Run(object value)
             {
-               
+                try
+                {
+
+            
                 // Do a task
                 Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
+                Thread.Sleep(500);
                 Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
 
                 Program.ClientThread.Stop();
                 Program.ClientThread = new Misc.ClientThread();
                 Program.ClientThread.Start();
-                _AREvt.WaitOne(10, true);
-                if (ThreadDone != null)
-                    ThreadDone(this, EventArgs.Empty);
+          
+                }
+                catch(Exception )
+                {
+
+                }
+          
             }
-        }
+        
         public static Type FindType(string fullName)
         {
             return
