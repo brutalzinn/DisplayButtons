@@ -1129,6 +1129,7 @@ namespace DisplayButtons.Forms
                 //control2.Tag = null; 
                 control.NormalImage = null;
                 control.Tag = null;
+                control.ClearText();
                 if (folder == null) control.Invoke(new Action(control.Refresh));
             }
             if (folder == null) return;
@@ -1193,6 +1194,7 @@ namespace DisplayButtons.Forms
             control1.NormalImage = null;
             control1.Tag = null;
             control1.Text = "";
+            control1.ClearText();
             ClearSingleItemToDevice(CurrentDevice, slot);
 
             if (folder == null) control1.Invoke(new Action(control1.Refresh));
