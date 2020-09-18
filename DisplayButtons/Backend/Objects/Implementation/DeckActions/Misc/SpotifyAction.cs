@@ -30,8 +30,15 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             [Description("Volume Down")]
             VolumeMinus,
             [Description("Volume Up")]
-            VolumePlus
+            VolumePlus,
+            [Description("Play Playlist")]
+            PlayList
         }
+      
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("Config Playlist")]
+        [ActionPropertyUpdateImageOnChanged]
+         public string ConfigPlay { get; set; }
 
         [ActionPropertyInclude]
         [ActionPropertyDescription("Media Key")]
@@ -85,28 +92,58 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
         }
 
-        public async void CallSpotifyAuth()
-        {
-
-            
-            
-        
-           
-        }
+       
         public override void OnButtonUp(DeckDevice deckDevice)
-        {
+        { 
+            Task.WaitAll( Spotify.Auth());
             switch (Key)
             {
                 case SpotifyMediaKeys.PlayPause:
 
-                     Task.FromResult( Spotify.Main());
+                    
+                    Task.WaitAll(Spotify.ResumePlayBack());
+                    break;
+                case SpotifyMediaKeys.Stop:
+
+                 
+                    Task.WaitAll(Spotify.PausePlayBack());
+                    break;
+
+                case SpotifyMediaKeys.VolumePlus:
+
+
+                    Task.WaitAll(Spotify.setVolume(10));
+                    break;
+                case SpotifyMediaKeys.VolumeMinus:
+
+
+                    Task.WaitAll(Spotify.setVolume(-10));
+                    break;
+                case SpotifyMediaKeys.PlayList:
+
+                
+
 
                     break;
 
 
-
-
             }
+        }
+        public void ConfigPlayHelper()
+        {
+      
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.SpotifyForms.SpotifyPlaylists")) as Form;
+       
+
+          
+
+       
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+            
+            }
+          
         }
 
         public override DeckImage GetDefaultItemImage()

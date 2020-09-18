@@ -1,7 +1,9 @@
 ﻿
+using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
 using Newtonsoft.Json;
 using SpotifyAPI.Web;
 using SpotifyAPI.Web.Auth;
+using Swan;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -16,14 +18,14 @@ using static SpotifyAPI.Web.Scopes;
 
 namespace DisplayButtons.Bibliotecas.SpotifyWrapper
 {
-    public static class Spotify
+    public class Spotify
     {
         private const string CredentialsPath = "credentials.json";
         private static readonly string? clientId = "d1362b6ae88a4254900b41bdc1489503";
         private static readonly EmbedIOAuthServer _server = new EmbedIOAuthServer(new Uri("http://localhost:5000/callback"), 5000);
 
         
-        public static async Task<int> Main()
+        public static async Task<bool> Auth()
         {
             // This is a bug in the SWAN Logging library, need this hack to bring back the cursor
            
@@ -37,15 +39,16 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
 
             if (File.Exists(CredentialsPath))
             {
-                await Start();
+                return true;
             }
             else
             {
                 await StartAuthentication();
+                return false;
             }
 
-            Console.ReadKey();
-            return 0;
+           
+        
         }
 
         private static async Task Start()
@@ -62,13 +65,136 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             var spotify = new SpotifyClient(config);
 
             var me = await spotify.UserProfile.Current();
-            Console.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
 
             var playlists = await spotify.PaginateAll(await spotify.Playlists.CurrentUsers().ConfigureAwait(false));
-            Console.WriteLine($"Total Playlists in your Account: {playlists.Count}");
+            Debug.WriteLine($"Total Playlists in your Account: {playlists.Count}");
 
             _server.Dispose();
-            Environment.Exit(0);
+          //  Environment.Exit(0);
+        }
+
+        public static async Task ResumePlayBack()
+        {
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+
+            var me = await spotify.UserProfile.Current();
+            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+           
+            await spotify.Player.ResumePlayback();
+         
+
+            _server.Dispose();
+            //  Environment.Exit(0);
+        }
+        public static async Task setVolume(int volume)
+        {
+           
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+
+            var me = await spotify.UserProfile.Current();
+         //   Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+                     int atualpercent =  spotify.Player.GetCurrentPlayback().Result.Device.VolumePercent.GetValueOrDefault();
+            int result = atualpercent + volume;
+            PlayerVolumeRequest playvolumecontext = new PlayerVolumeRequest(result);
+        
+            await spotify.Player.SetVolume(playvolumecontext);
+
+
+            _server.Dispose();
+            //  Environment.Exit(0);
+        }
+
+        public static async Task PausePlayBack()
+        {
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+
+            var me = await spotify.UserProfile.Current();
+            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+
+            await spotify.Player.PausePlayback();
+          
+            _server.Dispose();
+            //  Environment.Exit(0);
+        }
+        public static async Task PlayPlaylist(SimplePlaylist playlist)
+        {
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+      
+            var me = await spotify.UserProfile.Current();
+
+            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+
+
+            PlayerResumePlaybackRequest teste = new PlayerResumePlaybackRequest();
+            teste.ContextUri = playlist.Uri;
+
+              await spotify.Player.ResumePlayback(teste);
+      
+
+            _server.Dispose();
+            //  Environment.Exit(0);
+        }
+     
+            public static async Task <System.Collections.Generic.IList<SpotifyAPI.Web.SimplePlaylist>> getAllPlayerList()
+        {
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+
+            var me = await spotify.UserProfile.Current();
+            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+
+            var playlists = await spotify.PaginateAll(await spotify.Playlists.CurrentUsers().ConfigureAwait(false));
+            _server.Dispose();
+            
+            return playlists;
+
+            
+            //  Environment.Exit(0);
         }
 
         private static async Task StartAuthentication()
@@ -91,7 +217,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             {
                 CodeChallenge = challenge,
                 CodeChallengeMethod = "S256",
-                Scope = new List<string> { UserReadEmail, UserReadPrivate, PlaylistReadPrivate, PlaylistReadCollaborative }
+                Scope = new List<string> { UserReadEmail, UserReadPlaybackPosition,UserReadCurrentlyPlaying,UserModifyPlaybackState ,UserReadPlaybackState,UserReadPlaybackState,UserReadPrivate, PlaylistReadPrivate,PlaylistModifyPublic,PlaylistModifyPrivate, Streaming,AppRemoteControl,PlaylistReadCollaborative }
             };
 
             Uri uri = request.ToUri();
