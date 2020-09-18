@@ -34,6 +34,8 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             [Description("Play Playlist")]
             PlayList
         }
+
+        public string PlayListId;
       
         [ActionPropertyInclude]
         [ActionPropertyDescription("Config Playlist")]
@@ -121,7 +123,9 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                     break;
                 case SpotifyMediaKeys.PlayList:
 
-                
+                    var val = Task.Run(() => Spotify.getPlayListById(PlayListId));
+
+                    Task.WaitAll(Spotify.PlayPlaylist(val.Result));
 
 
                     break;
@@ -133,15 +137,16 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
       
             dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.SpotifyForms.SpotifyPlaylists")) as Form;
-       
-
-          
-
-       
-
+            form.SelectPlaylist(PlayListId);
             if (form.ShowDialog() == DialogResult.OK)
             {
-            
+
+
+                PlayListId = ((GlobalControlSpotifyPlayList)form.comboBox1.SelectedItem).Value.Id;
+            }
+            else
+            {
+                form.Close();
             }
           
         }

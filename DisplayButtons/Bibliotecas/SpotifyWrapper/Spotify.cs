@@ -172,6 +172,39 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             //  Environment.Exit(0);
         }
      
+        public static async Task <SimplePlaylist> getPlayListById(string id)
+        {
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+
+            var me = await spotify.UserProfile.Current();
+            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+
+            var playlists = await spotify.PaginateAll(await spotify.Playlists.CurrentUsers().ConfigureAwait(false));
+            SimplePlaylist item = null;
+            foreach (SimplePlaylist list_item in playlists)
+            {
+
+                if(list_item.Id == id)
+                {
+                    item = list_item;
+                    break;
+                }
+            }
+
+            _server.Dispose();
+
+            return item;
+
+        }
             public static async Task <System.Collections.Generic.IList<SpotifyAPI.Web.SimplePlaylist>> getAllPlayerList()
         {
             var json = await File.ReadAllTextAsync(CredentialsPath);

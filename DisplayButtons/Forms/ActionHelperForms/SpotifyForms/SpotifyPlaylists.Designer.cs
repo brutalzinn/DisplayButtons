@@ -92,9 +92,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox comboBox1;
         private Controls.ImageModernButton save_button;
         private Controls.ImageModernButton cancel_button;
+        public System.Windows.Forms.ComboBox comboBox1;
     }
 }

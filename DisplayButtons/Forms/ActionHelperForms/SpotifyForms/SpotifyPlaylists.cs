@@ -24,7 +24,7 @@ namespace DisplayButtons.Forms.ActionHelperForms.SpotifyForms
  
             foreach (var item in  val.Result)
             {
-                GlobalControl teste = new GlobalControl();
+                GlobalControlSpotifyPlayList teste = new GlobalControlSpotifyPlayList();
                 teste.Text = item.Name;
                 teste.Value = item;
                 comboBox1.Items.Add(teste);
@@ -33,7 +33,12 @@ namespace DisplayButtons.Forms.ActionHelperForms.SpotifyForms
           
         }
 
+        public void SelectPlaylist(string id)
+        {
+            var val = Task.Run(() => Spotify.getPlayListById(id));
 
+            SpotifyHelper.SelectItemByValue(comboBox1,val.Result);
+        }
 
         private void SpotifyPlaylists_Load(object sender, EventArgs e)
         {
@@ -47,6 +52,8 @@ namespace DisplayButtons.Forms.ActionHelperForms.SpotifyForms
 
         private void save_button_Click(object sender, EventArgs e)
         {
+
+           
             CloseWithResult(DialogResult.OK);
         }
 
