@@ -66,8 +66,8 @@ namespace DisplayButtons.Backend.Networking.Implementation
      
                 writer.WriteInt(slot);
                 //Byte array lenght
-                writer.WriteInt(item.GetItemImage().InternalBitmap.Length);
-                writer.Write(item.GetItemImage().InternalBitmap);
+                writer.WriteInt(item.SetDefault.InternalBitmap.Length);
+                writer.Write(item.SetDefault.InternalBitmap);
 
                 headerContent.Font = " ";
                 headerContent.Size = item.Decksize;

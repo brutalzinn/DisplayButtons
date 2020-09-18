@@ -1175,14 +1175,15 @@ namespace DisplayButtons.Forms
                 control.Invoke(new Action(control.Refresh));
 
                 CurrentDevice.CheckCurrentFolder();
-                if (sendToDevice)
+              
+
+            }  
+            if (sendToDevice)
                 {
 
-                    SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentProfile.Currentfolder);
+          SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentProfile.Currentfolder);
 
                 }
-
-            }
 
         }
         public void RefreshButton(int slot, bool sendToDevice = true)
@@ -1504,8 +1505,8 @@ namespace DisplayButtons.Forms
                 List<IDeckItem> items = folder.GetDeckItems();
 
                 List<int> addedItems = new List<int>();
-                bool isFolder = false;
-                for (int i = 0; i < Instance.CurrentDevice.CurrentProfile.Matriz.Calc; i++)
+              
+                for (int i = 0; i < MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Calc; i++)
                 {
                     IDeckItem item = null;
                     if (items.ElementAtOrDefault(i) != null)
@@ -1515,16 +1516,12 @@ namespace DisplayButtons.Forms
                     }
 
                     if (item == null) break;
-                  
-                    if (item is DynamicDeckFolder)
-                    {
 
-                        isFolder = true;
-                    }
+                    bool isFolder = item is IDeckFolder;
                     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                     var seri = image.BitmapSerialized;
 
-                   
+                    item.SetDefault = image;
 
                     packet.AddToQueue(folder.GetItemIndex(item), item);
 
@@ -1535,10 +1532,10 @@ namespace DisplayButtons.Forms
                 //    con.SendPacket(packet_label);
                 var clearPacket = new SlotImageClearChunkPacket();
                 //  var clearPacket_labels = new SlotLabelButtonClearChunkPacket();
-                for (int i = 1; i < Instance.CurrentDevice.CurrentProfile.Matriz.Calc + 1; i++)
+                for (int i = 1; i < MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Calc + 1; i++)
                 {
-                    if (addedItems.Contains(i)) 
-                        continue;
+                    if (addedItems.Contains(i))    continue;
+                     
                     //packet_label.ClearPacket();
                     clearPacket.AddToQueue(i);
                     //     clearPacket_labels.AddToQueue(i);
