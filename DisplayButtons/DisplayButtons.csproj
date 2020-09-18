@@ -71,6 +71,8 @@
     <PackageReference Include="shortid">
       <Version>2.0.3</Version>
     </PackageReference>
+    <PackageReference Include="SpotifyAPI.Web" Version="6.0.0-beta.12" />
+    <PackageReference Include="SpotifyAPI.Web.Auth" Version="6.0.0-beta.12" />
     <PackageReference Include="System.Data.SQLite">
       <Version>1.0.112.2</Version>
     </PackageReference>

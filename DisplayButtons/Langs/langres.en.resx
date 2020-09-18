@@ -279,6 +279,9 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   <data name="DECKMISCIFTTT" xml:space="preserve">
     <value>IFTTT connection</value>
   </data>
+  <data name="DECKMISCSPOTIFY" xml:space="preserve">
+    <value>spotify integration beta</value>
+  </data>
   <data name="DECKOBSMULTISCENE" xml:space="preserve">
     <value>Multi scene selector</value>
   </data>
