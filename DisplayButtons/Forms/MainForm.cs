@@ -126,7 +126,8 @@ namespace DisplayButtons.Forms
                     perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo);
                     warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
                     deckoptions_button.Text = Texts.rm.GetString("BUTTONDECKMISCELLANEOUS", Texts.cultereinfo);
-
+                    RefreshDeveloperMode();
+                    reloadALL();
                 }));
 
             });
@@ -520,6 +521,19 @@ namespace DisplayButtons.Forms
             e.Handled = true;
         }
 
+        public void RefreshDeveloperMode()
+        {
+
+            if (Disposing || !IsHandleCreated) return;
+            Invoke(new Action(() =>
+            {
+
+                Control control = Controls.Find("painel_developer", true).FirstOrDefault() as ShadedPanel;
+                control.Refresh();
+
+            }));
+
+        }
 
         public void ChangeDeveloperMode()
         {
