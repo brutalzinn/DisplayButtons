@@ -55,45 +55,21 @@ namespace DisplayButtons.Backend.Networking.TcpLib
 
         public override void OnAcceptConnection(ConnectionState state)
         {
-            
-
+          
         }
-        public void RefreshCurrentUsb()
-        {
-            Thread th = new Thread(AutoConnectedUsb);
-            th.Start();
-        }
+      
 
-        private void AutoConnectedUsb()
-        {
-            Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
-            Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
-
-            Program.ClientThread.Stop();
-            Program.ClientThread = new Misc.ClientThread();
-            Program.ClientThread.Start();
-            Thread.Sleep(5000);
-          }
+     
         public override void OnRetryConnect(ConnectionState state)
         {
-        
-            
-            if (Program.mode == 1)
+            if(Program.mode == 1)
             {
-            
-               
-  RefreshCurrentUsb();
-               
+UsbMode.RetryConnect();
             }
+            
 
         }
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-          
-     
-               // devices_refresh.MountUsbDevices();
-          
-        }
+      
         public override void OnDropConnection(ConnectionState state)
         {
             //isConnected = false;

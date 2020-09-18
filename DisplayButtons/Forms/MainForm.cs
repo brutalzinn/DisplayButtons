@@ -126,7 +126,8 @@ namespace DisplayButtons.Forms
                     perfil_info.Text = Texts.rm.GetString("PERFILINFOLABEL", Texts.cultereinfo);
                     warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
                     deckoptions_button.Text = Texts.rm.GetString("BUTTONDECKMISCELLANEOUS", Texts.cultereinfo);
-
+                    RefreshDeveloperMode();
+                    reloadALL();
                 }));
 
             });
@@ -520,6 +521,19 @@ namespace DisplayButtons.Forms
             e.Handled = true;
         }
 
+        public void RefreshDeveloperMode()
+        {
+
+            if (Disposing || !IsHandleCreated) return;
+            Invoke(new Action(() =>
+            {
+
+                Control control = Controls.Find("painel_developer", true).FirstOrDefault() as ShadedPanel;
+                control.Refresh();
+
+            }));
+
+        }
 
         public void ChangeDeveloperMode()
         {
@@ -1114,8 +1128,11 @@ namespace DisplayButtons.Forms
 
         public void RefreshAllButtons(bool sendToDevice = true)
         {
-
-            if (Globals.can_refresh == false) { return; }
+            if(Globals.can_refresh == false)
+            {
+                return;
+            }
+         
 
             // Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentProfile?.Currentfolder;
@@ -1129,6 +1146,7 @@ namespace DisplayButtons.Forms
                 //control2.Tag = null; 
                 control.NormalImage = null;
                 control.Tag = null;
+                control.ClearText();
                 if (folder == null) control.Invoke(new Action(control.Refresh));
             }
             if (folder == null) return;
@@ -1171,14 +1189,15 @@ namespace DisplayButtons.Forms
                 control.Invoke(new Action(control.Refresh));
 
                 CurrentDevice.CheckCurrentFolder();
-                if (sendToDevice)
+              
+
+            }  
+            if (sendToDevice)
                 {
 
-                    SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentProfile.Currentfolder);
+          SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentProfile.Currentfolder);
 
                 }
-
-            }
 
         }
         public void RefreshButton(int slot, bool sendToDevice = true)
@@ -1193,6 +1212,7 @@ namespace DisplayButtons.Forms
             control1.NormalImage = null;
             control1.Tag = null;
             control1.Text = "";
+            control1.ClearText();
             ClearSingleItemToDevice(CurrentDevice, slot);
 
             if (folder == null) control1.Invoke(new Action(control1.Refresh));
@@ -1310,34 +1330,40 @@ namespace DisplayButtons.Forms
         public static void DeviceAdbConnected(object sender, DeviceDataEventArgs e)
         {
             Thread.Sleep(1500);
-            var receiver = new ConsoleOutputReceiver();
-
-            Program.client.ExecuteRemoteCommand("pm path net.robertocpaes.displaybuttons", e.Device, receiver);
- 
-            if (receiver != null)
+            try
             {
-                var product_name = new ConsoleOutputReceiver();
-                var product_manufacter = new ConsoleOutputReceiver();
+                var receiver = new ConsoleOutputReceiver();
 
-                if (String.IsNullOrEmpty(e.Device.Model))
+                Program.client.ExecuteRemoteCommand("pm path net.robertocpaes.displaybuttons", e.Device, receiver);
+
+                if (receiver != null)
                 {
-                    Program.client.ExecuteRemoteCommand("getprop ro.product.name", e.Device, product_name);
-                    Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", e.Device, product_manufacter);
+                    var product_name = new ConsoleOutputReceiver();
+                    var product_manufacter = new ConsoleOutputReceiver();
+
+                    if (String.IsNullOrEmpty(e.Device.Model))
+                    {
+                        Program.client.ExecuteRemoteCommand("getprop ro.product.name", e.Device, product_name);
+                        Program.client.ExecuteRemoteCommand("getprop ro.product.manufacturer", e.Device, product_manufacter);
 
 
 
-                    e.Device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
-                    e.Device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                        e.Device.Model = product_name.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                        e.Device.Product = product_manufacter.ToString().TrimEnd(new char[] { '\r', '\n' }); ;
+                    }
+
+                    Program.device_list.Add(e.Device);
+                    //       Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
+
+                    Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
+
+
                 }
-
-                Program.device_list.Add(e.Device);
-                //       Console.WriteLine($"The device {e.Device.Name} has connected to this PC");
-
-                Console.WriteLine("STARTING SERVER ON SMARTPHONE...");
-
+            }
+            catch(Exception ee)
+            {
 
             }
-
 
 
         }
@@ -1493,8 +1519,8 @@ namespace DisplayButtons.Forms
                 List<IDeckItem> items = folder.GetDeckItems();
 
                 List<int> addedItems = new List<int>();
-                bool isFolder = false;
-                for (int i = 0; i < Instance.CurrentDevice.CurrentProfile.Matriz.Calc; i++)
+              
+                for (int i = 0; i < MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Calc; i++)
                 {
                     IDeckItem item = null;
                     if (items.ElementAtOrDefault(i) != null)
@@ -1504,18 +1530,14 @@ namespace DisplayButtons.Forms
                     }
 
                     if (item == null) break;
-                  
-                    if (item is DynamicDeckFolder)
-                    {
 
-                        isFolder = true;
-                    }
+                    bool isFolder = item is IDeckFolder;
                     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                     var seri = image.BitmapSerialized;
 
+                    item.SetDefault = image;
 
-
-                    packet.AddToQueue(folder.GetItemIndex(item), item, image);
+                    packet.AddToQueue(folder.GetItemIndex(item), item);
 
                 }
 
@@ -1524,10 +1546,10 @@ namespace DisplayButtons.Forms
                 //    con.SendPacket(packet_label);
                 var clearPacket = new SlotImageClearChunkPacket();
                 //  var clearPacket_labels = new SlotLabelButtonClearChunkPacket();
-                for (int i = 1; i < Instance.CurrentDevice.CurrentProfile.Matriz.Calc + 1; i++)
+                for (int i = 1; i < MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Calc + 1; i++)
                 {
-                    if (addedItems.Contains(i)) 
-                        continue;
+                    if (addedItems.Contains(i))    continue;
+                     
                     //packet_label.ClearPacket();
                     clearPacket.AddToQueue(i);
                     //     clearPacket_labels.AddToQueue(i);
@@ -3560,7 +3582,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                 reloadExternButtons();
             }
-            ApplyTheme(panel_buttons);
+       //     ApplyTheme(panel_buttons);
 
 
 

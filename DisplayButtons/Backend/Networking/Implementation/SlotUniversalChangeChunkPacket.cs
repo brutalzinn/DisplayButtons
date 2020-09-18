@@ -22,10 +22,10 @@ namespace DisplayButtons.Backend.Networking.Implementation
 
 
         IDictionary<int, IDeckItem> toSend = new Dictionary<int, IDeckItem>();
-        public void AddToQueue(int slot, IDeckItem item, DeckImage image)
+        public void AddToQueue(int slot, IDeckItem item)
         {
 
-            item.SetDefault = image;
+       
             toSend.Add(slot, item);
         }
         public void ClearPacket()

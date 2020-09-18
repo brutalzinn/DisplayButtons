@@ -27,7 +27,16 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         {
             action_user_control.Instance.Add(type);
         }
-     
+        public class GlobalAbstractDeckAction
+        {
+            public string Text { get; set; }
+            public AbstractDeckAction Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
         public class GlobalControl
         {
             public string Text { get; set; }

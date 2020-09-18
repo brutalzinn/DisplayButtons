@@ -447,6 +447,36 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   <data name="LANGUAGE" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="LAYERMULTIACTIONACTIONSTITLE" xml:space="preserve">
+    <value>Available buttons</value>
+  </data>
+  <data name="LAYERMULTIACTIONCONFIGBUTTON" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="LAYERMULTIACTIONDELALLBUTTON" xml:space="preserve">
+    <value>Clear actions</value>
+  </data>
+  <data name="LAYERMULTIACTIONDELALLCONFIRM" xml:space="preserve">
+    <value>Are you sure you want to clear all buttons?</value>
+  </data>
+  <data name="LAYERMULTIACTIONDELBUTTON" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="LAYERMULTIACTIONDELLCONFIRM" xml:space="preserve">
+    <value>Are you sure you want  to delete this button?</value>
+  </data>
+  <data name="LAYERMULTIACTIONLISTACTIONSTITLE" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="LAYERMULTIACTIONSELECTITEMERROR" xml:space="preserve">
+    <value>Select an item</value>
+  </data>
+  <data name="LAYERMULTIACTIONTITLE" xml:space="preserve">
+    <value>Multi-function button</value>
+  </data>
+  <data name="LAYERMULTIACTIONTOOLSTITLE" xml:space="preserve">
+    <value>Functions</value>
+  </data>
   <data name="MAGNETITEAUTOMINIMIZER" xml:space="preserve">
     <value>Automatic minimizer</value>
   </data>

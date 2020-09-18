@@ -34,12 +34,13 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
-            this.label3 = new System.Windows.Forms.Label();
             this.imageModernButton4 = new DisplayButtons.Controls.ImageModernButton();
             this.listBox3 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.UpButton = new System.Windows.Forms.Button();
+            this.DownButton = new System.Windows.Forms.Button();
+            this.DelButton = new DisplayButtons.Controls.ImageModernButton();
+            this.DellAllButton = new DisplayButtons.Controls.ImageModernButton();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // modernButton3
@@ -109,40 +110,18 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "Ações";
             // 
-            // imageModernButton3
-            // 
-            this.imageModernButton3.CustomColorScheme = false;
-            this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(553, 182);
-            this.imageModernButton3.Name = "imageModernButton3";
-            this.imageModernButton3.NormalImage = null;
-            this.imageModernButton3.Origin = null;
-            this.imageModernButton3.Size = new System.Drawing.Size(117, 45);
-            this.imageModernButton3.TabIndex = 18;
-            this.imageModernButton3.Text = "<-- Adicionar Ação -";
-            this.imageModernButton3.UseVisualStyleBackColor = true;
-            this.imageModernButton3.Click += new System.EventHandler(this.ImageModernButton3_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(587, 245);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "label3";
-            // 
             // imageModernButton4
             // 
             this.imageModernButton4.CustomColorScheme = false;
             this.imageModernButton4.Image = null;
-            this.imageModernButton4.Location = new System.Drawing.Point(565, 279);
+            this.imageModernButton4.Location = new System.Drawing.Point(553, 182);
             this.imageModernButton4.Name = "imageModernButton4";
             this.imageModernButton4.NormalImage = null;
             this.imageModernButton4.Origin = null;
-            this.imageModernButton4.Size = new System.Drawing.Size(100, 23);
+            this.imageModernButton4.Size = new System.Drawing.Size(112, 23);
             this.imageModernButton4.TabIndex = 20;
             this.imageModernButton4.Text = "Configurações";
+            this.imageModernButton4.TextButton = null;
             this.imageModernButton4.UseVisualStyleBackColor = true;
             this.imageModernButton4.Click += new System.EventHandler(this.ImageModernButton4_Click);
             // 
@@ -156,48 +135,88 @@
             this.listBox3.Size = new System.Drawing.Size(119, 304);
             this.listBox3.TabIndex = 21;
             // 
-            // button1
+            // UpButton
             // 
-            this.button1.Location = new System.Drawing.Point(575, 89);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(53, 31);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "/\\";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.UpButton.Location = new System.Drawing.Point(577, 89);
+            this.UpButton.Name = "UpButton";
+            this.UpButton.Size = new System.Drawing.Size(58, 31);
+            this.UpButton.TabIndex = 22;
+            this.UpButton.Text = "/\\";
+            this.UpButton.UseVisualStyleBackColor = true;
+            this.UpButton.Click += new System.EventHandler(this.UpButton_Click);
             // 
-            // button2
+            // DownButton
             // 
-            this.button2.Location = new System.Drawing.Point(575, 140);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(51, 26);
-            this.button2.TabIndex = 23;
-            this.button2.Text = "\\/";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.DownButton.Location = new System.Drawing.Point(579, 146);
+            this.DownButton.Name = "DownButton";
+            this.DownButton.Size = new System.Drawing.Size(56, 30);
+            this.DownButton.TabIndex = 23;
+            this.DownButton.Text = "\\/";
+            this.DownButton.UseVisualStyleBackColor = true;
+            this.DownButton.Click += new System.EventHandler(this.DownButton_Click);
+            // 
+            // DelButton
+            // 
+            this.DelButton.CustomColorScheme = false;
+            this.DelButton.Image = null;
+            this.DelButton.Location = new System.Drawing.Point(553, 211);
+            this.DelButton.Name = "DelButton";
+            this.DelButton.NormalImage = null;
+            this.DelButton.Origin = null;
+            this.DelButton.Size = new System.Drawing.Size(112, 23);
+            this.DelButton.TabIndex = 20;
+            this.DelButton.Text = "Del";
+            this.DelButton.TextButton = null;
+            this.DelButton.UseVisualStyleBackColor = true;
+            this.DelButton.Click += new System.EventHandler(this.DelButton_Click);
+            // 
+            // DellAllButton
+            // 
+            this.DellAllButton.CustomColorScheme = false;
+            this.DellAllButton.Image = null;
+            this.DellAllButton.Location = new System.Drawing.Point(553, 240);
+            this.DellAllButton.Name = "DellAllButton";
+            this.DellAllButton.NormalImage = null;
+            this.DellAllButton.Origin = null;
+            this.DellAllButton.Size = new System.Drawing.Size(112, 23);
+            this.DellAllButton.TabIndex = 20;
+            this.DellAllButton.Text = "Del all";
+            this.DellAllButton.TextButton = null;
+            this.DellAllButton.UseVisualStyleBackColor = true;
+            this.DellAllButton.Click += new System.EventHandler(this.DelButtonAll_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(671, 58);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(105, 15);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Botões disponíveis";
             // 
             // LayerMultiActionHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ColorScheme.isToIgnoreForegroundColor = false;
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.DellAllButton);
+            this.Controls.Add(this.DelButton);
+            this.Controls.Add(this.DownButton);
+            this.Controls.Add(this.UpButton);
             this.Controls.Add(this.listBox3);
             this.Controls.Add(this.imageModernButton4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.imageModernButton3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.modernButton3);
             this.Controls.Add(this.modernButton2);
-            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "LayerMultiActionHelper";
             this.Text = "LayerMultiAction";
             this.Load += new System.EventHandler(this.LayerMultiActionHelper_Load);
@@ -214,11 +233,12 @@
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private Controls.ImageModernButton imageModernButton3;
-        private System.Windows.Forms.Label label3;
         private Controls.ImageModernButton imageModernButton4;
         private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button UpButton;
+        private System.Windows.Forms.Button DownButton;
+        private Controls.ImageModernButton DelButton;
+        private Controls.ImageModernButton DellAllButton;
+        private System.Windows.Forms.Label label4;
     }
 }

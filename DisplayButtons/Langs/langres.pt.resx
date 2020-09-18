@@ -429,7 +429,7 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
     <value>Botões lua</value>
   </data>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
-    <value>IFTT Maker Chave</value>
+    <value>Chave IFTTT</value>
   </data>
   <data name="IMPORTPROFILE" xml:space="preserve">
     <value>Importar perfil</value>
@@ -457,6 +457,36 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   </data>
   <data name="LANGUAGE" xml:space="preserve">
     <value>Língua</value>
+  </data>
+  <data name="LAYERMULTIACTIONACTIONSTITLE" xml:space="preserve">
+    <value>Botões disponíveis</value>
+  </data>
+  <data name="LAYERMULTIACTIONCONFIGBUTTON" xml:space="preserve">
+    <value>Configurações</value>
+  </data>
+  <data name="LAYERMULTIACTIONDELALLBUTTON" xml:space="preserve">
+    <value>Limpar ações</value>
+  </data>
+  <data name="LAYERMULTIACTIONDELALLCONFIRM" xml:space="preserve">
+    <value>Tem certeza que deseja limpar todos os botão ?</value>
+  </data>
+  <data name="LAYERMULTIACTIONDELBUTTON" xml:space="preserve">
+    <value>Deletar</value>
+  </data>
+  <data name="LAYERMULTIACTIONDELLCONFIRM" xml:space="preserve">
+    <value>Tem certeza que deseja deletar esse botão?</value>
+  </data>
+  <data name="LAYERMULTIACTIONLISTACTIONSTITLE" xml:space="preserve">
+    <value>Ações</value>
+  </data>
+  <data name="LAYERMULTIACTIONSELECTITEMERROR" xml:space="preserve">
+    <value>Selecione um item.</value>
+  </data>
+  <data name="LAYERMULTIACTIONTITLE" xml:space="preserve">
+    <value>Botão multi função</value>
+  </data>
+  <data name="LAYERMULTIACTIONTOOLSTITLE" xml:space="preserve">
+    <value>Funções</value>
   </data>
   <data name="MAGNETITEAUTOMINIMIZER" xml:space="preserve">
     <value>Minimizador automático</value>

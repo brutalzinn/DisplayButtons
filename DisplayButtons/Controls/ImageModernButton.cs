@@ -53,6 +53,17 @@ namespace DisplayButtons.Controls
         }
 
         private TextLabel _textlabel;
+        public  void ClearText()
+        {
+            
+                
+                _textlabel = null;
+                Refresh();
+
+
+            
+
+        }
         public TextLabel TextButton
         {
             get => Origin?.TextButton ?? _textlabel;

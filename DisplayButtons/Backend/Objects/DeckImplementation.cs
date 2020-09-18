@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Xml.Serialization;
 using static DisplayButtons.Backend.Utils.DevicePersistManager;
 
@@ -79,6 +80,71 @@ namespace DisplayButtons.Backend.Objects
 
 
         }
+   
+
+    
+        public static bool isRetryConnected = false;
+        public static bool isConnected = false;
+
+
+      
+     
+      
+       
+            public static bool AlreadyCalled = false;
+        
+        public static void ConnectedSucessfull()
+        {
+            //  AlreadyCalled = false;
+            aTimer.Enabled = false;
+            AlreadyCalled = false;
+          
+        }
+       public static System.Timers.Timer aTimer = new System.Timers.Timer();
+        public  static void RetryConnect()
+        {
+
+
+            if (AlreadyCalled) {
+                return;
+            }
+            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            aTimer.Interval = 5000;
+            aTimer.Enabled = true;
+            AlreadyCalled = true;
+
+        }
+
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+
+        {
+            ThreadPool.QueueUserWorkItem(new WaitCallback(Run));
+
+        }
+
+            public static void Run(object value)
+            {
+                try
+                {
+
+            
+                // Do a task
+                Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
+                Thread.Sleep(500);
+                Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
+
+                Program.ClientThread.Stop();
+                Program.ClientThread = new Misc.ClientThread();
+                Program.ClientThread.Start();
+          
+                }
+                catch(Exception )
+                {
+
+                }
+          
+            }
+        
         public static Type FindType(string fullName)
         {
             return
