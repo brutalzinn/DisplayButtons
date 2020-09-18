@@ -54,7 +54,15 @@ namespace DisplayButtons.Forms.ActionHelperForms
         {
             InitializeComponent();
 
-          
+           this.Text =  Texts.rm.GetString("LAYERMULTIACTIONTITLE", Texts.cultereinfo);
+           label1.Text  = Texts.rm.GetString("LAYERMULTIACTIONACTIONSTITLE", Texts.cultereinfo);
+            label2.Text = Texts.rm.GetString("LAYERMULTIACTIONLISTACTIONSTITLE", Texts.cultereinfo);
+            label4.Text = Texts.rm.GetString("LAYERMULTIACTIONTOOLSTITLE", Texts.cultereinfo);
+            imageModernButton4.Text = Texts.rm.GetString("LAYERMULTIACTIONCONFIGBUTTON", Texts.cultereinfo);
+            DelButton.Text = Texts.rm.GetString("LAYERMULTIACTIONDELBUTTON", Texts.cultereinfo);
+            DellAllButton.Text = Texts.rm.GetString("LAYERMULTIACTIONDELALLBUTTON", Texts.cultereinfo);
+            modernButton2.Text = Texts.rm.GetString("EVENTSYSTEMSAVEBUTTON", Texts.cultereinfo);
+            modernButton3.Text = Texts.rm.GetString("EVENTSYSTEMCANCELBUTTON", Texts.cultereinfo);
         }
         public string scripter
         {
@@ -321,25 +329,28 @@ namespace DisplayButtons.Forms.ActionHelperForms
 
         private void DownButton_Click(object sender, EventArgs e)
         {
-            if (listBox2.SelectedIndex == -1)
-            {
-                MessageBox.Show("Select a itemto move.", "error", MessageBoxButtons.OK);
-            }
+           
             try
             {
-
-                int newIndex = listBox2.SelectedIndex + 1;
-                
-                if (newIndex < 0)
+                if (listBox2.SelectedIndex == -1)
                 {
-                    return;
+                    MessageBox.Show(Texts.rm.GetString("LAYERMULTIACTIONSELECTITEMERROR", Texts.cultereinfo), Texts.rm.GetString("LAYERMULTIACTIONTITLE", Texts.cultereinfo), MessageBoxButtons.OK);
                 }
-                object selectItem = listBox2.SelectedItem;
-          
-                listBox2.Items.Remove(selectItem);
+                else
+                {
+                    int newIndex = listBox2.SelectedIndex + 1;
 
-                listBox2.Items.Insert(newIndex, selectItem);
-                listBox2.SetSelected(newIndex, true);
+                    if (newIndex < 0)
+
+                        return;
+
+                    object selectItem = listBox2.SelectedItem;
+
+                    listBox2.Items.Remove(selectItem);
+
+                    listBox2.Items.Insert(newIndex, selectItem);
+                    listBox2.SetSelected(newIndex, true);
+                }
             }
             catch (Exception)
             {
@@ -349,25 +360,30 @@ namespace DisplayButtons.Forms.ActionHelperForms
 
         private void UpButton_Click(object sender, EventArgs e)
         {
-            if (listBox2.SelectedIndex == -1)
-            {
-                MessageBox.Show("Select a itemto move.", "error", MessageBoxButtons.OK);
-            }
+           
             try
             {
+ if (listBox2.SelectedIndex == -1)
+            {
+                MessageBox.Show(Texts.rm.GetString("LAYERMULTIACTIONSELECTITEMERROR", Texts.cultereinfo), Texts.rm.GetString("LAYERMULTIACTIONTITLE", Texts.cultereinfo), MessageBoxButtons.OK);
+                }
+                else
+                {
 
+               
                 int newIndex = listBox2.SelectedIndex - 1;
 
                 if (newIndex < 0)
-                {
+                
                     return;
-                }
+                
                 object selectItem = listBox2.SelectedItem;
 
                 listBox2.Items.Remove(selectItem);
 
                 listBox2.Items.Insert(newIndex, selectItem);
                 listBox2.SetSelected(newIndex, true);
+                }
             }
             catch (Exception)
             {
@@ -377,18 +393,26 @@ namespace DisplayButtons.Forms.ActionHelperForms
 
         private void DelButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Sure", "Some Title", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show(Texts.rm.GetString("LAYERMULTIACTIONDELLCONFIRM", Texts.cultereinfo), Texts.rm.GetString("LAYERMULTIACTIONTITLE", Texts.cultereinfo), MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 object selectItem = listBox2.SelectedItem;
                 listBox2.Items.Remove(selectItem);
                 //do something
             }
-            else if (dialogResult == DialogResult.No)
-            {
+           
+        }
 
-                //do something else
+        private void DelButtonAll_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show(Texts.rm.GetString("LAYERMULTIACTIONDELALLCONFIRM", Texts.cultereinfo), Texts.rm.GetString("LAYERMULTIACTIONTITLE", Texts.cultereinfo), MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                listBox2.Items.Clear();
+                //do something
             }
+      
+
         }
     }
 

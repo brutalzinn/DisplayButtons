@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using static DisplayButtons.Backend.Objects.Implementation.DeckActions.General.KeyPressAction;
 using shortid;
+using DisplayButtons.Forms;
 
 namespace DisplayButtons.Backend.Objects.Implementation
 {
@@ -68,7 +69,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
            
           
             int addToSlot = -1;
-            for (int i = Globals.calc - 1; i >= 0; i--)
+            for (int i = MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Calc - 1; i >= 0; i--)
             {
                 if (items.ContainsKey(i))
                 {

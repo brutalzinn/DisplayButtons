@@ -1114,8 +1114,11 @@ namespace DisplayButtons.Forms
 
         public void RefreshAllButtons(bool sendToDevice = true)
         {
-
-            if (Globals.can_refresh == false) { return; }
+            if(Globals.can_refresh == false)
+            {
+                return;
+            }
+         
 
             // Buttons_Unfocus(this, EventArgs.Empty);
             IDeckFolder folder = CurrentDevice?.CurrentProfile?.Currentfolder;
@@ -1521,9 +1524,9 @@ namespace DisplayButtons.Forms
                     var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                     var seri = image.BitmapSerialized;
 
+                   
 
-
-                    packet.AddToQueue(folder.GetItemIndex(item), item, image);
+                    packet.AddToQueue(folder.GetItemIndex(item), item);
 
                 }
 
@@ -3568,7 +3571,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                 reloadExternButtons();
             }
-            ApplyTheme(panel_buttons);
+       //     ApplyTheme(panel_buttons);
 
 
 

@@ -22,10 +22,10 @@ namespace DisplayButtons.Backend.Networking.Implementation
 
 
         IDictionary<int, IDeckItem> toSend = new Dictionary<int, IDeckItem>();
-        public void AddToQueue(int slot, IDeckItem item, DeckImage image)
+        public void AddToQueue(int slot, IDeckItem item)
         {
 
-            item.SetDefault = image;
+       
             toSend.Add(slot, item);
         }
         public void ClearPacket()
@@ -66,8 +66,8 @@ namespace DisplayButtons.Backend.Networking.Implementation
      
                 writer.WriteInt(slot);
                 //Byte array lenght
-                writer.WriteInt(item.SetDefault.InternalBitmap.Length);
-                writer.Write(item.SetDefault.InternalBitmap);
+                writer.WriteInt(item.GetItemImage().InternalBitmap.Length);
+                writer.Write(item.GetItemImage().InternalBitmap);
 
                 headerContent.Font = " ";
                 headerContent.Size = item.Decksize;
