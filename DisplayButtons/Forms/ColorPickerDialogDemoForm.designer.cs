@@ -48,7 +48,8 @@ namespace DisplayButtons.Forms
             this.fileToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(554, 24);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(646, 24);
             this.menuStrip.TabIndex = 0;
             // 
             // fileToolStripMenuItem
@@ -69,9 +70,10 @@ namespace DisplayButtons.Forms
             // 
             // browseColorButton
             // 
-            this.browseColorButton.Location = new System.Drawing.Point(274, 260);
+            this.browseColorButton.Location = new System.Drawing.Point(320, 300);
+            this.browseColorButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.browseColorButton.Name = "browseColorButton";
-            this.browseColorButton.Size = new System.Drawing.Size(103, 23);
+            this.browseColorButton.Size = new System.Drawing.Size(120, 27);
             this.browseColorButton.TabIndex = 2;
             this.browseColorButton.Text = "&Choose Color...";
             this.browseColorButton.UseVisualStyleBackColor = true;
@@ -79,58 +81,64 @@ namespace DisplayButtons.Forms
             // 
             // demoLabel
             // 
-            this.demoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+            this.demoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.demoLabel.AutoEllipsis = true;
             this.demoLabel.BackColor = System.Drawing.SystemColors.Info;
             this.demoLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.demoLabel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.demoLabel.Location = new System.Drawing.Point(383, 27);
+            this.demoLabel.Location = new System.Drawing.Point(447, 31);
+            this.demoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.demoLabel.Name = "demoLabel";
-            this.demoLabel.Padding = new System.Windows.Forms.Padding(9);
-            this.demoLabel.Size = new System.Drawing.Size(159, 256);
+            this.demoLabel.Padding = new System.Windows.Forms.Padding(10);
+            this.demoLabel.Size = new System.Drawing.Size(185, 295);
             this.demoLabel.TabIndex = 3;
             this.demoLabel.Text = resources.GetString("demoLabel.Text");
             // 
             // dialogColorPreviewPanel
             // 
             this.dialogColorPreviewPanel.Color = System.Drawing.Color.Empty;
-            this.dialogColorPreviewPanel.Location = new System.Drawing.Point(274, 206);
+            this.dialogColorPreviewPanel.Location = new System.Drawing.Point(320, 238);
+            this.dialogColorPreviewPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dialogColorPreviewPanel.Name = "dialogColorPreviewPanel";
-            this.dialogColorPreviewPanel.Size = new System.Drawing.Size(103, 48);
+            this.dialogColorPreviewPanel.Size = new System.Drawing.Size(120, 55);
             this.dialogColorPreviewPanel.TabIndex = 4;
             // 
             // colorPreviewPanel
             // 
             this.colorPreviewPanel.Color = System.Drawing.Color.Empty;
-            this.colorPreviewPanel.Location = new System.Drawing.Point(12, 27);
+            this.colorPreviewPanel.Location = new System.Drawing.Point(14, 31);
+            this.colorPreviewPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.colorPreviewPanel.Name = "colorPreviewPanel";
-            this.colorPreviewPanel.Size = new System.Drawing.Size(256, 256);
+            this.colorPreviewPanel.Size = new System.Drawing.Size(299, 295);
             this.colorPreviewPanel.TabIndex = 5;
             // 
             // showAlphaChannelCheckBox
             // 
             this.showAlphaChannelCheckBox.Checked = true;
             this.showAlphaChannelCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showAlphaChannelCheckBox.Location = new System.Drawing.Point(274, 27);
+            this.showAlphaChannelCheckBox.Location = new System.Drawing.Point(320, 31);
+            this.showAlphaChannelCheckBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.showAlphaChannelCheckBox.Name = "showAlphaChannelCheckBox";
-            this.showAlphaChannelCheckBox.Size = new System.Drawing.Size(103, 37);
+            this.showAlphaChannelCheckBox.Size = new System.Drawing.Size(120, 43);
             this.showAlphaChannelCheckBox.TabIndex = 6;
             this.showAlphaChannelCheckBox.Text = "Show &Alpha Channel";
             this.showAlphaChannelCheckBox.UseVisualStyleBackColor = true;
             // 
             // ColorPickerDialogDemoForm
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(554, 297);
+            this.ClientSize = new System.Drawing.Size(646, 343);
             this.Controls.Add(this.showAlphaChannelCheckBox);
             this.Controls.Add(this.colorPreviewPanel);
             this.Controls.Add(this.dialogColorPreviewPanel);
             this.Controls.Add(this.demoLabel);
             this.Controls.Add(this.browseColorButton);
             this.Controls.Add(this.menuStrip);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.MaximizeBox = false;
             this.Name = "ColorPickerDialogDemoForm";
             this.Text = "ColorPickerDialog Form Demonstration";

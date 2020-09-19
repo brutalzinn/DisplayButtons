@@ -34,9 +34,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(13, 98);
+            this.progressBar1.Location = new System.Drawing.Point(13, 106);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(599, 45);
+            this.progressBar1.Size = new System.Drawing.Size(626, 45);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 0;
             // 
@@ -53,7 +53,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(625, 169);
+            this.ClientSize = new System.Drawing.Size(654, 178);
             this.ColorScheme.isToIgnoreForegroundColor = false;
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
@@ -62,6 +62,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Name = "frmWaitForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOADING FORM";
             this.Load += new System.EventHandler(this.frmWaitForm_Load);
             this.ResumeLayout(false);

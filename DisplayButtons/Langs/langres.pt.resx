@@ -500,6 +500,12 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="MAGNETITECOOLSATALHOS" xml:space="preserve">
     <value>Atalhos rápidos</value>
   </data>
+  <data name="MAGNETITEFORMPORTBUTTON" xml:space="preserve">
+    <value>Mudar porta</value>
+  </data>
+  <data name="MAGNETITEFORMPORTLABEL" xml:space="preserve">
+    <value>Porta</value>
+  </data>
   <data name="MATRIZCHANGER" xml:space="preserve">
     <value>Alterar matriz</value>
   </data>
