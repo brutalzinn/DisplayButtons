@@ -19,7 +19,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
     {
         public string AppName;
         public int windowEvent;
-        public static TimedProcessWatcher processWatcher;
+     
         public override string GetActionName()
         {
 
@@ -93,6 +93,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
                 ProcessHelper(e.Process, 0, value);
 
             };
+            process.Start();
 
         }
     }

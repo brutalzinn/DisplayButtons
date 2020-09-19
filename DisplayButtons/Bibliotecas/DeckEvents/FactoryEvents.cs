@@ -36,7 +36,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
   
        
             //start commum events
-            foreach (var events in EventXml.Settings.Events)
+            foreach (Event events in EventXml.Settings.Events)
             {
                 if (events.IsEnabled)
                 {
