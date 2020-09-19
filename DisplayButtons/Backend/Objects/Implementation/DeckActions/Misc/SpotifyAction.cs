@@ -122,14 +122,19 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                     Task.WaitAll(Spotify.setVolume(-10));
                     break;
                 case SpotifyMediaKeys.PlayList:
-
                     var val = Task.Run(() => Spotify.getPlayListById(PlayListId));
-
                     Task.WaitAll(Spotify.PlayPlaylist(val.Result));
-
-
                     break;
-
+                case SpotifyMediaKeys.Next:
+             
+                    Task.WaitAll(Spotify.SkipNext());
+                    break;
+                case SpotifyMediaKeys.Back:
+                    Task.WaitAll(Spotify.SkipPrevius());
+                    break;
+                case SpotifyMediaKeys.VolumeOff:
+                    Task.WaitAll(Spotify.MuteDesmute());
+                    break;
 
             }
         }

@@ -144,6 +144,87 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             _server.Dispose();
             //  Environment.Exit(0);
         }
+        public static async Task SkipNext()
+        {
+
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+
+            var me = await spotify.UserProfile.Current();
+            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+
+            await spotify.Player.SkipNext();
+
+            _server.Dispose();
+        }
+        public static async Task SkipPrevius()
+        {
+
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+
+            var me = await spotify.UserProfile.Current();
+            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+
+            await spotify.Player.SkipPrevious();
+
+            _server.Dispose();
+        }
+        public static bool isClicked = false;
+        public static int volumeBefore;
+
+
+        public static async Task MuteDesmute()
+        {
+           
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+
+            var me = await spotify.UserProfile.Current();
+            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+             
+           
+            if (!isClicked)
+            {
+              volumeBefore = spotify.Player.GetCurrentPlayback().Result.Device.VolumePercent.Value;
+                PlayerVolumeRequest playvolumecontext = new PlayerVolumeRequest(0);
+                await spotify.Player.SetVolume(playvolumecontext);
+                isClicked = true;
+            }
+            else
+            {
+             
+                 PlayerVolumeRequest playvolume = new PlayerVolumeRequest(volumeBefore);
+                await spotify.Player.SetVolume(playvolume);
+                isClicked = false;
+            }
+
+            _server.Dispose();
+        }
         public static async Task PlayPlaylist(SimplePlaylist playlist)
         {
             var json = await File.ReadAllTextAsync(CredentialsPath);
