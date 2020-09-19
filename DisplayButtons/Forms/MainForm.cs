@@ -3032,22 +3032,7 @@ namespace DisplayButtons.Forms
 
 
 
-                Padding categoryPadding = new Padding(5, 0, 0, 0);
-                Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
-                Padding itemPadding = new Padding(25, 0, 0, 0);
-                Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
-                Label TextTitle = new Label()
-                {
-                    Padding = categoryPadding,
-                    TextAlign = ContentAlignment.MiddleLeft,
-                    Font = categoryFont,
-                    Dock = DockStyle.Top,
-                    Text = Texts.rm.GetString("GENERATESIDEBARTITLEPLUGINS", Texts.cultereinfo),
-                    Height = TextRenderer.MeasureText(Text, categoryFont).Height,
-                    Tag = "header"
-
-                };
-                toAdd.Add(TextTitle);
+               
 
                 foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory)))
                 {
@@ -3225,10 +3210,10 @@ toAdd.AsEnumerable().Reverse().All(m =>
         }
         public void createPluginButton()
         {
-            
-           
-           
 
+
+
+         
             Package[] installedPackages = Workshop.GetInstalled();
 
             installedPackages.ToList().ForEach(x =>
@@ -3243,8 +3228,23 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
 
             });
+            Padding categoryPadding = new Padding(5, 0, 0, 0);
+            Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
+            Padding itemPadding = new Padding(25, 0, 0, 0);
+            Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
+            Label TextTitle = new Label()
+            {
+                Padding = categoryPadding,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Font = categoryFont,
+                Dock = DockStyle.Top,
+                Text = Texts.rm.GetString("GENERATESIDEBARTITLEPLUGINS", Texts.cultereinfo),
+                Height = TextRenderer.MeasureText(Text, categoryFont).Height,
+                Tag = "header"
 
-    
+            };
+            shadedPanel1.Controls.Add(TextTitle);
+
         }
 
 
