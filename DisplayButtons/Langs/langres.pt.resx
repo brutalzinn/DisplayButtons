@@ -512,6 +512,27 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="MESSAGEBOXPERFIL_ALERT" xml:space="preserve">
     <value>AVISO</value>
   </data>
+  <data name="MISCMEDIAKEYSMUTE" xml:space="preserve">
+    <value>Mutar</value>
+  </data>
+  <data name="MISCMEDIAKEYSNEXT" xml:space="preserve">
+    <value>Próxima</value>
+  </data>
+  <data name="MISCMEDIAKEYSPLAYLIST" xml:space="preserve">
+    <value>Tocar playlist</value>
+  </data>
+  <data name="MISCMEDIAKEYSPLAYPAUSE" xml:space="preserve">
+    <value>Tocar/Pausar</value>
+  </data>
+  <data name="MISCMEDIAKEYSPREVIUS" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="MISCMEDIAKEYSVOLUMEDOWN" xml:space="preserve">
+    <value>Abaixar volume</value>
+  </data>
+  <data name="MISCMEDIAKEYSVOLUMEUP" xml:space="preserve">
+    <value>Aumentar volume</value>
+  </data>
   <data name="OBSAINTEGRATIONOBSFOUND" xml:space="preserve">
     <value>Uma instância OBS foi encontrada!</value>
   </data>
