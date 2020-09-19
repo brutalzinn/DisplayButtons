@@ -10,6 +10,7 @@ using DisplayButtons.Forms;
 using System.Linq;
 using EventHook;
 using System.Diagnostics;
+using CookieProjects.ProcessWatcher;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 {
@@ -18,6 +19,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
     {
         public string AppName;
         public int windowEvent;
+        public static TimedProcessWatcher processWatcher;
         public override string GetActionName()
         {
 
@@ -80,7 +82,18 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
         public override void OnInit(Event value)
         {
-         
+            TimedProcessWatcher process = new TimedProcessWatcher(1.0);
+            process.ProcessStarted += (s, e) =>
+            {
+                ProcessHelper(e.Process, 1, value);
+            };
+            process.ProcessStopped += (s, e) =>
+
+            {
+                ProcessHelper(e.Process, 0, value);
+
+            };
+
         }
     }
 }
