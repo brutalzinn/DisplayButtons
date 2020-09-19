@@ -20,7 +20,7 @@ namespace ScribeBot.Interface
     /// <summary>
     /// Main interface window.
     /// </summary>
-    public partial class Window : TemplateForm
+    public partial class Window : Form
     {
         protected override void OnLoad(EventArgs e)
         {

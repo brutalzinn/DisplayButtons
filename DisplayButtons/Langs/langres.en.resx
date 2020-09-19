@@ -280,7 +280,7 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
     <value>IFTTT connection</value>
   </data>
   <data name="DECKMISCSPOTIFY" xml:space="preserve">
-    <value>spotify integration beta</value>
+    <value>Spotify API</value>
   </data>
   <data name="DECKOBSMULTISCENE" xml:space="preserve">
     <value>Multi scene selector</value>
@@ -489,6 +489,12 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   <data name="MAGNETITECOOLSATALHOS" xml:space="preserve">
     <value>Quick shortcuts</value>
   </data>
+  <data name="MAGNETITEFORMPORTBUTTON" xml:space="preserve">
+    <value>Change port</value>
+  </data>
+  <data name="MAGNETITEFORMPORTLABEL" xml:space="preserve">
+    <value>Port</value>
+  </data>
   <data name="MATRIZCHANGER" xml:space="preserve">
     <value>Change matrix</value>
   </data>
@@ -608,6 +614,13 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   </data>
   <data name="RESIZETEXTOPEN" xml:space="preserve">
     <value>Open Display Buttons</value>
+  </data>
+  <data name="SPOTIFYAUDIOPLAYLISTLABELHELPER" xml:space="preserve">
+    <value>Choose your playlist below to configure the playlist button</value>
+  </data>
+  <data name="SPOTIFYAUDIOSENSIBILYHELPERTEXT" xml:space="preserve">
+    <value>Type a value between 0 and 100 to configure
+ the speed of the "volume up" button</value>
   </data>
   <data name="STARTTCPSERVER" xml:space="preserve">
     <value>Start TCP server</value>

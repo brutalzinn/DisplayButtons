@@ -117,6 +117,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Langs\langres.pt.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

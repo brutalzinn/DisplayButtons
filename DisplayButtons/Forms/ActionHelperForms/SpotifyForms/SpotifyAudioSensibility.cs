@@ -13,6 +13,10 @@ namespace DisplayButtons.Forms.ActionHelperForms.SpotifyForms
         public SpotifyAudioSensibility()
         {
             InitializeComponent();
+
+            ok_button.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+            Cancel_button.Text = Texts.rm.GetString("BUTTONCANCEL", Texts.cultereinfo);
+          label1.Text = Texts.rm.GetString("SPOTIFYAUDIOSENSIBILYHELPERTEXT", Texts.cultereinfo); 
         }
 
         private void SpotifyAudioSensibility_Load(object sender, EventArgs e)

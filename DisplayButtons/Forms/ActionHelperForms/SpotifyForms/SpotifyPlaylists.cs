@@ -18,8 +18,11 @@ namespace DisplayButtons.Forms.ActionHelperForms.SpotifyForms
         public SpotifyPlaylists()
         {
             InitializeComponent();
+            save_button.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+            cancel_button.Text = Texts.rm.GetString("BUTTONCANCEL", Texts.cultereinfo);
+            label1.Text = Texts.rm.GetString("SPOTIFYAUDIOPLAYLISTLABELHELPER", Texts.cultereinfo);
 
-           var val = Task.Run(() => Spotify.getAllPlayerList());
+            var val = Task.Run(() => Spotify.getAllPlayerList());
 
  
             foreach (var item in  val.Result)

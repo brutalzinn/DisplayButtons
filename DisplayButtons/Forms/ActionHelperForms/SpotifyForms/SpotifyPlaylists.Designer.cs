@@ -31,12 +31,13 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.save_button = new DisplayButtons.Controls.ImageModernButton();
             this.cancel_button = new DisplayButtons.Controls.ImageModernButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(13, 82);
+            this.comboBox1.Location = new System.Drawing.Point(13, 90);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(397, 23);
             this.comboBox1.TabIndex = 0;
@@ -71,6 +72,15 @@
             this.cancel_button.UseVisualStyleBackColor = true;
             this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "label1";
+            // 
             // SpotifyPlaylists
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -81,6 +91,7 @@
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.cancel_button);
             this.Controls.Add(this.save_button);
             this.Controls.Add(this.comboBox1);
@@ -88,6 +99,7 @@
             this.Text = "SpotifyPlaylists";
             this.Load += new System.EventHandler(this.SpotifyPlaylists_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -95,5 +107,6 @@
         private Controls.ImageModernButton save_button;
         private Controls.ImageModernButton cancel_button;
         public System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
