@@ -1,5 +1,6 @@
 ﻿using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Utils;
+using DisplayButtons.Forms;
 using DisplayButtons.Forms.EventSystem.Controls.actions;
 using System;
 using System.Collections.Generic;
@@ -47,9 +48,16 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         }
         public override void OnExecute()
         {
-            Debug.WriteLine("ON EXECUTE ACTION");
+           
 
             ProfileStaticHelper.SelectCurrentDevicePerfil( ProfileStaticHelper.SelectPerfilByName(profile));
+            MainForm.Instance.Invoke(new Action(() =>
+            {
+
+                ProfileStaticHelper.SelectItemByValue(MainForm.Instance.perfilselector, ProfileStaticHelper.SelectPerfilByName(profile));
+
+            }));
+         
         }
 
 
