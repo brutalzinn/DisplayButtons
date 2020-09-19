@@ -15,10 +15,11 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
     public class SpotifyAction : AbstractDeckAction
     {
-
-
+ 
         public enum SpotifyMediaKeys
         {
+
+
             [Description("Back")]
             Back,
             [Description("Next")]

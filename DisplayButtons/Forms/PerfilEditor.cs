@@ -13,6 +13,10 @@ namespace DisplayButtons.Forms
         public PerfilEditor()
         {
             InitializeComponent();
+
+            label1.Text = Texts.rm.GetString("EVENTSYSTEMEVENTNAME", Texts.cultereinfo);
+            OK.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+            Cancel.Text = Texts.rm.GetString("BUTTONCANCEL", Texts.cultereinfo);
         }
 
         private void PerfilEditor_Load(object sender, EventArgs e)
