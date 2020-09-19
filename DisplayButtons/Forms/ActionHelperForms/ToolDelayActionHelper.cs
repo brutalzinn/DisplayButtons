@@ -37,6 +37,11 @@ namespace DisplayButtons.Forms.ActionHelperForms
         public ToolDelayActionHelper()
         {
             InitializeComponent();
+
+            label1.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+            modernButton2.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+            modernButton3.Text = Texts.rm.GetString("BUTTONCANCEL", Texts.cultereinfo);
+            this.Text = Texts.rm.GetString("TOOLDELAYHELPER", Texts.cultereinfo);
         }
         private void CloseWithResult(DialogResult result)
         {

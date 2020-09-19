@@ -38,6 +38,8 @@ namespace DisplayButtons.Forms.EventSystem
             tab_trigger_button.Text = Texts.rm.GetString("EVENTSYSTEMTRIGGER", Texts.cultereinfo);
             conditions.Text = Texts.rm.GetString("EVENTSYSTEMCONDITIONS", Texts.cultereinfo);
             this.Text = Texts.rm.GetString("EVENTSYSTEMBUTTON", Texts.cultereinfo);
+            imageModernButton1.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+            imageModernButton2.Text = Texts.rm.GetString("BUTTONCANCEL", Texts.cultereinfo);
             if (_event != null)
             { 
                 CurrentEvent = _event; 

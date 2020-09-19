@@ -25,7 +25,7 @@ namespace DisplayButtons.Backend.Objects
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public class ActionPropertyDescriptionAttribute : Attribute
     {
-        readonly string description;
+        private readonly string description;
 
         public string Description
         {
@@ -42,9 +42,20 @@ namespace DisplayButtons.Backend.Objects
     }
     // novos botões do multiple action 
 
+    [System.AttributeUsage(System.AttributeTargets.Class |
+                       System.AttributeTargets.Struct)
+]
+    public class MediaAttribute : System.Attribute
+    {
+        private string name;
 
+        public MediaAttribute(string name)
+        {
+            this.name = name;
 
-    public abstract class AbstractDeckAction 
+        }
+    }
+        public abstract class AbstractDeckAction 
     {
         public static Type FindType(string fullName)
         {

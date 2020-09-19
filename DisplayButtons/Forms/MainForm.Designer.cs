@@ -39,9 +39,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.painel_developer = new DisplayButtons.Forms.ShadedPanel();
             this.shadedPanel3 = new DisplayButtons.Forms.ShadedPanel();
-            this.imageModernButton5 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton4 = new DisplayButtons.Controls.ImageModernButton();
-            this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel4 = new DisplayButtons.Forms.ShadedPanel();
             this.panel_buttons = new System.Windows.Forms.Panel();
@@ -139,13 +137,11 @@ namespace DisplayButtons.Forms
             // painel_developer
             // 
             this.painel_developer.Controls.Add(this.shadedPanel3);
-            this.painel_developer.Controls.Add(this.imageModernButton5);
             this.painel_developer.Controls.Add(this.imageModernButton4);
-            this.painel_developer.Controls.Add(this.imageModernButton3);
             this.painel_developer.Controls.Add(this.imageModernButton2);
             this.painel_developer.Location = new System.Drawing.Point(545, 89);
             this.painel_developer.Name = "painel_developer";
-            this.painel_developer.Size = new System.Drawing.Size(500, 47);
+            this.painel_developer.Size = new System.Drawing.Size(283, 47);
             this.painel_developer.TabIndex = 5;
             this.painel_developer.Visible = false;
             this.painel_developer.Paint += new System.Windows.Forms.PaintEventHandler(this.Painel_developer_Paint);
@@ -158,26 +154,11 @@ namespace DisplayButtons.Forms
             this.shadedPanel3.Size = new System.Drawing.Size(189, 456);
             this.shadedPanel3.TabIndex = 3;
             // 
-            // imageModernButton5
-            // 
-            this.imageModernButton5.CustomColorScheme = false;
-            this.imageModernButton5.Image = null;
-            this.imageModernButton5.Location = new System.Drawing.Point(127, 8);
-            this.imageModernButton5.Name = "imageModernButton5";
-            this.imageModernButton5.NormalImage = null;
-            this.imageModernButton5.Origin = null;
-            this.imageModernButton5.Size = new System.Drawing.Size(112, 33);
-            this.imageModernButton5.TabIndex = 2;
-            this.imageModernButton5.Text = "Recarregar botões externos";
-            this.imageModernButton5.TextButton = null;
-            this.imageModernButton5.UseVisualStyleBackColor = true;
-            this.imageModernButton5.Click += new System.EventHandler(this.ImageModernButton6_Click);
-            // 
             // imageModernButton4
             // 
             this.imageModernButton4.CustomColorScheme = false;
             this.imageModernButton4.Image = null;
-            this.imageModernButton4.Location = new System.Drawing.Point(369, 7);
+            this.imageModernButton4.Location = new System.Drawing.Point(139, 7);
             this.imageModernButton4.Name = "imageModernButton4";
             this.imageModernButton4.NormalImage = null;
             this.imageModernButton4.Origin = null;
@@ -187,21 +168,6 @@ namespace DisplayButtons.Forms
             this.imageModernButton4.TextButton = null;
             this.imageModernButton4.UseVisualStyleBackColor = true;
             this.imageModernButton4.Click += new System.EventHandler(this.ImageModernButton4_Click);
-            // 
-            // imageModernButton3
-            // 
-            this.imageModernButton3.CustomColorScheme = false;
-            this.imageModernButton3.Image = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(245, 8);
-            this.imageModernButton3.Name = "imageModernButton3";
-            this.imageModernButton3.NormalImage = null;
-            this.imageModernButton3.Origin = null;
-            this.imageModernButton3.Size = new System.Drawing.Size(118, 33);
-            this.imageModernButton3.TabIndex = 1;
-            this.imageModernButton3.Text = "Recarregar botões";
-            this.imageModernButton3.TextButton = null;
-            this.imageModernButton3.UseVisualStyleBackColor = true;
-            this.imageModernButton3.Click += new System.EventHandler(this.ImageModernButton3_Click);
             // 
             // imageModernButton2
             // 
@@ -320,7 +286,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton8.Name = "imageModernButton8";
             this.imageModernButton8.NormalImage = null;
             this.imageModernButton8.Origin = null;
-            this.imageModernButton8.Size = new System.Drawing.Size(27, 32);
+            this.imageModernButton8.Size = new System.Drawing.Size(28, 31);
             this.imageModernButton8.TabIndex = 10;
             this.imageModernButton8.Text = "-";
             this.imageModernButton8.TextButton = null;
@@ -422,10 +388,8 @@ namespace DisplayButtons.Forms
         private System.Windows.Forms.Label action_label;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private ShadedPanel painel_developer;
-        private ImageModernButton imageModernButton3;
         private ImageModernButton imageModernButton2;
         private ImageModernButton imageModernButton4;
-        private ImageModernButton imageModernButton5;
         private ShadedPanel shadedPanel3;
         private ShadedPanel shadedPanel4;
         private ImageModernButton imageModernButton6;

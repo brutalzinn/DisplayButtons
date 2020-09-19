@@ -80,8 +80,11 @@ namespace DisplayButtons.Forms.EventSystem
 
         private void imageModernButton4_Click(object sender, EventArgs e)
         {
-            event_interface teste = new event_interface(CurrentItem.Value);
-            teste.Show();
+            if (CurrentItem.Value != null)
+            {
+                event_interface teste = new event_interface(CurrentItem.Value);
+                teste.Show();
+            }
         }
 
         private void imageModernButton1_Click(object sender, EventArgs e)

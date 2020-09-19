@@ -71,6 +71,8 @@
     <PackageReference Include="shortid">
       <Version>2.0.3</Version>
     </PackageReference>
+    <PackageReference Include="SpotifyAPI.Web" Version="6.0.0-beta.12" />
+    <PackageReference Include="SpotifyAPI.Web.Auth" Version="6.0.0-beta.12" />
     <PackageReference Include="System.Data.SQLite">
       <Version>1.0.112.2</Version>
     </PackageReference>
@@ -115,6 +117,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Langs\langres.pt.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

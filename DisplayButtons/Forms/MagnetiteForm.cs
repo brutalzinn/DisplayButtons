@@ -61,7 +61,7 @@ namespace DisplayButtons.Forms
             sb.AppendLine($"    - Persisted Devices: {DevicePersistManager.PersistedDevices.Count}");
             sb.AppendLine($"    - Is OBS Connected: {OBSUtils.IsConnected}");
             //sb.AppendLine($"    - TCP Server Connections: {Program.ServerThread?.TcpServer?.CurrentConnections}");
-            sb.AppendLine($"    - TCP Server Max Connections: {Program.ServerThread?.TcpServer?.MaxConnections}");
+         //   sb.AppendLine($"    - TCP Server Max Connections: {Program.ServerThread?.TcpServer?.MaxConnections}");
             for (int i = 0, persistedCount = DevicePersistManager.PersistedDevices.Count; i < persistedCount; i++) {
                 var device = DevicePersistManager.PersistedDevices[i];
                 sb.AppendLine($"        - {i}: {device.DeviceName} [{device.DeviceGuid}]");
@@ -121,7 +121,9 @@ namespace DisplayButtons.Forms
                 coluna.Text = MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Column.ToString();
 
             }
-                modernButton2.Text = Texts.rm.GetString("IMPORTPROFILE", Texts.cultereinfo);
+            label6.Text = Texts.rm.GetString("MAGNETITEFORMPORTLABEL", Texts.cultereinfo);
+            port_save_button.Text = Texts.rm.GetString("MAGNETITEFORMPORTBUTTON", Texts.cultereinfo); 
+            modernButton2.Text = Texts.rm.GetString("IMPORTPROFILE", Texts.cultereinfo);
             modernButton1.Text = Texts.rm.GetString("EXPORTPERFIL", Texts.cultereinfo);
             modernButton11.Text = Texts.rm.GetString("PRINCIPALFOLDER", Texts.cultereinfo);
             modernButton9.Text = Texts.rm.GetString("BACKFOLDER", Texts.cultereinfo);

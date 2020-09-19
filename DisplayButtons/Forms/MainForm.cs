@@ -577,6 +577,7 @@ namespace DisplayButtons.Forms
                     c.BackColor = appTheme.SecondaryColor;
                     c.ForeColor = appTheme.ForegroundColor;
                 }
+              
                 else
                 {
                     c.BackColor = appTheme.BackgroundColor;
@@ -584,7 +585,7 @@ namespace DisplayButtons.Forms
                 return true;
             });
         }
-
+ 
         public void ApplyTheme(Control parent)
         {
 
@@ -2156,7 +2157,7 @@ namespace DisplayButtons.Forms
             });
             if (loadplugins)
             {
-              
+               
                 createPluginButton();
                
                
@@ -2487,13 +2488,13 @@ namespace DisplayButtons.Forms
 
         public enum Position
         {
-            [Description("baixo")]
+            [Description("Down")]
             ANDROID_baixo = 81,
 
-            [Description("cima")]
+            [Description("Up")]
             ANDROID_cima = 49,
 
-            [Description("meio")]
+            [Description("Middle")]
             ANDROID_meio = 17
         }
 
@@ -2583,9 +2584,7 @@ namespace DisplayButtons.Forms
                 IsItalicText.Checked = dI.Isitalictext;
                 IsBoldText.Checked = dI.Isboldtext;
 
-                // PositionComboBox.SelectedValue = (int)dI.DeckPosition;
-
-
+     
 
                 sizeLabelTextBox.Text = dI.Decksize.ToString();
                 myColor.Click += (s, e) =>
@@ -2661,22 +2660,12 @@ namespace DisplayButtons.Forms
                 };
 
 
-
-
-
-
-
-
-
-
-
-
                 painel_position.Size = new Size(190, 60);
 
                 painel_color.Size = new Size(190, 30);
 
-                painel_name.Size = new Size(190, 180);
-                painel_tamanho.Size = new Size(190, 50);
+                painel_name.Size = new Size(190, 320);
+                painel_tamanho.Size = new Size(210, 60);
                 painel_shadowstroke.Size = new Size(190, 300);
                 painel_shadowstroke.WrapContents = true;
       
@@ -2705,6 +2694,11 @@ namespace DisplayButtons.Forms
 
                 painel_name.Controls.Add(myTextNameInformation);
                 painel_name.Controls.Add(myNameText);
+                painel_name.Controls.Add(PositionComboBox);
+                painel_name.Controls.Add(painel_tamanho);
+           
+                painel_name.Controls.Add(painel_color);
+
                 painel_name.Controls.Add(IsHintText);
                 painel_name.Controls.Add(IsItalicText);
                 painel_name.Controls.Add(IsBoldText);
@@ -2717,17 +2711,19 @@ namespace DisplayButtons.Forms
 
                
                 flowLayoutPanel1.Controls.Add(painel_name);
-                flowLayoutPanel1.Controls.Add(painel_color);
-                flowLayoutPanel1.Controls.Add(painel_tamanho);
-                flowLayoutPanel1.Controls.Add(painel_position);
+              
+             
+             
+             
                 flowLayoutPanel1.Controls.Add(painel_shadowstroke);
 
                 flowLayoutPanel1.Controls.Add(myButton); 
-                myButton.Text = "Salvar";
+                myButton.Text =Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
 
-          
+                
 
-            
+
+
 
                 setEnumValues(PositionComboBox, typeof(Position));
                 myButton.Click += (s, e) =>
@@ -3019,7 +3015,7 @@ namespace DisplayButtons.Forms
 
 
             List<Control> toAdd = new List<Control>();
-
+        
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
@@ -3028,29 +3024,30 @@ namespace DisplayButtons.Forms
             // DisplayButtons.Forms.MainForm.testando(value);
             MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate
             {
-                //Globals.launcher_principal.ShadedPanel1.Controls.Clear();
-                
+               
               
-
-                //  PluginLuaGenerator testando = new PluginLuaGenerator();
-                //  PluginLuaGenerator.name = name_button;
-
-                //     PluginLuaGenerator.LuaExecuteButtonDown = buttondowm;
-                //  PluginLuaGenerator.LuaExecuteButtonDown = //buttondowm;
-                //     PluginLuaGenerator.DeckActionCategory_string = category;
-
-
-                //    Debug.WriteLine("RRR" + testando.GetActionName());
-
-                // Globals.launcher_principal.ShadedPanel1.Controls.Add(teste);
-                MainForm.instance.ShadedPanel1.Refresh();
 
                 var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
 
-               
 
 
+                Padding categoryPadding = new Padding(5, 0, 0, 0);
+                Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
+                Padding itemPadding = new Padding(25, 0, 0, 0);
+                Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
+                Label TextTitle = new Label()
+                {
+                    Padding = categoryPadding,
+                    TextAlign = ContentAlignment.MiddleLeft,
+                    Font = categoryFont,
+                    Dock = DockStyle.Top,
+                    Text = Texts.rm.GetString("GENERATESIDEBARTITLEPLUGINS", Texts.cultereinfo),
+                    Height = TextRenderer.MeasureText(Text, categoryFont).Height,
+                    Tag = "header"
+
+                };
+                toAdd.Add(TextTitle);
 
                 foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory)))
                 {
@@ -3062,11 +3059,6 @@ namespace DisplayButtons.Forms
 
                         foreach (var i2 in enumItems)
                         {
-
-
-
-
-
 
 
 
@@ -3103,15 +3095,7 @@ namespace DisplayButtons.Forms
 
 
                             toAdd.Add(item);
-                            //  i2.SetConfigs(name, script);
-
-
-
-
-
-
-
-
+           
                         }
 
                     }
@@ -3127,10 +3111,11 @@ namespace DisplayButtons.Forms
 toAdd.AsEnumerable().Reverse().All(m =>
                 {
                     ShadedPanel1.Controls.Add(m);
+
                     return true;
                 });
 
-
+       
 
 
         }
@@ -3240,21 +3225,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
         }
         public void createPluginButton()
         {
-            Padding categoryPadding = new Padding(5, 0, 0, 0);
-            Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
-            Padding itemPadding = new Padding(25, 0, 0, 0);
-            Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
-            Label TextTitle = new Label()
-            {
-                Padding = categoryPadding,
-                TextAlign = ContentAlignment.MiddleLeft,
-                Font = categoryFont,
-                Dock = DockStyle.Top,
-                Text = Texts.rm.GetString("GENERATESIDEBARTITLEPLUGINS", Texts.cultereinfo),
-                Height = TextRenderer.MeasureText(Text, categoryFont).Height,
-                Tag = "header"
-
-            };
+            
            
            
 
@@ -3272,7 +3243,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
 
             });
-            shadedPanel1.Controls.Add(TextTitle);
+
+    
         }
 
 
@@ -3524,7 +3496,33 @@ toAdd.AsEnumerable().Reverse().All(m =>
         public void reloadALL()
         {
 
+            List<Control> toAdd = new List<Control>();
+            foreach (Control c in shadedPanel1.Controls)
+            {
 
+                if (c.Tag != null && c.Tag.ToString().ToLowerInvariant() == "header")
+                {
+                    toAdd.Add(c);
+
+                }
+
+            }
+
+            toAdd.AsEnumerable().Reverse().All(m =>
+            {
+                shadedPanel1.Controls.Remove(m);
+                return true;
+            });
+
+            try
+            {
+                reloadButtons();
+            }
+            finally
+            {
+
+                reloadExternButtons();
+            }
         }
         public void reloadExternButtons()
         {
@@ -3534,7 +3532,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
             foreach (Control c in shadedPanel1.Controls)
             {
 
-
+               
                 if (c.Tag is AbstractDeckAction act)
                     if (act.IsPlugin() == true)
                     {
@@ -3555,11 +3553,31 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         }
 
+       
         public void reloadButtons()
         {
 
 
-            shadedPanel1.Controls.Clear();
+
+            List<Control> toAdd = new List<Control>();
+
+            foreach (Control c in shadedPanel1.Controls)
+            {
+
+               
+                if (c.Tag is AbstractDeckAction act   )
+                    if (act.IsPlugin() == false)
+                    {
+                        toAdd.Add(c);
+
+
+                    }
+            }
+            toAdd.AsEnumerable().Reverse().All(m =>
+            {
+                shadedPanel1.Controls.Remove(m);
+                return true;
+            });
 
             GenerateSidebar(shadedPanel1, false);
             ApplySidebarTheme(shadedPanel1);
@@ -3572,16 +3590,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void ImageModernButton2_Click(object sender, EventArgs e)
         {
-
-            try
-            {
-                reloadButtons();
-            }
-            finally
-            {
-
-                reloadExternButtons();
-            }
+            reloadALL();
        //     ApplyTheme(panel_buttons);
 
 
@@ -3607,10 +3616,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
         {
 
             imageModernButton2.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
-            imageModernButton5.Text = Texts.rm.GetString("BUTTONRELOADEXTERNBUTTON", Texts.cultereinfo);
-
-            imageModernButton3.Text = Texts.rm.GetString("BUTTONRELOADBUTTONS", Texts.cultereinfo);
-
+         
             imageModernButton4.Text = Texts.rm.GetString("BUTTONOPENCONSOLE", Texts.cultereinfo);
 
 

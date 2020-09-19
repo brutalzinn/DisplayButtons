@@ -179,6 +179,7 @@ toExecuteASK = "1";
         private void ModernButton3_Click(object sender, EventArgs e)
         {
             CloseWithResult(DialogResult.Cancel);
+
         }
 
         private void ExecutableRunHelper_Load(object sender, EventArgs e)
