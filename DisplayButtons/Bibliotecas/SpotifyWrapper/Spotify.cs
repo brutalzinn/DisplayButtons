@@ -98,7 +98,11 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
         }
         public static async Task setVolume(int volume)
         {
-           
+
+            if (Mute)
+            {
+                await Desmute();
+            }
             var json = await File.ReadAllTextAsync(CredentialsPath);
             var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
 
@@ -115,14 +119,51 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
                      int atualpercent =  spotify.Player.GetCurrentPlayback().Result.Device.VolumePercent.GetValueOrDefault();
             int result = atualpercent + volume;
             PlayerVolumeRequest playvolumecontext = new PlayerVolumeRequest(result);
-        
+     
             await spotify.Player.SetVolume(playvolumecontext);
 
 
             _server.Dispose();
             //  Environment.Exit(0);
         }
+        public static bool IsMute()
+        {
+            if (Mute)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
+        }
+
+        public static async Task Desmute()
+        {
+           
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+              .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+
+            var me = await spotify.UserProfile.Current();
+            //   Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+        
+            PlayerVolumeRequest playvolumecontext = new PlayerVolumeRequest(volumeBefore);
+
+            await spotify.Player.SetVolume(playvolumecontext);
+            Mute = false;
+
+            _server.Dispose();
+
+        }
         public static async Task PausePlayBack()
         {
             var json = await File.ReadAllTextAsync(CredentialsPath);
@@ -186,8 +227,9 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
 
             _server.Dispose();
         }
-        public static bool isClicked = false;
+        public static bool isClicked = true;
         public static int volumeBefore;
+        private static bool Mute = false;
 
 
         public static async Task MuteDesmute()
@@ -208,19 +250,21 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
              
            
-            if (!isClicked)
+            if (isClicked)
             {
-              volumeBefore = spotify.Player.GetCurrentPlayback().Result.Device.VolumePercent.Value;
+             volumeBefore = spotify.Player.GetCurrentPlayback().Result.Device.VolumePercent.Value;
                 PlayerVolumeRequest playvolumecontext = new PlayerVolumeRequest(0);
                 await spotify.Player.SetVolume(playvolumecontext);
-                isClicked = true;
+                isClicked = false;
+                Mute = true;
             }
             else
             {
-             
+              
                  PlayerVolumeRequest playvolume = new PlayerVolumeRequest(volumeBefore);
                 await spotify.Player.SetVolume(playvolume);
-                isClicked = false;
+                isClicked = true;
+                Mute = false;
             }
 
             _server.Dispose();

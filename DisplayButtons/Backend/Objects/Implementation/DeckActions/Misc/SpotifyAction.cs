@@ -36,7 +36,11 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
 
         public string PlayListId;
-      
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("Config Volume Sensibility")]
+        [ActionPropertyUpdateImageOnChanged]
+        public int VolumeSensibility { get; set; } = 10;
+
         [ActionPropertyInclude]
         [ActionPropertyDescription("Config Playlist")]
         [ActionPropertyUpdateImageOnChanged]
@@ -114,12 +118,12 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 case SpotifyMediaKeys.VolumePlus:
 
 
-                    Task.WaitAll(Spotify.setVolume(10));
+                    Task.WaitAll(Spotify.setVolume(VolumeSensibility));
                     break;
                 case SpotifyMediaKeys.VolumeMinus:
 
 
-                    Task.WaitAll(Spotify.setVolume(-10));
+                    Task.WaitAll(Spotify.setVolume(-VolumeSensibility));
                     break;
                 case SpotifyMediaKeys.PlayList:
                     var val = Task.Run(() => Spotify.getPlayListById(PlayListId));
@@ -137,6 +141,27 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                     break;
 
             }
+        }
+        public void VolumeSensibilityHelper()
+        {
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.SpotifyForms.SpotifyAudioSensibility")) as Form;
+            form.textBox1.Text = VolumeSensibility.ToString();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                int result = Convert.ToInt32(form.textBox1.Text);
+                if( result <= 100)
+                {
+VolumeSensibility = result;
+
+                }
+                
+            }
+            else
+            {
+                form.Close();
+            }
+
+
         }
         public void ConfigPlayHelper()
         {
