@@ -14,25 +14,14 @@ namespace DisplayButtons.Bibliotecas
 {
     class GlobalHotKeys
     {
-        private static GlobalHotKeys instance;
-
-        public static GlobalHotKeys Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+       
         public static List<DynamicDeckFolder> folder_form = new List<DynamicDeckFolder>();
 
-        public GlobalHotKeys()
-        {
-            instance = this;
-        }
+       
      
 
     
-        public void RegisterHotKeyCollector(DynamicDeckFolder folder)
+        public static void RegisterHotKeyCollector(DynamicDeckFolder folder)
         {
             if (folder != null)
 #pragma warning disable CS0618 // O tipo ou membro é obsoleto
@@ -40,7 +29,7 @@ namespace DisplayButtons.Bibliotecas
 #pragma warning restore CS0618 // O tipo ou membro é obsoleto
 
         }
-        public void GarbageHotKeyCollector(DynamicDeckFolder folder)
+        public static void GarbageHotKeyCollector(DynamicDeckFolder folder)
         {
 
             if(folder != null)

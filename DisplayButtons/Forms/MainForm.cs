@@ -799,14 +799,14 @@ namespace DisplayButtons.Forms
 
             if (!isForDelete)
             {
-        //        GlobalHotKeys.Instance.RegisterHotKeyCollector(folder);
+            GlobalHotKeys.RegisterHotKeyCollector(folder);
 
             }
             else
             {
-                //    GlobalHotKeys.folder_form.Add(new GlobalHotKeys.folders(folder));
-         //       GlobalHotKeys.Instance.GarbageHotKeyCollector(folder);
-                //   GlobalHotKeys.hotKeyManager.Unregister(GlobalHotKeys.VirtualKeyFromKey(folder.KeyGlobalValue.Keys), GlobalHotKeys.VirtualKeyFromKeyModifier(folder.KeyGlobalValue.ModifierKeys));
+                //GlobalHotKeys.folder_form.Add(new GlobalHotKeys.folders(folder));
+            GlobalHotKeys.GarbageHotKeyCollector(folder);
+          //   GlobalHotKeys.hotKeyManager.Unregister(GlobalHotKeys.VirtualKeyFromKey(folder.KeyGlobalValue.Keys), GlobalHotKeys.VirtualKeyFromKeyModifier(folder.KeyGlobalValue.ModifierKeys));
             }
             //   GlobalHotKeys.Instance.init();
 
@@ -2299,7 +2299,7 @@ namespace DisplayButtons.Forms
                                 if (ttt.KeyGlobalValue.Keys != null)
                                 {
 
-                                    GlobalHotKeys.Instance.GarbageHotKeyCollector(ttt);
+                                    GlobalHotKeys.GarbageHotKeyCollector(ttt);
                                 }
 
                             }
