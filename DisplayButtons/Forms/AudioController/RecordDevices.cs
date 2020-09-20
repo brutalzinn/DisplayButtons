@@ -14,13 +14,14 @@ using static DisplayButtons.Bibliotecas.Helpers.ControllerHelper;
 
 namespace DisplayButtons.Forms.AudioController
 {
-    public partial class RecordDevices : Form
+    public partial class RecordDevices : TemplateForm
     {
         public RecordDevices()
         {
             InitializeComponent();
-          
-           
+            save_button.Text = Texts.rm.GetString("EVENTSYSTEMSAVEBUTTON", Texts.cultereinfo);
+            cancel_button.Text = Texts.rm.GetString("EVENTSYSTEMCANCELBUTTON", Texts.cultereinfo);
+
         }
         public void FillComboBox(DeviceType item)
         {

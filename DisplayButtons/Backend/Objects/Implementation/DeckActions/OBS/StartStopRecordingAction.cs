@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
@@ -14,8 +15,11 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         static bool firstTime;
         public enum RecordingState
         {
+            [Description("OBSDESCRIPTIONSTART")]
             Start,
+            [Description("OBSDESCRIPTIONSTOP")]
             Stop,
+            [Description("OBSDESCRIPTIONTOGGLE")]
             Toggle
         }
         public enum RecordStateToggle

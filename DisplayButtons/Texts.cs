@@ -46,6 +46,7 @@ namespace DisplayButtons
         public static CultureInfo cultereinfo = new CultureInfo("pt-BR");
         public static Assembly a = Assembly.Load("DisplayButtons");
         public static ResourceManager rm = new ResourceManager("DisplayButtons.Langs.langres", a);
+     
         public static void initilizeLang()
         {
 

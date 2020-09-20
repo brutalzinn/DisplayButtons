@@ -20,21 +20,21 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
 
 
-            [Description("Back")]
+            [Description("MISCMEDIAKEYSPREVIUS")]
             Back,
-            [Description("Next")]
+            [Description("MISCMEDIAKEYSNEXT")]
             Next,
-            [Description("Play/Pause")]
+            [Description("MISCMEDIAKEYSPLAYPAUSE")]
             PlayPause,
-            [Description("Stop")]
+            [Description("MISMEDIAKEYSSTOP")]
             Stop,
-            [Description("Volume Off")]
+            [Description("MISCMEDIAKEYSMUTE")]
             VolumeOff,
-            [Description("Volume Down")]
+            [Description("MISCMEDIAKEYSVOLUMEDOWN")]
             VolumeMinus,
-            [Description("Volume Up")]
+            [Description("MISCMEDIAKEYSVOLUMEUP")]
             VolumePlus,
-            [Description("Play Playlist")]
+            [Description("MISCMEDIAKEYSPLAYLIST")]
             PlayList
         }
 

@@ -501,17 +501,62 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   <data name="MATRIZGENERATORLABELLOADING" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="MEDIASETDEFAULT" xml:space="preserve">
+    <value>Set as default</value>
+  </data>
   <data name="MESSAGEBOXPERFIL" xml:space="preserve">
     <value>Are you sure you want to remove the profile {0}?</value>
   </data>
   <data name="MESSAGEBOXPERFIL_ALERT" xml:space="preserve">
     <value>WARNING</value>
   </data>
+  <data name="MISCMEDIAKEYSMUTE" xml:space="preserve">
+    <value>Mute</value>
+  </data>
+  <data name="MISCMEDIAKEYSNEXT" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="MISCMEDIAKEYSPLAYLIST" xml:space="preserve">
+    <value>Play Playlist</value>
+  </data>
+  <data name="MISCMEDIAKEYSPLAYPAUSE" xml:space="preserve">
+    <value>Play/Pause</value>
+  </data>
+  <data name="MISCMEDIAKEYSPREVIUS" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="MISCMEDIAKEYSVOLUMEDOWN" xml:space="preserve">
+    <value>Volume down</value>
+  </data>
+  <data name="MISCMEDIAKEYSVOLUMEUP" xml:space="preserve">
+    <value>Volume up</value>
+  </data>
+  <data name="MISMEDIAKEYSSTOP" xml:space="preserve">
+    <value>Stop</value>
+  </data>
   <data name="OBSAINTEGRATIONOBSFOUND" xml:space="preserve">
     <value>An OBS instance was found!</value>
   </data>
   <data name="OBSCONNECTION" xml:space="preserve">
     <value>Create OBS connection</value>
+  </data>
+  <data name="OBSDESCRIPTIONGONE" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="OBSDESCRIPTIONSTART" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="OBSDESCRIPTIONSTOP" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="OBSDESCRIPTIONTOGGLE" xml:space="preserve">
+    <value>Toggle</value>
+  </data>
+  <data name="OBSDESCRIPTIONVISIBLE" xml:space="preserve">
+    <value>Visible</value>
+  </data>
+  <data name="OBSDESCRIPTIONVISIBLE1" xml:space="preserve">
+    <value>Visible</value>
   </data>
   <data name="OBSINTEGRATIONAPPLY" xml:space="preserve">
     <value>Please close OBS and click OK to apply the final touches.</value>
@@ -590,6 +635,15 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   </data>
   <data name="PLUGINGERENCIER_VERSION" xml:space="preserve">
     <value>VERSION</value>
+  </data>
+  <data name="POSITIONCOMBOBOXDOWN" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="POSITIONCOMBOBOXMEIO" xml:space="preserve">
+    <value>Middle</value>
+  </data>
+  <data name="POSITIONCOMBOBOXUP" xml:space="preserve">
+    <value>Up</value>
   </data>
   <data name="PRINCIPALFOLDER" xml:space="preserve">
     <value>Parent folder</value>

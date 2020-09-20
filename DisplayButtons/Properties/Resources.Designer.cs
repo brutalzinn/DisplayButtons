@@ -63,16 +63,6 @@ namespace DisplayButtons.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap artgraphic {
-            get {
-                object obj = ResourceManager.GetObject("artgraphic", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap bug__virus__insect__malware__pest {
             get {
                 object obj = ResourceManager.GetObject("bug__virus__insect__malware__pest", resourceCulture);

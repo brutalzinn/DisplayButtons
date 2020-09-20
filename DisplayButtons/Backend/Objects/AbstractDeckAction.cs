@@ -70,10 +70,11 @@ namespace DisplayButtons.Backend.Objects
         {
             General,
             AutoHotKey,
+            Helpers,
             OBS,
             Misc,
             Deck,
-            Spotify
+            
         }
 
      

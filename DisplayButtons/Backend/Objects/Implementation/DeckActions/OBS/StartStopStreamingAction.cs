@@ -1,5 +1,6 @@
 ﻿using DisplayButtons.Backend.Utils;
 using DisplayButtons.Properties;
+using System.ComponentModel;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
@@ -8,8 +9,11 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         static bool firstTime;
         public enum StreamingState
         {
+            [Description("OBSDESCRIPTIONSTART")]
             Start,
+            [Description("OBSDESCRIPTIONSTOP")]
             Stop,
+            [Description("OBSDESCRIPTIONTOGGLE")]
             Toggle
         }
         public enum StreamingStateToggle

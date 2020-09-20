@@ -2475,7 +2475,7 @@ namespace DisplayButtons.Forms
                     }
                 }
 
-                list.Add(new KeyValuePair<string, int>(desc, i));
+                list.Add(new KeyValuePair<string, int>(Texts.rm.GetString(desc, Texts.cultereinfo), i));
             }
             // NOTE: It is very important that DisplayMember and ValueMember are set before DataSource.
             //       If you do, this works fine, and the SelectedValue of the ComboBox will be an int
@@ -2488,14 +2488,15 @@ namespace DisplayButtons.Forms
 
         public enum Position
         {
-            [Description("Down")]
+            [Description("POSITIONCOMBOBOXDOWN")]
             ANDROID_baixo = 81,
 
-            [Description("Up")]
-            ANDROID_cima = 49,
+            [Description("POSITIONCOMBOBOXMEIO")]
+            ANDROID_meio = 17,
+           [Description("POSITIONCOMBOBOXUP")]
+            ANDROID_cima = 49
 
-            [Description("Middle")]
-            ANDROID_meio = 17
+           
         }
 
         private void FocusItem(ImageModernButton mb, IDeckItem item)
@@ -2877,14 +2878,18 @@ namespace DisplayButtons.Forms
         private void LoadProperties(DynamicDeckItem item, FlowLayoutPanel panel)
         {
 
-           
+        
             var props = item.DeckAction.GetType().GetProperties().Where(
                 prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
             foreach (var prop in props)
             {
+                MethodInfo myname = item.DeckAction.GetType().GetMethod("GetActionName");
 
+                var returnValue = (string)myname.Invoke(item.DeckAction, new object[] { });
+                action_label.Text = returnValue;
                 bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
                 MethodInfo helperMethod = item.DeckAction.GetType().GetMethod(prop.Name + "Helper");
+                
                 if (helperMethod != null)
                 {
                     panel.Controls.Add(new Label()
@@ -2915,16 +2920,16 @@ namespace DisplayButtons.Forms
                         {
                             DropDownStyle = ComboBoxStyle.DropDownList
                         };
-                        cBox.Items.AddRange(values.OfType<Enum>().Select(c => EnumUtils.GetDescription(prop.PropertyType, c, c.ToString())).ToArray());
+                        cBox.Items.AddRange(values.OfType<Enum>().Select(c => EnumUtils.GetDescriptionTranslator(prop.PropertyType, c, c.ToString())).ToArray());
 
-                        cBox.Text = EnumUtils.GetDescription(prop.PropertyType, (Enum)prop.GetValue(item.DeckAction), ((Enum)prop.GetValue(item.DeckAction)).ToString());
+                        cBox.Text = EnumUtils.GetDescriptionTranslator(prop.PropertyType, (Enum)prop.GetValue(item.DeckAction), ((Enum)prop.GetValue(item.DeckAction)).ToString());
 
                         cBox.SelectedIndexChanged += (s, e) =>
                         {
                             try
                             {
                                 if (cBox.Text == string.Empty) return;
-                                prop.SetValue(item.DeckAction, EnumUtils.FromDescription(prop.PropertyType, cBox.Text));
+                                prop.SetValue(item.DeckAction, EnumUtils.FromDescriptionTRanslator(prop.PropertyType, cBox.Text));
                                 UpdateIcon(shouldUpdateIcon);
                             }
                             catch (Exception)

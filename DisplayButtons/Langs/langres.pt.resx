@@ -512,6 +512,9 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="MATRIZGENERATORLABELLOADING" xml:space="preserve">
     <value>Carregando...</value>
   </data>
+  <data name="MEDIASETDEFAULT" xml:space="preserve">
+    <value>Definir como padrão</value>
+  </data>
   <data name="MESSAGEBOXPERFIL" xml:space="preserve">
     <value>Você tem certeza que deseja remover o perfil {0} ?</value>
   </data>
@@ -539,11 +542,29 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="MISCMEDIAKEYSVOLUMEUP" xml:space="preserve">
     <value>Aumentar volume</value>
   </data>
+  <data name="MISMEDIAKEYSSTOP" xml:space="preserve">
+    <value>Pausar</value>
+  </data>
   <data name="OBSAINTEGRATIONOBSFOUND" xml:space="preserve">
     <value>Uma instância OBS foi encontrada!</value>
   </data>
   <data name="OBSCONNECTION" xml:space="preserve">
     <value>Criar conexão OBS</value>
+  </data>
+  <data name="OBSDESCRIPTIONGONE" xml:space="preserve">
+    <value>Esconder</value>
+  </data>
+  <data name="OBSDESCRIPTIONSTART" xml:space="preserve">
+    <value>Iniciar</value>
+  </data>
+  <data name="OBSDESCRIPTIONSTOP" xml:space="preserve">
+    <value>Parar</value>
+  </data>
+  <data name="OBSDESCRIPTIONTOGGLE" xml:space="preserve">
+    <value>Alternancia</value>
+  </data>
+  <data name="OBSDESCRIPTIONVISIBLE" xml:space="preserve">
+    <value>Visível</value>
   </data>
   <data name="OBSINTEGRATIONAPPLY" xml:space="preserve">
     <value>Feche o OBS e clique em OK para aplicar os retoques finais.</value>
@@ -622,6 +643,15 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   </data>
   <data name="PLUGINGERENCIER_VERSION" xml:space="preserve">
     <value>VERSÃO</value>
+  </data>
+  <data name="POSITIONCOMBOBOXDOWN" xml:space="preserve">
+    <value>Abaixo</value>
+  </data>
+  <data name="POSITIONCOMBOBOXMEIO" xml:space="preserve">
+    <value>Meio</value>
+  </data>
+  <data name="POSITIONCOMBOBOXUP" xml:space="preserve">
+    <value>Cima</value>
   </data>
   <data name="PRINCIPALFOLDER" xml:space="preserve">
     <value>Pasta principal</value>

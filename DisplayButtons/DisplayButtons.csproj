@@ -35,6 +35,9 @@
     <Optimize>false</Optimize>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Backend\Objects\Implementation\DeckActions\OBS\TestSceneMultiSwitch.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AudioSwitcher.AudioApi" Version="4.0.0-alpha5" />

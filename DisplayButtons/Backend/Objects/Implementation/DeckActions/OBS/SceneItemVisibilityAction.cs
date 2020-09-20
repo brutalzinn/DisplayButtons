@@ -1,6 +1,7 @@
 ﻿using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,9 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
     {
         public enum ItemVisibility
         {
+            [Description("OBSDESCRIPTIONVISIBLE")]
             Visible,
+            [Description("OBSDESCRIPTIONGONE")]
             Gone
         }
 

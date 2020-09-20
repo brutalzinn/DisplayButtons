@@ -160,12 +160,12 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
             List<int> list = new List<int>();
 
             var clearPacket = new Networking.Implementation.SlotImageClearChunkPacket();
-            var packet = new Networking.Implementation.SlotImageChangeChunkPacket();
+            var packet = new Networking.Implementation.SlotUniversalChangeChunkPacket();
             foreach (var item in folder.GetDeckItems()) {
                 if (!(item is DynamicDeckItem)) continue;
                 var index = folder.GetItemIndex(item);
                 list.Add(index);
-                packet.AddToQueue(index, ((DynamicDeckItem)item).DeckImage);
+                packet.AddToQueue(index, ((DynamicDeckItem)item));
             }
             for (int i = 0; i < 15; i++) {
                 if (list.Contains(i + 1)) continue;

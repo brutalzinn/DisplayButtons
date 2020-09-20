@@ -11,19 +11,19 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
     {
         public enum MediaKeys
         {
-            [Description("Previous")]
+            [Description("MISCMEDIAKEYSPREVIUS")]
             Back,
-            [Description("Next")]
+            [Description("MISCMEDIAKEYSNEXT")]
             Next,
-            [Description("Play/Pause")]
+            [Description("MISCMEDIAKEYSPLAYPAUSE")]
             PlayPause,
-            [Description("Stop")]
+            [Description("MISMEDIAKEYSSTOP")]
             Stop,
-            [Description("Volume Off")]
+            [Description("MISCMEDIAKEYSMUTE")]
             VolumeOff,
-            [Description("Volume Down")]
+            [Description("MISCMEDIAKEYSVOLUMEDOWN")]
             VolumeMinus,
-            [Description("Volume Up")]
+            [Description("MISCMEDIAKEYSVOLUMEUP")]
             VolumePlus
         }
 

@@ -7,22 +7,21 @@ using System.Windows.Forms;
 using DisplayButtons.Bibliotecas.Helpers;
 using System.Threading.Tasks;
 using AudioSwitcher.AudioApi;
+using AudioSwitcher.AudioApi.CoreAudio;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
-    public class OutputDeviceAction : AbstractDeckAction
+    public class InputDeviceAction : AbstractDeckAction
     {
-        public enum MediaOutputDevice
+        public enum MediaInputDevice
         {
-            [Description("Mute")]
+            [Description("MISCMEDIAKEYSMUTE")]
             Mute,
-            [Description("Volume up")]
+            [Description("MISCMEDIAKEYSVOLUMEUP")]
             VolumeUp,
-            [Description("Set Default")]
+            [Description("MEDIASETDEFAULT")]
             Default,
-            [Description("Set Default Communicator")]
-            DefaultCommun,
-            [Description("Volume down")]
+            [Description("MISCMEDIAKEYSVOLUMEDOWN")]
             VolumeDown
 
         }
@@ -37,21 +36,21 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         [ActionPropertyInclude]
         [ActionPropertyDescription("Media Key")]
         [ActionPropertyUpdateImageOnChanged]
-        public MediaOutputDevice Key { get; set; } = MediaOutputDevice.Mute;
+        public MediaInputDevice Key { get; set; } = MediaInputDevice.Mute;
 
         public override AbstractDeckAction CloneAction()
         {
-            return new OutputDeviceAction();
+            return new InputDeviceAction();
         }
 
         public override DeckActionCategory GetActionCategory()
         {
-            return DeckActionCategory.General;
+            return DeckActionCategory.Helpers;
         }
         public void DeviceIdHelper()
         {
             dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.AudioController.RecordDevices")) as Form;
-            form.FillComboBox(DeviceType.Playback);
+            form.FillComboBox(DeviceType.Capture);
             form.selectDeviceById(DeviceId);
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -67,7 +66,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
         public override string GetActionName()
         {
-            return "Output device control";
+            return "Input device control";
         }
 
         [Obsolete]
@@ -85,30 +84,24 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
         public override void OnButtonUp(DeckDevice deckDevice)
         {
-
-            var device = ControllerHelper.getDeviceByGuid(DeviceId);
-          
+            var audioController = new CoreAudioController();
+            var device = Task.FromResult(audioController.GetDevice(DeviceId, DeviceState.All)).Result;
+          //  var device = ControllerHelper.getDeviceByGuid(DeviceId);
             switch (Key)
             {
-                case MediaOutputDevice.Mute:
+                case MediaInputDevice.Mute:
                     if(device != null)
                     {
-                    Task.FromResult( device.SetMuteAsync(!device.IsMuted));
+                    Task.FromResult( device.ToggleMuteAsync());
                     }
                     break;
-                case MediaOutputDevice.Default:
+                case MediaInputDevice.Default:
                     if (device != null)
                     {
-                        Task.FromResult(device.SetAsDefault());
+                        Task.FromResult(device.SetAsDefaultAsync());
                     }
                     break;
-                case MediaOutputDevice.DefaultCommun:
-                    if (device != null)
-                    {
-                        Task.FromResult(device.SetAsDefaultCommunications());
-                    }
-                    break;
-                case MediaOutputDevice.VolumeUp:
+                case MediaInputDevice.VolumeUp:
                     if (device != null)
                     {
                         
@@ -116,7 +109,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                         Task.FromResult(device.SetVolumeAsync(volume));
                     }
                     break;
-                case MediaOutputDevice.VolumeDown:
+                case MediaInputDevice.VolumeDown:
                     if (device != null)
                     {
 
@@ -124,6 +117,8 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                         Task.FromResult(device.SetVolumeAsync(volume));
                     }
                     break;
+         
+
             }
         }
 
@@ -135,10 +130,10 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             return base.GetDefaultItemImage();
         }
 
-        private Bitmap GetKey(MediaOutputDevice key)
+        private Bitmap GetKey(MediaInputDevice key)
         {
             switch (key) {
-                case MediaOutputDevice.Mute:
+                case MediaInputDevice.Mute:
                     return Resources.img_item_default;
                
                 default:
