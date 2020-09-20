@@ -66,7 +66,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
         public override string GetActionName()
         {
-            return "Input device control";
+            return Texts.rm.GetString("HELPERSDECKINPUTDEVICE", Texts.cultereinfo);
         }
 
         [Obsolete]

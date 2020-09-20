@@ -69,7 +69,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
         public override string GetActionName()
         {
-            return "Output device control";
+            return Texts.rm.GetString("HELPERSDECKOUTPUTDEVICE", Texts.cultereinfo);
         }
 
         [Obsolete]

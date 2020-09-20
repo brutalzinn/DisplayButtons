@@ -377,7 +377,7 @@ namespace DisplayButtons.Forms
 
              
 
-                appBar1.Actions.Add(itemBiblioteca);
+            //    appBar1.Actions.Add(itemBiblioteca);
  
                 // ApplyTheme(panel1);
                 GenerateSidebar(shadedPanel1, true);
@@ -2886,6 +2886,9 @@ namespace DisplayButtons.Forms
                 MethodInfo myname = item.DeckAction.GetType().GetMethod("GetActionName");
 
                 var returnValue = (string)myname.Invoke(item.DeckAction, new object[] { });
+                
+                action_label.MaximumSize = new Size(110, 0);
+                action_label.AutoSize = true;
                 action_label.Text = returnValue;
                 bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
                 MethodInfo helperMethod = item.DeckAction.GetType().GetMethod(prop.Name + "Helper");

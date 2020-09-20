@@ -431,6 +431,12 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="GENERATESIDEBARTITLEPLUGINS" xml:space="preserve">
     <value>Botões lua</value>
   </data>
+  <data name="HELPERSDECKINPUTDEVICE" xml:space="preserve">
+    <value>Controlador de áudio - gravação</value>
+  </data>
+  <data name="HELPERSDECKOUTPUTDEVICE" xml:space="preserve">
+    <value>Controlador de áudio - reprodução</value>
+  </data>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>Chave IFTTT</value>
   </data>

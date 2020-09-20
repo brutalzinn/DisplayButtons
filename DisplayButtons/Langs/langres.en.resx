@@ -420,6 +420,12 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   <data name="GENERATESIDEBARTITLEPLUGINS" xml:space="preserve">
     <value>Buttons  lua</value>
   </data>
+  <data name="HELPERSDECKINPUTDEVICE" xml:space="preserve">
+    <value>Audio controller - recording</value>
+  </data>
+  <data name="HELPERSDECKOUTPUTDEVICE" xml:space="preserve">
+    <value>Audio controller - playback</value>
+  </data>
   <data name="IFTTMAKERKEYTEXT" xml:space="preserve">
     <value>IFTT Maker Key</value>
   </data>
