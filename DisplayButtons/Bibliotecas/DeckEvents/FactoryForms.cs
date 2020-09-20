@@ -37,6 +37,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
                 return Text;
             }
         }
+    
         public class GlobalControl
         {
             public string Text { get; set; }
