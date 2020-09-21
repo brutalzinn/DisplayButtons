@@ -43,6 +43,7 @@ using DisplayButtons.Bibliotecas.DeckEvents;
 using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
 using static DisplayButtons.Backend.Objects.ProfileVoidHelper;
 using DisplayButtons.Bibliotecas.DeckText;
+using DisplayButtons.Bibliotecas.Helpers;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -1221,7 +1222,7 @@ namespace DisplayButtons.Forms
             control1.Tag = null;
             control1.Text = "";
             control1.ClearText();
-            ClearSingleItemToDevice(CurrentDevice, slot);
+            DeckHelpers.ClearSingleItemToDevice(CurrentDevice, slot);
 
             if (folder == null) control1.Invoke(new Action(control1.Refresh));
 
@@ -1248,7 +1249,7 @@ namespace DisplayButtons.Forms
  CurrentDevice.CheckCurrentFolder();
             if (sendToDevice)
             {
-                SendSingleItemToDevice(CurrentDevice, slot, item.GetDeckDefaultLayer);
+                        DeckHelpers.SendSingleItemToDevice(CurrentDevice, slot, item.GetDeckDefaultLayer);
 
             }
 
@@ -1257,37 +1258,11 @@ namespace DisplayButtons.Forms
              
             }
            
-            // 
+    
         }
-        public static void SendSingleItemToDevice(DeckDevice device,int slot, DeckItemMisc item)
-        {
-            var con = device.GetConnection();
-            if (con != null)
-            {
-                bool isFolder = false;
-              
-                var image = item.GetItemImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
-                var seri = image.BitmapSerialized;
-                con.SendPacket(new SingleUniversalChangePacket(image)
-                {
-                    ImageSlot = slot,
-                    CurrentItem = item
+   
 
-                });
-
-
-            }
-
-
-            }
-        public static void ClearSingleItemToDevice(DeckDevice device, int slot)
-        {
-            var con = device.GetConnection();
-            con.SendPacket(new SlotImageClearPacket(slot));
-     
-        }
-
-            private ImageModernButton GetButtonControl(int id)
+            public ImageModernButton GetButtonControl(int id)
         {
             return Controls.Find("modernButton" + id, true).FirstOrDefault() as ImageModernButton;
         }
