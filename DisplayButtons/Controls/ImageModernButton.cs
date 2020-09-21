@@ -100,7 +100,7 @@ namespace DisplayButtons.Controls
                     Invoke(new Action(Refresh));
             }
         }
-        public new Image ImageLayerTwo 
+        public  Image ImageLayerTwo 
         {
             get => Origin?.ImageLayerTwo ?? _imageTwo;
             set
@@ -230,43 +230,76 @@ namespace DisplayButtons.Controls
             base.OnPaint(pevent);
 
 
-            
 
-
-            if (Image != null)
+            switch (camada)
             {
-                if (TextButton != null)
-                {
-                    using (Font font1 = new Font("Arial", TextButton.Size, FontStyle.Bold, GraphicsUnit.Point))
+                case 1:
+                    if (Image != null)
                     {
-                        Graphics g = this.CreateGraphics();
+                        if (TextButton != null)
+                        {
+                            using (Font font1 = new Font("Arial", TextButton.Size, FontStyle.Bold, GraphicsUnit.Point))
+                            {
+                                Graphics g = this.CreateGraphics();
 
-                        SizeF size = g.MeasureString(TextButton.Text,font1);
-                        StringFormat format = new StringFormat();
-                
-                        int nLeft = Convert.ToInt32((this.ClientRectangle.Width / 2) - (size.Width / 2));
-                        int nTop = Convert.ToInt32(TextHelper.PercentOf(TextButton.Position,this.Size.Height));
-                        RectangleF rectF1 = new RectangleF(nLeft, nTop, Image.Width, Image.Height);
-          
-                        pevent.Graphics.DrawImage(Image, DisplayRectangle);
+                                SizeF size = g.MeasureString(TextButton.Text, font1);
+                                StringFormat format = new StringFormat();
 
-                        pevent.Graphics.DrawString(TextButton.Text, font1, TextButton.Brush, rectF1);
+                                int nLeft = Convert.ToInt32((this.ClientRectangle.Width / 2) - (size.Width / 2));
+                                int nTop = Convert.ToInt32(TextHelper.PercentOf(TextButton.Position, this.Size.Height));
+                                RectangleF rectF1 = new RectangleF(nLeft, nTop, Image.Width, Image.Height);
+
+                                pevent.Graphics.DrawImage(Image, DisplayRectangle);
+
+                                pevent.Graphics.DrawString(TextButton.Text, font1, TextButton.Brush, rectF1);
+
+                            }
+                        }
+                        else
+                        {
+                            pevent.Graphics.DrawImage(Image, DisplayRectangle);
+
+                        }
+
 
                     }
-                }
-                else
-                {
-                    pevent.Graphics.DrawImage(Image, DisplayRectangle);
-
-                }
+                    break;
 
 
-            }else if (ImageLayerTwo != null)
-            {
-                pevent.Graphics.DrawImage(ImageLayerTwo, DisplayRectangle);
+                case 2:
+                    
+                        if (ImageLayerTwo != null)
+                        {
+                            if (TextButton != null)
+                            {
+                                using (Font font1 = new Font("Arial", TextButton.Size, FontStyle.Bold, GraphicsUnit.Point))
+                                {
+                                    Graphics g = this.CreateGraphics();
+
+                                    SizeF size = g.MeasureString(TextButton.Text, font1);
+                                    StringFormat format = new StringFormat();
+
+                                    int nLeft = Convert.ToInt32((this.ClientRectangle.Width / 2) - (size.Width / 2));
+                                    int nTop = Convert.ToInt32(TextHelper.PercentOf(TextButton.Position, this.Size.Height));
+                                    RectangleF rectF1 = new RectangleF(nLeft, nTop, ImageLayerTwo.Width, ImageLayerTwo.Height);
+
+                                    pevent.Graphics.DrawImage(ImageLayerTwo, DisplayRectangle);
+
+                                    pevent.Graphics.DrawString(TextButton.Text, font1, TextButton.Brush, rectF1);
+
+                                }
+                            }
+                            else
+                            {
+                                pevent.Graphics.DrawImage(ImageLayerTwo, DisplayRectangle);
+
+                            }
 
 
+                        }
+                    break;
             }
+            
         }
         
 

@@ -25,7 +25,7 @@ namespace DisplayButtons.Backend.Networking.Implementation
         public int ImageSlot { get; set; }
  
 
-       public IDeckItem CurrentItem { get; set; }
+       public DeckItemMisc CurrentItem { get; set; }
         public override object Clone()
         {
             return new SingleUniversalChangePacket();
@@ -51,19 +51,19 @@ namespace DisplayButtons.Backend.Networking.Implementation
 
                
                 headerContent.Font = " ";
-                headerContent.Size = CurrentItem.GetDeckDefaultLayer.Decksize;
-                headerContent.Position = CurrentItem.GetDeckDefaultLayer.Deckposition;
-                headerContent.Text = CurrentItem.GetDeckDefaultLayer.Deckname;
-                headerContent.Color = CurrentItem.GetDeckDefaultLayer.Deckcolor;
-                headerContent.Stroke_color = CurrentItem.GetDeckDefaultLayer.Stroke_color;
-                headerContent.Stroke_dx = CurrentItem.GetDeckDefaultLayer.Stroke_dxtext;
-                headerContent.Stroke_radius = CurrentItem.GetDeckDefaultLayer.Stroke_radius;
-                headerContent.Stroke_dy = CurrentItem.GetDeckDefaultLayer.Stroke_Dy;
-                headerContent.IsStroke = CurrentItem.GetDeckDefaultLayer.IsStroke;
-                headerContent.Isboldtext = CurrentItem.GetDeckDefaultLayer.Isboldtext;
-                headerContent.Isnormaltext = CurrentItem.GetDeckDefaultLayer.Isnormaltext;
-                headerContent.Isitalictext = CurrentItem.GetDeckDefaultLayer.Isitalictext;
-                headerContent.Ishinttext = CurrentItem.GetDeckDefaultLayer.Ishinttext;
+                headerContent.Size = CurrentItem.Decksize;
+                headerContent.Position = CurrentItem.Deckposition;
+                headerContent.Text = CurrentItem.Deckname;
+                headerContent.Color = CurrentItem.Deckcolor;
+                headerContent.Stroke_color = CurrentItem.Stroke_color;
+                headerContent.Stroke_dx = CurrentItem.Stroke_dxtext;
+                headerContent.Stroke_radius = CurrentItem.Stroke_radius;
+                headerContent.Stroke_dy = CurrentItem.Stroke_Dy;
+                headerContent.IsStroke = CurrentItem.IsStroke;
+                headerContent.Isboldtext = CurrentItem.Isboldtext;
+                headerContent.Isnormaltext = CurrentItem.Isnormaltext;
+                headerContent.Isitalictext = CurrentItem.Isitalictext;
+                headerContent.Ishinttext = CurrentItem.Ishinttext;
                 string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.None);
 
                 writer.WriteUTF(jsonString);

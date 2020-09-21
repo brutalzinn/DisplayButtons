@@ -1177,7 +1177,7 @@ namespace DisplayButtons.Forms
 
                 control.NormalImage = item?.GetDeckDefaultLayer?.GetItemImage()?.Bitmap;
 
-                control.TextButton = new TextLabel(item);
+                control.TextButton = new TextLabel(item.GetDeckDefaultLayer);
 
                 control.Tag = item;
                 control.Invoke(new Action(control.Refresh));
@@ -1228,13 +1228,13 @@ namespace DisplayButtons.Forms
 
                     control.NormalImage = item?.GetDeckDefaultLayer?.GetItemImage()?.Bitmap;
                     control.Text = item?.GetDeckDefaultLayer.Deckname;
-                    control.TextButton = new TextLabel(item);
+                    control.TextButton = new TextLabel(item.GetDeckDefaultLayer);
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
  CurrentDevice.CheckCurrentFolder();
             if (sendToDevice)
             {
-                SendSingleItemToDevice(CurrentDevice, slot, item);
+                SendSingleItemToDevice(CurrentDevice, slot, item.GetDeckDefaultLayer);
 
             }
 
@@ -1245,14 +1245,14 @@ namespace DisplayButtons.Forms
            
             // 
         }
-        public static void SendSingleItemToDevice(DeckDevice device,int slot, IDeckItem item)
+        public static void SendSingleItemToDevice(DeckDevice device,int slot, DeckItemMisc item)
         {
             var con = device.GetConnection();
             if (con != null)
             {
                 bool isFolder = false;
               
-                var image = item.GetDeckDefaultLayer.GetItemImage() ?? item.GetDeckDefaultLayer.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
+                var image = item.GetItemImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                 var seri = image.BitmapSerialized;
                 con.SendPacket(new SingleUniversalChangePacket(image)
                 {
@@ -2214,12 +2214,12 @@ namespace DisplayButtons.Forms
 
                   if(LayerSelected() == 1)
                     {
-
+                        ActionImagePlaceHolder.camada = 1;
 ActionImagePlaceHolder.Image = bmp;
                     }
                     else if (LayerSelected() == 2)
                     {
-                        
+                        ActionImagePlaceHolder.camada = 2;
                         ActionImagePlaceHolder.ImageLayerTwo = bmp;
                     }
                       
@@ -2534,12 +2534,17 @@ ActionImagePlaceHolder.Image = bmp;
             if (!layer)
             {
                  dI = item.GetDeckDefaultLayer;
+                ActionImagePlaceHolder.TextButton = new TextLabel(dI);
+                ActionImagePlaceHolder.Image = item.GetDeckDefaultLayer.DeckImage.Bitmap;
             }
             else
             {
                  dI = item.GetDeckLayerTwo;
+                ActionImagePlaceHolder.TextButton = new TextLabel(dI);
+                ActionImagePlaceHolder.ImageLayerTwo = item.GetDeckLayerTwo.DeckImage.Bitmap;
+
             }
-           
+
             ModernButton myButton = new ModernButton();
             ModernButton myColor = new ModernButton();
             ModernButton myColorShadow = new ModernButton();
@@ -2808,35 +2813,37 @@ ActionImagePlaceHolder.Image = bmp;
                 {
             camada1.Click += (sender, e) => { 
     ActionImagePlaceHolder.Origin = mb;
-  FocusItemPropertiesOptions(item, false);
+                ActionImagePlaceHolder.camada = 1;
+                FocusItemPropertiesOptions(item, false);
     ActionImagePlaceHolder.Refresh();
 };
                 if (TT.DeckAction.IsLayered())
                     {
                     camada2.Visible = true;
             camada2.Click += (sender, e) => {
-               
-                    
-                        if (item.GetDeckLayerTwo == null)
+        
+                if (item.GetDeckLayerTwo == null)
                         {
                             item.GetDeckLayerTwo = new DeckItemMisc();
-                        }
-                        ActionImagePlaceHolder.Origin = mb;
+                        }     
+                
+                ActionImagePlaceHolder.Origin = mb;
+                       ActionImagePlaceHolder.camada = 2;
                         FocusItemPropertiesOptions(item, true);
                         ActionImagePlaceHolder.Refresh();
                     
                
             }; 
                 }
-                camada1.PerformClick();
-                camada1.PerformClick();
+               
             }
 
 
 
 
 
-
+ camada1.PerformClick();
+                camada1.PerformClick();
 
 
           

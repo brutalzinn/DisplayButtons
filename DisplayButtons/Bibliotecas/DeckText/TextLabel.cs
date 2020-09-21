@@ -36,14 +36,14 @@ namespace DisplayButtons.Bibliotecas.DeckText
             this.position = pos;
 
         }
-        public TextLabel(IDeckItem item)
+        public TextLabel(DeckItemMisc item)
         {
-            if (item.GetDeckDefaultLayer != null)
+            if (item != null)
             {
-                setPosition(item.GetDeckDefaultLayer.Deckposition);
-                this.size = item.GetDeckDefaultLayer.Decksize / 3;
-                this.Color = System.Drawing.ColorTranslator.FromHtml(item.GetDeckDefaultLayer.Deckcolor);
-                this.text = item.GetDeckDefaultLayer.Deckname;
+                setPosition(item.Deckposition);
+                this.size = item.Decksize / 3;
+                this.Color = System.Drawing.ColorTranslator.FromHtml(item.Deckcolor);
+                this.text = item.Deckname;
                 this.brush = new SolidBrush(this.Color); //Brushes.White;
 
             }
