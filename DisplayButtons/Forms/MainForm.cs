@@ -48,6 +48,7 @@ using DisplayButtons.Bibliotecas.DeckText;
 
 namespace DisplayButtons.Forms
 {
+
     public partial class MainForm : TemplateForm
     {
         private static MainForm instance;
@@ -638,7 +639,7 @@ namespace DisplayButtons.Forms
                                         };
                                         var id2 = deckFolder.Add(deckItemToAdd);
                                        
-                                        deckItemToAdd.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
+                                        deckItemToAdd.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
                                         CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
                                         RefreshAllButtons();
@@ -650,21 +651,21 @@ namespace DisplayButtons.Forms
 
                                         return;
                                     }
-                                    var folder = new DynamicDeckFolder
-                                    {
-                                        DeckImage = new DeckImage(Resources.img_folder)
-                                    };
+                                    var folder = new DynamicDeckFolder();
+
+                                    folder.GetDeckDefaultLayer.DeckImage = new DeckImage(Resources.img_folder);
+                                   
                                     //Create a new folder instance
                                     CurrentDevice.CheckCurrentFolder();
                                     folder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     folder.Add(1, folderUpItem);
                                     folder.Add(item);
 
-                                    var newItem = new DynamicDeckItem
-                                    {
-                                        DeckAction = action.DeckAction.CloneAction(),
-                                        DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default)
-                                    };
+                                    var newItem = new DynamicDeckItem();
+
+                                    newItem.DeckAction = action.DeckAction.CloneAction();
+                                    newItem.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
+                                    
 
                                     var id = folder.Add(newItem);
 
@@ -726,10 +727,10 @@ namespace DisplayButtons.Forms
                                 //We must create a folder if there is an item
                                 var oldItem = action1.OldFolder.GetDeckItems().First(cItem => action1.OldFolder.GetItemIndex(cItem) == mb.CurrentSlot);
 
-                                var newFolder = new DynamicDeckFolder
-                                {
-                                    DeckImage = new DeckImage(Resources.img_folder)
-                                };
+                                var newFolder = new DynamicDeckFolder();
+
+                                newFolder.GetDeckDefaultLayer.DeckImage = new DeckImage(Resources.img_folder);
+                               
                                 //Create a new folder instance
 
 
@@ -911,7 +912,7 @@ namespace DisplayButtons.Forms
                                             if (senderB != null && senderB.Tag != null && senderB.Tag is IDeckItem deckItem)
                                             {
                                                 bool isFolder = deckItem is IDeckFolder;
-                                                senderB.Image = isFolder ? Resources.img_folder : ((IDeckItem)senderB.Tag).GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
+                                                senderB.Image = isFolder ? Resources.img_folder : ((IDeckItem)senderB.Tag).GetDeckDefaultLayer.GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
                                             }
                                         }
                                     };
@@ -1163,16 +1164,8 @@ namespace DisplayButtons.Forms
 
                 if (item is DynamicDeckItem FF && FF.DeckAction is PluginLuaGenerator TT)
                 {
-                    // Debug.WriteLine("PluginLuaGenerator: " + GetPropertiesPlugins(FF, "ScriptNamePoint"));
-
-
                     LoadPropertiesPlugins(FF, GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
                     TT.SetConfigs(GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
-
-
-
-
-
                 }
                 if (item is DynamicDeckFolder EE && EE != null && EE.KeyGlobalValue != null && EE.UniqueID != null)
                 {
@@ -1182,7 +1175,7 @@ namespace DisplayButtons.Forms
 
                 //control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
 
-                control.NormalImage = item?.GetItemImage().Bitmap;
+                control.NormalImage = item?.GetDeckDefaultLayer?.GetItemImage()?.Bitmap;
 
                 control.TextButton = new TextLabel(item);
 
@@ -1233,8 +1226,8 @@ namespace DisplayButtons.Forms
                 {
            
 
-                    control.NormalImage = item?.GetItemImage().Bitmap;
-                    control.Text = item?.Deckname;
+                    control.NormalImage = item?.GetDeckDefaultLayer?.GetItemImage()?.Bitmap;
+                    control.Text = item?.GetDeckDefaultLayer.Deckname;
                     control.TextButton = new TextLabel(item);
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
@@ -1259,7 +1252,7 @@ namespace DisplayButtons.Forms
             {
                 bool isFolder = false;
               
-                var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
+                var image = item.GetDeckDefaultLayer.GetItemImage() ?? item.GetDeckDefaultLayer.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                 var seri = image.BitmapSerialized;
                 con.SendPacket(new SingleUniversalChangePacket(image)
                 {
@@ -1533,10 +1526,10 @@ namespace DisplayButtons.Forms
                     if (item == null) break;
 
                     bool isFolder = item is IDeckFolder;
-                    var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
+                    var image = item.GetDeckDefaultLayer.GetItemImage() ?? item.GetDeckDefaultLayer.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                     var seri = image.BitmapSerialized;
 
-                    item.SetDefault = image;
+                    item.GetDeckDefaultLayer.SetDefault = image;
 
                     packet.AddToQueue(folder.GetItemIndex(item), item);
 
@@ -1579,7 +1572,7 @@ namespace DisplayButtons.Forms
 
                 bool isFolder = item is IDeckFolder;
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-                var image = item.GetItemImage() ?? item.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
+                var image = item.GetDeckDefaultLayer.GetItemImage() ?? item.GetDeckDefaultLayer.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                 var seri = image.BitmapSerialized;
                 if (item is DynamicDeckItem DI && DI.DeckAction != null)
                 {
@@ -1904,7 +1897,7 @@ namespace DisplayButtons.Forms
 
 
 
-                    folder_form.Add(new folders(PP.Deckname, PP, false, root));
+                    folder_form.Add(new folders(PP.GetDeckDefaultLayer.Deckname, PP, false, root));
                     // AddFolderInPanelList(shadedPanel1, PP.folder_name, PP, root, false, root);
                     //   Debug.WriteLine(PP.folder_name + "CC:" + PP.GetSubFolders().Count);             
 
@@ -1915,7 +1908,7 @@ namespace DisplayButtons.Forms
 
                             if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
-                                folder_form.Add(new folders(pastapai.Deckname, pastapai, true, root));
+                                folder_form.Add(new folders(pastapai.GetDeckDefaultLayer.Deckname, pastapai, true, root));
                             }
                             AddFolderInPanelList(root);
                             root++;
@@ -1924,7 +1917,7 @@ namespace DisplayButtons.Forms
                         {
                             if (CurrentDevice.CurrentProfile.Mainfolder.GetSubFolders()[root] is DynamicDeckFolder pastapai)
                             {
-                                folder_form.Add(new folders(pastapai.Deckname, pastapai, true, root));
+                                folder_form.Add(new folders(pastapai.GetDeckDefaultLayer.Deckname, pastapai, true, root));
                             }
                             Debug.WriteLine("ROOT: " + root);
                             AddFolderInPanelList(root);
@@ -2020,8 +2013,8 @@ namespace DisplayButtons.Forms
                         folder.Font = itemFont;
 
                         folder.Dock = DockStyle.Top;
-                        folder.Text = item.Deckname;
-                        folder.Height = TextRenderer.MeasureText(item.Deckname, itemFont).Height;
+                        folder.Text = item.GetDeckDefaultLayer.Deckname;
+                        folder.Height = TextRenderer.MeasureText(item.GetDeckDefaultLayer.Deckname, itemFont).Height;
                         toAdd.Add(folder);
                         foreach (DynamicDeckFolder subitem in ListFolders(item).Skip(1))
                         {
@@ -2033,8 +2026,8 @@ namespace DisplayButtons.Forms
                             subfolder.Font = itemFont;
 
                             subfolder.Dock = DockStyle.Top;
-                            subfolder.Text = "..." + subitem.Deckname;
-                            subfolder.Height = TextRenderer.MeasureText("..." + subitem.Deckname, itemFont).Height;
+                            subfolder.Text = "..." + subitem.GetDeckDefaultLayer.Deckname;
+                            subfolder.Height = TextRenderer.MeasureText("..." + subitem.GetDeckDefaultLayer.Deckname, itemFont).Height;
                             subfolder.Click += (s, ee) =>
                                                    {
 
@@ -2058,8 +2051,8 @@ namespace DisplayButtons.Forms
                         folder.Font = itemFont;
 
                         folder.Dock = DockStyle.Top;
-                        folder.Text = item.Deckname;
-                        folder.Height = TextRenderer.MeasureText(item.Deckname, itemFont).Height;
+                        folder.Text = item.GetDeckDefaultLayer.Deckname;
+                        folder.Height = TextRenderer.MeasureText(item.GetDeckDefaultLayer.Deckname, itemFont).Height;
                         toAdd.Add(folder);
                     }
 
@@ -2203,8 +2196,25 @@ namespace DisplayButtons.Forms
                         return;
                     }
 
+                    var checkedRadioButton = MainForm.Instance.groupBox1.Controls
+                           .OfType<RadioButton>()
+                           .FirstOrDefault(r => r.Checked);
+                    if (checkedRadioButton != null)
+                    {
+                        switch (checkedRadioButton.Name)
+                        {
+                            case "camada1":
 
-                    imageModernButton1.Image = bmp;
+                                imageModernButton1.camada = 1; 
+                              
+                                break;
+                            case "camada2":
+                                imageModernButton1.camada = 2;
+                                break;
+
+                        }
+                    }
+                     imageModernButton1.Image = bmp;
                 }
                 catch (Exception)
                 {
@@ -2498,9 +2508,9 @@ namespace DisplayButtons.Forms
 
            
         }
-
-        private void FocusItem(ImageModernButton mb, IDeckItem item)
+        private void FocusItemPropertiesOptions(IDeckItem item,bool layer)
         {
+
             flowLayoutPanel1.Controls.OfType<Control>().All(c =>
             {
                 c.Dispose();
@@ -2508,268 +2518,307 @@ namespace DisplayButtons.Forms
             });
 
             flowLayoutPanel1.Controls.Clear();
-            if (item is IDeckItem dI)
+            DeckItemMisc dI = null;
+            if (!layer)
+            {
+                 dI = item.GetDeckDefaultLayer;
+            }
+            else
+            {
+                 dI = item.GetDeckLayerTwo;
+            }
+
+            ModernButton myButton = new ModernButton();
+            ModernButton myColor = new ModernButton();
+            ModernButton myColorShadow = new ModernButton();
+            Label myTextNameInformation = new Label();
+            Label sizeLabelInfo = new Label();
+            Label positionLabelInfo = new Label();
+            Label StrokeLabelInfo = new Label();
+            Label StrokeLabelColor = new Label();
+            Label StrokeLabelDX = new Label();
+            Label StrokeLabelDY = new Label();
+            Label StrokeLabelRADIUS = new Label();
+            TextBox sizeLabelTextBox = new TextBox();
+            ComboBox PositionComboBox = new ComboBox();
+            TextBox myNameText = new TextBox();
+            TextBox myColorText = new TextBox();
+            CheckBox IsStrokeCheckbox = new CheckBox();
+            CheckBox IsHintText = new CheckBox();
+            CheckBox IsBoldText = new CheckBox();
+            CheckBox IsItalicText = new CheckBox();
+            CheckBox IsNormalText = new CheckBox();
+            TextBox shadow_stroke_radiustextfloat = new TextBox();
+            TextBox shadow_stroke_dxtextfloat = new TextBox();
+            TextBox shadow_stroke_dytextfloat = new TextBox();
+            TextBox shadow_stroke_color = new TextBox();
+            myColor.Size = new Size(70, 30);
+            IsHintText.Text = Texts.rm.GetString("DECKITEMHINTTEXT", Texts.cultereinfo);
+            IsBoldText.Text = Texts.rm.GetString("DECKITEMBOLDTEXT", Texts.cultereinfo);
+            IsItalicText.Text = Texts.rm.GetString("DECKITEMITALICTEXT", Texts.cultereinfo);
+            IsNormalText.Text = Texts.rm.GetString("DECKITEMNORMALTEXT", Texts.cultereinfo);
+            IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
+            myColor.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
+            myColorShadow.Size = new Size(70, 30);
+            myColorShadow.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
+            myTextNameInformation.Text = Texts.rm.GetString("DECKITEMTEXT", Texts.cultereinfo);
+            StrokeLabelInfo.Text = Texts.rm.GetString("DECKITEMSTROKE", Texts.cultereinfo);
+            StrokeLabelRADIUS.Text = Texts.rm.GetString("DECKITEMSTROKERADIUS", Texts.cultereinfo);
+            StrokeLabelDX.Text = Texts.rm.GetString("DECKITEMSTROKEDX", Texts.cultereinfo);
+            StrokeLabelDY.Text = Texts.rm.GetString("DECKITEMSTROKEDY", Texts.cultereinfo);
+            StrokeLabelColor.Text = Texts.rm.GetString("DECKITEMSTROKECOLOR", Texts.cultereinfo);
+            positionLabelInfo.Text = Texts.rm.GetString("DECKITEMPOSITION", Texts.cultereinfo);
+            sizeLabelInfo.Text = Texts.rm.GetString("DECKITEMSIZE", Texts.cultereinfo);
+            FlowLayoutPanel painel_name = new FlowLayoutPanel();
+            FlowLayoutPanel painel_color = new FlowLayoutPanel();
+            FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
+            FlowLayoutPanel painel_position = new FlowLayoutPanel();
+            FlowLayoutPanel painel_shadowstroke = new FlowLayoutPanel();
+            myColor.Dock = DockStyle.None;
+            myColorText.Dock = DockStyle.None;
+            sizeLabelTextBox.Dock = DockStyle.None;
+            sizeLabelInfo.Dock = DockStyle.None;
+            positionLabelInfo.Dock = DockStyle.None;
+            StrokeLabelInfo.Dock = DockStyle.None;
+            PositionComboBox.Dock = DockStyle.None;
+            shadow_stroke_radiustextfloat.Dock = DockStyle.None;
+            shadow_stroke_dxtextfloat.Dock = DockStyle.None;
+            shadow_stroke_dytextfloat.Dock = DockStyle.None;
+            shadow_stroke_color.Dock = DockStyle.None;
+            myNameText.Text = dI.Deckname;
+            myColorText.Text = dI.Deckcolor;
+
+            IsStrokeCheckbox.Checked = dI.IsStroke;
+            shadow_stroke_color.Text = dI.Stroke_color;
+            shadow_stroke_dytextfloat.Text = dI.Stroke_Dy.ToString();
+            shadow_stroke_dxtextfloat.Text = dI.Stroke_dxtext.ToString();
+            shadow_stroke_radiustextfloat.Text = dI.Stroke_radius.ToString();
+            IsNormalText.Checked = dI.Isnormaltext;
+            IsHintText.Checked = dI.Ishinttext;
+            IsItalicText.Checked = dI.Isitalictext;
+            IsBoldText.Checked = dI.Isboldtext;
+           
+
+
+            sizeLabelTextBox.Text = dI.Decksize.ToString();
+            myColor.Click += (s, e) =>
+            {
+
+                using (ColorPickerDialog dialog = new ColorPickerDialog())
+                {
+                    dialog.PreviewColorChanged += this.DialogColorChangedHandler;
+
+                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
+                        string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
+                        myColorText.Text = result;
+                    }
+
+                    dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
+                }
+
+            };
+
+            myColorShadow.Click += (s, e) =>
+            {
+
+                using (ColorPickerDialog dialog = new ColorPickerDialog())
+                {
+                    dialog.PreviewColorChanged += this.DialogColorChangedHandler;
+
+                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
+                        string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
+                        shadow_stroke_color.Text = result;
+                    }
+
+                    dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
+                }
+
+            };
+
+
+
+            IsHintText.Click += (s, e) =>
+            {
+
+                IsNormalText.Checked = false;
+            };
+            IsBoldText.Click += (s, e) =>
+
+            {
+
+                IsNormalText.Checked = false;
+
+            };
+
+            IsItalicText.Click += (s, e) =>
+
+            {
+                IsNormalText.Checked = false;
+
+            };
+
+            IsNormalText.Click += (s, e) =>
+            {
+                if (IsNormalText.Checked)
+                {
+                    IsHintText.Checked = false;
+                    IsBoldText.Checked = false;
+                    IsItalicText.Checked = false;
+                }
+
+
+            };
+
+
+            painel_position.Size = new Size(190, 60);
+
+            painel_color.Size = new Size(190, 30);
+
+            painel_name.Size = new Size(190, 320);
+            painel_tamanho.Size = new Size(210, 60);
+            painel_shadowstroke.Size = new Size(190, 300);
+            painel_shadowstroke.WrapContents = true;
+
+            painel_tamanho.WrapContents = true;
+            painel_name.WrapContents = true;
+            //painel 1
+            painel_color.WrapContents = true;
+            painel_position.WrapContents = true;
+            painel_position.Controls.Add(positionLabelInfo);
+
+            painel_position.Controls.Add(PositionComboBox);
+            painel_shadowstroke.Controls.Add(StrokeLabelInfo);
+            painel_shadowstroke.Controls.Add(IsStrokeCheckbox);
+            painel_shadowstroke.Controls.Add(StrokeLabelRADIUS);
+            painel_shadowstroke.Controls.Add(shadow_stroke_radiustextfloat);
+            painel_shadowstroke.Controls.Add(StrokeLabelDX);
+            painel_shadowstroke.Controls.Add(shadow_stroke_dxtextfloat);
+            painel_shadowstroke.Controls.Add(StrokeLabelDY);
+            painel_shadowstroke.Controls.Add(shadow_stroke_dytextfloat);
+            painel_shadowstroke.Controls.Add(StrokeLabelColor);
+            painel_shadowstroke.Controls.Add(shadow_stroke_color);
+            painel_shadowstroke.Controls.Add(myColorShadow);
+
+            painel_color.Controls.Add(myColor);
+            painel_color.Controls.Add(myColorText);
+
+            painel_name.Controls.Add(myTextNameInformation);
+            painel_name.Controls.Add(myNameText);
+            painel_name.Controls.Add(PositionComboBox);
+            painel_name.Controls.Add(painel_tamanho);
+
+            painel_name.Controls.Add(painel_color);
+
+            painel_name.Controls.Add(IsHintText);
+            painel_name.Controls.Add(IsItalicText);
+            painel_name.Controls.Add(IsBoldText);
+            painel_name.Controls.Add(IsNormalText);
+            painel_tamanho.Controls.Add(sizeLabelInfo);
+            painel_tamanho.Controls.Add(sizeLabelTextBox);
+
+
+
+
+
+            flowLayoutPanel1.Controls.Add(painel_name);
+
+
+
+
+            flowLayoutPanel1.Controls.Add(painel_shadowstroke);
+
+            flowLayoutPanel1.Controls.Add(myButton);
+            myButton.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+
+
+
+
+
+
+            setEnumValues(PositionComboBox, typeof(Position));
+            myButton.Click += (s, e) =>
+            {
+                dI.Deckname = myNameText.Text;
+                dI.Deckcolor = myColorText.Text;
+                dI.Decksize = Convert.ToInt32(sizeLabelTextBox.Text);
+                dI.Stroke_radius = Convert.ToSingle(shadow_stroke_radiustextfloat.Text);
+                dI.Stroke_Dy = Convert.ToSingle(shadow_stroke_dytextfloat.Text);
+                dI.Stroke_dxtext = Convert.ToSingle(shadow_stroke_dxtextfloat.Text);
+                dI.Stroke_color = shadow_stroke_color.Text;
+                dI.Deckposition = (int)PositionComboBox.SelectedValue;
+                dI.IsStroke = IsStrokeCheckbox.Checked;
+                dI.Isboldtext = IsBoldText.Checked;
+                dI.Ishinttext = IsHintText.Checked;
+                dI.Isitalictext = IsItalicText.Checked;
+                dI.Isnormaltext = IsNormalText.Checked;
+                int slot = CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(item);
+                RefreshButton(slot, true);
+
+
+
+
+            };
+
+
+            PositionComboBox.SelectedValue = dI.Deckposition;
+            if (item is DynamicDeckItem TT)
+            {
+                LoadProperties(TT, flowLayoutPanel1);
+
+            }
+            if (item is DynamicDeckFolder AA)
             {
 
 
-
-
-
-                ModernButton myButton = new ModernButton();
-                ModernButton myColor = new ModernButton();
-                ModernButton myColorShadow = new ModernButton();
-                Label myTextNameInformation = new Label();
-                Label sizeLabelInfo = new Label();
-                Label positionLabelInfo = new Label();
-                Label StrokeLabelInfo = new Label();
-                Label StrokeLabelColor = new Label();
-                Label StrokeLabelDX = new Label();
-                Label StrokeLabelDY = new Label();
-                Label StrokeLabelRADIUS = new Label();
-                TextBox sizeLabelTextBox = new TextBox();
-                ComboBox PositionComboBox = new ComboBox();
-                TextBox myNameText = new TextBox();
-                TextBox myColorText = new TextBox();
-                CheckBox IsStrokeCheckbox = new CheckBox();
-                CheckBox IsHintText = new CheckBox();
-                CheckBox IsBoldText = new CheckBox();
-                CheckBox IsItalicText = new CheckBox();
-                CheckBox IsNormalText = new CheckBox();
-                TextBox shadow_stroke_radiustextfloat = new TextBox();
-                TextBox shadow_stroke_dxtextfloat = new TextBox();
-                TextBox shadow_stroke_dytextfloat = new TextBox();
-                TextBox shadow_stroke_color = new TextBox();
-                myColor.Size = new Size(70, 30);
-                IsHintText.Text = Texts.rm.GetString("DECKITEMHINTTEXT", Texts.cultereinfo);
-                IsBoldText.Text = Texts.rm.GetString("DECKITEMBOLDTEXT", Texts.cultereinfo);
-                IsItalicText.Text = Texts.rm.GetString("DECKITEMITALICTEXT", Texts.cultereinfo);
-                IsNormalText.Text = Texts.rm.GetString("DECKITEMNORMALTEXT", Texts.cultereinfo);
-                IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
-                myColor.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
-                myColorShadow.Size = new Size(70, 30);
-                myColorShadow.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
-                myTextNameInformation.Text = Texts.rm.GetString("DECKITEMTEXT", Texts.cultereinfo);
-                StrokeLabelInfo.Text = Texts.rm.GetString("DECKITEMSTROKE", Texts.cultereinfo);
-                StrokeLabelRADIUS.Text = Texts.rm.GetString("DECKITEMSTROKERADIUS", Texts.cultereinfo);
-                StrokeLabelDX.Text = Texts.rm.GetString("DECKITEMSTROKEDX", Texts.cultereinfo);
-                StrokeLabelDY.Text = Texts.rm.GetString("DECKITEMSTROKEDY", Texts.cultereinfo);
-                StrokeLabelColor.Text = Texts.rm.GetString("DECKITEMSTROKECOLOR", Texts.cultereinfo);
-                positionLabelInfo.Text = Texts.rm.GetString("DECKITEMPOSITION", Texts.cultereinfo);
-                sizeLabelInfo.Text = Texts.rm.GetString("DECKITEMSIZE", Texts.cultereinfo); 
-                FlowLayoutPanel painel_name = new FlowLayoutPanel();
-                FlowLayoutPanel painel_color = new FlowLayoutPanel();
-                FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
-                FlowLayoutPanel painel_position = new FlowLayoutPanel();
-                FlowLayoutPanel painel_shadowstroke= new FlowLayoutPanel();
-                myColor.Dock = DockStyle.None;
-                myColorText.Dock = DockStyle.None;
-                sizeLabelTextBox.Dock = DockStyle.None;
-                sizeLabelInfo.Dock = DockStyle.None;
-                positionLabelInfo.Dock = DockStyle.None;
-                StrokeLabelInfo.Dock = DockStyle.None;
-                PositionComboBox.Dock = DockStyle.None;
-                shadow_stroke_radiustextfloat.Dock = DockStyle.None;
-                shadow_stroke_dxtextfloat.Dock = DockStyle.None;
-                shadow_stroke_dytextfloat.Dock = DockStyle.None;
-                shadow_stroke_color.Dock = DockStyle.None;
-                myNameText.Text = dI.Deckname;
-                myColorText.Text = dI.Deckcolor;
-
-                IsStrokeCheckbox.Checked = dI.IsStroke;
-                shadow_stroke_color.Text = dI.Stroke_color;
-                shadow_stroke_dytextfloat.Text = dI.Stroke_Dy.ToString();
-                shadow_stroke_dxtextfloat.Text = dI.Stroke_dxtext.ToString();
-                shadow_stroke_radiustextfloat.Text = dI.Stroke_radius.ToString();
-                IsNormalText.Checked = dI.Isnormaltext;
-                IsHintText.Checked = dI.Ishinttext;
-                IsItalicText.Checked = dI.Isitalictext;
-                IsBoldText.Checked = dI.Isboldtext;
-
-     
-
-                sizeLabelTextBox.Text = dI.Decksize.ToString();
-                myColor.Click += (s, e) =>
-                {
-
-                    using (ColorPickerDialog dialog = new ColorPickerDialog())
-                    {
-                        dialog.PreviewColorChanged += this.DialogColorChangedHandler;
-
-                        if (dialog.ShowDialog(this) == DialogResult.OK)
-                        {
-                            //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
-                            string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
-                            myColorText.Text = result;
-                        }
-
-                        dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
-                    }
-
-                };
-
-                myColorShadow.Click += (s, e) =>
-                {
-
-                    using (ColorPickerDialog dialog = new ColorPickerDialog())
-                    {
-                        dialog.PreviewColorChanged += this.DialogColorChangedHandler;
-
-                        if (dialog.ShowDialog(this) == DialogResult.OK)
-                        {
-                            //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
-                            string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
-                            shadow_stroke_color.Text = result;
-                        }
-
-                        dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
-                    }
-
-                };
-
-
-
-                IsHintText.Click += (s, e) =>
-                {
-
-                    IsNormalText.Checked = false;
-  };
-                IsBoldText.Click += (s, e) =>
-
-                {
-
-                    IsNormalText.Checked = false;
-
-                };
-
-                IsItalicText.Click += (s, e) =>
-
-                {
-                    IsNormalText.Checked = false;
-
-                };
-
-            IsNormalText.Click += (s, e) =>
-                {
-                    if (IsNormalText.Checked)
-                    {
-                        IsHintText.Checked = false;
-                        IsBoldText.Checked = false;
-                        IsItalicText.Checked = false;
-                    }
-                
-                
-                };
-
-
-                painel_position.Size = new Size(190, 60);
-
-                painel_color.Size = new Size(190, 30);
-
-                painel_name.Size = new Size(190, 320);
-                painel_tamanho.Size = new Size(210, 60);
-                painel_shadowstroke.Size = new Size(190, 300);
-                painel_shadowstroke.WrapContents = true;
-      
-                painel_tamanho.WrapContents = true;
-                painel_name.WrapContents = true;
-                //painel 1
-                painel_color.WrapContents = true;
-                painel_position.WrapContents = true;
-                painel_position.Controls.Add(positionLabelInfo);
-
-                painel_position.Controls.Add(PositionComboBox);
-                painel_shadowstroke.Controls.Add(StrokeLabelInfo);
-                painel_shadowstroke.Controls.Add(IsStrokeCheckbox);
-                painel_shadowstroke.Controls.Add(StrokeLabelRADIUS);
-                painel_shadowstroke.Controls.Add(shadow_stroke_radiustextfloat);
-                painel_shadowstroke.Controls.Add(StrokeLabelDX);
-                painel_shadowstroke.Controls.Add(shadow_stroke_dxtextfloat);
-                painel_shadowstroke.Controls.Add(StrokeLabelDY);
-                painel_shadowstroke.Controls.Add(shadow_stroke_dytextfloat);
-                painel_shadowstroke.Controls.Add(StrokeLabelColor);
-                painel_shadowstroke.Controls.Add(shadow_stroke_color);
-                painel_shadowstroke.Controls.Add(myColorShadow);
-
-                painel_color.Controls.Add(myColor);
-                painel_color.Controls.Add(myColorText);
-
-                painel_name.Controls.Add(myTextNameInformation);
-                painel_name.Controls.Add(myNameText);
-                painel_name.Controls.Add(PositionComboBox);
-                painel_name.Controls.Add(painel_tamanho);
-           
-                painel_name.Controls.Add(painel_color);
-
-                painel_name.Controls.Add(IsHintText);
-                painel_name.Controls.Add(IsItalicText);
-                painel_name.Controls.Add(IsBoldText);
-                painel_name.Controls.Add(IsNormalText);
-                painel_tamanho.Controls.Add(sizeLabelInfo);
-                painel_tamanho.Controls.Add(sizeLabelTextBox);
-
-
-
-
-               
-                flowLayoutPanel1.Controls.Add(painel_name);
-              
-             
-             
-             
-                flowLayoutPanel1.Controls.Add(painel_shadowstroke);
-
-                flowLayoutPanel1.Controls.Add(myButton); 
-                myButton.Text =Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
-
-                
-
-
-
-
-                setEnumValues(PositionComboBox, typeof(Position));
-                myButton.Click += (s, e) =>
-                {
-                    dI.Deckname = myNameText.Text;
-                    dI.Deckcolor = myColorText.Text;
-                    dI.Decksize = Convert.ToInt32(sizeLabelTextBox.Text);
-                    dI.Stroke_radius = Convert.ToSingle(shadow_stroke_radiustextfloat.Text);
-                    dI.Stroke_Dy = Convert.ToSingle(shadow_stroke_dytextfloat.Text);
-                    dI.Stroke_dxtext = Convert.ToSingle(shadow_stroke_dxtextfloat.Text);
-                    dI.Stroke_color = shadow_stroke_color.Text;
-                    dI.Deckposition = (int)PositionComboBox.SelectedValue;
-                    dI.IsStroke = IsStrokeCheckbox.Checked;
-                    dI.Isboldtext = IsBoldText.Checked;
-                    dI.Ishinttext = IsHintText.Checked;
-                    dI.Isitalictext = IsItalicText.Checked;
-                    dI.Isnormaltext = IsNormalText.Checked;
-                  int slot =  CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(dI);
-                    RefreshButton(slot, true);
-
-
-
-
-                };
-
-
-                PositionComboBox.SelectedValue = dI.Deckposition;
-                if (dI is DynamicDeckItem TT)
-                {
-                 LoadProperties(TT, flowLayoutPanel1);
-
-                }
-                if (dI is DynamicDeckFolder AA)
-                {
-
-
-                    LoadPropertiesFolder(AA, flowLayoutPanel1);
-                }
-
+                LoadPropertiesFolder(AA, flowLayoutPanel1);
             }
+      
+        }
+        private void FocusItem(ImageModernButton mb, IDeckItem item)
+        {       
+            
+            flowLayoutPanel1.Controls.OfType<Control>().All(c =>
+            {
+                c.Dispose();
+                return true;
+            });
+
+            flowLayoutPanel1.Controls.Clear();
+
+      
+
+
+
+camada1.Click += (sender, e) => { 
+  FocusItemPropertiesOptions(item, false);
+ };
+            camada2.Click += (sender, e) => {
+                if(item.GetDeckLayerTwo == null)
+                {
+                    item.GetDeckLayerTwo = new DeckItemMisc();
+                }
+FocusItemPropertiesOptions(item, true);
+            };
+
+
+
+      camada1.PerformClick();
+
+
+
+
+
             imageModernButton1.Origin = mb;
             //Write_name_Image("testando", mb, 10f,10f,"Arial",10);
             imageModernButton1.Refresh();
             shadedPanel2.Show();
             shadedPanel1.Refresh();
+
+
         }
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -3142,7 +3191,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 //Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(item), true).FirstOrDefault() as Label;
                 if (item != null)
                 {
-                    var ser = item.GetItemImage().BitmapSerialized;
+                    var ser = item.GetDeckDefaultLayer.GetItemImage().BitmapSerialized;
                     //  control.NormalImage = null
 
 
@@ -3300,7 +3349,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                 // AddWatermark("RWER", ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
 
-                imageModernButton1.Image = ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
+                imageModernButton1.Image = ((IDeckItem)imageModernButton1.Origin.Tag).GetDeckDefaultLayer.GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
                 //   var teste = new MagickImage((Bitmap)imageModernButton1.Image);
                 //   image.Annotate("caption:This is gergerga test.", Gravity.South); // caption:"This is a test."
                 // write the image to the appropriate directory

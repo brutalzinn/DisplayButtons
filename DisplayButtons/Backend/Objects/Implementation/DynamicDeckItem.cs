@@ -18,11 +18,15 @@ namespace DisplayButtons.Backend.Objects.Implementation
         public DeckImage DeckImage { get; set; }
     
         public AbstractDeckAction DeckAction { get; set; }
-        public AbstractDeckInformation DeckInformation { get; set; }
-        public override DeckImage GetItemImage()
+
+       public override DeckImage GetItemImage()
         {
-            return DeckImage;
-        }
-      
+           return DeckImage;
+       }
+
+
+       
+
+
     }
 }

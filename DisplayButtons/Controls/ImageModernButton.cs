@@ -64,6 +64,7 @@ namespace DisplayButtons.Controls
             
 
         }
+        public int camada { get; set; } = 1;
         public TextLabel TextButton
         {
             get => Origin?.TextButton ?? _textlabel;
@@ -138,7 +139,17 @@ namespace DisplayButtons.Controls
                         var deckImage = new DeckImage(bmp);
                         
                         if (Tag is DynamicDeckItem itemTag) {
-                            itemTag.DeckImage = deckImage;
+                          
+                            if(camada == 1)
+                            {
+
+ itemTag.GetDeckDefaultLayer.DeckImage = deckImage;
+                            }
+                            else if(camada == 2)
+                            {
+                                itemTag.GetDeckLayerTwo.DeckImage = deckImage;
+                            }
+                           
 
                         } else if (Tag is DynamicDeckFolder itemFolder) {
                             itemFolder.DeckImage = deckImage;

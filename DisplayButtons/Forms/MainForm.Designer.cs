@@ -34,6 +34,9 @@ namespace DisplayButtons.Forms
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.shadedPanel1 = new DisplayButtons.Forms.ShadedPanel();
             this.shadedPanel2 = new DisplayButtons.Forms.ShadedPanel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.camada2 = new System.Windows.Forms.RadioButton();
+            this.camada1 = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.action_label = new System.Windows.Forms.Label();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
@@ -58,6 +61,7 @@ namespace DisplayButtons.Forms
             this.deckoptions_button = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.painel_developer.SuspendLayout();
             this.panel_buttons.SuspendLayout();
             this.statusStrip2.SuspendLayout();
@@ -91,6 +95,7 @@ namespace DisplayButtons.Forms
             // shadedPanel2
             // 
             this.shadedPanel2.ColorScheme = null;
+            this.shadedPanel2.Controls.Add(this.groupBox1);
             this.shadedPanel2.Controls.Add(this.flowLayoutPanel1);
             this.shadedPanel2.Controls.Add(this.action_label);
             this.shadedPanel2.Controls.Add(this.imageModernButton1);
@@ -100,6 +105,37 @@ namespace DisplayButtons.Forms
             this.shadedPanel2.Size = new System.Drawing.Size(302, 262);
             this.shadedPanel2.TabIndex = 0;
             this.shadedPanel2.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.camada2);
+            this.groupBox1.Controls.Add(this.camada1);
+            this.groupBox1.Location = new System.Drawing.Point(101, 47);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(131, 47);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // camada2
+            // 
+            this.camada2.AutoSize = true;
+            this.camada2.Location = new System.Drawing.Point(27, 22);
+            this.camada2.Name = "camada2";
+            this.camada2.Size = new System.Drawing.Size(14, 13);
+            this.camada2.TabIndex = 1;
+            this.camada2.UseVisualStyleBackColor = true;
+            // 
+            // camada1
+            // 
+            this.camada1.AutoSize = true;
+            this.camada1.Checked = true;
+            this.camada1.Location = new System.Drawing.Point(6, 22);
+            this.camada1.Name = "camada1";
+            this.camada1.Size = new System.Drawing.Size(14, 13);
+            this.camada1.TabIndex = 0;
+            this.camada1.TabStop = true;
+            this.camada1.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -114,7 +150,7 @@ namespace DisplayButtons.Forms
             // action_label
             // 
             this.action_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.action_label.Location = new System.Drawing.Point(102, 13);
+            this.action_label.Location = new System.Drawing.Point(101, 13);
             this.action_label.Name = "action_label";
             this.action_label.Size = new System.Drawing.Size(142, 36);
             this.action_label.TabIndex = 3;
@@ -122,6 +158,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton1
             // 
+            this.imageModernButton1.camada = 0;
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
             this.imageModernButton1.Location = new System.Drawing.Point(15, 13);
@@ -156,6 +193,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton4
             // 
+            this.imageModernButton4.camada = 0;
             this.imageModernButton4.CustomColorScheme = false;
             this.imageModernButton4.Image = null;
             this.imageModernButton4.Location = new System.Drawing.Point(139, 7);
@@ -171,6 +209,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton2
             // 
+            this.imageModernButton2.camada = 0;
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
             this.imageModernButton2.Location = new System.Drawing.Point(14, 8);
@@ -241,6 +280,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton6
             // 
+            this.imageModernButton6.camada = 0;
             this.imageModernButton6.CustomColorScheme = false;
             this.imageModernButton6.Image = null;
             this.imageModernButton6.Location = new System.Drawing.Point(250, 93);
@@ -265,6 +305,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton7
             // 
+            this.imageModernButton7.camada = 0;
             this.imageModernButton7.CustomColorScheme = false;
             this.imageModernButton7.Image = null;
             this.imageModernButton7.Location = new System.Drawing.Point(153, 99);
@@ -280,6 +321,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton8
             // 
+            this.imageModernButton8.camada = 0;
             this.imageModernButton8.CustomColorScheme = false;
             this.imageModernButton8.Image = null;
             this.imageModernButton8.Location = new System.Drawing.Point(186, 99);
@@ -324,6 +366,7 @@ namespace DisplayButtons.Forms
             // 
             // deckoptions_button
             // 
+            this.deckoptions_button.camada = 0;
             this.deckoptions_button.CustomColorScheme = false;
             this.deckoptions_button.Image = null;
             this.deckoptions_button.Location = new System.Drawing.Point(390, 93);
@@ -370,6 +413,8 @@ namespace DisplayButtons.Forms
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.shadedPanel1.ResumeLayout(false);
             this.shadedPanel2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.painel_developer.ResumeLayout(false);
             this.panel_buttons.ResumeLayout(false);
             this.panel_buttons.PerformLayout();
@@ -408,6 +453,9 @@ namespace DisplayButtons.Forms
         private Label perfil_info;
         public ComboBox perfilselector;
         private ImageModernButton deckoptions_button;
+        private RadioButton camada2;
+        private RadioButton camada1;
+        public GroupBox groupBox1;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

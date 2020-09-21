@@ -59,31 +59,31 @@ namespace DisplayButtons.Backend.Networking.Implementation
         {
 
             //Write the slot
-            if (item.SetDefault != null)
+            if (item.GetDeckDefaultLayer.SetDefault != null)
             {
                 Json headerContent = new Json();
 
      
                 writer.WriteInt(slot);
                 //Byte array lenght
-                writer.WriteInt(item.SetDefault.InternalBitmap.Length);
-                writer.Write(item.SetDefault.InternalBitmap);
+                writer.WriteInt(item.GetDeckDefaultLayer.SetDefault.InternalBitmap.Length);
+                writer.Write(item.GetDeckDefaultLayer.SetDefault.InternalBitmap);
 
                 headerContent.Font = " ";
-                headerContent.Size = item.Decksize;
-                headerContent.Position = item.Deckposition;
-                headerContent.Text = item.Deckname;
-                headerContent.Color = item.Deckcolor;
+                headerContent.Size = item.GetDeckDefaultLayer.Decksize;
+                headerContent.Position = item.GetDeckDefaultLayer.Deckposition;
+                headerContent.Text = item.GetDeckDefaultLayer.Deckname;
+                headerContent.Color = item.GetDeckDefaultLayer.Deckcolor;
 
-                headerContent.Stroke_color = item.Stroke_color;
-                headerContent.Stroke_dx = item.Stroke_dxtext;
-                headerContent.Stroke_radius = item.Stroke_radius;
-                headerContent.Stroke_dy = item.Stroke_Dy;
-                headerContent.IsStroke = item.IsStroke;
-                headerContent.Isboldtext = item.Isboldtext;
-                headerContent.Isnormaltext = item.Isnormaltext;
-                headerContent.Isitalictext = item.Isitalictext;
-                headerContent.Ishinttext = item.Ishinttext;
+                headerContent.Stroke_color = item.GetDeckDefaultLayer.Stroke_color;
+                headerContent.Stroke_dx = item.GetDeckDefaultLayer.Stroke_dxtext;
+                headerContent.Stroke_radius = item.GetDeckDefaultLayer.Stroke_radius;
+                headerContent.Stroke_dy = item.GetDeckDefaultLayer.Stroke_Dy;
+                headerContent.IsStroke = item.GetDeckDefaultLayer.IsStroke;
+                headerContent.Isboldtext = item.GetDeckDefaultLayer.Isboldtext;
+                headerContent.Isnormaltext = item.GetDeckDefaultLayer.Isnormaltext;
+                headerContent.Isitalictext = item.GetDeckDefaultLayer.Isitalictext;
+                headerContent.Ishinttext = item.GetDeckDefaultLayer.Ishinttext;
                 string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.None);
 
                 writer.WriteUTF(jsonString);
