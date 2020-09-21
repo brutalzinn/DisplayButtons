@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
@@ -36,8 +37,9 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
             return new MediaKeyAction();
         }
-        public override bool IsLayered()
+        public override bool IsLayered(int CurretItem)
         {
+            Debug.WriteLine("CURRET ITEM IS" + CurretItem);
             return true;
         }
 
@@ -54,6 +56,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         [Obsolete]
         public override bool OnButtonClick(DeckDevice deckDevice)
         {
+            
             return false;
         }
 

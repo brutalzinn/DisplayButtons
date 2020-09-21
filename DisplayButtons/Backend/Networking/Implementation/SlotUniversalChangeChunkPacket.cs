@@ -22,7 +22,7 @@ namespace DisplayButtons.Backend.Networking.Implementation
 
 
         IDictionary<int, DeckItemMisc> toSend = new Dictionary<int, DeckItemMisc>();
-        public void AddToQueue(int slot, IDeckItem item)
+        public void AddToQueue(int slot, DeckItemMisc item)
         {
 
        

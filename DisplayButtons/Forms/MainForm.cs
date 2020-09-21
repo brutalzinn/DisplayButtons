@@ -638,7 +638,7 @@ namespace DisplayButtons.Forms
                                             DeckAction = action.DeckAction.CloneAction()
                                         };
                                         var id2 = deckFolder.Add(deckItemToAdd);
-                                       
+
                                         deckItemToAdd.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
                                         CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
@@ -654,7 +654,7 @@ namespace DisplayButtons.Forms
                                     var folder = new DynamicDeckFolder();
 
                                     folder.GetDeckDefaultLayer.DeckImage = new DeckImage(Resources.img_folder);
-                                   
+
                                     //Create a new folder instance
                                     CurrentDevice.CheckCurrentFolder();
                                     folder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
@@ -665,7 +665,7 @@ namespace DisplayButtons.Forms
 
                                     newItem.DeckAction = action.DeckAction.CloneAction();
                                     newItem.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
-                                    
+
 
                                     var id = folder.Add(newItem);
 
@@ -676,6 +676,10 @@ namespace DisplayButtons.Forms
                                     mb.Tag = folder;
                                     mb.Image = Resources.img_folder;
                                     CurrentDevice.CurrentProfile.Currentfolder = folder;
+                                    if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
+                                    {
+                                        mycustomitem.DeckAction.IsLayered(mb.CurrentSlot);
+                                    }
                                     RefreshAllButtons();
                                 }
                                 else
@@ -686,11 +690,15 @@ namespace DisplayButtons.Forms
                                     };
                                     mb.Image = ((DynamicDeckItem)mb.Tag).DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default;
 
-                                FocusItem(mb, mb.Tag as IDeckItem);
+                                    FocusItem(mb, mb.Tag as IDeckItem);
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is PluginLuaGenerator YY)
                                     {
                                         LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName);
                                         YY.SetConfigs(action.ToScript);
+                                    }
+                                    if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
+                                    {
+                                        mycustomitem.DeckAction.IsLayered(mb.CurrentSlot);
                                     }
                                 }
                             }
@@ -710,7 +718,11 @@ namespace DisplayButtons.Forms
                                     if (isEmpty)
                                     {
                                         action1.OldFolder.GetParent().Remove(slot);
-                                        RefreshButton(slot);
+                                            if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
+                                            {
+                                                mycustomitem.DeckAction.IsLayered(-1);
+                                            }
+                                            RefreshButton(slot);
                                    //     ClearSingleItemToDevice(CurrentDevice,slot);
                                     }
                                 }
@@ -1531,7 +1543,7 @@ namespace DisplayButtons.Forms
 
                     item.GetDeckDefaultLayer.SetDefault = image;
 
-                    packet.AddToQueue(folder.GetItemIndex(item), item);
+                    packet.AddToQueue(folder.GetItemIndex(item), item.GetDeckDefaultLayer);
 
                 }
 

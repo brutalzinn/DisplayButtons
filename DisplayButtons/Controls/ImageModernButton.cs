@@ -210,7 +210,7 @@ namespace DisplayButtons.Controls
                                 state.SendPacket(new SingleUniversalChangePacket(deckImage)
                                 {
                                     ImageSlot = slot,
-                                    CurrentItem = itemNew
+                                    CurrentItem = itemNew.GetDeckDefaultLayer
 
                                 }); 
                             }
