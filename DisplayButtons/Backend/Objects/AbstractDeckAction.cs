@@ -104,7 +104,7 @@ namespace DisplayButtons.Backend.Objects
         {
             return null;
         }
-        public virtual bool IsLayered(int current = 0)
+        public virtual bool IsLayered(int current = -1)
         {
             return false;
         }

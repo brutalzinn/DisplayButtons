@@ -39,7 +39,11 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
         public override bool IsLayered(int CurretItem)
         {
-            Debug.WriteLine("CURRET ITEM IS" + CurretItem);
+            if(CurretItem != -1)
+            {
+Debug.WriteLine("CURRET ITEM IS" + CurretItem);
+            }
+            
             return true;
         }
 

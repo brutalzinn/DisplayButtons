@@ -718,10 +718,7 @@ namespace DisplayButtons.Forms
                                     if (isEmpty)
                                     {
                                         action1.OldFolder.GetParent().Remove(slot);
-                                            if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
-                                            {
-                                                mycustomitem.DeckAction.IsLayered(-1);
-                                            }
+                                           
                                             RefreshButton(slot);
                                    //     ClearSingleItemToDevice(CurrentDevice,slot);
                                     }
@@ -793,6 +790,11 @@ namespace DisplayButtons.Forms
                                 RefreshButton(action1.OldSlot, true);
                               //  ClearSingleItemToDevice(CurrentDevice, action1.OldSlot);
                                 RefreshButton(mb.CurrentSlot, true);
+
+                                if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
+                                {
+                                    mycustomitem.DeckAction.IsLayered(mb.CurrentSlot);
+                                }
                             }
 
                         }
@@ -2547,13 +2549,13 @@ ActionImagePlaceHolder.Image = bmp;
             {
                  dI = item.GetDeckDefaultLayer;
                 ActionImagePlaceHolder.TextButton = new TextLabel(dI);
-                ActionImagePlaceHolder.Image = item.GetDeckDefaultLayer.DeckImage.Bitmap;
+                ActionImagePlaceHolder.Image = item.GetDeckDefaultLayer?.DeckImage?.Bitmap;
             }
             else
             {
                  dI = item.GetDeckLayerTwo;
                 ActionImagePlaceHolder.TextButton = new TextLabel(dI);
-                ActionImagePlaceHolder.ImageLayerTwo = item.GetDeckLayerTwo.DeckImage.Bitmap;
+                ActionImagePlaceHolder.ImageLayerTwo = item.GetDeckLayerTwo?.DeckImage?.Bitmap;
 
             }
 
