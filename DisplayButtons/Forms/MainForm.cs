@@ -2159,10 +2159,25 @@ namespace DisplayButtons.Forms
 
         }
 
-        
 
 
 
+        public int LayerSelected()
+        {
+            var checkedRadioButton = groupBox1.Controls
+                          .OfType<RadioButton>()
+                          .FirstOrDefault(r => r.Checked);
+            switch (checkedRadioButton.Name)
+            {
+                case "camada1":
+                    return 1;
+
+                case "camada2":
+                    return 2;
+                default:
+                    return 0;
+            }
+        }
 
         private void ImageModernButton1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -2196,25 +2211,22 @@ namespace DisplayButtons.Forms
                         return;
                     }
 
-                    var checkedRadioButton = MainForm.Instance.groupBox1.Controls
-                           .OfType<RadioButton>()
-                           .FirstOrDefault(r => r.Checked);
-                    if (checkedRadioButton != null)
+
+                  if(LayerSelected() == 1)
                     {
-                        switch (checkedRadioButton.Name)
-                        {
-                            case "camada1":
 
-                                imageModernButton1.camada = 1; 
-                              
-                                break;
-                            case "camada2":
-                                imageModernButton1.camada = 2;
-                                break;
-
-                        }
+ActionImagePlaceHolder.Image = bmp;
                     }
-                     imageModernButton1.Image = bmp;
+                    else if (LayerSelected() == 2)
+                    {
+                        
+                        ActionImagePlaceHolder.ImageLayerTwo = bmp;
+                    }
+                      
+                            
+                   
+
+                    
                 }
                 catch (Exception)
                 {
@@ -2412,7 +2424,7 @@ namespace DisplayButtons.Forms
                     }
 
 
-                    imageModernButton1.Image = bmp;
+                    ActionImagePlaceHolder.Image = bmp;
                 }
                 catch (Exception)
                 {
@@ -2527,7 +2539,7 @@ namespace DisplayButtons.Forms
             {
                  dI = item.GetDeckLayerTwo;
             }
-
+           
             ModernButton myButton = new ModernButton();
             ModernButton myColor = new ModernButton();
             ModernButton myColorShadow = new ModernButton();
@@ -2779,8 +2791,8 @@ namespace DisplayButtons.Forms
       
         }
         private void FocusItem(ImageModernButton mb, IDeckItem item)
-        {       
-            
+        {
+
             flowLayoutPanel1.Controls.OfType<Control>().All(c =>
             {
                 c.Dispose();
@@ -2789,32 +2801,47 @@ namespace DisplayButtons.Forms
 
             flowLayoutPanel1.Controls.Clear();
 
-      
 
 
 
-camada1.Click += (sender, e) => { 
-  FocusItemPropertiesOptions(item, false);
- };
-            camada2.Click += (sender, e) => {
-                if(item.GetDeckLayerTwo == null)
+ if (item is DynamicDeckItem TT)
                 {
-                    item.GetDeckLayerTwo = new DeckItemMisc();
+            camada1.Click += (sender, e) => { 
+    ActionImagePlaceHolder.Origin = mb;
+  FocusItemPropertiesOptions(item, false);
+    ActionImagePlaceHolder.Refresh();
+};
+                if (TT.DeckAction.IsLayered())
+                    {
+                    camada2.Visible = true;
+            camada2.Click += (sender, e) => {
+               
+                    
+                        if (item.GetDeckLayerTwo == null)
+                        {
+                            item.GetDeckLayerTwo = new DeckItemMisc();
+                        }
+                        ActionImagePlaceHolder.Origin = mb;
+                        FocusItemPropertiesOptions(item, true);
+                        ActionImagePlaceHolder.Refresh();
+                    
+               
+            }; 
                 }
-FocusItemPropertiesOptions(item, true);
-            };
-
-
-
-      camada1.PerformClick();
-
+                camada1.PerformClick();
+                camada1.PerformClick();
+            }
 
 
 
 
-            imageModernButton1.Origin = mb;
+
+
+
+
+          
             //Write_name_Image("testando", mb, 10f,10f,"Arial",10);
-            imageModernButton1.Refresh();
+       
             shadedPanel2.Show();
             shadedPanel1.Refresh();
 
@@ -3348,15 +3375,23 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 // item = folder.GetDeckItems()[i];
 
                 // AddWatermark("RWER", ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+                if(LayerSelected() == 1){
 
-                imageModernButton1.Image = ((IDeckItem)imageModernButton1.Origin.Tag).GetDeckDefaultLayer.GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
+                ActionImagePlaceHolder.Image = ((IDeckItem)ActionImagePlaceHolder.Origin.Tag).GetDeckDefaultLayer.GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
+
+                }else if (LayerSelected() == 2)
+                {
+                    ActionImagePlaceHolder.Image = ((IDeckItem)ActionImagePlaceHolder.Origin.Tag).GetDeckLayerTwo.DeckImage?.Bitmap ?? Resources.img_item_default;
+
+
+                }
                 //   var teste = new MagickImage((Bitmap)imageModernButton1.Image);
                 //   image.Annotate("caption:This is gergerga test.", Gravity.South); // caption:"This is a test."
                 // write the image to the appropriate directory
                 // image.Write(@"D:\testimage.jpg");
                 // SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentProfile.Currentfolder,teste);
 
-                imageModernButton1.Refresh();
+                ActionImagePlaceHolder.Refresh();
             }
         }
         public void UpdatePluginImg()
@@ -3823,7 +3858,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void imageModernButton8_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(String.Format(imageModernButton1.Text = Texts.rm.GetString("MESSAGEBOXPERFIL", Texts.cultereinfo), CurrentPerfil.Value.Name), Texts.rm.GetString("MESSAGEBOXPERFIL_ALERT", Texts.cultereinfo), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(String.Format(ActionImagePlaceHolder.Text = Texts.rm.GetString("MESSAGEBOXPERFIL", Texts.cultereinfo), CurrentPerfil.Value.Name), Texts.rm.GetString("MESSAGEBOXPERFIL_ALERT", Texts.cultereinfo), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ProfileStaticHelper.RemovePerfil(CurrentPerfil.Value);
             }

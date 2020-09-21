@@ -36,6 +36,10 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
             return new MediaKeyAction();
         }
+        public override bool IsLayered()
+        {
+            return true;
+        }
 
         public override DeckActionCategory GetActionCategory()
         {

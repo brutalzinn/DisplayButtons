@@ -104,6 +104,14 @@ namespace DisplayButtons.Backend.Objects
         {
             return null;
         }
+        public virtual bool IsLayered()
+        {
+            return false;
+        }
+        public virtual DeckImage GetLayerTwo()
+        {
+            return null;
+        }
 
     }
 

@@ -87,7 +87,8 @@ namespace DisplayButtons.Controls
         }
 
         private Image _image;
-      
+        private Image _imageTwo;
+
         public Image NormalImage {
             get => Origin?._image ?? _image; set {
                 if (Origin != null) {
@@ -99,7 +100,61 @@ namespace DisplayButtons.Controls
                     Invoke(new Action(Refresh));
             }
         }
+        public new Image ImageLayerTwo 
+        {
+            get => Origin?.ImageLayerTwo ?? _imageTwo;
+            set
+            {
+                if (Origin != null)
+                {
+                    Origin.ImageLayerTwo = value;
+                    return;
+                }
+                _imageTwo = value;
+                Refresh();
 
+                if (Parent != null && Parent.Parent != null && Parent.Parent is MainForm frm)
+                {
+                    if (frm.CurrentDevice != null)
+                    {
+                        int slot = int.Parse(ExtractNumber(Name));
+                       
+                       
+
+                        Bitmap bmp = new Bitmap(value);
+                        var deckImage = new DeckImage(bmp);
+
+                        if (Tag is DynamicDeckItem itemTag)
+                        {
+
+                            if (itemTag.DeckAction.IsLayered())
+                            {
+                                if (itemTag.GetDeckLayerTwo != null)
+                                {
+                                    itemTag.GetDeckLayerTwo.DeckImage = deckImage;
+                                }
+
+
+                            }
+
+                        }
+
+                        else if (Tag is DynamicDeckFolder itemFolder)
+                        {
+                            itemFolder.DeckImage = deckImage;
+                        }
+                    
+                        if (Tag is DynamicDeckItem item)
+                        {
+                            var device = frm.CurrentDevice;
+                            device.CheckCurrentFolder();
+                            device.CurrentProfile.Currentfolder.Add(slot, item);
+                        }
+                       
+                    }
+                }
+            }
+        }
         public new Image Image {
             get => Origin?.Image ?? _image;
             set {
@@ -139,19 +194,13 @@ namespace DisplayButtons.Controls
                         var deckImage = new DeckImage(bmp);
                         
                         if (Tag is DynamicDeckItem itemTag) {
-                          
-                            if(camada == 1)
-                            {
 
  itemTag.GetDeckDefaultLayer.DeckImage = deckImage;
+                         
+                          
                             }
-                            else if(camada == 2)
-                            {
-                                itemTag.GetDeckLayerTwo.DeckImage = deckImage;
-                            }
-                           
 
-                        } else if (Tag is DynamicDeckFolder itemFolder) {
+                        else if (Tag is DynamicDeckFolder itemFolder) {
                             itemFolder.DeckImage = deckImage;
                         }
                         if (Tag is IDeckItem itemNew)
@@ -181,7 +230,7 @@ namespace DisplayButtons.Controls
             base.OnPaint(pevent);
 
 
-
+            
 
 
             if (Image != null)
@@ -210,6 +259,11 @@ namespace DisplayButtons.Controls
                     pevent.Graphics.DrawImage(Image, DisplayRectangle);
 
                 }
+
+
+            }else if (ImageLayerTwo != null)
+            {
+                pevent.Graphics.DrawImage(ImageLayerTwo, DisplayRectangle);
 
 
             }
