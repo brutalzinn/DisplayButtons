@@ -104,7 +104,20 @@ namespace DisplayButtons.Controls
 
         private Image _image;
         private Image _imagetwo;
-
+        public Image NormalLayerTwo
+        {
+            get => Origin?._imagetwo ?? _imagetwo; set
+            {
+                if (Origin != null)
+                {
+                    Origin._imagetwo = value;
+                    return;
+                }
+                _imagetwo = value;
+                if (IsHandleCreated)
+                    Invoke(new Action(Refresh));
+            }
+        }
         public Image NormalImage {
             get => Origin?._image ?? _image; set {
                 if (Origin != null) {

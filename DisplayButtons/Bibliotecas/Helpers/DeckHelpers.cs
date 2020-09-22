@@ -60,58 +60,37 @@ namespace DisplayButtons.Bibliotecas.Helpers
 
 
             return item;
-        }    
-            public static void RefreshButton(int slot, DeckDevice CurrentDevice,DeckItemMisc deckmisc, bool sendToDevice = true)
+        }
+        public static void RefreshButton(IDeckItem item,int camada,  DeckItemMisc itemmisc)
         {
             // Buttons_Unfocus(this, EventArgs.Empty);
-
-            IDeckFolder folder = MainForm.Instance.CurrentDevice?.CurrentProfile.Currentfolder;
-            ImageModernButton control1 = MainForm.Instance.GetButtonControl(slot);
-            //Label control_label = GetLabelControl(slot);
-            // Label title_control = Controls.Find("titleLabel" + slot, true).FirstOrDefault() as Label;
-
-            control1.NormalImage = null;
-            control1.Tag = null;
-            control1.Text = "";
-            control1.ClearText();
-            ClearSingleItemToDevice(CurrentDevice, slot);
-
-            if (folder == null) control1.Invoke(new Action(control1.Refresh));
-
-            if (folder == null) return;
-            for (int i = 0; i < folder.GetDeckItems().Count; i++)
+            MainForm.Instance.Invoke(new Action(() =>
             {
-                IDeckItem item = null;
-                item = folder.GetDeckItems()[i];
+                IDeckFolder folder = MainForm.Instance.CurrentDevice?.CurrentProfile.Currentfolder;
+            ImageModernButton control = MainForm.Instance.Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
 
-                if (folder.GetItemIndex(item) != slot) continue;
-                ImageModernButton control = MainForm.Instance.Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
-
-
-
-                if (item != null)
-                {
-
-
-                    control.NormalImage = deckmisc?.GetItemImage()?.Bitmap;
-               
-                    control.TextButton = new TextLabel(deckmisc);
-                    control.Tag = item;
-                    control.Invoke(new Action(control.Refresh));
-                    CurrentDevice.CheckCurrentFolder();
-                    if (sendToDevice)
-                    {
-                        SendSingleItemToDevice(CurrentDevice, slot, deckmisc);
-
-                    }
-
-
-                }
+            if (camada == 1)
+            {
+                control.Camada = 1;
+                control.NormalImage = itemmisc?.GetItemImage()?.Bitmap;
+            }else if(camada == 2)
+            {
+                control.Camada = 2;
+                control.NormalLayerTwo = itemmisc?.GetItemImage()?.Bitmap;
 
             }
+            control.TextButton = new TextLabel(itemmisc);
+            control.Tag = item;
+     
+          control.Invoke(new Action(control.Refresh));
+            MainForm.Instance.CurrentDevice.CheckCurrentFolder();
 
-            // 
+            SendSingleItemToDevice(MainForm.Instance.CurrentDevice, folder.GetItemIndex(item), itemmisc);
+            }));
+
+
         }
+
 
 
         public class DeckEvent : Sharpy.IEvent

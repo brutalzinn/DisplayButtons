@@ -3374,7 +3374,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
 
         }
-        private void UpdateLayerView()
+        public void UpdateLayerView()
         {
             
             // AddWatermark("RWER", ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);

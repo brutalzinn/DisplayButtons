@@ -8,6 +8,7 @@ using DisplayButtons.Bibliotecas.Helpers;
 using System.Threading.Tasks;
 using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
+using System.Diagnostics;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
@@ -74,6 +75,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             if (_current != -1)
             {
                 CurrentItem = _current;
+                Debug.WriteLine("CURRENT ITEM ID IS " + CurrentItem);
             }
 
             return true;
@@ -141,9 +143,9 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
         public void setVariable(bool variable,DeckDevice device)
         {
-            DeckHelpers.getDeckItem(CurrentItem).GetDeckLayerTwo.Deckname = "CHEGUEII MEU BEM";
-            DeckHelpers.RefreshButton(CurrentItem, device, DeckHelpers.getDeckItem(CurrentItem).GetDeckLayerTwo, true);
-
+           var item =  DeckHelpers.getDeckItem(CurrentItem);
+           // DeckHelpers.SendSingleItemToDevice(device,CurrentItem,item);
+            DeckHelpers.RefreshButton(item, 2, item.GetDeckLayerTwo);
 
         }
         private Bitmap GetKey(MediaInputDevice key)
