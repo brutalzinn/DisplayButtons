@@ -27,6 +27,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
 
         int sensitivevolume = 10;
+        int CurrentItem = 1;
         [ActionPropertyInclude]
         [ActionPropertyDescription("Device Id")]
         [ActionPropertyUpdateImageOnChanged]
@@ -68,7 +69,15 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
             return Texts.rm.GetString("HELPERSDECKINPUTDEVICE", Texts.cultereinfo);
         }
+        public override bool IsLayered(int _current)
+        {
+            if (_current != -1)
+            {
+                CurrentItem = _current;
+            }
 
+            return true;
+        }
         [Obsolete]
         public override bool OnButtonClick(DeckDevice deckDevice)
         {
@@ -93,6 +102,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                     if(device != null)
                     {
                     Task.FromResult( device.ToggleMuteAsync());
+                        setVariable(device.IsMuted ,deckDevice);
                     }
                     break;
                 case MediaInputDevice.Default:
@@ -129,7 +139,13 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 return new DeckImage(img);
             return base.GetDefaultItemImage();
         }
+        public void setVariable(bool variable,DeckDevice device)
+        {
+            DeckHelpers.getDeckItem(CurrentItem).GetDeckLayerTwo.Deckname = "CHEGUEII MEU BEM";
+            DeckHelpers.RefreshButton(CurrentItem, device, DeckHelpers.getDeckItem(CurrentItem).GetDeckLayerTwo, true);
 
+
+        }
         private Bitmap GetKey(MediaInputDevice key)
         {
             switch (key) {

@@ -44,7 +44,24 @@ namespace DisplayButtons.Bibliotecas.Helpers
             }
 
         }
-        public static void RefreshButton(int slot, DeckDevice CurrentDevice,DeckItemMisc deckmisc, bool sendToDevice = true)
+
+        public static IDeckItem getDeckItem(int slot)
+        {
+
+            IDeckFolder folder = MainForm.Instance.CurrentDevice?.CurrentProfile.Currentfolder;
+            ImageModernButton control1 = MainForm.Instance.GetButtonControl(slot);
+            if (folder == null) return null;
+            IDeckItem item = null;
+            for (int i = 0; i < folder.GetDeckItems().Count; i++)
+            {
+                item = folder.GetDeckItems()[i];
+                if (folder.GetItemIndex(item) != slot) continue;
+            }
+
+
+            return item;
+        }    
+            public static void RefreshButton(int slot, DeckDevice CurrentDevice,DeckItemMisc deckmisc, bool sendToDevice = true)
         {
             // Buttons_Unfocus(this, EventArgs.Empty);
 

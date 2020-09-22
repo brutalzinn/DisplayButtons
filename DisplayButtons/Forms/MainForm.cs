@@ -791,11 +791,13 @@ namespace DisplayButtons.Forms
                                 RefreshButton(action1.OldSlot, true);
                               //  ClearSingleItemToDevice(CurrentDevice, action1.OldSlot);
                                 RefreshButton(mb.CurrentSlot, true);
-
+                                
                                 if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
                                 {
                                     mycustomitem.DeckAction.IsLayered(mb.CurrentSlot);
-                                }
+                                    FocusItem(mb, mycustomitem);
+                                } 
+                               
                             }
 
                         }
@@ -2203,12 +2205,12 @@ namespace DisplayButtons.Forms
 
                   if(LayerSelected() == 1)
                     {
-                        ActionImagePlaceHolder.camada = 1;
+                        ActionImagePlaceHolder.Camada = 1;
 ActionImagePlaceHolder.Image = bmp;
                     }
                     else if (LayerSelected() == 2)
                     {
-                        ActionImagePlaceHolder.camada = 2;
+                        ActionImagePlaceHolder.Camada = 2;
                         ActionImagePlaceHolder.ImageLayerTwo = bmp;
                     }
                       
@@ -2509,30 +2511,13 @@ ActionImagePlaceHolder.Image = bmp;
 
            
         }
-        private void FocusItemPropertiesOptions(IDeckItem item,bool layer)
+        private void FocusItemPropertiesOptions(DeckItemMisc dI,IDeckItem item)
         {
 
-            flowLayoutPanel1.Controls.OfType<Control>().All(c =>
-            {
-                c.Dispose();
-                return true;
-            });
+
+            
 
             flowLayoutPanel1.Controls.Clear();
-            DeckItemMisc dI = null;
-            if (!layer)
-            {
-                 dI = item.GetDeckDefaultLayer;
-                ActionImagePlaceHolder.TextButton = new TextLabel(dI);
-                ActionImagePlaceHolder.Image = item.GetDeckDefaultLayer?.DeckImage?.Bitmap;
-            }
-            else
-            {
-                 dI = item.GetDeckLayerTwo;
-                ActionImagePlaceHolder.TextButton = new TextLabel(dI);
-                ActionImagePlaceHolder.ImageLayerTwo = item.GetDeckLayerTwo?.DeckImage?.Bitmap;
-
-            }
 
             ModernButton myButton = new ModernButton();
             ModernButton myColor = new ModernButton();
@@ -2771,6 +2756,7 @@ ActionImagePlaceHolder.Image = bmp;
 
 
             PositionComboBox.SelectedValue = dI.Deckposition;
+
             if (item is DynamicDeckItem TT)
             {
                 LoadProperties(TT, flowLayoutPanel1);
@@ -2782,62 +2768,62 @@ ActionImagePlaceHolder.Image = bmp;
 
                 LoadPropertiesFolder(AA, flowLayoutPanel1);
             }
-      
+
+
         }
         private void FocusItem(ImageModernButton mb, IDeckItem item)
         {
+       
+           
+            ActionImagePlaceHolder.Origin = mb;
+            camada1.Checked = true;
 
-            flowLayoutPanel1.Controls.OfType<Control>().All(c =>
+            camada1.Click += (sender, e) => {
+
+ if (item ==null)
             {
-                c.Dispose();
-                return true;
-            });
+                return;
+            }
+                ActionImagePlaceHolder.Camada = 1;
+                ActionImagePlaceHolder.TextButton = new TextLabel(item.GetDeckDefaultLayer);
+       
+        FocusItemPropertiesOptions(item.GetDeckDefaultLayer, item);
+                ActionImagePlaceHolder.Refresh();
+            };
+                
 
-            flowLayoutPanel1.Controls.Clear();
-
-
-
-
- if (item is DynamicDeckItem TT)
+            if (item is DynamicDeckItem VV)
                 {
-            camada1.Click += (sender, e) => { 
-    ActionImagePlaceHolder.Origin = mb;
-                ActionImagePlaceHolder.camada = 1;
-                FocusItemPropertiesOptions(item, false);
-    ActionImagePlaceHolder.Refresh();
-};
-                if (TT.DeckAction.IsLayered())
+        
+                if (VV.DeckAction.IsLayered())
                     {
                     camada2.Visible = true;
+
+
             camada2.Click += (sender, e) => {
-        
+                if (item == null)
+                {
+                    return;
+                }
                 if (item.GetDeckLayerTwo == null)
                         {
                             item.GetDeckLayerTwo = new DeckItemMisc();
-                        }     
-                
-                ActionImagePlaceHolder.Origin = mb;
-                       ActionImagePlaceHolder.camada = 2;
-                        FocusItemPropertiesOptions(item, true);
-                        ActionImagePlaceHolder.Refresh();
-                    
-               
+                        }
+
+                ActionImagePlaceHolder.Camada = 2;
+                ActionImagePlaceHolder.TextButton = new TextLabel(item.GetDeckLayerTwo);
+      
+              
+
+                     FocusItemPropertiesOptions(item.GetDeckLayerTwo, item);
+
+                ActionImagePlaceHolder.Refresh();
+
             }; 
                 }
                
             }
-
-
-
-
-
- camada1.PerformClick();
-                camada1.PerformClick();
-
-
-          
-            //Write_name_Image("testando", mb, 10f,10f,"Arial",10);
-       
+        
             shadedPanel2.Show();
             shadedPanel1.Refresh();
 
@@ -3871,6 +3857,16 @@ toAdd.AsEnumerable().Reverse().All(m =>
         private void imageModernButton9_Click(object sender, EventArgs e)
         {
             new MagnetiteForm().ShowDialog();
+        }
+
+        private void camada1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void camada2_Click(object sender, EventArgs e)
+        {
+
         }
     }
     #endregion

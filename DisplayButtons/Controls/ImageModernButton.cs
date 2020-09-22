@@ -32,7 +32,7 @@ namespace DisplayButtons.Controls
             }
         }
         public ImageModernButton Origin { get; set; }
-
+     
 
         public static Guid GetConnectionGuidFromDeckDevice(DeckDevice device)
         {
@@ -64,7 +64,23 @@ namespace DisplayButtons.Controls
             
 
         }
-        public int camada { get; set; } = 1;
+        private int _camada;
+        public int Camada
+        {
+            get => Origin?.Camada ?? _camada;
+            set
+            {
+                if (Origin != null)
+                {
+                    Origin.Camada = value;
+                    return;
+                }
+                _camada = value;
+                Refresh();
+
+
+            }
+        }
         public TextLabel TextButton
         {
             get => Origin?.TextButton ?? _textlabel;
@@ -87,7 +103,7 @@ namespace DisplayButtons.Controls
         }
 
         private Image _image;
-        private Image _imageTwo;
+        private Image _imagetwo;
 
         public Image NormalImage {
             get => Origin?._image ?? _image; set {
@@ -100,9 +116,10 @@ namespace DisplayButtons.Controls
                     Invoke(new Action(Refresh));
             }
         }
-        public  Image ImageLayerTwo 
+       
+        public  Image ImageLayerTwo
         {
-            get => Origin?.ImageLayerTwo ?? _imageTwo;
+            get => Origin?.ImageLayerTwo ?? _imagetwo;
             set
             {
                 if (Origin != null)
@@ -110,7 +127,7 @@ namespace DisplayButtons.Controls
                     Origin.ImageLayerTwo = value;
                     return;
                 }
-                _imageTwo = value;
+                _imagetwo = value;
                 Refresh();
 
                 if (Parent != null && Parent.Parent != null && Parent.Parent is MainForm frm)
@@ -118,8 +135,28 @@ namespace DisplayButtons.Controls
                     if (frm.CurrentDevice != null)
                     {
                         int slot = int.Parse(ExtractNumber(Name));
-                       
-                       
+                        IEnumerable<ConnectionState> connections;
+                        if (Program.mode == 0)
+                        {
+
+                            connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+
+
+                        }
+                        else
+                        {
+                            connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+
+
+                        }
+                        var stateID = GetConnectionGuidFromDeckDevice(frm.CurrentDevice);
+                        var state = connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
+                        if (value == null)
+                        {
+                            //Send clear packet
+                            state?.SendPacket(new SlotImageClearPacket(slot));
+                            return;
+                        }
 
                         Bitmap bmp = new Bitmap(value);
                         var deckImage = new DeckImage(bmp);
@@ -138,69 +175,8 @@ namespace DisplayButtons.Controls
                             }
 
                         }
-
                         else if (Tag is DynamicDeckFolder itemFolder)
                         {
-                            itemFolder.DeckImage = deckImage;
-                        }
-                    
-                        if (Tag is DynamicDeckItem item)
-                        {
-                            var device = frm.CurrentDevice;
-                            device.CheckCurrentFolder();
-                            device.CurrentProfile.Currentfolder.Add(slot, item);
-                        }
-                       
-                    }
-                }
-            }
-        }
-        public new Image Image {
-            get => Origin?.Image ?? _image;
-            set {
-                if (Origin != null) {
-                    Origin.Image = value;
-                    return;
-                }
-                _image = value;
-                Refresh();
-
-                if (Parent != null && Parent.Parent != null && Parent.Parent is MainForm frm) {
-                    if (frm.CurrentDevice != null) {
-                        int slot = int.Parse(ExtractNumber(Name));
-                        IEnumerable<ConnectionState> connections;
-                        if (Program.mode == 0)
-                        {
-
-                         connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
-
-
-                        }
-                        else
-                        {
-                             connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
-
-
-                        }
-                        var stateID = GetConnectionGuidFromDeckDevice(frm.CurrentDevice);
-                        var state = connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
-                        if (value == null) {
-                            //Send clear packet
-                            state?.SendPacket(new SlotImageClearPacket(slot));
-                            return;
-                        }
-
-                        Bitmap bmp = new Bitmap(value);
-                        var deckImage = new DeckImage(bmp);
-                        
-                        if (Tag is DynamicDeckItem itemTag) {
-
- itemTag.GetDeckDefaultLayer.DeckImage = deckImage;
-                         
-                          
-                            }
-
-                        else if (Tag is DynamicDeckFolder itemFolder) {
                             itemFolder.DeckImage = deckImage;
                         }
                         if (Tag is IDeckItem itemNew)
@@ -212,10 +188,86 @@ namespace DisplayButtons.Controls
                                     ImageSlot = slot,
                                     CurrentItem = itemNew.GetDeckDefaultLayer
 
-                                }); 
+                                });
                             }
                         }
-                        if (Tag is DynamicDeckItem item) {
+                        if (Tag is DynamicDeckItem item)
+                        {
+                            var device = frm.CurrentDevice;
+                            device.CheckCurrentFolder();
+                            device.CurrentProfile.Currentfolder.Add(slot, item);
+                        }
+                    }
+                }
+            }
+        }
+        public new Image Image
+        {
+            get => Origin?.Image ?? _image;
+            set
+            {
+                if (Origin != null)
+                {
+                    Origin.Image = value;
+                    return;
+                }
+                _image = value;
+                Refresh();
+
+                if (Parent != null && Parent.Parent != null && Parent.Parent is MainForm frm)
+                {
+                    if (frm.CurrentDevice != null)
+                    {
+                        int slot = int.Parse(ExtractNumber(Name));
+                        IEnumerable<ConnectionState> connections;
+                        if (Program.mode == 0)
+                        {
+
+                            connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+
+
+                        }
+                        else
+                        {
+                            connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+
+
+                        }
+                        var stateID = GetConnectionGuidFromDeckDevice(frm.CurrentDevice);
+                        var state = connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
+                        if (value == null)
+                        {
+                            //Send clear packet
+                            state?.SendPacket(new SlotImageClearPacket(slot));
+                            return;
+                        }
+
+                        Bitmap bmp = new Bitmap(value);
+                        var deckImage = new DeckImage(bmp);
+
+                        if (Tag is DynamicDeckItem itemTag)
+                        {
+                            itemTag.GetDeckDefaultLayer.DeckImage = deckImage;
+
+                        }
+                        else if (Tag is DynamicDeckFolder itemFolder)
+                        {
+                            itemFolder.DeckImage = deckImage;
+                        }
+                        if (Tag is IDeckItem itemNew)
+                        {
+                            if (state != null)
+                            {
+                                state.SendPacket(new SingleUniversalChangePacket(deckImage)
+                                {
+                                    ImageSlot = slot,
+                                    CurrentItem = itemNew.GetDeckDefaultLayer
+
+                                });
+                            }
+                        }
+                        if (Tag is DynamicDeckItem item)
+                        {
                             var device = frm.CurrentDevice;
                             device.CheckCurrentFolder();
                             device.CurrentProfile.Currentfolder.Add(slot, item);
@@ -230,10 +282,10 @@ namespace DisplayButtons.Controls
             base.OnPaint(pevent);
 
 
-
-            switch (camada)
+            switch (Camada)
             {
                 case 1:
+
                     if (Image != null)
                     {
                         if (TextButton != null)
@@ -261,45 +313,46 @@ namespace DisplayButtons.Controls
 
                         }
 
+                    }
+                    break;
+
+                case 2:
+                    if (ImageLayerTwo != null)
+                    {
+                        if (TextButton != null)
+                        {
+                            using (Font font1 = new Font("Arial", TextButton.Size, FontStyle.Bold, GraphicsUnit.Point))
+                            {
+                                Graphics g = this.CreateGraphics();
+
+                                SizeF size = g.MeasureString(TextButton.Text, font1);
+                                StringFormat format = new StringFormat();
+
+                                int nLeft = Convert.ToInt32((this.ClientRectangle.Width / 2) - (size.Width / 2));
+                                int nTop = Convert.ToInt32(TextHelper.PercentOf(TextButton.Position, this.Size.Height));
+                                RectangleF rectF1 = new RectangleF(nLeft, nTop, ImageLayerTwo.Width, ImageLayerTwo.Height);
+
+                                pevent.Graphics.DrawImage(ImageLayerTwo, DisplayRectangle);
+
+                                pevent.Graphics.DrawString(TextButton.Text, font1, TextButton.Brush, rectF1);
+
+                            }
+                        }
+                        else
+                        {
+                            pevent.Graphics.DrawImage(ImageLayerTwo, DisplayRectangle);
+
+                        }
 
                     }
                     break;
 
 
-                case 2:
-                    
-                        if (ImageLayerTwo != null)
-                        {
-                            if (TextButton != null)
-                            {
-                                using (Font font1 = new Font("Arial", TextButton.Size, FontStyle.Bold, GraphicsUnit.Point))
-                                {
-                                    Graphics g = this.CreateGraphics();
-
-                                    SizeF size = g.MeasureString(TextButton.Text, font1);
-                                    StringFormat format = new StringFormat();
-
-                                    int nLeft = Convert.ToInt32((this.ClientRectangle.Width / 2) - (size.Width / 2));
-                                    int nTop = Convert.ToInt32(TextHelper.PercentOf(TextButton.Position, this.Size.Height));
-                                    RectangleF rectF1 = new RectangleF(nLeft, nTop, ImageLayerTwo.Width, ImageLayerTwo.Height);
-
-                                    pevent.Graphics.DrawImage(ImageLayerTwo, DisplayRectangle);
-
-                                    pevent.Graphics.DrawString(TextButton.Text, font1, TextButton.Brush, rectF1);
-
-                                }
-                            }
-                            else
-                            {
-                                pevent.Graphics.DrawImage(ImageLayerTwo, DisplayRectangle);
-
-                            }
-
-
-                        }
-                    break;
-            }
             
+                  
+
+            }
+
         }
         
 

@@ -126,17 +126,17 @@ namespace DisplayButtons.Forms
             this.camada2.TabIndex = 1;
             this.camada2.UseVisualStyleBackColor = true;
             this.camada2.Visible = false;
+            this.camada2.Click += new System.EventHandler(this.camada2_Click);
             // 
             // camada1
             // 
             this.camada1.AutoSize = true;
-            this.camada1.Checked = true;
             this.camada1.Location = new System.Drawing.Point(6, 22);
             this.camada1.Name = "camada1";
             this.camada1.Size = new System.Drawing.Size(14, 13);
             this.camada1.TabIndex = 0;
-            this.camada1.TabStop = true;
             this.camada1.UseVisualStyleBackColor = true;
+            this.camada1.Click += new System.EventHandler(this.camada1_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -159,7 +159,7 @@ namespace DisplayButtons.Forms
             // 
             // ActionImagePlaceHolder
             // 
-            this.ActionImagePlaceHolder.camada = 0;
+            this.ActionImagePlaceHolder.Camada = 1;
             this.ActionImagePlaceHolder.CustomColorScheme = false;
             this.ActionImagePlaceHolder.Image = null;
             this.ActionImagePlaceHolder.ImageLayerTwo = null;
@@ -195,7 +195,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton4
             // 
-            this.imageModernButton4.camada = 0;
+            this.imageModernButton4.Camada = 0;
             this.imageModernButton4.CustomColorScheme = false;
             this.imageModernButton4.Image = null;
             this.imageModernButton4.ImageLayerTwo = null;
@@ -212,7 +212,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton2
             // 
-            this.imageModernButton2.camada = 0;
+            this.imageModernButton2.Camada = 0;
             this.imageModernButton2.CustomColorScheme = false;
             this.imageModernButton2.Image = null;
             this.imageModernButton2.ImageLayerTwo = null;
@@ -284,7 +284,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton6
             // 
-            this.imageModernButton6.camada = 0;
+            this.imageModernButton6.Camada = 0;
             this.imageModernButton6.CustomColorScheme = false;
             this.imageModernButton6.Image = null;
             this.imageModernButton6.ImageLayerTwo = null;
@@ -310,7 +310,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton7
             // 
-            this.imageModernButton7.camada = 0;
+            this.imageModernButton7.Camada = 0;
             this.imageModernButton7.CustomColorScheme = false;
             this.imageModernButton7.Image = null;
             this.imageModernButton7.ImageLayerTwo = null;
@@ -327,7 +327,7 @@ namespace DisplayButtons.Forms
             // 
             // imageModernButton8
             // 
-            this.imageModernButton8.camada = 0;
+            this.imageModernButton8.Camada = 0;
             this.imageModernButton8.CustomColorScheme = false;
             this.imageModernButton8.Image = null;
             this.imageModernButton8.ImageLayerTwo = null;
@@ -373,7 +373,7 @@ namespace DisplayButtons.Forms
             // 
             // deckoptions_button
             // 
-            this.deckoptions_button.camada = 0;
+            this.deckoptions_button.Camada = 0;
             this.deckoptions_button.CustomColorScheme = false;
             this.deckoptions_button.Image = null;
             this.deckoptions_button.ImageLayerTwo = null;
