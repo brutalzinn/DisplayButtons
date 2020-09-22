@@ -114,8 +114,21 @@ namespace DisplayButtons.Bibliotecas.Helpers
         }
 
 
+        public class DeckEvent : Sharpy.IEvent
+        {
 
+            public DeckItemMisc DeckMisc;
+            public IDeckItem DeckItem;
+            public int Camada;
 
-
+            public DeckEvent( IDeckItem item, int cam, DeckItemMisc deckmisc = null)
+            {
+                this.DeckMisc = deckmisc;
+                this.DeckItem = item;
+                this.Camada = cam;
+            }
+        }
     }
+
+
 }

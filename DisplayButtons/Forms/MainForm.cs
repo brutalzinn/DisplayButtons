@@ -44,6 +44,7 @@ using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
 using static DisplayButtons.Backend.Objects.ProfileVoidHelper;
 using DisplayButtons.Bibliotecas.DeckText;
 using DisplayButtons.Bibliotecas.Helpers;
+using static DisplayButtons.Bibliotecas.Helpers.DeckHelpers;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -1061,7 +1062,9 @@ namespace DisplayButtons.Forms
                                     {
                                         if (!isDoubleClick)
                                         {
+
                                             FocusItem(mb, item);
+                                            camada1.PerformClick();
                                             goto end;
                                         }
                                             //Navigate to the folder
@@ -1080,10 +1083,11 @@ namespace DisplayButtons.Forms
                                             return;
                                         }
                                     }
-
+                                 
                                         //Show button panel with settable properties
                                         FocusItem(mb, item);
-
+                                    camada1.PerformClick();
+                            
                                     lastClick.Reset();
                                 }
                                 else
@@ -1165,6 +1169,7 @@ namespace DisplayButtons.Forms
                 //control2.Tag = null; 
                 control.NormalImage = null;
                 control.Tag = null;
+                control.Camada = 1;
                 control.ClearText();
                 if (folder == null) control.Invoke(new Action(control.Refresh));
             }
@@ -1223,6 +1228,7 @@ namespace DisplayButtons.Forms
             control1.NormalImage = null;
             control1.Tag = null;
             control1.Text = "";
+            control1.Camada = 1;
             control1.ClearText();
             DeckHelpers.ClearSingleItemToDevice(CurrentDevice, slot);
 
@@ -2203,14 +2209,14 @@ namespace DisplayButtons.Forms
                     }
 
 
-                  if(LayerSelected() == 1)
+                  if(ActionImagePlaceHolder.Camada == 1)
                     {
-                        ActionImagePlaceHolder.Camada = 1;
+                 
 ActionImagePlaceHolder.Image = bmp;
                     }
-                    else if (LayerSelected() == 2)
+                    else if (ActionImagePlaceHolder.Camada == 2)
                     {
-                        ActionImagePlaceHolder.Camada = 2;
+                     
                         ActionImagePlaceHolder.ImageLayerTwo = bmp;
                     }
                       
@@ -2773,57 +2779,78 @@ ActionImagePlaceHolder.Image = bmp;
         }
         private void FocusItem(ImageModernButton mb, IDeckItem item)
         {
-       
-           
-            ActionImagePlaceHolder.Origin = mb;
-            camada1.Checked = true;
 
-            camada1.Click += (sender, e) => {
-
- if (item ==null)
+            if (item == null)
             {
                 return;
             }
-                ActionImagePlaceHolder.Camada = 1;
-                ActionImagePlaceHolder.TextButton = new TextLabel(item.GetDeckDefaultLayer);
-       
-        FocusItemPropertiesOptions(item.GetDeckDefaultLayer, item);
-                ActionImagePlaceHolder.Refresh();
-            };
-                
-
+               
+            camada1.Tag = item;
+            camada2.Tag = item;
             if (item is DynamicDeckItem VV)
-                {
-        
+            {
+
                 if (VV.DeckAction.IsLayered())
-                    {
+                {
                     camada2.Visible = true;
 
-
-            camada2.Click += (sender, e) => {
-                if (item == null)
-                {
-                    return;
                 }
-                if (item.GetDeckLayerTwo == null)
-                        {
-                            item.GetDeckLayerTwo = new DeckItemMisc();
+            }
+                    Globals.events.On("DeckEvent", (e) => {
+                     
+                // Cast event argrument to your event object
+                var obj = (DeckEvent)e;
+
+           if(obj.Camada == 1)
+                {
+                ActionImagePlaceHolder.TextButton = new TextLabel(obj.DeckItem.GetDeckDefaultLayer);
+       
+        FocusItemPropertiesOptions(obj.DeckItem.GetDeckDefaultLayer, obj.DeckItem);
+                           
+
+                        }
+                        else if (obj.Camada == 2)
+                {
+                         
+                            if (obj.DeckItem.GetDeckLayerTwo == null)
+                            {
+                                obj.DeckItem.GetDeckLayerTwo = new DeckItemMisc();
+                            }
+
+
+                            ActionImagePlaceHolder.TextButton = new TextLabel(obj.DeckItem.GetDeckLayerTwo);
+
+
+
+                            FocusItemPropertiesOptions(obj.DeckItem.GetDeckLayerTwo, obj.DeckItem);
+
+
+
+
+
+
+
                         }
 
-                ActionImagePlaceHolder.Camada = 2;
-                ActionImagePlaceHolder.TextButton = new TextLabel(item.GetDeckLayerTwo);
-      
-              
+                          ActionImagePlaceHolder.Camada = obj.Camada;
+                      
+                      
+                        if(ActionImagePlaceHolder.Origin != null)
+                        {
+                            UpdateLayerView();
+                        }
+                    });
 
-                     FocusItemPropertiesOptions(item.GetDeckLayerTwo, item);
 
-                ActionImagePlaceHolder.Refresh();
-
-            }; 
-                }
-               
-            }
         
+                
+
+              ActionImagePlaceHolder.Origin = mb;
+           
+
+
+
+
             shadedPanel2.Show();
             shadedPanel1.Refresh();
 
@@ -3347,7 +3374,27 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
 
         }
-        private void UpdateIcon(bool shouldUpdateIcon)
+        private void UpdateLayerView()
+        {
+            
+            // AddWatermark("RWER", ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
+            if (ActionImagePlaceHolder.Camada == 1)
+            {
+
+                ActionImagePlaceHolder.Image = ((IDeckItem)ActionImagePlaceHolder.Origin.Tag).GetDeckDefaultLayer.GetItemImage()?.Bitmap ?? Resources.img_item_default;
+
+            }
+            else if (ActionImagePlaceHolder.Camada == 2)
+            {
+                ActionImagePlaceHolder.ImageLayerTwo = ((IDeckItem)ActionImagePlaceHolder.Origin.Tag).GetDeckLayerTwo.GetItemImage()?.Bitmap ?? Resources.img_item_default;
+
+
+            }
+
+
+            ActionImagePlaceHolder.Refresh();
+        }
+            private void UpdateIcon(bool shouldUpdateIcon)
         {
             // IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
             if (shouldUpdateIcon)
@@ -3357,21 +3404,18 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 // item = folder.GetDeckItems()[i];
 
                 // AddWatermark("RWER", ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, folder);
-                if(LayerSelected() == 1){
+                if(ActionImagePlaceHolder.Camada == 1)
+                {
 
                 ActionImagePlaceHolder.Image = ((IDeckItem)ActionImagePlaceHolder.Origin.Tag).GetDeckDefaultLayer.GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
 
-                }else if (LayerSelected() == 2)
+                }else if (ActionImagePlaceHolder.Camada == 2)
                 {
-                    ActionImagePlaceHolder.Image = ((IDeckItem)ActionImagePlaceHolder.Origin.Tag).GetDeckLayerTwo.DeckImage?.Bitmap ?? Resources.img_item_default;
+                    ActionImagePlaceHolder.ImageLayerTwo = ((IDeckItem)ActionImagePlaceHolder.Origin.Tag).GetDeckLayerTwo.GetDefaultImage()?.Bitmap ?? Resources.img_item_default;
 
 
                 }
-                //   var teste = new MagickImage((Bitmap)imageModernButton1.Image);
-                //   image.Annotate("caption:This is gergerga test.", Gravity.South); // caption:"This is a test."
-                // write the image to the appropriate directory
-                // image.Write(@"D:\testimage.jpg");
-                // SendItemsToDevice(CurrentDevice, CurrentDevice.CurrentProfile.Currentfolder,teste);
+
 
                 ActionImagePlaceHolder.Refresh();
             }
@@ -3862,11 +3906,21 @@ toAdd.AsEnumerable().Reverse().All(m =>
         private void camada1_Click(object sender, EventArgs e)
         {
 
+            RadioButton mb = (sender as RadioButton);
+            if (mb.Tag is IDeckItem FF)
+            {
+                Globals.events.Trigger("DeckEvent", new DeckEvent(FF,1));
+            }
+
         }
 
         private void camada2_Click(object sender, EventArgs e)
         {
-
+            RadioButton mb = (sender as RadioButton);
+            if (mb.Tag is IDeckItem FF)
+            {
+                Globals.events.Trigger("DeckEvent", new DeckEvent(FF, 2));
+            }
         }
     }
     #endregion
