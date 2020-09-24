@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
-    public class InputDeviceAction : AbstractDeckAction
+    public class InputDeviceAction : AbstractDeckAction , IDeckHelper
     {
         public enum MediaInputDevice
         {
@@ -29,6 +29,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
         int sensitivevolume = 10;
         int CurrentItem = 1;
+        IDeckItem atual_item;
         [ActionPropertyInclude]
         [ActionPropertyDescription("Device Id")]
         [ActionPropertyUpdateImageOnChanged]
@@ -70,11 +71,12 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
             return Texts.rm.GetString("HELPERSDECKINPUTDEVICE", Texts.cultereinfo);
         }
-        public override bool IsLayered(int _current)
+        public override bool IsLayered(int _current,IDeckItem item)
         {
             if (_current != -1)
             {
                 CurrentItem = _current;
+                atual_item = item;
                 Debug.WriteLine("CURRENT ITEM ID IS " + CurrentItem);
             }
 
@@ -102,9 +104,10 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             {
                 case MediaInputDevice.Mute:
                     if(device != null)
-                    {
-                    Task.FromResult( device.ToggleMuteAsync());
-                        setVariable(device.IsMuted ,deckDevice);
+                    {  
+                       
+                   var result =  Task.FromResult( device.ToggleMuteAsync().Result);
+                       IDeckHelper.setVariable(result.Result , atual_item, deckDevice);
                     }
                     break;
                 case MediaInputDevice.Default:
@@ -141,13 +144,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 return new DeckImage(img);
             return base.GetDefaultItemImage();
         }
-        public void setVariable(bool variable,DeckDevice device)
-        {
-           var item =  DeckHelpers.getDeckItem(CurrentItem);
-           // DeckHelpers.SendSingleItemToDevice(device,CurrentItem,item);
-            DeckHelpers.RefreshButton(item, 2, item.GetDeckLayerTwo);
-
-        }
+   
         private Bitmap GetKey(MediaInputDevice key)
         {
             switch (key) {

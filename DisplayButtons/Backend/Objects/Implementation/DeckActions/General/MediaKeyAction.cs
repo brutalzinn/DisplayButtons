@@ -37,15 +37,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
             return new MediaKeyAction();
         }
-        public override bool IsLayered(int CurretItem)
-        {
-            if(CurretItem != -1)
-            {
-Debug.WriteLine("CURRET ITEM IS" + CurretItem);
-            }
-            
-            return true;
-        }
+    
 
         public override DeckActionCategory GetActionCategory()
         {

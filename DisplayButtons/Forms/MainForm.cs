@@ -680,7 +680,7 @@ namespace DisplayButtons.Forms
                                     CurrentDevice.CurrentProfile.Currentfolder = folder;
                                     if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
                                     {
-                                        mycustomitem.DeckAction.IsLayered(mb.CurrentSlot);
+                                        mycustomitem.DeckAction.IsLayered(mb.CurrentSlot, mycustomitem);
                                     }
                                     RefreshAllButtons();
                                 }
@@ -700,7 +700,7 @@ namespace DisplayButtons.Forms
                                     }
                                     if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
                                     {
-                                        mycustomitem.DeckAction.IsLayered(mb.CurrentSlot);
+                                        mycustomitem.DeckAction.IsLayered(mb.CurrentSlot, mycustomitem);
                                     }
                                 }
                             }
@@ -795,8 +795,8 @@ namespace DisplayButtons.Forms
                                 
                                 if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
                                 {
-                                    mycustomitem.DeckAction.IsLayered(mb.CurrentSlot);
-                                    FocusItem(mb, mycustomitem);
+                                    mycustomitem.DeckAction.IsLayered(mb.CurrentSlot,mycustomitem);
+                                   // FocusItem(mb, mycustomitem);
                                 } 
                                
                             }
@@ -1574,9 +1574,9 @@ namespace DisplayButtons.Forms
                 if (item is DynamicDeckItem DI && DI.DeckAction != null)
                 {
 
-
+ DI.DeckAction.IsLayered(control.CurrentSlot, DI);
                 }
-
+              
                 //
                 control.NormalImage = image.Bitmap;
 

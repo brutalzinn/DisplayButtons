@@ -61,12 +61,12 @@ namespace DisplayButtons.Bibliotecas.Helpers
 
             return item;
         }
-        public static void RefreshButton(IDeckItem item,int camada,  DeckItemMisc itemmisc)
+        public static void RefreshButton(IDeckItem item,int camada,  DeckItemMisc itemmisc, DeckDevice device)
         {
             // Buttons_Unfocus(this, EventArgs.Empty);
             MainForm.Instance.Invoke(new Action(() =>
             {
-                IDeckFolder folder = MainForm.Instance.CurrentDevice?.CurrentProfile.Currentfolder;
+                IDeckFolder folder = device.CurrentProfile.Currentfolder;
             ImageModernButton control = MainForm.Instance.Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
 
             if (camada == 1)
@@ -83,9 +83,9 @@ namespace DisplayButtons.Bibliotecas.Helpers
             control.Tag = item;
      
           control.Invoke(new Action(control.Refresh));
-            MainForm.Instance.CurrentDevice.CheckCurrentFolder();
+            device.CheckCurrentFolder();
 
-            SendSingleItemToDevice(MainForm.Instance.CurrentDevice, folder.GetItemIndex(item), itemmisc);
+            SendSingleItemToDevice(device, folder.GetItemIndex(item), itemmisc);
             }));
 
 
