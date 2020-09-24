@@ -177,7 +177,7 @@ namespace DisplayButtons.Controls
                         if (Tag is DynamicDeckItem itemTag)
                         {
 
-                            if (itemTag.DeckAction.IsLayered())
+                            if (itemTag.DeckAction.setLayer())
                             {
                                 if (itemTag.GetDeckLayerTwo != null)
                                 {

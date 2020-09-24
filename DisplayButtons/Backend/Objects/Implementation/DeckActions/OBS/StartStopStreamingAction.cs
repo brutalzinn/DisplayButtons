@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
-    public class StartStopStreamingAction : AbstractDeckAction
+    public class StartStopStreamingAction : AbstractDeckAction, IDeckHelper
     {
         static bool firstTime;
         public enum StreamingState
@@ -23,6 +23,9 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 
 
         }
+
+        int CurrentItem = 1;
+        IDeckItem atual_item;
         public StreamingStateToggle ToggleStreamingAction { get; set; } = StreamingStateToggle.Stopped;
         [ActionPropertyInclude]
         [ActionPropertyDescription("Action")]
@@ -37,7 +40,33 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         {
             return DeckActionCategory.OBS;
         }
+        public override bool setLayer(int _current, IDeckItem item)
+        {
 
+            if (_current != -1)
+            {
+                CurrentItem = _current;
+                atual_item = item;
+
+            }
+
+
+
+            return true;
+        }
+        public override bool getLayer()
+        {
+            switch (StreamAction)
+            {
+                case StreamingState.Toggle:
+
+                    return true;
+
+                default:
+                    return false;
+
+            }
+        }
         public override string GetActionName()
         {
             if (!firstTime) {
@@ -86,10 +115,12 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                             case StreamingStateToggle.Stopped:
                                 ToggleStreamingAction = StreamingStateToggle.Recording;
                                 OBSUtils.StartRecording();
+                                IDeckHelper.setVariable(false, atual_item, deckDevice);
                                 break;
                             case StreamingStateToggle.Recording:
                                 ToggleStreamingAction = StreamingStateToggle.Stopped;
                                 OBSUtils.StopRecording();
+                                IDeckHelper.setVariable(true, atual_item, deckDevice);
                                 break;
                         }
                         break;

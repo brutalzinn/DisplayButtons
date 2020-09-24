@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
-    public class StartStopRecordingAction : AbstractDeckAction
+    public class StartStopRecordingAction : AbstractDeckAction, IDeckHelper
     {
         static bool firstTime;
         public enum RecordingState
@@ -29,9 +29,12 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 
 
         }
+        int CurrentItem = 1;
+        IDeckItem atual_item;
         [ActionPropertyInclude]
         [ActionPropertyDescription("Action")]
         [ActionPropertyUpdateImageOnChanged]
+
         public RecordingState RecordAction { get; set; }
         public RecordStateToggle ToggleAction { get; set; } = RecordStateToggle.Stopped;
         public override AbstractDeckAction CloneAction()
@@ -43,7 +46,33 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         {
             return DeckActionCategory.OBS;
         }
+        public override bool setLayer(int _current, IDeckItem item)
+        {
+           
+                    if (_current != -1)
+                    {
+                        CurrentItem = _current;
+                        atual_item = item;
 
+                    }
+
+
+
+            return true;
+        }
+        public override bool getLayer()
+        {
+            switch (RecordAction)
+            {
+                case RecordingState.Toggle:
+               
+                    return true;
+
+                default:
+                    return false;
+
+            }
+        }
         public override string GetActionName()
         {
             if (!firstTime) {
@@ -89,11 +118,15 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
                         {
                             case RecordStateToggle.Stopped:
                                 ToggleAction = RecordStateToggle.Recording;
+                             
                                 OBSUtils.StartRecording();
+                              IDeckHelper.setVariable(false, atual_item, deckDevice);
                                 break;
                             case RecordStateToggle.Recording:
                                 ToggleAction = RecordStateToggle.Stopped;
+                               
                                 OBSUtils.StopRecording();
+                                IDeckHelper.setVariable(true, atual_item, deckDevice);
                                 break;
                         }
 

@@ -678,9 +678,9 @@ namespace DisplayButtons.Forms
                                     mb.Tag = folder;
                                     mb.Image = Resources.img_folder;
                                     CurrentDevice.CurrentProfile.Currentfolder = folder;
-                                    if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
+                                    if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.setLayer() == true)
                                     {
-                                        mycustomitem.DeckAction.IsLayered(mb.CurrentSlot, mycustomitem);
+                                        mycustomitem.DeckAction.setLayer(mb.CurrentSlot, mycustomitem);
                                     }
                                     RefreshAllButtons();
                                 }
@@ -698,9 +698,9 @@ namespace DisplayButtons.Forms
                                         LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName);
                                         YY.SetConfigs(action.ToScript);
                                     }
-                                    if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
+                                    if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.setLayer() == true)
                                     {
-                                        mycustomitem.DeckAction.IsLayered(mb.CurrentSlot, mycustomitem);
+                                        mycustomitem.DeckAction.setLayer(mb.CurrentSlot, mycustomitem);
                                     }
                                 }
                             }
@@ -793,10 +793,10 @@ namespace DisplayButtons.Forms
                               //  ClearSingleItemToDevice(CurrentDevice, action1.OldSlot);
                                 RefreshButton(mb.CurrentSlot, true);
                                 
-                                if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.IsLayered() == true)
+                                if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.setLayer() == true)
                                 {
-                                    mycustomitem.DeckAction.IsLayered(mb.CurrentSlot,mycustomitem);
-                                   // FocusItem(mb, mycustomitem);
+                                    mycustomitem.DeckAction.setLayer(mb.CurrentSlot,mycustomitem);
+                                   // FocusItem(mb, mycustomitems
                                 } 
                                
                             }
@@ -1574,7 +1574,7 @@ namespace DisplayButtons.Forms
                 if (item is DynamicDeckItem DI && DI.DeckAction != null)
                 {
 
- DI.DeckAction.IsLayered(control.CurrentSlot, DI);
+ DI.DeckAction.setLayer(control.CurrentSlot, DI);
                 }
               
                 //
@@ -2781,19 +2781,19 @@ ActionImagePlaceHolder.Image = bmp;
         {
             if (item is DynamicDeckItem VV)
             {
-                if (VV.DeckAction.IsLayered())
+                if (VV.DeckAction.getLayer())
                 {
                     camada2.Visible = true;
-                    if (VV.GetDeckLayerTwo == null)
+                    if (item.GetDeckLayerTwo == null)
                     {
-                        VV.GetDeckLayerTwo = new DeckItemMisc();
+                        item.GetDeckLayerTwo = new DeckItemMisc();
                     }
                 
                 }
                 else
                 {
                     camada2.Visible = false;
-                    VV.GetDeckLayerTwo = null;
+                    item.GetDeckLayerTwo = null;
                   
                 }
                 
@@ -2802,10 +2802,7 @@ ActionImagePlaceHolder.Image = bmp;
         }
         private void FocusItem(ImageModernButton mb, IDeckItem item)
         {
-            if(item == null)
-            {
-                return;
-            }
+          
             camada1.Tag = item;
             camada2.Tag = item;
           
@@ -2834,7 +2831,11 @@ ActionImagePlaceHolder.Image = bmp;
                         }
 
                           ActionImagePlaceHolder.Camada = obj.Camada;
-                        
+                        if(ActionImagePlaceHolder.Origin != null)
+                        {
+  UpdateLayerView();  
+                        }
+                      
 
                     });
 
@@ -2843,7 +2844,7 @@ ActionImagePlaceHolder.Image = bmp;
                
 
               ActionImagePlaceHolder.Origin = mb;
-            UpdateLayerView();
+          
 
 
 

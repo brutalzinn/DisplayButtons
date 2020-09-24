@@ -50,11 +50,12 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         [ActionPropertyUpdateImageOnChanged]
          public string ConfigPlay { get; set; }
 
+
         [ActionPropertyInclude]
         [ActionPropertyDescription("Media Key")]
         [ActionPropertyUpdateImageOnChanged]
         public SpotifyMediaKeys Key { get; set; } = SpotifyMediaKeys.PlayPause;
-
+       
         public override AbstractDeckAction CloneAction()
         {
             return new SpotifyAction();
@@ -64,7 +65,29 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
             return DeckActionCategory.Misc;
         }
+        public override bool setLayer(int _current, IDeckItem item)
+        {
+            if (_current != -1)
+            {
+                CurrentItem = _current;
+                atual_item = item;
 
+            }
+            return true;
+        }
+        public override bool getLayer()
+        {
+            switch (Key)
+            {
+                case SpotifyMediaKeys.VolumeOff:
+
+                    return true;
+
+                default:
+                    return false;
+
+            }
+        }
         public override string GetActionName()
         {
             return Texts.rm.GetString("DECKMISCSPOTIFY", Texts.cultereinfo);
@@ -76,26 +99,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             return false;
         }
 
-        public Keys GetKeyFromMediaKey(SpotifyMediaKeys mediaKey)
-        {
-            switch (mediaKey) {
-                case SpotifyMediaKeys.Back:
-                    return Keys.MediaPreviousTrack;
-                case SpotifyMediaKeys.Next:
-                    return Keys.MediaPreviousTrack;
-                case SpotifyMediaKeys.PlayPause:
-                    return Keys.MediaPlayPause;
-                case SpotifyMediaKeys.Stop:
-                    return Keys.MediaStop;
-                case SpotifyMediaKeys.VolumeOff:
-                    return Keys.VolumeMute;
-                case SpotifyMediaKeys.VolumeMinus:
-                    return Keys.VolumeDown;
-                case SpotifyMediaKeys.VolumePlus:
-                    return Keys.VolumeUp;
-            }
-            return Keys.None;
-        }
+    
 
         public override void OnButtonDown(DeckDevice deckDevice)
         {
@@ -174,25 +178,7 @@ VolumeSensibility = result;
 
 
         }
-        public override bool IsLayered(int _current, IDeckItem item)
-        {
-            switch (Key)
-            {
-                case SpotifyMediaKeys.VolumeOff:
-                    if (_current != -1)
-                    {
-                        CurrentItem = _current;
-                        atual_item = item;
-
-                    }
-
-                    return true;
-
-                default:
-                    return false;
-
-            }
-        }
+   
         public void ConfigPlayHelper()
         {
       

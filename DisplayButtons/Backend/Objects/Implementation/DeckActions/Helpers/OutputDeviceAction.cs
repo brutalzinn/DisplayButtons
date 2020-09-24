@@ -87,17 +87,25 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             }
 
         }
-        public override bool IsLayered(int _current, IDeckItem item)
+        public override bool setLayer(int _current, IDeckItem item)
+        {
+
+            if (_current != -1)
+            {
+                CurrentItem = _current;
+                atual_item = item;
+
+            }
+
+
+
+            return true;
+        }
+        public override bool getLayer()
         {
             switch (Key)
             {
                 case MediaOutputDevice.Mute:
-                    if (_current != -1)
-                    {
-                        CurrentItem = _current;
-                        atual_item = item;
-                      
-                    }
 
                     return true;
 

@@ -91,20 +91,24 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
             return Texts.rm.GetString("HELPERSDECKINPUTDEVICE", Texts.cultereinfo);
         }
-        public override bool IsLayered(int _current,IDeckItem item)
+        public override bool setLayer(int _current,IDeckItem item)
+        {
+            if (_current != -1)
+            {
+                CurrentItem = _current;
+                atual_item = item;
+
+            }
+            return true;
+        }
+        public override bool getLayer()
         {
             switch (Key)
             {
                 case MediaInputDevice.Mute:
-                    if (_current != -1)
-                    {
-                        CurrentItem = _current;
-                        atual_item = item;
-                        Debug.WriteLine("CURRENT ITEM ID IS " + CurrentItem);
-                    }
 
                     return true;
-                   
+
                 default:
                     return false;
 

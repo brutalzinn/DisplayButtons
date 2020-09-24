@@ -76,7 +76,7 @@ namespace DisplayButtons.Bibliotecas.Helpers
             }else if(camada == 2)
             {
                 control.Camada = 2;
-                control.NormalLayerTwo = itemmisc?.GetItemImage()?.Bitmap;
+                control.NormalLayerTwo = itemmisc?.GetItemImage()?.Bitmap ?? Resources.img_item_default; ;
 
             }
             control.TextButton = new TextLabel(itemmisc);

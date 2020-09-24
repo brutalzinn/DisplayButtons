@@ -247,15 +247,25 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             var spotify = new SpotifyClient(config);
 
             var me = await spotify.UserProfile.Current();
-            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
-             
+     
            
+            if(spotify.Player.GetCurrentPlayback().Result == null)
+            {
+                return false;
+            }
+
             if (isClicked)
             {
-             volumeBefore = spotify.Player.GetCurrentPlayback().Result.Device.VolumePercent.Value;
+                var volumeatual = spotify.Player.GetCurrentPlayback().Result.Device.VolumePercent.GetValueOrDefault();
+                if(volumeatual != 0)
+                {
+             volumeBefore = volumeatual;
+
+                }
                 PlayerVolumeRequest playvolumecontext = new PlayerVolumeRequest(0);
                 await spotify.Player.SetVolume(playvolumecontext);
                 isClicked = false;
+                Mute = true;
                 _server.Dispose();
                 return true;
             }
@@ -265,6 +275,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
                  PlayerVolumeRequest playvolume = new PlayerVolumeRequest(volumeBefore);
                 await spotify.Player.SetVolume(playvolume);
                 isClicked = true;
+                Mute = false;
                 _server.Dispose();
                 return false;
             }
