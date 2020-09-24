@@ -1087,7 +1087,7 @@ namespace DisplayButtons.Forms
                                         //Show button panel with settable properties
                                         FocusItem(mb, item);
                                     camada1.PerformClick();
-                            
+
                                     lastClick.Reset();
                                 }
                                 else
@@ -2777,29 +2777,44 @@ ActionImagePlaceHolder.Image = bmp;
 
 
         }
-        private void FocusItem(ImageModernButton mb, IDeckItem item)
+        private void ChangeCamadaLayerByComboBox(IDeckItem item)
         {
-
-            if (item == null)
-            {
-                return;
-            }
-               
-            camada1.Tag = item;
-            camada2.Tag = item;
             if (item is DynamicDeckItem VV)
             {
-
                 if (VV.DeckAction.IsLayered())
                 {
                     camada2.Visible = true;
-
+                    if (VV.GetDeckLayerTwo == null)
+                    {
+                        VV.GetDeckLayerTwo = new DeckItemMisc();
+                    }
+                
                 }
+                else
+                {
+                    camada2.Visible = false;
+                    VV.GetDeckLayerTwo = null;
+                  
+                }
+                
+
             }
+        }
+        private void FocusItem(ImageModernButton mb, IDeckItem item)
+        {
+            if(item == null)
+            {
+                return;
+            }
+            camada1.Tag = item;
+            camada2.Tag = item;
+          
+   
+       
                     Globals.events.On("DeckEvent", (e) => {
-                     
-                // Cast event argrument to your event object
-                var obj = (DeckEvent)e;
+                       
+                        // Cast event argrument to your event object
+                        var obj = (DeckEvent)e;
 
            if(obj.Camada == 1)
                 {
@@ -2811,42 +2826,24 @@ ActionImagePlaceHolder.Image = bmp;
                         }
                         else if (obj.Camada == 2)
                 {
-                         
-                            if (obj.DeckItem.GetDeckLayerTwo == null)
-                            {
-                                obj.DeckItem.GetDeckLayerTwo = new DeckItemMisc();
-                            }
-
-
+  
                             ActionImagePlaceHolder.TextButton = new TextLabel(obj.DeckItem.GetDeckLayerTwo);
 
-
-
                             FocusItemPropertiesOptions(obj.DeckItem.GetDeckLayerTwo, obj.DeckItem);
-
-
-
-
-
-
 
                         }
 
                           ActionImagePlaceHolder.Camada = obj.Camada;
-                      
-                      
-                        if(ActionImagePlaceHolder.Origin != null)
-                        {
-                            UpdateLayerView();
-                        }
+                        
+
                     });
 
 
         
-                
+               
 
               ActionImagePlaceHolder.Origin = mb;
-           
+            UpdateLayerView();
 
 
 
@@ -3011,14 +3008,16 @@ ActionImagePlaceHolder.Image = bmp;
                         cBox.Items.AddRange(values.OfType<Enum>().Select(c => EnumUtils.GetDescriptionTranslator(prop.PropertyType, c, c.ToString())).ToArray());
 
                         cBox.Text = EnumUtils.GetDescriptionTranslator(prop.PropertyType, (Enum)prop.GetValue(item.DeckAction), ((Enum)prop.GetValue(item.DeckAction)).ToString());
-
+                        ChangeCamadaLayerByComboBox(item);
                         cBox.SelectedIndexChanged += (s, e) =>
                         {
                             try
                             {
                                 if (cBox.Text == string.Empty) return;
                                 prop.SetValue(item.DeckAction, EnumUtils.FromDescriptionTRanslator(prop.PropertyType, cBox.Text));
-                                UpdateIcon(shouldUpdateIcon);
+                              
+                                //UpdateIcon(shouldUpdateIcon);  
+                                ChangeCamadaLayerByComboBox(item);
                             }
                             catch (Exception)
                             {

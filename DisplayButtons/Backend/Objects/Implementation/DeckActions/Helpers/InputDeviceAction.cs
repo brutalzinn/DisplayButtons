@@ -73,14 +73,22 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
         public override bool IsLayered(int _current,IDeckItem item)
         {
-            if (_current != -1)
+            switch (Key)
             {
-                CurrentItem = _current;
-                atual_item = item;
-                Debug.WriteLine("CURRENT ITEM ID IS " + CurrentItem);
-            }
+                case MediaInputDevice.Mute:
+                    if (_current != -1)
+                    {
+                        CurrentItem = _current;
+                        atual_item = item;
+                        Debug.WriteLine("CURRENT ITEM ID IS " + CurrentItem);
+                    }
 
-            return true;
+                    return true;
+                   
+                default:
+                    return false;
+
+            }
         }
         [Obsolete]
         public override bool OnButtonClick(DeckDevice deckDevice)
@@ -137,23 +145,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             }
         }
 
-        public override DeckImage GetDefaultItemImage()
-        {
-            var img = GetKey(Key);
-            if (img != null)
-                return new DeckImage(img);
-            return base.GetDefaultItemImage();
-        }
-   
-        private Bitmap GetKey(MediaInputDevice key)
-        {
-            switch (key) {
-                case MediaInputDevice.Mute:
-                    return Resources.img_item_default;
-               
-                default:
-                    return null;
-            }
-        }
+     
+    
     }
 }
