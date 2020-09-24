@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
-    public class SpotifyAction : AbstractDeckAction
+    public class SpotifyAction : AbstractDeckAction, IDeckHelper
     {
  
         public enum SpotifyMediaKeys
@@ -37,7 +37,8 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             [Description("MISCMEDIAKEYSPLAYLIST")]
             PlayList
         }
-
+        int CurrentItem = 1;
+        IDeckItem atual_item;
         public string PlayListId;
         [ActionPropertyInclude]
         [ActionPropertyDescription("Config Volume Sensibility")]
@@ -104,43 +105,50 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
        
         public override void OnButtonUp(DeckDevice deckDevice)
         { 
-            Task.WaitAll( Spotify.Auth());
+            var auth_result = Task.FromResult( Spotify.Auth()).Result;
+            if (!auth_result.Result)
+            {
+                return;
+
+            }
             switch (Key)
             {
                 case SpotifyMediaKeys.PlayPause:
 
                     
-                    Task.WaitAll(Spotify.ResumePlayBack());
+                    Task.FromResult(Spotify.ResumePlayBack());
                     break;
                 case SpotifyMediaKeys.Stop:
 
                  
-                    Task.WaitAll(Spotify.PausePlayBack());
+                    Task.FromResult(Spotify.PausePlayBack());
                     break;
 
                 case SpotifyMediaKeys.VolumePlus:
 
 
-                    Task.WaitAll(Spotify.setVolume(VolumeSensibility));
+                    Task.FromResult(Spotify.setVolume(VolumeSensibility));
                     break;
                 case SpotifyMediaKeys.VolumeMinus:
 
 
-                    Task.WaitAll(Spotify.setVolume(-VolumeSensibility));
+                    Task.FromResult(Spotify.setVolume(-VolumeSensibility));
                     break;
                 case SpotifyMediaKeys.PlayList:
                     var val = Task.Run(() => Spotify.getPlayListById(PlayListId));
-                    Task.WaitAll(Spotify.PlayPlaylist(val.Result));
+                    Task.FromResult(Spotify.PlayPlaylist(val.Result));
                     break;
                 case SpotifyMediaKeys.Next:
              
-                    Task.WaitAll(Spotify.SkipNext());
+                    Task.FromResult(Spotify.SkipNext());
                     break;
                 case SpotifyMediaKeys.Back:
-                    Task.WaitAll(Spotify.SkipPrevius());
+                    Task.FromResult(Spotify.SkipPrevius());
                     break;
                 case SpotifyMediaKeys.VolumeOff:
-                    Task.WaitAll(Spotify.MuteDesmute());
+                  //  Task.FromResult(Spotify.MuteDesmute());
+                    var result = Task.FromResult(Spotify.MuteDesmute().Result);
+                    IDeckHelper.setVariable(result.Result, atual_item, deckDevice);
                     break;
 
             }
@@ -165,6 +173,25 @@ VolumeSensibility = result;
             }
 
 
+        }
+        public override bool IsLayered(int _current, IDeckItem item)
+        {
+            switch (Key)
+            {
+                case SpotifyMediaKeys.VolumeOff:
+                    if (_current != -1)
+                    {
+                        CurrentItem = _current;
+                        atual_item = item;
+
+                    }
+
+                    return true;
+
+                default:
+                    return false;
+
+            }
         }
         public void ConfigPlayHelper()
         {

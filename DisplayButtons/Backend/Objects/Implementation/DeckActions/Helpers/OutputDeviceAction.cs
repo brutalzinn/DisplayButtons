@@ -12,7 +12,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
-    public class OutputDeviceAction : AbstractDeckAction
+    public class OutputDeviceAction : AbstractDeckAction, IDeckHelper
     {
         
         public enum MediaOutputDevice
@@ -28,12 +28,16 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
         }
 
-        int sensitivevolume = 10;
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("Volume Stepper")]
+        [ActionPropertyUpdateImageOnChanged]
+        public int VolumeStepper { get; set; } = 10;
         [ActionPropertyInclude]
         [ActionPropertyDescription("Device Id")]
         [ActionPropertyUpdateImageOnChanged]
         public Guid DeviceId { get; set; }
-
+        int CurrentItem = 1;
+        IDeckItem atual_item;
         public double volume { get; set; }
         [ActionPropertyInclude]
         [ActionPropertyDescription("Media Key")]
@@ -67,6 +71,41 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             }
 
         }
+        public void VolumeStepperHelper()
+        {
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.AudioController.VolumeStepper")) as Form;
+            form.Volume_textbox.Text = VolumeStepper.ToString();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+
+
+                VolumeStepper = Convert.ToInt32(form.Volume_textbox.Text);
+            }
+            else
+            {
+                form.Close();
+            }
+
+        }
+        public override bool IsLayered(int _current, IDeckItem item)
+        {
+            switch (Key)
+            {
+                case MediaOutputDevice.Mute:
+                    if (_current != -1)
+                    {
+                        CurrentItem = _current;
+                        atual_item = item;
+                      
+                    }
+
+                    return true;
+
+                default:
+                    return false;
+
+            }
+        }
         public override string GetActionName()
         {
             return Texts.rm.GetString("HELPERSDECKOUTPUTDEVICE", Texts.cultereinfo);
@@ -96,7 +135,8 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 case MediaOutputDevice.Mute:
                     if (device != null)
                     {
-                        Task.FromResult(device.ToggleMuteAsync());
+                        var result = Task.FromResult(device.ToggleMuteAsync().Result);
+                        IDeckHelper.setVariable(result.Result, atual_item, deckDevice);
                     }
                     break;
                 case MediaOutputDevice.Default:
@@ -109,7 +149,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                     if (device != null)
                     {
 
-                        volume = Math.Round(sensitivevolume + device.Volume);
+                        volume = Math.Round(VolumeStepper + device.Volume);
                         Task.FromResult(device.SetVolumeAsync(volume));
                     }
                     break;
@@ -117,7 +157,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                     if (device != null)
                     {
 
-                        volume = Math.Round(device.Volume - sensitivevolume);
+                        volume = Math.Round(device.Volume - VolumeStepper);
                         Task.FromResult(device.SetVolumeAsync(volume));
                     }
                     break;

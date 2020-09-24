@@ -65,10 +65,10 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             var spotify = new SpotifyClient(config);
 
             var me = await spotify.UserProfile.Current();
-            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+        
 
             var playlists = await spotify.PaginateAll(await spotify.Playlists.CurrentUsers().ConfigureAwait(false));
-            Debug.WriteLine($"Total Playlists in your Account: {playlists.Count}");
+           
 
             _server.Dispose();
           //  Environment.Exit(0);
@@ -88,7 +88,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             var spotify = new SpotifyClient(config);
 
             var me = await spotify.UserProfile.Current();
-            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+       
            
             await spotify.Player.ResumePlayback();
          
@@ -178,7 +178,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             var spotify = new SpotifyClient(config);
 
             var me = await spotify.UserProfile.Current();
-            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+  
 
             await spotify.Player.PausePlayback();
           
@@ -200,7 +200,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             var spotify = new SpotifyClient(config);
 
             var me = await spotify.UserProfile.Current();
-            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+        
 
             await spotify.Player.SkipNext();
 
@@ -221,7 +221,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             var spotify = new SpotifyClient(config);
 
             var me = await spotify.UserProfile.Current();
-            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+
 
             await spotify.Player.SkipPrevious();
 
@@ -232,7 +232,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
         private static bool Mute = false;
 
 
-        public static async Task MuteDesmute()
+        public static async Task<bool> MuteDesmute()
         {
            
             var json = await File.ReadAllTextAsync(CredentialsPath);
@@ -256,7 +256,8 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
                 PlayerVolumeRequest playvolumecontext = new PlayerVolumeRequest(0);
                 await spotify.Player.SetVolume(playvolumecontext);
                 isClicked = false;
-                Mute = true;
+                _server.Dispose();
+                return true;
             }
             else
             {
@@ -264,10 +265,11 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
                  PlayerVolumeRequest playvolume = new PlayerVolumeRequest(volumeBefore);
                 await spotify.Player.SetVolume(playvolume);
                 isClicked = true;
-                Mute = false;
+                _server.Dispose();
+                return false;
             }
 
-            _server.Dispose();
+            
         }
         public static async Task PlayPlaylist(SimplePlaylist playlist)
         {
@@ -284,7 +286,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
       
             var me = await spotify.UserProfile.Current();
 
-            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+  
 
 
             PlayerResumePlaybackRequest teste = new PlayerResumePlaybackRequest();
@@ -311,7 +313,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             var spotify = new SpotifyClient(config);
 
             var me = await spotify.UserProfile.Current();
-            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+            
 
             var playlists = await spotify.PaginateAll(await spotify.Playlists.CurrentUsers().ConfigureAwait(false));
             SimplePlaylist item = null;
@@ -344,7 +346,7 @@ namespace DisplayButtons.Bibliotecas.SpotifyWrapper
             var spotify = new SpotifyClient(config);
 
             var me = await spotify.UserProfile.Current();
-            Debug.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
+ 
 
             var playlists = await spotify.PaginateAll(await spotify.Playlists.CurrentUsers().ConfigureAwait(false));
             _server.Dispose();
