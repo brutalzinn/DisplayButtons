@@ -10,19 +10,19 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.Misc
     public class IFTTTEventAction : AbstractDeckAction
     {
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Event Name")]
+        [ActionPropertyDescription("DESCRIPTIONEVENTNAME")]
         public string EventName { get; set; } = "";
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Value 1")]
+        [ActionPropertyDescription("DESCRIPTIONVALUEONE")]
         public string Value1 { get; set; } = "";
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Value 2")]
+        [ActionPropertyDescription("DESCRIPTIONVALUETWO")]
         public string Value2 { get; set; } = "";
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Value 3")]
+        [ActionPropertyDescription("DESCRIPTIONVALUETHREE")]
         public string Value3 { get; set; } = "";
 
 

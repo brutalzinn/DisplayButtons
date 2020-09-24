@@ -27,13 +27,13 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
         }
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Volume Stepper")]
+        [ActionPropertyDescription("DESCRIPTIONVOLUMESTEPPER")]
         [ActionPropertyUpdateImageOnChanged]
         public int VolumeStepper { get; set; } = 10;
         int CurrentItem = 1;
         IDeckItem atual_item;
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Device Control")]
+        [ActionPropertyDescription("DESCRIPTIONDEVICESLIST")]
         [ActionPropertyUpdateImageOnChanged]
         public Guid DeviceId { get; set; }
 
@@ -41,7 +41,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
         public double volume { get; set; }
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Media Key")]
+        [ActionPropertyDescription("DESCRIPTIONOFUNCTIONLIST")]
         [ActionPropertyUpdateImageOnChanged]
         public MediaInputDevice Key { get; set; } = MediaInputDevice.Mute;
 

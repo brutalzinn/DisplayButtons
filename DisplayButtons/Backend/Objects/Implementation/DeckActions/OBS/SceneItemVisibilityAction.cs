@@ -23,11 +23,11 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         public string SceneName { get; set; } = "";
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Scene Item")]
+        [ActionPropertyDescription("DESCRIPTIONSCENEITEM")]
         public String SceneItem { get; set; } = "";
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Visibility")]
+        [ActionPropertyDescription("DESCRIPTIONSCENEVISIBILITY")]
         public ItemVisibility ItemVisibilityStatus { get; set; }
 
         public void SceneItemHelper()

@@ -11,7 +11,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
     public class SwitchSceneAction : AbstractDeckAction
     {
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Selected Scene")]
+        [ActionPropertyDescription("DESCRIPTIONSELECTEDSCENE")]
         public String SceneName { get; set; } = "";
 
         public void SceneNameHelper()

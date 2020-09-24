@@ -26,7 +26,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Keys")]
+        [ActionPropertyDescription("DESCRIPTIONKEYS")]
         public KeyInfo KeyInfoValue { get; set; } = new KeyInfo();
 
         public void KeyInfoValueHelper()

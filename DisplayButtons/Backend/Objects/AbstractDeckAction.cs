@@ -31,7 +31,7 @@ namespace DisplayButtons.Backend.Objects
         {
             get
             {
-                return description;
+                return Texts.rm.GetString(description, Texts.cultereinfo);
             }
         }
 

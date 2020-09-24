@@ -29,7 +29,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         }
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Media Key")]
+        [ActionPropertyDescription("DESCRIPTIONOFUNCTIONLIST")]
         [ActionPropertyUpdateImageOnChanged]
         public MediaKeys Key { get; set; } = MediaKeys.PlayPause;
 

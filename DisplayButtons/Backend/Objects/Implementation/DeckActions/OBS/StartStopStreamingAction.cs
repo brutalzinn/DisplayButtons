@@ -28,7 +28,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         IDeckItem atual_item;
         public StreamingStateToggle ToggleStreamingAction { get; set; } = StreamingStateToggle.Stopped;
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Action")]
+        [ActionPropertyDescription("DESCRIPTIONACTION")]
         [ActionPropertyUpdateImageOnChanged]
         public StreamingState StreamAction { get; set; }
         public override AbstractDeckAction CloneAction()

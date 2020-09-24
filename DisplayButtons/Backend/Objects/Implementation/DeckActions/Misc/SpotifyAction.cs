@@ -41,18 +41,18 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         IDeckItem atual_item;
         public string PlayListId;
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Config Volume Sensibility")]
+        [ActionPropertyDescription("DESCRIPTIONVOLUMESTEPPER")]
         [ActionPropertyUpdateImageOnChanged]
         public int VolumeSensibility { get; set; } = 10;
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Config Playlist")]
+        [ActionPropertyDescription("DESCRIPTIONPLAYLISTCONFIG")]
         [ActionPropertyUpdateImageOnChanged]
          public string ConfigPlay { get; set; }
 
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Media Key")]
+        [ActionPropertyDescription("DESCRIPTIONOFUNCTIONLIST")]
         [ActionPropertyUpdateImageOnChanged]
         public SpotifyMediaKeys Key { get; set; } = SpotifyMediaKeys.PlayPause;
        

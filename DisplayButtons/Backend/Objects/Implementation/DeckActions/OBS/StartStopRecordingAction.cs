@@ -32,7 +32,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         int CurrentItem = 1;
         IDeckItem atual_item;
         [ActionPropertyInclude]
-        [ActionPropertyDescription("Action")]
+        [ActionPropertyDescription("DESCRIPTIONACTION")]
         [ActionPropertyUpdateImageOnChanged]
 
         public RecordingState RecordAction { get; set; }

@@ -18,7 +18,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
 
         [ActionPropertyInclude]
-        [ActionPropertyDescription("To Execute")]
+        [ActionPropertyDescription("DESCRIPTIONTOEXECUTE")]
         public string ToExecute { get; set; } = "";
 
         public void ToExecuteHelper()

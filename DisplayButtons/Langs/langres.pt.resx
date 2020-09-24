@@ -335,6 +335,45 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="DefaultUIFactory_ToastMessage" xml:space="preserve">
     <value>Nova versão disponível</value>
   </data>
+  <data name="DESCRIPTIONACTION" xml:space="preserve">
+    <value>Ação</value>
+  </data>
+  <data name="DESCRIPTIONDEVICESLIST" xml:space="preserve">
+    <value>Dispositivos</value>
+  </data>
+  <data name="DESCRIPTIONEVENTNAME" xml:space="preserve">
+    <value>Nome do evento</value>
+  </data>
+  <data name="DESCRIPTIONKEYS" xml:space="preserve">
+    <value>Teclas</value>
+  </data>
+  <data name="DESCRIPTIONOFUNCTIONLIST" xml:space="preserve">
+    <value>Lista de funções</value>
+  </data>
+  <data name="DESCRIPTIONSCENEITEM" xml:space="preserve">
+    <value>Item de cena</value>
+  </data>
+  <data name="DESCRIPTIONSCENEVISIBILITY" xml:space="preserve">
+    <value>Visibilidade</value>
+  </data>
+  <data name="DESCRIPTIONSELECTEDSCENE" xml:space="preserve">
+    <value>Cena selecionada</value>
+  </data>
+  <data name="DESCRIPTIONTOEXECUTE" xml:space="preserve">
+    <value>Executar</value>
+  </data>
+  <data name="DESCRIPTIONVALUEONE" xml:space="preserve">
+    <value>Valor 1</value>
+  </data>
+  <data name="DESCRIPTIONVALUETHREE" xml:space="preserve">
+    <value>Valor 3</value>
+  </data>
+  <data name="DESCRIPTIONVALUETWO" xml:space="preserve">
+    <value>Valor 2</value>
+  </data>
+  <data name="DESCRIPTIONVOLUMESTEPPER" xml:space="preserve">
+    <value>Configurador de volume</value>
+  </data>
   <data name="DEVELOPERMODE" xml:space="preserve">
     <value>Modo desenvolvedor</value>
   </data>

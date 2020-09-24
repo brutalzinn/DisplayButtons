@@ -45,6 +45,7 @@ using static DisplayButtons.Backend.Objects.ProfileVoidHelper;
 using DisplayButtons.Bibliotecas.DeckText;
 using DisplayButtons.Bibliotecas.Helpers;
 using static DisplayButtons.Bibliotecas.Helpers.DeckHelpers;
+using DisplayButtons.Forms.loading;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -2523,7 +2524,7 @@ ActionImagePlaceHolder.Image = bmp;
 
             
 
-            flowLayoutPanel1.Controls.Clear();
+          
 
             ModernButton myButton = new ModernButton();
             ModernButton myColor = new ModernButton();
@@ -2800,22 +2801,34 @@ ActionImagePlaceHolder.Image = bmp;
 
             }
         }
+        private void clearFlowLayout()
+        {
+            flowLayoutPanel1.Controls.OfType<Control>().All(c =>
+            {
+                c.Dispose();
+                return true;
+            });
+
+            flowLayoutPanel1.Controls.Clear();
+        }
         private void FocusItem(ImageModernButton mb, IDeckItem item)
         {
-          
+         
             camada1.Tag = item;
             camada2.Tag = item;
           
    
        
                     Globals.events.On("DeckEvent", (e) => {
-                       
+                        flowLayoutPanel1.Controls.Clear();
+                        //                        clearFlowLayout();
                         // Cast event argrument to your event object
                         var obj = (DeckEvent)e;
 
            if(obj.Camada == 1)
                 {
-                ActionImagePlaceHolder.TextButton = new TextLabel(obj.DeckItem.GetDeckDefaultLayer);
+                            
+                            ActionImagePlaceHolder.TextButton = new TextLabel(obj.DeckItem.GetDeckDefaultLayer);
        
         FocusItemPropertiesOptions(obj.DeckItem.GetDeckDefaultLayer, obj.DeckItem);
                            
@@ -2823,7 +2836,8 @@ ActionImagePlaceHolder.Image = bmp;
                         }
                         else if (obj.Camada == 2)
                 {
-  
+                            
+
                             ActionImagePlaceHolder.TextButton = new TextLabel(obj.DeckItem.GetDeckLayerTwo);
 
                             FocusItemPropertiesOptions(obj.DeckItem.GetDeckLayerTwo, obj.DeckItem);

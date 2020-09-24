@@ -166,6 +166,7 @@ namespace DisplayButtons.Forms
             this.ActionImagePlaceHolder.Location = new System.Drawing.Point(15, 13);
             this.ActionImagePlaceHolder.Name = "ActionImagePlaceHolder";
             this.ActionImagePlaceHolder.NormalImage = null;
+            this.ActionImagePlaceHolder.NormalLayerTwo = null;
             this.ActionImagePlaceHolder.Origin = null;
             this.ActionImagePlaceHolder.Size = new System.Drawing.Size(80, 80);
             this.ActionImagePlaceHolder.TabIndex = 2;
@@ -202,6 +203,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton4.Location = new System.Drawing.Point(139, 7);
             this.imageModernButton4.Name = "imageModernButton4";
             this.imageModernButton4.NormalImage = null;
+            this.imageModernButton4.NormalLayerTwo = null;
             this.imageModernButton4.Origin = null;
             this.imageModernButton4.Size = new System.Drawing.Size(124, 34);
             this.imageModernButton4.TabIndex = 1;
@@ -219,6 +221,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton2.Location = new System.Drawing.Point(14, 8);
             this.imageModernButton2.Name = "imageModernButton2";
             this.imageModernButton2.NormalImage = null;
+            this.imageModernButton2.NormalLayerTwo = null;
             this.imageModernButton2.Origin = null;
             this.imageModernButton2.Size = new System.Drawing.Size(107, 33);
             this.imageModernButton2.TabIndex = 0;
@@ -291,6 +294,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton6.Location = new System.Drawing.Point(250, 93);
             this.imageModernButton6.Name = "imageModernButton6";
             this.imageModernButton6.NormalImage = null;
+            this.imageModernButton6.NormalLayerTwo = null;
             this.imageModernButton6.Origin = null;
             this.imageModernButton6.Size = new System.Drawing.Size(123, 37);
             this.imageModernButton6.TabIndex = 8;
@@ -317,6 +321,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton7.Location = new System.Drawing.Point(153, 99);
             this.imageModernButton7.Name = "imageModernButton7";
             this.imageModernButton7.NormalImage = null;
+            this.imageModernButton7.NormalLayerTwo = null;
             this.imageModernButton7.Origin = null;
             this.imageModernButton7.Size = new System.Drawing.Size(27, 31);
             this.imageModernButton7.TabIndex = 10;
@@ -334,6 +339,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton8.Location = new System.Drawing.Point(186, 99);
             this.imageModernButton8.Name = "imageModernButton8";
             this.imageModernButton8.NormalImage = null;
+            this.imageModernButton8.NormalLayerTwo = null;
             this.imageModernButton8.Origin = null;
             this.imageModernButton8.Size = new System.Drawing.Size(28, 31);
             this.imageModernButton8.TabIndex = 10;
@@ -380,6 +386,7 @@ namespace DisplayButtons.Forms
             this.deckoptions_button.Location = new System.Drawing.Point(390, 93);
             this.deckoptions_button.Name = "deckoptions_button";
             this.deckoptions_button.NormalImage = null;
+            this.deckoptions_button.NormalLayerTwo = null;
             this.deckoptions_button.Origin = null;
             this.deckoptions_button.Size = new System.Drawing.Size(122, 37);
             this.deckoptions_button.TabIndex = 12;
