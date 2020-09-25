@@ -1,10 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using DisplayButtons.Bibliotecas.OAuthConsumer.TwitchEvents;
+using Newtonsoft.Json;
+
 using SpotifyAPI.Web;
 using SpotifyAPI.Web.Auth;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
@@ -13,12 +18,14 @@ using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Models;
+using static DisplayButtons.Bibliotecas.OAuthConsumer.Services;
 
 namespace DisplayButtons.Bibliotecas.TwitchWrapper
 {
     
         public static class TwitchWrapper
         {
+        private static SimpleWebServer.SimpleHTTPServer oAuthTokenTwitch;
         private static TwitchClient client;
         private const string CredentialsPath = "credentials_twitch.json";
         private static readonly string? clientId = "h8ocjqn8n6fvv4jrr6oyzb0f923v7e";
@@ -41,7 +48,7 @@ namespace DisplayButtons.Bibliotecas.TwitchWrapper
             }
             else
             {
-                await StartAuthentication();
+               await  StartAuthentication();
                 return false;
             }
 
@@ -51,19 +58,15 @@ namespace DisplayButtons.Bibliotecas.TwitchWrapper
       
         private static async Task StartAuthentication()
         {
-            var (verifier, challenge) = PKCEUtil.GenerateCodes();
 
-            await _server.Start();
-            _server.AuthorizationCodeReceived += async (sender, response) =>
-            {
-                await _server.Stop();
-                PKCETokenResponse token = await new OAuthClient().RequestToken(
-                  new PKCETokenRequest(clientId!, response.Code, _server.BaseUri, verifier)
-                );
+            oAuthTokenTwitch =  new SimpleWebServer.SimpleHTTPServer(5000, ServicesEnum.Twitch);
 
-                await File.WriteAllTextAsync(CredentialsPath, JsonConvert.SerializeObject(token));
-             
-            };
+    
+            // Handle requests
+
+       
+            // Close the listener
+
             string url = String.Format("https://id.twitch.tv/oauth2/authorize?client_id={0}&redirect_uri={1}&response_type={2}&scope={3}", "h8ocjqn8n6fvv4jrr6oyzb0f923v7e", "http://localhost:5000/callback", "token", "");
 
 
@@ -71,16 +74,33 @@ namespace DisplayButtons.Bibliotecas.TwitchWrapper
             Uri uri = (new Uri (url));
             try
             {
-                BrowserUtil.Open(uri);
+               BrowserUtil.Open(uri);
             }
             catch (Exception)
             {
                 Console.WriteLine("Unable to open URL, manually open: {0}", uri);
             }
+
+
+
         }
         public static void StartChat()
         {
-          
+            string token = "";
+            string type = "";
+            Globals.events.On("TwitchEventHandlerLoginOauth", (e) => {
+                // Cast event argrument to your event object
+                var obj = (TwitchEventHandlerLoginOauth)e;
+
+                // Get (set) your event object data
+                token = obj.token;
+                type = obj.type;
+oAuthTokenTwitch.Stop();
+                // Other code
+            });
+         
+            Debug.WriteLine(token); 
+            
             ConnectionCredentials credentials = new ConnectionCredentials("robertocpaes", "h8ocjqn8n6fvv4jrr6oyzb0f923v7e");
             var clientOptions = new ClientOptions
             {

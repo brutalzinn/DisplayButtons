@@ -24,6 +24,7 @@ namespace DisplayButtons.Forms.TwitchChat
             InitializeComponent();
 
             Task.FromResult(TwitchWrapper.Auth().Result);
+            TwitchWrapper.StartChat();
 
         }
         private void CloseWithResult(DialogResult result)
