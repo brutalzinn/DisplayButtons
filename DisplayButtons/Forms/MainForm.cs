@@ -46,6 +46,7 @@ using DisplayButtons.Bibliotecas.DeckText;
 using DisplayButtons.Bibliotecas.Helpers;
 using static DisplayButtons.Bibliotecas.Helpers.DeckHelpers;
 using DisplayButtons.Forms.loading;
+using DisplayButtons.Forms.TwitchChat;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -3935,6 +3936,12 @@ toAdd.AsEnumerable().Reverse().All(m =>
             {
                 Globals.events.Trigger("DeckEvent", new DeckEvent(FF, 2));
             }
+        }
+
+        private void imageModernButton1_Click(object sender, EventArgs e)
+        {
+            TwitchChatForm teste = new TwitchChatForm();
+            teste.Show();
         }
     }
     #endregion

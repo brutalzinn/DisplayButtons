@@ -74,6 +74,7 @@ namespace DisplayButtons.Backend.Objects
             OBS,
             Misc,
             Deck,
+            Twitch
             
         }
 

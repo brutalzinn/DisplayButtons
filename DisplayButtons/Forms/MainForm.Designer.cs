@@ -59,6 +59,7 @@ namespace DisplayButtons.Forms
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.perfil_info = new System.Windows.Forms.Label();
             this.deckoptions_button = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -395,6 +396,24 @@ namespace DisplayButtons.Forms
             this.deckoptions_button.UseVisualStyleBackColor = true;
             this.deckoptions_button.Click += new System.EventHandler(this.imageModernButton9_Click);
             // 
+            // imageModernButton1
+            // 
+            this.imageModernButton1.Camada = 0;
+            this.imageModernButton1.CustomColorScheme = false;
+            this.imageModernButton1.Image = null;
+            this.imageModernButton1.ImageLayerTwo = null;
+            this.imageModernButton1.Location = new System.Drawing.Point(882, 95);
+            this.imageModernButton1.Name = "imageModernButton1";
+            this.imageModernButton1.NormalImage = null;
+            this.imageModernButton1.NormalLayerTwo = null;
+            this.imageModernButton1.Origin = null;
+            this.imageModernButton1.Size = new System.Drawing.Size(131, 43);
+            this.imageModernButton1.TabIndex = 13;
+            this.imageModernButton1.Text = "imageModernButton1";
+            this.imageModernButton1.TextButton = null;
+            this.imageModernButton1.UseVisualStyleBackColor = true;
+            this.imageModernButton1.Click += new System.EventHandler(this.imageModernButton1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -405,6 +424,7 @@ namespace DisplayButtons.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.imageModernButton1);
             this.Controls.Add(this.deckoptions_button);
             this.Controls.Add(this.perfil_info);
             this.Controls.Add(this.imageModernButton8);
@@ -471,6 +491,7 @@ namespace DisplayButtons.Forms
         private RadioButton camada2;
         private RadioButton camada1;
         public GroupBox groupBox1;
+        private ImageModernButton imageModernButton1;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }
