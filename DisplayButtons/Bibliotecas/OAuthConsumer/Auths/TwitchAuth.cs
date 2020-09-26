@@ -50,7 +50,7 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
 
             Scopes myscope = new Scopes(scope);
 
-            Url myurl = new Url("https://id.twitch.tv/oauth2/token", ClientId(), RedirectUrl() + "callapi", myscope.Scope);
+            Url myurl = new Url(ServiceUrl(), ClientId(), RedirectUrl() + "callback", myscope.Scope);
 
             Debug.WriteLine("URL LINK GET CODE : " + myurl.Url_feeder);
             Uri uri = (new Uri(myurl.Url_feeder));
@@ -154,11 +154,11 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
             scope.Add("user:read:broadcast");
             scope.Add("channel:edit:commercial");
             scope.Add("user:edit");
-            Scopes myscope = new Scopes(scope);
+          
 
             //    var jsonRequest = JsonConvert.SerializeObject(postData);
             // HttpContent content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
-            Url my_post = new Url(ServiceUrl(), ClientId(), ClientSecret(), code, "authorization_code", RedirectUrl() + "callapi");
+            Url my_post = new Url("https://id.twitch.tv/oauth2/token", ClientId(), ClientSecret(), code, "authorization_code", RedirectUrl() + "callapi");
 
             var result = await httpClientRequest.PostAsync(my_post.Url_feeder,null);
             try
