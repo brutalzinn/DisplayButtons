@@ -22,10 +22,7 @@ namespace DisplayButtons.Forms.TwitchChat
         public TwitchChatForm()
         {
             InitializeComponent();
-            if (TwitchWrapper.Auth())
-            {
-
-            }
+            TwitchWrapper.StartTwitchApi();
            
 
         }

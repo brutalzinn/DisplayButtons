@@ -1,4 +1,6 @@
-﻿using DisplayButtons.Bibliotecas.OAuthConsumer.TwitchEvents;
+﻿using DisplayButtons.Bibliotecas.OAuthConsumer;
+using DisplayButtons.Bibliotecas.OAuthConsumer.Auths;
+using DisplayButtons.Bibliotecas.OAuthConsumer.TwitchEvents;
 using MyService;
 using Newtonsoft.Json;
 
@@ -36,69 +38,18 @@ namespace DisplayButtons.Bibliotecas.TwitchWrapper
         private const string CredentialsPath = "credentials_twitch.json";
         private static readonly string? clientId = "h8ocjqn8n6fvv4jrr6oyzb0f923v7e";
 
-        public static bool Auth()
+     
+
+        public static void StartTwitchApi()
         {
-            // This is a bug in the SWAN Logging library, need this hack to bring back the cursor
+            TwitchAuth myTwitchApi = new TwitchAuth();
 
+            myTwitchApi.Authenticator();
+   
+            // setApi();
 
-            if (string.IsNullOrEmpty(clientId))
-            {
-                throw new NullReferenceException(
-                  "Please set SPOTIFY_CLIENT_ID via environment variables before starting the program"
-                );
-            }
+            // Other code
 
-            if (File.Exists(CredentialsPath))
-            {
-                return true;
-            }
-            else
-            {
-                StartAuthentication();
-                return false;
-            }
-
-
-
-        }
-
-        private static void StartAuthentication()
-        {
-
-            //if(oAuthTokenTwitch == null)
-            //       {
-            //       oAuthTokenTwitch =  new SimpleWebServer.SimpleHTTPServer(5000,ServicesEnum.Twitch);
-
-            //       }
-
-            WebService.StartWebServer(ServicesEnum.Twitch);
-
-            string url = String.Format("https://id.twitch.tv/oauth2/authorize?client_id={0}&redirect_uri={1}&response_type={2}&scope={3}", clientId, "http://localhost:5000/callback", "token", "");
-
-  
-            Uri uri = (new Uri(url));
-            try
-            {
-                BrowserUtil.Open(uri);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Unable to open URL, manually open: {0}", uri);
-            }
-
-            Globals.events.On("TwitchEventHandlerLoginOauth", (e) => {
-                // Cast event argrument to your event object
-                var obj = (TwitchEventHandlerLoginOauth)e;
-
-                // Get (set) your event object data
-                my_token = obj.token;
-                //    type = obj.type;
-
-                //   WebService.StopWebServer();
-                setApi();
-
-                // Other code
-            });
 
         }
     

@@ -1,5 +1,6 @@
 ﻿using DisplayButtons;
 using DisplayButtons.Bibliotecas.OAuthConsumer;
+using DisplayButtons.Bibliotecas.OAuthConsumer.Auths;
 using DisplayButtons.Bibliotecas.OAuthConsumer.TwitchEvents;
 using Newtonsoft.Json;
 using System;
@@ -41,7 +42,9 @@ xhr.open(""POST"", url, true);
 xhr.setRequestHeader(""Content-Type"", ""application/json"");
         var data = JSON.stringify({""key"": hash});
 xhr.send(data);
+
   } else {
+
       // No hash found
   }
 </script>";
@@ -60,13 +63,13 @@ xhr.send(data);
    "    </form>" +
    "  </body>" +
    "</html>";
-
       
+
 
         /// <summary>
         /// Keep the task in a static variable to keep it alive
         /// </summary>
-private static Task _mainLoop;
+        private static Task _mainLoop;
 
         /// <summary>
         /// Call this to start the web server
@@ -144,13 +147,7 @@ private static Task _mainLoop;
                                     //Get the current settings
                                     response.ContentType = "application/json";
 
-                                    //This is what we want to send back
-                                  //var responseBody = JsonConvert.SerializeObject(MyApplicationSettings);
 
-                                  //  //Write it to the response stream
-                                  //  var buffer = Encoding.UTF8.GetBytes(responseBody);
-                                  //  response.ContentLength64 = buffer.Length;
-                                  //  response.OutputStream.Write(buffer, 0, buffer.Length);
                                     handled = true;
                                     break;
 
@@ -177,19 +174,19 @@ private static Task _mainLoop;
                                     using (var reader = new StreamReader(body, context.Request.ContentEncoding))
                                     {
                                         //Get the data that was sent to us
-                                   
+
 
                                         var json = JsonConvert.DeserializeObject<JavaScriptOauthInfo>(reader.ReadToEnd());
                                         try
                                         {
-                                            ProcessTypeRequest(_service, json.key);
-
+                                            //    HandlerApi(_service, json.key);
+                                            ProcessTypeKey(_service, json.key);
                                         }
-                                        catch(Exception)
+                                        catch (Exception)
                                         {
 
                                         }
-                                      
+
                                         //User user = JsonConvert.DeserializeObject<User>(fixedData);
 
                                         //Use it to update our settings
@@ -207,7 +204,7 @@ private static Task _mainLoop;
                                     //  var buffer = Encoding.UTF8.GetBytes(responseBody);
                                     //  response.ContentLength64 = buffer.Length;
                                     //  response.OutputStream.Write(buffer, 0, buffer.Length);
-                                  ;
+
 
                             }
 
@@ -215,32 +212,88 @@ private static Task _mainLoop;
                             break;
 
                         case "/callback":
+                            switch (context.Request.HttpMethod)
+                            {
+                               
+                                case "GET":
+                                    using (var body = context.Request.InputStream)
+                                    using (var reader = new StreamReader(body, context.Request.ContentEncoding))
+                                    {
+                                        byte[] script = Encoding.UTF8.GetBytes(pageData);
 
-                             byte[] script = Encoding.UTF8.GetBytes( pageData);
-                           
-                            response.ContentType = "text/html";
-                            response.ContentEncoding = Encoding.UTF8;
-                            response.ContentLength64 = script.LongLength;
-                            
+                                        response.ContentType = "text/html";
+                                        response.ContentEncoding = Encoding.UTF8;
+                                        response.ContentLength64 = script.LongLength;
 
-                        
-                           
-                    
-    
-                            response.ContentLength64 = script.LongLength;
-                            response.OutputStream.WriteAsync(script, 0, script.Length);
+                                        response.OutputStream.WriteAsync(script, 0, script.Length);
+
+                                        try
+                                        {
+                                            ProcessTypeCode(_service, context.Request.Url.PathAndQuery.ToString());
 
 
-                       
-                        
+                                        }
+                                        catch (Exception)
+                                        {
 
+                                        }
+                                        response.StatusCode = 204;
+
+                                        break;
+
+                                    }
+
+                            }
                             break;
+                        case "/callapi":
+                            switch (context.Request.HttpMethod)
+                            {
+
+                                case "GET":
+                                    using (var body = context.Request.InputStream)
+                                    using (var reader = new StreamReader(body, context.Request.ContentEncoding))
+                                    {
+                                        byte[] script = Encoding.UTF8.GetBytes(pageData);
+
+                                        response.ContentType = "text/html";
+                                        response.ContentEncoding = Encoding.UTF8;
+                                        response.ContentLength64 = script.LongLength;
+
+                                        response.OutputStream.WriteAsync(script, 0, script.Length);
+
+                                        try
+                                        {
+                                            
+
+
+                                        }
+                                        catch (Exception)
+                                        {
+
+                                        }
+                                        response.StatusCode = 204;
+
+                                        break;
+
+                                    }
+
+                            }
+                            break;
+
+
                     }
+
+
+
+
+
                     if (!handled)
                     {
                         response.StatusCode = 404;
                     }
                 }
+
+
                 catch (Exception e)
                 {
                     //Return the exception details the client - you may or may not want to do this
@@ -254,28 +307,36 @@ private static Task _mainLoop;
                 }
             }
         }
-        private static void ProcessTypeRequest(ServicesEnum _service_enum, string urlparam)
+        private static void ProcessTypeKey(ServicesEnum _service_enum, string urlparam)
+        {
+            var acess_link = HttpUtility.ParseQueryString(urlparam);    
+                      string token = acess_link.Get("access_token");
+                // string type = acess_link.Get("token_type");
+                  
+                   Globals.events.Trigger("EventHandlerLoginAuthGetToken", new EventHandlerLoginAuthGetToken(token));
+                   
+        }
+        private static void ProcessTypeCode(ServicesEnum _service_enum, string urlparam)
         {
             var acess_link = HttpUtility.ParseQueryString(urlparam);
-          
-                switch (_service_enum)
-                {
+            //   string token = acess_link.Get("access_token");
+            //     string type = acess_link.Get("token_type");
+            string code = acess_link.Get("/callback?code");
+            Globals.events.Trigger("EventHandlerLoginAuth", new EventHandlerLoginAuth(code));
 
-                    case ServicesEnum.Twitch:
+        }
+        private static void HandlerApi(Action method)
+        {
 
-                      
-                        string token = acess_link.Get("access_token");
-                        string type = acess_link.Get("token_type");
-                        Globals.events.Trigger("TwitchEventHandlerLoginOauth", new TwitchEventHandlerLoginOauth(token, type));
+            //switch (_service_enum)
+            //{
+            //    case ServicesEnum.Twitch:
 
-                        break;
-                    case ServicesEnum.Default:
+            //        break;
+            //    case ServicesEnum.Default:
 
-                        Debug.WriteLine("Link default" + acess_link);
-                        break;
-                }
-
-            
+            //        break;
+            //}
         }
         //private static void UpdateSettings(MySettings newSettings)
         //{

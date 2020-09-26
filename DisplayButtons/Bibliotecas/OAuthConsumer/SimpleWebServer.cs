@@ -175,10 +175,10 @@ namespace SimpleWebServer
 
                 case ServicesEnum.Twitch:
 
-                    Debug.WriteLine("Link" + req.Url.Query.ToString());
-                    string token = acess_link.Get("access_token");
-                    string type = acess_link.Get("token_type");
-                    Globals.events.Trigger("TwitchEventHandlerLoginOauth", new TwitchEventHandlerLoginOauth(token, type));
+                    //Debug.WriteLine("Link" + req.Url.Query.ToString());
+                    //string token = acess_link.Get("access_token");
+                    //string type = acess_link.Get("token_type");
+                    //Globals.events.Trigger("TwitchEventHandlerLoginOauth", new EventHandlerLoginAuth(token, type));
                  
                     break;
                 case ServicesEnum.Default:
