@@ -35,7 +35,7 @@ namespace SimpleWebServer
         private bool localMode = true;
         private bool custom = false;
         public static int pageViews = 0;
-
+        private bool _enabled = false;
         public static int requestCount = 0;
 
         private List<string> customPrefixes;
@@ -63,9 +63,11 @@ namespace SimpleWebServer
         /// </summary>
         /// <param name="path">Directory path to serve.</param>
         /// <param name="port">Port of the server.</param>
-        public SimpleHTTPServer( int port, ServicesEnum service)
+        public SimpleHTTPServer( int _port, ServicesEnum service)
         {
-            this.Initialize(port, service);
+       
+
+            this.Initialize(_port, service);
         }
 
         /// <summary>
@@ -74,13 +76,18 @@ namespace SimpleWebServer
         /// <param name="path">Directory path to serve.</param>
         /// <param name="port">Port of the server.</param>
         /// <param name="local">Indicates whether this is loopback only server</param>
-        public SimpleHTTPServer(string path, int port, bool local, bool custom, List<string> customPrefixes)
+        public SimpleHTTPServer(ServicesEnum service, bool local, bool custom, List<string> customPrefixes)
         {
             this.localMode = local;
             this.custom = custom;
+            this._service = service;
             this.customPrefixes = customPrefixes;
+            TcpListener l = new TcpListener(IPAddress.Loopback, 0);
+            l.Start();
+            int port = ((IPEndPoint)l.LocalEndpoint).Port;
+            l.Stop();
+            this.Initialize(port, service);
 
-            
         }
 
         /// <summary>
@@ -102,9 +109,14 @@ namespace SimpleWebServer
         /// </summary>
         public void Stop()
         {
-            _listener.Stop();
-         _serverThread.Interrupt();
-          
+          _enabled = false;
+            _listener.Close();
+            //   _listener.Close();
+            //  _listener.Stop();
+            
+       _serverThread.Interrupt();
+
+         
         }
 
         private void Listen()
@@ -126,13 +138,21 @@ namespace SimpleWebServer
                 
                
             }
+
+          
+
             try
             {
+                _listener.Start();
+            }
+            catch (Exception)
+            {
+                
+               
+                //  throw new Exception(string.Format("Failed to start listener for {0} make sure that you have admin privileges",ex));
+            }
 
-           
-            _listener.Start();
-            }catch(Exception) { }
-            
+
             while (true)
             {
                 try
@@ -140,7 +160,7 @@ namespace SimpleWebServer
                     HttpListenerContext context = _listener.GetContext();
                     Process(context);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }
@@ -148,16 +168,22 @@ namespace SimpleWebServer
         }
         private void ProcessTypeRequest(ServicesEnum _service_enum, HttpListenerRequest req)
         {
+            var acess_link = HttpUtility.ParseQueryString(req.Url.Query);
 
             switch (_service_enum)
             {
 
                 case ServicesEnum.Twitch:
-                  string token =  HttpUtility.ParseQueryString(req.Url.ToString()).Get("access_token");
-                    string type = HttpUtility.ParseQueryString(req.Url.ToString()).Get("token_type");
-           
+
+                    Debug.WriteLine("Link" + req.Url.Query.ToString());
+                    string token = acess_link.Get("access_token");
+                    string type = acess_link.Get("token_type");
                     Globals.events.Trigger("TwitchEventHandlerLoginOauth", new TwitchEventHandlerLoginOauth(token, type));
                  
+                    break;
+                case ServicesEnum.Default:
+
+                    Debug.WriteLine("Link default" + acess_link);
                     break;
             }
       
@@ -179,7 +205,7 @@ namespace SimpleWebServer
                 Debug.WriteLine(req.HttpMethod);
                 Debug.WriteLine(req.UserHostName);
                 Debug.WriteLine(req.UserAgent);
-                Console.WriteLine();
+                
 
                 // If `shutdown` url requested w/ POST, then shutdown the server after serving the page
                 if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/shutdown"))
@@ -189,8 +215,7 @@ namespace SimpleWebServer
                 }
 
 
-
-
+             
 
 
 
@@ -208,16 +233,18 @@ namespace SimpleWebServer
                 resp.ContentLength64 = data.LongLength;
 
                 // Write out to the response stream (asynchronously), then close it
-                resp.OutputStream.WriteAsync(data, 0, data.Length);
+                resp.OutputStream.WriteAsync(data, 0, data.Length); 
+               
                 resp.Close();
-                if ((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/callback"))
+                if (req.Url.AbsolutePath == "/callback")
                 {
                     ProcessTypeRequest(_service, req);
 
                 }
-               
 
-                
+
+
+
             }
             catch (Exception)
             {
@@ -234,6 +261,7 @@ namespace SimpleWebServer
             
             this._port = port;
             this._service = service;
+            this._enabled = true;
             _serverThread = new Thread(this.Listen);
             _serverThread.Start();
         }

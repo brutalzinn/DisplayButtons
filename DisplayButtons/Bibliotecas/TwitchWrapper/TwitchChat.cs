@@ -1,4 +1,5 @@
 ﻿using DisplayButtons.Bibliotecas.OAuthConsumer.TwitchEvents;
+using MyService;
 using Newtonsoft.Json;
 
 using SpotifyAPI.Web;
@@ -11,6 +12,9 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TwitchLib.Api;
+using TwitchLib.Api.Helix.Models.Users;
+
 using TwitchLib.Client;
 using TwitchLib.Client.Enums;
 using TwitchLib.Client.Events;
@@ -22,15 +26,17 @@ using static DisplayButtons.Bibliotecas.OAuthConsumer.Services;
 
 namespace DisplayButtons.Bibliotecas.TwitchWrapper
 {
-    
-        public static class TwitchWrapper
-        {
-        private static SimpleWebServer.SimpleHTTPServer oAuthTokenTwitch;
+
+    public static class TwitchWrapper
+    {
+ 
         private static TwitchClient client;
+        private static string my_token;
+        private static TwitchAPI api;
         private const string CredentialsPath = "credentials_twitch.json";
         private static readonly string? clientId = "h8ocjqn8n6fvv4jrr6oyzb0f923v7e";
-        private static readonly EmbedIOAuthServer _server = new EmbedIOAuthServer(new Uri("http://localhost:5000/callback"), 5000);
-        public static async Task<bool> Auth()
+
+        public static bool Auth()
         {
             // This is a bug in the SWAN Logging library, need this hack to bring back the cursor
 
@@ -48,60 +54,69 @@ namespace DisplayButtons.Bibliotecas.TwitchWrapper
             }
             else
             {
-               await  StartAuthentication();
+                StartAuthentication();
                 return false;
             }
 
 
 
         }
-      
-        private static async Task StartAuthentication()
+
+        private static void StartAuthentication()
         {
 
-            oAuthTokenTwitch =  new SimpleWebServer.SimpleHTTPServer(5000, ServicesEnum.Twitch);
+            //if(oAuthTokenTwitch == null)
+            //       {
+            //       oAuthTokenTwitch =  new SimpleWebServer.SimpleHTTPServer(5000,ServicesEnum.Twitch);
 
-    
-            // Handle requests
+            //       }
 
-       
-            // Close the listener
+            WebService.StartWebServer(ServicesEnum.Twitch);
 
-            string url = String.Format("https://id.twitch.tv/oauth2/authorize?client_id={0}&redirect_uri={1}&response_type={2}&scope={3}", "h8ocjqn8n6fvv4jrr6oyzb0f923v7e", "http://localhost:5000/callback", "token", "");
+            string url = String.Format("https://id.twitch.tv/oauth2/authorize?client_id={0}&redirect_uri={1}&response_type={2}&scope={3}", clientId, "http://localhost:5000/callback", "token", "");
 
-
-
-            Uri uri = (new Uri (url));
+  
+            Uri uri = (new Uri(url));
             try
             {
-               BrowserUtil.Open(uri);
+                BrowserUtil.Open(uri);
             }
             catch (Exception)
             {
                 Console.WriteLine("Unable to open URL, manually open: {0}", uri);
             }
 
-
-
-        }
-        public static void StartChat()
-        {
-            string token = "";
-            string type = "";
             Globals.events.On("TwitchEventHandlerLoginOauth", (e) => {
                 // Cast event argrument to your event object
                 var obj = (TwitchEventHandlerLoginOauth)e;
 
                 // Get (set) your event object data
-                token = obj.token;
-                type = obj.type;
-oAuthTokenTwitch.Stop();
+                my_token = obj.token;
+                //    type = obj.type;
+
+                //   WebService.StopWebServer();
+                setApi();
+
                 // Other code
             });
-         
-            Debug.WriteLine(token); 
-            
-            ConnectionCredentials credentials = new ConnectionCredentials("robertocpaes", "h8ocjqn8n6fvv4jrr6oyzb0f923v7e");
+
+        }
+    
+       private static void setApi()
+        {
+
+            api = new TwitchAPI();
+            api.Settings.ClientId = clientId;
+            api.Settings.AccessToken = my_token; // App Secret is not an Accesstoken
+            foreach (User item in api.Helix.Users.GetUsersAsync().Result.Users)
+            {
+
+                Debug.WriteLine(item.DisplayName);
+            }
+        }
+        private static void StartChat()
+        {
+            ConnectionCredentials credentials = new ConnectionCredentials("robertocpaes", my_token);
             var clientOptions = new ClientOptions
             {
                 MessagesAllowedInPeriod = 750,
@@ -122,17 +137,17 @@ oAuthTokenTwitch.Stop();
         }
             private  static void Client_OnLog(object sender, OnLogArgs e)
             {
-                Console.WriteLine($"{e.DateTime.ToString()}: {e.BotUsername} - {e.Data}");
+                Debug.WriteLine($"{e.DateTime.ToString()}: {e.BotUsername} - {e.Data}");
             }
 
             private static void Client_OnConnected(object sender, OnConnectedArgs e)
             {
-                Console.WriteLine($"Connected to {e.AutoJoinChannel}");
+            Debug.WriteLine($"Connected to {e.AutoJoinChannel}");
             }
 
             private static void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
             {
-                Console.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
+            Debug.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
                 client.SendMessage(e.Channel, "Hey guys! I am a bot connected via TwitchLib!");
             }
 

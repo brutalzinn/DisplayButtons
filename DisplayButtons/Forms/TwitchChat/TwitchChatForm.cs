@@ -22,9 +22,11 @@ namespace DisplayButtons.Forms.TwitchChat
         public TwitchChatForm()
         {
             InitializeComponent();
+            if (TwitchWrapper.Auth())
+            {
 
-            Task.FromResult(TwitchWrapper.Auth().Result);
-            TwitchWrapper.StartChat();
+            }
+           
 
         }
         private void CloseWithResult(DialogResult result)
