@@ -19,6 +19,12 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Objects
      
   
         }
+        public Url(string service_url, string clientid, string clientsecret, string refreshtoken, string grant_type)
+        {
+            this.url_feeder = String.Format("{0}?grant_type={1}&refresh_token={2}&client_id={3}&client_secret={4}", service_url, grant_type, refreshtoken, clientid, clientsecret);
+
+
+        }
         public string Url_feeder { get => url_feeder; set => url_feeder = value; }
     }
 }

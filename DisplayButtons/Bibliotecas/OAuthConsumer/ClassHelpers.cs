@@ -5,20 +5,21 @@ using System.Text;
 namespace DisplayButtons.Bibliotecas.OAuthConsumer
 {
    
-        public class JavaScriptOauthInfo
+        public class JsonOAuthSession
         {
    
-            public string key { get; set; }
+            public string access_token { get; set; }
         public string code { get; set; }
-        public string auth { get; set; }
+        public int expires_in { get; set; }
+        public bool auth { get; set; }
+        public string refresh_token { get; set; }
     }
-    public class JsonAuthTwitch
+    public class JsonOAuth
     {
-
         public string access_token { get; set; }
         public string refresh_token { get; set; }
         public int expires_in { get; set; }
-        public string [] scope { get; set; }
+        public List<string> scope { get; set; }
         public string token_type { get; set; }
     }
 

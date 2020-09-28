@@ -20,15 +20,40 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
     public class TwitchAuth : AbstractAuth
     {
         private const string CredentialsPath = "credentials_twitch.json";
-        public string code;
+        private string code;
         private string token;
 
 
+        public string Token()
+        {
+            if(token != null)
+            {
+ return token;
+            }
+            else
+            {
+                return "";
+            }
+           
+        }
+        public string Code()
+        {
 
+            return code;
+        }
         public override bool AuthCheck()
         { 
             if (File.Exists(CredentialsPath))
             {
+
+                string result = File.ReadAllText(CredentialsPath);
+                var json =  JsonConvert.DeserializeObject<JsonOAuthSession>(result);
+                if(json.expires_in != 0)
+                {
+  code = json.code;
+                token = json.access_token;
+                }
+              
                 return true;
             }
             else
@@ -38,29 +63,43 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
             }
           
         }
-
+       
         public override void Authenticator()
         {
             WebService.StartWebServer(ServicesEnum.Twitch);
 
             List<string> scope = new List<string>();
-            scope.Add("user:read:broadcast");
-            scope.Add("channel:edit:commercial");
-            scope.Add("user:edit");
+            scope.Add("chat:edit");
+            scope.Add("chat:read");
+            scope.Add("channel:moderate");
+            scope.Add("whispers:read");
+            scope.Add("whispers:edit");
+
 
             Scopes myscope = new Scopes(scope);
 
             Url myurl = new Url(ServiceUrl(), ClientId(), RedirectUrl() + "callback", myscope.Scope);
 
-            Debug.WriteLine("URL LINK GET CODE : " + myurl.Url_feeder);
-            Uri uri = (new Uri(myurl.Url_feeder));
+            Debug.WriteLine("MINHA URL COM SCOPE" + myurl.Url_feeder);
+          
             try
             {
-                BrowserUtil.Open(uri);
+                try
+                {
+                    Process myProcess = new Process();
+                    // true is the default, but it is important not to set it to false
+                    myProcess.StartInfo.UseShellExecute = true;
+                    myProcess.StartInfo.FileName = myurl.Url_feeder;
+                    myProcess.Start();
+                }
+                catch (Exception ee)
+                {
+                    Console.WriteLine(ee.Message);
+                }
             }
             catch (Exception)
             {
-                Console.WriteLine("Unable to open URL, manually open: {0}", uri);
+                //         Console.WriteLine("Unable to open URL, manually open: {0}", uri);
             }
 
 
@@ -69,20 +108,27 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
                 // Cast event argrument to your event object
                 var obj = (EventHandlerLoginAuth)e;
                 code = obj.code;
-                JavaScriptOauthInfo myjson = new JavaScriptOauthInfo();
 
-                myjson.code = obj.code;
-
-                var json = JsonConvert.SerializeObject(myjson);
+             
 
 
-                File.WriteAllTextAsync(CredentialsPath, json);
-                var result = Task.FromResult(getTwitchData()).Result;
-                Debug.WriteLine("KEY IS : " + result.ToString()) ;
-                
+
+                var val = Task.Run(() => getTwitchData());
+              token = val.Result.access_token ;
+                JsonOAuthSession myjson = new JsonOAuthSession();
 
 
-              
+  myjson.code = obj.code;
+myjson.access_token = token;
+
+                myjson.expires_in = val.Result.expires_in;
+                myjson.refresh_token = val.Result.refresh_token;
+                                var json = JsonConvert.SerializeObject(myjson);
+         
+File.WriteAllTextAsync(CredentialsPath, json);
+                TwitchWrapper.TwitchWrapper.StartChat();
+
+
             });
 
                 // Cast event argrument to your event object
@@ -138,18 +184,11 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
         {
             return "sx26x69d1ak429bed15b737589u020";
         }
-        public async Task<JObject> getTwitchData()
+        public async Task<JsonOAuth> getTwitchData()
         {
             var httpClientRequest = new HttpClient();
 
-            //var postData = new Dictionary<string, object>();
-            //postData.Add("client_id", "ihjl5qbxnatduno6yrs1h0x0eei40g");
-            //postData.Add("client_secret", "3ppn2pgdhuv8j5gfrmlr980binpg09");
-            //postData.Add("code", code);
-            //postData.Add("grant_type", "authorization_code");
-            //postData.Add("redirect_uri", "http://localhost:5000/callapi");
-
-            // postData.Add("state", mycreatedtoken);
+     
             List<string> scope = new List<string>();
             scope.Add("user:read:broadcast");
             scope.Add("channel:edit:commercial");
@@ -164,7 +203,37 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
             try
             {
                 var resultString = await result.Content.ReadAsStringAsync();
-                var jsonResult = JObject.Parse(resultString);
+                var jsonResult = JsonConvert.DeserializeObject<JsonOAuth>(resultString);
+
+               // var jsonResult = JObject.Parse(resultString);
+                System.Diagnostics.Debug.WriteLine(jsonResult);
+                return jsonResult;
+            }
+
+            catch
+            {
+                System.Diagnostics.Debug.WriteLine(result);
+                return null;
+            }
+        }
+        public async Task<JsonOAuth> refreshToken(string refreshtoken)
+        {
+            var httpClientRequest = new HttpClient();
+
+
+        
+
+            //    var jsonRequest = JsonConvert.SerializeObject(postData);
+            // HttpContent content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
+            Url my_post = new Url("https://id.twitch.tv/oauth2/token", ClientId(), ClientSecret(), refreshtoken, "refresh_token");
+
+            var result = await httpClientRequest.PostAsync(my_post.Url_feeder, null);
+            try
+            {
+                var resultString = await result.Content.ReadAsStringAsync();
+                var jsonResult = JsonConvert.DeserializeObject<JsonOAuth>(resultString);
+
+                // var jsonResult = JObject.Parse(resultString);
                 System.Diagnostics.Debug.WriteLine(jsonResult);
                 return jsonResult;
             }

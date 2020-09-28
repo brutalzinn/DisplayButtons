@@ -176,11 +176,11 @@ xhr.send(data);
                                         //Get the data that was sent to us
 
 
-                                        var json = JsonConvert.DeserializeObject<JavaScriptOauthInfo>(reader.ReadToEnd());
+                                        var json = JsonConvert.DeserializeObject<JsonOAuthSession>(reader.ReadToEnd());
                                         try
                                         {
                                             //    HandlerApi(_service, json.key);
-                                            ProcessTypeKey(_service, json.key);
+                                            ProcessTypeKey(_service, json.code);
                                         }
                                         catch (Exception)
                                         {
@@ -263,7 +263,8 @@ xhr.send(data);
 
                                         try
                                         {
-                                            
+                                            ProcessTypeCode(_service, context.Request.Url.PathAndQuery.ToString());
+
 
 
                                         }

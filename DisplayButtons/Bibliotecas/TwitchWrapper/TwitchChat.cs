@@ -38,15 +38,16 @@ namespace DisplayButtons.Bibliotecas.TwitchWrapper
         private const string CredentialsPath = "credentials_twitch.json";
         private static readonly string? clientId = "h8ocjqn8n6fvv4jrr6oyzb0f923v7e";
 
-     
+        private static TwitchAuth myTwitchApi;
 
         public static void StartTwitchApi()
         {
-            TwitchAuth myTwitchApi = new TwitchAuth();
+           myTwitchApi = new TwitchAuth();
 
             myTwitchApi.Authenticator();
+
    
-            // setApi();
+        //   setApi();
 
             // Other code
 
@@ -57,25 +58,31 @@ namespace DisplayButtons.Bibliotecas.TwitchWrapper
         {
 
             api = new TwitchAPI();
-            api.Settings.ClientId = clientId;
-            api.Settings.AccessToken = my_token; // App Secret is not an Accesstoken
+            api.Settings.ClientId = myTwitchApi.ClientId();
+            api.Settings.AccessToken = myTwitchApi.Token(); // App Secret is not an Accesstoken
             foreach (User item in api.Helix.Users.GetUsersAsync().Result.Users)
             {
 
                 Debug.WriteLine(item.DisplayName);
             }
         }
-        private static void StartChat()
+        public static void StartChat()
         {
-            ConnectionCredentials credentials = new ConnectionCredentials("robertocpaes", my_token);
+         
+
+
+            ConnectionCredentials credentials = new ConnectionCredentials("robertocpaes", myTwitchApi.Token());
             var clientOptions = new ClientOptions
             {
                 MessagesAllowedInPeriod = 750,
+                UseSsl = true,
+                
                 ThrottlingPeriod = TimeSpan.FromSeconds(30)
+                
             };
             WebSocketClient customClient = new WebSocketClient(clientOptions);
             client = new TwitchClient(customClient);
-            client.Initialize(credentials);
+            client.Initialize(credentials, "robertocpaes");
 
             client.OnLog += Client_OnLog;
             client.OnJoinedChannel += Client_OnJoinedChannel;
@@ -104,13 +111,16 @@ namespace DisplayButtons.Bibliotecas.TwitchWrapper
 
             private static void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
             {
+            Debug.WriteLine("Received message of" + e.ChatMessage.DisplayName + " Message body: " + e.ChatMessage.Message);
                 if (e.ChatMessage.Message.Contains("badword"))
                     client.TimeoutUser(e.ChatMessage.Channel, e.ChatMessage.Username, TimeSpan.FromMinutes(30), "Bad word! 30 minute timeout!");
             }
 
         private static  void Client_OnWhisperReceived(object sender, OnWhisperReceivedArgs e)
             {
-                if (e.WhisperMessage.Username == "my_friend")
+
+            Debug.WriteLine("Received message of" + e.WhisperMessage.Username + " Message body: " + e.WhisperMessage.Message);
+            if (e.WhisperMessage.Username == "Saintjoow")
                     client.SendWhisper(e.WhisperMessage.Username, "Hey! Whispers are so cool!!");
             }
 

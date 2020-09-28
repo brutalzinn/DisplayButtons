@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace DisplayButtons.Bibliotecas.OAuthConsumer.Objects
@@ -12,9 +13,9 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Objects
         public Scopes(List<string> _scopes)
         {
            
-                scopes += String.Join(" ", _scopes.ToArray());
+                scopes += String.Join("%20", _scopes.ToArray());
 
-            
+        
 
         }
 
