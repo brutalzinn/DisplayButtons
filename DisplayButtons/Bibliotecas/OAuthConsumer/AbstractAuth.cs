@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DisplayButtons.Bibliotecas.OAuthConsumer
 {
@@ -10,8 +11,9 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer
         public abstract string ClientSecret();
         public abstract string RedirectUrl();
         public abstract string GetActionName();
-        public abstract bool AuthCheck();
-        public abstract void Authenticator();
+   
+        public virtual async Task AuthCheck() { }
+        public virtual async Task Authenticator() { }
         public abstract void RefreshToken();
         public abstract string ServiceUrl();
 

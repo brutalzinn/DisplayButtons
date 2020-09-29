@@ -22,65 +22,70 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
         private const string CredentialsPath = "credentials_twitch.json";
         private string code;
         private string token;
-
-
+        private bool _hastoken;
+        public bool HasToken()
+        {
+            return _hastoken;
+        }
         public string Token()
         {
-            if(token != null)
-            {
+            
  return token;
-            }
-            else
-            {
-                return "";
-            }
-           
+  
         }
         public string Code()
         {
 
             return code;
         }
-        public override bool AuthCheck()
+        public override async Task AuthCheck()
         { 
             if (File.Exists(CredentialsPath))
             {
 
                 string result = File.ReadAllText(CredentialsPath);
                 var json =  JsonConvert.DeserializeObject<JsonOAuthSession>(result);
-                if(json.expires_in != 0)
-                {
+             
   code = json.code;
                 token = json.access_token;
-                }
+                
               
-                return true;
+              
             }
             else
             {
-                Authenticator();
-                return false;
+                await Authenticator();
+                
             }
           
         }
        
-        public override void Authenticator()
+        public override async Task Authenticator()
         {
             WebService.StartWebServer(ServicesEnum.Twitch);
-
+      
             List<string> scope = new List<string>();
             scope.Add("chat:edit");
             scope.Add("chat:read");
             scope.Add("channel:moderate");
             scope.Add("whispers:read");
             scope.Add("whispers:edit");
-
+            scope.Add("channel:manage:extensions");
+            scope.Add("bits:read");
+            scope.Add("channel:edit:commercial");
+            scope.Add("channel:manage:broadcast");
+            scope.Add("channel:read:subscriptions");
+            scope.Add("clips:edit");
+            scope.Add("user:edit");
+            scope.Add("user:edit:follows"); 
+            scope.Add("user:read:broadcast");
+            scope.Add("user:read:email");
 
             Scopes myscope = new Scopes(scope);
 
             Url myurl = new Url(ServiceUrl(), ClientId(), RedirectUrl() + "callback", myscope.Scope);
 
-            Debug.WriteLine("MINHA URL COM SCOPE" + myurl.Url_feeder);
+
           
             try
             {
@@ -102,55 +107,42 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
                 //         Console.WriteLine("Unable to open URL, manually open: {0}", uri);
             }
 
-
-            Globals.events.On("EventHandlerLoginAuth", (e) =>
+ JsonOAuthSession myjson = new JsonOAuthSession();
+            Globals.events.On("EventHandlerLoginAuth", async (e) =>
             {
                 // Cast event argrument to your event object
                 var obj = (EventHandlerLoginAuth)e;
                 code = obj.code;
 
-             
 
 
 
-                var val = Task.Run(() => getTwitchData());
-              token = val.Result.access_token ;
-                JsonOAuthSession myjson = new JsonOAuthSession();
 
+                var val = await getTwitchData();
 
+                token = val.access_token;
+               
+                
   myjson.code = obj.code;
-myjson.access_token = token;
-
-                myjson.expires_in = val.Result.expires_in;
-                myjson.refresh_token = val.Result.refresh_token;
-                                var json = JsonConvert.SerializeObject(myjson);
+myjson.access_token = val.access_token;
+              
+                myjson.expires_in = val.expires_in;
+                myjson.refresh_token = val.refresh_token;
+                              
          
-File.WriteAllTextAsync(CredentialsPath, json);
-                TwitchWrapper.TwitchWrapper.StartChat();
 
+              //  TwitchWrapper.TwitchWrapper.StartChat();
+  var json = JsonConvert.SerializeObject(myjson);
 
-            });
-
-                // Cast event argrument to your event object
-
-                Globals.events.On("EventHandlerLoginAuthGetToken", (e) =>
-            {
-                var obj = (EventHandlerLoginAuthGetToken)e;
-
-
-                Debug.WriteLine("MEU TOKEN é " + obj.token);
-
-
+await File.WriteAllTextAsync(CredentialsPath, json);
+                _hastoken = true;
             });
 
 
 
 
-
-
-
-            
-            }
+         //   await TaskEx.WaitUntil(HasToken);
+        }
   
        
         public override string ClientId()
@@ -189,10 +181,7 @@ File.WriteAllTextAsync(CredentialsPath, json);
             var httpClientRequest = new HttpClient();
 
      
-            List<string> scope = new List<string>();
-            scope.Add("user:read:broadcast");
-            scope.Add("channel:edit:commercial");
-            scope.Add("user:edit");
+           
           
 
             //    var jsonRequest = JsonConvert.SerializeObject(postData);

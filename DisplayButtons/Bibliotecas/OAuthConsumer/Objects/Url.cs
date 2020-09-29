@@ -10,7 +10,7 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Objects
 
         public Url(string service_url,string clientid,string redirecturl, string scope)
         {
-            this.url_feeder =  String.Format("{0}?client_id={1}&redirect_uri={2}&response_type=code&scope={3}", service_url,clientid, redirecturl, scope);
+            this.url_feeder =  String.Format("{0}?client_id={1}&response_type=code&scope={3}&redirect_uri={2}", service_url,clientid, redirecturl, scope);
            
         }
         public Url(string service_url, string clientid, string clientsecret, string code, string grant_type,string redirect_url)
