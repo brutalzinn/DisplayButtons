@@ -30,7 +30,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
            
 
             if (form.ShowDialog() == DialogResult.OK) {
-            
+                form.Close();
             } else {
                 form.Close();
             }

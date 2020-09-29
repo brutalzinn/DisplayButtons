@@ -1,4 +1,5 @@
 ﻿
+using DisplayButtons.Backend.Objects;
 using DisplayButtons.Bibliotecas.OAuthConsumer;
 using DisplayButtons.Bibliotecas.OAuthConsumer.Auths;
 using DisplayButtons.Bibliotecas.TwitchWrapper;
@@ -15,6 +16,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TwitchLib.Api;
@@ -77,6 +79,7 @@ namespace DisplayButtons.Forms.TwitchChat
              StartChat();
 
            
+
         }
         private static string getUserName()
         {
@@ -98,24 +101,25 @@ namespace DisplayButtons.Forms.TwitchChat
             ConnectionCredentials credentials = new ConnectionCredentials(getUserName(), myTwitchApi.Token());
             var clientOptions = new ClientOptions
             {
+            
                 MessagesAllowedInPeriod = 750,
                 UseSsl = true,
-
+               
                 ThrottlingPeriod = TimeSpan.FromSeconds(30)
 
             };
             WebSocketClient customClient = new WebSocketClient(clientOptions);
             client = new TwitchClient(customClient);
-            client.Initialize(credentials, getUserName());
+            client.Initialize(credentials, getUserName(),'!');
 
             client.OnLog += Client_OnLog;
-            client.OnJoinedChannel += Client_OnJoinedChannel;
+     //       client.OnJoinedChannel += Client_OnJoinedChannel;
             client.OnMessageReceived += Client_OnMessageReceived;
             client.OnWhisperReceived += Client_OnWhisperReceived;
             client.OnNewSubscriber += Client_OnNewSubscriber;
-            client.OnUserJoined += Client_OnUserJoined;
-            client.OnUserLeft += Client_OnUserLeft;
-            client.OnConnected += Client_OnConnected;
+        client.OnUserJoined += Client_OnUserJoined;
+         client.OnUserLeft += Client_OnUserLeft;
+        //    client.OnUserStateChanged += ClientUsers;
 
             client.Connect();
             
@@ -135,6 +139,20 @@ namespace DisplayButtons.Forms.TwitchChat
 
 
         }
+        private static void ClientUsers(object sender, OnUserStateChangedArgs e)
+        {
+            TwitchChatForm.Instance.Invoke(new Action(() =>
+            {
+           
+
+                    TwitchChatForm.Instance.listBox1.Items.Add(e.UserState.DisplayName);
+                
+                
+
+            }));
+
+
+        }
         private static void Client_OnUserJoined(object sender, OnUserJoinedArgs e)
         {
             TwitchChatForm.Instance.Invoke(new Action(() =>
@@ -147,7 +165,7 @@ namespace DisplayButtons.Forms.TwitchChat
         }
         private static void Client_OnConnected(object sender, OnConnectedArgs e)
         {
-            Debug.WriteLine($"Connected to {e.AutoJoinChannel}");
+  
          
         
         }
@@ -155,11 +173,46 @@ namespace DisplayButtons.Forms.TwitchChat
         private static void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
           
-            //Debug.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
-
-            //  client.SendMessage(e.Channel, "Hey guys! I am a bot connected via TwitchLib!");
+    //      Debug.WriteLine("Hey guys! I am a bot connected via TwitchLib!");
+  //client.SendMessage(e.Channel, "Hey guys! I am a bot connected via TwitchLib!" + e.BotUsername);
         }
+        private void CreateMute(string username)
+        {
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.TwitchChat.TwitchUserInput")) as Form;
 
+
+
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                string motivo = form.motivo_ritchtextbox.Text;
+                int timer = Convert.ToInt32(form.timer_textbox.Text);
+                client.SendMessage(getUserName(), $"!timeout  {username} {timer} {motivo}");
+
+            }
+            else
+            {
+                form.Close();
+            }
+        }
+        private void CreateBan(string username)
+        {
+            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.TwitchChat.TwitchUserInput")) as Form;
+
+
+
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                string motivo = form.motivo_ritchtextbox.Text;
+                int timer = Convert.ToInt32(form.timer_textbox.Text);
+                client.SendMessage(getUserName(), $"!ban {username} {motivo}");
+            }
+            else
+            {
+                form.Close();
+            }
+        }
         private  static void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
             TwitchChatForm.Instance.Invoke(new Action(() =>
@@ -201,6 +254,15 @@ namespace DisplayButtons.Forms.TwitchChat
                 if (index != ListBox.NoMatches)
                 {
                     contextMenuStrip1.Show(listBox1,e.Location);
+                    muteMenuItem1.Click += (sender, e) =>
+                    {
+                        CreateMute(listBox1.SelectedItem.ToString());
+                    };
+                    banStripMenuItem1.Click += (sender, e) =>
+                    {
+                        CreateBan(listBox1.SelectedItem.ToString());
+                    };
+                  
                     // Do something
                 }
             }

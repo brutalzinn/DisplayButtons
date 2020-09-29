@@ -47,10 +47,12 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
                 var json =  JsonConvert.DeserializeObject<JsonOAuthSession>(result);
              
   code = json.code;
+            
                 token = json.access_token;
-                
-              
-              
+                _hastoken = true;
+
+
+
             }
             else
             {
@@ -107,7 +109,6 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
                 //         Console.WriteLine("Unable to open URL, manually open: {0}", uri);
             }
 
- JsonOAuthSession myjson = new JsonOAuthSession();
             Globals.events.On("EventHandlerLoginAuth", async (e) =>
             {
                 // Cast event argrument to your event object
@@ -123,18 +124,7 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
                 token = val.access_token;
                
                 
-  myjson.code = obj.code;
-myjson.access_token = val.access_token;
-              
-                myjson.expires_in = val.expires_in;
-                myjson.refresh_token = val.refresh_token;
-                              
-         
 
-              //  TwitchWrapper.TwitchWrapper.StartChat();
-  var json = JsonConvert.SerializeObject(myjson);
-
-await File.WriteAllTextAsync(CredentialsPath, json);
                 _hastoken = true;
             });
 
@@ -193,9 +183,22 @@ await File.WriteAllTextAsync(CredentialsPath, json);
             {
                 var resultString = await result.Content.ReadAsStringAsync();
                 var jsonResult = JsonConvert.DeserializeObject<JsonOAuth>(resultString);
+                JsonOAuthSession myjson = new JsonOAuthSession();
 
-               // var jsonResult = JObject.Parse(resultString);
+                // var jsonResult = JObject.Parse(resultString);
                 System.Diagnostics.Debug.WriteLine(jsonResult);
+                myjson.code = code;
+                myjson.access_token = jsonResult.access_token;
+
+                myjson.expires_in = jsonResult.expires_in;
+                myjson.refresh_token = jsonResult.refresh_token;
+
+
+
+                //  TwitchWrapper.TwitchWrapper.StartChat();
+                var json = JsonConvert.SerializeObject(myjson);
+
+                await File.WriteAllTextAsync(CredentialsPath, json);
                 return jsonResult;
             }
 

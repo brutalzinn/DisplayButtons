@@ -14,6 +14,7 @@ namespace DisplayButtons.Forms.TwitchChat
         {
             InitializeComponent();
         }
+
         private void CloseWithResult(DialogResult result)
         {
             DialogResult = result;
