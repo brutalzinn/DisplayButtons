@@ -1,5 +1,6 @@
 ﻿
 using DisplayButtons.Backend.Objects;
+using DisplayButtons.Bibliotecas.Helpers;
 using DisplayButtons.Bibliotecas.OAuthConsumer;
 using DisplayButtons.Bibliotecas.OAuthConsumer.Auths;
 using DisplayButtons.Bibliotecas.TwitchWrapper;
@@ -30,7 +31,7 @@ using TwitchLib.Communication.Models;
 
 namespace DisplayButtons.Forms.TwitchChat
 {
-    public partial class TwitchChatForm : TemplateForm
+    public partial class TwitchChatForm : Form
     {
         private static TwitchClient client;
         private static TwitchAPI api;
@@ -50,10 +51,9 @@ namespace DisplayButtons.Forms.TwitchChat
             instance = this;
             InitializeComponent();
             TwitchChatForm.StartTwitchApi();
+            
 
-           
-
-            }
+        }
         private void CloseWithResult(DialogResult result)
         {
             DialogResult = result;
@@ -78,7 +78,10 @@ namespace DisplayButtons.Forms.TwitchChat
             api.Settings.AccessToken = myTwitchApi.Token();
              StartChat();
 
-           
+            InitializeAsync();
+
+
+
 
         }
         private static string getUserName()
@@ -89,11 +92,26 @@ namespace DisplayButtons.Forms.TwitchChat
             return api.Helix.Users.GetUsersAsync().Result.Users.FirstOrDefault().DisplayName;
 
         }
-    
+        async static void InitializeAsync()
+        {
+
+           
+
+
+
+            //my_web.Navigate("https://twitch.tv/popout/robertocpaes/chat");
+
+
+
+
+            
+        }
         public static void StartChat()
         {
 
-            if(client != null)
+         
+          
+            if (client != null)
             {
                 client = null;
             }
@@ -122,8 +140,12 @@ namespace DisplayButtons.Forms.TwitchChat
         //    client.OnUserStateChanged += ClientUsers;
 
             client.Connect();
-            
-        
+       
+
+         
+
+
+
         }
         private static void Client_OnLog(object sender, OnLogArgs e)
         {
@@ -217,7 +239,7 @@ namespace DisplayButtons.Forms.TwitchChat
         {
             TwitchChatForm.Instance.Invoke(new Action(() =>
             {
-                TwitchChatForm.Instance.richTextBox1.AppendText("[" + e.ChatMessage.DisplayName + "]: " + e.ChatMessage.Message + Environment.NewLine);
+             //   TwitchChatForm.Instance.richTextBox1.AppendText("[" + e.ChatMessage.DisplayName + "]: " + e.ChatMessage.Message + Environment.NewLine);
                 // Debug.WriteLine("Received message of" + e.ChatMessage.DisplayName + " Message body: " + e.ChatMessage.Message);
                 //    if (e.ChatMessage.Message.Contains("badword"))
                 //        client.TimeoutUser(e.ChatMessage.Channel, e.ChatMessage.Username, TimeSpan.FromMinutes(30), "Bad word! 30 minute timeout!");

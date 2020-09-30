@@ -47,8 +47,17 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
                 var json =  JsonConvert.DeserializeObject<JsonOAuthSession>(result);
              
   code = json.code;
-            
-                token = json.access_token;
+            if(token != null)
+                {
+token = json.access_token;
+                }
+                else
+                {
+                    var call_refresh = await refreshToken(json.refresh_token);
+                    token = call_refresh.access_token;
+                 
+                }
+                
                 _hastoken = true;
 
 
@@ -224,7 +233,7 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
             {
                 var resultString = await result.Content.ReadAsStringAsync();
                 var jsonResult = JsonConvert.DeserializeObject<JsonOAuth>(resultString);
-
+                AuthenticatorHelper.UpdateJson(File.ReadAllText(CredentialsPath), resultString, CredentialsPath);
                 // var jsonResult = JObject.Parse(resultString);
                 System.Diagnostics.Debug.WriteLine(jsonResult);
                 return jsonResult;
