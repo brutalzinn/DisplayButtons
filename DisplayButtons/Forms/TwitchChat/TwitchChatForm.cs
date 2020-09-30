@@ -4,6 +4,7 @@ using DisplayButtons.Bibliotecas.Helpers;
 using DisplayButtons.Bibliotecas.OAuthConsumer;
 using DisplayButtons.Bibliotecas.OAuthConsumer.Auths;
 using DisplayButtons.Bibliotecas.TwitchWrapper;
+using Microsoft.Win32;
 using OpenQA.Selenium.Remote;
 using SpotifyAPI.Web.Auth;
 using System;
@@ -31,14 +32,14 @@ using TwitchLib.Communication.Models;
 
 namespace DisplayButtons.Forms.TwitchChat
 {
-    public partial class TwitchChatForm : Form
+    public partial class TwitchChatForm : TemplateForm
     {
-        private static TwitchClient client;
-        private static TwitchAPI api;
+        private  TwitchClient client;
+        private  TwitchAPI api;
 
-        private static TwitchAuth myTwitchApi;
-        private static TwitchChatForm instance;
-
+        private  TwitchAuth myTwitchApi;
+        private static  TwitchChatForm instance;
+  
         public static TwitchChatForm Instance
         {
             get
@@ -50,7 +51,7 @@ namespace DisplayButtons.Forms.TwitchChat
         {
             instance = this;
             InitializeComponent();
-            TwitchChatForm.StartTwitchApi();
+            TwitchChatForm.Instance.StartTwitchApi();
             
 
         }
@@ -68,45 +69,48 @@ namespace DisplayButtons.Forms.TwitchChat
         {
             CloseWithResult(DialogResult.OK);
         }
-        public static async void StartTwitchApi()
+
+        public async void StartTwitchApi()
         {
+
             myTwitchApi = new TwitchAuth();
-           await  myTwitchApi.AuthCheck();
-         await TaskEx.WaitUntil(myTwitchApi.HasToken);
+            await myTwitchApi.AuthCheck();
+        // await TaskEx.WaitUntil(myTwitchApi.HasToken);
                api = new TwitchAPI();
             api.Settings.ClientId = myTwitchApi.ClientId();
             api.Settings.AccessToken = myTwitchApi.Token();
              StartChat();
-
-            InitializeAsync();
-
-
-
+           
 
         }
-        private static string getUserName()
+     
+    
+            public  string getUserNameApi()
         {
-
-
 
             return api.Helix.Users.GetUsersAsync().Result.Users.FirstOrDefault().DisplayName;
 
         }
-        async static void InitializeAsync()
+         public void InitializeAsync(string username)
         {
 
-           
+            EnsureBrowserEmulationEnabled("DisplayButtons.exe");
+            WebBrowser teste = new WebBrowser();
+            teste.Dock = DockStyle.Fill;
+            TwitchChatForm.Instance.Invoke(new Action(() =>
+            {
+                TwitchChatForm.Instance.panel1.Controls.Add(teste);
+
+            }));
+
+            teste.Navigate($"https://twitch.tv/popout/{username}/chat");
 
 
 
-            //my_web.Navigate("https://twitch.tv/popout/robertocpaes/chat");
 
 
-
-
-            
         }
-        public static void StartChat()
+        public void StartChat()
         {
 
          
@@ -116,7 +120,7 @@ namespace DisplayButtons.Forms.TwitchChat
                 client = null;
             }
 
-            ConnectionCredentials credentials = new ConnectionCredentials(getUserName(), myTwitchApi.Token());
+            ConnectionCredentials credentials = new ConnectionCredentials(getUserNameApi(), myTwitchApi.Token());
             var clientOptions = new ClientOptions
             {
             
@@ -128,7 +132,7 @@ namespace DisplayButtons.Forms.TwitchChat
             };
             WebSocketClient customClient = new WebSocketClient(clientOptions);
             client = new TwitchClient(customClient);
-            client.Initialize(credentials, getUserName(),'!');
+            client.Initialize(credentials, getUserNameApi(),'!');
 
             client.OnLog += Client_OnLog;
      //       client.OnJoinedChannel += Client_OnJoinedChannel;
@@ -209,7 +213,7 @@ namespace DisplayButtons.Forms.TwitchChat
             {
                 string motivo = form.motivo_ritchtextbox.Text;
                 int timer = Convert.ToInt32(form.timer_textbox.Text);
-                client.SendMessage(getUserName(), $"!timeout  {username} {timer} {motivo}");
+                client.SendMessage(getUserNameApi(), $"!timeout  {username} {timer} {motivo}");
 
             }
             else
@@ -228,7 +232,7 @@ namespace DisplayButtons.Forms.TwitchChat
             {
                 string motivo = form.motivo_ritchtextbox.Text;
                 int timer = Convert.ToInt32(form.timer_textbox.Text);
-                client.SendMessage(getUserName(), $"!ban {username} {motivo}");
+                client.SendMessage(getUserNameApi(), $"!ban {username} {motivo}");
             }
             else
             {
@@ -252,15 +256,15 @@ namespace DisplayButtons.Forms.TwitchChat
 
             Debug.WriteLine("Received message of" + e.WhisperMessage.Username + " Message body: " + e.WhisperMessage.Message);
             if (e.WhisperMessage.Username == "Saintjoow")
-                client.SendWhisper(e.WhisperMessage.Username, "Hey! Whispers are so cool!!");
+                TwitchChatForm.Instance.client.SendWhisper(e.WhisperMessage.Username, "Hey! Whispers are so cool!!");
         }
 
         private static void Client_OnNewSubscriber(object sender, OnNewSubscriberArgs e)
         {
             if (e.Subscriber.SubscriptionPlan == SubscriptionPlan.Prime)
-                client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the substers! You just earned 500 points! So kind of you to use your Twitch Prime on this channel!");
+                TwitchChatForm.Instance.client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the substers! You just earned 500 points! So kind of you to use your Twitch Prime on this channel!");
             else
-                client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the substers! You just earned 500 points!");
+                TwitchChatForm.Instance.client.SendMessage(e.Channel, $"Welcome {e.Subscriber.DisplayName} to the substers! You just earned 500 points!");
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -289,11 +293,39 @@ namespace DisplayButtons.Forms.TwitchChat
                 }
             }
         }
+        public static void EnsureBrowserEmulationEnabled(string exename = "MarkdownMonster.exe", bool uninstall = false)
+        {
 
+            try
+            {
+                using (
+                    var rk = Registry.CurrentUser.OpenSubKey(
+                            @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION", true)
+                )
+                {
+                    if (!uninstall)
+                    {
+                        dynamic value = rk.GetValue(exename);
+                        if (value == null)
+                            rk.SetValue(exename, (uint)11001, RegistryValueKind.DWord);
+                    }
+                    else
+                        rk.DeleteValue(exename);
+                }
+            }
+            catch
+            {
+            }
+        }
         private void imageModernButton2_Click(object sender, EventArgs e)
         {
-            client.SendMessage(getUserName(), richTextBox2.Text);
+            client.SendMessage(getUserNameApi(), richTextBox2.Text);
             richTextBox2.Clear();
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

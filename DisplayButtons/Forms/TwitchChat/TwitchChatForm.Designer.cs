@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
@@ -38,16 +37,9 @@
             this.kickMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.muteMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.banStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(16, 45);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(597, 347);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
             // 
             // richTextBox2
             // 
@@ -131,6 +123,13 @@
             this.banStripMenuItem1.Size = new System.Drawing.Size(179, 22);
             this.banStripMenuItem1.Text = "banStripMenuItem1";
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(16, 44);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(596, 354);
+            this.panel1.TabIndex = 5;
+            // 
             // TwitchChatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -141,11 +140,11 @@
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.imageModernButton2);
             this.Controls.Add(this.imageModernButton1);
             this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
             this.Name = "TwitchChatForm";
             this.Text = "TwitchChatForm";
             this.Load += new System.EventHandler(this.TwitchChatForm_Load);
@@ -155,8 +154,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private Controls.ImageModernButton imageModernButton1;
         private Controls.ImageModernButton imageModernButton2;
@@ -165,5 +162,6 @@
         private System.Windows.Forms.ToolStripMenuItem kickMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem muteMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem banStripMenuItem1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

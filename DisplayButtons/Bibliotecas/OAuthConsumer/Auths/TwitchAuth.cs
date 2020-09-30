@@ -47,16 +47,12 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
                 var json =  JsonConvert.DeserializeObject<JsonOAuthSession>(result);
              
   code = json.code;
-            if(token != null)
-                {
-token = json.access_token;
-                }
-                else
-                {
+          
+
                     var call_refresh = await refreshToken(json.refresh_token);
                     token = call_refresh.access_token;
                  
-                }
+                
                 
                 _hastoken = true;
 
