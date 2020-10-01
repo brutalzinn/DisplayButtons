@@ -22,6 +22,7 @@ namespace DisplayButtons.Forms.TwitchChat.configs
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
+           
             CloseWithResult(DialogResult.OK);
         }
 

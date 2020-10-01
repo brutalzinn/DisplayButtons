@@ -22,6 +22,7 @@ using DisplayButtons.Forms.ActionHelperForms;
 using DisplayButtons.Bibliotecas.DeckEvents;
 using MoreLinq;
 using System.Reflection;
+using Microsoft.Win32;
 
 namespace DisplayButtons
 {
@@ -45,6 +46,31 @@ namespace DisplayButtons
         public static DeviceMonitor monitor { get; set; }
         public static AdbClient client { get; set; }
         public static List<DeviceData> device_list = new List<DeviceData>();
+
+        public static void EnsureBrowserEmulationEnabled(string exename = "MarkdownMonster.exe", bool uninstall = false)
+        {
+
+            try
+            {
+                using (
+                    var rk = Registry.CurrentUser.OpenSubKey(
+                            @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION", true)
+                )
+                {
+                    if (!uninstall)
+                    {
+                        dynamic value = rk.GetValue(exename);
+                        if (value == null)
+                            rk.SetValue(exename, (uint)11001, RegistryValueKind.DWord);
+                    }
+                    else
+                        rk.DeleteValue(exename);
+                }
+            }
+            catch
+            {
+            }
+        }
         public static Type FindType(string fullName)
         {
             return
@@ -189,7 +215,7 @@ namespace DisplayButtons
             EventXml.LoadSettings();
 
             ApplicationSettingsManager.LoadSettings();
-
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
       OBSUtils.PrepareOBSIntegration();
@@ -199,8 +225,8 @@ namespace DisplayButtons
                 Application.Run(firstRunForm);
                 if (!firstRunForm.FinishedSetup) return;
             }
-      
 
+            EnsureBrowserEmulationEnabled("DisplayButtons.exe");
 
             dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
       

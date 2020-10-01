@@ -32,8 +32,6 @@ namespace DisplayButtons.Forms.TwitchChat
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-
             this.SuspendLayout();
             // 
             // panel1
@@ -45,15 +43,6 @@ namespace DisplayButtons.Forms.TwitchChat
             // 
             // imageModernButton1
             // 
-
-            this.webBrowser1.Location = new System.Drawing.Point(23, 214);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(256, 339);
-            this.webBrowser1.TabIndex = 4;
-            this.webBrowser1.Dock = DockStyle.Fill;
-
-
             this.imageModernButton1.Camada = 0;
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
@@ -82,7 +71,6 @@ namespace DisplayButtons.Forms.TwitchChat
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.imageModernButton1);
             this.Controls.Add(this.panel1);
-            this.panel1.Controls.Add(this.webBrowser1);
             this.Name = "TwitchChatFast";
             this.Text = "TwitchChatFast";
             this.Load += new System.EventHandler(this.TwitchChatFast_Load);
@@ -94,6 +82,6 @@ namespace DisplayButtons.Forms.TwitchChat
 
         private System.Windows.Forms.Panel panel1;
         private Controls.ImageModernButton imageModernButton1;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+      
     }
 }

@@ -33,6 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton2 = new DisplayButtons.Controls.ImageModernButton();
+            this.opacity_trackbar = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.opacity_trackbar)).BeginInit();
             this.SuspendLayout();
             // 
             // checkbox_topmost
@@ -97,6 +100,26 @@
             this.imageModernButton2.UseVisualStyleBackColor = true;
             this.imageModernButton2.Click += new System.EventHandler(this.imageModernButton2_Click);
             // 
+            // opacity_trackbar
+            // 
+            this.opacity_trackbar.Location = new System.Drawing.Point(87, 142);
+            this.opacity_trackbar.Maximum = 100;
+            this.opacity_trackbar.Name = "opacity_trackbar";
+            this.opacity_trackbar.Size = new System.Drawing.Size(187, 45);
+            this.opacity_trackbar.SmallChange = 5;
+            this.opacity_trackbar.TabIndex = 4;
+            this.opacity_trackbar.TickFrequency = 10;
+            this.opacity_trackbar.Value = 100;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(21, 142);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 15);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Visibility";
+            // 
             // TwitchChatConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -107,6 +130,8 @@
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.opacity_trackbar);
             this.Controls.Add(this.imageModernButton2);
             this.Controls.Add(this.imageModernButton1);
             this.Controls.Add(this.label1);
@@ -115,6 +140,7 @@
             this.Name = "TwitchChatConfig";
             this.Text = "TwitchChatConfig";
             this.Load += new System.EventHandler(this.TwitchChatConfig_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.opacity_trackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,5 +153,7 @@
         private System.Windows.Forms.Label label1;
         private Controls.ImageModernButton imageModernButton1;
         private Controls.ImageModernButton imageModernButton2;
+        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TrackBar opacity_trackbar;
     }
 }

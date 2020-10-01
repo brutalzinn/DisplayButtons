@@ -2,9 +2,7 @@
 using DisplayButtons.Misc;
 using DisplayButtons.Properties;
 using DisplayButtons.Backend.Utils;
-using NickAc.ModernUIDoneRight.Forms;
-using NickAc.ModernUIDoneRight.Objects;
-using NickAc.ModernUIDoneRight.Utils;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +13,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DisplayButtons.Backend.Utils.AppSettings;
 using System.Linq.Expressions;
-
+using NickAc.ModernUIDoneRight.Forms;
+using NickAc.ModernUIDoneRight.Objects;
 
 namespace DisplayButtons.Forms
 {
