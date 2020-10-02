@@ -66,7 +66,9 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 
         public override void OnButtonDown(DeckDevice deckDevice)
         {
-            var thread = new Thread(ThreadSTA);
+           
+
+             var thread = new Thread(ThreadSTA);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
 
