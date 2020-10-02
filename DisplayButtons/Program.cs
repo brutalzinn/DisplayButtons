@@ -23,6 +23,7 @@ using DisplayButtons.Bibliotecas.DeckEvents;
 using MoreLinq;
 using System.Reflection;
 using Microsoft.Win32;
+using DisplayButtons.Bibliotecas.Helpers;
 
 namespace DisplayButtons
 {
@@ -224,9 +225,10 @@ namespace DisplayButtons
                 FirstSetupForm firstRunForm = new FirstSetupForm();
                 Application.Run(firstRunForm);
                 if (!firstRunForm.FinishedSetup) return;
-            }
+            }      
+          //  EnsureBrowserEmulationEnabled("DisplayButtons.exe");
 
-            EnsureBrowserEmulationEnabled("DisplayButtons.exe");
+            new WebBrowserInstanceHelper().SetBrowserFeatureControl();
 
             dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
       

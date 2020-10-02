@@ -86,7 +86,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
         }
         public override void OnButtonUp(DeckDevice deckDevice)
         {
-          ;
+          
         }
     }
 }
