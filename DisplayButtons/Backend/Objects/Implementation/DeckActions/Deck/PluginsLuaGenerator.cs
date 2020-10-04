@@ -1,4 +1,5 @@
 ﻿using DisplayButtons.Backend.Utils;
+using DisplayButtons.Engine.Wrappers;
 using DisplayButtons.Forms;
 using MoonSharp.Interpreter;
 using System;
@@ -24,7 +25,8 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
     {
 
 
-
+        [XmlIgnore]
+        public string dllpath { get; set; } = "";
         [XmlIgnore]
         public string ToScript { get; set; } = "";
 
@@ -37,10 +39,11 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         public string ScriptNamePoint { get; set; } = "";
         public string script_to_form { get; set; } = "";
         public string name_img { get; set; } = "";
+
        public string DeckActionCategory_string { get; set; } = "Deck";
         public string name { get; set; } = "";
         [ActionPropertyInclude]
-        [ActionPropertyDescription("To Execute")]
+        [ActionPropertyDescription("EVENTSYSTEMCONFIGBUTTON")]
         public string ToExecute { get; set; } = "";
 
         [XmlElement("ToControls")]
@@ -66,17 +69,12 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         [MoonSharpUserData]
 
 
-        public class formcontrol
+        public class control
         {
 
             private PluginLuaGenerator instance;
-            public formcontrol()
-            {
-
-
-
-            }
-            public formcontrol(PluginLuaGenerator param)
+         
+            public control(PluginLuaGenerator param)
             {
 
                 instance = param;
@@ -141,7 +139,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 }
             }
 
-            public  void setFormControl(string name, string value, string type, int x, int y, int tam_x, int tam_y)
+            public  void setcontrol(string name, string value, string type, int x, int y, int tam_x, int tam_y)
             {
 
               if(instance.form != null)
@@ -262,7 +260,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 }
                 return result;
             }
-            public  string getFormControl(string name)
+            public  string getcontrol(string name)
             {
 
 
@@ -299,17 +297,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
    
    public override void SetConfigs(string script_param)
         {
-
-
-
-
-            //  ToScript = script_param;
-
-            //  ToScript = File.ReadAllText(path);
-            //      ToScript = File.ReadAllText(ScriptEntryPoint);
-            // ToScript = File.ReadAllText(path);
-
-
+  
         }
 
         public void ToExecuteHelper()
@@ -318,7 +306,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
             //   var originalToExec = new String(ToScript.ToCharArray());
             form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.ActionPlugin")) as Form;
 
-            ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol(this);
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = new control(this);
 
 
 
@@ -410,10 +398,9 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         public override void OnButtonDown(DeckDevice deckDevice)
         {
 
-            //        ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
-
-            ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol(this);
-
+            ScribeBot.Scripter.Environment.Globals["library"] = new LibraryInterfaceWrapper(dllpath);
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = new control(this);
+            
             ScribeBot.Scripter.Execute(ToScript, true);
             //  Debug.WriteLine(script);
             object functiontable = ScribeBot.Scripter.Environment.Globals["ButtonDown"];
@@ -421,24 +408,17 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
            
      
-           //  ScribeBot.Scripter.Environment.Call(DynValue.NewString("buttondown"));
+          
          
 
 
         }
-        public PluginLuaGenerator() { }
+      
 
-        // The following constructor has parameters for two of the three
-        // properties.
-        public PluginLuaGenerator(string name_param, string script_param)
-        {
-
-       //     ToScript = script_param;
-        }
         public override void OnButtonUp(DeckDevice deckDevice)
         {
             //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
-            ScribeBot.Scripter.Environment.Globals["formdesign"] = new formcontrol(this);
+            ScribeBot.Scripter.Environment.Globals["formdesign"] = new control(this);
 
             ScribeBot.Scripter.Execute(ToScript, true);
             //    DynValue luaFactFunction = ScribeBot.Scripter.Environment.Globals.Get("ButtonDown");

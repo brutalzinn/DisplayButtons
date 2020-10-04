@@ -16,6 +16,7 @@ namespace DisplayButtons.Backend.Utils
 
         public AbstractDeckAction DeckAction { get; set; }
         public string ToExecute { get; set; }
+        public string dllpath { get; set; }
         public string ToScript { get; set; }
         public string ToName{ get; set; }
     }

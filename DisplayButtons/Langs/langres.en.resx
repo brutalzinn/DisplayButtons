@@ -216,6 +216,12 @@ the use of Display Buttons. Don't forget to give your feedback.</value>
   <data name="CONNECTEDDEVICES" xml:space="preserve">
     <value>Connected device</value>
   </data>
+  <data name="DECKACTIONDLLGENERATORPLUGIN" xml:space="preserve">
+    <value>Dll generator</value>
+  </data>
+  <data name="DECKACTIONPLUGINLUAOPTION" xml:space="preserve">
+    <value>Configurar</value>
+  </data>
   <data name="DECKGENERALKEYPRESS" xml:space="preserve">
     <value>Key simulator</value>
   </data>

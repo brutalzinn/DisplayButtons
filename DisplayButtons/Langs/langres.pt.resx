@@ -225,6 +225,9 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="CONNECTEDDEVICES" xml:space="preserve">
     <value>Dispositivo conectado</value>
   </data>
+  <data name="DECKACTIONDLLGENERATORPLUGIN" xml:space="preserve">
+    <value>Dll generator</value>
+  </data>
   <data name="DECKGENERALKEYPRESS" xml:space="preserve">
     <value>Simulador de tecla</value>
   </data>

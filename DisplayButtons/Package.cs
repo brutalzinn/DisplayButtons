@@ -117,7 +117,11 @@ namespace ScribeBot
 
             return contents;
         }
+        public string ReturnPathEntry(string content)
+        {
 
+            return $@"{ArchivePath}\{content}";
+        }
         /// <summary>
         /// Write content to a specific file entry inside a package.
         /// </summary>
@@ -155,7 +159,7 @@ namespace ScribeBot
 
             //   Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), type);
 
-           
+
 
 
 

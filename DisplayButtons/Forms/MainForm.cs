@@ -49,6 +49,7 @@ using DisplayButtons.Forms.loading;
 using DisplayButtons.Forms.TwitchChat;
 
 using System.Data.Entity.Infrastructure.Interception;
+using DisplayButtons.Backend.Objects.Implementation.DeckActions.Deck;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -699,9 +700,15 @@ namespace DisplayButtons.Forms
                                     FocusItem(mb, mb.Tag as IDeckItem);
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is PluginLuaGenerator YY)
                                     {
-                                        LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName);
-                                        YY.SetConfigs(action.ToScript);
+                                        LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName,action.dllpath);
+                                    if(action.dllpath != null)
+                                        {
+                                            YY.SetConfigs(action.dllpath);
+                                        }
+                                            
+                                        // ;
                                     }
+                                   
                                     if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.setLayer() == true)
                                     {
                                         mycustomitem.DeckAction.setLayer(mb.CurrentSlot, mycustomitem);
@@ -1191,13 +1198,10 @@ namespace DisplayButtons.Forms
                 if (item is DynamicDeckItem FF && FF.DeckAction is PluginLuaGenerator TT)
                 {
                     LoadPropertiesPlugins(FF, GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
-                    TT.SetConfigs(GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
+                  //  TT.SetConfigs(GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
                 }
-                if (item is DynamicDeckFolder EE && EE != null && EE.KeyGlobalValue != null && EE.UniqueID != null)
-                {
-                    new GlobalHotKeys().refreshFolder(EE);
-
-                }
+               
+                
 
                 //control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
 
@@ -3088,7 +3092,8 @@ ActionImagePlaceHolder.Image = bmp;
 
 
         }
-        private void LoadPropertiesPlugins(DynamicDeckItem item, string script, string entrypoint = "", string name = "")
+      
+        private void LoadPropertiesPlugins(DynamicDeckItem item, string script, string entrypoint = "", string name = "",string dllpath = "")
         {
 
             Type type = item.DeckAction.GetType();
@@ -3109,6 +3114,13 @@ ActionImagePlaceHolder.Image = bmp;
                 PropertyInfo prop = type.GetProperty("ScriptEntryPoint");
                 prop.SetValue(item.DeckAction, entrypoint, null);
             }
+            if (dllpath != "")
+            {
+                PropertyInfo prop = type.GetProperty("dllpath");
+                prop.SetValue(item.DeckAction, dllpath, null);
+               
+            }
+
             //  prop.SetValue(item.DeckAction, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(result_string));
             //         UpdateIcon(shouldUpdateIcon);
 
@@ -3117,7 +3129,7 @@ ActionImagePlaceHolder.Image = bmp;
 
             //  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public void button_creator(string name, string entry_point, string script)
+        public void button_creator(string name, string entry_point, string script,string dllpath)
         {
             //PluginLuaGenerator testando = new PluginLuaGenerator();
 
@@ -3175,11 +3187,12 @@ ActionImagePlaceHolder.Image = bmp;
 
                                 if (item.Tag is AbstractDeckAction act)
                                 {
-                                    var leste = new DeckActionHelper(act);
-                                    leste.ToExecute = entry_point;
-                                    leste.ToName = name;
-                                    leste.ToScript = script;
-                                    item.DoDragDrop(leste, DragDropEffects.Copy);
+                                    var _deckaction = new DeckActionHelper(act);
+                                    _deckaction.ToExecute = entry_point;
+                                    _deckaction.ToName = name;
+                                    _deckaction.dllpath = dllpath;
+                                    _deckaction.ToScript = script;
+                                    item.DoDragDrop(_deckaction, DragDropEffects.Copy);
                                     //      i2.SetConfigs();
                                     //  LoadPropertiesPlugins(i2, script);
 
@@ -3331,7 +3344,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
 
-                MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
+                MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ReturnPathEntry( x.GetInfo()["EntryPoint"]), x.ReadFileContents(x.GetInfo()["EntryPoint"]), x.ReturnPathEntry(x.GetInfo()["Custom_content"]));
 
                 MainForm.Instance.PluginLoaderScript(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
                 //    MainForm.Instance.RefreshAllPluginsDependencies(x.ReadFileContents(x.GetInfo()["EntryPoint"]));
@@ -3382,7 +3395,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 {
 
                     LoadPropertiesPlugins(TT, script);
-                    FF.SetConfigs(script);
+                   // FF.SetConfigs(script);
                 }
                 //  ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
             }

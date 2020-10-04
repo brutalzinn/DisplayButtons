@@ -12,6 +12,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransparentTwitchChatWPF", "Transparent-Twitch-Chat-Overlay\TransparentTwitchChatWPF\TransparentTwitchChatWPF.csproj", "{340C12FD-3B4D-4A37-AB81-5C5786135206}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceDll", "InterfaceDll\InterfaceDll.csproj", "{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,18 @@ Global
 		{340C12FD-3B4D-4A37-AB81-5C5786135206}.Release|x64.Build.0 = Release|x64
 		{340C12FD-3B4D-4A37-AB81-5C5786135206}.Release|x86.ActiveCfg = Release|x86
 		{340C12FD-3B4D-4A37-AB81-5C5786135206}.Release|x86.Build.0 = Release|x86
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Debug|x64.Build.0 = Debug|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Debug|x86.Build.0 = Debug|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Release|x64.ActiveCfg = Release|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Release|x64.Build.0 = Release|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Release|x86.ActiveCfg = Release|Any CPU
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
