@@ -12,17 +12,18 @@
     <UseWPF>true</UseWPF>
     <Platforms>x86;x64</Platforms>
     <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
 
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>TransparentTwitchChatWPF_TemporaryKey.pfx</ManifestKeyFile>
+
   </PropertyGroup>
   <ItemGroup>
-    <Resource Include="Icons\twitch_chat.ico" />
+    <Resource Include="icons\twitch_chat.ico"/>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\twitch_chat2.ico" />
+    <Resource Include="icons\twitch_chat2.ico"/>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\Alert 1.wav">
