@@ -10,7 +10,7 @@
         BorderThickness="4"
         ResizeMode="NoResize"
         Topmost="True"
-        Icon="/Icons/twitch_chat2.ico"
+        Icon="/TransparentTwitchChatWPF;component/icons/twitch_chat2.ico"
         Title="Twitch Chat Overlay" Height="500" Width="320" KeyUp="Window_KeyUp" MouseRightButtonUp="Window_MouseRightButtonUp" Deactivated="Window_Deactivated" PreviewLostKeyboardFocus="Window_PreviewLostKeyboardFocus" SourceInitialized="Window_SourceInitialized" Loaded="Window_Loaded">
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" CanExecute="CommandBinding_CanExecute_1" Executed="CommandBinding_Executed_1" />
@@ -54,7 +54,7 @@
 
         <tb:TaskbarIcon
             Name="taskbarControl"
-            IconSource="/Icons/twitch_chat2.ico"
+            IconSource="/TransparentTwitchChatWPF;component/icons/twitch_chat2.ico"
             ToolTipText="Twitch Chat Overlay">
             <!-- Set a simple context menu  -->
             <tb:TaskbarIcon.ContextMenu>
@@ -99,7 +99,7 @@
                     <Button Name="btnMax" Visibility="Visible" Background="White" Click="btnMax_Click"  Width="15" Height="14" Margin="0,1,4,0">
                         <TextBlock Margin="0,-3,0,0">☐</TextBlock>
                     </Button>
-                    <Button Name="btnClose" Visibility="Visible" Background="White" Command="{x:Static SystemCommands.CloseWindowCommand}" Width="15" Height="14" Margin="0,1,0,0">
+                    <Button Name="btnClose" Visibility="Visible" Background="White" Click="CloseWindow" Width="15" Height="14" Margin="0,1,0,0">
                         <TextBlock Margin="0,-3,0,0">✕</TextBlock>
                     </Button>
                 </StackPanel>

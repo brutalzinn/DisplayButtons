@@ -317,10 +317,18 @@ namespace TransparentTwitchChatWPF
         {
             ExitApplication();
         }
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            ExitApplication();
+
+
+
+        }
 
         private void CommandBinding_Executed_3(object sender, ExecutedRoutedEventArgs e)
         {
             SystemCommands.MinimizeWindow(this);
+        
         }
 
         private void SetCustomChatAddress(string url)
@@ -371,14 +379,13 @@ namespace TransparentTwitchChatWPF
             {
                 if (MessageBox.Show("Sure you want to exit the application?", "Exit", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    System.Windows.Application.Current.Shutdown();
+                    SystemCommands.CloseWindow(this);
+
+                    this.taskbarControl.Dispose();
                 }
             }
-            else
-            {
-                System.Windows.Application.Current.Shutdown();
-            }
-            //SystemCommands.CloseWindow(this);
+         
+           
         }
 
         public void ToggleBotActivitySetting()

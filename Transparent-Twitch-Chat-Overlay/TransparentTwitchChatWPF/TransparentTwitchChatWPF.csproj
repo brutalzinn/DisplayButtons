@@ -20,10 +20,10 @@
 
   </PropertyGroup>
   <ItemGroup>
-    <Resource Include="icons\twitch_chat.ico"/>
+    <Resource Include="icons\twitch_chat.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons\twitch_chat2.ico"/>
+    <Resource Include="icons\twitch_chat2.ico" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\Alert 1.wav">
