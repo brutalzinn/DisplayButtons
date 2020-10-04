@@ -3942,7 +3942,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
-            //new TransparentTwitchChatWPF.MainWindow().InitializeComponent();
+            new TransparentTwitchChatWPF.App().Init();
 
 
         }
