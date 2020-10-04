@@ -33,7 +33,7 @@
     <ApplicationIcon>twitch_chat2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <OutputType>Library</OutputType>
+    <OutputType>WinExe</OutputType>
     <StartupObject></StartupObject>
   </PropertyGroup>
   <ItemGroup>
