@@ -13,7 +13,7 @@
     <Nullable>disable</Nullable>
     <Platforms>AnyCPU;x86</Platforms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -69,6 +69,7 @@
     <PackageReference Include="Portable.BouncyCastle">
       <Version>1.8.6.7</Version>
     </PackageReference>
+    <PackageReference Include="PresentationFramework" Version="4.6.0" />
     <PackageReference Include="Resource.Embedder" Version="2.1.1" />
     <PackageReference Include="Selenium.WebDriver">
       <Version>3.141.0</Version>
@@ -95,6 +96,7 @@
     </PackageReference>
     <PackageReference Include="TwitchLib" Version="3.1.1" />
     <PackageReference Include="TwitchLib.Client" Version="3.1.6-CI-20200922-8" />
+    <PackageReference Include="WindowsBase" Version="4.6.1055" />
     <Reference Include="Cyotek.Windows.Forms.ColorPicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=58daa28b0b2de221, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Cyotek.Windows.Forms.ColorPicker.dll</HintPath>
@@ -109,6 +111,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EventHook\EventHook\EventHook.csproj" />
+    <ProjectReference Include="..\Transparent-Twitch-Chat-Overlay\TransparentTwitchChatWPF\TransparentTwitchChatWPF.csproj" />
   </ItemGroup>
 
   <ItemGroup>
