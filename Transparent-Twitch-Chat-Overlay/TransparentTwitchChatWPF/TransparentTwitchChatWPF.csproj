@@ -10,7 +10,7 @@
 
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Platforms>x86</Platforms>
+    <Platforms>x86;x64</Platforms>
     <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
     <OutputType>WinExe</OutputType>
 
@@ -18,9 +18,11 @@
   <PropertyGroup>
     <ManifestKeyFile>TransparentTwitchChatWPF_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
-  <ItemGroup>  
+  <ItemGroup>
     <Resource Include="Icons\twitch_chat.ico" />
-    <Resource Include="twitch_chat2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\twitch_chat2.ico" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\Alert 1.wav">
@@ -55,7 +57,17 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="PresentationFramework" Version="4.6.0" />
   </ItemGroup>
-  
+  <ItemGroup>
+    <Reference Update="CefSharp">
+      <Private>true</Private>
+    </Reference>
+    <Reference Update="CefSharp.Core">
+      <Private>true</Private>
+    </Reference>
+    <Reference Update="CefSharp.Wpf">
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
