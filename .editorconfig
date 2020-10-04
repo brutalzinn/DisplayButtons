@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0006: Arquivo de origem "C:\Users\rober\Documents\My projects\ButtonDeck\bin\Debug\EventHook.dll" não pode ser encontrado
+dotnet_diagnostic.CS0006.severity = none

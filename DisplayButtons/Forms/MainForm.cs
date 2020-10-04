@@ -47,7 +47,7 @@ using DisplayButtons.Bibliotecas.Helpers;
 using static DisplayButtons.Bibliotecas.Helpers.DeckHelpers;
 using DisplayButtons.Forms.loading;
 using DisplayButtons.Forms.TwitchChat;
-using TransparentTwitchChatWPF;
+
 using System.Data.Entity.Infrastructure.Interception;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -3942,8 +3942,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
-            new TransparentTwitchChatWPF.App().Run();
-
+         
 
 
         }

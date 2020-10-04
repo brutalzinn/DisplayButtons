@@ -1,7 +1,6 @@
 ﻿using CookieProjects.ProcessWatcher;
 using DisplayButtons.Backend.Utils;
 using DisplayButtons.Bibliotecas.DeckEvents.Actions;
-using EventHook;
 using MoreLinq.Extensions;
 using System;
 using System.CodeDom;

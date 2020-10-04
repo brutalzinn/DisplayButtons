@@ -110,7 +110,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EventHook\EventHook\EventHook.csproj" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Transparent-Twitch-Chat-Overlay\TransparentTwitchChatWPF\TransparentTwitchChatWPF.csproj" />
   </ItemGroup>
 

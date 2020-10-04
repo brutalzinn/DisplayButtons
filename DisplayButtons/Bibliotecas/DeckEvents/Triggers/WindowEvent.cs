@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 using DisplayButtons.Forms;
 using System.Linq;
-using EventHook;
+
 using System.Diagnostics;
 using CookieProjects.ProcessWatcher;
 
