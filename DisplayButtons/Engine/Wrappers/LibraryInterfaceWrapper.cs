@@ -11,17 +11,27 @@ using System.Windows.Forms;
 namespace DisplayButtons.Engine.Wrappers
 {
     [MoonSharpUserData]
-    public static class LibraryInterfaceWrapper
+    public class LibraryInterfaceWrapper
     {
-        
-        public void ButtonDown(string assmblynamespace)
+        Assembly AssemblyAcess { get; set; }
+
+        public LibraryInterfaceWrapper(PluginLuaGenerator instance)     
         {
-        
-
-
+            LoadAssembly(instance.dllpath);
         }
-     
+        public void LoadAssembly(string assembly)
+        {
+            AssemblyAcess = Assembly.LoadFile(Application.StartupPath + "/" + assembly);
+        }
+      
+        public void ExecuteMethod(string assemblyInfo,string method)
+        {
+            Type assemblyType = AssemblyAcess.GetType(assemblyInfo);
 
-       
+            var o = Activator.CreateInstance(assemblyType, null);
+            
+        }
+
+
     }
 }

@@ -4,8 +4,12 @@ namespace InterfaceDll
 {
     public interface InterfaceDllClass
     {
-        string Name { get; }
-        string Version { get; }
+        public abstract void ButtonDown();
+        public abstract void ButtonUp();
+
+        public abstract string GetDllName();
+
+        public abstract void ActionMethod();
 
     }
 }

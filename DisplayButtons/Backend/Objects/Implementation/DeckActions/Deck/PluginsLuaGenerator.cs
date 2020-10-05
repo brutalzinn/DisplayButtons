@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using TransparentTwitchChatWPF;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {
@@ -418,8 +419,8 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         public override void OnButtonUp(DeckDevice deckDevice)
         {
             //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
-            ScribeBot.Scripter.Environment.Globals["library"] = new LibraryInterfaceWrapper(this);
 
+            ScribeBot.Scripter.Environment.Globals["library"] = new LibraryInterfaceWrapper(this);
             ScribeBot.Scripter.Environment.Globals["formdesign"] = new control(this);
 
             ScribeBot.Scripter.Execute(ToScript, true);

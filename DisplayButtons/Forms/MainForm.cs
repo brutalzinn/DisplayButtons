@@ -3331,6 +3331,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 MainForm.Instance.PluginsLists.Add(NameSpace, Script);
             }
         }
+   
         public void createPluginButton()
         {
 

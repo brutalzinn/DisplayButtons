@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransparentTwitchChatWPF", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterfaceDll", "InterfaceDll\InterfaceDll.csproj", "{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McMaster.NETCore.Plugins", "Plugins\McMaster.NETCore.Plugins.csproj", "{891C889C-84AF-46A8-91D9-62DCF8870D88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,18 @@ Global
 		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Release|x64.Build.0 = Release|Any CPU
 		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Release|x86.ActiveCfg = Release|Any CPU
 		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}.Release|x86.Build.0 = Release|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Debug|x64.Build.0 = Debug|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Debug|x86.Build.0 = Debug|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Release|x64.ActiveCfg = Release|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Release|x64.Build.0 = Release|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Release|x86.ActiveCfg = Release|Any CPU
+		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
