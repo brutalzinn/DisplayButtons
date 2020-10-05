@@ -6,28 +6,32 @@ using System.Windows;
 
 namespace TransparentTwitchChatWPF
 {
-    public class InterfaceDllWrapper : InterfaceDll.InterfaceDllClass
+    public interface InterfaceDllWrapper : InterfaceDll.InterfaceDllClass
     {
-    
-        public void ActionMethod()
+
+
+        public abstract void MostrarForm();
+       
+
+    }
+    class DllWrapper : InterfaceDllWrapper
+    {
+        public string Name
         {
-            throw new NotImplementedException();
+            get { return "Math"; }
         }
 
-        public void ButtonDown()
+        public string Version
         {
-            Debug.WriteLine("HELLO BUTTON DOWN");
-            //instance.ExitApplication();
+            get { return "1.0.0.0"; }
         }
 
-        public void ButtonUp()
+        public void MostrarForm();
         {
-        new MainWindow().Show();
-        }
 
-        public string GetDllName()
-        {
-            return "Chat box";
-        }
+         new MainWindow().Show();
+
+         }
     }
 }
+
