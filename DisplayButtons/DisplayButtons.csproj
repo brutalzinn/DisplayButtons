@@ -116,7 +116,6 @@
   <ItemGroup>
     <ProjectReference Include="..\InterfaceDll\InterfaceDll.csproj" />
     <ProjectReference Include="..\Plugins\McMaster.NETCore.Plugins.csproj" />
-    <ProjectReference Include="..\Transparent-Twitch-Chat-Overlay\TransparentTwitchChatWPF\TransparentTwitchChatWPF.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -152,6 +151,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  
   <PropertyGroup>
     <RestorePackagesPath>..\packages</RestorePackagesPath>
   </PropertyGroup>

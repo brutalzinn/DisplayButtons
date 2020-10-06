@@ -126,7 +126,7 @@ namespace ScribeBot
         public string ReturnAbsolutePathEntry(string content)
         {
 
-            return $@"{Application.StartupPath}\{ArchivePath}\{content}";
+            return  Path.Combine(AppContext.BaseDirectory, ArchivePath,content);
         }
         /// <summary>
         /// Write content to a specific file entry inside a package.

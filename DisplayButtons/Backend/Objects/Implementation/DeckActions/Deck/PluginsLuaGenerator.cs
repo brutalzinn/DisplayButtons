@@ -14,7 +14,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using TransparentTwitchChatWPF;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {

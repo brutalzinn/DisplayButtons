@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TransparentTwitchChatWPF</name>
+    </assembly>
+    <members>
+        <member name="T:TransparentTwitchChatWPF.App">
+            <summary>
+            Interaction logic for App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:TransparentTwitchChatWPF.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TransparentTwitchChatWPF.CustomWindow">
+            <summary>
+            Interaction logic for CustomWindow.xaml
+            </summary>
+            <summary>
+            CustomWindow
+            </summary>
+        </member>
+        <member name="M:TransparentTwitchChatWPF.CustomWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TransparentTwitchChatWPF.Input">
+            <summary>
+            Interaction logic for Input.xaml
+            </summary>
+            <summary>
+            Input
+            </summary>
+        </member>
+        <member name="M:TransparentTwitchChatWPF.Input.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TransparentTwitchChatWPF.Input_Custom">
+            <summary>
+            Interaction logic for Input.xaml
+            </summary>
+            <summary>
+            Input_Custom
+            </summary>
+        </member>
+        <member name="M:TransparentTwitchChatWPF.Input_Custom.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TransparentTwitchChatWPF.Input_Fade">
+            <summary>
+            Interaction logic for Input.xaml
+            </summary>
+            <summary>
+            Input_Fade
+            </summary>
+        </member>
+        <member name="M:TransparentTwitchChatWPF.Input_Fade.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TransparentTwitchChatWPF.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:TransparentTwitchChatWPF.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:TransparentTwitchChatWPF.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:TransparentTwitchChatWPF.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:TransparentTwitchChatWPF.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:TransparentTwitchChatWPF.SettingsWindow">
+            <summary>
+            Interaction logic for Settings.xaml
+            </summary>
+            <summary>
+            SettingsWindow
+            </summary>
+        </member>
+        <member name="M:TransparentTwitchChatWPF.SettingsWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Microsoft.Shell.NativeMethods.MessageHandler">
+            <summary>
+            Delegate declaration that matches WndProc signatures.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Shell.SingleInstance`1">
+            <summary>
+            This class checks to make sure that only one instance of 
+            this application is running at a time.
+            </summary>
+            <remarks>
+            Note: this class should be used with some caution, because it does no
+            security checking. For example, if one instance of an app that uses this class
+            is running as Administrator, any other instance, even if it is not
+            running as Administrator, can activate it with command line arguments.
+            For most apps, this will not be much of an issue.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.Shell.SingleInstance`1.Delimiter">
+            <summary>
+            String delimiter used in channel names.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Shell.SingleInstance`1.ChannelNameSuffix">
+            <summary>
+            Suffix to the channel name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Shell.SingleInstance`1.RemoteServiceName">
+            <summary>
+            Remote service name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Shell.SingleInstance`1.IpcProtocol">
+            <summary>
+            IPC protocol used (string).
+            </summary>
+        </member>
+        <member name="F:Microsoft.Shell.SingleInstance`1.singleInstanceMutex">
+            <summary>
+            Application mutex.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Shell.SingleInstance`1.channel">
+            <summary>
+            IPC channel for communications.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Shell.SingleInstance`1.commandLineArgs">
+            <summary>
+            List of command line arguments for the application.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Shell.SingleInstance`1.CommandLineArgs">
+            <summary>
+            Gets list of command line arguments for the application.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Shell.SingleInstance`1.InitializeAsFirstInstance(System.String)">
+            <summary>
+            Checks if the instance of the application attempting to start is the first instance. 
+            If not, activates the first instance.
+            </summary>
+            <returns>True if this is the first instance of the application.</returns>
+        </member>
+        <member name="M:Microsoft.Shell.SingleInstance`1.Cleanup">
+            <summary>
+            Cleans up single-instance code, clearing shared resources, mutexes, etc.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Shell.SingleInstance`1.GetCommandLineArgs(System.String)">
+            <summary>
+            Gets command line args - for ClickOnce deployed applications, command line args may not be passed directly, they have to be retrieved.
+            </summary>
+            <returns>List of command line arg strings.</returns>
+        </member>
+        <member name="M:Microsoft.Shell.SingleInstance`1.CreateRemoteService(System.String)">
+            <summary>
+            Creates a remote service for communication.
+            </summary>
+            <param name="channelName">Application's IPC channel name.</param>
+        </member>
+        <member name="M:Microsoft.Shell.SingleInstance`1.SignalFirstInstance(System.String,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Creates a client channel and obtains a reference to the remoting service exposed by the server - 
+            in this case, the remoting service exposed by the first instance. Calls a function of the remoting service 
+            class to pass on command line arguments from the second instance to the first and cause it to activate itself.
+            </summary>
+            <param name="channelName">Application's IPC channel name.</param>
+            <param name="args">
+            Command line arguments for the second instance, passed to the first instance to take appropriate action.
+            </param>
+        </member>
+        <member name="M:Microsoft.Shell.SingleInstance`1.ActivateFirstInstanceCallback(System.Object)">
+            <summary>
+            Callback for activating first instance of the application.
+            </summary>
+            <param name="arg">Callback argument.</param>
+            <returns>Always null.</returns>
+        </member>
+        <member name="M:Microsoft.Shell.SingleInstance`1.ActivateFirstInstance(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Activates the first instance of the application with arguments from a second instance.
+            </summary>
+            <param name="args">List of arguments to supply the first instance of the application.</param>
+        </member>
+        <member name="T:Microsoft.Shell.SingleInstance`1.IPCRemoteService">
+            <summary>
+            Remoting service class which is exposed by the server i.e the first instance and called by the second instance
+            to pass on the command line arguments to the first instance and cause it to activate itself.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Shell.SingleInstance`1.IPCRemoteService.InvokeFirstInstance(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Activates the first instance of the application.
+            </summary>
+            <param name="args">List of arguments to pass to the first instance.</param>
+        </member>
+        <member name="M:Microsoft.Shell.SingleInstance`1.IPCRemoteService.InitializeLifetimeService">
+            <summary>
+            Remoting Object's ease expires after every 5 minutes by default. We need to override the InitializeLifetimeService class
+            to ensure that lease never expires.
+            </summary>
+            <returns>Always null.</returns>
+        </member>
+    </members>
+</doc>

@@ -11,6 +11,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <Platforms>x86;x64</Platforms>
+
+<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
     <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
     <OutputType>Library</OutputType>
 
@@ -18,6 +22,12 @@
   <PropertyGroup>
     <ManifestKeyFile>TransparentTwitchChatWPF_TemporaryKey.pfx</ManifestKeyFile>
 
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutputPath>C:\Users\rober\Documents\My projects\ButtonDeck\bin\netcoreapp3.1\Data\Packages\LuaApi</OutputPath>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <DocumentationFile></DocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="icons\twitch_chat.ico" />
@@ -61,6 +71,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\InterfaceDll\InterfaceDll.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Reference Update="CefSharp">

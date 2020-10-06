@@ -3335,20 +3335,22 @@ toAdd.AsEnumerable().Reverse().All(m =>
             }
         }
       
-        public void dllAssing(string path)
+        public void dllAssing(string pluginDll)
         {
-    
-if (File.Exists(path))
+         
+            if (File.Exists(pluginDll))
                 {
-                    var loader = PluginLoader.CreateFromAssemblyFile(path,sharedTypes: new[] {   typeof(InterfaceDll.InterfaceDllClass), // The IAdapterRegistration class lets plugins get registered.
-                        typeof(IServiceCollection),   // Required for the Adapter to register itself
-                   
-          
-                 });
+                var loader = PluginLoader.CreateFromAssemblyFile(
+                       pluginDll,
+                    
+                       config => config.PreferSharedTypes = true);
+                Globals.loaders.Add(loader);
+
+     
                        
                     
               
-                Globals.loaders.Add(loader);
+             
             }
 
         }
@@ -3364,10 +3366,10 @@ if (File.Exists(path))
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
-                MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ReturnPathEntry(x.GetInfo()["EntryPoint"]), x.ReadFileContents(x.GetInfo()["EntryPoint"]), x.ReturnPathEntry(x.GetInfo()["Custom_content"]));
+              button_creator(x.GetInfo()["Name"], x.ReturnPathEntry(x.GetInfo()["EntryPoint"]), x.ReadFileContents(x.GetInfo()["EntryPoint"]), x.ReturnPathEntry(x.GetInfo()["Custom_content"]));
 
-                MainForm.Instance.PluginLoaderScript(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
-                MainForm.Instance.dllAssing(x.ReturnAbsolutePathEntry(x.GetInfo()["Custom_content"]));
+               PluginLoaderScript(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
+            dllAssing(x.ReturnAbsolutePathEntry(x.GetInfo()["Custom_content"]));
                 //    MainForm.Instance.RefreshAllPluginsDependencies(x.ReadFileContents(x.GetInfo()["EntryPoint"]));
                 //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
               
@@ -3997,7 +3999,7 @@ if (File.Exists(path))
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
-            new TransparentTwitchChatWPF.MainWindow().Show();
+           // new TransparentTwitchChatWPF.MainWindow().Show();
 
 
         }

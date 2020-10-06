@@ -9,6 +9,9 @@
     <DisablePublicApiAnalyzer Condition="'$(TargetFramework)' == 'netcoreapp2.0'">true</DisablePublicApiAnalyzer>
     <OutputType>library</OutputType>
     <IsPackable>true</IsPackable>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageDescription>Provides API for dynamically loading assemblies into a .NET application.
 
@@ -18,6 +21,13 @@ See https://github.com/natemcmaster/DotNetCorePlugins/blob/master/README.md for 
     <PackageTags>.NET Core;plugins</PackageTags>
     <DefineConstants Condition="'$(TargetFramework)' == 'netcoreapp3.0'">$(DefineConstants);FEATURE_UNLOAD</DefineConstants>
     <DefineConstants Condition="'$(TargetFramework)' == 'netcoreapp3.0'">$(DefineConstants);FEATURE_NATIVE_RESOLVER</DefineConstants>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.0|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+    <OutputPath>C:\Users\rober\Documents\My projects\ButtonDeck\bin</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,16 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-
-
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
+using System.Windows;
 namespace InterfaceDll
 {
     public interface InterfaceDllClass
     {
-    
-
+  
       string GetActionName();
-
-
-
 
         void Configure(ServiceCollection service);
 
@@ -18,7 +17,7 @@ namespace InterfaceDll
 
     public interface IMyService
     {
-        void Execute();
+        Window Execute();
         string Teste();
     }
 }

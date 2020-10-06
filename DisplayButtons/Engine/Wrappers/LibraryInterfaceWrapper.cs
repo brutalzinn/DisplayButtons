@@ -12,18 +12,19 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
-using TransparentTwitchChatWPF;
+
 
 namespace DisplayButtons.Engine.Wrappers
 {
     [MoonSharpUserData]
     public static class LibraryInterfaceWrapper
     {
-       public static void ShowChatBox()
+        public static void ShowChatBox()
         {  
             
-            Debug.WriteLine($"PASSANDO COM {Globals.loaders.Count}");
+          
             var services = new ServiceCollection();
 
          
@@ -32,8 +33,12 @@ namespace DisplayButtons.Engine.Wrappers
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 
             IMyService consumer = serviceProvider.GetRequiredService<IMyService>();
-
-          Debug.WriteLine ($"{consumer.Teste()}");
+            Thread thread = new Thread(() => {
+                consumer.Execute().Show();
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+         
         }
         public static void ConfigureServices(ServiceCollection services, List<PluginLoader> loaders)
         {

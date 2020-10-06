@@ -33,9 +33,9 @@ namespace TransparentTwitchChatWPF
 
             return "Escrevendo no console..";
         }
-            public void Execute()
+            public Window Execute()
             {
-                new MainWindow().Show();
+            return new MainWindow();
             }
 
         }
