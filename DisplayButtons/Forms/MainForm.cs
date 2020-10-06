@@ -50,6 +50,9 @@ using DisplayButtons.Forms.TwitchChat;
 
 using System.Data.Entity.Infrastructure.Interception;
 using DisplayButtons.Backend.Objects.Implementation.DeckActions.Deck;
+using McMaster.NETCore.Plugins;
+using Microsoft.Extensions.DependencyInjection;
+using DisplayButtons.Engine.Wrappers;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -135,7 +138,7 @@ namespace DisplayButtons.Forms
                     warning_label.Text = Texts.rm.GetString("WARNINGLABELTEXT", Texts.cultereinfo);
                     deckoptions_button.Text = Texts.rm.GetString("BUTTONDECKMISCELLANEOUS", Texts.cultereinfo);
                     RefreshDeveloperMode();
-                    reloadALL();
+                   // reloadALL();
                 }));
 
             });
@@ -3331,7 +3334,24 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 MainForm.Instance.PluginsLists.Add(NameSpace, Script);
             }
         }
-   
+      
+        public void dllAssing(string path)
+        {
+    
+if (File.Exists(path))
+                {
+                    var loader = PluginLoader.CreateFromAssemblyFile(path,sharedTypes: new[] {   typeof(InterfaceDll.InterfaceDllClass), // The IAdapterRegistration class lets plugins get registered.
+                        typeof(IServiceCollection),   // Required for the Adapter to register itself
+                   
+          
+                 });
+                       
+                    
+              
+                Globals.loaders.Add(loader);
+            }
+
+        }
         public void createPluginButton()
         {
 
@@ -3339,19 +3359,40 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
          
             Package[] installedPackages = Workshop.GetInstalled();
-
+         
             installedPackages.ToList().ForEach(x =>
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
-
-                MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ReturnPathEntry( x.GetInfo()["EntryPoint"]), x.ReadFileContents(x.GetInfo()["EntryPoint"]), x.ReturnPathEntry(x.GetInfo()["Custom_content"]));
+                MainForm.Instance.button_creator(x.GetInfo()["Name"], x.ReturnPathEntry(x.GetInfo()["EntryPoint"]), x.ReadFileContents(x.GetInfo()["EntryPoint"]), x.ReturnPathEntry(x.GetInfo()["Custom_content"]));
 
                 MainForm.Instance.PluginLoaderScript(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
+                MainForm.Instance.dllAssing(x.ReturnAbsolutePathEntry(x.GetInfo()["Custom_content"]));
                 //    MainForm.Instance.RefreshAllPluginsDependencies(x.ReadFileContents(x.GetInfo()["EntryPoint"]));
                 //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
-
+              
             });
+          
+            foreach (var loader in Globals.loaders)
+            {
+                foreach (var pluginType in loader
+                    .LoadDefaultAssembly()
+                    .GetTypes()
+                    .Where(t => typeof(InterfaceDll.InterfaceDllClass).IsAssignableFrom(t) && !t.IsAbstract))
+                {
+                    // This assumes the implementation of IPlugin has a parameterless constructor
+                    InterfaceDll.InterfaceDllClass plugin = (InterfaceDll.InterfaceDllClass)Activator.CreateInstance(pluginType);
+
+                  
+                    Debug.WriteLine($"Created plugin instance '{plugin.GetActionName()}'.");
+                }
+
+
+            }
+         
+
+        
+          
             Padding categoryPadding = new Padding(5, 0, 0, 0);
             Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);

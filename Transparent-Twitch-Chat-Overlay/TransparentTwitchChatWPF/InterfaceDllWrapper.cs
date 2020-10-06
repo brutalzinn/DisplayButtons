@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InterfaceDll;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -6,28 +8,35 @@ using System.Windows;
 
 namespace TransparentTwitchChatWPF
 {
+   
     public class InterfaceDllWrapper : InterfaceDll.InterfaceDllClass
     {
-    
-        public void ActionMethod()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void ButtonDown()
+
+        public string GetActionName() { return "Chat box v1"; }
+        
+
+        public void Configure(ServiceCollection service)
         {
+            service.AddSingleton<IMyService>(new Service());
            
-            //instance.ExitApplication();
         }
 
-        public void ButtonUp()
-        {
-        new MainWindow().Show();
-        }
 
-        public string GetDllName()
-        {
-            return "Chat box";
+
         }
-    }
+   public class Service : IMyService
+        {
+        
+        public string Teste()
+        {
+
+            return "Escrevendo no console..";
+        }
+            public void Execute()
+            {
+                new MainWindow().Show();
+            }
+
+        }
 }

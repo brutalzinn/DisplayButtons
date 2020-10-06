@@ -50,6 +50,7 @@
     </PackageReference>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
     <PackageReference Include="Jot" Version="1.4.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
     <PackageReference Include="MoonSharp">
       <Version>2.0.0</Version>
     </PackageReference>
@@ -113,6 +114,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InterfaceDll\InterfaceDll.csproj" />
+    <ProjectReference Include="..\Plugins\McMaster.NETCore.Plugins.csproj" />
     <ProjectReference Include="..\Transparent-Twitch-Chat-Overlay\TransparentTwitchChatWPF\TransparentTwitchChatWPF.csproj" />
   </ItemGroup>
 

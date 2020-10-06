@@ -1,37 +1,61 @@
 ﻿using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
+using DisplayButtons.Bibliotecas.Helpers;
+using InterfaceDll;
+using McMaster.NETCore.Plugins;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using TransparentTwitchChatWPF;
 
 namespace DisplayButtons.Engine.Wrappers
 {
     [MoonSharpUserData]
-    public class LibraryInterfaceWrapper
+    public static class LibraryInterfaceWrapper
     {
-        Assembly AssemblyAcess { get; set; }
+       public static void ShowChatBox()
+        {  
+            
+            Debug.WriteLine($"PASSANDO COM {Globals.loaders.Count}");
+            var services = new ServiceCollection();
 
-        public LibraryInterfaceWrapper(PluginLuaGenerator instance)     
-        {
-            LoadAssembly(instance.dllpath);
-        }
-        public void LoadAssembly(string assembly)
-        {
-            AssemblyAcess = Assembly.LoadFile(Application.StartupPath + "/" + assembly);
-        }
-      
-        public void ExecuteMethod(string assemblyInfo,string method)
-        {
-            Type assemblyType = AssemblyAcess.GetType(assemblyInfo);
+         
+           ConfigureServices(services, Globals.loaders);
 
-            var o = Activator.CreateInstance(assemblyType, null);
+            ServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            IMyService consumer = serviceProvider.GetRequiredService<IMyService>();
+
+          Debug.WriteLine ($"{consumer.Teste()}");
+        }
+        public static void ConfigureServices(ServiceCollection services, List<PluginLoader> loaders)
+        {
+            // Create an instance of plugin types
+            foreach (var loader in loaders)
+            {
+                foreach (var pluginType in loader
+                    .LoadDefaultAssembly()
+                    .GetTypes()
+                    .Where(t => typeof(InterfaceDll.InterfaceDllClass).IsAssignableFrom(t) && !t.IsAbstract))
+                {
+                    // This assumes the implementation of IPluginFactory has a parameterless constructor
+                    var plugin = Activator.CreateInstance(pluginType) as InterfaceDll.InterfaceDllClass;
+                    Debug.WriteLine($"Service plugin instance '{plugin.GetActionName()}' created.");
+
+                    plugin?.Configure(services);
+                }
+            }
+        }
+        public static void CloseChatBox()
+        {
             
         }
-
-
     }
 }

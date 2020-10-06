@@ -63,7 +63,8 @@ namespace ScribeBot
             Environment.Globals["data"] = new PluginWrapper();
             Environment.Globals["minecraft"] = new MinecraftWrapper();
             Environment.Globals["socket"] = new SocketWrapper();
-     //   Environment.Globals["library"] = new LibraryInterfaceWrapper();
+            Environment.Globals["chatbox"] = typeof(LibraryInterfaceWrapper);
+            //   Environment.Globals["library"] = new LibraryInterfaceWrapper();
             //       Environment.Globals["teste"] = typeof(functio)
             //    Environment.Globals["teste"] = typeof(CoreWrapperVoid);
             //Types

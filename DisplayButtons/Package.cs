@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Forms;
+using System.Windows.Forms;
 
 //TO-DO: Remake this entire class
 namespace ScribeBot
@@ -121,6 +122,11 @@ namespace ScribeBot
         {
 
             return $@"{ArchivePath}\{content}";
+        }
+        public string ReturnAbsolutePathEntry(string content)
+        {
+
+            return $@"{Application.StartupPath}\{ArchivePath}\{content}";
         }
         /// <summary>
         /// Write content to a specific file entry inside a package.

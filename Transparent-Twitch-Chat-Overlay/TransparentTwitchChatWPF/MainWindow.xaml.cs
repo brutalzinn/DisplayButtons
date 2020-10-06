@@ -121,9 +121,10 @@ namespace TransparentTwitchChatWPF
 
         public MainWindow()
         {
+            //Variables.instance = this;
             InitializeComponent();
             DataContext = this;
-
+            
             this.genSettings = new GeneralSettings
             {
                 CustomWindows = new StringCollection(),

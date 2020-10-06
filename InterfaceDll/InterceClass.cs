@@ -1,15 +1,24 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+
 
 namespace InterfaceDll
 {
     public interface InterfaceDllClass
     {
-        public abstract void ButtonDown();
-        public abstract void ButtonUp();
+    
 
-        public abstract string GetDllName();
+      string GetActionName();
 
-        public abstract void ActionMethod();
 
+
+
+        void Configure(ServiceCollection service);
+
+    }
+
+    public interface IMyService
+    {
+        void Execute();
+        string Teste();
     }
 }

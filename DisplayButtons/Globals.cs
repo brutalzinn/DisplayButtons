@@ -1,4 +1,5 @@
 ﻿using DisplayButtons.Backend.Utils;
+using McMaster.NETCore.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace DisplayButtons
         public static int calc  { get; set; } //ApplicationSettingsManager.Settings.coluna * ApplicationSettingsManager.Settings.linha;
     public  static int linha  { get; set;}
         public static Sharpy.EventManager events = new Sharpy.EventManager();
-
+        public static List<PluginLoader> loaders = new List<PluginLoader>();
         public static int ConsoleOpenned { get; set; }
         public static bool can_refresh { get; set; } = false;
         public static int coluna { get; set; }

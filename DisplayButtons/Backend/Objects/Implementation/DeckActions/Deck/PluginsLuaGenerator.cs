@@ -399,7 +399,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         public override void OnButtonDown(DeckDevice deckDevice)
         {
 
-            ScribeBot.Scripter.Environment.Globals["library"] = new LibraryInterfaceWrapper(this);
+
             ScribeBot.Scripter.Environment.Globals["formdesign"] = new control(this);
             
             ScribeBot.Scripter.Execute(ToScript, true);
@@ -420,7 +420,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         {
             //    ScribeBot.Scripter.Environment.Globals["list"] = typeof(LIST);
 
-            ScribeBot.Scripter.Environment.Globals["library"] = new LibraryInterfaceWrapper(this);
+           
             ScribeBot.Scripter.Environment.Globals["formdesign"] = new control(this);
 
             ScribeBot.Scripter.Execute(ToScript, true);
