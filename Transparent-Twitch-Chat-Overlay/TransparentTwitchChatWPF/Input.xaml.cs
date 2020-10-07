@@ -22,7 +22,12 @@ namespace TransparentTwitchChatWPF
         public Input(string defaultAnswer = "")
         {
             InitializeComponent();
+            translateUI();
             txtAnswer.Text = defaultAnswer;
+        }
+        private void translateUI()
+        {
+            txtAnswer.Text = Utilities.m_LanguageProvider.GetString("txtAnswerChatBox");
         }
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)

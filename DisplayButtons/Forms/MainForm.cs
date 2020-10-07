@@ -3390,6 +3390,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                    
                     Thread t2 = new Thread(delegate ()
                     {
+                        plugin.SetLang(ApplicationSettingsManager.Settings.Language);
                          plugin.LoadScripts(Scripter.Environment);
 
                     });

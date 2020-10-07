@@ -22,6 +22,7 @@ using System.Collections.Specialized;
 using Jot;
 using Jot.DefaultInitializer;
 using System.Media;
+using NthDeveloper.MultiLanguage;
 
 /*
  * v0.8
@@ -90,7 +91,7 @@ namespace TransparentTwitchChatWPF
         GeneralSettings genSettings;
         TrackingConfiguration genSettingsTrackingConfig;
         JsCallbackFunctions jsCallbackFunctions;
-
+        IMultiLanguageProvider m_LanguageProvider;
         //StringCollection custom_windows = new StringCollection();
         List<BrowserWindow> windows = new List<BrowserWindow>();
 
@@ -119,10 +120,12 @@ namespace TransparentTwitchChatWPF
             }
         }
 
-        public MainWindow()
+        public MainWindow(IMultiLanguageProvider languageProvider)
         {
             //Variables.instance = this;
             InitializeComponent();
+            translateUI();
+            m_LanguageProvider = languageProvider;
             DataContext = this;
             
             this.genSettings = new GeneralSettings
@@ -161,7 +164,11 @@ namespace TransparentTwitchChatWPF
             this.jsCallbackFunctions = new JsCallbackFunctions();
             Browser1.JavascriptObjectRepository.Register("jsCallback", this.jsCallbackFunctions, isAsync: true, options: BindingOptions.DefaultBinder);
         }
-
+        private void translateUI()
+        {
+          //this. = Utilities.m_LanguageProvider.GetString("AppTitle");
+          
+        }
         public bool ProcessCommandLineArgs(IList<string> args)
         {
             if (args == null || args.Count == 0)

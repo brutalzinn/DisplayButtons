@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Jot;
+using NthDeveloper.MultiLanguage;
 
 namespace TransparentTwitchChatWPF
 {
@@ -15,6 +16,7 @@ namespace TransparentTwitchChatWPF
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
         }
+      public static  IMultiLanguageProvider m_LanguageProvider;
     }
 
     public sealed class KapChat

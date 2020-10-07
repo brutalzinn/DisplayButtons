@@ -12,6 +12,8 @@ namespace InterfaceDll
   
       string GetActionName();
 
+        void SetLang(string lang);
+
         void Configure(ServiceCollection service);
         void LoadScripts(Script scripter);
    

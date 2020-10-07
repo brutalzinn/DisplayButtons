@@ -26,11 +26,11 @@ namespace TransparentTwitchChatWPF.Wrappers
           
           
             Thread thread = new Thread(() => {
-                new MainWindow().Show();
+                new MainWindow(Utilities.m_LanguageProvider).ShowDialog();
             });
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
-            thread.Join();
+        
         }
       
     }

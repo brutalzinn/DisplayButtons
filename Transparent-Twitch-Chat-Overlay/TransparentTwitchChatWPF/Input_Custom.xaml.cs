@@ -22,10 +22,14 @@ namespace TransparentTwitchChatWPF
         public Input_Custom(string defaultAnswer = "")
         {
             InitializeComponent();
+            translateUI();
             txtAnswer.Text = defaultAnswer;
         }
-
-        private void btnDialogOk_Click(object sender, RoutedEventArgs e)
+        private void translateUI()
+        {
+            lblQuestion.Content = Utilities.m_LanguageProvider.GetString("combobocustomurl");
+        }
+            private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
         }

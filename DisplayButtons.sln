@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McMaster.NETCore.Plugins", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonSharp.Interpreter.netcore", "MoonSharp.Interpreter.netcore\MoonSharp.Interpreter.netcore.csproj", "{693BDC4D-933F-42CF-9C5D-83566E4185E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NthMultiLanguage", "NthMultiLanguage\NthMultiLanguage.csproj", "{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Release|x64.Build.0 = Release|Any CPU
 		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Release|x86.Build.0 = Release|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Debug|x64.Build.0 = Debug|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Debug|x86.Build.0 = Debug|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Release|x64.ActiveCfg = Release|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Release|x64.Build.0 = Release|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Release|x86.ActiveCfg = Release|Any CPU
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

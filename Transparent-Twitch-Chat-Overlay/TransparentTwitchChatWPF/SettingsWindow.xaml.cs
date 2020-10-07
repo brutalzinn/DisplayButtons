@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Media;
+using NthDeveloper.MultiLanguage;
 
 namespace TransparentTwitchChatWPF
 {
@@ -22,15 +23,38 @@ namespace TransparentTwitchChatWPF
     {
         WindowSettings config;
         MainWindow _main;
-
+      
         public SettingsWindow(MainWindow mainWindow, WindowSettings windowConfig)
         {
             this.config = windowConfig;
             this._main = mainWindow;
 
             InitializeComponent();
+            translateUI();
         }
+        private void translateUI()
+        {
+          //  this.Content = Utilities.m_LanguageProvider.GetString("AppTitle");
+            OKButton.Content = Utilities.m_LanguageProvider.GetString("Save");
+            CancelButton.Content = Utilities.m_LanguageProvider.GetString("Cancel");
+            cbCustomURL.Content = Utilities.m_LanguageProvider.GetString("CustomUrl");
+            labelWiki.Content = Utilities.m_LanguageProvider.GetString("labelWiki");
+            ProblemLabel.Content = Utilities.m_LanguageProvider.GetString("ProblemLabel");
+            LabelCredit.Content = Utilities.m_LanguageProvider.GetString("LabelCredit");
+            VersionLabel.Content = Utilities.m_LanguageProvider.GetString("Version");
+            LabelTwitchOverlayCaption.Content = Utilities.m_LanguageProvider.GetString("LabelTwitchOverlayCaption");
+            LabelDetailedInfo.Content = Utilities.m_LanguageProvider.GetString("LabelDetailedInfo");
+            WidgetLabelDetailed.Content = Utilities.m_LanguageProvider.GetString("WidgetLabelDetailed");
+            NewWidgetButton.Content = Utilities.m_LanguageProvider.GetString("NewWidgetButton");
 
+            UrlLabel.Content = Utilities.m_LanguageProvider.GetString("UrlLabel");
+
+            cbInteraction.Content = Utilities.m_LanguageProvider.GetString("cbInteraction");
+            cbTaskbar.Content = Utilities.m_LanguageProvider.GetString("cbTaskbar");
+            cbConfirmClose.Content = Utilities.m_LanguageProvider.GetString("cbConfirmClose");
+            cbEnableTrayIcon.Content = Utilities.m_LanguageProvider.GetString("cbEnableTrayIcon");
+            cbAutoHideBorders.Content = Utilities.m_LanguageProvider.GetString("cbAutoHideBorders");
+        }
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
             this.config.ChatType = this.comboChatType.SelectedIndex;
