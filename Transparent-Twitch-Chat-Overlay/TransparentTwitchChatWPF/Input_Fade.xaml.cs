@@ -22,9 +22,13 @@ namespace TransparentTwitchChatWPF
         public Input_Fade(string defaultAnswer = "")
         {
             InitializeComponent();
+            translateUI();
             txtAnswer.Text = defaultAnswer;
         }
-
+        private void translateUI()
+        {
+            lblQuestion.Content = Utilities.m_LanguageProvider.GetString("lblQuestionContent");
+        }
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;

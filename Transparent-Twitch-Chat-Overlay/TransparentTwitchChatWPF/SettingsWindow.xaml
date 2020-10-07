@@ -24,12 +24,12 @@
                 </ListView.ItemContainerStyle>
                 <ListViewItem>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Chat" VerticalAlignment="Center" />
+                        <TextBlock x:Name="ChatListView" Text="Chat" VerticalAlignment="Center" />
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem>
+                <ListViewItem x:Name="GeneralListView">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="General" VerticalAlignment="Center" />
+                        <TextBlock x:Name="GeneralListVIew" Text="General" VerticalAlignment="Center" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem>
@@ -39,7 +39,7 @@
                 </ListViewItem>
                 <ListViewItem>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="About" VerticalAlignment="Center" />
+                        <TextBlock x:Name="AboutListView" Text="About" VerticalAlignment="Center" />
                     </StackPanel>
                 </ListViewItem>
             </ListView>
@@ -47,9 +47,9 @@
         
         <Grid Name="chatGrid" Grid.Column="1">
             <Grid Name ="twitchPopoutChat" Visibility="Hidden" Grid.Column="1">
-                <Label Content="Username" HorizontalAlignment="Left" Margin="12,22,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="UsernameLabel" Content="Username" HorizontalAlignment="Left" Margin="12,22,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <TextBox Name="tbTwitchPopoutUsername" HorizontalAlignment="Left" Height="23" Width="240" Margin="20,52,0,0" TextWrapping="NoWrap" Text="username" VerticalAlignment="Top" />
-                <Label Content="Custom CSS" HorizontalAlignment="Left" Margin="12,75,0,0" FontWeight="Bold" />
+                <Label x:Name="CustomCssLabel" Content="Custom CSS" HorizontalAlignment="Left" Margin="12,75,0,0" FontWeight="Bold" />
                 <TextBox Name="tbPopoutCSS" 
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          Width="Auto" Height="Auto"
@@ -61,7 +61,7 @@
                 <Label Content="URL" HorizontalAlignment="Left" Margin="12,22,0,0" FontWeight="Bold" />
                 <TextBox Name="tbURL" HorizontalAlignment="Stretch" Height="23" Width="Auto" Margin="20,52,15,0" TextWrapping="NoWrap" Text="url" VerticalAlignment="Top" />
 
-                <Label Content="Custom CSS" HorizontalAlignment="Left" Margin="12,75,0,0" FontWeight="Bold" />
+                <Label x:Name="CustomUrlGridContentLabel" Content="Custom CSS" HorizontalAlignment="Left" Margin="12,75,0,0" FontWeight="Bold" />
                 <TextBox Name="tbCSS2" 
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          Width="Auto" Height="Auto"
@@ -71,13 +71,13 @@
             </Grid>
             <Grid Name="kapChatGrid" Grid.Column="1">
                 <StackPanel HorizontalAlignment="Left" Orientation="Vertical" Width="127">
-                    <Label Content="Username" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="Chat Fade" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="Chat Fade Time" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="Show Bots" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="Chat Sound" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="Theme" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Name="lblCSS" Content="Custom CSS" Visibility="Hidden" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="UsernameLabelChat" Content="Username" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="ChatFadeLabel" Content="Chat Fade" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="ChatFadeTimeLabel" Content="Chat Fade Time" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="ShowBotsLabel" Content="Show Bots" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="ChatSoundTimeLabel" Content="Chat Sound" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="ThemeLabel" Content="Theme" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="lblCSSChatLabel" Content="Custom CSS" Visibility="Hidden" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 </StackPanel>
 
                 <StackPanel HorizontalAlignment="Right" Orientation="Vertical" Width="274">

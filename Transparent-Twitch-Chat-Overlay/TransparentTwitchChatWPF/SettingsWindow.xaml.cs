@@ -54,6 +54,21 @@ namespace TransparentTwitchChatWPF
             cbConfirmClose.Content = Utilities.m_LanguageProvider.GetString("cbConfirmClose");
             cbEnableTrayIcon.Content = Utilities.m_LanguageProvider.GetString("cbEnableTrayIcon");
             cbAutoHideBorders.Content = Utilities.m_LanguageProvider.GetString("cbAutoHideBorders");
+
+            UsernameLabelChat.Content = Utilities.m_LanguageProvider.GetString("UsernameLabel");
+            CustomCssLabel.Content = Utilities.m_LanguageProvider.GetString("CustomCssLabel");
+            ChatFadeTimeLabel.Content = Utilities.m_LanguageProvider.GetString("ChatFadeTimeLabel");
+            ThemeLabel.Content = Utilities.m_LanguageProvider.GetString("ThemeLabel");
+            ChatListView.Text = Utilities.m_LanguageProvider.GetString("ChatListView");
+            AboutListView.Text = Utilities.m_LanguageProvider.GetString("AboutListView");
+            combobocustomurl.Content = Utilities.m_LanguageProvider.GetString("combobocustomurl");
+            ShowBotsLabel.Content = Utilities.m_LanguageProvider.GetString("ShowBotsLabel");
+            ChatSoundTimeLabel.Content = Utilities.m_LanguageProvider.GetString("ChatSoundTimeLabel");
+       
+        
+        
+        
+        
         }
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
@@ -221,13 +236,13 @@ namespace TransparentTwitchChatWPF
             if (comboTheme.SelectedIndex == 0)
             {
                 tbCSS.Visibility = Visibility.Visible;
-                lblCSS.Visibility = Visibility.Visible;
+                lblCSSChatLabel.Visibility = Visibility.Visible;
                 this.Height = 510;
             }
             else
             {
                 tbCSS.Visibility = Visibility.Hidden;
-                lblCSS.Visibility = Visibility.Hidden;
+                lblCSSChatLabel.Visibility = Visibility.Hidden;
                 this.Height = 405;
             }
         }
