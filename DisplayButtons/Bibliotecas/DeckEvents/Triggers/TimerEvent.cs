@@ -83,7 +83,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 
         public override void OnInit(Event value)
         {
-            SharpShedule.Sheduler teste = new SharpShedule.Sheduler();
+            SharpSchedule.AsyncScheduler teste = new SharpSchedule.AsyncScheduler();
 
             if (recurring)
             {
@@ -91,7 +91,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
             }
             else
             {
-                teste.Shedule(OnExecute, Start, value, Interval);
+                teste.Schedule(OnExecute, Start, value, Interval);
                 
             } 
           teste.Start();

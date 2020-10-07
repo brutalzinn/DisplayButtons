@@ -2,7 +2,6 @@
 using System.Linq;
 using System.IO;
 using System.Threading;
-using MoonSharp.Interpreter;
 using System.Diagnostics;
 using ScribeBot.Engine.Containers;
 using ScribeBot.Engine.Wrappers;
@@ -10,6 +9,8 @@ using ScribeBot.Engine.Proxies;
 using DisplayButtons.Engine.Wrappers;
 using System.Windows.Forms;
 using System.Reflection;
+using MoonSharp.Interpreter;
+using System.Runtime.CompilerServices;
 
 namespace ScribeBot
 {
@@ -49,7 +50,7 @@ namespace ScribeBot
             Environment.PerformanceStats.Enabled = true;
 
             Directory.GetFiles($@"Data\Extensions\", "*.lua").ToList().ForEach(x => Environment.DoFile(x));
-
+            
             //Libraries
             Environment.Globals["audio"] = typeof(AudioWrapper);
             Environment.Globals["core"] = typeof(CoreWrapper);
@@ -63,7 +64,7 @@ namespace ScribeBot
             Environment.Globals["data"] = new PluginWrapper();
             Environment.Globals["minecraft"] = new MinecraftWrapper();
             Environment.Globals["socket"] = new SocketWrapper();
-            Environment.Globals["chatbox"] = typeof(LibraryInterfaceWrapper);
+           
             //   Environment.Globals["library"] = new LibraryInterfaceWrapper();
             //       Environment.Globals["teste"] = typeof(functio)
             //    Environment.Globals["teste"] = typeof(CoreWrapperVoid);

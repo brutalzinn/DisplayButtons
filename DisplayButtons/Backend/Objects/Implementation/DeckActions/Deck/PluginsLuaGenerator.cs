@@ -53,6 +53,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
         public  string dictionary_name { get; set; } = "";
         [XmlIgnore]
         public dynamic form;
+
         [XmlIgnore]
         private static PluginLuaGenerator instance;
         [XmlIgnore]
@@ -64,8 +65,6 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 return instance;
             }
         }
-
-
         [MoonSharpUserData]
 
 
@@ -139,7 +138,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 }
             }
 
-            public  void setcontrol(string name, string value, string type, int x, int y, int tam_x, int tam_y)
+            public  void SetControl(string name, string value, string type, int x, int y, int tam_x, int tam_y)
             {
 
               if(instance.form != null)
@@ -193,7 +192,20 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                             instance.form.Controls.Add(labeled);
 
                         break;
-                    case "file":
+                        case "combobox":
+                            ComboBox combobox = new ComboBox();
+                            combobox.Text = value;
+                            combobox.Name = name;
+                            //       PluginLuaGenerator.form.Controls.Add(txt);
+                            combobox.Width = tam_x;
+                            combobox.Height = tam_y;
+                            combobox.Location = new System.Drawing.Point(x, y);
+                            //     AddControlToUser(labeled.Name, labeled.Text);
+                            instance.form.Controls.Add(combobox);
+
+                            break;
+
+                        case "file":
                         TextBox file_text = new TextBox();
                         OpenFileDialog file_search = new OpenFileDialog();
                         Button file_button = new Button();
@@ -234,6 +246,30 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 
 
             }
+            public  void AddComboBoxItem(string control,string[] item)
+            {
+                foreach (Control c in instance.form.Controls)
+                {
+                    if (c.Name == control)
+                    {
+if (c is ComboBox TT)
+                            {
+                        foreach (string i in item)
+                        {
+                            
+
+                                TT.Items.Add(i);
+                            
+
+
+                        }
+}
+
+                    }
+
+                }
+
+            }
             public  string GetKey(string key)
             {
                 string result = null;
@@ -260,27 +296,27 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 }
                 return result;
             }
-            public  string getcontrol(string name)
-            {
-
-
-                string result = "";
-                foreach (Control c in instance.form.Controls)
+            public  string GetControl(string name)
                 {
-                    if (c.Name == name)
-                    {
-                        result = c.Text;
 
-                    }
-                    else
-                    {
 
-                        result = "";
+                    string result = "";
+                    foreach (Control c in instance.form.Controls)
+                    {
+                        if (c.Name == name)
+                        {
+                            result = c.Text;
+
+                        }
+                        else
+                        {
+
+                            result = "";
+                        }
                     }
+                    return result;
+
                 }
-                return result;
-
-            }
 
         }
 

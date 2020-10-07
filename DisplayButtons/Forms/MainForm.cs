@@ -53,6 +53,8 @@ using DisplayButtons.Backend.Objects.Implementation.DeckActions.Deck;
 using McMaster.NETCore.Plugins;
 using Microsoft.Extensions.DependencyInjection;
 using DisplayButtons.Engine.Wrappers;
+using InterfaceDll;
+using MoonSharp.Interpreter;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -194,7 +196,7 @@ namespace DisplayButtons.Forms
         public void StartupMethods()
         {
 
-    
+         
             StartUsbMode();
 
 
@@ -3357,8 +3359,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
         public void createPluginButton()
         {
 
-
-
+      Scripter.Initialize();
+           
          
             Package[] installedPackages = Workshop.GetInstalled();
          
@@ -3385,13 +3387,22 @@ toAdd.AsEnumerable().Reverse().All(m =>
                     // This assumes the implementation of IPlugin has a parameterless constructor
                     InterfaceDll.InterfaceDllClass plugin = (InterfaceDll.InterfaceDllClass)Activator.CreateInstance(pluginType);
 
-                  
-                    Debug.WriteLine($"Created plugin instance '{plugin.GetActionName()}'.");
+                   
+                    Thread t2 = new Thread(delegate ()
+                    {
+                         plugin.LoadScripts(Scripter.Environment);
+
+                    });
+                   
+                    t2.Start();
+                   // t2.Join();
+                 Debug.WriteLine($"Created plugin instance '{plugin.GetActionName()}'.");
                 }
 
 
             }
          
+      
 
         
           

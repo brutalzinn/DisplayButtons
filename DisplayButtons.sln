@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisplayButtons", "DisplayButtons\DisplayButtons.csproj", "{2E4934B5-FFBC-4F7C-8CD5-5F3B3DEB86F1}"
 	ProjectSection(ProjectDependencies) = postProject
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4} = {693BDC4D-933F-42CF-9C5D-83566E4185E4}
 		{340C12FD-3B4D-4A37-AB81-5C5786135206} = {340C12FD-3B4D-4A37-AB81-5C5786135206}
 	EndProjectSection
 EndProject
@@ -15,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterfaceDll", "InterfaceDll\InterfaceDll.csproj", "{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McMaster.NETCore.Plugins", "Plugins\McMaster.NETCore.Plugins.csproj", "{891C889C-84AF-46A8-91D9-62DCF8870D88}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonSharp.Interpreter.netcore", "MoonSharp.Interpreter.netcore\MoonSharp.Interpreter.netcore.csproj", "{693BDC4D-933F-42CF-9C5D-83566E4185E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +85,18 @@ Global
 		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Release|x64.Build.0 = Release|Any CPU
 		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Release|x86.ActiveCfg = Release|Any CPU
 		{891C889C-84AF-46A8-91D9-62DCF8870D88}.Release|x86.Build.0 = Release|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Debug|x64.Build.0 = Debug|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Debug|x86.Build.0 = Debug|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Release|x64.ActiveCfg = Release|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Release|x64.Build.0 = Release|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Release|x86.ActiveCfg = Release|Any CPU
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

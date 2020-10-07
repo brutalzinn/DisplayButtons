@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
+using MoonSharp.Interpreter;
+using TransparentTwitchChatWPF.Wrappers;
 
 namespace TransparentTwitchChatWPF
 {
@@ -22,9 +24,19 @@ namespace TransparentTwitchChatWPF
            
         }
 
+        public void LoadScripts(Script script)
+        {
+
+            UserData.RegisterType<LibraryInterfaceWrapper>();
+            DynValue chatboxclass = UserData.Create(new LibraryInterfaceWrapper());
+            script.Globals.Set("chatbox", chatboxclass);
+
+           
+      
 
 
         }
+    }
    public class Service : IMyService
         {
         
@@ -33,10 +45,8 @@ namespace TransparentTwitchChatWPF
 
             return "Escrevendo no console..";
         }
-            public Window Execute()
-            {
-            return new MainWindow();
-            }
+  
+            
 
         }
 }
