@@ -24,7 +24,7 @@
 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutputPath>C:\Users\rober\Documents\My projects\ButtonDeck\bin\netcoreapp3.1\Data\Packages\LuaApi</OutputPath>
+    <OutputPath>..\bin\netcoreapp3.1\Data\Packages\LuaApi</OutputPath>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <DocumentationFile></DocumentationFile>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>

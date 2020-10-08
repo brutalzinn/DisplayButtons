@@ -13,7 +13,10 @@
     <Nullable>disable</Nullable>
     <Platforms>AnyCPU;x86</Platforms>
     <UseWPF>true</UseWPF>
-  </PropertyGroup>
+ 
+ </PropertyGroup>
+
+  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
@@ -24,14 +27,20 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>C:\Users\rober\Documents\My projects\ButtonDeck\bin</OutputPath>
+    <OutputPath>..\bin</OutputPath>
     <Optimize>false</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
+
+
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>C:\Users\rober\Documents\My projects\ButtonDeck\bin</OutputPath>
+
+      
+
     <Optimize>false</Optimize>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -40,6 +49,11 @@
   </ItemGroup>
 
   <ItemGroup>
+
+    <Content Include="setup\Data\**" CopyToOutputDirectory="PreserveNewest" DestinationFolder="Data\%(RecursiveDir)\%(Filename)%(Extension)" />
+
+
+
     <PackageReference Include="AudioSwitcher.AudioApi" Version="4.0.0-alpha5" />
     <PackageReference Include="AudioSwitcher.AudioApi.CoreAudio" Version="4.0.0-alpha5" />
     <PackageReference Include="DotNetZip">
@@ -104,6 +118,7 @@
     <Folder Include="Backend\Objects\Implementation\DeckActions\Media\" />
     <Folder Include="Bibliotecas\Injetores\" />
     <Folder Include="Bibliotecas\TwitchChat\" />
+    <Folder Include="setup\Data\Logs\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -149,8 +164,15 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  
   <PropertyGroup>
     <RestorePackagesPath>..\packages</RestorePackagesPath>
+      
   </PropertyGroup>
+
+
+
+
+ 
+
+  
 </Project>

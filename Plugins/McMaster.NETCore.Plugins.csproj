@@ -27,7 +27,7 @@ See https://github.com/natemcmaster/DotNetCorePlugins/blob/master/README.md for 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.0|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Users\rober\Documents\My projects\ButtonDeck\bin</OutputPath>
+    <OutputPath>..\libraries\bin</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
