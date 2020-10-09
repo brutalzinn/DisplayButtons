@@ -402,14 +402,14 @@ namespace DisplayButtons.Forms
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
             this.imageModernButton1.ImageLayerTwo = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(882, 95);
+            this.imageModernButton1.Location = new System.Drawing.Point(850, 89);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.NormalLayerTwo = null;
             this.imageModernButton1.Origin = null;
             this.imageModernButton1.Size = new System.Drawing.Size(131, 43);
             this.imageModernButton1.TabIndex = 13;
-            this.imageModernButton1.Text = "imageModernButton1";
+            this.imageModernButton1.Text = "teste";
             this.imageModernButton1.TextButton = null;
             this.imageModernButton1.UseVisualStyleBackColor = true;
             this.imageModernButton1.Click += new System.EventHandler(this.imageModernButton1_Click);

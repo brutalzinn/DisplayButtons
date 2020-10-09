@@ -166,8 +166,11 @@ namespace DisplayButtons.Controls
                         var state = connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
                         if (value == null)
                         {
-                            //Send clear packet
-                            state?.SendPacket(new SlotImageClearPacket(slot));
+                            if (state != null)
+                            {
+                                //Send clear packet
+                                state.SendPacket(new SlotImageClearPacket(slot));
+                            }
                             return;
                         }
 

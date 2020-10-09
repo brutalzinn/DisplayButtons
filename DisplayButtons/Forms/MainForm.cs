@@ -55,6 +55,8 @@ using Microsoft.Extensions.DependencyInjection;
 using DisplayButtons.Engine.Wrappers;
 using InterfaceDll;
 using MoonSharp.Interpreter;
+using System.Management;
+using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -176,7 +178,7 @@ namespace DisplayButtons.Forms
         #endregion
 
         #region Methods
-
+        public bool DeviceTest = false;
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -1094,7 +1096,7 @@ namespace DisplayButtons.Forms
                                         {
 
                                             FocusItem(mb, item);
-                                            camada1.PerformClick();
+                                           // camada1.PerformClick();
                                             goto end;
                                         }
                                             //Navigate to the folder
@@ -1116,7 +1118,7 @@ namespace DisplayButtons.Forms
                                  
                                         //Show button panel with settable properties
                                         FocusItem(mb, item);
-                                    camada1.PerformClick();
+                             //       camada1.PerformClick();
 
                                     lastClick.Reset();
                                 }
@@ -1233,7 +1235,12 @@ namespace DisplayButtons.Forms
                 CurrentDevice.CheckCurrentFolder();
               
 
-            }  
+            }
+
+            if (DeviceTest)
+            {
+                return;
+            }
             if (sendToDevice)
                 {
 
@@ -1256,7 +1263,12 @@ namespace DisplayButtons.Forms
             control1.Text = "";
             control1.Camada = 1;
             control1.ClearText();
-            DeckHelpers.ClearSingleItemToDevice(CurrentDevice, slot);
+            if (!DeviceTest)
+            {
+                DeckHelpers.ClearSingleItemToDevice(CurrentDevice, slot);
+
+            }
+ 
 
             if (folder == null) control1.Invoke(new Action(control1.Refresh));
 
@@ -1281,7 +1293,11 @@ namespace DisplayButtons.Forms
                     control.Tag = item;
                     control.Invoke(new Action(control.Refresh));
  CurrentDevice.CheckCurrentFolder();
-            if (sendToDevice)
+                    if (DeviceTest)
+                    {
+                        return;
+                    }
+                    if (sendToDevice)
             {
                         DeckHelpers.SendSingleItemToDevice(CurrentDevice, slot, item.GetDeckDefaultLayer);
 
@@ -2546,10 +2562,22 @@ ActionImagePlaceHolder.Image = bmp;
         private void FocusItemPropertiesOptions(DeckItemMisc dI,IDeckItem item)
         {
 
+           clearFlowLayout();
+         
+          //  ChangeCamadaLayerByComboBox(item);
+            if (item is DynamicDeckItem TT)
+            {
+          LoadProperties(TT, flowLayoutPanel1);
 
-            
+            }
+            if (item is DynamicDeckFolder AA)
+            {
 
-          
+
+               LoadPropertiesFolder(AA, flowLayoutPanel1);
+            }
+            return;
+
 
             ModernButton myButton = new ModernButton();
             ModernButton myColor = new ModernButton();
@@ -2742,27 +2770,27 @@ ActionImagePlaceHolder.Image = bmp;
             painel_name.Controls.Add(IsNormalText);
             painel_tamanho.Controls.Add(sizeLabelInfo);
             painel_tamanho.Controls.Add(sizeLabelTextBox);
+            PositionComboBox.SelectedValue = dI.Deckposition;
+
+            setEnumValues(PositionComboBox, typeof(Position));
 
 
 
 
-
-            flowLayoutPanel1.Controls.Add(painel_name);
-
+        //    toAdd.Add(painel_name);
 
 
 
-            flowLayoutPanel1.Controls.Add(painel_shadowstroke);
 
-            flowLayoutPanel1.Controls.Add(myButton);
+       //     toAdd.Add(painel_shadowstroke);
+
+         //   toAdd.Add(myButton);
             myButton.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
 
 
 
 
-
-
-            setEnumValues(PositionComboBox, typeof(Position));
+      
             myButton.Click += (s, e) =>
             {
                 dI.Deckname = myNameText.Text;
@@ -2786,22 +2814,16 @@ ActionImagePlaceHolder.Image = bmp;
 
             };
 
-
-            PositionComboBox.SelectedValue = dI.Deckposition;
-
-            if (item is DynamicDeckItem TT)
+            toAdd.AsEnumerable().All(m =>
             {
-                LoadProperties(TT, flowLayoutPanel1);
-
-            }
-            if (item is DynamicDeckFolder AA)
-            {
+                flowLayoutPanel1.Controls.Add(m);
+                return true;
+            });
 
 
-                LoadPropertiesFolder(AA, flowLayoutPanel1);
-            }
+            
 
-
+    
         }
         private void ChangeCamadaLayerByComboBox(IDeckItem item)
         {
@@ -2838,13 +2860,16 @@ ActionImagePlaceHolder.Image = bmp;
         }
         private void FocusItem(ImageModernButton mb, IDeckItem item)
         {
-         
-            camada1.Tag = item;
-            camada2.Tag = item;
+camada1.Tag = item;
+                        camada2.Tag = item;
           
+            camada1.PerformClick();
+           
+
    
        
                     Globals.events.On("DeckEvent", (e) => {
+                        
                        
                         //                        clearFlowLayout();
                         // Cast event argrument to your event object
@@ -2857,8 +2882,8 @@ ActionImagePlaceHolder.Image = bmp;
        
         FocusItemPropertiesOptions(obj.DeckItem.GetDeckDefaultLayer, obj.DeckItem);
                            
-
                         }
+
                         else if (obj.Camada == 2)
                 {
                             
@@ -2870,23 +2895,21 @@ ActionImagePlaceHolder.Image = bmp;
                         }
 
                           ActionImagePlaceHolder.Camada = obj.Camada;
-                        if(ActionImagePlaceHolder.Origin != null)
-                        {
-  UpdateLayerView();  
-                        }
                       
+  UpdateLayerView();
+
+
+
 
                     });
 
 
-        
-               
 
-              ActionImagePlaceHolder.Origin = mb;
-          
+            ActionImagePlaceHolder.Origin = mb;
 
 
 
+            ActionImagePlaceHolder.Refresh();
 
             shadedPanel2.Show();
             shadedPanel1.Refresh();
@@ -3005,13 +3028,11 @@ ActionImagePlaceHolder.Image = bmp;
                 prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
             foreach (var prop in props)
             {
-                MethodInfo myname = item.DeckAction.GetType().GetMethod("GetActionName");
-
-                var returnValue = (string)myname.Invoke(item.DeckAction, new object[] { });
+             
                 
-                action_label.MaximumSize = new Size(110, 0);
-                action_label.AutoSize = true;
-                action_label.Text = returnValue;
+                //action_label.MaximumSize = new Size(110, 0);
+                //action_label.AutoSize = true;
+                //action_label.Text = item.DeckAction.GetActionName();
                 bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
                 MethodInfo helperMethod = item.DeckAction.GetType().GetMethod(prop.Name + "Helper");
                 
@@ -3048,7 +3069,7 @@ ActionImagePlaceHolder.Image = bmp;
                         cBox.Items.AddRange(values.OfType<Enum>().Select(c => EnumUtils.GetDescriptionTranslator(prop.PropertyType, c, c.ToString())).ToArray());
 
                         cBox.Text = EnumUtils.GetDescriptionTranslator(prop.PropertyType, (Enum)prop.GetValue(item.DeckAction), ((Enum)prop.GetValue(item.DeckAction)).ToString());
-                        ChangeCamadaLayerByComboBox(item);
+                    ChangeCamadaLayerByComboBox(item);
                         cBox.SelectedIndexChanged += (s, e) =>
                         {
                             try
@@ -3057,7 +3078,6 @@ ActionImagePlaceHolder.Image = bmp;
                                 prop.SetValue(item.DeckAction, EnumUtils.FromDescriptionTRanslator(prop.PropertyType, cBox.Text));
                               
                                 //UpdateIcon(shouldUpdateIcon);  
-                                ChangeCamadaLayerByComboBox(item);
                             }
                             catch (Exception)
                             {
@@ -3086,7 +3106,7 @@ ActionImagePlaceHolder.Image = bmp;
                             if (txt.Text == string.Empty) return;
                             //After loosing focus, convert type to thingy.
                             prop.SetValue(item.DeckAction, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(txt.Text));
-                            UpdateIcon(shouldUpdateIcon);
+                           // UpdateIcon(shouldUpdateIcon);
                         }
                         catch (Exception)
                         {
@@ -4029,10 +4049,19 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
-           // new TransparentTwitchChatWPF.MainWindow().Show();
+            // new TransparentTwitchChatWPF.MainWindow().Show();
 
+            DeviceTest = true;
 
+              DeckDevice deckDevice = new DeckDevice(new Guid("161fb525-7004-4cb1-9487-6f5106af32da"), "Teste");
+
+            CurrentDevice = deckDevice;
+
+            ProfileTestDeckHelper.SetupPerfil(deckDevice);
+
+         
         }
+
     }
     #endregion
 }
