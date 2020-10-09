@@ -21,6 +21,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoonSharp.Interpreter.netco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NthMultiLanguage", "NthMultiLanguage\NthMultiLanguage.csproj", "{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{7F000225-2385-4499-B825-7ABD5776E0A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bibliotecas", "Bibliotecas", "{855DDA78-D8B9-48C5-958E-E54BED80D6D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{35608EB5-9F68-49E9-8FFA-862FF5B1E5FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +119,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{340C12FD-3B4D-4A37-AB81-5C5786135206} = {35608EB5-9F68-49E9-8FFA-862FF5B1E5FB}
+		{0ABD28F1-AB70-4EDA-85D4-46842CA3AF7E} = {7F000225-2385-4499-B825-7ABD5776E0A4}
+		{891C889C-84AF-46A8-91D9-62DCF8870D88} = {855DDA78-D8B9-48C5-958E-E54BED80D6D9}
+		{693BDC4D-933F-42CF-9C5D-83566E4185E4} = {855DDA78-D8B9-48C5-958E-E54BED80D6D9}
+		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54} = {855DDA78-D8B9-48C5-958E-E54BED80D6D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BBDAE9A-607C-4349-BD4D-66958350141A}
