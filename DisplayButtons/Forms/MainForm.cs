@@ -657,8 +657,17 @@ namespace DisplayButtons.Forms
                                         RefreshAllButtons();
                                         //implementação dos plugins
 
+                                        if (mb.Tag is DynamicDeckItem DDT && DDT.DeckAction is PluginLuaGenerator PG)
+                                        {
+                                            LoadPropertiesPlugins(DDT, action.ToScript, action.ToExecute, action.ToName, action.dllpath);
 
+                                            PG.SetConfigs(action.dllpath);
 
+                                        }
+                                        if (mb.Tag is DynamicDeckItem DDTTWO && DDTTWO.DeckAction.setLayer() == true)
+                                        {
+                                            DDTTWO.DeckAction.setLayer(mb.CurrentSlot, DDTTWO);
+                                        }
                                         FocusItem(GetButtonControl(id2), deckItemToAdd);
 
                                         return;
@@ -692,6 +701,13 @@ namespace DisplayButtons.Forms
                                     {
                                         mycustomitem.DeckAction.setLayer(mb.CurrentSlot, mycustomitem);
                                     }
+                                    if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is PluginLuaGenerator YY)
+                                    {
+                                        LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName, action.dllpath);
+
+                                        YY.SetConfigs(action.dllpath);
+
+                                    }
                                     RefreshAllButtons();
                                 }
                                 else
@@ -706,12 +722,9 @@ namespace DisplayButtons.Forms
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is PluginLuaGenerator YY)
                                     {
                                         LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName,action.dllpath);
-                                    if(action.dllpath != null)
-                                        {
+                                   
                                             YY.SetConfigs(action.dllpath);
-                                        }
-                                            
-                                        // ;
+                                        
                                     }
                                    
                                     if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.setLayer() == true)
@@ -810,11 +823,12 @@ namespace DisplayButtons.Forms
                                 RefreshButton(mb.CurrentSlot, true);
                                 
                                 if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.setLayer() == true)
-                                {
+                                { 
                                     mycustomitem.DeckAction.setLayer(mb.CurrentSlot,mycustomitem);
                                    // FocusItem(mb, mycustomitems
                                 } 
-                               
+                         
+
                             }
 
                         }
@@ -1203,7 +1217,6 @@ namespace DisplayButtons.Forms
                 if (item is DynamicDeckItem FF && FF.DeckAction is PluginLuaGenerator TT)
                 {
                     LoadPropertiesPlugins(FF, GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
-                  //  TT.SetConfigs(GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
                 }
                
                 
@@ -2832,7 +2845,7 @@ ActionImagePlaceHolder.Image = bmp;
    
        
                     Globals.events.On("DeckEvent", (e) => {
-                        flowLayoutPanel1.Controls.Clear();
+                       
                         //                        clearFlowLayout();
                         // Cast event argrument to your event object
                         var obj = (DeckEvent)e;
@@ -3147,7 +3160,6 @@ ActionImagePlaceHolder.Image = bmp;
             Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
             Padding itemPadding = new Padding(25, 0, 0, 0);
             Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
-            IList<PluginLuaGenerator> list = new List<PluginLuaGenerator>();
             // DisplayButtons.Forms.MainForm.testando(value);
             MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate
             {
@@ -3364,14 +3376,19 @@ toAdd.AsEnumerable().Reverse().All(m =>
          
             Package[] installedPackages = Workshop.GetInstalled();
          
+            if(installedPackages.Count() == 0)
+            {
+                return;
+            }
             installedPackages.ToList().ForEach(x =>
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
-              button_creator(x.GetInfo()["Name"], x.ReturnPathEntry(x.GetInfo()["EntryPoint"]), x.ReadFileContents(x.GetInfo()["EntryPoint"]), x.ReturnPathEntry(x.GetInfo()["Custom_content"]));
+              
+              button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]), x.ReturnPathEntry(packageInfo["Custom_content"]));
 
-               PluginLoaderScript(x.GetInfo()["Name"], x.ReadFileContents(x.GetInfo()["EntryPoint"]));
-            dllAssing(x.ReturnAbsolutePathEntry(x.GetInfo()["Custom_content"]));
+               PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
+            dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_content"]));
                 //    MainForm.Instance.RefreshAllPluginsDependencies(x.ReadFileContents(x.GetInfo()["EntryPoint"]));
                 //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
               
@@ -3991,7 +4008,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void camada1_Click(object sender, EventArgs e)
         {
-
+            clearFlowLayout();
             RadioButton mb = (sender as RadioButton);
             if (mb.Tag is IDeckItem FF)
             {
@@ -4002,6 +4019,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void camada2_Click(object sender, EventArgs e)
         {
+            clearFlowLayout();
             RadioButton mb = (sender as RadioButton);
             if (mb.Tag is IDeckItem FF)
             {

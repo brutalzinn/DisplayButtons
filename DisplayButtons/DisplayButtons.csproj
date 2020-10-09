@@ -50,7 +50,6 @@
 
   <ItemGroup>
 
-    <Content Include="setup\Data\**" CopyToOutputDirectory="PreserveNewest" DestinationFolder="Data\%(RecursiveDir)\%(Filename)%(Extension)" />
 
 
 
@@ -118,7 +117,7 @@
     <Folder Include="Backend\Objects\Implementation\DeckActions\Media\" />
     <Folder Include="Bibliotecas\Injetores\" />
     <Folder Include="Bibliotecas\TwitchChat\" />
-    <Folder Include="setup\Data\Logs\" />
+    <Folder Include="setup\Data\imgs\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -168,9 +167,27 @@
     <RestorePackagesPath>..\packages</RestorePackagesPath>
       
   </PropertyGroup>
+  <ItemGroup>
+    <_CopyItems Include="setup\Data\**\*.*" />
+  <_OutputItems Include="$(OutputPath)Data\%(RecursiveDir)\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+
+   <ItemGroup>
+      <MySourceFiles Include="setup\Data\**\*.*" />
+   </ItemGroup>
 
 
 
+
+
+
+ 
+
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+
+      <Copy SourceFiles="@(MySourceFiles)" DestinationFiles="$(OutputPath)Data\%(RecursiveDir)%(Filename)%(Extension)" />
+    </Target>
 
  
 
