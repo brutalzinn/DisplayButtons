@@ -243,6 +243,12 @@ o uso do Display Buttons. Não esqueça de dar seu feedback.
   <data name="DECKGENERALTOGGLEKEY" xml:space="preserve">
     <value>Manter tecla pressionada</value>
   </data>
+  <data name="DECKHELPERCOLOR" xml:space="preserve">
+    <value>Cor</value>
+  </data>
+  <data name="DECKHELPERENABLESTROKE" xml:space="preserve">
+    <value>Traço</value>
+  </data>
   <data name="DECKITEMBOLDTEXT" xml:space="preserve">
     <value>Negrito</value>
   </data>

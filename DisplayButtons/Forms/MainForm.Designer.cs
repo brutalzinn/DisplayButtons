@@ -132,10 +132,12 @@ namespace DisplayButtons.Forms
             // camada1
             // 
             this.camada1.AutoSize = true;
+            this.camada1.Checked = true;
             this.camada1.Location = new System.Drawing.Point(6, 22);
             this.camada1.Name = "camada1";
             this.camada1.Size = new System.Drawing.Size(14, 13);
             this.camada1.TabIndex = 0;
+            this.camada1.TabStop = true;
             this.camada1.UseVisualStyleBackColor = true;
             this.camada1.Click += new System.EventHandler(this.camada1_Click);
             // 

@@ -2137,9 +2137,8 @@ namespace DisplayButtons.Forms
 
             var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
+
             List<Control> toAdd = new List<Control>();
-
-
 
 
             foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory)))
@@ -2559,277 +2558,381 @@ ActionImagePlaceHolder.Image = bmp;
 
            
         }
-        private void FocusItemPropertiesOptions(DeckItemMisc dI,IDeckItem item)
+        private void FocusItemPropertiesOptions(DeckItemMisc dI)
         {
 
-           clearFlowLayout();
-         
-          //  ChangeCamadaLayerByComboBox(item);
-            if (item is DynamicDeckItem TT)
+       
+            clearFlowLayout();
+          
+            var props = dI.GetType().GetProperties().Where(
+              prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
+            foreach (var prop in props)
             {
-          LoadProperties(TT, flowLayoutPanel1);
-
-            }
-            if (item is DynamicDeckFolder AA)
-            {
-
-
-               LoadPropertiesFolder(AA, flowLayoutPanel1);
-            }
-            return;
-
-
-            ModernButton myButton = new ModernButton();
-            ModernButton myColor = new ModernButton();
-            ModernButton myColorShadow = new ModernButton();
-            Label myTextNameInformation = new Label();
-            Label sizeLabelInfo = new Label();
-            Label positionLabelInfo = new Label();
-            Label StrokeLabelInfo = new Label();
-            Label StrokeLabelColor = new Label();
-            Label StrokeLabelDX = new Label();
-            Label StrokeLabelDY = new Label();
-            Label StrokeLabelRADIUS = new Label();
-            TextBox sizeLabelTextBox = new TextBox();
-            ComboBox PositionComboBox = new ComboBox();
-            TextBox myNameText = new TextBox();
-            TextBox myColorText = new TextBox();
-            CheckBox IsStrokeCheckbox = new CheckBox();
-            CheckBox IsHintText = new CheckBox();
-            CheckBox IsBoldText = new CheckBox();
-            CheckBox IsItalicText = new CheckBox();
-            CheckBox IsNormalText = new CheckBox();
-            TextBox shadow_stroke_radiustextfloat = new TextBox();
-            TextBox shadow_stroke_dxtextfloat = new TextBox();
-            TextBox shadow_stroke_dytextfloat = new TextBox();
-            TextBox shadow_stroke_color = new TextBox();
-            myColor.Size = new Size(70, 30);
-            IsHintText.Text = Texts.rm.GetString("DECKITEMHINTTEXT", Texts.cultereinfo);
-            IsBoldText.Text = Texts.rm.GetString("DECKITEMBOLDTEXT", Texts.cultereinfo);
-            IsItalicText.Text = Texts.rm.GetString("DECKITEMITALICTEXT", Texts.cultereinfo);
-            IsNormalText.Text = Texts.rm.GetString("DECKITEMNORMALTEXT", Texts.cultereinfo);
-            IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
-            myColor.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
-            myColorShadow.Size = new Size(70, 30);
-            myColorShadow.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
-            myTextNameInformation.Text = Texts.rm.GetString("DECKITEMTEXT", Texts.cultereinfo);
-            StrokeLabelInfo.Text = Texts.rm.GetString("DECKITEMSTROKE", Texts.cultereinfo);
-            StrokeLabelRADIUS.Text = Texts.rm.GetString("DECKITEMSTROKERADIUS", Texts.cultereinfo);
-            StrokeLabelDX.Text = Texts.rm.GetString("DECKITEMSTROKEDX", Texts.cultereinfo);
-            StrokeLabelDY.Text = Texts.rm.GetString("DECKITEMSTROKEDY", Texts.cultereinfo);
-            StrokeLabelColor.Text = Texts.rm.GetString("DECKITEMSTROKECOLOR", Texts.cultereinfo);
-            positionLabelInfo.Text = Texts.rm.GetString("DECKITEMPOSITION", Texts.cultereinfo);
-            sizeLabelInfo.Text = Texts.rm.GetString("DECKITEMSIZE", Texts.cultereinfo);
-            FlowLayoutPanel painel_name = new FlowLayoutPanel();
-            FlowLayoutPanel painel_color = new FlowLayoutPanel();
-            FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
-            FlowLayoutPanel painel_position = new FlowLayoutPanel();
-            FlowLayoutPanel painel_shadowstroke = new FlowLayoutPanel();
-            myColor.Dock = DockStyle.None;
-            myColorText.Dock = DockStyle.None;
-            sizeLabelTextBox.Dock = DockStyle.None;
-            sizeLabelInfo.Dock = DockStyle.None;
-            positionLabelInfo.Dock = DockStyle.None;
-            StrokeLabelInfo.Dock = DockStyle.None;
-            PositionComboBox.Dock = DockStyle.None;
-            shadow_stroke_radiustextfloat.Dock = DockStyle.None;
-            shadow_stroke_dxtextfloat.Dock = DockStyle.None;
-            shadow_stroke_dytextfloat.Dock = DockStyle.None;
-            shadow_stroke_color.Dock = DockStyle.None;
-            myNameText.Text = dI.Deckname;
-            myColorText.Text = dI.Deckcolor;
-
-            IsStrokeCheckbox.Checked = dI.IsStroke;
-            shadow_stroke_color.Text = dI.Stroke_color;
-            shadow_stroke_dytextfloat.Text = dI.Stroke_Dy.ToString();
-            shadow_stroke_dxtextfloat.Text = dI.Stroke_dxtext.ToString();
-            shadow_stroke_radiustextfloat.Text = dI.Stroke_radius.ToString();
-            IsNormalText.Checked = dI.Isnormaltext;
-            IsHintText.Checked = dI.Ishinttext;
-            IsItalicText.Checked = dI.Isitalictext;
-            IsBoldText.Checked = dI.Isboldtext;
-           
-
-
-            sizeLabelTextBox.Text = dI.Decksize.ToString();
-            myColor.Click += (s, e) =>
-            {
-
-                using (ColorPickerDialog dialog = new ColorPickerDialog())
+                bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
+                MethodInfo helperMethod = dI.GetType().GetMethod(prop.Name + "Helper");
+                if (helperMethod != null)
                 {
-                    dialog.PreviewColorChanged += this.DialogColorChangedHandler;
-
-                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                    flowLayoutPanel1.Controls.Add(new Label()
                     {
-                        //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
-                        string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
-                        myColorText.Text = result;
+                        Text = GetPropertyDescription(prop)
+                    });
+
+                    Button helperButton = new ModernButton()
+                    {
+                        Text = "..."
+                    };
+
+                    helperButton.Click += (sender, e) => helperMethod.Invoke(dI, new object[] { });
+
+                    helperButton.Width = flowLayoutPanel1.DisplayRectangle.Width - 16;
+                    flowLayoutPanel1.Controls.Add(helperButton);
+                }
+                else
+                {
+                    if (prop.PropertyType.IsSubclassOf(typeof(Enum)))
+                    {
+                        var values = Enum.GetValues(prop.PropertyType);
+                        flowLayoutPanel1.Controls.Add(new Label()
+                        {
+                            Text = GetPropertyDescription(prop)
+                        });
+                        ComboBox cBox = new ComboBox
+                        {
+                            DropDownStyle = ComboBoxStyle.DropDownList
+                        };
+                        cBox.Items.AddRange(values.OfType<Enum>().Select(c => EnumUtils.GetDescription(prop.PropertyType, c, c.ToString())).ToArray());
+
+                        cBox.Text = EnumUtils.GetDescription(prop.PropertyType, (Enum)prop.GetValue(dI), ((Enum)prop.GetValue(dI)).ToString());
+
+                        cBox.SelectedIndexChanged += (s, e) =>
+                        {
+                            try
+                            {
+                                if (cBox.Text == string.Empty) return;
+                                prop.SetValue(dI, EnumUtils.FromDescription(prop.PropertyType, cBox.Text));
+                         //   UpdateIcon(shouldUpdateIcon);
+                            }
+                            catch (Exception)
+                            {
+                                //Ignore all errors
+                            }
+                        };
+                        flowLayoutPanel1.Controls.Add(cBox);
+                        return;
                     }
 
-                    dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
-                }
-
-            };
-
-            myColorShadow.Click += (s, e) =>
-            {
-
-                using (ColorPickerDialog dialog = new ColorPickerDialog())
-                {
-                    dialog.PreviewColorChanged += this.DialogColorChangedHandler;
-
-                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                    if (!TypeDescriptor.GetConverter(prop.PropertyType).CanConvertFrom
+                (typeof(string))) continue;
+                    flowLayoutPanel1.Controls.Add(new Label()
                     {
-                        //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
-                        string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
-                        shadow_stroke_color.Text = result;
-                    }
+                        Text = GetPropertyDescription(prop)
+                    });
 
-                    dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
+                    var txt = new TextBox
+                    {
+                        Text = (string)TypeDescriptor.GetConverter(prop.PropertyType).ConvertTo(prop.GetValue(dI), typeof(string))
+                    };
+                    txt.TextChanged += (sender, e) =>
+                    {
+                        try
+                        {
+                            if (txt.Text == string.Empty) return;
+                            //After loosing focus, convert type to thingy.
+                            prop.SetValue(dI, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(txt.Text));
+                         //   UpdateIcon(shouldUpdateIcon);
+                        }
+                        catch (Exception)
+                        {
+                            //Ignore all errors
+                        }
+                    };
+                    txt.Width = flowLayoutPanel1.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
+                    flowLayoutPanel1.Controls.Add(txt);
                 }
+            }
 
-            };
+            //  ChangeCamadaLayerByComboBox(item);
 
+            //toAdd.AsEnumerable().Reverse().All(m =>
+            //{
+            //    parent.Controls.Add(m);
+            //    return true;
+            //});
 
+            //            List<Control> toAdd = new List<Control>();
 
-            IsHintText.Click += (s, e) =>
-            {
+            //            ModernButton myButton = new ModernButton();
+            //            ModernButton myColor = new ModernButton();
+            //            ModernButton myColorShadow = new ModernButton();
+            //            Label myTextNameInformation = new Label();
+            //            Label sizeLabelInfo = new Label();
+            //            Label positionLabelInfo = new Label();
+            //            Label StrokeLabelInfo = new Label();
+            //            Label StrokeLabelColor = new Label();
+            //            Label StrokeLabelDX = new Label();
+            //            Label StrokeLabelDY = new Label();
+            //            Label StrokeLabelRADIUS = new Label();
+            //            TextBox sizeLabelTextBox = new TextBox();
+            //            ComboBox PositionComboBox = new ComboBox();
+            //            TextBox myNameText = new TextBox();
+            //            TextBox myColorText = new TextBox();
+            //            CheckBox IsStrokeCheckbox = new CheckBox();
+            //            CheckBox IsHintText = new CheckBox();
+            //            CheckBox IsBoldText = new CheckBox();
+            //            CheckBox IsItalicText = new CheckBox();
+            //            CheckBox IsNormalText = new CheckBox();
+            //            TextBox shadow_stroke_radiustextfloat = new TextBox();
+            //            TextBox shadow_stroke_dxtextfloat = new TextBox();
+            //            TextBox shadow_stroke_dytextfloat = new TextBox();
+            //            TextBox shadow_stroke_color = new TextBox();
+            //            myColor.Size = new Size(70, 30);
+            //            IsHintText.Text = Texts.rm.GetString("DECKITEMHINTTEXT", Texts.cultereinfo);
+            //            IsBoldText.Text = Texts.rm.GetString("DECKITEMBOLDTEXT", Texts.cultereinfo);
+            //            IsItalicText.Text = Texts.rm.GetString("DECKITEMITALICTEXT", Texts.cultereinfo);
+            //            IsNormalText.Text = Texts.rm.GetString("DECKITEMNORMALTEXT", Texts.cultereinfo);
+            //            IsStrokeCheckbox.Text = "Enable Stroke Effect on text";
+            //            myColor.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
+            //            myColorShadow.Size = new Size(70, 30);
+            //            myColorShadow.Text = Texts.rm.GetString("DECKITEMSELECTCOLOR", Texts.cultereinfo);
+            //            myTextNameInformation.Text = Texts.rm.GetString("DECKITEMTEXT", Texts.cultereinfo);
+            //            StrokeLabelInfo.Text = Texts.rm.GetString("DECKITEMSTROKE", Texts.cultereinfo);
+            //            StrokeLabelRADIUS.Text = Texts.rm.GetString("DECKITEMSTROKERADIUS", Texts.cultereinfo);
+            //            StrokeLabelDX.Text = Texts.rm.GetString("DECKITEMSTROKEDX", Texts.cultereinfo);
+            //            StrokeLabelDY.Text = Texts.rm.GetString("DECKITEMSTROKEDY", Texts.cultereinfo);
+            //            StrokeLabelColor.Text = Texts.rm.GetString("DECKITEMSTROKECOLOR", Texts.cultereinfo);
+            //            positionLabelInfo.Text = Texts.rm.GetString("DECKITEMPOSITION", Texts.cultereinfo);
+            //            sizeLabelInfo.Text = Texts.rm.GetString("DECKITEMSIZE", Texts.cultereinfo);
+            //            FlowLayoutPanel painel_name = new FlowLayoutPanel();
+            //            FlowLayoutPanel painel_color = new FlowLayoutPanel();
+            //            FlowLayoutPanel painel_tamanho = new FlowLayoutPanel();
+            //            FlowLayoutPanel painel_position = new FlowLayoutPanel();
+            //            FlowLayoutPanel painel_shadowstroke = new FlowLayoutPanel();
+            //            myColor.Dock = DockStyle.None;
+            //            myColorText.Dock = DockStyle.None;
+            //            sizeLabelTextBox.Dock = DockStyle.None;
+            //            sizeLabelInfo.Dock = DockStyle.None;
+            //            positionLabelInfo.Dock = DockStyle.None;
+            //            StrokeLabelInfo.Dock = DockStyle.None;
+            //            PositionComboBox.Dock = DockStyle.None;
+            //            shadow_stroke_radiustextfloat.Dock = DockStyle.None;
+            //            shadow_stroke_dxtextfloat.Dock = DockStyle.None;
+            //            shadow_stroke_dytextfloat.Dock = DockStyle.None;
+            //            shadow_stroke_color.Dock = DockStyle.None;
+            //            myNameText.Text = dI.Deckname;
+            //            myColorText.Text = dI.Deckcolor;
 
-                IsNormalText.Checked = false;
-            };
-            IsBoldText.Click += (s, e) =>
-
-            {
-
-                IsNormalText.Checked = false;
-
-            };
-
-            IsItalicText.Click += (s, e) =>
-
-            {
-                IsNormalText.Checked = false;
-
-            };
-
-            IsNormalText.Click += (s, e) =>
-            {
-                if (IsNormalText.Checked)
-                {
-                    IsHintText.Checked = false;
-                    IsBoldText.Checked = false;
-                    IsItalicText.Checked = false;
-                }
-
-
-            };
-
-
-            painel_position.Size = new Size(190, 60);
-
-            painel_color.Size = new Size(190, 30);
-
-            painel_name.Size = new Size(190, 320);
-            painel_tamanho.Size = new Size(210, 60);
-            painel_shadowstroke.Size = new Size(190, 300);
-            painel_shadowstroke.WrapContents = true;
-
-            painel_tamanho.WrapContents = true;
-            painel_name.WrapContents = true;
-            //painel 1
-            painel_color.WrapContents = true;
-            painel_position.WrapContents = true;
-            painel_position.Controls.Add(positionLabelInfo);
-
-            painel_position.Controls.Add(PositionComboBox);
-            painel_shadowstroke.Controls.Add(StrokeLabelInfo);
-            painel_shadowstroke.Controls.Add(IsStrokeCheckbox);
-            painel_shadowstroke.Controls.Add(StrokeLabelRADIUS);
-            painel_shadowstroke.Controls.Add(shadow_stroke_radiustextfloat);
-            painel_shadowstroke.Controls.Add(StrokeLabelDX);
-            painel_shadowstroke.Controls.Add(shadow_stroke_dxtextfloat);
-            painel_shadowstroke.Controls.Add(StrokeLabelDY);
-            painel_shadowstroke.Controls.Add(shadow_stroke_dytextfloat);
-            painel_shadowstroke.Controls.Add(StrokeLabelColor);
-            painel_shadowstroke.Controls.Add(shadow_stroke_color);
-            painel_shadowstroke.Controls.Add(myColorShadow);
-
-            painel_color.Controls.Add(myColor);
-            painel_color.Controls.Add(myColorText);
-
-            painel_name.Controls.Add(myTextNameInformation);
-            painel_name.Controls.Add(myNameText);
-            painel_name.Controls.Add(PositionComboBox);
-            painel_name.Controls.Add(painel_tamanho);
-
-            painel_name.Controls.Add(painel_color);
-
-            painel_name.Controls.Add(IsHintText);
-            painel_name.Controls.Add(IsItalicText);
-            painel_name.Controls.Add(IsBoldText);
-            painel_name.Controls.Add(IsNormalText);
-            painel_tamanho.Controls.Add(sizeLabelInfo);
-            painel_tamanho.Controls.Add(sizeLabelTextBox);
-            PositionComboBox.SelectedValue = dI.Deckposition;
-
-            setEnumValues(PositionComboBox, typeof(Position));
+            //            IsStrokeCheckbox.Checked = dI.IsStroke;
+            //            shadow_stroke_color.Text = dI.Stroke_color;
+            //            shadow_stroke_dytextfloat.Text = dI.Stroke_Dy.ToString();
+            //            shadow_stroke_dxtextfloat.Text = dI.Stroke_dxtext.ToString();
+            //            shadow_stroke_radiustextfloat.Text = dI.Stroke_radius.ToString();
+            //            IsNormalText.Checked = dI.Isnormaltext;
+            //            IsHintText.Checked = dI.Ishinttext;
+            //            IsItalicText.Checked = dI.Isitalictext;
+            //            IsBoldText.Checked = dI.Isboldtext;
 
 
 
+            //            sizeLabelTextBox.Text = dI.Decksize.ToString();
+            //            myColor.Click += (s, e) =>
+            //            {
 
-        //    toAdd.Add(painel_name);
+            //                using (ColorPickerDialog dialog = new ColorPickerDialog())
+            //                {
+            //                    dialog.PreviewColorChanged += this.DialogColorChangedHandler;
 
+            //                    if (dialog.ShowDialog(this) == DialogResult.OK)
+            //                    {
+            //                        //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
+            //                        string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
+            //                        myColorText.Text = result;
+            //                    }
 
+            //                    dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
+            //                }
 
+            //            };
 
-       //     toAdd.Add(painel_shadowstroke);
+            //            myColorShadow.Click += (s, e) =>
+            //            {
 
-         //   toAdd.Add(myButton);
-            myButton.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+            //                using (ColorPickerDialog dialog = new ColorPickerDialog())
+            //                {
+            //                    dialog.PreviewColorChanged += this.DialogColorChangedHandler;
 
+            //                    if (dialog.ShowDialog(this) == DialogResult.OK)
+            //                    {
+            //                        //    Debug.WriteLine("COLORCODE:" + dialog.Color.Name);
+            //                        string result = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
+            //                        shadow_stroke_color.Text = result;
+            //                    }
 
+            //                    dialog.PreviewColorChanged -= this.DialogColorChangedHandler;
+            //                }
 
-
-      
-            myButton.Click += (s, e) =>
-            {
-                dI.Deckname = myNameText.Text;
-                dI.Deckcolor = myColorText.Text;
-                dI.Decksize = Convert.ToInt32(sizeLabelTextBox.Text);
-                dI.Stroke_radius = Convert.ToSingle(shadow_stroke_radiustextfloat.Text);
-                dI.Stroke_Dy = Convert.ToSingle(shadow_stroke_dytextfloat.Text);
-                dI.Stroke_dxtext = Convert.ToSingle(shadow_stroke_dxtextfloat.Text);
-                dI.Stroke_color = shadow_stroke_color.Text;
-                dI.Deckposition = (int)PositionComboBox.SelectedValue;
-                dI.IsStroke = IsStrokeCheckbox.Checked;
-                dI.Isboldtext = IsBoldText.Checked;
-                dI.Ishinttext = IsHintText.Checked;
-                dI.Isitalictext = IsItalicText.Checked;
-                dI.Isnormaltext = IsNormalText.Checked;
-                int slot = CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(item);
-                RefreshButton(slot, true);
-
-
-
-
-            };
-
-            toAdd.AsEnumerable().All(m =>
-            {
-                flowLayoutPanel1.Controls.Add(m);
-                return true;
-            });
+            //            };
 
 
-            
 
-    
+            //            IsHintText.Click += (s, e) =>
+            //            {
+
+            //                IsNormalText.Checked = false;
+            //            };
+            //            IsBoldText.Click += (s, e) =>
+
+            //            {
+
+            //                IsNormalText.Checked = false;
+
+            //            };
+
+            //            IsItalicText.Click += (s, e) =>
+
+            //            {
+            //                IsNormalText.Checked = false;
+
+            //            };
+
+            //            IsNormalText.Click += (s, e) =>
+            //            {
+            //                if (IsNormalText.Checked)
+            //                {
+            //                    IsHintText.Checked = false;
+            //                    IsBoldText.Checked = false;
+            //                    IsItalicText.Checked = false;
+            //                }
+
+
+            //            };
+
+
+            //            painel_position.Size = new Size(190, 60);
+
+            //            painel_color.Size = new Size(190, 30);
+
+            //            painel_name.Size = new Size(190, 320);
+            //            painel_tamanho.Size = new Size(210, 60);
+            //            painel_shadowstroke.Size = new Size(190, 300);
+            //            painel_shadowstroke.WrapContents = true;
+
+            //            painel_tamanho.WrapContents = true;
+            //            painel_name.WrapContents = true;
+            //            //painel 1
+            //            painel_color.WrapContents = true;
+            //            painel_position.WrapContents = true;
+
+
+            //            painel_position.Controls.Add(positionLabelInfo);
+
+            //            painel_position.Controls.Add(PositionComboBox);
+
+            //            painel_shadowstroke.Controls.Add(StrokeLabelInfo);
+            //            painel_shadowstroke.Controls.Add(IsStrokeCheckbox);
+            //            painel_shadowstroke.Controls.Add(StrokeLabelRADIUS);
+            //            painel_shadowstroke.Controls.Add(shadow_stroke_radiustextfloat);
+            //            painel_shadowstroke.Controls.Add(StrokeLabelDX);
+            //            painel_shadowstroke.Controls.Add(shadow_stroke_dxtextfloat);
+            //            painel_shadowstroke.Controls.Add(StrokeLabelDY);
+            //            painel_shadowstroke.Controls.Add(shadow_stroke_dytextfloat);
+            //            painel_shadowstroke.Controls.Add(StrokeLabelColor);
+            //            painel_shadowstroke.Controls.Add(shadow_stroke_color);
+            //            painel_shadowstroke.Controls.Add(myColorShadow);
+
+
+            //            painel_color.Controls.Add(myColor);
+            //            painel_color.Controls.Add(myColorText);
+
+
+            //            painel_name.Controls.Add(myTextNameInformation);
+            //            painel_name.Controls.Add(myNameText);
+            //            painel_name.Controls.Add(PositionComboBox);
+            //            painel_name.Controls.Add(painel_tamanho);
+
+            //            painel_name.Controls.Add(painel_color);
+
+            //            painel_name.Controls.Add(IsHintText);
+            //            painel_name.Controls.Add(IsItalicText);
+            //            painel_name.Controls.Add(IsBoldText);
+            //            painel_name.Controls.Add(IsNormalText);
+
+            //            painel_tamanho.Controls.Add(sizeLabelInfo);
+            //            painel_tamanho.Controls.Add(sizeLabelTextBox);
+
+            //            PositionComboBox.SelectedValue = dI.Deckposition;
+
+            //            setEnumValues(PositionComboBox, typeof(Position));
+
+
+
+
+            //           toAdd.Add(painel_name);
+
+            //toAdd.Add(painel_shadowstroke);
+            //toAdd.Add(myButton);
+
+
+
+            //            myButton.Text = Texts.rm.GetString("BUTTONSAVE", Texts.cultereinfo);
+
+
+
+
+
+            //            myButton.Click += (s, e) =>
+            //            {
+            //                dI.Deckname = myNameText.Text;
+            //                dI.Deckcolor = myColorText.Text;
+            //                dI.Decksize = Convert.ToInt32(sizeLabelTextBox.Text);
+            //                dI.Stroke_radius = Convert.ToSingle(shadow_stroke_radiustextfloat.Text);
+            //                dI.Stroke_Dy = Convert.ToSingle(shadow_stroke_dytextfloat.Text);
+            //                dI.Stroke_dxtext = Convert.ToSingle(shadow_stroke_dxtextfloat.Text);
+            //                dI.Stroke_color = shadow_stroke_color.Text;
+            //                dI.Deckposition = (int)PositionComboBox.SelectedValue;
+            //                dI.IsStroke = IsStrokeCheckbox.Checked;
+            //                dI.Isboldtext = IsBoldText.Checked;
+            //                dI.Ishinttext = IsHintText.Checked;
+            //                dI.Isitalictext = IsItalicText.Checked;
+            //                dI.Isnormaltext = IsNormalText.Checked;
+            //                int slot = CurrentDevice.CurrentProfile.Currentfolder.GetItemIndex(item);
+            //                RefreshButton(slot, true);
+
+
+
+
+            //            };
+            //            flowLayoutPanel1.SuspendLayout();
+            //            toAdd.AsEnumerable().All(m =>
+            //            {
+
+            //                flowLayoutPanel1.Controls.Add(m);
+
+            //                return true;
+            //            });
+            //flowLayoutPanel1.ResumeLayout(true);
+            //            if (item is DynamicDeckItem DDI)
+            //            {
+
+
+            //                LoadProperties(DDI, flowLayoutPanel1);
+
+
+            //            }
+            //            if (item is DynamicDeckFolder DDF)
+            //            {
+            //                LoadPropertiesFolder(DDF, flowLayoutPanel1);
+
+            //            }
+
+
+
+            //            ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
+
         }
-        private void ChangeCamadaLayerByComboBox(IDeckItem item)
+        private void ChangeCamadaLayerByComboBox(DynamicDeckItem item)
         {
-            if (item is DynamicDeckItem VV)
-            {
-                if (VV.DeckAction.getLayer())
+            
+                if (item.DeckAction.getLayer())
                 {
                     camada2.Visible = true;
                     if (item.GetDeckLayerTwo == null)
@@ -2846,66 +2949,65 @@ ActionImagePlaceHolder.Image = bmp;
                 }
                 
 
-            }
+            
         }
         private void clearFlowLayout()
         {
+  
             flowLayoutPanel1.Controls.OfType<Control>().All(c =>
             {
+                    
+          
                 c.Dispose();
+             
                 return true;
             });
-
             flowLayoutPanel1.Controls.Clear();
+
+
+        }
+        void ClearControl(Control c)
+        {
+
+            flowLayoutPanel1.Controls.Remove(c);
+            c.Dispose();
+            //etc
+
+            foreach (Control child in c.Controls)
+                ClearControl(child);
         }
         private void FocusItem(ImageModernButton mb, IDeckItem item)
         {
-camada1.Tag = item;
-                        camada2.Tag = item;
-          
-            camada1.PerformClick();
-           
-
-   
-       
-                    Globals.events.On("DeckEvent", (e) => {
-                        
-                       
-                        //                        clearFlowLayout();
-                        // Cast event argrument to your event object
-                        var obj = (DeckEvent)e;
-
-           if(obj.Camada == 1)
-                {
-                            
-                            ActionImagePlaceHolder.TextButton = new TextLabel(obj.DeckItem.GetDeckDefaultLayer);
-       
-        FocusItemPropertiesOptions(obj.DeckItem.GetDeckDefaultLayer, obj.DeckItem);
-                           
-                        }
-
-                        else if (obj.Camada == 2)
-                {
-                            
-
-                            ActionImagePlaceHolder.TextButton = new TextLabel(obj.DeckItem.GetDeckLayerTwo);
-
-                            FocusItemPropertiesOptions(obj.DeckItem.GetDeckLayerTwo, obj.DeckItem);
-
-                        }
-
-                          ActionImagePlaceHolder.Camada = obj.Camada;
-                      
-  UpdateLayerView();
-
-
-
-
-                    });
-
-
-
+            if(item is DynamicDeckItem TTT)
+            {
+            ChangeCamadaLayerByComboBox(TTT);
+            }
             ActionImagePlaceHolder.Origin = mb;
+
+            if (camada1.Checked)
+            {
+                ActionImagePlaceHolder.TextButton = new TextLabel(item.GetDeckDefaultLayer);
+
+                FocusItemPropertiesOptions(item.GetDeckDefaultLayer);
+                ActionImagePlaceHolder.Camada = 1;
+                UpdateLayerView();
+            }
+
+                           if (camada2.Checked) { 
+
+                               ActionImagePlaceHolder.TextButton = new TextLabel(item.GetDeckLayerTwo);
+
+                           FocusItemPropertiesOptions(item.GetDeckLayerTwo);
+                           ActionImagePlaceHolder.Camada = 2;
+                           UpdateLayerView();
+                       }
+
+
+            
+
+
+
+          
 
 
 
@@ -3023,7 +3125,7 @@ camada1.Tag = item;
         private void LoadProperties(DynamicDeckItem item, FlowLayoutPanel panel)
         {
 
-        
+            panel.SuspendLayout();
             var props = item.DeckAction.GetType().GetProperties().Where(
                 prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
             foreach (var prop in props)
@@ -3035,13 +3137,15 @@ camada1.Tag = item;
                 //action_label.Text = item.DeckAction.GetActionName();
                 bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
                 MethodInfo helperMethod = item.DeckAction.GetType().GetMethod(prop.Name + "Helper");
-                
+                action_label.Text = item.DeckAction.GetActionName();
                 if (helperMethod != null)
                 {
                     panel.Controls.Add(new Label()
                     {
                         Text = GetPropertyDescription(prop)
+                        
                     });
+                    panel.ResumeLayout(false);
 
                     Button helperButton = new ModernButton()
                     {
@@ -3052,6 +3156,8 @@ camada1.Tag = item;
 
                     helperButton.Width = panel.DisplayRectangle.Width - 16;
                     panel.Controls.Add(helperButton);
+                  //  panel.ResumeLayout(false);
+
                 }
                 else
                 {
@@ -3062,6 +3168,8 @@ camada1.Tag = item;
                         {
                             Text = GetPropertyDescription(prop)
                         });
+                      //  panel.ResumeLayout(false);
+
                         ComboBox cBox = new ComboBox
                         {
                             DropDownStyle = ComboBoxStyle.DropDownList
@@ -3069,7 +3177,7 @@ camada1.Tag = item;
                         cBox.Items.AddRange(values.OfType<Enum>().Select(c => EnumUtils.GetDescriptionTranslator(prop.PropertyType, c, c.ToString())).ToArray());
 
                         cBox.Text = EnumUtils.GetDescriptionTranslator(prop.PropertyType, (Enum)prop.GetValue(item.DeckAction), ((Enum)prop.GetValue(item.DeckAction)).ToString());
-                    ChangeCamadaLayerByComboBox(item);
+                 //   ChangeCamadaLayerByComboBox(item);
                         cBox.SelectedIndexChanged += (s, e) =>
                         {
                             try
@@ -3085,6 +3193,8 @@ camada1.Tag = item;
                             }
                         };
                         panel.Controls.Add(cBox);
+                   //     panel.ResumeLayout(false);
+
                         return;
                     }
 
@@ -3094,6 +3204,7 @@ camada1.Tag = item;
                     {
                         Text = GetPropertyDescription(prop)
                     });
+                //    panel.ResumeLayout(false);
 
                     var txt = new TextBox
                     {
@@ -3113,12 +3224,16 @@ camada1.Tag = item;
                             //Ignore all errors
                         }
                     };
+               //     panel.ResumeLayout(false);
+
                     txt.Width = panel.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
                     panel.Controls.Add(txt);
+                 //   panel.ResumeLayout(false);
+
                 }
             }
+            panel.ResumeLayout(true);
 
-  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
 
         private string GetPropertiesPlugins(DynamicDeckItem item, string properties)
@@ -4028,23 +4143,13 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void camada1_Click(object sender, EventArgs e)
         {
-            clearFlowLayout();
-            RadioButton mb = (sender as RadioButton);
-            if (mb.Tag is IDeckItem FF)
-            {
-                Globals.events.Trigger("DeckEvent", new DeckEvent(FF,1));
-            }
+          
 
         }
 
         private void camada2_Click(object sender, EventArgs e)
         {
-            clearFlowLayout();
-            RadioButton mb = (sender as RadioButton);
-            if (mb.Tag is IDeckItem FF)
-            {
-                Globals.events.Trigger("DeckEvent", new DeckEvent(FF, 2));
-            }
+         
         }
 
         private void imageModernButton1_Click(object sender, EventArgs e)
