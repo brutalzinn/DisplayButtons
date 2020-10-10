@@ -178,6 +178,16 @@
    </ItemGroup>
 
 
+   <ItemGroup>
+     <MySourceFiles Remove="setup\Data\Packages\help.txt" />
+   </ItemGroup>
+
+
+   <ItemGroup>
+     <_CopyItems Remove="setup\Data\Packages\help.txt" />
+   </ItemGroup>
+
+
 
 
 
