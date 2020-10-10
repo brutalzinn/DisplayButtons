@@ -933,7 +933,7 @@ namespace DisplayButtons.Forms
 
                             if (sender is ImageModernButton senderB)
                             {
-                                if (e.Button == MouseButtons.Left && DevicePersistManager.IsVirtualDeviceConnected && ModifierKeys == Keys.Shift)
+                                if ( DevicePersistManager.IsDeviceTest && ModifierKeys == Keys.Control)
                                 {
                                     if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item)
                                     {
@@ -1004,7 +1004,7 @@ namespace DisplayButtons.Forms
                         {
                             if (sender is ImageModernButton senderB)
                             {
-                                if (e.Button == MouseButtons.Left && DevicePersistManager.IsVirtualDeviceConnected && ModifierKeys == Keys.Shift)
+                                if (DevicePersistManager.IsDeviceTest && ModifierKeys == Keys.Shift)
                                 {
                                     if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item)
                                     {
@@ -1140,6 +1140,17 @@ namespace DisplayButtons.Forms
                                         //Show button panel with settable properties
                                         FocusItem(mb, item);
                                     camada1.PerformClick();
+
+                                    //if (Debugger.IsAttached)
+                                    //{
+
+
+                                    //    Debug.WriteLine("Simulando clique no botão.");
+
+                                    //    item.DeckAction.OnButtonDown(DevicePersistManager.DeviceTest)
+
+
+                                    //}
                                     //       camada1.PerformClick();
 
                                     lastClick.Reset();
