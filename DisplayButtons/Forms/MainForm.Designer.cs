@@ -61,7 +61,7 @@ namespace DisplayButtons.Forms
             this.deckoptions_button = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
-            this.shadedPanel5 = new DisplayButtons.Forms.ShadedPanel();
+            this.debugger_tools = new DisplayButtons.Forms.ShadedPanel();
             this.imageModernButton5 = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
@@ -69,7 +69,7 @@ namespace DisplayButtons.Forms
             this.painel_developer.SuspendLayout();
             this.panel_buttons.SuspendLayout();
             this.statusStrip2.SuspendLayout();
-            this.shadedPanel5.SuspendLayout();
+            this.debugger_tools.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar1
@@ -439,15 +439,16 @@ namespace DisplayButtons.Forms
             this.imageModernButton3.UseVisualStyleBackColor = true;
             this.imageModernButton3.Click += new System.EventHandler(this.imageModernButton3_Click_1);
             // 
-            // shadedPanel5
+            // debugger_tools
             // 
-            this.shadedPanel5.Controls.Add(this.imageModernButton5);
-            this.shadedPanel5.Controls.Add(this.imageModernButton1);
-            this.shadedPanel5.Controls.Add(this.imageModernButton3);
-            this.shadedPanel5.Location = new System.Drawing.Point(848, 89);
-            this.shadedPanel5.Name = "shadedPanel5";
-            this.shadedPanel5.Size = new System.Drawing.Size(324, 50);
-            this.shadedPanel5.TabIndex = 14;
+            this.debugger_tools.Controls.Add(this.imageModernButton5);
+            this.debugger_tools.Controls.Add(this.imageModernButton1);
+            this.debugger_tools.Controls.Add(this.imageModernButton3);
+            this.debugger_tools.Location = new System.Drawing.Point(848, 89);
+            this.debugger_tools.Name = "debugger_tools";
+            this.debugger_tools.Size = new System.Drawing.Size(324, 50);
+            this.debugger_tools.TabIndex = 14;
+            this.debugger_tools.Visible = false;
             // 
             // imageModernButton5
             // 
@@ -477,7 +478,7 @@ namespace DisplayButtons.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
-            this.Controls.Add(this.shadedPanel5);
+            this.Controls.Add(this.debugger_tools);
             this.Controls.Add(this.deckoptions_button);
             this.Controls.Add(this.perfil_info);
             this.Controls.Add(this.imageModernButton8);
@@ -508,7 +509,7 @@ namespace DisplayButtons.Forms
             this.panel_buttons.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
-            this.shadedPanel5.ResumeLayout(false);
+            this.debugger_tools.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -547,7 +548,7 @@ namespace DisplayButtons.Forms
         public GroupBox groupBox1;
         private ImageModernButton imageModernButton1;
         private ImageModernButton imageModernButton3;
-        private ShadedPanel shadedPanel5;
+        private ShadedPanel debugger_tools;
         private ImageModernButton imageModernButton5;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }

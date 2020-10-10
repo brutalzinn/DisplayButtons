@@ -426,6 +426,7 @@ namespace DisplayButtons.Forms
             Texts.initilizeLang();
   FactoryEvents.Init();
  Checkupdates();
+            ChangeDebuggerrMode();
         }
         private void Checkupdates()
         {
@@ -550,7 +551,6 @@ namespace DisplayButtons.Forms
             }));
 
         }
-
         public void ChangeDeveloperMode()
         {
 
@@ -562,6 +562,25 @@ namespace DisplayButtons.Forms
                 if (control != null)
                 {
                     control.Visible = ApplicationSettingsManager.Settings.isDevelopermode;
+                }
+
+            }));
+
+        }
+        public void ChangeDebuggerrMode()
+        {
+
+            if (Disposing || !IsHandleCreated) return;
+            Invoke(new Action(() =>
+            {
+
+                Control control = Controls.Find("debugger_tools", true).FirstOrDefault() as ShadedPanel;
+                if (control != null)
+                {
+                    
+                    control.Visible = Debugger.IsAttached;
+
+                    
                 }
 
             }));
