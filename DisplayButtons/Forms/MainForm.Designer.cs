@@ -61,12 +61,15 @@ namespace DisplayButtons.Forms
             this.deckoptions_button = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
+            this.shadedPanel5 = new DisplayButtons.Forms.ShadedPanel();
+            this.imageModernButton5 = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.painel_developer.SuspendLayout();
             this.panel_buttons.SuspendLayout();
             this.statusStrip2.SuspendLayout();
+            this.shadedPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar1
@@ -146,6 +149,7 @@ namespace DisplayButtons.Forms
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 100);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(229, 150);
@@ -405,7 +409,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton1.CustomColorScheme = false;
             this.imageModernButton1.Image = null;
             this.imageModernButton1.ImageLayerTwo = null;
-            this.imageModernButton1.Location = new System.Drawing.Point(850, 89);
+            this.imageModernButton1.Location = new System.Drawing.Point(12, 5);
             this.imageModernButton1.Name = "imageModernButton1";
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.NormalLayerTwo = null;
@@ -423,7 +427,7 @@ namespace DisplayButtons.Forms
             this.imageModernButton3.CustomColorScheme = false;
             this.imageModernButton3.Image = null;
             this.imageModernButton3.ImageLayerTwo = null;
-            this.imageModernButton3.Location = new System.Drawing.Point(965, 92);
+            this.imageModernButton3.Location = new System.Drawing.Point(117, 5);
             this.imageModernButton3.Name = "imageModernButton3";
             this.imageModernButton3.NormalImage = null;
             this.imageModernButton3.NormalLayerTwo = null;
@@ -435,6 +439,34 @@ namespace DisplayButtons.Forms
             this.imageModernButton3.UseVisualStyleBackColor = true;
             this.imageModernButton3.Click += new System.EventHandler(this.imageModernButton3_Click_1);
             // 
+            // shadedPanel5
+            // 
+            this.shadedPanel5.Controls.Add(this.imageModernButton5);
+            this.shadedPanel5.Controls.Add(this.imageModernButton1);
+            this.shadedPanel5.Controls.Add(this.imageModernButton3);
+            this.shadedPanel5.Location = new System.Drawing.Point(848, 89);
+            this.shadedPanel5.Name = "shadedPanel5";
+            this.shadedPanel5.Size = new System.Drawing.Size(324, 50);
+            this.shadedPanel5.TabIndex = 14;
+            // 
+            // imageModernButton5
+            // 
+            this.imageModernButton5.Camada = 0;
+            this.imageModernButton5.CustomColorScheme = false;
+            this.imageModernButton5.Image = null;
+            this.imageModernButton5.ImageLayerTwo = null;
+            this.imageModernButton5.Location = new System.Drawing.Point(222, 7);
+            this.imageModernButton5.Name = "imageModernButton5";
+            this.imageModernButton5.NormalImage = null;
+            this.imageModernButton5.NormalLayerTwo = null;
+            this.imageModernButton5.Origin = null;
+            this.imageModernButton5.Size = new System.Drawing.Size(92, 39);
+            this.imageModernButton5.TabIndex = 14;
+            this.imageModernButton5.Text = "Load";
+            this.imageModernButton5.TextButton = null;
+            this.imageModernButton5.UseVisualStyleBackColor = true;
+            this.imageModernButton5.Click += new System.EventHandler(this.imageModernButton5_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -445,8 +477,7 @@ namespace DisplayButtons.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
-            this.Controls.Add(this.imageModernButton3);
-            this.Controls.Add(this.imageModernButton1);
+            this.Controls.Add(this.shadedPanel5);
             this.Controls.Add(this.deckoptions_button);
             this.Controls.Add(this.perfil_info);
             this.Controls.Add(this.imageModernButton8);
@@ -477,6 +508,7 @@ namespace DisplayButtons.Forms
             this.panel_buttons.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
+            this.shadedPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -515,6 +547,8 @@ namespace DisplayButtons.Forms
         public GroupBox groupBox1;
         private ImageModernButton imageModernButton1;
         private ImageModernButton imageModernButton3;
+        private ShadedPanel shadedPanel5;
+        private ImageModernButton imageModernButton5;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }

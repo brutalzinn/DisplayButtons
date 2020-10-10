@@ -38,7 +38,7 @@ device.CurrentProfile = profile;
                     
            DeviceSelected = profile;
                     ApplicationSettingsManager.Settings.CurrentProfile = profile.Name;
-                    MainForm.Instance.RefreshAllButtons(true);
+                   MainForm.Instance.RefreshAllButtons(true);
                 }));
             
         }
@@ -108,7 +108,7 @@ device.CurrentProfile = profile;
 
                     Profile new_folder = new Profile();
                     new_folder.Mainfolder = new DynamicDeckFolder();
-                    new_folder.Name = "DEFAULT";
+                    new_folder.Name = "TESTE";
 
                     device.profiles.Add(new_folder);
 

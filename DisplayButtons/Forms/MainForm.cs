@@ -1097,7 +1097,8 @@ namespace DisplayButtons.Forms
                                         {
 
                                             FocusItem(mb, item);
-                                           // camada1.PerformClick();
+                                            camada1.PerformClick();
+                                            // camada1.PerformClick();
                                             goto end;
                                         }
                                             //Navigate to the folder
@@ -1119,7 +1120,8 @@ namespace DisplayButtons.Forms
                                  
                                         //Show button panel with settable properties
                                         FocusItem(mb, item);
-                             //       camada1.PerformClick();
+                                    camada1.PerformClick();
+                                    //       camada1.PerformClick();
 
                                     lastClick.Reset();
                                 }
@@ -1238,7 +1240,7 @@ namespace DisplayButtons.Forms
 
             }
 
-            if (DeviceTest)
+            if (DevicePersistManager.IsDeviceTest)
             {
                 return;
             }
@@ -1264,7 +1266,7 @@ namespace DisplayButtons.Forms
             control1.Text = "";
             control1.Camada = 1;
             control1.ClearText();
-            if (!DeviceTest)
+            if (!DevicePersistManager.IsDeviceTest)
             {
                 DeckHelpers.ClearSingleItemToDevice(CurrentDevice, slot);
 
@@ -1422,7 +1424,15 @@ namespace DisplayButtons.Forms
             }
                 if (CurrentPerfil != null)
                 {
+                if (Debugger.IsAttached && DevicePersistManager.IsDeviceTest)
+                {
+
+                    ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value,DevicePersistManager.DeviceTest);
+                }
+                else
+                {
                     ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
+                }
                 }
 
           
@@ -1607,8 +1617,7 @@ namespace DisplayButtons.Forms
             List<IDeckItem> items = folder.GetDeckItems();
             foreach (var item in items)
             {
-                //This is when it loads.
-                //It will load from the persisted device.
+               
 
                 bool isFolder = item is IDeckFolder;
                 ImageModernButton control = Controls.Find("modernButton" + folder.GetItemIndex(item), true).FirstOrDefault() as ImageModernButton;
@@ -2745,11 +2754,12 @@ ActionImagePlaceHolder.Image = bmp;
             ChangeCamadaLayerByComboBox(TTT);
              
             }
+            
             ActionImagePlaceHolder.Origin = mb;
 
             camada1.Tag = item;
             camada2.Tag = item;
-     
+  
 
             ActionImagePlaceHolder.Refresh();
 
@@ -2865,7 +2875,7 @@ ActionImagePlaceHolder.Image = bmp;
         private void LoadProperties(DynamicDeckItem item, FlowLayoutPanel panel)
         {
 
-            panel.SuspendLayout();
+        
             var props = item.DeckAction.GetType().GetProperties().Where(
                 prop => Attribute.IsDefined(prop, typeof(ActionPropertyIncludeAttribute)));
             foreach (var prop in props)
@@ -2972,7 +2982,7 @@ ActionImagePlaceHolder.Image = bmp;
 
                 }
             }
-            panel.ResumeLayout(true);
+        
 
         }
 
@@ -3798,9 +3808,19 @@ toAdd.AsEnumerable().Reverse().All(m =>
             if (intselectedindex >= 0)
             {
                 CurrentPerfil = (ProfileVoidHelper.GlobalPerfilBox)perfilselector.Items[intselectedindex];
-                
-                    //CurrentDevice.CheckCurrentFolder();
-                    ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
+
+                //CurrentDevice.CheckCurrentFolder();
+                if (Debugger.IsAttached && DevicePersistManager.IsDeviceTest)
+                {
+
+                    ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value, DevicePersistManager.DeviceTest);
+                }
+                else
+                {
+                ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
+
+                }
+
                     RefreshAllButtons(true);
 
                 
@@ -3917,20 +3937,35 @@ toAdd.AsEnumerable().Reverse().All(m =>
         {
            // new TransparentTwitchChatWPF.MainWindow().Show();
 
-            DeviceTest = true;
+            DevicePersistManager.IsDeviceTest = true;
 
-              DeckDevice deckDevice = new DeckDevice(new Guid("161fb525-7004-4cb1-9487-6f5106af32da"), "Teste");
+            DevicePersistManager.DeviceTest = new DeckDevice(new Guid("161fb525-7004-4cb1-9487-6f5106af32da"), "Teste");
+           
+            CurrentDevice = DevicePersistManager.DeviceTest;
+            DevicePersistManager.DeviceTest = DevicePersistManager.DeviceTest;
+           //DevicePersistManager.DeviceTest = deckDevice;
+            DevicePersistManager.PersistDevice(DevicePersistManager.DeviceTest);
+           
 
-            CurrentDevice = deckDevice;
-            DevicePersistManager.DeviceTest = deckDevice;
-            ProfileTestDeckHelper.SetupPerfil(deckDevice);
 
+         
+            ProfileTestDeckHelper.SetupPerfil(DevicePersistManager.DeviceTest);
+ 
          
         }
 
         private void imageModernButton3_Click_1(object sender, EventArgs e)
         {
-            DevicePersistManager.SaveDevicesTest(DevicePersistManager.DeviceTest);
+            DevicePersistManager.SaveDevices();
+        }
+
+        private void imageModernButton5_Click(object sender, EventArgs e)
+        {
+
+            DevicePersistManager.LoadDevices();
+            MatrizGenerator(DevicePersistManager.DeviceTest.CurrentProfile);
+            ChangeToDevice(DevicePersistManager.DeviceTest);
+
         }
     }
     #endregion

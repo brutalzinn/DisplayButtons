@@ -18,6 +18,7 @@ namespace DisplayButtons.Backend.Utils
         private const string DEVICES_FILENAME = "devices.xml";
 
         public static DeckDevice DeviceTest { get; set; }
+        public static bool IsDeviceTest { get; set; }
         public static bool IsVirtualDeviceConnected { get; set; }
         public static DeviceData DeviceUsb { get; set; }
 
@@ -272,29 +273,7 @@ namespace DisplayButtons.Backend.Utils
 
 
         }
-        public static void SaveDevicesTest(DeckDevice DeviceTest)
-        {
-            //  SaveProfileItems();
-
-
-            if (DeviceTest.CurrentProfile != null)
-            {
-                CompressFolders(DeviceTest.CurrentProfile.Mainfolder);
-            }
-
-
-
-            if (DeviceTest != null)
-            {
-                File.WriteAllText(DEVICES_FILENAME, XMLUtils.ToXML(DeviceTest));
-            }
-            else
-            {
-                Debug.WriteLine("DELETE " + DEVICES_FILENAME);
-                //    File.Delete(DEVICES_FILENAME);
-            }
-
-        }
+      
 
 
 
