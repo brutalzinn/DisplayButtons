@@ -63,9 +63,7 @@ namespace DisplayButtons.Backend.Objects
 
         [ActionPropertyDescription("DECKHELPERENABLESTROKE")]
         public bool IsStroke { get => isstroke; set => isstroke = value; }
-        [ActionPropertyInclude]
-
-        [ActionPropertyDescription("DECKITEMHINTTEXT")]
+       
         public bool Ishinttext { get => ishinttext; set => ishinttext = value; }
         [ActionPropertyInclude]
 

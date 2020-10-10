@@ -57,6 +57,7 @@ using InterfaceDll;
 using MoonSharp.Interpreter;
 using System.Management;
 using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
+using Swan;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -2621,62 +2622,67 @@ ActionImagePlaceHolder.Image = bmp;
                         return;
                     }
 
-                    if (!TypeDescriptor.GetConverter(prop.PropertyType).CanConvertFrom
-                (typeof(string))) continue;
-                    flowLayoutPanel1.Controls.Add(new Label()
+                    if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(float)|| prop.PropertyType == typeof(float))
                     {
-                        Text = GetPropertyDescription(prop)
-                    });
-
-                    var txt = new TextBox
-                    {
-                        Text = (string)TypeDescriptor.GetConverter(prop.PropertyType).ConvertTo(prop.GetValue(dI), typeof(string))
-                    };
-                    txt.TextChanged += (sender, e) =>
-                    {
-                        try
+                        //
+                        flowLayoutPanel1.Controls.Add(new Label()
                         {
-                            if (txt.Text == string.Empty) return;
+                            Text = GetPropertyDescription(prop)
+                        });
+
+                        var txt = new TextBox
+                        {
+                            Text = (string)TypeDescriptor.GetConverter(prop.PropertyType).ConvertTo(prop.GetValue(dI), typeof(string))
+                        };
+                        txt.TextChanged += (sender, e) =>
+                        {
+                            try
+                            {
+                                if (txt.Text == string.Empty) return;
                             //After loosing focus, convert type to thingy.
                             prop.SetValue(dI, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(txt.Text));
-                         //   UpdateIcon(shouldUpdateIcon);
+                            //   UpdateIcon(shouldUpdateIcon);
                         }
-                        catch (Exception)
-                        {
+                            catch (Exception)
+                            {
                             //Ignore all errors
                         }
-                    };
-                    txt.Width = flowLayoutPanel1.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
-                    flowLayoutPanel1.Controls.Add(txt);
+                        };
+                        txt.Width = flowLayoutPanel1.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
+                        flowLayoutPanel1.Controls.Add(txt);
+                    }
                     // checkbox test
-                    if (prop.PropertyType != typeof(bool))
-                        continue;
+                    if (prop.PropertyType == typeof(bool))
+                    {
+                    //    continue;
                         flowLayoutPanel1.Controls.Add(new Label()
-                    {
-                        Text = GetPropertyDescription(prop)
-                    });
-
-                    var cbk = new CheckBox
-                    {
-                        Checked = (bool)prop.GetValue(dI)
-
-                    };
-                    cbk.CheckedChanged += (sender, e) =>
-                    {
-                        try
                         {
-                            if (cbk.Checked == false) return;
+                            Text = GetPropertyDescription(prop)
+                        });
+
+                        var cbk = new CheckBox
+                        {
+                           
+                            Checked = (bool)prop.GetValue(dI)
+
+                        };
+                        cbk.CheckedChanged += (sender, e) =>
+                        {
+                            try
+                            {
+
                             //After loosing focus, convert type to thingy.
                             prop.SetValue(dI, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(cbk.Checked));
                             //   UpdateIcon(shouldUpdateIcon);
                         }
-                        catch (Exception)
-                        {
+                            catch (Exception)
+                            {
                             //Ignore all errors
                         }
-                    };
-                    cbk.Width = flowLayoutPanel1.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
-                    flowLayoutPanel1.Controls.Add(cbk);
+                        };
+                        cbk.Width = flowLayoutPanel1.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
+                        flowLayoutPanel1.Controls.Add(cbk);
+                    }
                 }
             }
 
