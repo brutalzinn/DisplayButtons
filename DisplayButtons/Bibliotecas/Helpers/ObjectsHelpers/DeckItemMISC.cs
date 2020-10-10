@@ -1,6 +1,7 @@
 ﻿using DisplayButtons.Properties;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -39,10 +40,8 @@ namespace DisplayButtons.Backend.Objects
 
         [ActionPropertyDescription("DECKITEMSIZE")]
         public int Decksize { get => _decksize; set => _decksize = value; }
-        [ActionPropertyInclude]
 
-        [ActionPropertyDescription("DECKITEMPOSITION")]
-        public int Deckposition { get => _deckposition; set => _deckposition = value; }
+        public int Deckposition { get => (int)DeckPosition;}
         [ActionPropertyInclude]
 
         [ActionPropertyDescription("DECKITEMSTROKERADIUS")]
@@ -85,8 +84,20 @@ namespace DisplayButtons.Backend.Objects
         {
             return new DeckImage(Resources.img_item_default);
         }
-      
+        public enum Pos
+        {
+            [Description("baixo")]
+            Baixo = 81,
+            [Description("meio")]
+            Meio = 17,
+            [Description("cima")]
+            Cima = 49
 
+
+        }
+        [ActionPropertyInclude]
+        [ActionPropertyDescription("DESCRIPTIONSCENEVISIBILITY")]
+        public Pos DeckPosition { get; set; } = Pos.Baixo;
         public  DeckImage GetItemImage()
         {
             return DeckImage;

@@ -16,13 +16,17 @@ namespace DisplayButtons.Backend.Utils
     public static class DevicePersistManager
     {
         private const string DEVICES_FILENAME = "devices.xml";
+
+        public static DeckDevice DeviceTest { get; set; }
         public static bool IsVirtualDeviceConnected { get; set; }
         public static DeviceData DeviceUsb { get; set; }
 
         private static IDictionary<Guid, DeckDevice> deckDevicesFromConnection = new Dictionary<Guid, DeckDevice>();
 
-        public static IDictionary<Guid, DeckDevice> DeckDevicesFromConnection {
-            get {
+        public static IDictionary<Guid, DeckDevice> DeckDevicesFromConnection
+        {
+            get
+            {
                 return deckDevicesFromConnection;
             }
         }
@@ -60,20 +64,24 @@ namespace DisplayButtons.Backend.Utils
         }
 
 
-        public static ICollection<Guid> GuidsFromConnections {
-            get {
+        public static ICollection<Guid> GuidsFromConnections
+        {
+            get
+            {
                 return deckDevicesFromConnection.Keys;
             }
         }
 
         private static List<DeckDevice> persistedDevices;
 
-        public static List<DeckDevice> PersistedDevices {
-            get {
+        public static List<DeckDevice> PersistedDevices
+        {
+            get
+            {
                 return persistedDevices;
             }
         }
-        
+
         public static Guid GetConnectionGuidFromDeckDevice(DeckDevice device)
         {
             return deckDevicesFromConnection.FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
@@ -87,7 +95,7 @@ namespace DisplayButtons.Backend.Utils
 
         public static bool IsDeviceOnline(DeckDevice device)
         {
-            
+
             return deckDevicesFromConnection.Values.Any(m => m.DeviceGuid == device.DeviceGuid);
         }
 
@@ -112,12 +120,12 @@ namespace DisplayButtons.Backend.Utils
         {
             return PersistedDevices.Any(w => w.DeviceGuid == deviceGuid);
         }
-   
+
 
         public static bool HasPerfilCreated(DeckDevice device)
         {
 
-           if(device.CurrentProfile != null)
+            if (device.CurrentProfile != null)
             {
 
                 return true;
@@ -128,7 +136,7 @@ namespace DisplayButtons.Backend.Utils
             }
 
         }
-            public static void PersistDevice(DeckDevice device)
+        public static void PersistDevice(DeckDevice device)
         {
 
             if (IsDevicePersisted(device))
@@ -146,11 +154,11 @@ namespace DisplayButtons.Backend.Utils
                 PersistedDevices.RemoveAll(m => m.DeviceGuid == device.DeviceGuid);
 
             }
- PersistedDevices.Add(device);
+            PersistedDevices.Add(device);
 
-            
-           
-            
+
+
+
         }
         public static void PersistUsbGuid(DeviceData device_usb, Guid serial)
         {
@@ -162,7 +170,7 @@ namespace DisplayButtons.Backend.Utils
         }
         public static bool IsPersistedUsbMode()
         {
-            if(DeviceUsb != null)
+            if (DeviceUsb != null)
             {
                 return true;
             }
@@ -170,11 +178,12 @@ namespace DisplayButtons.Backend.Utils
             {
                 return false;
             }
-           
+
         }
         public static void RemoveConnectionState(ConnectionState state)
         {
-            if (deckDevicesFromConnection.Keys.Contains(state.ConnectionGuid)) {
+            if (deckDevicesFromConnection.Keys.Contains(state.ConnectionGuid))
+            {
                 var device = GetDeckDeviceFromConnectionGuid(state.ConnectionGuid);
                 OnDeviceDisconnected(new object(), device);
             }
@@ -189,34 +198,40 @@ namespace DisplayButtons.Backend.Utils
         public static void ChangeConnectedState(ConnectionState state, DeckDevice device)
         {
             if (device == null || state == null) return;
-            if (!deckDevicesFromConnection.ContainsKey(state.ConnectionGuid)) {
+            if (!deckDevicesFromConnection.ContainsKey(state.ConnectionGuid))
+            {
                 deckDevicesFromConnection.Add(state.ConnectionGuid, device);
             }
         }
 
         public static void LoadDevices()
         {
-            if (File.Exists(DEVICES_FILENAME)) {
+            if (File.Exists(DEVICES_FILENAME))
+            {
                 var newPersistedDevices = XMLUtils.FromXML<List<DeckDevice>>(File.ReadAllText(DEVICES_FILENAME));
                 if (persistedDevices == null) persistedDevices = new List<DeckDevice>();
                 persistedDevices.AddRange(newPersistedDevices.Where(m => !IsDevicePersisted(m.DeviceGuid)));
-            } else {
+            }
+            else
+            {
                 persistedDevices = new List<DeckDevice>();
             }
         }
 
         private static void CompressFolders(IDeckFolder folder)
         {
-            folder.GetSubFolders().All(c => {
+            folder.GetSubFolders().All(c =>
+            {
                 CompressFolders(c);
                 c.SetParent(folder);
-                if (c.GetParent() != null) {
-                
+                if (c.GetParent() != null)
+                {
+
                     c.Remove(1);
                 }
 
                 return true;
-            
+
             });
         }
 
@@ -233,29 +248,57 @@ namespace DisplayButtons.Backend.Utils
         public static void SaveDevices()
         {
             //  SaveProfileItems();
-           
-                foreach (var device in persistedDevices)
-                {
+
+            foreach (var device in persistedDevices)
+            {
 
                 if (device.CurrentProfile != null)
                 {
                     CompressFolders(device.CurrentProfile.Mainfolder);
                 }
-             
-                }
 
-                if (persistedDevices != null)
-                {
-                    File.WriteAllText(DEVICES_FILENAME, XMLUtils.ToXML(persistedDevices));
-                }
-                else
-                {
-                    Debug.WriteLine("DELETE " + DEVICES_FILENAME);
-                    //    File.Delete(DEVICES_FILENAME);
-                }
-            
+            }
+
+            if (persistedDevices != null)
+            {
+                File.WriteAllText(DEVICES_FILENAME, XMLUtils.ToXML(persistedDevices));
+            }
+            else
+            {
+                Debug.WriteLine("DELETE " + DEVICES_FILENAME);
+                //    File.Delete(DEVICES_FILENAME);
+            }
+
+
+
         }
-           
+        public static void SaveDevicesTest(DeckDevice DeviceTest)
+        {
+            //  SaveProfileItems();
+
+
+            if (DeviceTest.CurrentProfile != null)
+            {
+                CompressFolders(DeviceTest.CurrentProfile.Mainfolder);
+            }
+
+
+
+            if (DeviceTest != null)
+            {
+                File.WriteAllText(DEVICES_FILENAME, XMLUtils.ToXML(DeviceTest));
+            }
+            else
+            {
+                Debug.WriteLine("DELETE " + DEVICES_FILENAME);
+                //    File.Delete(DEVICES_FILENAME);
+            }
+
         }
+
+
+
+
     }
+}
 

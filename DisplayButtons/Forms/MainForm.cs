@@ -2648,6 +2648,35 @@ ActionImagePlaceHolder.Image = bmp;
                     };
                     txt.Width = flowLayoutPanel1.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
                     flowLayoutPanel1.Controls.Add(txt);
+                    // checkbox test
+                    if (prop.PropertyType != typeof(bool))
+                        continue;
+                        flowLayoutPanel1.Controls.Add(new Label()
+                    {
+                        Text = GetPropertyDescription(prop)
+                    });
+
+                    var cbk = new CheckBox
+                    {
+                        Checked = (bool)prop.GetValue(dI)
+
+                    };
+                    cbk.CheckedChanged += (sender, e) =>
+                    {
+                        try
+                        {
+                            if (cbk.Checked == false) return;
+                            //After loosing focus, convert type to thingy.
+                            prop.SetValue(dI, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(cbk.Checked));
+                            //   UpdateIcon(shouldUpdateIcon);
+                        }
+                        catch (Exception)
+                        {
+                            //Ignore all errors
+                        }
+                    };
+                    cbk.Width = flowLayoutPanel1.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
+                    flowLayoutPanel1.Controls.Add(cbk);
                 }
             }
 
@@ -2984,32 +3013,9 @@ ActionImagePlaceHolder.Image = bmp;
             }
             ActionImagePlaceHolder.Origin = mb;
 
-            if (camada1.Checked)
-            {
-                ActionImagePlaceHolder.TextButton = new TextLabel(item.GetDeckDefaultLayer);
-
-                FocusItemPropertiesOptions(item.GetDeckDefaultLayer);
-                ActionImagePlaceHolder.Camada = 1;
-                UpdateLayerView();
-            }
-
-                           if (camada2.Checked) { 
-
-                               ActionImagePlaceHolder.TextButton = new TextLabel(item.GetDeckLayerTwo);
-
-                           FocusItemPropertiesOptions(item.GetDeckLayerTwo);
-                           ActionImagePlaceHolder.Camada = 2;
-                           UpdateLayerView();
-                       }
-
-
-            
-
-
-
-          
-
-
+            camada1.Tag = item;
+            camada2.Tag = item;
+     
 
             ActionImagePlaceHolder.Refresh();
 
@@ -4143,30 +4149,52 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
         private void camada1_Click(object sender, EventArgs e)
         {
-          
+            RadioButton mb = (sender as RadioButton);
+                if(mb.Tag is IDeckItem FF)
+            {
+                ActionImagePlaceHolder.TextButton = new TextLabel(FF.GetDeckDefaultLayer);
+
+                FocusItemPropertiesOptions(FF.GetDeckDefaultLayer);
+                ActionImagePlaceHolder.Camada = 1;
+                UpdateLayerView();
+            }
 
         }
 
         private void camada2_Click(object sender, EventArgs e)
         {
-         
+            RadioButton mb = (sender as RadioButton);
+            if (mb.Tag is IDeckItem FF)
+            {
+                ActionImagePlaceHolder.TextButton = new TextLabel(FF.GetDeckLayerTwo);
+
+                FocusItemPropertiesOptions(FF.GetDeckLayerTwo);
+                ActionImagePlaceHolder.Camada = 2;
+                UpdateLayerView();
+            }
+
+
         }
 
         private void imageModernButton1_Click(object sender, EventArgs e)
         {
-            // new TransparentTwitchChatWPF.MainWindow().Show();
+           // new TransparentTwitchChatWPF.MainWindow().Show();
 
             DeviceTest = true;
 
               DeckDevice deckDevice = new DeckDevice(new Guid("161fb525-7004-4cb1-9487-6f5106af32da"), "Teste");
 
             CurrentDevice = deckDevice;
-
+            DevicePersistManager.DeviceTest = deckDevice;
             ProfileTestDeckHelper.SetupPerfil(deckDevice);
 
          
         }
 
+        private void imageModernButton3_Click_1(object sender, EventArgs e)
+        {
+            DevicePersistManager.SaveDevicesTest(DevicePersistManager.DeviceTest);
+        }
     }
     #endregion
 }

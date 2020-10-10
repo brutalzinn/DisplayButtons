@@ -60,6 +60,7 @@ namespace DisplayButtons.Forms
             this.perfil_info = new System.Windows.Forms.Label();
             this.deckoptions_button = new DisplayButtons.Controls.ImageModernButton();
             this.imageModernButton1 = new DisplayButtons.Controls.ImageModernButton();
+            this.imageModernButton3 = new DisplayButtons.Controls.ImageModernButton();
             this.shadedPanel1.SuspendLayout();
             this.shadedPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -409,12 +410,30 @@ namespace DisplayButtons.Forms
             this.imageModernButton1.NormalImage = null;
             this.imageModernButton1.NormalLayerTwo = null;
             this.imageModernButton1.Origin = null;
-            this.imageModernButton1.Size = new System.Drawing.Size(131, 43);
+            this.imageModernButton1.Size = new System.Drawing.Size(94, 43);
             this.imageModernButton1.TabIndex = 13;
-            this.imageModernButton1.Text = "teste";
+            this.imageModernButton1.Text = "criar";
             this.imageModernButton1.TextButton = null;
             this.imageModernButton1.UseVisualStyleBackColor = true;
             this.imageModernButton1.Click += new System.EventHandler(this.imageModernButton1_Click);
+            // 
+            // imageModernButton3
+            // 
+            this.imageModernButton3.Camada = 0;
+            this.imageModernButton3.CustomColorScheme = false;
+            this.imageModernButton3.Image = null;
+            this.imageModernButton3.ImageLayerTwo = null;
+            this.imageModernButton3.Location = new System.Drawing.Point(965, 92);
+            this.imageModernButton3.Name = "imageModernButton3";
+            this.imageModernButton3.NormalImage = null;
+            this.imageModernButton3.NormalLayerTwo = null;
+            this.imageModernButton3.Origin = null;
+            this.imageModernButton3.Size = new System.Drawing.Size(94, 43);
+            this.imageModernButton3.TabIndex = 13;
+            this.imageModernButton3.Text = "salvar";
+            this.imageModernButton3.TextButton = null;
+            this.imageModernButton3.UseVisualStyleBackColor = true;
+            this.imageModernButton3.Click += new System.EventHandler(this.imageModernButton3_Click_1);
             // 
             // MainForm
             // 
@@ -426,6 +445,7 @@ namespace DisplayButtons.Forms
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.imageModernButton3);
             this.Controls.Add(this.imageModernButton1);
             this.Controls.Add(this.deckoptions_button);
             this.Controls.Add(this.perfil_info);
@@ -494,6 +514,7 @@ namespace DisplayButtons.Forms
         private RadioButton camada1;
         public GroupBox groupBox1;
         private ImageModernButton imageModernButton1;
+        private ImageModernButton imageModernButton3;
 
         internal ShadedPanel ShadedPanel1 { get => shadedPanel1; set => shadedPanel1 = value; }
     }
