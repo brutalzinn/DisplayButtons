@@ -933,8 +933,9 @@ namespace DisplayButtons.Forms
 
                             if (sender is ImageModernButton senderB)
                             {
-                                if ( DevicePersistManager.IsDeviceTest && ModifierKeys == Keys.Control)
+                                if ( e.Button == MouseButtons.Right && DevicePersistManager.IsDeviceTest && ModifierKeys == Keys.Control)
                                 {
+                                    Debug.WriteLine("Ativando botão esquerdo");
                                     if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item)
                                     {
                                         item.DeckAction?.OnButtonUp(CurrentDevice);
@@ -1000,11 +1001,11 @@ namespace DisplayButtons.Forms
 
                         };
 
-                        control.MouseDown += (sender, e) =>
+                            control.MouseDown += (sender, e) =>
                         {
                             if (sender is ImageModernButton senderB)
                             {
-                                if (DevicePersistManager.IsDeviceTest && ModifierKeys == Keys.Shift)
+                                if ( e.Button == MouseButtons.Left && DevicePersistManager.IsDeviceTest && ModifierKeys == Keys.Control)
                                 {
                                     if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item)
                                     {
