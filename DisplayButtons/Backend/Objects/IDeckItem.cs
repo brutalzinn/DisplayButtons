@@ -11,6 +11,7 @@ namespace DisplayButtons.Backend.Objects
 {
     [XmlInclude(typeof(DynamicDeckFolder))]
     [XmlInclude(typeof(DynamicDeckItem))]
+    [XmlInclude(typeof(DynamicBackItem))]
     [XmlInclude(typeof(Profile))]
   
     [XmlInclude(typeof(MatrizObject))]
