@@ -2714,7 +2714,7 @@ ActionImagePlaceHolder.Image = bmp;
         private void ChangeCamadaLayerByComboBox(DynamicDeckItem item)
         {
             
-                if (item.DeckAction.getLayer())
+                if ( item.DeckAction.getLayer())
                 {
                     camada2.Visible = true;
                     if (item.GetDeckLayerTwo == null)
