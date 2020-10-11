@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using static DisplayButtons.Backend.Objects.Implementation.DeckActions.General.KeyPressAction;
 using shortid;
 using DisplayButtons.Forms;
+using DisplayButtons.Bibliotecas;
 
 namespace DisplayButtons.Backend.Objects.Implementation
 {
@@ -189,7 +190,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                 KeyGlobalValue = form.ModifiableAction.KeyGlobalValue;
-             
+                GlobalHotKeys.refreshFolder(this);
             }
                 else
                 {

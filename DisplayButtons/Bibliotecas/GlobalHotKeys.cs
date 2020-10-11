@@ -1,4 +1,5 @@
 ﻿using DisplayButtons.Backend.Objects.Implementation;
+using DisplayButtons.Bibliotecas.Helpers;
 using DisplayButtons.Forms;
 using NHotkey;
 using NHotkey.WindowsForms;
@@ -9,30 +10,31 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
+using WebSocketSharp;
 
 namespace DisplayButtons.Bibliotecas
 {
     class GlobalHotKeys
     {
-        private static GlobalHotKeys instance;
-
-        public static GlobalHotKeys Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-        public static List<DynamicDeckFolder> folder_form = new List<DynamicDeckFolder>();
-
-        public GlobalHotKeys()
-        {
-            instance = this;
-        }
+     
      
 
-    
-        public static void RegisterHotKeyCollector(DynamicDeckFolder folder)
+    public static void UpdateAllFoldersHotkeys()
+        {
+
+      DeckHelpers.ListFolders(MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder as DynamicDeckFolder).ForEach(e => {
+          if (!e.UniqueID.IsNullOrEmpty())
+          {
+              refreshFolder(e);
+          }
+
+            });
+
+       
+                
+                
+       }
+        public static void RegisterUniqueId(DynamicDeckFolder folder)
         {
             if (folder != null)
 #pragma warning disable CS0618 // O tipo ou membro é obsoleto
@@ -61,11 +63,9 @@ HotkeyManager.Current.Remove(folder.UniqueID) ;
             result = result.Replace("Control", "Ctrl");
 
             System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
-            if (string.IsNullOrEmpty(folder.UniqueID))
-            {
-                return;
-            }
-            if (!string.IsNullOrEmpty(result))
+            if (!folder.UniqueID.IsNullOrEmpty())
+          
+            if (!result.IsNullOrEmpty())
             {
                 try
                 {

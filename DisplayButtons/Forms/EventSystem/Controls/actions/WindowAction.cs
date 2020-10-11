@@ -10,6 +10,7 @@ using DisplayButtons.Bibliotecas.DeckEvents;
 using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Misc;
 using DisplayButtons.Backend.Objects;
+using DisplayButtons.Bibliotecas.Helpers;
 
 namespace DisplayButtons.Forms.EventSystem.Controls.actions
 {
@@ -42,7 +43,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.actions
         {
             if (MainForm.Instance.CurrentDevice.GetConnection() != null)
             {
-                var items = MainForm.ListFolders(MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder as DynamicDeckFolder);
+                var items = DeckHelpers.ListFolders(MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder as DynamicDeckFolder);
 
                 foreach (DynamicDeckFolder present in items)
                 {

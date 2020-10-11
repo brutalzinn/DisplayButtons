@@ -58,6 +58,7 @@ using MoonSharp.Interpreter;
 using System.Management;
 using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
 using Swan;
+using System.Windows.Media.Animation;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -146,6 +147,26 @@ namespace DisplayButtons.Forms
                    // reloadALL();
                 }));
 
+            });
+
+            Globals.events.On("DeckFolderEventCreate", (e) => {
+                // Cast event argrument to your event object
+                var obj = (DeckFolderEventCreate)e;
+
+                // Get (set) your event object data
+                GlobalHotKeys.RegisterUniqueId(obj._folder);
+
+                // Other code
+            });
+
+            Globals.events.On("DeckFolderEventDelete", (e) => {
+                // Cast event argrument to your event object
+                var obj = (DeckFolderEventDelete)e;
+
+                // Get (set) your event object data
+                GlobalHotKeys.RemoveHotKey(obj._folder);
+
+                // Other code
             });
 
         }
@@ -427,6 +448,7 @@ namespace DisplayButtons.Forms
   FactoryEvents.Init();
  Checkupdates();
             ChangeDebuggerrMode();
+            
         }
         private void Checkupdates()
         {
@@ -817,7 +839,7 @@ namespace DisplayButtons.Forms
                                     CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
                                     CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                  
-                                    Globals.events.Trigger("DeckFolderEvent", new DeckFolderEvent(newFolder));
+                                    Globals.events.Trigger("DeckFolderEventCreate", new DeckFolderEventCreate(newFolder));
 
                                     // chamada o registrador de pasta
                                 }
@@ -855,18 +877,7 @@ namespace DisplayButtons.Forms
 
         }
 
-        public void FolderCallBack(DynamicDeckFolder folder, bool isForDelete = false)
-        {
-            if (!isForDelete)
-            {
-        GlobalHotKeys.Instance.RegisterHotKeyCollector(folder);
-
-            }
-            else
-            {
-                GlobalHotKeys.Instance.GarbageHotKeyCollector(folder);
-            }
-        }
+     
 
 
         public void MatrizGenerator(Profile profile)
@@ -945,7 +956,9 @@ namespace DisplayButtons.Forms
 
 
 
-                                                FolderCallBack(item, true);
+                                                Globals.events.Trigger("DeckFolderEventDelete", new DeckFolderEventDelete(item));
+
+
                                             }
                                             senderB.Tag = null;
                                             senderB.Image = null;
@@ -1026,7 +1039,7 @@ namespace DisplayButtons.Forms
 
                                                 CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
                                                 //FolderCallBack(newFolder);
-                                                Globals.events.Trigger("DeckFolderEvent", new DeckFolderEvent(newFolder));
+                                                Globals.events.Trigger("DeckFolderEventCreate", new DeckFolderEventCreate(newFolder));
 
                                                 //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                                 RefreshAllButtons(true);
@@ -1497,6 +1510,7 @@ namespace DisplayButtons.Forms
             {
                 LoadItems(CurrentDevice.CurrentProfile.Currentfolder);
             }
+            GlobalHotKeys.UpdateAllFoldersHotkeys();
         }
 
         //List<Tuple<Guid, int>> ignoreOnce = new List<Tuple<Guid, int>>();
@@ -1793,22 +1807,7 @@ namespace DisplayButtons.Forms
         public static List<folders> folder_form = new List<folders>();
         public static List<IDeckFolder> folder_mode = new List<IDeckFolder>();
         public static List<DynamicDeckFolder> folder_globals_keys = new List<DynamicDeckFolder>();
-        public static List<DynamicDeckFolder> ListFolders(DynamicDeckFolder initialFolder)
-        {
-            var folders = new List<DynamicDeckFolder>();
-            folders.Add(initialFolder);
-            foreach (var f in initialFolder.GetSubFolders())
-            {
-                if (f is DynamicDeckFolder DF)
-                {
-
-                    folders.AddRange(ListFolders(DF));
-
-                }
-
-            }
-            return folders;
-        }
+     
         public static string pasta = "";
 
         public static List<int> additems_fold = new List<int>();
@@ -2053,10 +2052,6 @@ namespace DisplayButtons.Forms
 
             try
             {
-
-
-
-
 
 
                 int i = 0;
@@ -2384,7 +2379,8 @@ ActionImagePlaceHolder.Image = bmp;
                                 if (ttt.KeyGlobalValue.Keys != null)
                                 {
 
-                                    GlobalHotKeys.Instance.GarbageHotKeyCollector(ttt);
+                                    Globals.events.Trigger("DeckFolderEventDelete", new DeckFolderEventDelete(ttt));
+
                                 }
 
                             }

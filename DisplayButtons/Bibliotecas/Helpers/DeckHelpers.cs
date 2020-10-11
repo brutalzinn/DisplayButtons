@@ -62,6 +62,22 @@ namespace DisplayButtons.Bibliotecas.Helpers
 
             return item;
         }
+        public static List<DynamicDeckFolder> ListFolders(DynamicDeckFolder initialFolder)
+        {
+            var folders = new List<DynamicDeckFolder>();
+            folders.Add(initialFolder);
+            foreach (var f in initialFolder.GetSubFolders())
+            {
+                if (f is DynamicDeckFolder DF)
+                {
+
+                    folders.AddRange(ListFolders(DF));
+
+                }
+
+            }
+            return folders;
+        }
         public static void RefreshButton(IDeckItem item,int camada,  DeckItemMisc itemmisc, DeckDevice device)
         {
             // Buttons_Unfocus(this, EventArgs.Empty);
@@ -108,14 +124,20 @@ namespace DisplayButtons.Bibliotecas.Helpers
                 this.Camada = cam;
             }
         }
-        public class DeckFolderEvent : Sharpy.IEvent
+        public class DeckFolderEventCreate : Sharpy.IEvent
         {
-
-            public DynamicDeckFolder _folder;
-
-            public DeckFolderEvent(DynamicDeckFolder folder)
+public DynamicDeckFolder _folder;
+            public DeckFolderEventCreate(DynamicDeckFolder folder)
             {
                 this._folder = folder;   
+            }
+        }
+        public class DeckFolderEventDelete : Sharpy.IEvent
+        {
+            public DynamicDeckFolder _folder;
+            public DeckFolderEventDelete(DynamicDeckFolder folder)
+            {
+                this._folder = folder;
             }
         }
     }
