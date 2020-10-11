@@ -18,7 +18,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
     {
 
  
-        public DeckImage DeckImage { get; set; }
+        public DeckItemMisc DeckImage { get; set; }
         SerializableDictionary<int, IDeckItem> items = new SerializableDictionary<int, IDeckItem>();
 
         public SerializableDictionary<int, IDeckItem> Items
@@ -40,7 +40,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
 
         public override DeckImage GetItemImage()
         {
-            return DeckImage;
+            return DeckImage.GetItemImage();
         }
 
         public override int GetItemIndex(IDeckItem item)
@@ -92,7 +92,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
 
         public override DeckImage GetDeckImage()
         {
-            return DeckImage;
+            return DeckImage.GetItemImage();
         }
         [XmlIgnore]
         public string folder_name { get; set; }

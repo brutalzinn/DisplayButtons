@@ -193,7 +193,10 @@ namespace DisplayButtons.Controls
                         }
                         else if (Tag is DynamicDeckFolder itemFolder)
                         {
-                            itemFolder.DeckImage = deckImage;
+                            
+                           itemFolder.GetDeckDefaultLayer.DeckImage = deckImage;
+
+
                         }
                         if (Tag is IDeckItem itemNew)
                         {
@@ -268,7 +271,8 @@ namespace DisplayButtons.Controls
                         }
                         else if (Tag is DynamicDeckFolder itemFolder)
                         {
-                            itemFolder.DeckImage = deckImage;
+                            itemFolder.GetDeckDefaultLayer.DeckImage = deckImage;
+
                         }
                         if (Tag is IDeckItem itemNew)
                         {

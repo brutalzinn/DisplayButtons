@@ -1032,10 +1032,11 @@ namespace DisplayButtons.Forms
                                             {
                                                 Debug.WriteLine("Adicionando pasta...");
                                                 CurrentDevice.CheckCurrentFolder() ;
-                                                var newFolder = new DynamicDeckFolder
-                                                {
-                                                    DeckImage = new DeckImage(Resources.img_folder)
-                                                };
+                                                var newFolder = new DynamicDeckFolder();
+
+                                                var DeckImage = newFolder.GetDeckDefaultLayer.DeckImage = new DeckImage(Resources.img_folder);
+
+
                                                 newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                                 newFolder.Add(1, folderUpItem);
 
@@ -1259,7 +1260,7 @@ namespace DisplayButtons.Forms
                 //control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
 
                 control.NormalImage = item?.GetDeckDefaultLayer?.GetItemImage()?.Bitmap;
-
+                
                 control.TextButton = new TextLabel(item.GetDeckDefaultLayer);
 
                 control.Tag = item;
@@ -3529,10 +3530,11 @@ toAdd.AsEnumerable().Reverse().All(m =>
                             {
                                 Debug.WriteLine("Adicionando pasta...");
                                 CurrentDevice.CheckCurrentFolder();
-                                var newFolder = new DynamicDeckFolder
-                                {
-                                    DeckImage = new DeckImage(Resources.img_folder)
-                                };
+                                var newFolder = new DynamicDeckFolder();
+
+                                var DeckImage = newFolder.GetDeckDefaultLayer.DeckImage = new DeckImage(Resources.img_folder);
+
+                               
                                 newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                 newFolder.Add(1, folderUpItem);
 
@@ -3934,31 +3936,39 @@ toAdd.AsEnumerable().Reverse().All(m =>
         private void camada1_Click(object sender, EventArgs e)
         {
             RadioButton mb = (sender as RadioButton);
-                if(mb.Tag is DynamicDeckItem FF)
+                if(mb.Tag is IDeckItem FF)
             {
                 ActionImagePlaceHolder.TextButton = new TextLabel(FF.GetDeckDefaultLayer);
 
                 FocusItemPropertiesOptions(FF.GetDeckDefaultLayer);
-                LoadProperties(FF, flowLayoutPanel1);
-                ActionImagePlaceHolder.Camada = 1;
+              
+            }else if(mb.Tag is DynamicDeckItem DeckItem)
+            { 
+                LoadProperties(DeckItem, flowLayoutPanel1);
+
+            } 
+            ActionImagePlaceHolder.Camada = 1;
                 UpdateLayerView();
-            }
 
         }
 
         private void camada2_Click(object sender, EventArgs e)
         {
             RadioButton mb = (sender as RadioButton);
-            if (mb.Tag is DynamicDeckItem FF)
+            if (mb.Tag is IDeckItem FF)
             {
                 ActionImagePlaceHolder.TextButton = new TextLabel(FF.GetDeckLayerTwo);
 
                 FocusItemPropertiesOptions(FF.GetDeckLayerTwo);
-                LoadProperties(FF, flowLayoutPanel1);
 
-                ActionImagePlaceHolder.Camada = 2;
-                UpdateLayerView();
             }
+            else if (mb.Tag is DynamicDeckItem DeckItem)
+            {
+                LoadProperties(DeckItem, flowLayoutPanel1);
+
+            }
+            ActionImagePlaceHolder.Camada = 2;
+
 
 
         }
