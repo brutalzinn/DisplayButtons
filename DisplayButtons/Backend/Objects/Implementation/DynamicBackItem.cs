@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace DisplayButtons.Backend.Objects.Implementation
 {
     [Serializable]
-    public class DynamicBackItem : IDeckItem
+    public class DynamicBackItem : DynamicDeckItem
     {
         public override DeckImage GetDefaultImage()
         {

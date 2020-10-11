@@ -10,6 +10,7 @@ using DisplayButtons.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace DisplayButtons.Bibliotecas.Helpers
@@ -18,7 +19,8 @@ namespace DisplayButtons.Bibliotecas.Helpers
     {
 
 
-
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int GetDoubleClickTime();
         public static void ClearSingleItemToDevice(DeckDevice device, int slot)
         {
             var con = device.GetConnection();

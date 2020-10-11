@@ -1102,8 +1102,9 @@ namespace DisplayButtons.Forms
                       
 
                             lastClick.Stop();
-                            var obj = (MouseButtonEventArgs)e;
-                            bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
+                       
+                            bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= DeckHelpers.GetDoubleClickTime();
+                            Debug.WriteLine(isDoubleClick);
                             if (sender is ImageModernButton mb)
                             {
                                 if (mb.Tag != null && mb.Tag is IDeckItem item)
@@ -1122,37 +1123,36 @@ namespace DisplayButtons.Forms
                                             CurrentDevice.CurrentProfile.Currentfolder = folder;
                                         RefreshAllButtons();
                                         goto end;
-                                    }
-                                    if (isDoubleClick)
-                                    {
+                                    }else if (item is DynamicBackItem)
+                                    
+                                   {
+                                   
                                         if (CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null)
                                         {
                                             //Not on the main folder
-                                            if (item is DynamicBackItem)
+                                            if (!isDoubleClick)
                                             {
-                                                CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Currentfolder.GetParent();
-                                                RefreshAllButtons();
-                                  //              lastClick.Reset();
-                                            //    lastClick.Reset();
-                                            // return;
+
+                                                FocusItem(mb, item);
+                                                camada1.PerformClick();
+                                                goto end;
+                                                // camada1.PerformClick();
+                                               
                                             }
-                                        }
+                                            CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Currentfolder.GetParent();
+                                                RefreshAllButtons();
+
+
+
+                                                goto end;
+                              
+                                            }
+                                        
+                                       
                                     }
                                         //Show button panel with settable properties
                                         FocusItem(mb, item);
                                     camada1.PerformClick();
-
-                                    //if (Debugger.IsAttached)
-                                    //{
-
-
-                                    //    Debug.WriteLine("Simulando clique no botão.");
-
-                                    //    item.DeckAction.OnButtonDown(DevicePersistManager.DeviceTest)
-
-
-                                    //}
-                                    //       camada1.PerformClick();
 
                                     lastClick.Reset();
                                 }
@@ -1162,8 +1162,8 @@ namespace DisplayButtons.Forms
                                 }
                                 return;
                                 end:
-                                lastClick.Reset();
-                                lastClick.Start();
+                               lastClick.Reset();
+                               lastClick.Start();
                             }
 
 
