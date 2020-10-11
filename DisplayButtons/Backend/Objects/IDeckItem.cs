@@ -26,10 +26,10 @@ namespace DisplayButtons.Backend.Objects
       
        
        
-        public DeckItemMisc GetDeckLayerTwo { get; set; }
+        public virtual DeckItemMisc GetDeckLayerTwo { get; set; }
         // public DeckItemMISC GetDeckDefaultLayer { get => _GetDeckDefaultLayer; set => _GetDeckDefaultLayer = value; }
 
-        public DeckItemMisc GetDeckDefaultLayer
+        public virtual DeckItemMisc GetDeckDefaultLayer
         {
             get
             {

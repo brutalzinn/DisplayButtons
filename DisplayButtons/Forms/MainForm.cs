@@ -59,6 +59,7 @@ using System.Management;
 using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
 using Swan;
 using System.Windows.Media.Animation;
+using WebSocketSharp;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -225,9 +226,7 @@ namespace DisplayButtons.Forms
 
 
             ChangeDeveloperMode();
-            RegisterMainFolderHotKey();
-
-            RegisterBackFolderHotKey();
+       
 
 
           ProfileStaticHelper.SetupPerfil();
@@ -489,8 +488,7 @@ namespace DisplayButtons.Forms
 
             System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
 
-            if (!string.IsNullOrEmpty(resultMainFolder))
-            {
+            if (!resultMainFolder.IsNullOrEmpty())            {
                 try
                 {
                     System.Windows.Forms.KeysConverter kc = new System.Windows.Forms.KeysConverter();
@@ -518,7 +516,7 @@ namespace DisplayButtons.Forms
 
             System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
 
-            if (!string.IsNullOrEmpty(resultBackFolder))
+            if (!resultBackFolder.IsNullOrEmpty())
             {
                 try
                 {
@@ -771,7 +769,7 @@ namespace DisplayButtons.Forms
                                         
                                     }
                                    
-                                    if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.setLayer() == true)
+                                    if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction != null && mycustomitem.DeckAction.setLayer() == true)
                                     {
                                         mycustomitem.DeckAction.setLayer(mb.CurrentSlot, mycustomitem);
                                     }
@@ -857,7 +855,7 @@ namespace DisplayButtons.Forms
                               //  ClearSingleItemToDevice(CurrentDevice, action1.OldSlot);
                                 RefreshButton(mb.CurrentSlot, true);
                                 
-                                if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction.setLayer() == true)
+                                if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction != null && mycustomitem.DeckAction.setLayer() == true)
                                 { 
                                     mycustomitem.DeckAction.setLayer(mb.CurrentSlot,mycustomitem);
                                    // FocusItem(mb, mycustomitems
@@ -1510,6 +1508,9 @@ namespace DisplayButtons.Forms
             {
                 LoadItems(CurrentDevice.CurrentProfile.Currentfolder);
             }
+            RegisterMainFolderHotKey();
+
+            RegisterBackFolderHotKey();
             GlobalHotKeys.UpdateAllFoldersHotkeys();
         }
 
@@ -1678,7 +1679,7 @@ namespace DisplayButtons.Forms
         }
 
         private static DeckImage defaultDeckImage = new DeckImage(Resources.img_folder_up);
-        private static DynamicDeckItem folderUpItem = new DynamicDeckItem() { DeckImage = defaultDeckImage };
+        private static DynamicDeckItem folderUpItem = new DynamicDeckItem() { GetLayerOneImage  = defaultDeckImage };
 
         private void FixFolders(IDeckFolder folder, bool ignoreFirst = true, IDeckFolder trueParent = null)
         {
@@ -2760,7 +2761,7 @@ ActionImagePlaceHolder.Image = bmp;
         }
         private void FocusItem(ImageModernButton mb, IDeckItem item)
         {
-            if(item is DynamicDeckItem TTT)
+            if(item is DynamicDeckItem TTT && TTT.DeckAction != null)
             {
             ChangeCamadaLayerByComboBox(TTT);
              
@@ -3816,7 +3817,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                 FocusItemPropertiesOptions(FF.GetDeckDefaultLayer);
               
-            } if(mb.Tag is DynamicDeckItem DeckItem)
+            } if(mb.Tag is DynamicDeckItem DeckItem && DeckItem.DeckAction != null)
             { 
                 LoadProperties(DeckItem, flowLayoutPanel1);
 
@@ -3841,7 +3842,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 FocusItemPropertiesOptions(FF.GetDeckLayerTwo);
 
             }
-             if (mb.Tag is DynamicDeckItem DeckItem)
+             if (mb.Tag is DynamicDeckItem DeckItem && DeckItem.DeckAction != null) 
             {
                 LoadProperties(DeckItem, flowLayoutPanel1);
 
