@@ -792,32 +792,22 @@ namespace DisplayButtons.Forms
                                 var newFolder = new DynamicDeckFolder();
 
                                 newFolder.GetDeckDefaultLayer.DeckImage = new DeckImage(Resources.img_folder);
-                               
-                                //Create a new folder instance
-
-
-
-                                //parei aqui
-
                                 if (oldItem is DynamicDeckFolder deckFolder)
                                 {
+                                    //mesclagem de pasta
                                     CurrentDevice.CheckCurrentFolder();
                                     deckFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     deckFolder.Add(1, folderUpItem);
-                                    Debug.WriteLine("Mesclagem de pasta.");
+                                    
                                     deckFolder.Add(action1.DeckItem);
                                     CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, deckFolder);
 
-                                    CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
-
-
-                                    //   mb.DoDragDrop(new DeckItemMoveHelper(action1.DeckItem, deckFolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
-
+                                   // CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
 
                                 }
                                 else
                                 {
-
+                                    // mesclagem de itens. Se há um item em cima do outro, cria-se uma pasta.
                                     CurrentDevice.CheckCurrentFolder();
                                     newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     newFolder.Add(1, folderUpItem);
@@ -826,9 +816,10 @@ namespace DisplayButtons.Forms
                                     newFolder.Add(action1.DeckItem);
                                     CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
                                     CurrentDevice.CurrentProfile.Currentfolder = newFolder;
-                                    Debug.WriteLine("Dois itens.");
-                                    FolderCallBack(newFolder);
-                                    // call event
+                                 
+                                    Globals.events.Trigger("DeckFolderEvent", new DeckFolderEvent(newFolder));
+
+                                    // chamada o registrador de pasta
                                 }
 
 
@@ -866,23 +857,15 @@ namespace DisplayButtons.Forms
 
         public void FolderCallBack(DynamicDeckFolder folder, bool isForDelete = false)
         {
-
-
             if (!isForDelete)
             {
-        //        GlobalHotKeys.Instance.RegisterHotKeyCollector(folder);
+        GlobalHotKeys.Instance.RegisterHotKeyCollector(folder);
 
             }
             else
             {
-                //    GlobalHotKeys.folder_form.Add(new GlobalHotKeys.folders(folder));
-         //       GlobalHotKeys.Instance.GarbageHotKeyCollector(folder);
-                //   GlobalHotKeys.hotKeyManager.Unregister(GlobalHotKeys.VirtualKeyFromKey(folder.KeyGlobalValue.Keys), GlobalHotKeys.VirtualKeyFromKeyModifier(folder.KeyGlobalValue.ModifierKeys));
+                GlobalHotKeys.Instance.GarbageHotKeyCollector(folder);
             }
-            //   GlobalHotKeys.Instance.init();
-
-
-
         }
 
 
@@ -1042,9 +1025,11 @@ namespace DisplayButtons.Forms
                                                 newFolder.Add(1, folderUpItem);
 
                                                 CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
-                                                FolderCallBack(newFolder);
-                                                    //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
-                                                    RefreshAllButtons(true);
+                                                //FolderCallBack(newFolder);
+                                                Globals.events.Trigger("DeckFolderEvent", new DeckFolderEvent(newFolder));
+
+                                                //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
+                                                RefreshAllButtons(true);
 
                                             }
                                         };
@@ -1103,8 +1088,7 @@ namespace DisplayButtons.Forms
 
                         control.Click += (sender, e) =>
                         {
-                            Debug.WriteLine("CLICANDO");
-                            Debug.WriteLine(control.Name);
+                      
 
                             lastClick.Stop();
                             bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
@@ -1927,7 +1911,6 @@ namespace DisplayButtons.Forms
                         folder_children.Text = "............" + item.Name;
                         parent.Controls.Add(folder_children);
 
-                        Debug.WriteLine(item.Name + "/" + item.Folder_id);
 
                         folder_children.Click += (s, ee) =>
                         {
@@ -2000,7 +1983,7 @@ namespace DisplayButtons.Forms
                             {
                                 folder_form.Add(new folders(pastapai.GetDeckDefaultLayer.Deckname, pastapai, true, root));
                             }
-                            Debug.WriteLine("ROOT: " + root);
+                            
                             AddFolderInPanelList(root);
                             root = 0;
 
@@ -2213,7 +2196,7 @@ namespace DisplayButtons.Forms
                             Tag = i2
 
                         };
-                          Debug.WriteLine("TAG VINDO: " + i2);
+                    
                         item.MouseDown += (s, ee) =>
                         {
                             if (item.Tag is AbstractDeckAction act)
@@ -3491,117 +3474,11 @@ toAdd.AsEnumerable().Reverse().All(m =>
             return prop.Name;
         }
 
-        #endregion
-
-
-        #region Events
 
         private bool mouseDown;
         private Point mouseDownLoc = Cursor.Position;
 
-        private void ItemButton_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (sender is ImageModernButton senderB)
-            {
-                if (e.Button == MouseButtons.Left && DevicePersistManager.IsVirtualDeviceConnected && ModifierKeys == Keys.Shift)
-                {
-                    if (senderB.Tag != null && senderB.Tag is DynamicDeckItem item)
-                    {
-                        item.DeckAction?.OnButtonDown(CurrentDevice);
-                    }
-                    return;
-                }
-            }
-
-
-            mouseDown = e.Button == MouseButtons.Left;
-            mouseDownLoc = Cursor.Position;
-            if (e.Button == MouseButtons.Right)
-            {
-
-                if (sender is ImageModernButton senderT)
-                {
-                    if (senderT.Tag is DynamicDeckItem == false)
-                    {
-                        ContextMenuStrip menu = new ContextMenuStrip();
-                        menu.Items.Add("Adicionar pasta").Click += (s, ee) =>
-                        {
-
-                            if (sender is ImageModernButton mb)
-                            {
-                                Debug.WriteLine("Adicionando pasta...");
-                                CurrentDevice.CheckCurrentFolder();
-                                var newFolder = new DynamicDeckFolder();
-
-                                var DeckImage = newFolder.GetDeckDefaultLayer.DeckImage = new DeckImage(Resources.img_folder);
-
-                               
-                                newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
-                                newFolder.Add(1, folderUpItem);
-
-                                CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
-                                //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
-                                RefreshAllButtons(true);
-
-                            }
-                        };
-
-
-                        menu.Items.Add("Atualizar").Click += (s, ee) =>
-                        {
-
-                            if (sender is ImageModernButton mb)
-                            {
-                                //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
-                                RefreshAllButtons(true);
-
-                            }
-                        };
-
-
-                        menu.Show(sender as Control, e.Location);
-                    }
-                }
-            }
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ItemButton_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!mouseDown) return;
-            int distanceX = Math.Abs(mouseDownLoc.X - Cursor.Position.X);
-            int distanceY = Math.Abs(mouseDownLoc.Y - Cursor.Position.Y);
-            IDeckFolder folder = CurrentDevice?.CurrentProfile.Currentfolder;
-
-            var finalPoint = new Point(distanceX, distanceY);
-            bool didMove = SystemInformation.DragSize.Width * 2 > finalPoint.X && SystemInformation.DragSize.Height * 2 > finalPoint.Y;
-            if (didMove && !finalPoint.IsEmpty)
-            {
-                mouseDown = false;
-                if (sender is ImageModernButton mb)
-                {
-                    if (mb.Tag != null && mb.Tag is IDeckItem act)
-                    {
-                        bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= SystemInformation.DoubleClickTime;
-                        if (isDoubleClick) return;
-                        if ((CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null && (mb.CurrentSlot == 1))) return;
-                        mb.DoDragDrop(new DeckItemMoveHelper(act, CurrentDevice.CurrentProfile.Currentfolder, mb.CurrentSlot) { CopyOld = ModifierKeys.HasFlag(Keys.Control) }, ModifierKeys.HasFlag(Keys.Control) ? DragDropEffects.Copy : DragDropEffects.Move);
-                        //if (act is DynamicDeckItem dI && dI.DeckAction != null)
-                        //{
-                        //    Label title_control = Controls.Find("titleLabel" + folder.GetItemIndex(act), true).FirstOrDefault() as Label;
-
-                        //    title_control.Text = dI.DeckAction.GetActionName();
-                        //    Debug.WriteLine("Clicando no " + dI.DeckAction.GetActionName());
-                        //}
-                    }
-                }
-            }
-        }
+        
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -3943,11 +3820,16 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                 FocusItemPropertiesOptions(FF.GetDeckDefaultLayer);
               
-            }else if(mb.Tag is DynamicDeckItem DeckItem)
+            } if(mb.Tag is DynamicDeckItem DeckItem)
             { 
                 LoadProperties(DeckItem, flowLayoutPanel1);
 
-            } 
+            }
+             if (mb.Tag is DynamicDeckFolder DeckFolder)
+            {
+                LoadPropertiesFolder(DeckFolder, flowLayoutPanel1);
+
+            }
             ActionImagePlaceHolder.Camada = 1;
                 UpdateLayerView();
 
@@ -3963,14 +3845,19 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 FocusItemPropertiesOptions(FF.GetDeckLayerTwo);
 
             }
-            else if (mb.Tag is DynamicDeckItem DeckItem)
+             if (mb.Tag is DynamicDeckItem DeckItem)
             {
                 LoadProperties(DeckItem, flowLayoutPanel1);
 
             }
+             if (mb.Tag is DynamicDeckFolder DeckFolder)
+            {
+                LoadPropertiesFolder(DeckFolder, flowLayoutPanel1);
+
+            }
             ActionImagePlaceHolder.Camada = 2;
 
-
+            UpdateLayerView();
 
         }
 

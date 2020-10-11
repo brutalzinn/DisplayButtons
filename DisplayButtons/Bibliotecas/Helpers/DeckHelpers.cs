@@ -1,6 +1,7 @@
 ﻿using DisplayButtons.Backend.Networking;
 using DisplayButtons.Backend.Networking.Implementation;
 using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Bibliotecas.DeckText;
 using DisplayButtons.Controls;
 using DisplayButtons.Forms;
@@ -105,6 +106,16 @@ namespace DisplayButtons.Bibliotecas.Helpers
                 this.DeckMisc = deckmisc;
                 this.DeckItem = item;
                 this.Camada = cam;
+            }
+        }
+        public class DeckFolderEvent : Sharpy.IEvent
+        {
+
+            public DynamicDeckFolder _folder;
+
+            public DeckFolderEvent(DynamicDeckFolder folder)
+            {
+                this._folder = folder;   
             }
         }
     }

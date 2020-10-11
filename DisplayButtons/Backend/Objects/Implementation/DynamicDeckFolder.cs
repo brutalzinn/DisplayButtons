@@ -173,7 +173,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
      
         public string UniqueID { get; set; }
         [ActionPropertyInclude]
-      [ActionPropertyDescription("GlobalHotKeys")]
+      
     
             public KeyInfoGlobal KeyGlobalValue { get; set; } = new KeyInfoGlobal();
             public void KeyGlobalValueHelper()

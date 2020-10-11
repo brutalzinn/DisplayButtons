@@ -32,7 +32,7 @@ namespace DisplayButtons.Bibliotecas
      
 
     
-        public void RegisterHotKeyCollector(DynamicDeckFolder folder)
+        public static void RegisterHotKeyCollector(DynamicDeckFolder folder)
         {
             if (folder != null)
 #pragma warning disable CS0618 // O tipo ou membro é obsoleto
@@ -40,13 +40,12 @@ namespace DisplayButtons.Bibliotecas
 #pragma warning restore CS0618 // O tipo ou membro é obsoleto
 
         }
-        public void GarbageHotKeyCollector(DynamicDeckFolder folder)
+        public static void RemoveHotKey(DynamicDeckFolder folder)
         {
 
-            if(folder != null)
+            if(folder != null) { 
 
-            if (!String.IsNullOrEmpty(folder.UniqueID))
-            {
+           
 HotkeyManager.Current.Remove(folder.UniqueID) ;
 
             }
@@ -54,7 +53,7 @@ HotkeyManager.Current.Remove(folder.UniqueID) ;
             
         }
       
-        public void refreshFolder(DynamicDeckFolder folder)
+        public static void refreshFolder(DynamicDeckFolder folder)
         {
             string value1 = string.Join("+", folder.KeyGlobalValue.ModifierKeys.Where(c => c != Keys.None).Select(c => c.ToString()).OrderBy(c => c));
             string value2 = string.Join("+", folder.KeyGlobalValue.Keys.Where(c => !(c == Keys.ShiftKey || c == Keys.ControlKey || c == Keys.Menu)));
