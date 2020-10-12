@@ -1164,11 +1164,11 @@ namespace DisplayButtons.Forms
                                 end:
                                lastClick.Reset();
                                lastClick.Start();
-                            }
+                           
 
 
-                            RefreshAllButtons(true);
-
+                            RefreshButton(mb.CurrentSlot);
+ }
                         };
                             //    control.Controls.Add(control2);
 
@@ -1447,35 +1447,32 @@ namespace DisplayButtons.Forms
         }
         public void Start_configs()
         {
-           
-           
-               if(perfilselector.Items.Count == 0)
+
+             if (Debugger.IsAttached && DevicePersistManager.IsDeviceTest)
+                {
+
+                    ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value, DevicePersistManager.DeviceTest);
+                return;  
+            }
+            if (perfilselector.Items.Count == 0)
             {
                 ProfileStaticHelper.SetupPerfil();
             }
                 if (CurrentPerfil != null)
                 {
-                if (Debugger.IsAttached && DevicePersistManager.IsDeviceTest)
-                {
-
-                    ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value,DevicePersistManager.DeviceTest);
-                }
-                else
-                {
+               
+                
                     ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
-                }
+                
                 }
 
-          
-            //     folder_globals_keys = ListFolders(CurrentDevice.MainFolder as DynamicDeckFolder);
-
+         
             if (ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
             {
                 GenerateFolderList(shadedPanel4);
             }
 
-            //  GetAllFolders(CurrentDevice.MainFolder);
-         
+          
            
        
             
@@ -3725,14 +3722,13 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 {
 
                     ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value, DevicePersistManager.DeviceTest);
+                    RefreshAllButtons(false);
+                    return;
                 }
-                else
-                {
+               
                 ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
 
-                }
-
-                    RefreshAllButtons(true);
+              RefreshAllButtons(true);
 
                 
               
