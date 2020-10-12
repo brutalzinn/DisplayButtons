@@ -3871,7 +3871,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
             DevicePersistManager.DeviceTest = new DeckDevice(new Guid("161fb525-7004-4cb1-9487-6f5106af32da"), "Teste");
            
             CurrentDevice = DevicePersistManager.DeviceTest;
-            DevicePersistManager.DeviceTest = DevicePersistManager.DeviceTest;
+           
            //DevicePersistManager.DeviceTest = deckDevice;
             DevicePersistManager.PersistDevice(DevicePersistManager.DeviceTest);
            
@@ -3879,8 +3879,9 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
          
             ProfileTestDeckHelper.SetupPerfil(DevicePersistManager.DeviceTest);
- 
-         
+
+    //        ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value, DevicePersistManager.DeviceTest);
+            DevicePersistManager.OnDeviceConnected(this, DevicePersistManager.DeviceTest);
         }
 
         private void imageModernButton3_Click_1(object sender, EventArgs e)

@@ -112,7 +112,7 @@ device.CurrentProfile = profile;
 
                     device.profiles.Add(new_folder);
 
-                    SelectCurrentDevicePerfil(new_folder,device);
+              ///      SelectCurrentDevicePerfil(new_folder,device);
 
 
 

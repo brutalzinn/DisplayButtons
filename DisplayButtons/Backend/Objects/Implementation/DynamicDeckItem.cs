@@ -14,8 +14,12 @@ namespace DisplayButtons.Backend.Objects.Implementation
         {
             return DeckAction.GetDefaultItemImage();
         }
+        [XmlIgnore]
         public DeckImage GetLayerOneImage { get => base.GetDeckDefaultLayer.DeckImage; set => base.GetDeckDefaultLayer.DeckImage = value; }
-       
+      
+        [XmlIgnore]
+        public DeckImage GetLayerTwoImage { get => base.GetDeckLayerTwo.DeckImage; set => base.GetDeckLayerTwo.DeckImage = value; }
+
         public DeckImage DeckImage { get; set; }
     
         public AbstractDeckAction DeckAction { get; set; }

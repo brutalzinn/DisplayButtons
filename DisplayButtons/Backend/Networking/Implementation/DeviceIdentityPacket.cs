@@ -53,24 +53,8 @@ namespace DisplayButtons.Backend.Networking.Implementation
 
             DevicePersistManager.PersistDevice(deckDevice);
             DevicePersistManager.ChangeConnectedState(state, deckDevice);
-            /*
-            var deckImage = new DeckImage(new System.Drawing.Bitmap("streamdeck_key.png"));
-            var packet = new SlotImageChangeChunkPacket();
-            packet.AddToQueue(1, deckImage);
-            packet.AddToQueue(3, deckImage);
-            packet.AddToQueue(5, deckImage);
-            packet.AddToQueue(15, deckImage);
-            state.SendPacket(packet);*/
-             
-            if (Program.mode == 1)
-            {
-              //  DevicePersistManager.PersistUsbGuid(deckDevice.DeviceUsb, DeviceGuid);
-         // MainForm.Instance.StartUsbMode();
 
-                //      DevicePersistManager.PersistUsbMode(deckDevice);
-
-                //   teste.MountUsbDevices();
-            }
+    
             DevicePersistManager.OnDeviceConnected(this, deckDevice);
             Debug.WriteLine("MOSTRANDO GUID PARA: " + DeviceName);
             Debug.WriteLine("MOSTRANDO GUID PARA: " + DeviceGuid);
