@@ -243,10 +243,11 @@ namespace DisplayButtons.Backend.Networking.TcpLib
                  new AsyncCallback(ReceivedDataReady_Handler), st);
         }
 
-
+        [DebuggerHidden]
         /// <summary>
         /// Executes OnReceiveData method from the service provider.
         /// </summary>
+        /// 
         private void ReceivedDataReady_Handler(IAsyncResult ar)
         {
             try {

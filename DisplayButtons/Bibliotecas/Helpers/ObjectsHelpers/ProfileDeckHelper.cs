@@ -207,7 +207,7 @@ namespace DisplayButtons.Backend.Objects
 
                     device.profiles.Add(new_folder);
 
-                    SelectCurrentDevicePerfil(new_folder);
+                SelectCurrentDevicePerfil(new_folder);
 
 
 

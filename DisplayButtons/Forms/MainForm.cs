@@ -1104,7 +1104,7 @@ namespace DisplayButtons.Forms
                             lastClick.Stop();
                        
                             bool isDoubleClick = lastClick.ElapsedMilliseconds != 0 && lastClick.ElapsedMilliseconds <= DeckHelpers.GetDoubleClickTime();
-                            Debug.WriteLine(isDoubleClick);
+                            
                             if (sender is ImageModernButton mb)
                             {
                                 if (mb.Tag != null && mb.Tag is IDeckItem item)
@@ -1121,7 +1121,7 @@ namespace DisplayButtons.Forms
                                         }
                                             //Navigate to the folder
                                             CurrentDevice.CurrentProfile.Currentfolder = folder;
-                                        RefreshAllButtons();
+                                        RefreshAllButtons(true);
                                         goto end;
                                     }else if (item is DynamicBackItem)
                                     
@@ -1140,7 +1140,7 @@ namespace DisplayButtons.Forms
                                                
                                             }
                                             CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Currentfolder.GetParent();
-                                                RefreshAllButtons();
+                                                RefreshAllButtons(true);
 
 
 
@@ -1164,10 +1164,10 @@ namespace DisplayButtons.Forms
                                 end:
                                lastClick.Reset();
                                lastClick.Start();
-                           
 
 
-                            RefreshButton(mb.CurrentSlot);
+                                
+                           RefreshButton(mb.CurrentSlot);
  }
                         };
                             //    control.Controls.Add(control2);
@@ -1214,7 +1214,7 @@ namespace DisplayButtons.Forms
             // Application.DoEvents();
 
         }
-
+        
         public void RefreshAllButtons(bool sendToDevice = true)
         {
             if(Globals.can_refresh == false)
@@ -1236,7 +1236,7 @@ namespace DisplayButtons.Forms
                 control.NormalImage = null;
                 control.Tag = null;
                 control.Camada = 1;
-                control.ClearText();
+               control.ClearText();
                 if (folder == null) control.Invoke(new Action(control.Refresh));
             }
             if (folder == null) return;
@@ -1271,10 +1271,7 @@ namespace DisplayButtons.Forms
 
             }
 
-            if (DevicePersistManager.IsDeviceTest)
-            {
-                return;
-            }
+        
             if (sendToDevice)
                 {
 
@@ -1495,6 +1492,8 @@ namespace DisplayButtons.Forms
 
                Start_configs(); 
     SendItemsToDevice(CurrentDevice, true);
+       
+            
             }));
 
             e.Device.ButtonInteraction += Device_ButtonInteraction;
@@ -1503,8 +1502,11 @@ namespace DisplayButtons.Forms
 
         public void ChangeToDevice(DeckDevice device)
         {
-         
+
+    
             CurrentDevice = device;
+            ProfileStaticHelper.SetupPerfil();
+
             if (CurrentDevice.CurrentProfile != null)
             {
                 LoadItems(CurrentDevice.CurrentProfile.Currentfolder);
@@ -1532,7 +1534,7 @@ namespace DisplayButtons.Forms
                     {
                         if (device.CurrentProfile.Currentfolder.GetParent() != null)
                         {
-                            if (device.CurrentProfile.Currentfolder.GetItemIndex(item) == 1)
+                            if (item is DynamicBackItem backItem)
                             {
                                 if (e.PerformedAction != ButtonInteractPacket.ButtonAction.ButtonUp) return;
                                 //Navigate one up!
@@ -1540,7 +1542,7 @@ namespace DisplayButtons.Forms
                                 SendItemsToDevice(CurrentDevice, device.CurrentProfile.Currentfolder);
                                 //      AddWatermark(deckItem.DeckAction.GetActionName(), ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, device.CurrentProfile.Currentfolder.GetParent());
 
-                                RefreshAllButtons(false);
+                                this.Invoke(new Action(() => RefreshAllButtons(false)));
                                 return;
                             }
                         }
@@ -1564,7 +1566,7 @@ namespace DisplayButtons.Forms
                         //ignoreOnce.Add(new Tuple<Guid, int>(device.DeviceGuid, e.SlotID));
                         SendItemsToDevice(CurrentDevice, deckFolder);
                         //  AddWatermark(deckFolder.folder_name, ((IDeckItem)imageModernButton1.Origin.Tag).GetDefaultImage().Bitmap, "Arial", 7, 20f, 67f, Brushes.White, item, deckFolder);
-                        RefreshAllButtons(false);
+                       this.Invoke(new Action(() => RefreshAllButtons(false)));
                     }
                 }
             }
@@ -1607,11 +1609,11 @@ namespace DisplayButtons.Forms
 
                     if (item == null) break;
 
-                    bool isFolder = item is IDeckFolder;
-                    var image = item.GetDeckDefaultLayer.GetItemImage() ?? item.GetDeckDefaultLayer.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
-                    var seri = image.BitmapSerialized;
+              //    bool isFolder = item is IDeckFolder;
+              //     var image = item.GetDeckDefaultLayer.GetItemImage() ?? item.GetDeckDefaultLayer.GetDefaultImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
+                //    var seri = image.BitmapSerialized;
 
-                    item.GetDeckDefaultLayer.SetDefault = image;
+                  //  item.GetDeckDefaultLayer.DeckImage = image;
 
                     packet.AddToQueue(folder.GetItemIndex(item), item.GetDeckDefaultLayer);
 
@@ -2313,7 +2315,7 @@ ActionImagePlaceHolder.Image = bmp;
                         }
                         //Navigate to the folder
                         CurrentDevice.CurrentProfile.Currentfolder = folder;
-                        RefreshAllButtons();
+                        RefreshAllButtons(true);
                         goto end;
                     }
                     if (CurrentDevice.CurrentProfile.Currentfolder.GetParent() != null)
@@ -2322,7 +2324,7 @@ ActionImagePlaceHolder.Image = bmp;
                         if (item is DynamicBackItem)
                         {
                             CurrentDevice.CurrentProfile.Currentfolder = CurrentDevice.CurrentProfile.Currentfolder.GetParent();
-                            RefreshAllButtons();
+                            RefreshAllButtons(true);
                             lastClick.Reset();
                             return;
                         }

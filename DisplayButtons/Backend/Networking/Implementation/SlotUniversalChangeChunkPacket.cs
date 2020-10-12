@@ -59,15 +59,15 @@ namespace DisplayButtons.Backend.Networking.Implementation
         {
 
             //Write the slot
-            if (item.SetDefault != null)
+            if (item.GetItemImage() != null)
             {
                 Json headerContent = new Json();
 
      
                 writer.WriteInt(slot);
                 //Byte array lenght
-                writer.WriteInt(item.SetDefault.InternalBitmap.Length);
-                writer.Write(item.SetDefault.InternalBitmap);
+                writer.WriteInt(item.GetItemImage().InternalBitmap.Length);
+                writer.Write(item.GetItemImage().InternalBitmap);
 
                 headerContent.Font = " ";
                 headerContent.Size = item.Decksize;
