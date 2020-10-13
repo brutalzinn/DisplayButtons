@@ -1,13 +1,10 @@
-﻿using DisplayButtons.Backend.Objects.Implementation.DeckActions;
-using DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS;
-using System;
+﻿using System;
 using System.Linq;
-using System.Xml.Serialization;
 
 namespace DisplayButtons.Backend.Objects
 {
 
-    
+
 
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public class ActionPropertyPluginsScriptEntryPoint : Attribute
@@ -31,7 +28,7 @@ namespace DisplayButtons.Backend.Objects
         {
             get
             {
-                return Texts.rm.GetString(description, Texts.cultereinfo);
+                return description; //Texts.rm.GetString(description, Texts.cultereinfo);
             }
         }
 

@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bibliotecas", "Bibliotecas"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{35608EB5-9F68-49E9-8FFA-862FF5B1E5FB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendLibrary", "BackendLibrary\BackendLibrary.csproj", "{08AE825B-6066-453F-A4F8-282F9955BFC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,18 @@ Global
 		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Release|x64.Build.0 = Release|Any CPU
 		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Release|x86.ActiveCfg = Release|Any CPU
 		{2C6A78BD-71D7-40B0-9EC7-AC698143CF54}.Release|x86.Build.0 = Release|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Debug|x64.Build.0 = Debug|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Debug|x86.Build.0 = Debug|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Release|x64.ActiveCfg = Release|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Release|x64.Build.0 = Release|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Release|x86.ActiveCfg = Release|Any CPU
+		{08AE825B-6066-453F-A4F8-282F9955BFC5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

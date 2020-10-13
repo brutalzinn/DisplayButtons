@@ -691,7 +691,7 @@ namespace DisplayButtons.Forms
                                         {
                                             DeckAction = action.DeckAction.CloneAction()
                                         };
-                                        var id2 = deckFolder.Add(deckItemToAdd);
+                                        var id2 = deckFolder.Add(deckItemToAdd,CurrentDevice.CurrentProfile);
 
                                         deckItemToAdd.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
@@ -722,7 +722,7 @@ namespace DisplayButtons.Forms
                                     CurrentDevice.CheckCurrentFolder();
                                     folder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     folder.Add(1, folderUpItem);
-                                    folder.Add(item);
+                                    folder.Add(item, CurrentDevice.CurrentProfile);
 
                                     var newItem = new DynamicDeckItem();
 
@@ -730,7 +730,7 @@ namespace DisplayButtons.Forms
                                     newItem.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
 
-                                    var id = folder.Add(newItem);
+                                    var id = folder.Add(newItem, CurrentDevice.CurrentProfile);
 
                                     FocusItem(GetButtonControl(id), newItem);
 
@@ -819,7 +819,7 @@ namespace DisplayButtons.Forms
                                     deckFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     deckFolder.Add(1, folderUpItem);
                                     
-                                    deckFolder.Add(action1.DeckItem);
+                                    deckFolder.Add(action1.DeckItem, CurrentDevice.CurrentProfile);
                                     CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, deckFolder);
 
                                    // CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
@@ -832,8 +832,8 @@ namespace DisplayButtons.Forms
                                     newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     newFolder.Add(1, folderUpItem);
 
-                                    newFolder.Add(oldItem);
-                                    newFolder.Add(action1.DeckItem);
+                                    newFolder.Add(oldItem, CurrentDevice.CurrentProfile);
+                                    newFolder.Add(action1.DeckItem, CurrentDevice.CurrentProfile);
                                     CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
                                     CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                  

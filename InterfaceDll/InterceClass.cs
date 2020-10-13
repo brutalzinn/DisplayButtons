@@ -19,8 +19,12 @@ namespace InterfaceDll
    
 
     }
+    public interface InterfaceDllButton
+    {
 
-    public interface IMyService
+    }
+
+        public interface IMyService
     {
       
       

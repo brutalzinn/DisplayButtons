@@ -231,10 +231,6 @@ namespace DisplayButtons.Backend.Networking.IO
         }
 
 
-        public unsafe static int FloatToUInt32Bits(float f)
-        {
-            return *(int*)&f;
-        }
 
         /**
         * Converts the float argument to an <code>int</code> using the

@@ -65,12 +65,12 @@ namespace DisplayButtons.Backend.Objects.Implementation
             ParentFolder = folder;
         }
 
-        public override int Add(IDeckItem item)
+        public override int Add(IDeckItem item,Profile profile)
         {
            
           
             int addToSlot = -1;
-            for (int i = MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Calc - 1; i >= 0; i--)
+            for (int i = profile.Matriz.Calc - 1; i >= 0; i--)
             {
                 if (items.ContainsKey(i))
                 {

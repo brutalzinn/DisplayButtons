@@ -1,4 +1,5 @@
 ﻿using OBSWebsocketDotNet;
+using OBSWebsocketDotNet.Types;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -229,7 +230,7 @@ namespace DisplayButtons.Backend.Utils
             th.Start();
         }
 
-        private static OBSSceneWrapper ConstructSceneFromWebSocket(OBSWebsocketDotNet.OBSScene scene)
+        private static OBSSceneWrapper ConstructSceneFromWebSocket(OBSScene scene)
         {
             var finalScene = new OBSSceneWrapper
             {
@@ -240,7 +241,7 @@ namespace DisplayButtons.Backend.Utils
             return finalScene;
         }
 
-        private static OBSSceneItemWrapper ConstructSceneItemFromWebSocket(OBSWebsocketDotNet.SceneItem item)
+        private static OBSSceneItemWrapper ConstructSceneItemFromWebSocket(SceneItem item)
         {
             return new OBSSceneItemWrapper { ItemName = item.SourceName };
         }

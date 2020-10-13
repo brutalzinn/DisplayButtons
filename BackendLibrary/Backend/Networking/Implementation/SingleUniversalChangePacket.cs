@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DisplayButtons.Backend.Networking.Attributes;
+﻿using DisplayButtons.Backend.Networking.Attributes;
 using DisplayButtons.Backend.Networking.IO;
 using DisplayButtons.Backend.Objects;
-using DisplayButtons.Bibliotecas;
-using Newtonsoft.Json;
 
 namespace DisplayButtons.Backend.Networking.Implementation
 {
