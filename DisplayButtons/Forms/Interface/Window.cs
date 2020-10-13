@@ -239,7 +239,7 @@ namespace ScribeBot.Interface
             {
                 PackageFolderSelectDialog.ShowDialog();
 
-                Thread.CurrentThread.Abort();
+                Thread.CurrentThread.Interrupt();
             });
 
             fileDialogThread.TrySetApartmentState(ApartmentState.STA);

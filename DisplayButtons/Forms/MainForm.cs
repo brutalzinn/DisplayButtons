@@ -706,6 +706,10 @@ namespace DisplayButtons.Forms
                                             PG.SetConfigs(action.dllpath);
 
                                         }
+                                        if (mb.Tag is DynamicDeckItem DLLLDYNAMIC && DLLLDYNAMIC.DeckAction is DllWrapper)
+                                        {
+                                            LoadDll(DLLLDYNAMIC, action.plugin);
+                                        }
                                         if (mb.Tag is DynamicDeckItem DDTTWO && DDTTWO.DeckAction.setLayer() == true)
                                         {
                                             DDTTWO.DeckAction.setLayer(mb.CurrentSlot, DDTTWO);
@@ -743,12 +747,17 @@ namespace DisplayButtons.Forms
                                     {
                                         mycustomitem.DeckAction.setLayer(mb.CurrentSlot, mycustomitem);
                                     }
+
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is PluginLuaGenerator YY)
                                     {
                                         LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName, action.dllpath);
 
                                         YY.SetConfigs(action.dllpath);
 
+                                    }
+                                    if (mb.Tag is DynamicDeckItem DDIDLL && DDIDLL.DeckAction is DllWrapper)
+                                    {
+                                        LoadDll(DDIDLL, action.plugin);
                                     }
                                     RefreshAllButtons();
                                 }
@@ -766,9 +775,13 @@ namespace DisplayButtons.Forms
                                         LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName,action.dllpath);
                                    
                                             YY.SetConfigs(action.dllpath);
-                                        
+
                                     }
-                                   
+                                    if (mb.Tag is DynamicDeckItem DDIDLL && DDIDLL.DeckAction is DllWrapper)
+                                    {
+                                        LoadDll(DDIDLL, action.plugin);
+                                    }
+
                                     if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction != null && mycustomitem.DeckAction.setLayer() == true)
                                     {
                                         mycustomitem.DeckAction.setLayer(mb.CurrentSlot, mycustomitem);
@@ -3010,8 +3023,16 @@ ActionImagePlaceHolder.Image = bmp;
 
 
         }
-      
-        private void LoadPropertiesPlugins(DynamicDeckItem item, string script, string entrypoint = "", string name = "",string dllpath = "")
+        private void LoadDll(DynamicDeckItem item, PluginLoader plugin)
+        {
+            Type type = item.DeckAction.GetType();
+            if (plugin != null)
+            {
+                PropertyInfo propb = type.GetProperty("myPlugin");
+                propb.SetValue(item.DeckAction, plugin, null);
+            }
+        }
+            private void LoadPropertiesPlugins(DynamicDeckItem item, string script, string entrypoint = "", string name = "",string dllpath = "")
         {
 
             Type type = item.DeckAction.GetType();
@@ -3049,11 +3070,6 @@ ActionImagePlaceHolder.Image = bmp;
         }
         public void button_creator(string name, string entry_point, string script,string dllpath)
         {
-            //PluginLuaGenerator testando = new PluginLuaGenerator();
-
-            // testando.script = script;
-
-
             List<Control> toAdd = new List<Control>();
         
             Padding categoryPadding = new Padding(5, 0, 0, 0);
@@ -3068,24 +3084,13 @@ ActionImagePlaceHolder.Image = bmp;
 
                 var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
-
-
-
-               
-
                 foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory)))
                 {
                     var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i.IsPlugin() == true && i is PluginLuaGenerator);
                     if (enumItems.Any())
                     {
-
-
-
                         foreach (var i2 in enumItems)
                         {
-
-
-
                             Label item = new Label()
                             {
 
@@ -3139,10 +3144,92 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                     return true;
                 });
+        }
+        public void button_dll(PluginLoader plugin)
+        {
+            List<Control> toAdd = new List<Control>();
 
-       
+            Padding categoryPadding = new Padding(5, 0, 0, 0);
+            Font categoryFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 13, FontStyle.Bold);
+            Padding itemPadding = new Padding(25, 0, 0, 0);
+            Font itemFont = new Font(MainForm.instance.ShadedPanel1.Font.FontFamily, 12);
+            // DisplayButtons.Forms.MainForm.testando(value);
+            MainForm.instance.ShadedPanel1.Invoke((MethodInvoker)delegate
+            {
 
 
+
+            var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
+
+                foreach (var pluginType in plugin
+                                    .LoadDefaultAssembly()
+                                    .GetTypes()
+                                    .Where(t => typeof(InterfaceDll.ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
+                {
+                    // This assumes the implementation of IPlugin has a parameterless constructor
+                    InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
+
+
+                    foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory)))
+                    {
+                        var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i.IsPlugin() == true && i is DllWrapper);
+                        if (enumItems.Any())
+                        {
+                            foreach (var i2 in enumItems)
+                            {
+                                Label item = new Label()
+                                {
+
+                                    Padding = itemPadding,
+                                    TextAlign = ContentAlignment.MiddleLeft,
+                                    Font = itemFont,
+                                    Dock = DockStyle.Top,
+                                    Text = meuplugin.GetActionName(),
+                                    Height = TextRenderer.MeasureText(meuplugin.GetActionName(), itemFont).Height,
+                                    Tag = i2,
+
+                                };
+                                //    Debug.WriteLine("TAG VINDO: " + i2);
+                                item.MouseDown += (s, ee) =>
+                                {
+
+                                    if (item.Tag is AbstractDeckAction act)
+                                    {
+                                        var _deckaction = new DeckActionHelper(act);
+                                        _deckaction.plugin = plugin;
+                                        _deckaction.ToName = meuplugin.GetActionName();
+                                        item.DoDragDrop(_deckaction, DragDropEffects.Copy);
+                                    //      i2.SetConfigs();
+                                    //  LoadPropertiesPlugins(i2, script);
+
+                                }
+
+
+                                };
+
+
+                                toAdd.Add(item);
+
+                            }
+
+                        }
+                    }
+                }
+
+
+
+            });
+        
+
+
+
+
+            toAdd.AsEnumerable().Reverse().All(m =>
+            {
+                ShadedPanel1.Controls.Add(m);
+
+                return true;
+            });
         }
 
         public void RefreshButtonPlugin(int slot, string script, bool sendToDevice = true)
@@ -3268,6 +3355,17 @@ toAdd.AsEnumerable().Reverse().All(m =>
             }
 
         }
+        private void CreateOnlyDllInstance(string path)
+        {
+            if (File.Exists(path))
+            {
+                var loader = PluginLoader.CreateFromAssemblyFile(
+                       path,
+
+                       config => config.PreferSharedTypes = true);
+                button_dll(loader);
+            }
+        }
         public void createPluginButton()
         {
 
@@ -3284,15 +3382,19 @@ toAdd.AsEnumerable().Reverse().All(m =>
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
-              
-              button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]), x.ReturnPathEntry(packageInfo["Custom_content"]));
+                if (!packageInfo["EntryPoint"].IsNullOrEmpty()) { 
+                button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]), x.ReturnPathEntry(packageInfo["Custom_content"]));
 
-               PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
-            dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_content"]));
-                //    MainForm.Instance.RefreshAllPluginsDependencies(x.ReadFileContents(x.GetInfo()["EntryPoint"]));
-                //  MainForm.Instance.RefreshAllPluginsDependencies(x.ArchivePath + "\\" + x.GetInfo()["EntryPoint"]);
-              
+                PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
+                dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
+                }
+                else
+                {
+                    CreateOnlyDllInstance(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
+
+                }
             });
+
           
             foreach (var loader in Globals.loaders)
             {
