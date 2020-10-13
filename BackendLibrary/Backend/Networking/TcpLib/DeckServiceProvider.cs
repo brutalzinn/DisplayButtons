@@ -1,4 +1,5 @@
 ﻿using BackendLibrary;
+using BackendLibrary.ObjectsHelpers.Events;
 using DisplayButtons.Backend.Networking.Implementation;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Utils;
@@ -58,7 +59,8 @@ namespace DisplayButtons.Backend.Networking.TcpLib
         {
             if(Config.mode == 1)
             {
-UsbMode.RetryConnect();
+                DeviceStatusInform teste = new DeviceStatusInform();
+                teste.RaiseEvent(0);
             }
             
 

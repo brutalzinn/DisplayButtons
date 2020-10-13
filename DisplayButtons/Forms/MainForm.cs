@@ -59,7 +59,7 @@ using System.Management;
 using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
 using Swan;
 using System.Windows.Media.Animation;
-using WebSocketSharp;
+
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -488,7 +488,7 @@ namespace DisplayButtons.Forms
 
             System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
 
-            if (!resultMainFolder.IsNullOrEmpty())            {
+            if (!String.IsNullOrEmpty(resultMainFolder) )           {
                 try
                 {
                     System.Windows.Forms.KeysConverter kc = new System.Windows.Forms.KeysConverter();
@@ -516,7 +516,7 @@ namespace DisplayButtons.Forms
 
             System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
 
-            if (!resultBackFolder.IsNullOrEmpty())
+            if (!String.IsNullOrEmpty(resultBackFolder))
             {
                 try
                 {

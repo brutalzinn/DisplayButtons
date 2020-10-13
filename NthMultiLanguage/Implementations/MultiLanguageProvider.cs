@@ -55,10 +55,16 @@ namespace NthDeveloper.MultiLanguage
         {
             return m_CurrentPackage.GetString(key);
         }
+     
 
         public string GetString(string groupName, string key)
         {
             return m_CurrentPackage.GetString(groupName, key);
+        }
+
+        public string GetKey(string value)
+        {
+            throw new NotImplementedException();
         }
     }
 }

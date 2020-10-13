@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using BackendLibrary.Properties;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace DisplayButtons.Backend.Objects

@@ -245,10 +245,7 @@ namespace DisplayButtons.Backend.Networking.IO
         * @see        java.io.FilterOutputStream#out
         * @see        java.lang.Float#floatToIntBits(float)
         */
-        public void WriteFloat(float v)
-        {
-            WriteInt(FloatToUInt32Bits(v));
-        }
+     
 
         /**
         * Converts the double argument to a <code>long</code> using the

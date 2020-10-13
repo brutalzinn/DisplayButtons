@@ -11,8 +11,10 @@ namespace BackendLibrary
     {
         public static int mode = 0;
         public static IMultiLanguageProvider m_LanguageProvider;
+        
         public static void SetLang(string lang)
         {
+            
             string directory = Path.GetFullPath($@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\langs");
 
             if (!Directory.Exists(directory))

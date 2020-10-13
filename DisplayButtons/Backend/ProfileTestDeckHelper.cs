@@ -1,6 +1,7 @@
 ﻿using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Backend.Utils;
+using DisplayButtons.Forms;
 using System;
 using System.Windows.Forms;
 
