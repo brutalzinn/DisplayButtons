@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
-using WebSocketSharp;
+
 
 namespace DisplayButtons.Bibliotecas
 {
@@ -23,7 +23,7 @@ namespace DisplayButtons.Bibliotecas
         {
 
       DeckHelpers.ListFolders(MainForm.Instance.CurrentDevice.CurrentProfile.Mainfolder as DynamicDeckFolder).ForEach(e => {
-          if (!e.UniqueID.IsNullOrEmpty())
+          if (! String.IsNullOrEmpty(e.UniqueID))
           {
               refreshFolder(e);
           }
@@ -63,9 +63,9 @@ HotkeyManager.Current.Remove(folder.UniqueID) ;
             result = result.Replace("Control", "Ctrl");
 
             System.Windows.Forms.Keys retval = System.Windows.Forms.Keys.None;
-            if (!folder.UniqueID.IsNullOrEmpty())
+            if (!String.IsNullOrEmpty(folder.UniqueID))
           
-            if (!result.IsNullOrEmpty())
+            if (!String.IsNullOrEmpty(result))
             {
                 try
                 {

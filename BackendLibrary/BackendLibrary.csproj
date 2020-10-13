@@ -21,4 +21,8 @@
     <Folder Include="Backend\Objects\Implementation\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NthMultiLanguage\NthMultiLanguage.csproj" />
+  </ItemGroup>
+
 </Project>

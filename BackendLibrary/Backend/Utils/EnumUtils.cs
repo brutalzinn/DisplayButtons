@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackendLibrary;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +38,7 @@ namespace DisplayButtons.Backend.Utils
                 object[] attrs = fi.GetCustomAttributes
                         (typeof(DescriptionAttribute), true);
                 if (attrs != null && attrs.Length > 0)
-                    return Texts.rm.GetString(((DescriptionAttribute)attrs[0]).Description, Texts.cultereinfo);;
+                    return Config.m_LanguageProvider.GetString(((DescriptionAttribute)attrs[0]).Description);
 
             }
 
@@ -123,12 +124,8 @@ namespace DisplayButtons.Backend.Utils
            
 
 
-            var entry =
-                Texts.rm.GetResourceSet(System.Threading.Thread.CurrentThread.CurrentCulture, true, true)
-                  .OfType<DictionaryEntry>()
-                  .FirstOrDefault(e => e.Value.ToString() == value);
-
-            var key = entry.Key.ToString();
+           
+            var key = Config.m_LanguageProvider.GetString(value);
             return key;
 
         }

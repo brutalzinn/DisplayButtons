@@ -16,6 +16,7 @@ namespace NthDeveloper.MultiLanguage
 
         void SetCurrentLanguage(string languageCode);
 
+        string GetKey(string value);
         string GetString(string key);
         string GetString(string groupName, string key);
     }

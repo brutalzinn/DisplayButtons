@@ -8,6 +8,7 @@ using System.ServiceModel;
 using DisplayButtons.Backend.Networking.Implementation;
 using System.Diagnostics;
 using DisplayButtons.Backend.Objects;
+using BackendLibrary;
 
 namespace DisplayButtons.Backend.Networking.TcpLib
 {
@@ -465,7 +466,7 @@ namespace DisplayButtons.Backend.Networking.TcpLib
             //Starts the ReceiveData callback loop
             if (st._conn.Connected)
                 Debug.WriteLine("Starts the ReceiveData callback loop");
-            if (Program.mode == 1)
+            if (Config.mode == 1)
             {
                 UsbMode.ConnectedSucessfull();
             }

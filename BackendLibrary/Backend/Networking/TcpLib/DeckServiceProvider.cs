@@ -1,4 +1,5 @@
-﻿using DisplayButtons.Backend.Networking.Implementation;
+﻿using BackendLibrary;
+using DisplayButtons.Backend.Networking.Implementation;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Utils;
 using System;
@@ -55,7 +56,7 @@ namespace DisplayButtons.Backend.Networking.TcpLib
      
         public override void OnRetryConnect(ConnectionState state)
         {
-            if(Program.mode == 1)
+            if(Config.mode == 1)
             {
 UsbMode.RetryConnect();
             }

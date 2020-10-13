@@ -12,7 +12,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
     public class DynamicDeckFolder : IDeckFolder
     {
 
- 
+
         public DeckItemMisc DeckImage { get; set; }
         SerializableDictionary<int, IDeckItem> items = new SerializableDictionary<int, IDeckItem>();
 
@@ -27,7 +27,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
                 items = value;
             }
         }
-   
+
         public override List<IDeckItem> GetDeckItems() => items.Values.ToList();
         public override List<IDeckFolder> GetSubFolders() => items.Values.OfType<IDeckFolder>().ToList();
 
@@ -49,8 +49,8 @@ namespace DisplayButtons.Backend.Objects.Implementation
         public IDeckFolder ParentFolder { get; set; }
         public override IDeckFolder GetParent()
         {
-         
-  
+
+
             return ParentFolder;
         }
 
@@ -59,10 +59,10 @@ namespace DisplayButtons.Backend.Objects.Implementation
             ParentFolder = folder;
         }
 
-        public override int Add(IDeckItem item,Profile profile)
+        public override int Add(IDeckItem item, Profile profile)
         {
-           
-          
+
+
             int addToSlot = -1;
             for (int i = profile.Matriz.Calc - 1; i >= 0; i--)
             {
@@ -82,7 +82,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
         public override void Remove(int slot)
         {
             items.Remove(slot);
-            
+
         }
 
         public override DeckImage GetDeckImage()
@@ -148,52 +148,33 @@ namespace DisplayButtons.Backend.Objects.Implementation
 
         }
         [Serializable]
-      
 
-            public class KeyInfoGlobal
+
+        public class KeyInfoGlobal
         {
-                public KeyInfoGlobal()
-                {
-                }
-                public KeyInfoGlobal(Keys[] modifierKeys, Keys[] keys)
-                {
-                    ModifierKeys = modifierKeys;
-                    Keys = keys;
-                }
-
-                public Keys[] ModifierKeys { get; set; } = new Keys[] { };
-                public Keys[] Keys { get; set; } = new Keys[] { };
-            }
-
-     
-        public string UniqueID { get; set; }
-        [ActionPropertyInclude]
-      
-    
-            public KeyInfoGlobal KeyGlobalValue { get; set; } = new KeyInfoGlobal();
-            public void KeyGlobalValueHelper()
+            public KeyInfoGlobal()
             {
-           
-                var keyInfo = new KeyInfoGlobal(KeyGlobalValue.ModifierKeys, KeyGlobalValue.Keys);
-                dynamic form = Activator.CreateInstance(AbstractDeckAction.FindType("DisplayButtons.Forms.ActionHelperForms.FolderGlobalHotKey")) as Form;
-          
-                var execAction = new DynamicDeckFolder() as DynamicDeckFolder;
-                execAction.KeyGlobalValue = KeyGlobalValue;
-                form.ModifiableAction = execAction;
+            }
+            public KeyInfoGlobal(Keys[] modifierKeys, Keys[] keys)
+            {
+                ModifierKeys = modifierKeys;
+                Keys = keys;
+            }
 
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                KeyGlobalValue = form.ModifiableAction.KeyGlobalValue;
-                GlobalHotKeys.refreshFolder(this);
-            }
-                else
-                {
-                KeyGlobalValue = keyInfo;
-                }
-            }
+            public Keys[] ModifierKeys { get; set; } = new Keys[] { };
+            public Keys[] Keys { get; set; } = new Keys[] { };
         }
 
-    
-  
-    
+
+        public string UniqueID { get; set; }
+        [ActionPropertyInclude]
+
+
+        public KeyInfoGlobal KeyGlobalValue { get; set; } = new KeyInfoGlobal();
+
+
+
+
+
     }
+}
