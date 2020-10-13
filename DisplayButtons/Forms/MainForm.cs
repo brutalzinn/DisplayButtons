@@ -708,7 +708,7 @@ namespace DisplayButtons.Forms
                                         }
                                         if (mb.Tag is DynamicDeckItem DLLLDYNAMIC && DLLLDYNAMIC.DeckAction is DllWrapper)
                                         {
-                                            LoadDll(DLLLDYNAMIC, action.plugin);
+                                            LoadDll(DLLLDYNAMIC, action.plugin,action.ToName);
                                         }
                                         if (mb.Tag is DynamicDeckItem DDTTWO && DDTTWO.DeckAction.setLayer() == true)
                                         {
@@ -757,7 +757,7 @@ namespace DisplayButtons.Forms
                                     }
                                     if (mb.Tag is DynamicDeckItem DDIDLL && DDIDLL.DeckAction is DllWrapper)
                                     {
-                                        LoadDll(DDIDLL, action.plugin);
+                                        LoadDll(DDIDLL, action.plugin,action.ToName);
                                     }
                                     RefreshAllButtons();
                                 }
@@ -779,7 +779,7 @@ namespace DisplayButtons.Forms
                                     }
                                     if (mb.Tag is DynamicDeckItem DDIDLL && DDIDLL.DeckAction is DllWrapper)
                                     {
-                                        LoadDll(DDIDLL, action.plugin);
+                                        LoadDll(DDIDLL, action.plugin,action.ToName);
                                     }
 
                                     if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction != null && mycustomitem.DeckAction.setLayer() == true)
@@ -872,9 +872,9 @@ namespace DisplayButtons.Forms
                                 { 
                                     mycustomitem.DeckAction.setLayer(mb.CurrentSlot,mycustomitem);
                                    // FocusItem(mb, mycustomitems
-                                } 
-                         
+                                }
 
+                            
                             }
 
                         }
@@ -1263,12 +1263,16 @@ namespace DisplayButtons.Forms
 
                 //     var ser = item.GetItemImage().BitmapSerialized;
 
-                if (item is DynamicDeckItem FF && FF.DeckAction is PluginLuaGenerator TT)
+                if (item is DynamicDeckItem FF && FF.DeckAction is PluginLuaGenerator)
                 {
                     LoadPropertiesPlugins(FF, GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
                 }
-               
-                
+                if (item is DynamicDeckItem GG && GG.DeckAction is DllWrapper)
+                {
+                    LoadDll(GG, GetPluginDll(GetPropertiesPlugins(GG, "name")));
+                }
+
+
 
                 //control.TextLabel(item?.DeckName, this.Font, Brushes.Black, new PointF(25, 3));
 
@@ -3023,13 +3027,18 @@ ActionImagePlaceHolder.Image = bmp;
 
 
         }
-        private void LoadDll(DynamicDeckItem item, PluginLoader plugin)
+        private void LoadDll(DynamicDeckItem item, PluginLoader plugin, string name= "")
         {
             Type type = item.DeckAction.GetType();
             if (plugin != null)
             {
                 PropertyInfo propb = type.GetProperty("myPlugin");
                 propb.SetValue(item.DeckAction, plugin, null);
+            }
+            if (name != null)
+            {
+                PropertyInfo propb = type.GetProperty("name");
+                propb.SetValue(item.DeckAction, name, null);
             }
         }
             private void LoadPropertiesPlugins(DynamicDeckItem item, string script, string entrypoint = "", string name = "",string dllpath = "")
@@ -3297,14 +3306,45 @@ toAdd.AsEnumerable().Reverse().All(m =>
             // 
         }
         public Dictionary<string, string> PluginsLists = new Dictionary<string, string>();
+        public Dictionary<string, PluginLoader> PluginsOnlyDll = new Dictionary<string, PluginLoader>();
+        public void PluginLoaderDll(string name, PluginLoader plugin)
+        {
+            if (MainForm.Instance.PluginsOnlyDll.ContainsKey(name))
+            {
+                MainForm.Instance.PluginsOnlyDll[name] = plugin;
+            }
+            else
+            {
+                MainForm.Instance.PluginsOnlyDll.Add(name, plugin);
+            }
+        }
+        public static PluginLoader GetPluginDll(string key)
+        {
+            PluginLoader result = null;
+            try
+            {
+                if (MainForm.Instance.PluginsOnlyDll.ContainsKey(key))
+                {
+                    result = MainForm.Instance.PluginsOnlyDll[key];
+                }
+                else
+                {
+
+                    result = null;
+                }
+            }
+            catch (Exception)
+            {
+
+                Debug.WriteLine("NULL");
+            }
+            return result;
+        }
         public static string GetPluginScript(string key)
         {
             string result = null;
             try
             {
-
-
-
                 if (MainForm.Instance.PluginsLists.ContainsKey(key))
                 {
                     result = MainForm.Instance.PluginsLists[key];
@@ -3318,7 +3358,6 @@ toAdd.AsEnumerable().Reverse().All(m =>
             catch (Exception)
             {
 
-                //    result = "";
                 Debug.WriteLine("NULL");
             }
             return result;
@@ -3363,7 +3402,18 @@ toAdd.AsEnumerable().Reverse().All(m =>
                        path,
 
                        config => config.PreferSharedTypes = true);
-                button_dll(loader);
+                
+                foreach (var pluginType in loader
+                         .LoadDefaultAssembly()
+                         .GetTypes()
+                         .Where(t => typeof(InterfaceDll.ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
+                {
+                    InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
+                
+                    PluginLoaderDll(meuplugin.GetActionName(), loader);
+button_dll(loader);
+
+                }
             }
         }
         public void createPluginButton()

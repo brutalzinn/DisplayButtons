@@ -12,7 +12,7 @@ namespace OnlyDllPlugin
 
         public void MenuHelper()
         {
-            throw new NotImplementedException();
+            new MyForm().Show();
         }
 
         public void OnButtonDown()

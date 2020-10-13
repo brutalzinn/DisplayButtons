@@ -12,7 +12,25 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.Deck
     {
         [XmlIgnore]
         public PluginLoader myPlugin { get; set; }
+      [ActionPropertyIncludeAttribute]
+        public string config { get; set; } = "";
+        [ActionPropertyIncludeAttribute]
+
         public string name { get; set; } = "";
+      
+        public void configHelper()
+        {
+            foreach (var pluginType in myPlugin
+                           .LoadDefaultAssembly()
+                           .GetTypes()
+                           .Where(t => typeof(InterfaceDll.ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
+            {
+                InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
+
+                meuplugin.MenuHelper();
+
+            }
+        }
         public override AbstractDeckAction CloneAction()
         {
             return new DllWrapper();
