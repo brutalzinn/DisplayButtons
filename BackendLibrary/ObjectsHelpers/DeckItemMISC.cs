@@ -1,13 +1,9 @@
-﻿using DisplayButtons.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace DisplayButtons.Backend.Objects
 {
-   public class DeckItemMisc
+    public class DeckItemMisc
     {
 
         private string _deckname = "";

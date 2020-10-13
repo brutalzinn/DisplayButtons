@@ -2,13 +2,10 @@
 using DisplayButtons.Backend.Networking.Implementation;
 using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Backend.Utils;
-using DisplayButtons.Forms;
-using DisplayButtons.Misc;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace DisplayButtons.Backend.Objects

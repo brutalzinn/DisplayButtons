@@ -174,11 +174,11 @@ namespace DisplayButtons.Backend.Utils
                 var obsGlobalFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "obs-studio", "global.ini");
                 if (File.Exists(obsGlobalFilePath) && !File.ReadAllText(obsGlobalFilePath).Contains("[WebsocketAPI]")) {
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine(Texts.rm.GetString("OBSAINTEGRATIONOBSFOUND", Texts.cultereinfo));
+                    sb.AppendLine("OBSAINTEGRATIONOBSFOUND");
                     sb.AppendLine("");
-                    sb.AppendLine(Texts.rm.GetString("OBSINTEGRATIONFOUNDTWO", Texts.cultereinfo));
-                    sb.AppendLine(Texts.rm.GetString("OBSINTEGRATIONFOUNDTHREE", Texts.cultereinfo));
-                    if (MessageBox.Show(sb.ToString(), Texts.rm.GetString("OBSINTEGRATIONFOUNDTMESSAGEBOX", Texts.cultereinfo), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                    sb.AppendLine("OBSINTEGRATIONFOUNDTWO");
+                    sb.AppendLine("OBSINTEGRATIONFOUNDTHREE");
+                    if (MessageBox.Show(sb.ToString(), "OBSINTEGRATIONFOUNDTMESSAGEBOX", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                         //Now we download the websocket plugin from the web
                         using (WebClient client = new WebClient()) {
                             client.DownloadFile(obsWsWebLocation, obswszip);
