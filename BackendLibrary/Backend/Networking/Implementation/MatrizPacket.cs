@@ -34,8 +34,8 @@ namespace DisplayButtons.Backend.Networking.Implementation
         public override void FromInputStream(DataInputStream reader)
         {
 
-            Globals.status = reader.ReadBoolean();
-            Debug.WriteLine("RECEBIDO. " + Globals.status.ToString());
+           // Globals.status = reader.ReadBoolean();
+           // Debug.WriteLine("RECEBIDO. " + Globals.status.ToString());
         }
 
         public override long GetPacketNumber() => 11;

@@ -1,6 +1,8 @@
 ﻿using DisplayButtons.Backend.Networking.Attributes;
 using DisplayButtons.Backend.Networking.IO;
 using DisplayButtons.Backend.Objects;
+using DisplayButtons.Bibliotecas;
+using Newtonsoft.Json;
 
 namespace DisplayButtons.Backend.Networking.Implementation
 {
@@ -40,23 +42,23 @@ namespace DisplayButtons.Backend.Networking.Implementation
                 //Byte array lenght
                 writer.WriteInt(DeckImage.InternalBitmap.Length);
                 writer.Write(DeckImage.InternalBitmap);
-                Json headerContent = new Json();
-
-               
-                headerContent.Font = " ";
-                headerContent.Size = CurrentItem.Decksize;
-                headerContent.Position = CurrentItem.Deckposition;
-                headerContent.Text = CurrentItem.Deckname;
-                headerContent.Color = CurrentItem.Deckcolor;
-                headerContent.Stroke_color = CurrentItem.Stroke_color;
-                headerContent.Stroke_dx = CurrentItem.Stroke_dxtext;
-                headerContent.Stroke_radius = CurrentItem.Stroke_radius;
-                headerContent.Stroke_dy = CurrentItem.Stroke_Dy;
-                headerContent.IsStroke = CurrentItem.IsStroke;
-                headerContent.Isboldtext = CurrentItem.Isboldtext;
-                headerContent.Isnormaltext = CurrentItem.Isnormaltext;
-                headerContent.Isitalictext = CurrentItem.Isitalictext;
-                headerContent.Ishinttext = CurrentItem.Ishinttext;
+                Json headerContent = new Json
+                {
+                    Font = " ",
+                    Size = CurrentItem.Decksize,
+                    Position = CurrentItem.Deckposition,
+                    Text = CurrentItem.Deckname,
+                    Color = CurrentItem.Deckcolor,
+                    Stroke_color = CurrentItem.Stroke_color,
+                    Stroke_dx = CurrentItem.Stroke_dxtext,
+                    Stroke_radius = CurrentItem.Stroke_radius,
+                    Stroke_dy = CurrentItem.Stroke_Dy,
+                    IsStroke = CurrentItem.IsStroke,
+                    Isboldtext = CurrentItem.Isboldtext,
+                    Isnormaltext = CurrentItem.Isnormaltext,
+                    Isitalictext = CurrentItem.Isitalictext,
+                    Ishinttext = CurrentItem.Ishinttext
+                };
                 string jsonString = JsonConvert.SerializeObject(headerContent, Formatting.None);
 
                 writer.WriteUTF(jsonString);
