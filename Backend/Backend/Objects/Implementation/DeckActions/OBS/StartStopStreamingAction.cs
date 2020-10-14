@@ -1,5 +1,6 @@
-﻿using DisplayButtons.Backend.Utils;
-using DisplayButtons.Properties;
+﻿using Backend.Properties;
+using DisplayButtons.Backend.Utils;
+
 using System.ComponentModel;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS

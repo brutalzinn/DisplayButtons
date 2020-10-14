@@ -1,4 +1,4 @@
-﻿using DisplayButtons.Properties;
+﻿
 using DisplayButtons.Backend.Utils.Native;
 using System;
 using System.ComponentModel;
@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
 using System.ComponentModel.DataAnnotations;
+using Backend.Properties;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
 {

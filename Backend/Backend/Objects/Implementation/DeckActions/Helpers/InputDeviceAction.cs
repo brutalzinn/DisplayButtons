@@ -1,4 +1,4 @@
-﻿using DisplayButtons.Properties;
+﻿
 using DisplayButtons.Backend.Utils.Native;
 using System;
 using System.ComponentModel;

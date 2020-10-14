@@ -1,5 +1,4 @@
 ﻿
-using DisplayButtons.Properties;
 using DisplayButtons.Backend.Utils;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Backend.Properties;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 {
