@@ -1,8 +1,6 @@
 ﻿using DisplayButtons.Backend.Networking.Implementation;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Utils;
-using DisplayButtons.Forms;
-using DisplayButtons.Misc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -62,10 +60,10 @@ namespace DisplayButtons.Backend.Networking.TcpLib
      
         public override void OnRetryConnect(ConnectionState state)
         {
-            if(Program.mode == 1)
-            {
-UsbMode.RetryConnect();
-            }
+//            if(Program.mode == 1)
+//            {
+//UsbMode.RetryConnect();
+//            }
             
 
         }

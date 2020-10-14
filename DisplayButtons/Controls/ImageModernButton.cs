@@ -1,8 +1,4 @@
 ﻿using DisplayButtons.Forms;
-using DisplayButtons.Backend.Networking;
-using DisplayButtons.Backend.Networking.TcpLib;
-using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Utils;
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
@@ -12,9 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DisplayButtons.Backend.Networking.Implementation;
-using DisplayButtons.Backend.Objects.Implementation;
-using DisplayButtons.Bibliotecas.DeckText;
 using System.Diagnostics;
 
 namespace DisplayButtons.Controls

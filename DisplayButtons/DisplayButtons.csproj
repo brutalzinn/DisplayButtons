@@ -44,9 +44,6 @@
     <Optimize>false</Optimize>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Backend\Objects\Implementation\DeckActions\OBS\TestSceneMultiSwitch.cs" />
-  </ItemGroup>
 
   <ItemGroup>
 
@@ -114,7 +111,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Backend\Objects\Implementation\DeckActions\Media\" />
     <Folder Include="Bibliotecas\Injetores\" />
     <Folder Include="Bibliotecas\TwitchChat\" />
     <Folder Include="setup\Data\imgs\" />
@@ -125,6 +121,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Backend\Backend.csproj" />
     <ProjectReference Include="..\InterfaceDll\InterfaceDll.csproj" />
     <ProjectReference Include="..\MoonSharp.Interpreter.netcore\MoonSharp.Interpreter.netcore.csproj" />
     <ProjectReference Include="..\Plugins\McMaster.NETCore.Plugins.csproj" />
@@ -145,9 +142,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Langs\langres.pt.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -3,7 +3,6 @@ using DisplayButtons.Backend.Networking.IO;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Objects.Implementation;
 using DisplayButtons.Bibliotecas;
-using DisplayButtons.Properties;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
