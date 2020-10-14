@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents
 {
-    class FactoryEvents
+  public  class FactoryEvents
     {
 
         public static TimedProcessWatcher processWatcher;

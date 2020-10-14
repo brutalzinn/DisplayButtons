@@ -180,7 +180,7 @@ namespace DisplayButtons.Backend.Objects.Implementation
             {
            
                 var keyInfo = new KeyInfoGlobal(KeyGlobalValue.ModifierKeys, KeyGlobalValue.Keys);
-                dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.ActionHelperForms.FolderGlobalHotKey")) as Form;
+                dynamic form = Activator.CreateInstance(AbstractDeckAction.FindType("DisplayButtons.Forms.ActionHelperForms.FolderGlobalHotKey")) as Form;
           
                 var execAction = new DynamicDeckFolder() as DynamicDeckFolder;
                 execAction.KeyGlobalValue = KeyGlobalValue;

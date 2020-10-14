@@ -60,6 +60,7 @@ using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
 using Swan;
 using System.Windows.Media.Animation;
 using WebSocketSharp;
+using Backend;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -149,6 +150,12 @@ namespace DisplayButtons.Forms
                 }));
 
             });
+            var pr = new PluginRunner();
+            pr.PluginMessage += (s, e) => {
+
+           CurrentDevice.CurrentProfile.Currentfolder = e.folder;
+                RefreshAllButtons(true);
+            };
 
             Globals.events.On("DeckFolderEventCreate", (e) => {
                 // Cast event argrument to your event object
@@ -1531,7 +1538,7 @@ namespace DisplayButtons.Forms
             RegisterMainFolderHotKey();
 
             RegisterBackFolderHotKey();
-            GlobalHotKeys.UpdateAllFoldersHotkeys();
+            GlobalHotKeys.UpdateAllFoldersHotkeys(CurrentDevice);
         }
 
         //List<Tuple<Guid, int>> ignoreOnce = new List<Tuple<Guid, int>>();
