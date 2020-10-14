@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DisplayButtons
 {
-    class Texts
+   public class Texts
     {
 
        

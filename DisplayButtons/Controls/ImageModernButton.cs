@@ -9,6 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using DisplayButtons.Backend.Networking.TcpLib;
+using DisplayButtons.Backend.Utils;
+using DisplayButtons.Backend.Objects;
+using DisplayButtons.Backend.Networking;
+using DisplayButtons.Bibliotecas.DeckText;
+using DisplayButtons.Backend.Networking.Implementation;
+using DisplayButtons.Backend.Objects.Implementation;
 
 namespace DisplayButtons.Controls
 {
