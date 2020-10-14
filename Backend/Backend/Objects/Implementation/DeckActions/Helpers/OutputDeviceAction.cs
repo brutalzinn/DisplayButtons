@@ -10,6 +10,7 @@ using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
 using System.ComponentModel.DataAnnotations;
 using Backend.Bibliotecas.Helpers;
+using Backend.Properties;
 
 namespace Backend.Objects.Implementation.DeckActions.General
 {

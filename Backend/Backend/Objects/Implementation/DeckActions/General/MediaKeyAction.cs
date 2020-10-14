@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Backend.Properties;
 
 namespace Backend.Objects.Implementation.DeckActions.General
 {

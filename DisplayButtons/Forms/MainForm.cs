@@ -46,6 +46,7 @@ using NetSparkleUpdater.SignatureVerifiers;
 using DisplayButtons.Bibliotecas.DeckEvents;
 using DisplayButtons.Forms.EventSystem;
 using static Backend.Objects.AbstractDeckAction;
+using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
 
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -731,7 +732,7 @@ namespace DisplayButtons.Forms
                                     newItem.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
 
-                                    var id = folder.Add(newItem);
+                                    var id = folder.Add(newItem,CurrentDevice.CurrentProfile);
 
                                     FocusItem(GetButtonControl(id), newItem);
 
