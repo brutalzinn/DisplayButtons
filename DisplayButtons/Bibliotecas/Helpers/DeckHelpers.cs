@@ -1,22 +1,19 @@
-﻿using Backend.Networking.Implementation;
+﻿using Backend.DeckText;
+using Backend.Networking;
+using Backend.Networking.Implementation;
 using Backend.Objects;
 using Backend.Objects.Implementation;
-using DisplayButtons.Backend.Networking;
-using DisplayButtons.Backend.Networking.Implementation;
-using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Objects.Implementation;
-using DisplayButtons.Bibliotecas.DeckText;
 using DisplayButtons.Controls;
 using DisplayButtons.Forms;
-using DisplayButtons.Misc;
 using DisplayButtons.Properties;
+using Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Backend.Helpers
+namespace DisplayButtons.Helpers
 {
    public static class DeckHelpers
     {

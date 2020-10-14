@@ -1,4 +1,4 @@
-﻿using Properties;
+﻿
 using Backend.Utils.Native;
 using System;
 using System.ComponentModel;

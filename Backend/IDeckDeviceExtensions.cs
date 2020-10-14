@@ -1,4 +1,5 @@
-﻿using Backend.Networking;
+﻿using Backend;
+using Backend.Networking;
 using Backend.Networking.TcpLib;
 using Backend.Objects;
 using Backend.Utils;
@@ -14,7 +15,7 @@ namespace Misc
     {
         public static Guid GetConnectionGuidFromDeckDevice(DeckDevice device)
         {
-            if(Program.mode == 0)
+            if (Initilizator.mode== 0)
             {
  var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
             return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;

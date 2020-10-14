@@ -1,7 +1,6 @@
 ﻿using Backend.Networking.Implementation;
 using Backend.Objects;
 using Backend.Utils;
-using Forms;
 using Misc;
 using System;
 using System.Collections.Generic;
@@ -62,7 +61,7 @@ namespace Backend.Networking.TcpLib
      
         public override void OnRetryConnect(ConnectionState state)
         {
-            if(Program.mode == 1)
+            if(Initilizator.mode == 1)
             {
 UsbMode.RetryConnect();
             }

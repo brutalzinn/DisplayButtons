@@ -1,5 +1,5 @@
 ﻿
-using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
+
 using Newtonsoft.Json;
 using SpotifyAPI.Web;
 using SpotifyAPI.Web.Auth;
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using static SpotifyAPI.Web.Scopes;
 
 
-namespace DisplayButtons.Bibliotecas.SpotifyWrapper
+namespace Backend.Bibliotecas.SpotifyWrapper
 {
     public class Spotify
     {

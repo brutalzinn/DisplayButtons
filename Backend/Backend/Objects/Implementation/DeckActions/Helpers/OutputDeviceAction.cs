@@ -1,14 +1,15 @@
-﻿using Properties;
+﻿
 using Backend.Utils.Native;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Bibliotecas.Helpers;
+
 using System.Threading.Tasks;
 using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
 using System.ComponentModel.DataAnnotations;
+using Backend.Bibliotecas.Helpers;
 
 namespace Backend.Objects.Implementation.DeckActions.General
 {

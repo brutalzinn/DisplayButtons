@@ -1,8 +1,6 @@
 ﻿//#define FORCE_SILENCE
 
 using DisplayButtons.Forms;
-using DisplayButtons.Misc;
-using DisplayButtons.Backend.Utils;
 using ScribeBot;
 using System;
 using System.Collections.Generic;
@@ -24,6 +22,9 @@ using MoreLinq;
 using System.Reflection;
 using Microsoft.Win32;
 using DisplayButtons.Bibliotecas.Helpers;
+using Backend.Utils;
+using Backend;
+using Misc;
 
 namespace DisplayButtons
 {
@@ -38,8 +39,7 @@ namespace DisplayButtons
         private const string errorFileName = "errors.log";
         private static Mutex mutex = null;
 
-        public static ServerThread ServerThread { get; set; }
-        public static ClientThread ClientThread { get; set; }
+
         public static int mode { get; set; }
         public static bool SuccessfulServerStart { get; set; } = false;
         public static StartServerResult AdbResult { get; set; }
@@ -235,8 +235,8 @@ namespace DisplayButtons
             if (form.ShowDialog() == DialogResult.OK)
             {
                 mode = 0;
-     ServerThread = new ServerThread();
-            ServerThread.Start();
+     Initilizator.ServerThread = new ServerThread();
+                Initilizator.ServerThread.Start();
             
 
                 Debug.WriteLine("MODO SOCKET CLIENT");
@@ -274,16 +274,16 @@ namespace DisplayButtons
                     //   client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", client.GetDevices().First(), null);
 
                        DevicePersistManager.PersistUsbMode(client.GetDevices().First());
-              //      client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
-                
-                    ClientThread = new ClientThread();
-                ClientThread.Start();
+                    //      client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
+
+                    Initilizator.ClientThread = new ClientThread();
+                    Initilizator.ClientThread.Start();
 
                 }
                 else
                 {
 
-                    ClientThread = new ClientThread();
+                    Initilizator.ClientThread = new ClientThread();
                   
 
 
@@ -325,16 +325,16 @@ Application.Run(new MainForm());
         {
             if(mode ==0)
             {
-   ServerThread.Stop();
-            ServerThread = new ServerThread();
-            ServerThread.Start();
+   Initilizator.ServerThread.Stop();
+                Initilizator.ServerThread = new ServerThread();
+                Initilizator.ServerThread.Start();
 
             }
             else
             {
-                ClientThread.Stop();
-                ClientThread = new ClientThread();
-                ClientThread.Start();
+                Initilizator.ClientThread.Stop();
+                Initilizator.ClientThread = new ClientThread();
+                Initilizator.ClientThread.Start();
 
             }
          

@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using SharpAdbClient;
+using DisplayButtons.Forms;
+using Backend;
+using DisplayButtons;
 
 namespace Misc
 {
@@ -35,7 +38,7 @@ namespace Misc
 
             int controlSize = _frm.TitlebarHeight * 2;
             System.Drawing.Size result;
-            if (Program.mode == 0)
+            if (Initilizator.mode == 0)
             {
          result = new Size(Width * 2, Math.Max(controlSize * CurrentConnections, controlSize) + 2);
 
@@ -166,13 +169,13 @@ namespace Misc
                     if (Program.mode == 0)
                     {
 
-                         result = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+                         result = Initilizator.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
 
                     }
                     else
                     {
 
-                        result = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+                        result = Initilizator.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
 
 
                     }
@@ -205,7 +208,7 @@ private void UpdateConnectedDevices()
                 List<Guid> toRemove = new List<Guid>();
                 DevicePersistManager.DeckDevicesFromConnection.All(c =>
                 {
-                    if (!Program.ServerThread.TcpServer.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
+                    if (!Initilizator.ServerThread.TcpServer.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
                     {
                         toRemove.Add(c.Key);
                     }
@@ -221,7 +224,7 @@ private void UpdateConnectedDevices()
                 List<Guid> toRemove = new List<Guid>();
                 DevicePersistManager.DeckDevicesFromConnection.All(c =>
                 {
-                    if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
+                    if (!Initilizator.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == c.Key))
                     {
                         toRemove.Add(c.Key);
                     }
@@ -248,7 +251,7 @@ private void UpdateConnectedDevices()
                 
 
              
-                if (!Program.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
+                if (!Initilizator.ClientThread.TcpClient.Connections.OfType<ConnectionState>().Any(d => d.ConnectionGuid == item.DeviceGuid))
                 {
                     
                     if (item.GetConnection() != null)
@@ -265,13 +268,13 @@ private void UpdateConnectedDevices()
                                 Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
                                 Program.client.RemoveAllForwards(item.DeviceUsb);
                                 Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
-                                //  Program.client.ExecuteRemoteCommand("am force-stop net.nickac.DisplayButtons", item.DeviceUsb, null);
-                                //     Thread.Sleep(1400);
-                                //      Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", item.DeviceUsb, null);
-                                //        Thread.Sleep(1200);
-                                Program.ClientThread.Stop();
-                                Program.ClientThread = new Misc.ClientThread();
-                                Program.ClientThread.Start();
+                            //  Program.client.ExecuteRemoteCommand("am force-stop net.nickac.DisplayButtons", item.DeviceUsb, null);
+                            //     Thread.Sleep(1400);
+                            //      Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", item.DeviceUsb, null);
+                            //        Thread.Sleep(1200);
+                            Initilizator.ClientThread.Stop();
+                            Initilizator.ClientThread = new Misc.ClientThread();
+                            Initilizator.ClientThread.Start();
                                 MainForm.Instance.Invoke(new Action(() =>
                                 {
                                     if(item.GetConnection() != null)

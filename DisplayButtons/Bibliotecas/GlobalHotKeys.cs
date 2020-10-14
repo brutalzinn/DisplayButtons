@@ -1,8 +1,8 @@
 ﻿using Backend.Objects.Implementation;
-using BackendProxy.Helpers;
-using DisplayButtons.Backend.Objects.Implementation;
+
 using DisplayButtons.Bibliotecas.Helpers;
 using DisplayButtons.Forms;
+using DisplayButtons.Helpers;
 using NHotkey;
 using NHotkey.WindowsForms;
 using shortid;

@@ -1,4 +1,4 @@
-﻿using Properties;
+﻿
 using Backend.Utils.Native;
 using System;
 using System.ComponentModel;
@@ -8,9 +8,12 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Linq;
 using SpotifyAPI.Web;
-using Bibliotecas.SpotifyWrapper;
+
 using System.Threading.Tasks;
-using BackendProxy.Backend.Objects;
+
+using Backend.Bibliotecas.SpotifyWrapper;
+
+using Backend.Properties;
 
 namespace Backend.Objects.Implementation.DeckActions.General
 {

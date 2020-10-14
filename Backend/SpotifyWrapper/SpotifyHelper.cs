@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DisplayButtons.Bibliotecas.SpotifyWrapper
+namespace Backend.Bibliotecas.SpotifyWrapper
 {
   
         public class GlobalControlSpotifyPlayList

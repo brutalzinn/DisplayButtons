@@ -1,5 +1,5 @@
-﻿using Backend.Utils;
-using Properties;
+﻿using Backend.Properties;
+using Backend.Utils;
 using System.ComponentModel;
 
 namespace Backend.Objects.Implementation.DeckActions.OBS

@@ -1,5 +1,8 @@
-﻿using Backend.Objects;
-using BackendProxy.Helpers;
+﻿using Backend.Events;
+using Backend.Objects;
+using BackendProxy;
+
+using Sharpy;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,11 +19,13 @@ namespace Backend.Objects
 
                 if (variable)
                 {
-                    DeckHelpers.RefreshButton(item, 2, item.GetDeckLayerTwo, device);
+                    Wrapper.events.Trigger("IDeckInterfaceEvent", new IDeckInterfaceEvent(item,device,2));
+
+                   // DeckHelpers.RefreshButton(item, 2, item.GetDeckLayerTwo, device);
                 }
                 else
                 {
-                    DeckHelpers.RefreshButton(item, 1, item.GetDeckDefaultLayer, device);
+                    Wrapper.events.Trigger("IDeckInterfaceEvent", new IDeckInterfaceEvent(item, device, 1));
                 }
             }
             catch (Exception)

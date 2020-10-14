@@ -1,4 +1,5 @@
 ﻿using Backend.Objects.Implementation;
+using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Backend.Objects
         public abstract void SetParent(IDeckFolder folder);
 
         public abstract void Add(int slot, IDeckItem item);
-        public abstract int Add(IDeckItem item);
+        public abstract int Add(IDeckItem item, Profile profile);
         public abstract void Remove(int slot);
         public abstract int GetItemIndex(IDeckItem item);
 

@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace DisplayButtons
+namespace Backend
 {
     [Serializable]
-    class Globals
+    public class Globals
     {
 
       

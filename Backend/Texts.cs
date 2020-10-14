@@ -1,4 +1,6 @@
-﻿using DisplayButtons.Backend.Utils;
+﻿using Backend.Utils;
+using BackendProxy;
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,9 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DisplayButtons
+namespace Backend
 {
-    class Texts
+   public class Texts
     {
 
         private static Dictionary<string, string> Text = new Dictionary<string, string>
@@ -67,7 +69,7 @@ namespace DisplayButtons
                     break;
             }
 
-            Globals.events.Trigger("languagechanged");
+            Wrapper.events.Trigger("languagechanged");
 
         }
     }

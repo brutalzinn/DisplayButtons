@@ -1,5 +1,5 @@
 ﻿
-using Properties;
+
 using Backend.Utils;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using BackendProxy.Backend.Objects;
+using Backend.Properties;
 
 namespace Backend.Objects.Implementation.DeckActions.OBS
 {

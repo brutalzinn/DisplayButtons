@@ -28,8 +28,24 @@ using Backend.Networking.Implementation;
 using DisplayButtons.Backend.Objects;
 using Backend.Utils;
 using DisplayButtons.Bibliotecas;
-using static BackendProxy.Helpers.DeckHelpers;
 using NickAc.ModernUIDoneRight.Objects;
+using Backend.Events;
+using DisplayButtons.Helpers;
+using static DisplayButtons.Helpers.DeckHelpers;
+using Backend.DeckText;
+using Backend.Objects.Implementation;
+using Backend.Objects.Implementation.DeckActions.General;
+using DisplayButtons.Controls;
+using Backend.Objects.Implementation.DeckActions.Deck;
+using NickAc.ModernUIDoneRight.Controls;
+using Backend.Networking;
+using DisplayButtons.Properties;
+using Backend;
+using BackendProxy;
+using NetSparkleUpdater.SignatureVerifiers;
+using DisplayButtons.Bibliotecas.DeckEvents;
+using DisplayButtons.Forms.EventSystem;
+using static Backend.Objects.AbstractDeckAction;
 
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -119,6 +135,15 @@ namespace DisplayButtons.Forms
                    // reloadALL();
                 }));
 
+            });
+
+            BackendProxy.Wrapper.events.On("IDeckInterfaceEvent", (e) => {
+                // Cast event argrument to your event object
+                var obj = (IDeckInterfaceEvent)e;
+
+                // Get (set) your event object data
+                DeckHelpers.RefreshButton(obj._item, obj._mode, obj._item.GetDeckLayerTwo, obj._device);
+                // Other code
             });
 
             BackendProxy.Wrapper.events.On("DeckFolderEventCreate", (e) => {
@@ -663,7 +688,7 @@ namespace DisplayButtons.Forms
                                         {
                                             DeckAction = action.DeckAction.CloneAction()
                                         };
-                                        var id2 = deckFolder.Add(deckItemToAdd);
+                                        var id2 = deckFolder.Add(deckItemToAdd,CurrentDevice.CurrentProfile);
 
                                         deckItemToAdd.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
@@ -698,7 +723,7 @@ namespace DisplayButtons.Forms
                                     CurrentDevice.CheckCurrentFolder();
                                     folder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     folder.Add(1, folderUpItem);
-                                    folder.Add(item);
+                                    folder.Add(item, CurrentDevice.CurrentProfile);
 
                                     var newItem = new DynamicDeckItem();
 
@@ -804,7 +829,7 @@ namespace DisplayButtons.Forms
                                     deckFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     deckFolder.Add(1, folderUpItem);
                                     
-                                    deckFolder.Add(action1.DeckItem);
+                                    deckFolder.Add(action1.DeckItem, CurrentDevice.CurrentProfile);
                                     CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, deckFolder);
 
                                    // CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
@@ -817,12 +842,12 @@ namespace DisplayButtons.Forms
                                     newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     newFolder.Add(1, folderUpItem);
 
-                                    newFolder.Add(oldItem);
-                                    newFolder.Add(action1.DeckItem);
+                                    newFolder.Add(oldItem,CurrentDevice.CurrentProfile);
+                                    newFolder.Add(action1.DeckItem, CurrentDevice.CurrentProfile);
                                     CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
                                     CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                  
-                                    Globals.events.Trigger("DeckFolderEventCreate", new DeckFolderEventCreate(newFolder));
+                                   Wrapper.events.Trigger("DeckFolderEventCreate", new DeckFolderEventCreate(newFolder));
 
                                     // chamada o registrador de pasta
                                 }
@@ -939,7 +964,7 @@ namespace DisplayButtons.Forms
 
 
 
-                                                Globals.events.Trigger("DeckFolderEventDelete", new DeckFolderEventDelete(item));
+                                                Wrapper.events.Trigger("DeckFolderEventDelete", new DeckFolderEventDelete(item));
 
 
                                             }
@@ -1022,7 +1047,7 @@ namespace DisplayButtons.Forms
 
                                                 CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
                                                 //FolderCallBack(newFolder);
-                                                Globals.events.Trigger("DeckFolderEventCreate", new DeckFolderEventCreate(newFolder));
+                                                Wrapper.events.Trigger("DeckFolderEventCreate", new DeckFolderEventCreate(newFolder));
 
                                                 //CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                                 RefreshAllButtons(true);
@@ -2372,7 +2397,7 @@ ActionImagePlaceHolder.Image = bmp;
                                 if (ttt.KeyGlobalValue.Keys != null)
                                 {
 
-                                    Globals.events.Trigger("DeckFolderEventDelete", new DeckFolderEventDelete(ttt));
+                                    Wrapper.events.Trigger("DeckFolderEventDelete", new DeckFolderEventDelete(ttt));
 
                                 }
 

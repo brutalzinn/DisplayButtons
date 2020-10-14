@@ -71,8 +71,26 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DesignDependencies\DesignDependencies.csproj" />
+    <ProjectReference Include="..\InterfaceDll\InterfaceDll.csproj" />
     <ProjectReference Include="..\MoonSharp.Interpreter.netcore\MoonSharp.Interpreter.netcore.csproj" />
+    <ProjectReference Include="..\Plugins\McMaster.NETCore.Plugins.csproj" />
     <ProjectReference Include="..\ProxyBackend\BackendProxy.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Langs\langres.pt.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
