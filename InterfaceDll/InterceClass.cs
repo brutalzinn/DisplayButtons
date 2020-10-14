@@ -25,7 +25,7 @@ namespace InterfaceDll
 
         string GetActionName();
         void MenuHelper();
-        void OnButtonDown();
+        void OnButtonDown(DeckDevice device);
         void OnButtonUp();
 
     }

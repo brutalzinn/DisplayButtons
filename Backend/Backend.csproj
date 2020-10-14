@@ -59,8 +59,6 @@
   <ItemGroup>
     <None Include="Resources\img_item_stop_stream.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DisplayButtons\DisplayButtons.csproj" />
-  </ItemGroup>
+
 
 </Project>
