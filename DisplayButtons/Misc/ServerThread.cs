@@ -1,5 +1,5 @@
-﻿using DisplayButtons.Backend.Networking.TcpLib;
-using DisplayButtons.Backend.Utils;
+﻿using Backend.Networking.TcpLib;
+using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DisplayButtons.Misc
+namespace Misc
 {
     public class ServerThread
     {

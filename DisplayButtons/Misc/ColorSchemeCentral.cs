@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DisplayButtons.Backend.Utils.AppSettings;
+using static Backend.Utils.AppSettings;
 
-namespace DisplayButtons.Misc
+namespace Misc
 {
     public static class ColorSchemeCentral
     {

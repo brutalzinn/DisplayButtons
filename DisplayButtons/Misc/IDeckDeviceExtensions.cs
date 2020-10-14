@@ -1,14 +1,14 @@
-﻿using DisplayButtons.Backend.Networking;
-using DisplayButtons.Backend.Networking.TcpLib;
-using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Utils;
+﻿using Backend.Networking;
+using Backend.Networking.TcpLib;
+using Backend.Objects;
+using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DisplayButtons.Misc
+namespace Misc
 {
     public static class IDeckDeviceExtensions
     {

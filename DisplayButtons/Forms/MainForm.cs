@@ -1,23 +1,7 @@
 ﻿
-using DisplayButtons.Backend.Networking;
-using DisplayButtons.Backend.Networking.Implementation;
-using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Objects.Implementation;
-using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
-using DisplayButtons.Backend.Utils;
-using DisplayButtons.Bibliotecas;
-using DisplayButtons.Controls;
-using DisplayButtons.Misc;
-using DisplayButtons.Properties;
-using Cyotek.Windows.Forms;
-using NetSparkleUpdater;
-using NetSparkleUpdater.Configurations;
-using NetSparkleUpdater.SignatureVerifiers;
-using Newtonsoft.Json;
 using NHotkey;
 using NHotkey.WindowsForms;
-using NickAc.ModernUIDoneRight.Controls;
-using NickAc.ModernUIDoneRight.Objects;
+
 using ScribeBot;
 using SharpAdbClient;
 using System;
@@ -30,36 +14,23 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.ServiceModel;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DisplayButtons.Backend.Objects.AbstractDeckAction;
 using Timer = System.Windows.Forms.Timer;
-using NickAc.ModernUIDoneRight.Objects.MenuItems;
-using DisplayButtons.Forms.EventSystem;
-using DisplayButtons.Forms.EventSystem.Controls.triggers;
-using DisplayButtons.Bibliotecas.DeckEvents;
-using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
-using static DisplayButtons.Backend.Objects.ProfileVoidHelper;
-using DisplayButtons.Bibliotecas.DeckText;
-using DisplayButtons.Bibliotecas.Helpers;
-using static DisplayButtons.Bibliotecas.Helpers.DeckHelpers;
-using DisplayButtons.Forms.loading;
-using DisplayButtons.Forms.TwitchChat;
-
-using System.Data.Entity.Infrastructure.Interception;
-using DisplayButtons.Backend.Objects.Implementation.DeckActions.Deck;
 using McMaster.NETCore.Plugins;
-using Microsoft.Extensions.DependencyInjection;
-using DisplayButtons.Engine.Wrappers;
-using InterfaceDll;
-using MoonSharp.Interpreter;
-using System.Management;
-using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
+
 using Swan;
-using System.Windows.Media.Animation;
 using WebSocketSharp;
+using Misc;
+using NetSparkleUpdater;
+using Backend.Objects;
+using Backend.Networking.Implementation;
+using DisplayButtons.Backend.Objects;
+using Backend.Utils;
+using DisplayButtons.Bibliotecas;
+using static BackendProxy.Helpers.DeckHelpers;
+using NickAc.ModernUIDoneRight.Objects;
+
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -135,7 +106,7 @@ namespace DisplayButtons.Forms
             {
                 ApplySidebarTheme(shadedPanel1);
             };
-            Globals.events.On("languagechanged", (e) => {
+            BackendProxy.Wrapper.events.On("languagechanged", (e) => {
 
 
                 MainForm.Instance.Invoke(new Action(() =>
@@ -150,7 +121,7 @@ namespace DisplayButtons.Forms
 
             });
 
-            Globals.events.On("DeckFolderEventCreate", (e) => {
+            BackendProxy.Wrapper.events.On("DeckFolderEventCreate", (e) => {
                 // Cast event argrument to your event object
                 var obj = (DeckFolderEventCreate)e;
 
@@ -160,7 +131,7 @@ namespace DisplayButtons.Forms
                 // Other code
             });
 
-            Globals.events.On("DeckFolderEventDelete", (e) => {
+            BackendProxy.Wrapper.events.On("DeckFolderEventDelete", (e) => {
                 // Cast event argrument to your event object
                 var obj = (DeckFolderEventDelete)e;
 
@@ -384,7 +355,8 @@ namespace DisplayButtons.Forms
                     if (CurrentDevice == null) return;
                     if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
+                      
+                        DevicePersistManager.ActualDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
                         SendItemsToDevice(CurrentDevice, true);
                         RefreshAllButtons(false);
                     }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DisplayButtons.Misc
+namespace Misc
 {
     public class ApplicationColorScheme : ColorScheme
     {

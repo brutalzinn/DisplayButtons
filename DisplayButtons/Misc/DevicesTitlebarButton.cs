@@ -1,8 +1,8 @@
-﻿using DisplayButtons.Forms;
-using DisplayButtons.Backend.Networking;
-using DisplayButtons.Backend.Networking.Implementation;
-using DisplayButtons.Backend.Networking.TcpLib;
-using DisplayButtons.Backend.Utils;
+﻿using Forms;
+using Backend.Networking;
+using Backend.Networking.Implementation;
+using Backend.Networking.TcpLib;
+using Backend.Utils;
 using NickAc.ModernUIDoneRight.Forms;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using SharpAdbClient;
 
-namespace DisplayButtons.Misc
+namespace Misc
 {
     public class DevicesTitlebarButton : NickAc.ModernUIDoneRight.Objects.Interaction.ModernTitlebarButton
     {

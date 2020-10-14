@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\ColorSchemePreviewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\DeckDeviceInformationControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ImageModernButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\PlaceHolderTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ShadedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Controls\AppBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Controls\ModernButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Controls\ModernShadowPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Controls\ModernTileReborn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Controls\ModernToolTIp.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Controls\SidebarControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Forms\GlowShadowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Forms\ModernForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Forms\ShadowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ModernUIDoneRight\Objects\MenuItems\AppBarMenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>
