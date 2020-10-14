@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace NickAc.Backend.Utils
+namespace Backend.Utils
 {
     public static class OBSUtils
     {

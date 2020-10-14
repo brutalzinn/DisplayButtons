@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Utils.Misc
+namespace Backend.Utils.Misc
 {
     public class IFTTTWebhookProperties
     {

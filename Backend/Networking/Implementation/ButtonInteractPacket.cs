@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NickAc.Backend.Networking.Attributes;
-using NickAc.Backend.Networking.IO;
-using NickAc.Backend.Networking.TcpLib;
-using NickAc.Backend.Utils;
+using Backend.Networking.Attributes;
+using Backend.Networking.IO;
+using Backend.Networking.TcpLib;
+using Backend.Utils;
 
-namespace NickAc.Backend.Networking.Implementation
+namespace Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer)]
     public class ButtonInteractPacket : INetworkPacket

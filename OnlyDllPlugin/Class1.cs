@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+using Backend.Objects;
+using System;
 using System.Diagnostics;
 
 namespace OnlyDllPlugin
@@ -15,14 +18,14 @@ namespace OnlyDllPlugin
             new MyForm().Show();
         }
 
-        public void OnButtonDown()
+        public void OnButtonDown(DeckDevice device)
         {
-            Debug.WriteLine("Me apertou");
+            Debug.WriteLine($"Me apertou down {device.DeviceName}" );
         }
 
-        public void OnButtonUp()
+        public void OnButtonUp(DeckDevice device)
         {
-            Debug.WriteLine("apertou de fora");
+            Debug.WriteLine($"apertou  up {device.DeviceName}" );
         }
     }
 }

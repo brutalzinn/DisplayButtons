@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using MoonSharp.Interpreter;
+using Backend.Objects;
+
 namespace InterfaceDll
 {
     public interface InterfaceDllClass
@@ -26,7 +28,7 @@ namespace InterfaceDll
         string GetActionName();
         void MenuHelper();
         void OnButtonDown(DeckDevice device);
-        void OnButtonUp();
+        void OnButtonUp(DeckDevice device);
 
     }
     public interface IMyService

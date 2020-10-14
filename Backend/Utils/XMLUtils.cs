@@ -1,4 +1,5 @@
-﻿using NickAc.Backend.Objects;
+﻿
+using Backend.Objects;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace NickAc.Backend.Utils
+namespace Backend.Utils
 {
     class XMLUtils
     {

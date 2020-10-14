@@ -62,7 +62,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.Deck
             {
                 InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
 
-                meuplugin.OnButtonDown();
+                meuplugin.OnButtonDown(deckDevice);
             }
         }
 
@@ -76,7 +76,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.Deck
             {
                 InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
 
-                meuplugin.OnButtonUp();
+                meuplugin.OnButtonUp(deckDevice);
             }
         }
     }

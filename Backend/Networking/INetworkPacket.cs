@@ -1,7 +1,7 @@
-﻿using NickAc.Backend.Networking.Attributes;
-using NickAc.Backend.Networking.Implementation;
-using NickAc.Backend.Networking.IO;
-using NickAc.Backend.Networking.TcpLib;
+﻿using Backend.Networking.Attributes;
+using Backend.Networking.Implementation;
+using Backend.Networking.IO;
+using Backend.Networking.TcpLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Networking
+namespace Backend.Networking
 {
     public static class NetworkPacketExtensions
     {

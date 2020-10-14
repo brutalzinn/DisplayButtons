@@ -1,6 +1,6 @@
-﻿using NickAc.Backend.Networking;
-using NickAc.Backend.Networking.TcpLib;
-using NickAc.Backend.Utils;
+﻿using Backend.Networking;
+using Backend.Networking.TcpLib;
+using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,9 +9,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static NickAc.Backend.Objects.DeckDevice;
+using static Backend.Objects.DeckDevice;
 
-namespace NickAc.Backend.Objects.Implementation.DeckActions.OBS
+namespace Backend.Objects.Implementation.DeckActions.OBS
 {
     public class TestSceneMultiSwitch : AbstractDeckAction
     {

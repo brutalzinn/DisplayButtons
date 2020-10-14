@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Objects.Implementation
+namespace Backend.Objects.Implementation
 {
     [Serializable]
     public class DynamicDeckItem : IDeckItem

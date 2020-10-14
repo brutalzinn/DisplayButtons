@@ -1,11 +1,11 @@
-﻿using NickAc.Backend.Utils;
+﻿using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Objects.Implementation.DeckActions.Misc
+namespace Backend.Objects.Implementation.DeckActions.Misc
 {
     public class IFTTTEventAction : AbstractDeckAction
     {

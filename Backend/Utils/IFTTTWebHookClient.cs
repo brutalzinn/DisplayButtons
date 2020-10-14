@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using NickAc.Backend.Utils.Misc;
+using Backend.Utils.Misc;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Utils
+namespace Backend.Utils
 {
     public class IFTTTWebHookClient
     {

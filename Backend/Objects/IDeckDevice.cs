@@ -1,4 +1,4 @@
-﻿using NickAc.Backend.Networking.Implementation;
+﻿using Backend.Networking.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace NickAc.Backend.Objects
+namespace Backend.Objects
 {
     [Serializable]
     public class DeckDevice

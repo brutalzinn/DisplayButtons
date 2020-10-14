@@ -5,7 +5,7 @@ using System.Threading;
 using System.Text;
 using System.Collections;
 
-namespace NickAc.Backend.Networking.TcpLib
+namespace Backend.Networking.TcpLib
 {
     /// <summary>
     /// This class holds useful information for keeping track of each client connected

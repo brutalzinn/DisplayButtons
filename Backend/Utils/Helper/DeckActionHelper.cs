@@ -1,11 +1,11 @@
-﻿using NickAc.Backend.Objects;
+﻿using Backend.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Utils
+namespace Backend.Utils
 {
     public class DeckActionHelper
     {

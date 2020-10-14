@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Networking.IO
+namespace Backend.Networking.IO
 {
     /**
     * A data output stream lets an application write primitive Java data

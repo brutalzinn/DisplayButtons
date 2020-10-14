@@ -1,10 +1,10 @@
-﻿using NickAc.Backend.Objects.Implementation.DeckActions;
-using NickAc.Backend.Objects.Implementation.DeckActions.OBS;
+﻿using Backend.Objects.Implementation.DeckActions;
+using Backend.Objects.Implementation.DeckActions.OBS;
 using System;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace NickAc.Backend.Objects
+namespace Backend.Objects
 {
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public class ActionPropertyIncludeAttribute : Attribute

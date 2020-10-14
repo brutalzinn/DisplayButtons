@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Drawing.Imaging;
 using System.Xml.Serialization;
 
-namespace NickAc.Backend.Objects
+namespace Backend.Objects
 {
     [Serializable]
     public class DeckImage

@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Utils
+namespace Backend.Utils
 {
     public static class EnumUtils
     {

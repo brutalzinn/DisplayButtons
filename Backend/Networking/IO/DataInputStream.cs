@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace NickAc.Backend.Networking.IO
+namespace Backend.Networking.IO
 {
     /**
     * A data input stream lets an application read primitive Java data

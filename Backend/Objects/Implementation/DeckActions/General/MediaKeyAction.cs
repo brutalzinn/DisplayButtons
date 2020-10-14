@@ -1,5 +1,5 @@
-﻿using DisplayButtons.Properties;
-using NickAc.Backend.Utils.Native;
+﻿using Backend.Properties;
+using Backend.Utils.Native;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NickAc.Backend.Objects.Implementation.DeckActions.General
+namespace Backend.Objects.Implementation.DeckActions.General
 {
     public class MediaKeyAction : AbstractDeckAction
     {

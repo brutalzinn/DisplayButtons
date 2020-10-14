@@ -1,5 +1,6 @@
-﻿using NickAc.Backend.Networking.TcpLib;
-using NickAc.Backend.Objects;
+﻿using Backend.Networking.TcpLib;
+using Backend.Objects;
+using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Utils
+namespace Backend.Utils
 {
     public static class DevicePersistManager
     {

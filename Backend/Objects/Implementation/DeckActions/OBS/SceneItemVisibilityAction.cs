@@ -1,4 +1,5 @@
-﻿using NickAc.Backend.Utils;
+﻿using Backend.Utils;
+using Backend.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NickAc.Backend.Objects.Implementation.DeckActions.OBS
+namespace Backend.Objects.Implementation.DeckActions.OBS
 {
     public class SceneItemVisibilityAction : AbstractDeckAction
     {

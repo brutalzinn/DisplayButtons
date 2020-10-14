@@ -1,13 +1,14 @@
 ﻿
-using DisplayButtons.Properties;
-using NickAc.Backend.Utils;
+using Backend.Properties;
+
+using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Objects.Implementation.DeckActions.OBS
+namespace Backend.Objects.Implementation.DeckActions.OBS
 {
     public class StartStopRecordingAction : AbstractDeckAction
     {

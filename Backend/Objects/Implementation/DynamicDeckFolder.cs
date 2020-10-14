@@ -1,4 +1,4 @@
-﻿using NickAc.Backend.Utils;
+﻿using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace NickAc.Backend.Objects.Implementation
+namespace Backend.Objects.Implementation
 {
     [Serializable]
     public class DynamicDeckFolder : IDeckFolder

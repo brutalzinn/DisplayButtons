@@ -1,11 +1,12 @@
-﻿using NickAc.Backend.Objects;
+﻿using Backend.Objects;
+using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace NickAc.Backend.Utils
+namespace Backend.Utils
 {
     //Code taken from http://weblogs.asp.net/pwelter34/archive/2006/05/03/444961.aspx
     //All credits go to its creators

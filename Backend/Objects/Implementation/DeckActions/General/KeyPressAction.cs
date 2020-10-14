@@ -1,4 +1,4 @@
-﻿using NickAc.Backend.Utils.Native;
+﻿using Backend.Utils.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NickAc.Backend.Objects.Implementation.DeckActions.General
+namespace Backend.Objects.Implementation.DeckActions.General
 {
     public class KeyPressAction : AbstractDeckAction
     {

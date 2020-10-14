@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace NickAc.Backend.Networking.Attributes
+namespace Backend.Networking.Attributes
 {
     [Flags]
     enum PacketArchitecture

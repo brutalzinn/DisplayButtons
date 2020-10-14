@@ -1,5 +1,5 @@
-﻿using NickAc.Backend.Networking.Implementation;
-using NickAc.Backend.Utils;
+﻿using Backend.Networking.Implementation;
+using Backend.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NickAc.Backend.Networking.TcpLib
+namespace Backend.Networking.TcpLib
 {
     public class DeckServiceProvider : TcpServiceProvider
     {

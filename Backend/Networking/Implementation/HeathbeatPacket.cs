@@ -1,7 +1,7 @@
-﻿using NickAc.Backend.Networking.Attributes;
-using NickAc.Backend.Networking.IO;
+﻿using Backend.Networking.Attributes;
+using Backend.Networking.IO;
 
-namespace NickAc.Backend.Networking.Implementation
+namespace Backend.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ServerToClient)]
     public class HeartbeatPacket : INetworkPacket
