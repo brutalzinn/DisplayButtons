@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="3.0.0" />
+    <PackageReference Include="obs-websocket-dotnet">
+      <Version>4.2.0-beta3</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_media_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_media_next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_media_pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_media_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_media_playpause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_media_volumedown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_media_volumeoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_media_volumeup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_media_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_start_recording.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_start_stream.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_stop_recording.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_item_stop_stream.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DisplayButtons\DisplayButtons.csproj" />
+  </ItemGroup>
+
+</Project>
