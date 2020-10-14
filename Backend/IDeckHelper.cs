@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DisplayButtons.Backend.Objects
+namespace Backend.Objects
 {
     public interface IDeckHelper  
     {

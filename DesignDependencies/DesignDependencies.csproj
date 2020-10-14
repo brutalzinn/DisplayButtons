@@ -10,21 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\ColorSchemePreviewControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Controls\DeckDeviceInformationControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\ImageModernButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\PlaceHolderTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\ShadedPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Update="ModernUIDoneRight\Controls\AppBar.cs">
       <SubType>Component</SubType>
     </Compile>

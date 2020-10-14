@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using BackendProxy.Backend.Objects;
 
 namespace Backend.Objects.Implementation.DeckActions.OBS
 {

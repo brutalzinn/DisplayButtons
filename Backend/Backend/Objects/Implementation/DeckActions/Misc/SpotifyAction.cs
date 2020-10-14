@@ -10,6 +10,7 @@ using System.Linq;
 using SpotifyAPI.Web;
 using Bibliotecas.SpotifyWrapper;
 using System.Threading.Tasks;
+using BackendProxy.Backend.Objects;
 
 namespace Backend.Objects.Implementation.DeckActions.General
 {

@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 
-namespace Bibliotecas.DeckText
+namespace Backend.DeckText
 {
     public class TextLabel
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bibliotecas.DeckText
+namespace Backend.DeckText
 {
    public class TextHelper
     {

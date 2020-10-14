@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
 using System.Diagnostics;
+using BackendProxy.Backend.Objects;
 
 namespace Backend.Objects.Implementation.DeckActions.General
 {
