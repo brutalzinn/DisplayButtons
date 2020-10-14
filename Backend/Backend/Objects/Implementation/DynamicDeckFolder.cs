@@ -9,7 +9,8 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using static Backend.Objects.Implementation.DeckActions.General.KeyPressAction;
 using shortid;
-
+using BackendProxy;
+using Backend.Events;
 
 namespace Backend.Objects.Implementation
 {
@@ -189,9 +190,11 @@ namespace Backend.Objects.Implementation
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                 KeyGlobalValue = form.ModifiableAction.KeyGlobalValue;
-                GlobalHotKeys.refreshFolder(this);
+              //  GlobalHotKeys.refreshFolder(this);
+                Wrapper.events.Trigger("DeckFolderEvent", new DeckFolderEvent(this));
+
             }
-                else
+            else
                 {
                 KeyGlobalValue = keyInfo;
                 }

@@ -137,7 +137,14 @@ namespace DisplayButtons.Forms
                 }));
 
             });
-
+            BackendProxy.Wrapper.events.On("DeckFolderEvent", (e) => {
+                // Cast event argrument to your event object
+                var obj = (DeckFolderEvent)e;
+                GlobalHotKeys.refreshFolder(obj._folder);
+                // Get (set) your event object data
+               // DeckHelpers.RefreshButton(obj._item, obj._mode, obj._item.GetDeckLayerTwo, obj._device);
+                // Other code
+            });
             BackendProxy.Wrapper.events.On("IDeckInterfaceEvent", (e) => {
                 // Cast event argrument to your event object
                 var obj = (IDeckInterfaceEvent)e;
