@@ -22,7 +22,7 @@ namespace Backend.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Backend.Properties {
         ///   Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Backend.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Backend.Properties {
         ///   pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_folder {
+        public static System.Drawing.Bitmap img_folder {
             get {
                 object obj = ResourceManager.GetObject("img_folder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_folder_up {
+        public static System.Drawing.Bitmap img_folder_up {
             get {
                 object obj = ResourceManager.GetObject("img_folder_up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_default {
+        public static System.Drawing.Bitmap img_item_default {
             get {
                 object obj = ResourceManager.GetObject("img_item_default", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_back {
+        public static System.Drawing.Bitmap img_item_media_back {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_back", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_next {
+        public static System.Drawing.Bitmap img_item_media_next {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_next", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_pause {
+        public static System.Drawing.Bitmap img_item_media_pause {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_pause", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_play {
+        public static System.Drawing.Bitmap img_item_media_play {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_play", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +133,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_playpause {
+        public static System.Drawing.Bitmap img_item_media_playpause {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_playpause", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +143,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_stop {
+        public static System.Drawing.Bitmap img_item_media_stop {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +153,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_volumedown {
+        public static System.Drawing.Bitmap img_item_media_volumedown {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_volumedown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +163,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_volumeoff {
+        public static System.Drawing.Bitmap img_item_media_volumeoff {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_volumeoff", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +173,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_media_volumeup {
+        public static System.Drawing.Bitmap img_item_media_volumeup {
             get {
                 object obj = ResourceManager.GetObject("img_item_media_volumeup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +183,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_start_recording {
+        public static System.Drawing.Bitmap img_item_start_recording {
             get {
                 object obj = ResourceManager.GetObject("img_item_start_recording", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +193,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_start_stream {
+        public static System.Drawing.Bitmap img_item_start_stream {
             get {
                 object obj = ResourceManager.GetObject("img_item_start_stream", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -203,7 +203,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_stop_recording {
+        public static System.Drawing.Bitmap img_item_stop_recording {
             get {
                 object obj = ResourceManager.GetObject("img_item_stop_recording", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -213,7 +213,7 @@ namespace Backend.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap img_item_stop_stream {
+        public static System.Drawing.Bitmap img_item_stop_stream {
             get {
                 object obj = ResourceManager.GetObject("img_item_stop_stream", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
