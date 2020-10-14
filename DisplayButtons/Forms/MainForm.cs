@@ -61,6 +61,7 @@ using Swan;
 using System.Windows.Media.Animation;
 using WebSocketSharp;
 using Backend;
+using Backend.GlobalHotkeys;
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
@@ -391,6 +392,7 @@ namespace DisplayButtons.Forms
                     if (CurrentDevice == null) return;
                     if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
+                       
                         CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
                         SendItemsToDevice(CurrentDevice, true);
                         RefreshAllButtons(false);
@@ -698,7 +700,7 @@ namespace DisplayButtons.Forms
                                         {
                                             DeckAction = action.DeckAction.CloneAction()
                                         };
-                                        var id2 = deckFolder.Add(deckItemToAdd);
+                                        var id2 = deckFolder.Add(deckItemToAdd, CurrentDevice.CurrentProfile);
 
                                         deckItemToAdd.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
@@ -733,7 +735,7 @@ namespace DisplayButtons.Forms
                                     CurrentDevice.CheckCurrentFolder();
                                     folder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     folder.Add(1, folderUpItem);
-                                    folder.Add(item);
+                                    folder.Add(item, CurrentDevice.CurrentProfile);
 
                                     var newItem = new DynamicDeckItem();
 
@@ -741,7 +743,7 @@ namespace DisplayButtons.Forms
                                     newItem.GetDeckDefaultLayer.DeckImage = new DeckImage(action.DeckAction.GetDefaultItemImage()?.Bitmap ?? Resources.img_item_default);
 
 
-                                    var id = folder.Add(newItem);
+                                    var id = folder.Add(newItem, CurrentDevice.CurrentProfile);
 
                                     FocusItem(GetButtonControl(id), newItem);
 
@@ -839,7 +841,7 @@ namespace DisplayButtons.Forms
                                     deckFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     deckFolder.Add(1, folderUpItem);
                                     
-                                    deckFolder.Add(action1.DeckItem);
+                                    deckFolder.Add(action1.DeckItem, CurrentDevice.CurrentProfile);
                                     CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, deckFolder);
 
                                    // CurrentDevice.CurrentProfile.Currentfolder = deckFolder;
@@ -852,8 +854,8 @@ namespace DisplayButtons.Forms
                                     newFolder.ParentFolder = CurrentDevice.CurrentProfile.Currentfolder;
                                     newFolder.Add(1, folderUpItem);
 
-                                    newFolder.Add(oldItem);
-                                    newFolder.Add(action1.DeckItem);
+                                    newFolder.Add(oldItem, CurrentDevice.CurrentProfile);
+                                    newFolder.Add(action1.DeckItem,CurrentDevice.CurrentProfile);
                                     CurrentDevice.CurrentProfile.Currentfolder.Add(mb.CurrentSlot, newFolder);
                                     CurrentDevice.CurrentProfile.Currentfolder = newFolder;
                                  
@@ -1538,7 +1540,7 @@ namespace DisplayButtons.Forms
             RegisterMainFolderHotKey();
 
             RegisterBackFolderHotKey();
-            GlobalHotKeys.UpdateAllFoldersHotkeys(CurrentDevice);
+            DeckHotkeys.UpdateAllFoldersHotkeys(CurrentDevice);
         }
 
         //List<Tuple<Guid, int>> ignoreOnce = new List<Tuple<Guid, int>>();

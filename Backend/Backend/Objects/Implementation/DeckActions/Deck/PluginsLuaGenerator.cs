@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
@@ -84,7 +85,7 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.General
                 {
 
                     name_img = nameimg;
-                    MainForm.Instance.UpdatePluginImg();
+             //       MainForm.Instance.UpdatePluginImg();
                 }
 
 

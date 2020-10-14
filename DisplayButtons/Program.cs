@@ -24,6 +24,7 @@ using MoreLinq;
 using System.Reflection;
 using Microsoft.Win32;
 using DisplayButtons.Bibliotecas.Helpers;
+using Backend;
 
 namespace DisplayButtons
 {
@@ -38,8 +39,7 @@ namespace DisplayButtons
         private const string errorFileName = "errors.log";
         private static Mutex mutex = null;
 
-        public static ServerThread ServerThread { get; set; }
-        public static ClientThread ClientThread { get; set; }
+        
         public static int mode { get; set; }
         public static bool SuccessfulServerStart { get; set; } = false;
         public static StartServerResult AdbResult { get; set; }
@@ -235,8 +235,8 @@ namespace DisplayButtons
             if (form.ShowDialog() == DialogResult.OK)
             {
                 mode = 0;
-     ServerThread = new ServerThread();
-            ServerThread.Start();
+     Config.ServerThread = new ServerThread();
+                Config.ServerThread.Start();
             
 
                 Debug.WriteLine("MODO SOCKET CLIENT");
@@ -276,14 +276,14 @@ namespace DisplayButtons
                        DevicePersistManager.PersistUsbMode(client.GetDevices().First());
               //      client.CreateForward(client.GetDevices().First(), "tcp:5095", "tcp:5095", true);
                 
-                    ClientThread = new ClientThread();
-                ClientThread.Start();
+                    Config.ClientThread = new ClientThread();
+                Config.ClientThread.Start();
 
                 }
                 else
                 {
 
-                    ClientThread = new ClientThread();
+                    Config.ClientThread = new ClientThread();
                   
 
 
@@ -325,16 +325,16 @@ Application.Run(new MainForm());
         {
             if(mode ==0)
             {
-   ServerThread.Stop();
-            ServerThread = new ServerThread();
-            ServerThread.Start();
+   Config.ServerThread.Stop();
+                Config.ServerThread = new ServerThread();
+                Config.ServerThread.Start();
 
             }
             else
             {
-                ClientThread.Stop();
-                ClientThread = new ClientThread();
-                ClientThread.Start();
+                Config.ClientThread.Stop();
+                Config.ClientThread = new ClientThread();
+                Config.ClientThread.Start();
 
             }
          

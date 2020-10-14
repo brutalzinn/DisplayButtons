@@ -79,13 +79,11 @@
 
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InterfaceDll\InterfaceDll.csproj" />
     <ProjectReference Include="..\MoonSharp.Interpreter.netcore\MoonSharp.Interpreter.netcore.csproj" />
     <ProjectReference Include="..\Plugins\McMaster.NETCore.Plugins.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="DeckEvents\PanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

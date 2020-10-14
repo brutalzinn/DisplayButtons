@@ -63,116 +63,117 @@ namespace DisplayButtons.Backend.Objects.Implementation.DeckActions.OBS
 
         public override void OnButtonUp(DeckDevice deckDevice)
         {
-            Thread th = new Thread(() => {
-                //We create a deck folder
-                Size imageSize = new Size(512, 512);
-                DynamicDeckFolder folder = new DynamicDeckFolder();
-                Font defaultFont = new Font("Arial", 80, GraphicsUnit.Point);
-                folder.SetParent(deckDevice.CurrentProfile.Currentfolder);
+            //Thread th = new Thread(() => {
+            //    //We create a deck folder
+            //    Size imageSize = new Size(512, 512);
+            //    DynamicDeckFolder folder = new DynamicDeckFolder();
+            //    Font defaultFont = new Font("Arial", 80, GraphicsUnit.Point);
+            //    folder.SetParent(deckDevice.CurrentProfile.Currentfolder);
 
-                var scenes = OBSUtils.GetScenes();
-                int index = 0;
-                using (var bmp = new Bitmap(imageSize.Width, imageSize.Height)) {
-                    using (var g = Graphics.FromImage(bmp)) {
-                        g.DrawString("Exit", defaultFont, Brushes.Black, new RectangleF(Point.Empty, imageSize), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
-                    }
-                    folder.Add(++index, new DynamicDeckItem() { DeckImage = new DeckImage(bmp) });
-                }
+            //    var scenes = OBSUtils.GetScenes();
+            //    int index = 0;
+            //    using (var bmp = new Bitmap(imageSize.Width, imageSize.Height)) {
+            //        using (var g = Graphics.FromImage(bmp)) {
+            //            g.DrawString("Exit", defaultFont, Brushes.Black, new RectangleF(Point.Empty, imageSize), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+            //        }
+            //        folder.Add(++index, new DynamicDeckItem() { DeckImage = new DeckImage(bmp) });
+            //    }
 
-                foreach (var s in scenes) {
-                    using (var bmp = new Bitmap(imageSize.Width, imageSize.Height)) {
-                        using (var g = Graphics.FromImage(bmp)) {
-                            g.DrawString(s, defaultFont, Brushes.Black, new RectangleF(Point.Empty, imageSize), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
-                        }
-                        folder.Add(++index, new DynamicDeckItem() { DeckImage = new DeckImage(bmp) });
-                    }
-                }
+            //    foreach (var s in scenes) {
+            //        using (var bmp = new Bitmap(imageSize.Width, imageSize.Height)) {
+            //            using (var g = Graphics.FromImage(bmp)) {
+            //                g.DrawString(s, defaultFont, Brushes.Black, new RectangleF(Point.Empty, imageSize), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+            //            }
+            //            folder.Add(++index, new DynamicDeckItem() { DeckImage = new DeckImage(bmp) });
+            //        }
+            //    }
 
-                foreach (var s in scenes) {
-                    using (var bmp = new Bitmap(imageSize.Width, imageSize.Height)) {
-                        using (var g = Graphics.FromImage(bmp)) {
-                            g.DrawString(s + previewSuffix, defaultFont, Brushes.Black, new RectangleF(Point.Empty, imageSize), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
-                        }
-                        folder.Add(++index, new DynamicDeckItem() { DeckImage = new DeckImage(bmp) });
-                    }
-                }
+            //    foreach (var s in scenes) {
+            //        using (var bmp = new Bitmap(imageSize.Width, imageSize.Height)) {
+            //            using (var g = Graphics.FromImage(bmp)) {
+            //                g.DrawString(s + previewSuffix, defaultFont, Brushes.Black, new RectangleF(Point.Empty, imageSize), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+            //            }
+            //            folder.Add(++index, new DynamicDeckItem() { DeckImage = new DeckImage(bmp) });
+            //        }
+            //    }
 
-                try {
-                    var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+            //    try {
+            //        var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 
-                    Type callType = assemblies.SelectMany(a => a.GetTypes())
-                    .Single(t => t.FullName == "DisplayButtons.Misc.IDeckDeviceExtensions");
+            //        Type callType = assemblies.SelectMany(a => a.GetTypes())
+            //        .Single(t => t.FullName == "DisplayButtons.Misc.IDeckDeviceExtensions");
 
-                    var method = callType.GetMethod("GetConnection", BindingFlags.Static | BindingFlags.Public);
+            //        var method = callType.GetMethod("GetConnection", BindingFlags.Static | BindingFlags.Public);
 
-                    ConnectionState connection = (ConnectionState)method.Invoke(null, new object[] { deckDevice });
-
-
+            //        ConnectionState connection = (ConnectionState)method.Invoke(null, new object[] { deckDevice });
 
 
-                    deckDevice.CurrentProfile.Currentfolder = folder;
 
 
-                    //This is a local fuction. Don't be scared, because this can happen.
-                    void fakeFolderHandle(object s, ButtonInteractionEventArgs e)
-                    {
-                        if (deckDevice.CurrentProfile.Currentfolder != folder) return;
-                        if (e.PerformedAction != Networking.Implementation.ButtonInteractPacket.ButtonAction.ButtonUp) return;
-                        if (deckDevice.CurrentProfile.Currentfolder.GetDeckItems().Any(c => deckDevice.CurrentProfile.Currentfolder.GetItemIndex(c) == e.SlotID)) {
-                            var item = deckDevice.CurrentProfile.Currentfolder.GetDeckItems().Where(c => deckDevice.CurrentProfile.Currentfolder.GetItemIndex(c) == e.SlotID);
-                            if (item is IDeckItem && e.SlotID == 1) {
-                                deckDevice.CurrentProfile.Currentfolder = folder.ParentFolder;
-                                SendFolder(connection, folder.ParentFolder);
-                                deckDevice.ButtonInteraction -= fakeFolderHandle;
-                                return;
-                            }
-                            if (e.SlotID - 1 <= scenes.Count) {
-                                if (scenes.AsEnumerable().ElementAtOrDefault(e.SlotID - 1) != null)
-                                    OBSUtils.SwitchScene(scenes[e.SlotID - 1]);
-                            } else {
-                                if (scenes.AsEnumerable().ElementAtOrDefault((e.SlotID - 1) - scenes.Count) != null)
-                                    OBSUtils.SwitchPreviewScene(scenes[(e.SlotID - 1) - scenes.Count]);
-                            }
-                        }
-
-                    }
-
-                    deckDevice.ButtonInteraction += fakeFolderHandle;
-
-                    SendFolder(connection, folder);
+            //        deckDevice.CurrentProfile.Currentfolder = folder;
 
 
-#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
-                } catch (Exception) {
-#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
-                    //Don't trow. Just flow.
-                }
+            //This is a local fuction. Don't be scared, because this can happen.
+            //                    void fakeFolderHandle(object s, ButtonInteractionEventArgs e)
+            //                    {
+            //                        if (deckDevice.CurrentProfile.Currentfolder != folder) return;
+            //                        if (e.PerformedAction != Networking.Implementation.ButtonInteractPacket.ButtonAction.ButtonUp) return;
+            //                        if (deckDevice.CurrentProfile.Currentfolder.GetDeckItems().Any(c => deckDevice.CurrentProfile.Currentfolder.GetItemIndex(c) == e.SlotID)) {
+            //                            var item = deckDevice.CurrentProfile.Currentfolder.GetDeckItems().Where(c => deckDevice.CurrentProfile.Currentfolder.GetItemIndex(c) == e.SlotID);
+            //                            if (item is IDeckItem && e.SlotID == 1) {
+            //                                deckDevice.CurrentProfile.Currentfolder = folder.ParentFolder;
+            //                                SendFolder(connection, folder.ParentFolder);
+            //                                deckDevice.ButtonInteraction -= fakeFolderHandle;
+            //                                return;
+            //                            }
+            //                            if (e.SlotID - 1 <= scenes.Count) {
+            //                                if (scenes.AsEnumerable().ElementAtOrDefault(e.SlotID - 1) != null)
+            //                                    OBSUtils.SwitchScene(scenes[e.SlotID - 1]);
+            //                            } else {
+            //                                if (scenes.AsEnumerable().ElementAtOrDefault((e.SlotID - 1) - scenes.Count) != null)
+            //                                    OBSUtils.SwitchPreviewScene(scenes[(e.SlotID - 1) - scenes.Count]);
+            //                            }
+            //                        }
+
+            //                    }
+
+            //                    deckDevice.ButtonInteraction += fakeFolderHandle;
+
+            //                    SendFolder(connection, folder);
 
 
-            });
-            th.Start();
+            //#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+            //                } catch (Exception) {
+            //#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+            //                    //Don't trow. Just flow.
+            //                }
 
 
-        }
+            //            });
+            //            th.Start();
 
-        private void SendFolder(ConnectionState connection, IDeckFolder folder)
-        {
-            List<int> list = new List<int>();
 
-            var clearPacket = new Networking.Implementation.SlotImageClearChunkPacket();
-            var packet = new Networking.Implementation.SlotUniversalChangeChunkPacket();
-            foreach (var item in folder.GetDeckItems()) {
-                if (!(item is DynamicDeckItem)) continue;
-                var index = folder.GetItemIndex(item);
-                list.Add(index);
-                packet.AddToQueue(index, ((DynamicDeckItem)item));
-            }
-            for (int i = 0; i < 15; i++) {
-                if (list.Contains(i + 1)) continue;
-                clearPacket.AddToQueue(i + 1);
-            }
-            connection.SendPacket(packet);
-            connection.SendPacket(clearPacket);
+            // }
+
+            //private void SendFolder(ConnectionState connection, IDeckFolder folder)
+            //{
+            //    List<int> list = new List<int>();
+
+            //    var clearPacket = new Networking.Implementation.SlotImageClearChunkPacket();
+            //    var packet = new Networking.Implementation.SlotUniversalChangeChunkPacket();
+            //    foreach (var item in folder.GetDeckItems()) {
+            //        if (!(item is DynamicDeckItem)) continue;
+            //        var index = folder.GetItemIndex(item);
+            //        list.Add(index);
+            //        packet.AddToQueue(index, ((DynamicDeckItem)item));
+            //    }
+            //    for (int i = 0; i < 15; i++) {
+            //        if (list.Contains(i + 1)) continue;
+            //        clearPacket.AddToQueue(i + 1);
+            //    }
+            //    connection.SendPacket(packet);
+            //    connection.SendPacket(clearPacket);
+            //}
+            //  }
         }
     }
-}

@@ -1,11 +1,4 @@
-﻿using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Utils;
-using DisplayButtons.Forms;
-using DisplayButtons.Forms.EventSystem.Controls.actions;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
+﻿using System;
 using System.Windows.Forms;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents.Actions

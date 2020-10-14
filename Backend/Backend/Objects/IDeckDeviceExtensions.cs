@@ -1,4 +1,5 @@
-﻿using DisplayButtons.Backend.Networking;
+﻿using Backend;
+using DisplayButtons.Backend.Networking;
 using DisplayButtons.Backend.Networking.TcpLib;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Backend.Utils;
@@ -14,16 +15,16 @@ namespace DisplayButtons.Misc
     {
         public static Guid GetConnectionGuidFromDeckDevice(DeckDevice device)
         {
-            if(Program.mode == 0)
+            if(Config.mode == 0)
             {
- var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+ var connections = Config.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
             return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
 
 
             }
             else
             {
-                var connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                var connections = Config.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
                 return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
 
 
@@ -32,10 +33,10 @@ namespace DisplayButtons.Misc
         }
         public static ConnectionState GetConnection(this DeckDevice device)
         {
-            if(Program.mode == 0)
+            if(Config.mode == 0)
             {
 
-    var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+    var connections = Config.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
             var stateID = GetConnectionGuidFromDeckDevice(device);
             return connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
 
@@ -43,7 +44,7 @@ namespace DisplayButtons.Misc
             else
             {
 
-                var connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                var connections = Config.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
                 var stateID = GetConnectionGuidFromDeckDevice(device);
                 return connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
 

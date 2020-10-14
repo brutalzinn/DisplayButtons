@@ -20,7 +20,7 @@ namespace DisplayButtons
             {
                 if (!e.UniqueID.IsNullOrEmpty())
                 {
-                    refreshFolder(e);
+                    GlobalHotKeys.refreshFolder(e);
                 }
 
             });
