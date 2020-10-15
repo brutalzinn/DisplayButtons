@@ -10,6 +10,8 @@ using DisplayButtons.Bibliotecas.DeckEvents.Actions;
 using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
 using DisplayButtons.Forms.EventSystem.misc.ProcessTrigger;
 using DisplayButtons.Backend.Objects;
+using Backend.Objects;
+using Backend;
 
 namespace DisplayButtons.Forms.EventSystem.Controls.triggers
 {
@@ -81,7 +83,7 @@ namespace DisplayButtons.Forms.EventSystem.Controls.triggers
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.misc.ProcessTrigger.ProcessList")) as Form;
+            dynamic form = Activator.CreateInstance(AbstractDeckAction.FindType("DisplayButtons.Forms.EventSystem.misc.ProcessTrigger.ProcessList")) as Form;
             if (form.ShowDialog() == DialogResult.OK)
             {
 

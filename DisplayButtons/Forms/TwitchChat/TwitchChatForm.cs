@@ -1,4 +1,5 @@
 ﻿
+using Backend.Objects;
 using DisplayButtons.Backend.Objects;
 using DisplayButtons.Bibliotecas.Helpers;
 using DisplayButtons.Bibliotecas.OAuthConsumer;
@@ -204,7 +205,7 @@ namespace DisplayButtons.Forms.TwitchChat
         }
         private void CreateMute(string username)
         {
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.TwitchChat.TwitchUserInput")) as Form;
+            dynamic form = Activator.CreateInstance(AbstractDeckAction.FindType("DisplayButtons.Forms.TwitchChat.TwitchUserInput")) as Form;
 
 
 
@@ -223,7 +224,7 @@ namespace DisplayButtons.Forms.TwitchChat
         }
         private void CreateBan(string username)
         {
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.TwitchChat.TwitchUserInput")) as Form;
+            dynamic form = Activator.CreateInstance(AbstractDeckAction.FindType("DisplayButtons.Forms.TwitchChat.TwitchUserInput")) as Form;
 
 
 

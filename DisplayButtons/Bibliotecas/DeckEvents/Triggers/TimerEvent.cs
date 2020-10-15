@@ -11,6 +11,7 @@ using System.Linq;
 
 using System.Diagnostics;
 using System.Reflection;
+using Backend.Objects;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
 {
@@ -41,7 +42,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         }
         public void ToExecuteHelper()
         {
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
+            dynamic form = Activator.CreateInstance(AbstractDeckAction.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
 
         
             // form.comboBox.SelectedItem = GetActionName();
