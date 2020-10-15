@@ -8,6 +8,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>C:\Users\rober\Documents\ButtonDeck\bin\netcoreapp3.1\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
 
