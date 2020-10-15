@@ -63,7 +63,7 @@ namespace Backend.Networking.TcpLib
         {
             if(Initilizator.mode == 1)
             {
-UsbMode.RetryConnect();
+//UsbMode.RetryConnect();
             }
             
 

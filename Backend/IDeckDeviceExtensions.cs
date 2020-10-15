@@ -17,14 +17,14 @@ namespace Misc
         {
             if (Initilizator.mode== 0)
             {
- var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+ var connections = Initilizator.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
             return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
 
 
             }
             else
             {
-                var connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                var connections = Initilizator.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
                 return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
 
 
@@ -33,10 +33,10 @@ namespace Misc
         }
         public static ConnectionState GetConnection(this DeckDevice device)
         {
-            if(Program.mode == 0)
+            if(Initilizator.mode == 0)
             {
 
-    var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+    var connections = Initilizator.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
             var stateID = GetConnectionGuidFromDeckDevice(device);
             return connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
 
@@ -44,7 +44,7 @@ namespace Misc
             else
             {
 
-                var connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                var connections = Initilizator.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
                 var stateID = GetConnectionGuidFromDeckDevice(device);
                 return connections.FirstOrDefault(m => m.ConnectionGuid == stateID);
 

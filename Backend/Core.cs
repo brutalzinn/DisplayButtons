@@ -3,22 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
 using MoonSharp.Interpreter;
-using ScribeBot.Interface;
-using System.Diagnostics;
 using System.Drawing.Text;
-using System.Net;
-using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
 using Newtonsoft.Json;
-using ScribeBot.Engine.Wrappers;
-using static DisplayButtons.Backend.Objects.AbstractDeckAction;
-using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Utils;
-using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
+using Application = System.Windows.Forms.Application;
+using ScribeBot.Interface;
+using System.Windows.Forms;
 
 namespace ScribeBot
 {

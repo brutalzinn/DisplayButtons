@@ -465,9 +465,9 @@ namespace Backend.Networking.TcpLib
             //Starts the ReceiveData callback loop
             if (st._conn.Connected)
                 Debug.WriteLine("Starts the ReceiveData callback loop");
-            if (Program.mode == 1)
+            if (Initilizator.mode == 1)
             {
-                UsbMode.ConnectedSucessfull();
+             //   UsbMode.ConnectedSucessfull();
             }
             try
             {

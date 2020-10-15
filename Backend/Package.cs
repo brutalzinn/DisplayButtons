@@ -9,8 +9,8 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ScribeBot.Engine.Containers;
-using DisplayButtons.Backend.Objects;
-using DisplayButtons.Forms;
+
+
 using System.Windows.Forms;
 
 //TO-DO: Remake this entire class
@@ -169,9 +169,9 @@ namespace ScribeBot
 
 
 
-                   MainForm.Instance.PluginLoaderScript(GetInfo()["Name"], ReadFileContents(GetInfo()["EntryPoint"]));
+                //   MainForm.Instance.PluginLoaderScript(GetInfo()["Name"], ReadFileContents(GetInfo()["EntryPoint"]));
 
-            MainForm.Instance.RefreshAllButtons(false);
+           // MainForm.Instance.RefreshAllButtons(false);
 
 
         }

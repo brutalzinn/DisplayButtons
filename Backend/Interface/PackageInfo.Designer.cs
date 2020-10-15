@@ -154,7 +154,7 @@ namespace ScribeBot.Interface
             this.runButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.runButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.runButton.ForeColor = System.Drawing.Color.Black;
-            this.runButton.Image = global::DisplayButtons.Properties.Resources.Run_grey_16x;
+            this.runButton.Image = global::Backend.Properties.Resources.Run_grey_16x;
             this.runButton.Location = new System.Drawing.Point(0, 0);
             this.runButton.Margin = new System.Windows.Forms.Padding(0);
             this.runButton.MinimumSize = new System.Drawing.Size(0, 20);
@@ -167,7 +167,7 @@ namespace ScribeBot.Interface
             // editButton
             // 
             this.editButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editButton.Image = global::DisplayButtons.Properties.Resources.Edit_grey_16x;
+            this.editButton.Image = global::Backend.Properties.Resources.Edit_grey_16x;
             this.editButton.Location = new System.Drawing.Point(32, 0);
             this.editButton.Margin = new System.Windows.Forms.Padding(0);
             this.editButton.Name = "editButton";

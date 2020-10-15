@@ -90,7 +90,7 @@ namespace Backend.Objects.Implementation.DeckActions.General
                 {
 
                     name_img = nameimg;
-                    MainForm.Instance.UpdatePluginImg();
+                   // MainForm.Instance.UpdatePluginImg();
                 }
 
 
