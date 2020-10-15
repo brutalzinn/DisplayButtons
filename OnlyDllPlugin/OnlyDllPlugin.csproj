@@ -28,9 +28,10 @@
       <WrapperTool>tlbimp</WrapperTool>
     </COMReference>
   </ItemGroup>
+  
 
   <ItemGroup>
-    <ProjectReference Include="..\InterfaceDll\InterfaceDll.csproj" />
+    <ProjectReference Include="..\Backend\Backend.csproj" />
   </ItemGroup>
 
 </Project>

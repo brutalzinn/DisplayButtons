@@ -47,6 +47,7 @@ using DisplayButtons.Bibliotecas.DeckEvents;
 using DisplayButtons.Forms.EventSystem;
 using static Backend.Objects.AbstractDeckAction;
 using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
+using Backend.Sdk;
 
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -3178,10 +3179,10 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 foreach (var pluginType in plugin
                                     .LoadDefaultAssembly()
                                     .GetTypes()
-                                    .Where(t => typeof(InterfaceDll.ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
+                                    .Where(t => typeof(ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
                 {
                     // This assumes the implementation of IPlugin has a parameterless constructor
-                    InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
+                    ButtonInterface meuplugin = (ButtonInterface)Activator.CreateInstance(pluginType);
 
 
                     foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory)))
@@ -3411,9 +3412,9 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 foreach (var pluginType in loader
                          .LoadDefaultAssembly()
                          .GetTypes()
-                         .Where(t => typeof(InterfaceDll.ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
+                         .Where(t => typeof(ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
                 {
-                    InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
+                    ButtonInterface meuplugin = (ButtonInterface)Activator.CreateInstance(pluginType);
                 
                     PluginLoaderDll(meuplugin.GetActionName(), loader);
 button_dll(loader);

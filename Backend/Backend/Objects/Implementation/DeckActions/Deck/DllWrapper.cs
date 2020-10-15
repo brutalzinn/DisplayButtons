@@ -1,4 +1,5 @@
-﻿using McMaster.NETCore.Plugins;
+﻿using Backend.Sdk;
+using McMaster.NETCore.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,9 +24,9 @@ namespace Backend.Objects.Implementation.DeckActions.Deck
             foreach (var pluginType in myPlugin
                            .LoadDefaultAssembly()
                            .GetTypes()
-                           .Where(t => typeof(InterfaceDll.ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
+                           .Where(t => typeof(ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
             {
-                InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
+                ButtonInterface meuplugin = (ButtonInterface)Activator.CreateInstance(pluginType);
 
                 meuplugin.MenuHelper();
 
@@ -58,11 +59,11 @@ namespace Backend.Objects.Implementation.DeckActions.Deck
             foreach (var pluginType in myPlugin
                                 .LoadDefaultAssembly()
                                 .GetTypes()
-                                .Where(t => typeof(InterfaceDll.ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
+                                .Where(t => typeof(ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
             {
-                InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
+                ButtonInterface meuplugin = (ButtonInterface)Activator.CreateInstance(pluginType);
 
-                meuplugin.OnButtonDown();
+                meuplugin.OnButtonDown(deckDevice);
             }
         }
 
@@ -72,11 +73,11 @@ namespace Backend.Objects.Implementation.DeckActions.Deck
             foreach (var pluginType in myPlugin
                                 .LoadDefaultAssembly()
                                 .GetTypes()
-                                .Where(t => typeof(InterfaceDll.ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
+                                .Where(t => typeof(ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
             {
-                InterfaceDll.ButtonInterface meuplugin = (InterfaceDll.ButtonInterface)Activator.CreateInstance(pluginType);
+                ButtonInterface meuplugin = (ButtonInterface)Activator.CreateInstance(pluginType);
 
-                meuplugin.OnButtonUp();
+                meuplugin.OnButtonUp(deckDevice);
             }
         }
     }

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Backend.Objects;
+using System;
 using System.Diagnostics;
 
 namespace OnlyDllPlugin
 {
-    public class Class1 : InterfaceDll.ButtonInterface
+    public class Class1 : Backend.Sdk.ButtonInterface
     {
         public string GetActionName()
         {
@@ -15,14 +16,14 @@ namespace OnlyDllPlugin
             new MyForm().Show();
         }
 
-        public void OnButtonDown()
+        public void OnButtonDown(DeckDevice device)
         {
-            Debug.WriteLine("Me apertou");
+            Debug.WriteLine($"Apertou down {device.DeviceName}");
         }
 
-        public void OnButtonUp()
+        public void OnButtonUp(DeckDevice device)
         {
-            Debug.WriteLine("apertou de fora");
+            Debug.WriteLine($"apertou up {device.DeviceName}");
         }
     }
 }

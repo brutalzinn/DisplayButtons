@@ -20,15 +20,7 @@ namespace InterfaceDll
 
     }
 
-    public interface ButtonInterface
-    {
-
-        string GetActionName();
-        void MenuHelper();
-        void OnButtonDown();
-        void OnButtonUp();
-
-    }
+   
     public interface IMyService
     {
       

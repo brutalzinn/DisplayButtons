@@ -208,15 +208,18 @@ namespace DisplayButtons
                 }
                 //return;
             }
-            errorText = String.Format(Texts.rm.GetString("INTEGRATIONERROROCURRED", Texts.cultereinfo), errorFileName);
+           
 
             Application.ThreadException += Application_ThreadException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            
               DevicePersistManager.LoadDevices();
             EventXml.LoadSettings();
 
             ApplicationSettingsManager.LoadSettings();
-            
+             Texts.initilizeLang();         
+            errorText = String.Format(Texts.rm.GetString("INTEGRATIONERROROCURRED", Texts.cultereinfo), errorFileName);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
       OBSUtils.PrepareOBSIntegration();
@@ -234,7 +237,7 @@ namespace DisplayButtons
       
             if (form.ShowDialog() == DialogResult.OK)
             {
-                mode = 0;
+                Initilizator.mode = 0;
      Initilizator.ServerThread = new ServerThread();
                 Initilizator.ServerThread.Start();
             
@@ -248,7 +251,7 @@ namespace DisplayButtons
             {
                // Silent = true;
                 Debug.WriteLine("MODO USB");
-                mode = 1;
+                Initilizator.mode = 1;
               
                 Adbserver = new AdbServer();
               
@@ -295,7 +298,7 @@ Application.Run(new MainForm());
              
             //Application.Run(new MainFormMenuOption());
             OBSUtils.Disconnect();
-            if (mode == 1)
+            if (Initilizator.mode == 1)
             {
 
              
