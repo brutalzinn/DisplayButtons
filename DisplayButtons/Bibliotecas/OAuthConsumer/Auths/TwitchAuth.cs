@@ -1,4 +1,5 @@
-﻿using DisplayButtons.Bibliotecas.OAuthConsumer.Objects;
+﻿using BackendProxy;
+using DisplayButtons.Bibliotecas.OAuthConsumer.Objects;
 using DisplayButtons.Bibliotecas.OAuthConsumer.TwitchEvents;
 using MyService;
 using Newtonsoft.Json;
@@ -114,7 +115,7 @@ namespace DisplayButtons.Bibliotecas.OAuthConsumer.Auths
                 //         Console.WriteLine("Unable to open URL, manually open: {0}", uri);
             }
 
-            Globals.events.On("EventHandlerLoginAuth", async (e) =>
+            Wrapper.events.On("EventHandlerLoginAuth", async (e) =>
             {
                 // Cast event argrument to your event object
                 var obj = (EventHandlerLoginAuth)e;

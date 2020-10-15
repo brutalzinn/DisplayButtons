@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 using Microsoft.Win32;
 using Backend.Utils;
+using BackendProxy;
+using Backend;
 
 namespace DisplayButtons.Forms.FirstSetup
 {
@@ -47,7 +49,7 @@ namespace DisplayButtons.Forms.FirstSetup
         public DeviceNamePage()
         {
             InitializeComponent();
-            Globals.events.On("languagechanged", (e) => {
+            Wrapper.events.On("languagechanged", (e) => {
 
                 label1.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL1", Texts.cultereinfo);
                 label2.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_LABEL2", Texts.cultereinfo);

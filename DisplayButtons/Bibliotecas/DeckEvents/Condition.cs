@@ -1,10 +1,9 @@
-﻿using MoonSharp.Interpreter;
+﻿
+
+using MoonSharp.Interpreter;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace DisplayButtons.Bibliotecas.DeckEvents

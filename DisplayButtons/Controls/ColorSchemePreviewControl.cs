@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Misc;
+using static Backend.Utils.AppSettings;
+using Backend.Utils;
 
 namespace DisplayButtons.Controls
 {
@@ -66,7 +69,7 @@ namespace DisplayButtons.Controls
         }
 
         private ApplicationColorScheme _appTheme = ColorSchemeCentral.Neptune;
-        private AppTheme _underlyingAppTheme = DisplayButtons.Backend.Utils.AppSettings.AppTheme.Neptune;
+        private AppTheme _underlyingAppTheme = AppSettings.AppTheme.Neptune;
 
         protected override void OnLoad(EventArgs e)
         {

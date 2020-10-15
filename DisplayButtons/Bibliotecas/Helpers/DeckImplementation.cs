@@ -2,6 +2,7 @@
 using Backend.Networking.Implementation;
 using Backend.Networking.TcpLib;
 using Backend.Utils;
+using DisplayButtons;
 using Misc;
 using SharpAdbClient;
 using System;
@@ -132,9 +133,9 @@ namespace Backend.Objects
                 Thread.Sleep(500);
                 Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
 
-                Program.ClientThread.Stop();
-                Program.ClientThread = new Misc.ClientThread();
-                Program.ClientThread.Start();
+                Initilizator.ClientThread.Stop();
+                Initilizator.ClientThread = new Misc.ClientThread();
+                Initilizator.ClientThread.Start();
           
                 }
                 catch(Exception )
@@ -160,15 +161,15 @@ namespace Backend.Objects
 
                public int CurrentConnections {
             get {
-                if(Program.mode == 0)
+                if(Initilizator.mode == 0)
                 {
                  
-                    return Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+                    return Initilizator.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
 
                 }
                 else 
                 {
-            return Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
+            return Initilizator.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
 
 
                 }
@@ -186,10 +187,10 @@ namespace Backend.Objects
                     // PersistUsbMode(DevicePersistManager.DeviceUsb);
                     Program.client.RemoveAllForwards(DevicePersistManager.DeviceUsb);
                     Program.client.CreateForward(DevicePersistManager.DeviceUsb, "tcp:5095", "tcp:5095", true);
-  
-                    Program.ClientThread.Stop();
-                    Program.ClientThread = new Misc.ClientThread();
-                    Program.ClientThread.Start();
+
+                Initilizator.ClientThread.Stop();
+                Initilizator.ClientThread = new Misc.ClientThread();
+                Initilizator.ClientThread.Start();
                 
 
                         }

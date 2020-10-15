@@ -1,5 +1,4 @@
-﻿using DisplayButtons.Backend.Objects;
-
+﻿
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -7,8 +6,10 @@ using System.Windows.Forms;
 
 using SharpAdbClient;
 using System.Threading;
-using Backend;
 using Backend.Utils;
+using Backend;
+using Backend.Objects;
+using Misc;
 
 namespace DisplayButtons.Forms
 {
@@ -92,13 +93,13 @@ namespace DisplayButtons.Forms
                             }
                             else
                             {
-                                PersistUsbMode(DeckUsb);
+                              //  PersistUsbMode(DeckUsb);
                                 Program.client.RemoveAllForwards(DeckUsb);
                                 Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
 
-                                Program.ClientThread.Stop();
-                                Program.ClientThread = new Misc.ClientThread();
-                                Program.ClientThread.Start();
+                                Initilizator.ClientThread.Stop();
+                                Initilizator.ClientThread = new Misc.ClientThread();
+                                Initilizator.ClientThread.Start();
 
 
 
@@ -151,7 +152,7 @@ namespace DisplayButtons.Forms
                         {
                             if (Tag is MainForm frm)
                             {
-                                if (IsVirtualDeviceConnected)
+                                if (DevicePersistManager.IsVirtualDeviceConnected)
                                 {
 
 
@@ -160,8 +161,8 @@ namespace DisplayButtons.Forms
                                     if (frm.CurrentDevice.DeviceGuid == DeckDevice.DeviceGuid)
                                     {
                                         //Someone clicked on the same device. Unload this one.
-                                        OnDeviceDisconnected(this, DeckDevice);
-                                        IsVirtualDeviceConnected = false;
+                                        DevicePersistManager.OnDeviceDisconnected(this, DeckDevice);
+                                        DevicePersistManager.IsVirtualDeviceConnected = false;
 
 
                                         frm.ChangeButtonsVisibility(false);
@@ -173,8 +174,8 @@ namespace DisplayButtons.Forms
                                     {
                                         Debug.WriteLine("DEVICE MNANAWE 2");
                                         //Someone requested another device. Unload current virtual device..
-                                        OnDeviceDisconnected(this, frm.CurrentDevice);
-                                        IsVirtualDeviceConnected = false;
+                                        DevicePersistManager.OnDeviceDisconnected(this, frm.CurrentDevice);
+                                        DevicePersistManager.IsVirtualDeviceConnected = false;
                                         frm.ChangeButtonsVisibility(false);
                                         frm.CurrentDevice = null;
                                         frm.RefreshAllButtons(false);
@@ -185,23 +186,23 @@ namespace DisplayButtons.Forms
 
                                     Debug.WriteLine("DEVICE MNANAWE 3");
                                     frm.CurrentDevice = DeckDevice;
-                                    IsVirtualDeviceConnected = true;
-                                    OnDeviceConnected(this, DeckDevice);
+                                    DevicePersistManager.IsVirtualDeviceConnected = true;
+                                    DevicePersistManager.OnDeviceConnected(this, DeckDevice);
                                     frm.ChangeButtonsVisibility(true);
                                     frm.RefreshAllButtons(false);
-                                    void tempConnected(object s, DeviceEventArgs ee)
+                                    void tempConnected(object s, DevicePersistManager.DeviceEventArgs ee)
                                     {
                                         if (ee.Device.DeviceGuid == DeckDevice.DeviceGuid) return;
-                                        DeviceConnected -= tempConnected;
-                                        if (IsVirtualDeviceConnected)
+                                        DevicePersistManager.DeviceConnected -= tempConnected;
+                                        if (DevicePersistManager.IsVirtualDeviceConnected)
                                         {
                                             //We had a virtual device.
-                                            OnDeviceDisconnected(this, DeckDevice);
-                                            IsVirtualDeviceConnected = false;
+                                            DevicePersistManager.OnDeviceDisconnected(this, DeckDevice);
+                                            DevicePersistManager.IsVirtualDeviceConnected = false;
                                             frm.ChangeButtonsVisibility(false);
                                         }
                                     }
-                                    DeviceConnected += tempConnected;
+                                    DevicePersistManager.DeviceConnected += tempConnected;
                                 }
                             }
                         }

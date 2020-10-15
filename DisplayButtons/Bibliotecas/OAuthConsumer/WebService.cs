@@ -1,4 +1,5 @@
-﻿using DisplayButtons;
+﻿using BackendProxy;
+using DisplayButtons;
 using DisplayButtons.Bibliotecas.OAuthConsumer;
 using DisplayButtons.Bibliotecas.OAuthConsumer.Auths;
 using DisplayButtons.Bibliotecas.OAuthConsumer.TwitchEvents;
@@ -314,7 +315,7 @@ xhr.send(data);
                       string token = acess_link.Get("access_token");
                 // string type = acess_link.Get("token_type");
                   
-                   Globals.events.Trigger("EventHandlerLoginAuthGetToken", new EventHandlerLoginAuthGetToken(token));
+                   Wrapper.events.Trigger("EventHandlerLoginAuthGetToken", new EventHandlerLoginAuthGetToken(token));
                    
         }
         private static void ProcessTypeCode(ServicesEnum _service_enum, string urlparam)
@@ -323,7 +324,7 @@ xhr.send(data);
             //   string token = acess_link.Get("access_token");
             //     string type = acess_link.Get("token_type");
             string code = acess_link.Get("/callback?code");
-            Globals.events.Trigger("EventHandlerLoginAuth", new EventHandlerLoginAuth(code));
+            Wrapper.events.Trigger("EventHandlerLoginAuth", new EventHandlerLoginAuth(code));
 
         }
         private static void HandlerApi(Action method)

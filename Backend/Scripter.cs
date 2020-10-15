@@ -17,7 +17,7 @@ namespace ScribeBot
     /// <summary>
     /// Class creating and maintaining environment for Lua scripts.
     /// </summary>
-    static class Scripter
+    public static class Scripter
     {
         /// <summary>
         /// Class instance containing MoonSharp scripting session.
