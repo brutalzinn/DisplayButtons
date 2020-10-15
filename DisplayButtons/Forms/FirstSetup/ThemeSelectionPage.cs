@@ -7,10 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DisplayButtons.Misc;
+
 using DisplayButtons.Controls;
-using DisplayButtons.Backend.Utils;
+
 using NickAc.ModernUIDoneRight.Utils;
+using BackendProxy;
+using Backend;
+using Misc;
+using Backend.Utils;
 
 namespace DisplayButtons.Forms.FirstSetup
 {
@@ -21,7 +25,7 @@ namespace DisplayButtons.Forms.FirstSetup
             InitializeComponent();
             //Set the default theme
 
-            Globals.events.On("languagechanged", (e) => {
+            Wrapper.events.On("languagechanged", (e) => {
                 label4.Text = Texts.rm.GetString("APPLICATIONFIRSTSETUPAGE1_INTROPAGE_LABEL6", Texts.cultereinfo);
 
 

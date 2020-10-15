@@ -1,5 +1,6 @@
-﻿using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Utils;
+﻿using Backend.Objects;
+using DisplayButtons.Backend.Objects;
+
 using DisplayButtons.Forms;
 using DisplayButtons.Forms.EventSystem.Controls.actions;
 using System;
@@ -20,7 +21,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents.Actions
         
         public void ToExecuteHelper()
         {
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
+            dynamic form = Activator.CreateInstance(AbstractDeckAction.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
 
 
             //  form.comboBox.Visible = false;

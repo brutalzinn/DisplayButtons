@@ -1,5 +1,5 @@
 ﻿using DisplayButtons.Forms.FirstSetup;
-using DisplayButtons.Backend.Utils;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BackendProxy;
+using Backend;
 
 namespace DisplayButtons.Forms
 {
@@ -29,7 +31,7 @@ namespace DisplayButtons.Forms
             InitializeComponent();
 
 
-            Globals.events.On("languagechanged", (e) => {
+            Wrapper.events.On("languagechanged", (e) => {
 
                 modernButton1.Text = Texts.rm.GetString("FIRSTPAGEBUTTONAVANCE", Texts.cultereinfo);
                 modernButton2.Text = Texts.rm.GetString("EVENTSYSTEMBACKBUTTON", Texts.cultereinfo);

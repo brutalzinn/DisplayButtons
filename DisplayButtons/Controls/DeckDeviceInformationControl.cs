@@ -1,13 +1,14 @@
 ﻿using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Utils;
-using DisplayButtons.Misc;
+
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using static DisplayButtons.Backend.Utils.DevicePersistManager;
+
 using SharpAdbClient;
 using System.Threading;
+using Backend;
+using Backend.Utils;
 
 namespace DisplayButtons.Forms
 {
@@ -73,7 +74,7 @@ namespace DisplayButtons.Forms
                     {
                         if (Tag is MainForm frm)
                         {
-                            if (IsVirtualDeviceConnected)
+                            if (DevicePersistManager.IsDeviceTest)
                             {
                                 Program.client.RemoveAllForwards(DeckUsb);
                                 Program.client.CreateForward(DevicePersistManager.DeviceUsb, $"tcp:{ApplicationSettingsManager.Settings.PORT}", $"tcp:{ApplicationSettingsManager.Settings.PORT}", true);
@@ -82,9 +83,9 @@ namespace DisplayButtons.Forms
                                 Thread.Sleep(1400);
                                 Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", DeckUsb, null);
                                 Thread.Sleep(1200);
-                                Program.ClientThread.Stop();
-                                Program.ClientThread = new Misc.ClientThread();
-                                Program.ClientThread.Start();
+                                Initilizator.ClientThread.Stop();
+                                Initilizator.ClientThread = new Misc.ClientThread();
+                                Initilizator.ClientThread.Start();
                              //   DevicePersistManager.PersistUsbMode(DeckUsb);
                          //       MainForm.Instance.StartLoad(true);
                              //   MainForm.Instance.Start_configs();

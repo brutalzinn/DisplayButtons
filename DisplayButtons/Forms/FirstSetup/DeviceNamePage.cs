@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DisplayButtons.Backend.Utils;
+
 using Microsoft.Win32;
+using Backend.Utils;
 
 namespace DisplayButtons.Forms.FirstSetup
 {

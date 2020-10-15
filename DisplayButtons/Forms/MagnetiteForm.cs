@@ -1,14 +1,14 @@
-﻿using DisplayButtons.Backend.Networking.Implementation;
-using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Utils;
+﻿using Backend;
+using Backend.Networking;
+using Backend.Networking.Implementation;
+using Backend.Objects;
+using Backend.Utils;
+using Misc;
 using System;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using DisplayButtons.Misc;
-
-using DisplayButtons.Backend.Networking;
-using static DisplayButtons.Backend.Utils.AppSettings;
+using static Backend.Utils.AppSettings;
 
 namespace DisplayButtons.Forms
 {
@@ -28,13 +28,13 @@ namespace DisplayButtons.Forms
 
         private void ModernButton4_Click(object sender, EventArgs e)
         {
-            Program.ServerThread.Start();
+            Initilizator.ServerThread.Start();
         }
 
         private void ModernButton3_Click(object sender, EventArgs e)
         {
-            Program.ServerThread.Stop();
-            Program.ServerThread = new Misc.ServerThread();
+            Initilizator.ServerThread.Stop();
+            Initilizator.ServerThread = new Misc.ServerThread();
         }
 
         private void ModernButton6_Click(object sender, EventArgs e)
