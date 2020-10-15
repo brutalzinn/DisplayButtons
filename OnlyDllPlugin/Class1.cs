@@ -1,10 +1,10 @@
-﻿using Backend.Objects;
+﻿using BackendAPI.Objects;
 using System;
 using System.Diagnostics;
 
 namespace OnlyDllPlugin
 {
-    public class Class1 : Backend.Sdk.ButtonInterface
+    public class Class1 : BackendAPI.Sdk.ButtonInterface
     {
         public string GetActionName()
         {

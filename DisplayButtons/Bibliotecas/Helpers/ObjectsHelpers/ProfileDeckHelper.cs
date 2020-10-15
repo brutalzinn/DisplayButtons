@@ -1,9 +1,9 @@
 ﻿
-using Backend.Networking;
-using Backend.Networking.Implementation;
-using Backend.Objects;
-using Backend.Objects.Implementation;
-using Backend.Utils;
+using BackendAPI.Networking;
+using BackendAPI.Networking.Implementation;
+using BackendAPI.Objects;
+using BackendAPI.Objects.Implementation;
+using BackendAPI.Utils;
 using DisplayButtons.Forms;
 using Misc;
 using System;
@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Security.Permissions;
 using System.Windows.Forms;
 
-namespace DisplayButtons.Backend.Objects
+namespace DisplayButtons.BackendAPI.Objects
 {
     public class ProfileVoidHelper
     {

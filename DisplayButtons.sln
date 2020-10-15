@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{3560
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlyDllPlugin", "OnlyDllPlugin\OnlyDllPlugin.csproj", "{A6CF9464-73FD-45E0-AA1F-D06F01B5A0B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.csproj", "{4AE8925A-5531-4B2F-A677-FA848773AA2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendAPI", "BackendAPI\BackendAPI.csproj", "{4AE8925A-5531-4B2F-A677-FA848773AA2B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendProxy", "ProxyBackend\BackendProxy.csproj", "{77BE374D-961F-4CF7-9561-0EB7D79D427A}"
 EndProject

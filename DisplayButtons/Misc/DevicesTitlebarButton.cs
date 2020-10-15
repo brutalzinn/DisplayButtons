@@ -1,5 +1,5 @@
-﻿using Backend.Networking.TcpLib;
-using Backend.Utils;
+﻿using BackendAPI.Networking.TcpLib;
+using BackendAPI.Utils;
 using NickAc.ModernUIDoneRight.Forms;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using SharpAdbClient;
 using DisplayButtons.Forms;
-using Backend;
+using BackendAPI;
 using DisplayButtons;
 
 namespace Misc

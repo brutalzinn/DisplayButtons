@@ -1,14 +1,14 @@
-﻿using Backend;
-using Backend.Networking;
-using Backend.Networking.Implementation;
-using Backend.Objects;
-using Backend.Utils;
+﻿using BackendAPI;
+using BackendAPI.Networking;
+using BackendAPI.Networking.Implementation;
+using BackendAPI.Objects;
+using BackendAPI.Utils;
 using Misc;
 using System;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using static Backend.Utils.AppSettings;
+using static BackendAPI.Utils.AppSettings;
 
 namespace DisplayButtons.Forms
 {

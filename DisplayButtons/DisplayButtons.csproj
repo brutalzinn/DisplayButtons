@@ -121,7 +121,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Backend\Backend.csproj" />
+    <ProjectReference Include="..\BackendAPI\BackendAPI.csproj" />
     <ProjectReference Include="..\DesignDependencies\DesignDependencies.csproj" />
     <ProjectReference Include="..\InterfaceDll\InterfaceDll.csproj" />
     <ProjectReference Include="..\MoonSharp.Interpreter.netcore\MoonSharp.Interpreter.netcore.csproj" />

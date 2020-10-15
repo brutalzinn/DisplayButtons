@@ -1,6 +1,6 @@
 ﻿
-using Backend;
-using Backend.Objects.Implementation.DeckActions.General;
+using BackendAPI;
+using BackendAPI.Objects.Implementation.DeckActions.General;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

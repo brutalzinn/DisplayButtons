@@ -12,9 +12,9 @@ using DisplayButtons.Controls;
 
 using NickAc.ModernUIDoneRight.Utils;
 using BackendProxy;
-using Backend;
+using BackendAPI;
 using Misc;
-using Backend.Utils;
+using BackendAPI.Utils;
 
 namespace DisplayButtons.Forms.FirstSetup
 {

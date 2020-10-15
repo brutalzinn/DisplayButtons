@@ -8,7 +8,7 @@ using System.Threading;
 using System.Collections.Generic;
 using DisplayButtons.Properties;
 using DisplayButtons;
-using Backend;
+using BackendAPI;
 
 namespace NetSparkleUpdater.UI.WinForms
 {

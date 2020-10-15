@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Misc;
-using static Backend.Utils.AppSettings;
-using Backend.Utils;
+using static BackendAPI.Utils.AppSettings;
+using BackendAPI.Utils;
 
 namespace DisplayButtons.Controls
 {

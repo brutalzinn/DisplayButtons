@@ -1,7 +1,7 @@
-﻿using Backend;
-using Backend.Objects;
-using Backend.Utils;
-using DisplayButtons.Backend.Objects;
+﻿using BackendAPI;
+using BackendAPI.Objects;
+using BackendAPI.Utils;
+using DisplayButtons.BackendAPI.Objects;
 
 using System;
 using System.Collections;
@@ -15,7 +15,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Backend.Objects.AbstractDeckAction;
+using static BackendAPI.Objects.AbstractDeckAction;
 using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
 
 namespace DisplayButtons.Forms.ActionHelperForms

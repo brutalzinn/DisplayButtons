@@ -1,6 +1,6 @@
 ﻿using DisplayButtons.Forms;
 
-using DisplayButtons.Backend.Objects;
+using DisplayButtons.BackendAPI.Objects;
 
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Utils;
@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Diagnostics;
-using Backend;
-using Backend.Utils;
-using Backend.Objects;
-using Backend.Networking.TcpLib;
-using Backend.DeckText;
-using Backend.Networking;
-using Backend.Networking.Implementation;
-using Backend.Objects.Implementation;
+using BackendAPI;
+using BackendAPI.Utils;
+using BackendAPI.Objects;
+using BackendAPI.Networking.TcpLib;
+using BackendAPI.DeckText;
+using BackendAPI.Networking;
+using BackendAPI.Networking.Implementation;
+using BackendAPI.Objects.Implementation;
 
 namespace DisplayButtons.Controls
 {

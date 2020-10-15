@@ -13,8 +13,8 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Resources;
 using System.Globalization;
-using Backend;
-using Backend.Utils;
+using BackendAPI;
+using BackendAPI.Utils;
 using Misc;
 
 namespace DisplayButtons.Forms

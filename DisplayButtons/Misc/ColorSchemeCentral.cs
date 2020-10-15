@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Backend.Utils.AppSettings;
+using static BackendAPI.Utils.AppSettings;
 
 namespace Misc
 {

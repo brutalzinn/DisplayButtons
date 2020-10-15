@@ -1,7 +1,7 @@
-﻿using Backend.Networking;
-using Backend.Networking.Implementation;
-using Backend.Networking.TcpLib;
-using Backend.Utils;
+﻿using BackendAPI.Networking;
+using BackendAPI.Networking.Implementation;
+using BackendAPI.Networking.TcpLib;
+using BackendAPI.Utils;
 using DisplayButtons;
 using Misc;
 using SharpAdbClient;
@@ -14,9 +14,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Xml.Serialization;
-using static Backend.Utils.DevicePersistManager;
+using static BackendAPI.Utils.DevicePersistManager;
 
-namespace Backend.Objects
+namespace BackendAPI.Objects
 {
 
  

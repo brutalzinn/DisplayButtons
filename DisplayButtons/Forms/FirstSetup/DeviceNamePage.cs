@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Microsoft.Win32;
-using Backend.Utils;
+using BackendAPI.Utils;
 using BackendProxy;
-using Backend;
+using BackendAPI;
 
 namespace DisplayButtons.Forms.FirstSetup
 {

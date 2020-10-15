@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 using System.Security.Permissions;
 using DisplayButtons;
-using Backend;
+using BackendAPI;
 
 namespace NetSparkleUpdater
 {

@@ -1,6 +1,6 @@
 ﻿
-using Backend.Objects;
-using DisplayButtons.Backend.Objects;
+using BackendAPI.Objects;
+using DisplayButtons.BackendAPI.Objects;
 using DisplayButtons.Bibliotecas.Helpers;
 using DisplayButtons.Bibliotecas.OAuthConsumer;
 using DisplayButtons.Bibliotecas.OAuthConsumer.Auths;
