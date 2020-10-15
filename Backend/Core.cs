@@ -17,7 +17,7 @@ namespace ScribeBot
     /// <summary>
     /// Class containing core functionality.
     /// </summary>
-    static class Core
+   public static class Core
     {
         public static string ReleaseAddress { get; private set; } = @"https://api.github.com/repos/jonekcode/ScribeBot/releases";
 
