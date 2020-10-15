@@ -54,7 +54,7 @@ namespace DisplayButtons.Forms.FirstSetup
             this.colorSchemePreviewControl2.Name = "colorSchemePreviewControl2";
             this.colorSchemePreviewControl2.Size = new System.Drawing.Size(177, 167);
             this.colorSchemePreviewControl2.TabIndex = 1;
-            this.colorSchemePreviewControl2.UnderlyingAppTheme = Backend.Utils.AppSettings.AppTheme.Neptune;
+            this.colorSchemePreviewControl2.UnderlyingAppTheme = AppSettings.AppTheme.Neptune;
             this.colorSchemePreviewControl2.Click += new System.EventHandler(this.ColorSchemePreviewControl2_Click);
             // 
             // colorSchemePreviewControl1

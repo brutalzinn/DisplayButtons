@@ -1,6 +1,7 @@
 ﻿
 using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
+using Backend;
 using DisplayButtons.Bibliotecas.Helpers;
 using System;
 using System.Collections.Generic;
