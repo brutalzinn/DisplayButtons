@@ -1,8 +1,7 @@
 ﻿using DisplayButtons.Forms;
-using DisplayButtons.Backend.Networking;
-using DisplayButtons.Backend.Networking.TcpLib;
+
 using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Utils;
+
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Utils;
 using System;
@@ -12,10 +11,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DisplayButtons.Backend.Networking.Implementation;
-using DisplayButtons.Backend.Objects.Implementation;
-using DisplayButtons.Bibliotecas.DeckText;
+
 using System.Diagnostics;
+using Backend;
+using Backend.Utils;
+using Backend.Objects;
+using Backend.Networking.TcpLib;
+using Backend.DeckText;
+using Backend.Networking;
+using Backend.Networking.Implementation;
+using Backend.Objects.Implementation;
 
 namespace DisplayButtons.Controls
 {
@@ -36,16 +41,16 @@ namespace DisplayButtons.Controls
 
         public static Guid GetConnectionGuidFromDeckDevice(DeckDevice device)
         {
-            if (Program.mode == 0)
+            if (Initilizator.mode == 0)
             {
 
-                var connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                var connections = Initilizator.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
                 return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
 
             }
             else
             {
-                var connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                var connections = Initilizator.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
                 return DevicePersistManager.DeckDevicesFromConnection.Where(m => connections.Select(c => c.ConnectionGuid).Contains(m.Key)).FirstOrDefault(m => m.Value.DeviceGuid == device.DeviceGuid).Key;
 
             }
@@ -152,13 +157,13 @@ namespace DisplayButtons.Controls
                         if (Program.mode == 0)
                         {
 
-                            connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                            connections = Initilizator.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
 
 
                         }
                         else
                         {
-                            connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                            connections = Initilizator.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
 
 
                         }
@@ -239,16 +244,16 @@ namespace DisplayButtons.Controls
                     {
                         int slot = int.Parse(ExtractNumber(Name));
                         IEnumerable<ConnectionState> connections;
-                        if (Program.mode == 0)
+                        if (Initilizator.mode == 0)
                         {
 
-                            connections = Program.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                            connections = Initilizator.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
 
 
                         }
                         else
                         {
-                            connections = Program.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
+                            connections = Initilizator.ClientThread.TcpClient?.Connections.OfType<ConnectionState>().Where(c => c.IsStillFunctioning());
 
 
                         }

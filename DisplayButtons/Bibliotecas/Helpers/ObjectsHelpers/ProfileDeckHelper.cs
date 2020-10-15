@@ -1,9 +1,11 @@
-﻿using DisplayButtons.Backend.Networking;
-using DisplayButtons.Backend.Networking.Implementation;
-using DisplayButtons.Backend.Objects.Implementation;
-using DisplayButtons.Backend.Utils;
+﻿
+using Backend.Networking;
+using Backend.Networking.Implementation;
+using Backend.Objects;
+using Backend.Objects.Implementation;
+using Backend.Utils;
 using DisplayButtons.Forms;
-using DisplayButtons.Misc;
+using Misc;
 using System;
 using System.Diagnostics;
 using System.Linq;

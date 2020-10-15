@@ -1,7 +1,8 @@
-﻿using DisplayButtons.Backend.Objects;
-using DisplayButtons.Backend.Objects.Implementation;
-using DisplayButtons.Backend.Objects.Implementation.DeckActions.General;
-using DisplayButtons.Backend.Utils;
+﻿using Backend;
+using Backend.Objects;
+using Backend.Utils;
+using DisplayButtons.Backend.Objects;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DisplayButtons.Backend.Objects.AbstractDeckAction;
+using static Backend.Objects.AbstractDeckAction;
 using static DisplayButtons.Bibliotecas.DeckEvents.FactoryForms;
 
 namespace DisplayButtons.Forms.ActionHelperForms
