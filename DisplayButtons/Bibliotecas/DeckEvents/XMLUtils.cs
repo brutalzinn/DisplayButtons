@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace DisplayButtons.DeckEvents
 {
-    class XMLUtils
+    class XMLDisplayUtils
     {
 
         protected static Type[] extraTypes;

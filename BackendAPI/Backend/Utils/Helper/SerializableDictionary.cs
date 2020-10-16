@@ -21,8 +21,8 @@ namespace BackendAPI.Utils
 
         public void ReadXml(System.Xml.XmlReader reader)
         {
-            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey), XMLUtils.ExtraTypes);
-            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue), XMLUtils.ExtraTypes);
+            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey), XMLUtils.ExtraTypesEvents);
+            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue), XMLUtils.ExtraTypesEvents);
             
             bool wasEmpty = reader.IsEmptyElement;
             reader.Read();
@@ -51,8 +51,8 @@ namespace BackendAPI.Utils
 
         public void WriteXml(System.Xml.XmlWriter writer)
         {
-            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey), XMLUtils.ExtraTypes);
-            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue), XMLUtils.ExtraTypes);
+            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey), XMLUtils.ExtraTypesEvents);
+            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue), XMLUtils.ExtraTypesEvents);
 
             foreach (TKey key in this.Keys) {
                 writer.WriteStartElement("item");

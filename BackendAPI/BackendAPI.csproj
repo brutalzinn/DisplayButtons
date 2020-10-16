@@ -10,6 +10,12 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>C:\Users\rober\Documents\ButtonDeck\bin\netcoreapp3.1\</OutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BackendAPI\**" />
+    <EmbeddedResource Remove="BackendAPI\**" />
+    <None Remove="BackendAPI\**" />
+  </ItemGroup>
   <ItemGroup>
 
 
@@ -71,9 +77,6 @@
     <PackageReference Include="TwitchLib.Client" Version="3.1.6-CI-20200922-8" />
     <PackageReference Include="WindowsBase" Version="4.6.1055" />
   
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BackendAPI\Objects\Implementation\DeckActions\Media\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DesignDependencies\DesignDependencies.csproj" />

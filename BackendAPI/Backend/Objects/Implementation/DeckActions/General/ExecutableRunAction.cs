@@ -24,7 +24,7 @@ namespace BackendAPI.Objects.Implementation.DeckActions.General
         public void ToExecuteHelper()
         {
             var originalToExec = new String(ToExecute.ToCharArray());
-            dynamic form = Activator.CreateInstance(FindType("Forms.ActionHelperForms.ExecutableRunHelper")) as Form;
+            dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.ExecutableRunHelper")) as Form;
             var execAction = CloneAction() as ExecutableRunAction;
             execAction.ToExecute = ToExecute;
             

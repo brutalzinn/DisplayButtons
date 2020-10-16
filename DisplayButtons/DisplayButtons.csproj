@@ -113,6 +113,7 @@
   <ItemGroup>
     <Folder Include="Bibliotecas\Injetores\" />
     <Folder Include="Bibliotecas\TwitchChat\" />
+    <Folder Include="Utils\" />
     <Folder Include="setup\Data\imgs\" />
   </ItemGroup>
 

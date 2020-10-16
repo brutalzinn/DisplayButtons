@@ -212,8 +212,8 @@ namespace DisplayButtons
 
             Application.ThreadException += Application_ThreadException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            
-              DevicePersistManager.LoadDevices();
+         
+
             EventXml.LoadSettings();
 
             ApplicationSettingsManager.LoadSettings();

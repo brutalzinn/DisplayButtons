@@ -25,7 +25,7 @@ namespace BackendAPI.Utils
         {
             try {
                 if (File.Exists(SETTINGS_FILE)) {
-                    settings = XMLUtils.FromXML<AppSettings>(File.ReadAllText(SETTINGS_FILE));
+                    settings = XMLUtils.SettingsFromXML<AppSettings>(File.ReadAllText(SETTINGS_FILE));
                     return;
                 }
             } catch (Exception) {
@@ -46,7 +46,7 @@ namespace BackendAPI.Utils
 
         public static void SaveSettings()
         {
-            File.WriteAllText(SETTINGS_FILE, XMLUtils.ToXML(settings));
+            File.WriteAllText(SETTINGS_FILE, XMLUtils.SettingsToXML(settings));
         }
 
         public static void ReplaceAppSettings(AppSettings newSettings)

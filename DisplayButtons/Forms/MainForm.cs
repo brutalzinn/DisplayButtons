@@ -234,7 +234,7 @@ namespace DisplayButtons.Forms
        
 
 
-          ProfileStaticHelper.SetupPerfil();
+         // ProfileStaticHelper.SetupPerfil();
 
             //       DeckServiceProvider.StartTimers();
 
@@ -390,7 +390,7 @@ namespace DisplayButtons.Forms
                     if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                       
-                        CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
+                        DevicePersistManager.ActualDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
                         SendItemsToDevice(CurrentDevice, true);
                         RefreshAllButtons(false);
                     }
@@ -2237,8 +2237,8 @@ namespace DisplayButtons.Forms
             {
                
                 createPluginButton();
-               
-               
+
+                DevicePersistManager.LoadDevices();
             }
           
 
@@ -3219,12 +3219,10 @@ toAdd.AsEnumerable().Reverse().All(m =>
                             {
                                 if (item.Tag is AbstractDeckAction act)
                                 {
-                                    //var deckaction = new DeckActionHelper(act);
-                                    //deckaction.plugin = plugin;
-                                    //deckaction.ToName = meuplugin.GetActionName();
-                                    //if (item.Tag is AbstractDeckAction act)
-                                        item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
-                              
+                                    var deckaction = new DeckActionHelper(act);
+                                    deckaction.plugin = plugin;
+                                    deckaction.ToName = meuplugin.GetActionName();
+                                    item.DoDragDrop(deckaction, DragDropEffects.Copy);
                                 }
                             };
                             toAdd.Add(item);
@@ -3414,10 +3412,19 @@ toAdd.AsEnumerable().Reverse().All(m =>
                        path,
 
                        config => config.PreferSharedTypes = true);
-                
-             
-                    //PluginLoaderDll(meuplugin.GetActionName(), loader);
-button_dll(loader);
+
+                foreach (var pluginType in loader
+                                  .LoadDefaultAssembly()
+                                  .GetTypes()
+                                  .Where(t => typeof(AbstractDeckAction).IsAssignableFrom(t) && !t.IsAbstract))
+                {
+                    // This assumes the implementation of IPlugin has a parameterless constructor
+                    AbstractDeckAction meuplugin = (AbstractDeckAction)Activator.CreateInstance(pluginType);
+                    XMLUtils.PluginList.Add(meuplugin);
+                }
+                //           DevicePersistManager.LoadDevices();
+                //   PluginLoaderDll(meuplugin.GetActionName(), loader);
+                button_dll(loader);
 
                 
             }
@@ -3721,7 +3728,7 @@ button_dll(loader);
                 return true;
             });
             createPluginButton();
-
+          
             ApplySidebarTheme(shadedPanel1);
 
 

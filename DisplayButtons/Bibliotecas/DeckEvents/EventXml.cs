@@ -28,7 +28,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
             {
                 if (File.Exists(SETTINGS_FILE))
                 {
-                    settings = XMLUtils.FromXMLEvents<AppSettings>(File.ReadAllText(SETTINGS_FILE));
+                    settings = XMLDisplayUtils.FromXMLEvents<AppSettings>(File.ReadAllText(SETTINGS_FILE));
                     return;
                 }
             }
@@ -54,7 +54,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
 
         public static void SaveSettings()
         {
-            File.WriteAllText(SETTINGS_FILE, XMLUtils.ToXmlEvents(settings));
+            File.WriteAllText(SETTINGS_FILE, XMLDisplayUtils.ToXmlEvents(settings));
         }
 
 
