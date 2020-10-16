@@ -1,29 +1,44 @@
 ﻿using BackendAPI.Objects;
 using System;
 using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace OnlyDllPlugin
 {
-    public class Class1 : BackendAPI.Sdk.ButtonInterface
+
+    [SoapInclude(typeof(OnlyDllPlugin.Class1))]
+
+
+    public class Class1 : AbstractDeckAction
     {
-        public string GetActionName()
+        public string testing { get; set; }
+        public override AbstractDeckAction CloneAction()
         {
-            return "Meu plugin";
+            return new Class1();
         }
 
-        public void MenuHelper()
+        public override DeckActionCategory GetActionCategory()
         {
-            new MyForm().Show();
+            return DeckActionCategory.Deck;
         }
 
-        public void OnButtonDown(DeckDevice device)
+        public override string GetActionName()
         {
-            Debug.WriteLine($"Apertou down {device.DeviceName}");
+            return "Teste de dll";
+        }
+        public override bool IsPlugin()
+        {
+            return true;
+        }
+        public override void OnButtonDown(DeckDevice deckDevice)
+        {
+            Debug.WriteLine($"Button down pela AbtractDeck por {deckDevice.DeviceName}");
+
         }
 
-        public void OnButtonUp(DeckDevice device)
+        public override void OnButtonUp(DeckDevice deckDevice)
         {
-            Debug.WriteLine($"apertou up {device.DeviceName}");
+            Debug.WriteLine($"Button up pela AbtractDeck por {deckDevice.DeviceName}");
         }
     }
 }

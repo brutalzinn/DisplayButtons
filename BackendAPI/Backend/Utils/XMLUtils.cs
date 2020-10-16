@@ -12,17 +12,18 @@ namespace BackendAPI.Utils
     {
 
         protected static Type[] extraTypes;
-        protected static Type[] extraTypesTrigger;
-        protected static Type[] extraTypesAction;
-        public static Type[] ExtraTypes {
-            get
+
+        public static Type[] ExtraTypes{
+       get
             {
                 if (extraTypes == null)
                     extraTypes = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>().Select(c => c.GetType()).ToArray();
                 return extraTypes;
             }
         }
-      
+//       public static Type[] types = new Type[] { typeof(AbstractDeckAction) };
+
+
         public static T FromXML<T>(string xml)
         {
             using (StringReader stringReader = new StringReader(xml)) {

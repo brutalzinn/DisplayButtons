@@ -390,7 +390,7 @@ namespace DisplayButtons.Forms
                     if (MessageBox.Show("Are you sure you  want to clear everything?" + Environment.NewLine + "All items will be lost!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                       
-                        DevicePersistManager.ActualDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
+                        CurrentDevice.CurrentProfile.Mainfolder = new DynamicDeckFolder();
                         SendItemsToDevice(CurrentDevice, true);
                         RefreshAllButtons(false);
                     }
@@ -3174,62 +3174,73 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
 
 
-            var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>();
 
                 foreach (var pluginType in plugin
                                     .LoadDefaultAssembly()
                                     .GetTypes()
-                                    .Where(t => typeof(ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
+                                    .Where(t => typeof(AbstractDeckAction).IsAssignableFrom(t) && !t.IsAbstract))
                 {
                     // This assumes the implementation of IPlugin has a parameterless constructor
-                    ButtonInterface meuplugin = (ButtonInterface)Activator.CreateInstance(pluginType);
+                    AbstractDeckAction meuplugin = (AbstractDeckAction)Activator.CreateInstance(pluginType);
 
+                    //var items = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>(meuplugin);
 
                     foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory)))
                     {
-                        var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i.IsPlugin() == true && i is DllWrapper);
-                        if (enumItems.Any())
+                        //  var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i.IsPlugin() == true);
+                        if (meuplugin.GetActionCategory() == enumItem)
                         {
-                            foreach (var i2 in enumItems)
+                            toAdd.Add(new Label()
                             {
-                                Label item = new Label()
+                                Padding = categoryPadding,
+                                TextAlign = ContentAlignment.MiddleLeft,
+                                Font = categoryFont,
+                                Dock = DockStyle.Top,
+                                Text = enumItem.ToString(),
+                                Tag = "header",
+                                Height = TextRenderer.MeasureText(enumItem.ToString(), categoryFont).Height
+                            });
+
+
+
+                            Label item = new Label()
+                            {
+                                Padding = itemPadding,
+                                TextAlign = ContentAlignment.MiddleLeft,
+                                Font = itemFont,
+                                Dock = DockStyle.Top,
+                                Text = meuplugin.GetActionName(),
+                                Height = TextRenderer.MeasureText(meuplugin.GetActionName(), itemFont).Height,
+                                Tag = meuplugin
+
+                            };
+
+                            item.MouseDown += (s, ee) =>
+                            {
+                                if (item.Tag is AbstractDeckAction act)
                                 {
-
-                                    Padding = itemPadding,
-                                    TextAlign = ContentAlignment.MiddleLeft,
-                                    Font = itemFont,
-                                    Dock = DockStyle.Top,
-                                    Text = meuplugin.GetActionName(),
-                                    Height = TextRenderer.MeasureText(meuplugin.GetActionName(), itemFont).Height,
-                                    Tag = i2,
-
-                                };
-                                //    Debug.WriteLine("TAG VINDO: " + i2);
-                                item.MouseDown += (s, ee) =>
-                                {
-
-                                    if (item.Tag is AbstractDeckAction act)
-                                    {
-                                        var _deckaction = new DeckActionHelper(act);
-                                        _deckaction.plugin = plugin;
-                                        _deckaction.ToName = meuplugin.GetActionName();
-                                        item.DoDragDrop(_deckaction, DragDropEffects.Copy);
-                                    //      i2.SetConfigs();
-                                    //  LoadPropertiesPlugins(i2, script);
-
+                                    //var deckaction = new DeckActionHelper(act);
+                                    //deckaction.plugin = plugin;
+                                    //deckaction.ToName = meuplugin.GetActionName();
+                                    //if (item.Tag is AbstractDeckAction act)
+                                        item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
+                              
                                 }
-
-
-                                };
-
-
-                                toAdd.Add(item);
-
-                            }
-
+                            };
+                            toAdd.Add(item);
                         }
                     }
-                }
+
+                    }
+                    toAdd.AsEnumerable().Reverse().All(m =>
+                    {
+                        ShadedPanel1.Controls.Add(m);
+                        return true;
+                    });
+                
+
+                    
+                
 
 
 
@@ -3239,12 +3250,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
 
 
-            toAdd.AsEnumerable().Reverse().All(m =>
-            {
-                ShadedPanel1.Controls.Add(m);
-
-                return true;
-            });
+           
         }
 
         public void RefreshButtonPlugin(int slot, string script, bool sendToDevice = true)
@@ -3409,17 +3415,11 @@ toAdd.AsEnumerable().Reverse().All(m =>
 
                        config => config.PreferSharedTypes = true);
                 
-                foreach (var pluginType in loader
-                         .LoadDefaultAssembly()
-                         .GetTypes()
-                         .Where(t => typeof(ButtonInterface).IsAssignableFrom(t) && !t.IsAbstract))
-                {
-                    ButtonInterface meuplugin = (ButtonInterface)Activator.CreateInstance(pluginType);
-                
-                    PluginLoaderDll(meuplugin.GetActionName(), loader);
+             
+                    //PluginLoaderDll(meuplugin.GetActionName(), loader);
 button_dll(loader);
 
-                }
+                
             }
         }
         public void createPluginButton()
