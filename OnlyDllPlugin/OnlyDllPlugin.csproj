@@ -14,7 +14,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     
-    <OutputPath>..\bin\netcoreapp3.1\Data\Packages\ExamplePackage</OutputPath>
+    <OutputPath>..\..\bin\netcoreapp3.1\Data\Packages\ExamplePackage</OutputPath>
   </PropertyGroup>
   
 

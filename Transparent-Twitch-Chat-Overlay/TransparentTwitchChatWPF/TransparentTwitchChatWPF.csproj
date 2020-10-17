@@ -29,6 +29,9 @@
     <DocumentationFile></DocumentationFile>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <OutputPath>C:\Users\rober\Documents\My projects\ButtonDeck\bin\netcoreapp3.1\Data\Packages\LuaApi\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Resource Include="icons\twitch_chat.ico" />
   </ItemGroup>

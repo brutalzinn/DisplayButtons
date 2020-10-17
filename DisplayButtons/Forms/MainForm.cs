@@ -423,10 +423,10 @@ namespace DisplayButtons.Forms
  
                 // ApplyTheme(panel1);
                 GenerateSidebar(shadedPanel1, true);
-           
+                DevicePersistManager.LoadDevices();
 
-             //   ApplySidebarTheme(painel_developer);
-  
+                //   ApplySidebarTheme(painel_developer);
+
 
                 Refresh();
 
@@ -2238,7 +2238,7 @@ namespace DisplayButtons.Forms
                
                 createPluginButton();
 
-                DevicePersistManager.LoadDevices();
+              
             }
           
 
@@ -3394,13 +3394,32 @@ toAdd.AsEnumerable().Reverse().All(m =>
                        pluginDll,
                     
                        config => config.PreferSharedTypes = true);
-                Globals.loaders.Add(loader);
+            
 
-     
-                       
-                    
-              
-             
+                foreach (var pluginType in loader
+                               .LoadDefaultAssembly()
+                               .GetTypes()
+                               .Where(t => typeof(InterfaceDll.InterfaceDllClass).IsAssignableFrom(t) && !t.IsAbstract))
+                {
+                    // This assumes the implementation of IPlugin has a parameterless constructor
+                    InterfaceDll.InterfaceDllClass plugin = (InterfaceDll.InterfaceDllClass)Activator.CreateInstance(pluginType);
+
+
+                    Thread t2 = new Thread(delegate ()
+                    {
+                        plugin.SetLang(ApplicationSettingsManager.Settings.Language);
+                        plugin.LoadScripts(Scripter.Environment);
+
+                    });
+
+                    t2.Start();
+                    // t2.Join();
+                    Debug.WriteLine($"Created plugin instance '{plugin.GetActionName()}'.");
+                }
+
+
+
+
             }
 
         }
@@ -3432,8 +3451,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
         public void createPluginButton()
         {
 
-      Scripter.Initialize();
-           
+      
+           Scripter.Initialize();
          
             Package[] installedPackages = Workshop.GetInstalled();
          
@@ -3441,49 +3460,33 @@ toAdd.AsEnumerable().Reverse().All(m =>
             {
                 return;
             }
+            
             installedPackages.ToList().ForEach(x =>
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
-                if (!packageInfo["EntryPoint"].IsNullOrEmpty()) { 
-                button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]), x.ReturnPathEntry(packageInfo["Custom_content"]));
+          
+               
+                   
+                
+                if (packageInfo["EntryPoint"].IsNullOrEmpty())
+                {
+               CreateOnlyDllInstance(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
 
-                PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
-                dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
                 }
                 else
                 {
-                    CreateOnlyDllInstance(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
+                    button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]), x.ReturnPathEntry(packageInfo["Custom_dll"]));
+                    PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
+
+                    dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
+
 
                 }
             });
 
           
-            foreach (var loader in Globals.loaders)
-            {
-                foreach (var pluginType in loader
-                    .LoadDefaultAssembly()
-                    .GetTypes()
-                    .Where(t => typeof(InterfaceDll.InterfaceDllClass).IsAssignableFrom(t) && !t.IsAbstract))
-                {
-                    // This assumes the implementation of IPlugin has a parameterless constructor
-                    InterfaceDll.InterfaceDllClass plugin = (InterfaceDll.InterfaceDllClass)Activator.CreateInstance(pluginType);
-
-                   
-                    Thread t2 = new Thread(delegate ()
-                    {
-                        plugin.SetLang(ApplicationSettingsManager.Settings.Language);
-                         plugin.LoadScripts(Scripter.Environment);
-
-                    });
-                   
-                    t2.Start();
-                   // t2.Join();
-                 Debug.WriteLine($"Created plugin instance '{plugin.GetActionName()}'.");
-                }
-
-
-            }
+          
          
       
 

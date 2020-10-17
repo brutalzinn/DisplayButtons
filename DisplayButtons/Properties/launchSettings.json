@@ -1,7 +1,8 @@
 {
   "profiles": {
     "DisplayButtons": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "nativeDebugging": true
     }
   }
 }
