@@ -120,12 +120,12 @@ namespace TransparentTwitchChatWPF
             }
         }
 
-        public MainWindow(IMultiLanguageProvider languageProvider)
+        public MainWindow()
         {
             //Variables.instance = this;
             InitializeComponent();
             translateUI();
-            m_LanguageProvider = languageProvider;
+     
             DataContext = this;
             
             this.genSettings = new GeneralSettings

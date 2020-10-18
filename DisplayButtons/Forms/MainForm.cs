@@ -3394,13 +3394,34 @@ toAdd.AsEnumerable().Reverse().All(m =>
                        pluginDll,
                     
                        config => config.PreferSharedTypes = true);
-                Globals.loaders.Add(loader);
+                foreach (var pluginType in loader
+                        .LoadDefaultAssembly()
+                        .GetTypes()
+                        .Where(t => typeof(InterfaceDll.InterfaceDllClass).IsAssignableFrom(t) && !t.IsAbstract))
+                {
+                    // This assumes the implementation of IPlugin has a parameterless constructor
+                    InterfaceDll.InterfaceDllClass plugin = (InterfaceDll.InterfaceDllClass)Activator.CreateInstance(pluginType);
 
-     
-                       
-                    
-              
-             
+
+                    Thread t2 = new Thread(delegate ()
+                    {
+                        plugin.SetLang(ApplicationSettingsManager.Settings.Language);
+                        plugin.LoadScripts(Scripter.Environment);
+
+                    });
+
+                    t2.Start();
+                    // t2.Join();
+                    Debug.WriteLine($"Created plugin instance '{plugin.GetActionName()}'.");
+                }
+
+
+
+
+
+
+
+
             }
 
         }
@@ -3446,7 +3467,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
                 if (!packageInfo["EntryPoint"].IsNullOrEmpty()) { 
-                button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]), x.ReturnPathEntry(packageInfo["Custom_content"]));
+                button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]), x.ReturnPathEntry(packageInfo["Custom_dll"]));
 
                 PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
                 dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
@@ -3459,32 +3480,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
             });
 
           
-            foreach (var loader in Globals.loaders)
-            {
-                foreach (var pluginType in loader
-                    .LoadDefaultAssembly()
-                    .GetTypes()
-                    .Where(t => typeof(InterfaceDll.InterfaceDllClass).IsAssignableFrom(t) && !t.IsAbstract))
-                {
-                    // This assumes the implementation of IPlugin has a parameterless constructor
-                    InterfaceDll.InterfaceDllClass plugin = (InterfaceDll.InterfaceDllClass)Activator.CreateInstance(pluginType);
-
-                   
-                    Thread t2 = new Thread(delegate ()
-                    {
-                        plugin.SetLang(ApplicationSettingsManager.Settings.Language);
-                         plugin.LoadScripts(Scripter.Environment);
-
-                    });
-                   
-                    t2.Start();
-                   // t2.Join();
-                 Debug.WriteLine($"Created plugin instance '{plugin.GetActionName()}'.");
-                }
-
-
-            }
-         
+        
       
 
         
