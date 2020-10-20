@@ -163,7 +163,7 @@ namespace ScribeBot
         public void Run(bool type = false) {
 
 
-            //   Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), type);
+             Scripter.Execute(ReadFileContents(GetInfo()["EntryPoint"]), type);
 
 
 

@@ -707,15 +707,12 @@ namespace DisplayButtons.Forms
 
                                         if (mb.Tag is DynamicDeckItem DDT && DDT.DeckAction is PluginLuaGenerator PG)
                                         {
-                                            LoadPropertiesPlugins(DDT, action.ToScript, action.ToExecute, action.ToName, action.dllpath);
+                                            LoadPropertiesPlugins(DDT, action.ToScript, action.ToExecute, action.ToName);
 
                                             PG.SetConfigs(action.dllpath);
 
                                         }
-                                        if (mb.Tag is DynamicDeckItem DLLLDYNAMIC && DLLLDYNAMIC.DeckAction is DllWrapper)
-                                        {
-                                            LoadDll(DLLLDYNAMIC, action.plugin,action.ToName);
-                                        }
+                                 
                                         if (mb.Tag is DynamicDeckItem DDTTWO && DDTTWO.DeckAction.setLayer() == true)
                                         {
                                             DDTTWO.DeckAction.setLayer(mb.CurrentSlot, DDTTWO);
@@ -756,15 +753,12 @@ namespace DisplayButtons.Forms
 
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is PluginLuaGenerator YY)
                                     {
-                                        LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName, action.dllpath);
+                                        LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName);
 
                                         YY.SetConfigs(action.dllpath);
 
                                     }
-                                    if (mb.Tag is DynamicDeckItem DDIDLL && DDIDLL.DeckAction is DllWrapper)
-                                    {
-                                        LoadDll(DDIDLL, action.plugin,action.ToName);
-                                    }
+                                
                                     RefreshAllButtons();
                                 }
                                 else
@@ -778,15 +772,12 @@ namespace DisplayButtons.Forms
                                     FocusItem(mb, mb.Tag as IDeckItem);
                                     if (mb.Tag is DynamicDeckItem TT && TT.DeckAction is PluginLuaGenerator YY)
                                     {
-                                        LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName,action.dllpath);
+                                        LoadPropertiesPlugins(TT, action.ToScript, action.ToExecute, action.ToName);
                                    
                                             YY.SetConfigs(action.dllpath);
 
                                     }
-                                    if (mb.Tag is DynamicDeckItem DDIDLL && DDIDLL.DeckAction is DllWrapper)
-                                    {
-                                        LoadDll(DDIDLL, action.plugin,action.ToName);
-                                    }
+                                 
 
                                     if (mb.Tag is DynamicDeckItem mycustomitem && mycustomitem.DeckAction != null && mycustomitem.DeckAction.setLayer() == true)
                                     {
@@ -1273,10 +1264,7 @@ namespace DisplayButtons.Forms
                 {
                     LoadPropertiesPlugins(FF, GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
                 }
-                if (item is DynamicDeckItem GG && GG.DeckAction is DllWrapper)
-                {
-                    LoadDll(GG, GetPluginDll(GetPropertiesPlugins(GG, "name")));
-                }
+           
 
 
 
@@ -1339,8 +1327,11 @@ namespace DisplayButtons.Forms
             
                 if (item != null)
                 {
-           
 
+                    if (item is DynamicDeckItem FF && FF.DeckAction is PluginLuaGenerator)
+                    {
+                        LoadPropertiesPlugins(FF, GetPluginScript(GetPropertiesPlugins(FF, "ScriptNamePoint")));
+                    }
                     control.NormalImage = item?.GetDeckDefaultLayer?.GetItemImage()?.Bitmap;
                     control.Text = item?.GetDeckDefaultLayer.Deckname;
                     control.TextButton = new TextLabel(item.GetDeckDefaultLayer);
@@ -3033,20 +3024,7 @@ ActionImagePlaceHolder.Image = bmp;
 
 
         }
-        private void LoadDll(DynamicDeckItem item, PluginLoader plugin, string name= "")
-        {
-            Type type = item.DeckAction.GetType();
-            if (plugin != null)
-            {
-                PropertyInfo propb = type.GetProperty("myPlugin");
-                propb.SetValue(item.DeckAction, plugin, null);
-            }
-            if (name != null)
-            {
-                PropertyInfo propb = type.GetProperty("name");
-                propb.SetValue(item.DeckAction, name, null);
-            }
-        }
+     
             private void LoadPropertiesPlugins(DynamicDeckItem item, string script, string entrypoint = "", string name = "",string dllpath = "")
         {
 
@@ -3068,12 +3046,7 @@ ActionImagePlaceHolder.Image = bmp;
                 PropertyInfo prop = type.GetProperty("ScriptEntryPoint");
                 prop.SetValue(item.DeckAction, entrypoint, null);
             }
-            if (dllpath != "")
-            {
-                PropertyInfo prop = type.GetProperty("dllpath");
-                prop.SetValue(item.DeckAction, dllpath, null);
-               
-            }
+          
 
             //  prop.SetValue(item.DeckAction, TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(result_string));
             //         UpdateIcon(shouldUpdateIcon);
@@ -3083,7 +3056,7 @@ ActionImagePlaceHolder.Image = bmp;
 
             //  ModifyColorScheme(flowLayoutPanel1.Controls.OfType<Control>());
         }
-        public void button_creator(string name, string entry_point, string script,string dllpath)
+        public void button_creator(string name, string entry_point, string script)
         {
             List<Control> toAdd = new List<Control>();
         
@@ -3101,7 +3074,7 @@ ActionImagePlaceHolder.Image = bmp;
 
                 foreach (DeckActionCategory enumItem in Enum.GetValues(typeof(DeckActionCategory)))
                 {
-                    var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i.IsPlugin() == true && i is PluginLuaGenerator);
+                    var enumItems = items.Where(i => i.GetActionCategory() == enumItem && i is PluginLuaGenerator);
                     if (enumItems.Any())
                     {
                         foreach (var i2 in enumItems)
@@ -3124,11 +3097,11 @@ ActionImagePlaceHolder.Image = bmp;
 
                                 if (item.Tag is AbstractDeckAction act)
                                 {
-                                    var _deckaction = new DeckActionHelper(act);
+                                    DeckActionHelper _deckaction = new DeckActionHelper(act);                 
+                                    _deckaction.ToScript = script;
                                     _deckaction.ToExecute = entry_point;
                                     _deckaction.ToName = name;
-                                    _deckaction.dllpath = dllpath;
-                                    _deckaction.ToScript = script;
+
                                     item.DoDragDrop(_deckaction, DragDropEffects.Copy);
                                     //      i2.SetConfigs();
                                     //  LoadPropertiesPlugins(i2, script);
@@ -3146,19 +3119,19 @@ ActionImagePlaceHolder.Image = bmp;
                     }
                 }
 
-                
+                toAdd.AsEnumerable().Reverse().All(m =>
+                {
+                    ShadedPanel1.Controls.Add(m);
+
+                    return true;
+                });
               
             });
 
 
 
 
-toAdd.AsEnumerable().Reverse().All(m =>
-                {
-                    ShadedPanel1.Controls.Add(m);
 
-                    return true;
-                });
         }
         public void button_dll(PluginLoader plugin)
         {
@@ -3219,10 +3192,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
                             {
                                 if (item.Tag is AbstractDeckAction act)
                                 {
-                                    var deckaction = new DeckActionHelper(act);
-                                    deckaction.plugin = plugin;
-                                    deckaction.ToName = meuplugin.GetActionName();
-                                    item.DoDragDrop(deckaction, DragDropEffects.Copy);
+                          
+                                    item.DoDragDrop(new DeckActionHelper(act), DragDropEffects.Copy);
                                 }
                             };
                             toAdd.Add(item);
@@ -3316,40 +3287,8 @@ toAdd.AsEnumerable().Reverse().All(m =>
             // 
         }
         public Dictionary<string, string> PluginsLists = new Dictionary<string, string>();
-        public Dictionary<string, PluginLoader> PluginsOnlyDll = new Dictionary<string, PluginLoader>();
-        public void PluginLoaderDll(string name, PluginLoader plugin)
-        {
-            if (MainForm.Instance.PluginsOnlyDll.ContainsKey(name))
-            {
-                MainForm.Instance.PluginsOnlyDll[name] = plugin;
-            }
-            else
-            {
-                MainForm.Instance.PluginsOnlyDll.Add(name, plugin);
-            }
-        }
-        public static PluginLoader GetPluginDll(string key)
-        {
-            PluginLoader result = null;
-            try
-            {
-                if (MainForm.Instance.PluginsOnlyDll.ContainsKey(key))
-                {
-                    result = MainForm.Instance.PluginsOnlyDll[key];
-                }
-                else
-                {
+      
 
-                    result = null;
-                }
-            }
-            catch (Exception)
-            {
-
-                Debug.WriteLine("NULL");
-            }
-            return result;
-        }
         public static string GetPluginScript(string key)
         {
             string result = null;
@@ -3453,7 +3392,7 @@ toAdd.AsEnumerable().Reverse().All(m =>
         public void createPluginButton()
         {
 
-      Scripter.Initialize();
+    
            
          
             Package[] installedPackages = Workshop.GetInstalled();
@@ -3466,17 +3405,28 @@ toAdd.AsEnumerable().Reverse().All(m =>
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
-                if (!packageInfo["EntryPoint"].IsNullOrEmpty()) { 
-                button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]), x.ReturnPathEntry(packageInfo["Custom_dll"]));
+                if (packageInfo.Keys.Contains("EntryPoint")) { 
+                        button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]));
+                    PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
+ x.Run();
+           
+                    if (packageInfo.Keys.Contains("Custom_dll"))
+                    {
 
-                PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
-                dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
+                        dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
+
+                    }   
                 }
                 else
                 {
-                    CreateOnlyDllInstance(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
+                    if (packageInfo.Keys.Contains("Custom_dll"))
+                    {
+                        CreateOnlyDllInstance(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
+
+                    }
 
                 }
+               
             });
 
           
