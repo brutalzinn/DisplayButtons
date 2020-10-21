@@ -48,6 +48,7 @@ using DisplayButtons.Forms.EventSystem;
 using static BackendAPI.Objects.AbstractDeckAction;
 using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
 using BackendAPI.Sdk;
+using Cyotek.Windows.Forms;
 
 
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -2608,6 +2609,8 @@ ActionImagePlaceHolder.Image = bmp;
             foreach (var prop in props)
             {
                 bool shouldUpdateIcon = Attribute.IsDefined(prop, typeof(ActionPropertyUpdateImageOnChangedAttribute));
+                bool shouldButtonColor = Attribute.IsDefined(prop, typeof(ActionProperptyColorButton));
+
                 MethodInfo helperMethod = dI.GetType().GetMethod(prop.Name + "Helper");
                 if (helperMethod != null)
                 {
@@ -2662,6 +2665,7 @@ ActionImagePlaceHolder.Image = bmp;
 
                     if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(float)|| prop.PropertyType == typeof(int))
                     {
+
                         //
                         flowLayoutPanel1.Controls.Add(new Label()
                         {
@@ -2672,6 +2676,7 @@ ActionImagePlaceHolder.Image = bmp;
                         {
                             Text = (string)TypeDescriptor.GetConverter(prop.PropertyType).ConvertTo(prop.GetValue(dI), typeof(string))
                         };
+                      
                         txt.TextChanged += (sender, e) =>
                         {
                             try
@@ -2686,8 +2691,55 @@ ActionImagePlaceHolder.Image = bmp;
                             //Ignore all errors
                         }
                         };
-                        txt.Width = flowLayoutPanel1.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
-                        flowLayoutPanel1.Controls.Add(txt);
+
+                        if (shouldButtonColor)
+                        {
+                            txt.Width = 90;
+
+                            var shadedpanelzero = new FlowLayoutPanel();
+                           
+                            shadedpanelzero.WrapContents = true;
+                            shadedpanelzero.Height = 30;
+                            Button helperButton = new ModernButton()
+                            {
+                                Text = "Color"
+                            };
+ 
+                            helperButton.Click += (sender, e) =>
+                            {
+
+                                using (ColorPickerDialog dialog = new ColorPickerDialog())
+                                {
+
+                                    if (dialog.ShowDialog(this) == DialogResult.OK)
+                                    {
+                                    
+                                       txt.Text = ColorTranslator.ToHtml(Color.FromArgb(dialog.Color.ToArgb()));
+                                  
+                                    }
+
+                                }
+
+                            };
+
+
+
+ shadedpanelzero.Controls.Add(txt);
+                            shadedpanelzero.Controls.Add(helperButton);
+                           
+                       
+                            flowLayoutPanel1.Controls.Add(shadedpanelzero);
+
+                        }
+                        else
+                        {
+                            txt.Width = flowLayoutPanel1.DisplayRectangle.Width - SystemInformation.VerticalScrollBarWidth * 2;
+
+                            flowLayoutPanel1.Controls.Add(txt);
+
+                        }
+                      
+                   
                     }
                     // checkbox test
                     if (prop.PropertyType == typeof(bool))
@@ -2802,10 +2854,7 @@ ActionImagePlaceHolder.Image = bmp;
             this.Close();
         }
 
-        private void DialogColorChangedHandler(object sender, EventArgs e)
-        {
-            //   dialogColorPreviewPanel.Color = ((ColorPickerDialog)sender).Color;
-        }
+      
 
 
         private void LoadPropertiesFolder(DynamicDeckFolder item, FlowLayoutPanel panel)
@@ -3333,19 +3382,10 @@ ActionImagePlaceHolder.Image = bmp;
                        pluginDll,
                     
                        config => config.PreferSharedTypes = true);
-<<<<<<< HEAD
-            
-
-                foreach (var pluginType in loader
-                               .LoadDefaultAssembly()
-                               .GetTypes()
-                               .Where(t => typeof(InterfaceDll.InterfaceDllClass).IsAssignableFrom(t) && !t.IsAbstract))
-=======
                 foreach (var pluginType in loader
                         .LoadDefaultAssembly()
                         .GetTypes()
                         .Where(t => typeof(InterfaceDll.InterfaceDllClass).IsAssignableFrom(t) && !t.IsAbstract))
->>>>>>> master
                 {
                     // This assumes the implementation of IPlugin has a parameterless constructor
                     InterfaceDll.InterfaceDllClass plugin = (InterfaceDll.InterfaceDllClass)Activator.CreateInstance(pluginType);
@@ -3365,13 +3405,10 @@ ActionImagePlaceHolder.Image = bmp;
 
 
 
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> master
 
             }
 
@@ -3404,13 +3441,8 @@ ActionImagePlaceHolder.Image = bmp;
         public void createPluginButton()
         {
 
-<<<<<<< HEAD
-      
-           Scripter.Initialize();
-=======
     
            
->>>>>>> master
          
             Package[] installedPackages = Workshop.GetInstalled();
          
@@ -3423,31 +3455,6 @@ ActionImagePlaceHolder.Image = bmp;
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
-<<<<<<< HEAD
-          
-               
-                   
-                
-                if (packageInfo["EntryPoint"].IsNullOrEmpty())
-                {
-               CreateOnlyDllInstance(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
-
-                }
-                else
-                {
-                    button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]), x.ReturnPathEntry(packageInfo["Custom_dll"]));
-                    PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
-
-                    dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
-
-
-                }
-            });
-
-          
-          
-         
-=======
                 if (packageInfo.Keys.Contains("EntryPoint") && packageInfo.Keys.Contains("Name")) { 
                         button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]));
                     PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
@@ -3474,7 +3481,6 @@ ActionImagePlaceHolder.Image = bmp;
 
           
         
->>>>>>> master
       
 
         

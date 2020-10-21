@@ -34,7 +34,7 @@ namespace BackendAPI.Objects
 
         public string Deckname { get => _deckname; set => _deckname = value; }
         [ActionPropertyInclude]
-
+        [ActionProperptyColorButton]
         [ActionPropertyDescription("DECKHELPERCOLOR")]
         public string Deckcolor { get => _deckcolor; set => _deckcolor = value; }
         [ActionPropertyInclude]
@@ -57,7 +57,7 @@ namespace BackendAPI.Objects
         [ActionPropertyDescription("DECKITEMSTROKEDY")]
         public float Stroke_Dy { get => dytextfloat; set => dytextfloat = value; }
         [ActionPropertyInclude]
-
+        [ActionProperptyColorButton]
         [ActionPropertyDescription("DECKHELPERCOLOR")]
         public string Stroke_color { get => stroke_color; set => stroke_color = value; }
         [ActionPropertyInclude]

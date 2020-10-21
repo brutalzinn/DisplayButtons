@@ -7,8 +7,10 @@ using System.Xml.Serialization;
 namespace BackendAPI.Objects
 {
 
-    
 
+    [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public class ActionProperptyColorButton : Attribute
+    { }
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public class ActionPropertyPluginsScriptEntryPoint : Attribute
     { }
