@@ -3405,7 +3405,7 @@ ActionImagePlaceHolder.Image = bmp;
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
-                if (packageInfo.Keys.Contains("EntryPoint")) { 
+                if (packageInfo.Keys.Contains("EntryPoint") && packageInfo.Keys.Contains("Name")) { 
                         button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]));
                     PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
  x.Run();
