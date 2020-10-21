@@ -32,9 +32,16 @@ namespace BackendAPI.Utils
                 Type[] result = null;
 
                 extraTypes = ReflectiveEnumerator.GetEnumerableOfType<AbstractDeckAction>().Select(c => c.GetType()).ToArray();
-             result = new Type[extraTypes.Length + LoadActionPlugins.Length];
-                extraTypes.CopyTo(result, 0);
-                LoadActionPlugins.CopyTo(result, extraTypes.Length);
+                if (LoadActionPlugins != null)
+                {
+                    result = new Type[extraTypes.Length + LoadActionPlugins.Length];
+                    extraTypes.CopyTo(result, 0);
+                    LoadActionPlugins.CopyTo(result, extraTypes.Length);
+                }
+                else
+                {
+                    result = extraTypes;
+                }
 
                 return result;
             }

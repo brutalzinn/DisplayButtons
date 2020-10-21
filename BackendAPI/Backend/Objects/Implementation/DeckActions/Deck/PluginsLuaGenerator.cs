@@ -338,7 +338,7 @@ if (c is ComboBox TT)
         {
 
             //   var originalToExec = new String(ToScript.ToCharArray());
-            form = Activator.CreateInstance(FindType("Forms.ActionHelperForms.ActionPlugin")) as Form;
+            form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.ActionPlugin")) as Form;
 
             ScribeBot.Scripter.Environment.Globals["formdesign"] = new control(this);
 

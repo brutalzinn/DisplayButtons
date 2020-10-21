@@ -14,7 +14,11 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     
+<<<<<<< HEAD
     <OutputPath>..\..\bin\netcoreapp3.1\Data\Packages\ExamplePackage</OutputPath>
+=======
+    <OutputPath>..\bin\netcoreapp3.1\Data\Packages\OnlyDllPlugin</OutputPath>
+>>>>>>> master
   </PropertyGroup>
   
 
