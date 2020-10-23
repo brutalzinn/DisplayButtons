@@ -3381,7 +3381,9 @@ ActionImagePlaceHolder.Image = bmp;
                 var loader = PluginLoader.CreateFromAssemblyFile(
                        pluginDll,
                     
+
                        config => config.PreferSharedTypes = true);
+
                 foreach (var pluginType in loader
                         .LoadDefaultAssembly()
                         .GetTypes()
@@ -3455,17 +3457,20 @@ ActionImagePlaceHolder.Image = bmp;
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
 
-                if (packageInfo.Keys.Contains("EntryPoint") && packageInfo.Keys.Contains("Name")) { 
-                        button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]));
-                    PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
- x.Run();
+                if (packageInfo.Keys.Contains("EntryPoint") && packageInfo.Keys.Contains("Name")) {
+                    x.Run();
            
-                    if (packageInfo.Keys.Contains("Custom_dll"))
+                   
+                   
+                     
+  if (packageInfo.Keys.Contains("Custom_dll"))
                     {
 
                         dllAssing(x.ReturnAbsolutePathEntry(packageInfo["Custom_dll"]));
 
                     }   
+                    button_creator(packageInfo["Name"], x.ReturnPathEntry(packageInfo["EntryPoint"]), x.ReadFileContents(packageInfo["EntryPoint"]));
+                    PluginLoaderScript(packageInfo["Name"], x.ReadFileContents(packageInfo["EntryPoint"]));
                 }
                 else
                 {
