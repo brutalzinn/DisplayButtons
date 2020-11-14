@@ -3380,9 +3380,9 @@ ActionImagePlaceHolder.Image = bmp;
                 {
                 var loader = PluginLoader.CreateFromAssemblyFile(
                        pluginDll,
-                    
 
-                       config => config.PreferSharedTypes = true);
+
+                      sharedTypes: new[] { typeof(InterfaceDll.InterfaceDllClass) }) ;
 
                 foreach (var pluginType in loader
                         .LoadDefaultAssembly()
@@ -3456,11 +3456,11 @@ ActionImagePlaceHolder.Image = bmp;
             installedPackages.ToList().ForEach(x =>
             {
                 Dictionary<string, string> packageInfo = x.GetInfo();
-
+   
                 if (packageInfo.Keys.Contains("EntryPoint") && packageInfo.Keys.Contains("Name")) {
-                    x.Run();
+                 
            
-                   
+    //  x.Run();             
                    
                      
   if (packageInfo.Keys.Contains("Custom_dll"))

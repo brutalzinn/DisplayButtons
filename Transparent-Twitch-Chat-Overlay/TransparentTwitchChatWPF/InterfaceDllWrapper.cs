@@ -28,6 +28,7 @@ namespace TransparentTwitchChatWPF
         }
         public void SetLang(string lang)
         {
+
             string directory = Path.GetFullPath($@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\langs");
            
            if(!Directory.Exists(directory)){

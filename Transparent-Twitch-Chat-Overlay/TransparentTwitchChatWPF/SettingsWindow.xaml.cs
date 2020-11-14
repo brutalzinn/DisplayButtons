@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Media;
 using NthDeveloper.MultiLanguage;
+using System.Reflection;
+using System.IO;
 
 namespace TransparentTwitchChatWPF
 {
@@ -30,7 +32,29 @@ namespace TransparentTwitchChatWPF
             this._main = mainWindow;
 
             InitializeComponent();
-            translateUI();
+           if(Utilities.CheckLanguageIsSet())
+            {
+
+translateUI();
+            }
+            else
+            {
+                  string directory = System.IO.Path.GetFullPath($@"{System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\langs");
+           
+           if(!Directory.Exists(directory)){
+                Directory.CreateDirectory(directory);
+            }
+                XmlFileSource _xmlFileSource = new XmlFileSource(directory);
+                MultiLanguageProvider _languageProvider = new MultiLanguageProvider(_xmlFileSource);
+
+
+
+                _languageProvider.SetCurrentLanguage("pt-BR");
+                Utilities.m_LanguageProvider = _languageProvider;
+
+                translateUI();
+            }
+            
         }
         private void translateUI()
         {

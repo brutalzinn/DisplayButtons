@@ -17,6 +17,17 @@ namespace TransparentTwitchChatWPF
             return System.Convert.ToBase64String(plainTextBytes);
         }
       public static  IMultiLanguageProvider m_LanguageProvider;
+        public static bool CheckLanguageIsSet()
+        {
+            if(m_LanguageProvider != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     public sealed class KapChat

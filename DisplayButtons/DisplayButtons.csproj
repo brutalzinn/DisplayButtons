@@ -4,14 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <StartupObject></StartupObject>
+
     <RootNamespace>DisplayButtons</RootNamespace>
     <AssemblyName>DisplayButtons</AssemblyName>
     <PackageId>DisplayButtons</PackageId>
     <ApplicationIcon>button-deck.ico</ApplicationIcon>
     <Nullable>disable</Nullable>
-    <Platforms>AnyCPU;x86</Platforms>
     <UseWPF>true</UseWPF>
  
  </PropertyGroup>
@@ -26,10 +24,10 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <OutputPath>..\bin</OutputPath>
     <Optimize>false</Optimize>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 

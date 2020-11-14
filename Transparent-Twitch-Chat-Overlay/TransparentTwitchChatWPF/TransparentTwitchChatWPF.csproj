@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-  <Import Project="..\packages\CefSharp.Wpf.81.3.100\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.81.3.100\build\CefSharp.Wpf.props')" />
-  <Import Project="..\packages\CefSharp.Common.81.3.100\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.81.3.100\build\CefSharp.Common.props')" />
-  <Import Project="..\packages\cef.redist.x86.81.3.10\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.81.3.10\build\cef.redist.x86.props')" />
-  <Import Project="..\packages\cef.redist.x64.81.3.10\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.81.3.10\build\cef.redist.x64.props')" />
+  <Import Project="..\packages\CefSharp.Wpf\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf\build\CefSharp.Wpf.props')" />
+  <Import Project="..\packages\CefSharp.Common\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
  
   <PropertyGroup>
@@ -16,21 +16,30 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
     <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
-    <OutputType>Library</OutputType>
 
-  </PropertyGroup>
+   
+  </PropertyGroup> 
+  <PropertyGroup>
+      <RestorePackagesPath>..\packages</RestorePackagesPath>
+
+    </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>TransparentTwitchChatWPF_TemporaryKey.pfx</ManifestKeyFile>
+    <OutputType>Library</OutputType>
+    <StartupObject></StartupObject>
 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutputPath>..\bin\netcoreapp3.1\Data\Packages\LuaApi</OutputPath>
+    <OutputPath>..\..\bin\netcoreapp3.1\Data\Packages\LuaApi</OutputPath>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <DocumentationFile></DocumentationFile>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutputPath>C:\Users\rober\Documents\My projects\ButtonDeck\bin\netcoreapp3.1\Data\Packages\LuaApi\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="icons\twitch_chat.ico" />
@@ -62,10 +71,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="cef.redist.x64" Version="81.3.10" />
-    <PackageReference Include="cef.redist.x86" Version="81.3.10" />
-    <PackageReference Include="CefSharp.Common" Version="81.3.100" />
-    <PackageReference Include="CefSharp.Wpf" Version="81.3.100" />
+    <PackageReference Include="cef.redist.x64" Version="85.3.13" />
+    <PackageReference Include="cef.redist.x86" Version="85.3.13" />
+    <PackageReference Include="CefSharp.Common" Version="85.3.130" />
+    <PackageReference Include="CefSharp.Wpf" Version="85.3.130" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
     <PackageReference Include="Jot" Version="1.4.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />

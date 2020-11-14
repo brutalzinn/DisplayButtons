@@ -91,7 +91,7 @@ namespace TransparentTwitchChatWPF
         GeneralSettings genSettings;
         TrackingConfiguration genSettingsTrackingConfig;
         JsCallbackFunctions jsCallbackFunctions;
-        IMultiLanguageProvider m_LanguageProvider;
+       
         //StringCollection custom_windows = new StringCollection();
         List<BrowserWindow> windows = new List<BrowserWindow>();
 

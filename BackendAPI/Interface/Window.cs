@@ -38,31 +38,44 @@ namespace ScribeBot.Interface
             ConsoleOutput.Font = new System.Drawing.Font("Arial", 10f);
 
             Package[] installedPackages = Workshop.GetInstalled();
-
-            installedPackages.ToList().ForEach(x =>
+            try
             {
-                Dictionary<string, string> packageInfo = x.GetInfo();
+                installedPackages.ToList().ForEach(x =>
+                {
+                    Dictionary<string, string> packageInfo = x.GetInfo();
 
-                PackageInfo p = new PackageInfo();
-                p.NameLabel.Text = packageInfo["Name"];
-                p.AuthorLabel.Text = packageInfo["Authors"];
-                p.DescLabel.Text = packageInfo["Description"];
-        //       p.Namespace.Text = packageInfo["Namespace"];
+                    PackageInfo p = new PackageInfo();
+                    if (!packageInfo.Keys.Contains("Name"))
+                    {
+                        p.NameLabel.Text = packageInfo["Custom_dll"];
+                    }
+                    else
+                    {
+                    p.NameLabel.Text = packageInfo["Name"];
+
+                    }
+                    p.AuthorLabel.Text = packageInfo["Authors"];
+                    p.DescLabel.Text = packageInfo["Description"];
+                //       p.Namespace.Text = packageInfo["Namespace"];
                 p.Package = x;
 
-                p.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
+                    p.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
 
-                InstalledPackagesList.Controls.Add(p);
-             //   x.Run(true);
+                    InstalledPackagesList.Controls.Add(p);
+                //   x.Run(true);
                 p.RunButton.Click += (o, e) =>
-                {
-                    
-                    ///  Execute(ScribeBot.Package.ReadFileContents(ScribeBot.Package.GetInfo()["EntryPoint"]));
-                
-                    x.Run(true);
-                };
-            });
+                    {
 
+                    ///  Execute(ScribeBot.Package.ReadFileContents(ScribeBot.Package.GetInfo()["EntryPoint"]));
+
+                    x.Run(true);
+                    };
+                });
+            }
+            catch (Exception)
+            {
+
+            }
             var hoverColor = new ColorContainer(0, 0, 0);
             var cursorPos = new PointContainer(0, 0);
 
