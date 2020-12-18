@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html ng-app="application">
+<head>
+    <meta charset="utf-8" />
+    <title>Test application</title>
+    <script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/angular.min.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <script type="text/javascript">
+                 var rows = 4;
+        var colums = 6;
+  
+        var arrayToModify = [];
+        window.onload = function () {
+        var i = 1 , buttonContainer, newButton;
+        buttonContainer = document.getElementById('this_element_contains_my_buttons');   
+        for (ir = 0; ir < rows; ir++) {
+
+        for (ic = 0; ic < colums; ic++) {
+
+          
+        newButton = document.createElement('input');
+        newButton.type = 'button';
+        newButton.value = "test" + i;
+        newButton.id = i;         
+              i++;
+
+        newButton.onclick = function () {
+        alert('You pressed '+this.id);
+        arrayToModify[arrayToModify.length] = this.id;
+        };
+                  
+        buttonContainer.appendChild(newButton); 
+    
+        
+        }
+                var p = document.createElement ("br");
+                    buttonContainer.appendChild(p);    
+              }
+
+
+        };
+
+    </script>
+</head>
+    <body>
+        <header><h4>Test application</h4></header>
+        <div class="well-lg" ng-controller="testController">
+            <ul ng-repeat="user in users.list" class="list-unstyled">
+                <li>{{user.FirstName}} {{user.LastName}}</li>
+            </ul>
+            <div id='this_element_contains_my_buttons'></div>
+            <input type='button' onclick='alert(arrayToModify);' value='Show the buttons I have clicked' />
+            <form class="form-group" ng-submit="users.post()">
+                <div class="container">
+                    <div class="row">
+                        <label for="FirstName" class="form-control-static col-md-2">First name:</label>
+                        <input name="FirstName" ng-model="users.postUser.FirstName" type="text" class="form-control" />
+                    </div>
+                    <div class="row">
+                        <label for="LastName" class="form-control-static">Last name:</label>
+                        <input name="LastName" ng-model="users.postUser.LastName" type="text" class="form-control" />
+                    </div>
+                    <div class="row">
+                        <input type="submit" class="btn btn-default" value="Register" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <footer></footer>
+    </body>
+</html>
