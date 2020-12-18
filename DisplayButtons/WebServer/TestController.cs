@@ -23,7 +23,16 @@ namespace WebShard
         {
             return new ContentResponse(name);
         }
-        public IResponse Get()
+        public IResponse Abacate(string buttonid)
+        {
+            return new ContentResponse(buttonid.ToString());
+        }
+
+        public IResponse Post()
+        {
+            return new RedirectResponse("/");
+        }
+            public IResponse Get()
         {
             //   return new ContentResponse("Hello World!");
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <title>Test application</title>
+
+
     <script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/angular.min.js" type="text/javascript"></script>
@@ -10,50 +12,61 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
     <script type="text/javascript">
-        var rows = 4;
-        var colums = 6;
+function sendAjaxRequest(element,urlToSend) {
+             var clickedButton = element;
+              $.ajax({type: "POST",
+                  url: urlToSend,
+                  data: { id: clickedButton.val()},
+                  success:function(result){
+                    alert('ok');
+                  },
+                 error:function(result)
+                  {
+                  alert('error');
+                 }
+             });
+     }
 
-        var arrayToModify = [];
-        window.onload = function () {
-        var i = 1 , buttonContainer, newButton;
-        buttonContainer = document.getElementById('this_element_contains_my_buttons');
-        for (ir = 0; ir < rows; ir++) {
+        $(function(){
+        $('#btn').click(function() {
+        var column  = 3;
+        var row = 3;
+        var i = 1;
+        for(ir = 0; ir < row; ir ++){
+        for(ic = 0; ic < column; ic ++){
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.innerHTML = 'Press me';
+             button.id = i;
+        button.onclick = function() {
+      
+      sendAjaxRequest($(this),'/Abacate/');
+             
+        };
 
-        for (ic = 0; ic < colums; ic++) {
-
-
-        newButton = document.createElement('input');
-        newButton.type = 'button';
-        newButton.value = "test" + i;
-        newButton.id = i;
+        var container = document.getElementById('container');        
+       
+        container.appendChild(button);
         i++;
-
-        newButton.onclick = function () {
-        alert('You pressed '+this.id);
-        arrayToModify[arrayToModify.length] = this.id;
-        };
-
-        buttonContainer.appendChild(newButton);
-
-
-        }
+        }        
         var p = document.createElement ("br");
-        buttonContainer.appendChild(p);
+                   container.appendChild(p);
         }
-
-
-        };
-
+        });
+        });
     </script>
 </head>
 <body>
     <header><h4>Test application</h4></header>
     <div class="well-lg" ng-controller="testController">
-   
-        <div id='this_element_contains_my_buttons'></div>
+
+        <div id='container'></div>
+        <div>
+            <input id="btn" type="button" value="button" />
+        </div>
         <input type='button' onclick='alert(arrayToModify);' value='Show the buttons I have clicked' />
-        
-    </div>
-    <footer></footer>
+                </div>
+
+        <footer></footer>
 </body>
 </html>
