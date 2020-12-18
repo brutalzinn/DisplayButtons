@@ -241,12 +241,11 @@ namespace DisplayButtons
 
             var app = new HttpApplication();
             app.ControllerRegistry.Register<HelloWorldController>();
-            app.ControllerRegistry.Register<ResourcesController>();  
-            app.RouteTable.Add("/", new { controller = "HelloWorld" });
-             app.RouteTable.Add("/{action?}", new { controller = "Abacate" });
+            app.ControllerRegistry.Register<ResourcesController>();
+            //  app.RouteTable.Add("/{action?}", new { controller = "Test" });
                app.RouteTable.Add(@"/{resourcePath:(css|js|fonts)}/{resourceName:[a-zA-Z][a-zA-Z0-9\.\-]*}", new { controller = "Resources" });
 
-   
+            app.RouteTable.Add("/{buttonid?}", new { controller = "Abacate" });
 
             //      app.RouteTable.Add("/", new { action = new Func<IResponse>(() => new ContentResponse("Hello World!")) });
 
