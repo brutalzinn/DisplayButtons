@@ -126,8 +126,27 @@
     <ProjectReference Include="..\MoonSharp.Interpreter.netcore\MoonSharp.Interpreter.netcore.csproj" />
     <ProjectReference Include="..\Plugins\McMaster.NETCore.Plugins.csproj" />
     <ProjectReference Include="..\ProxyBackend\BackendProxy.csproj" />
+    <ProjectReference Include="..\WebShard-master\WebShard\WebShard.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="Content\css\bootstrap-theme.css.map" />
+    <None Include="Content\css\bootstrap.css.map" />
+    <None Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Index.html" />
+    <Content Include="Content\js\angular.min.js" />
+    <Content Include="Content\js\app.js" />
+    <Content Include="Content\js\bootstrap.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery-2.1.1.min.js" />
+    <Content Include="Content\js\npm.js" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Update="Controls\ColorSchemePreviewControl.cs">
       <SubType>UserControl</SubType>

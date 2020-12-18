@@ -25,6 +25,12 @@ using DisplayButtons.Bibliotecas.Helpers;
 using BackendAPI.Utils;
 using BackendAPI;
 using Misc;
+using WebShard.Filtering;
+using WebShard.Ioc;
+using WebShard.Routing;
+
+using BackendAPI.Objects;
+using WebShard;
 
 namespace DisplayButtons
 {
@@ -228,13 +234,32 @@ namespace DisplayButtons
                 FirstSetupForm firstRunForm = new FirstSetupForm();
                 Application.Run(firstRunForm);
                 if (!firstRunForm.FinishedSetup) return;
-            }      
-          //  EnsureBrowserEmulationEnabled("DisplayButtons.exe");
+            }
+            //  EnsureBrowserEmulationEnabled("DisplayButtons.exe");
 
-            new WebBrowserInstanceHelper().SetBrowserFeatureControl();
+
+
+            var app = new HttpApplication();
+            app.ControllerRegistry.Register<HelloWorldController>();
+            app.ControllerRegistry.Register<ResourcesController>();
+            //  app.RouteTable.Add("/{action?}", new { controller = "Test" });
+               app.RouteTable.Add(@"/{resourcePath:(css|js|fonts)}/{resourceName:[a-zA-Z][a-zA-Z0-9\.\-]*}", new { controller = "Resources" });
+
+            app.RouteTable.Add("/", new { controller = "HelloWorld" });
+
+            //      app.RouteTable.Add("/", new { action = new Func<IResponse>(() => new ContentResponse("Hello World!")) });
+
+
+            var server = new HttpWebServer(app);
+
+            var th = new Thread(server.Start);
+            th.Start();
+
 
             dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
-      
+
+
+            //   server.Stop();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 Initilizator.mode = 0;
