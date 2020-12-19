@@ -14,17 +14,20 @@
     <script type="text/javascript">
 function sendAjaxRequest(element,urlToSend) {
              var clickedButton = element;
-              $.ajax({type: "POST",
+              $.ajax({
+                  type: "POST",
                   url: urlToSend,
-                  data: { id: clickedButton.val()},
+                  data: { buttonid: clickedButton.attr('id')},
                   success:function(result){
-                    alert('ok');
+                    alert('ok');  
+        alert("meu button é " + clickedButton.attr('id'));
                   },
                  error:function(result)
                   {
                   alert('error');
                  }
              });
+    
      }
 
         $(function(){
@@ -37,7 +40,7 @@ function sendAjaxRequest(element,urlToSend) {
         var button = document.createElement('button');
         button.type = 'button';
         button.innerHTML = 'Press me';
-             button.id = i;
+        button.id = i;
         button.onclick = function() {
       
       sendAjaxRequest($(this),'/Abacate');

@@ -13,26 +13,41 @@ namespace WebShard
     public sealed class HelloWorldController
     {   
         private readonly IHttpRequestContext _request;
+        public class Model
+        {
+            public string buttonid { get; set; }
+         
 
+            public Model()
+            {
+
+            }
+
+            public Model(string _buttonid)
+            {
+                buttonid = _buttonid;
+    
+            }
+        }
         public  HelloWorldController(IHttpRequestContext request)
         {
             _request = request;
           
         }
-        public IResponse Test(string name, string action)
+  
+        public IResponse Abacate(Model model)
         {
-            return new ContentResponse(name);
-        }
-        public IResponse Abacate(string buttonid)
-        {
-            return new ContentResponse(buttonid.ToString());
-        }
+            Debug.WriteLine("ACTION: "+ model.buttonid);
 
-        public IResponse Post()
-        {
             return new RedirectResponse("/");
         }
-            public IResponse Get()
+
+        public IResponse Post(string model)
+        {
+        
+            return new RedirectResponse("/");
+        }
+        public IResponse Get()
         {
             //   return new ContentResponse("Hello World!");
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
