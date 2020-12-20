@@ -38,7 +38,7 @@ function sendAjaxRequest(element,urlToSend,buttonaction) {
         for(ic = 0; ic < column; ic ++){
         var button = document.createElement('button');
         button.type = 'button';
-        button.innerHTML = 'Press me';
+        button.innerHTML = 'Press me ' + i;
         button.id = i;
         button.onclick = function() {
       

@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using BackendAPI.Networking.TcpLib;
 using BackendAPI.Sdk;
-
+using BackendAPI.Objects;
 
 namespace WebShard
 {
@@ -51,11 +51,20 @@ namespace WebShard
                 int SlotID = model.buttonid;
                 Debug.WriteLine("ACTION: " + model.actionid + "Button id " + model.buttonid);
             // DevicePersistManager.GetDeckDeviceFromConnectionGuid(DevicePersistManager.GuidsFromConnections)
-            var device = DevicePersistManager.DeckDevicesFromConnection.FirstOrDefault();
-                device.Value.OnButtonInteraction(PerformedAction, SlotID);
-            
-           
+            DeckDevice device;
+            if (Debugger.IsAttached && DevicePersistManager.IsDeviceTest)
+            {   
+                device = DevicePersistManager.DeviceTest;
+             
+            }
+            else
+            {
 
+                device = DevicePersistManager.DeckDevicesFromConnection.FirstOrDefault().Value;
+
+            }
+
+device.OnButtonInteraction(PerformedAction, SlotID);
 
             return new RedirectResponse("/");
         }
@@ -71,7 +80,7 @@ namespace WebShard
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
               //         Debug.WriteLine(path + @"\Content\Index.html");
 
-            return new FileSystemResponse(path + @"\Content\Index.html", "text/html", "utf-8");
+            return new FileSystemResponse(path + @"\Content\Index.php", "text/php", "utf-8");
         }
         public IResponse JsonTest()
         {
