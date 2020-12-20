@@ -1,8 +1,10 @@
 ﻿using BackendAPI.DeckText;
+using BackendAPI.Events;
 using BackendAPI.Networking;
 using BackendAPI.Networking.Implementation;
 using BackendAPI.Objects;
 using BackendAPI.Objects.Implementation;
+using BackendProxy;
 using DisplayButtons.Controls;
 using DisplayButtons.Forms;
 using DisplayButtons.Properties;
@@ -36,12 +38,13 @@ namespace DisplayButtons.Helpers
 
                 var image = item.GetItemImage() ?? (new DeckImage(isFolder ? Resources.img_folder : Resources.img_item_default));
                 var seri = image.BitmapSerialized;
-                con.SendPacket(new SingleUniversalChangePacket(image)
+         var singleeventpacket  = new DeckItemSinglePacket(image)
                 {
                     ImageSlot = slot,
                     CurrentItem = item
 
-                });
+                };
+                Wrapper.events.Trigger("deckitemsinglechangepacket", singleeventpacket);
 
 
             }

@@ -21,6 +21,8 @@ using BackendAPI.DeckText;
 using BackendAPI.Networking;
 using BackendAPI.Networking.Implementation;
 using BackendAPI.Objects.Implementation;
+using BackendAPI.Events;
+using BackendProxy;
 
 namespace DisplayButtons.Controls
 {
@@ -207,12 +209,13 @@ namespace DisplayButtons.Controls
                         {
                             if (state != null)
                             {
-                                state.SendPacket(new SingleUniversalChangePacket(deckImage)
+                               var singlepacket = new DeckItemSinglePacket(deckImage)
                                 {
                                     ImageSlot = slot,
                                     CurrentItem = itemNew.GetDeckDefaultLayer
 
-                                });
+                                };
+                                Wrapper.events.Trigger("deckitemsinglechangepacket", singlepacket);
                             }
                         }
                         if (Tag is DynamicDeckItem item)
@@ -283,12 +286,15 @@ namespace DisplayButtons.Controls
                         {
                             if (state != null)
                             {
-                                state.SendPacket(new SingleUniversalChangePacket(deckImage)
+                             var singlepacket = new DeckItemSinglePacket(deckImage)
                                 {
                                     ImageSlot = slot,
                                     CurrentItem = itemNew.GetDeckDefaultLayer
 
-                                });
+                                };
+
+                                Wrapper.events.Trigger("deckitemsinglechangepacket", singlepacket);
+
                             }
                         }
                         if (Tag is DynamicDeckItem item)
