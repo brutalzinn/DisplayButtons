@@ -9,25 +9,32 @@
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/angular.min.js" type="text/javascript"></script>
     <script src="js/app.js" type="text/javascript"></script>
+    <script src="js/rx.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+
+
+
+
+
+                                  
     <script type="text/javascript">
-function sendAjaxRequest(element,urlToSend,buttonaction) {
-             var clickedButton = element;
-              $.ajax({
-                  type: "POST",
-                  url: urlToSend,
-                  data: { buttonid: clickedButton.attr('id'),actionid: buttonaction},
-                  success:function(result){
-      console.log('deu certo');
-                  },
-                 error:function(result)
-                  {
-                  alert('error');
-                 }
-             });
-    
-     }
+        function sendAjaxRequest(element,urlToSend,buttonaction) {
+        var clickedButton = element;
+        $.ajax({
+        type: "POST",
+        url: urlToSend,
+        data: { buttonid: clickedButton.attr('id'),actionid: buttonaction},
+        success:function(result){
+        console.log('deu certo');
+        },
+        error:function(result)
+        {
+        alert('error');
+        }
+        });
+
+        }
 
         $(function(){
         $('#btn').click(function() {
@@ -41,18 +48,18 @@ function sendAjaxRequest(element,urlToSend,buttonaction) {
         button.innerHTML = 'Press me ' + i;
         button.id = i;
         button.onclick = function() {
-      
-      sendAjaxRequest($(this),'/Abacate',1);
-             
+
+        sendAjaxRequest($(this),'/ButtonClick',1);
+
         };
 
-        var container = document.getElementById('container');        
-       
+        var container = document.getElementById('container');
+
         container.appendChild(button);
         i++;
-        }        
+        }
         var p = document.createElement ("br");
-                   container.appendChild(p);
+        container.appendChild(p);
         }
         });
         });

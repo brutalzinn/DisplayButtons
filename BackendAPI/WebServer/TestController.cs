@@ -15,22 +15,40 @@ namespace WebShard
 {
 
     public sealed class HelloWorldController
-    {   
+    {
+      
         private readonly IHttpRequestContext _request;
-        public class Model
+        public class ModelButtonClick
         {
             public int  buttonid { get; set; }
             public int  actionid { get; set; }
 
-            public Model()
+            public ModelButtonClick()
             {
 
             }
 
-            public Model(int _buttonid,int _actionid)
+            public ModelButtonClick(int _buttonid,int _actionid)
             {
                 buttonid = _buttonid;
                 actionid = _actionid;
+            }
+        }
+        public ModelButtonImage buttonimage { get; set; }
+        public class ModelButtonImage
+        {
+            public IDictionary<int, DeckImage> toSend = new Dictionary<int, DeckImage>();
+            public int buttonid { get; set; }
+
+            public ModelButtonImage()
+            {
+
+            }
+
+            public ModelButtonImage(DeckImage img, int buttonid)
+            {
+                toSend.Add(buttonid, img);
+          
             }
         }
         public ButtonShapes.ButtonAction PerformedAction { get; set; }
@@ -39,8 +57,13 @@ namespace WebShard
             _request = request;
           
         }
- 
-        public IResponse Abacate(Model model)
+        public IResponse getButtonImage()
+        {
+
+
+            return new JsonResponse(buttonimage);
+        }
+            public IResponse ButtonClick(ModelButtonClick model)
         {
 
 
@@ -80,7 +103,7 @@ device.OnButtonInteraction(PerformedAction, SlotID);
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
               //         Debug.WriteLine(path + @"\Content\Index.html");
 
-            return new FileSystemResponse(path + @"\Content\Index.php", "text/php", "utf-8");
+            return new FileSystemResponse(path + @"\Content\Index.html", "text/html", "utf-8");
         }
         public IResponse JsonTest()
         {

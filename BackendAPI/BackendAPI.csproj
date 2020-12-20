@@ -23,7 +23,7 @@
     <None Remove="Content\css\bootstrap.css" />
     <None Remove="Content\css\bootstrap.min.css" />
     <None Remove="Content\fonts\glyphicons-halflings-regular.svg" />
-    <None Remove="Content\Index.php" />
+    <None Remove="Content\Index.html" />
     <None Remove="Content\js\angular.min.js" />
     <None Remove="Content\js\app.js" />
     <None Remove="Content\js\bootstrap.js" />
@@ -38,10 +38,12 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\Index.php">
+    <Content Include="Content\Index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\js\angular.min.js" />
+    <Content Include="Content\js\angular.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\js\app.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -149,6 +151,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Content\js\rx.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

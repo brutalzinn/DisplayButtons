@@ -3,10 +3,12 @@ using BackendAPI.Networking.IO;
 using BackendAPI.Objects;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Collections.Specialized;
 namespace BackendAPI.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer)]
@@ -27,11 +29,13 @@ namespace BackendAPI.Networking.Implementation
 
         public override void ToOutputStream(DataOutputStream writer)
         {
+
+
             //The number of images to send
-            writer.WriteInt(toSend.Count);
-            foreach (var item in toSend) {
-                SendDeckImage(writer, item.Key, item.Value);
-            }
+           // writer.WriteInt(toSend.Count);
+           // foreach (var item in toSend) {
+             //   SendDeckImage(writer, item.Key, item.Value);
+           // }
 
         }
 
@@ -44,6 +48,19 @@ namespace BackendAPI.Networking.Implementation
                 writer.WriteInt(img.InternalBitmap.Length);
                 //Write the byte array
                 writer.Write(img.InternalBitmap);
+        
+
+                string base64Image = img.ImageToBase64(img.Bitmap,System.Drawing.Imaging.ImageFormat.Jpeg);
+                using (WebClient client = new WebClient())
+                {
+                    byte[] response = client.UploadValues("http://127.0.0.1", new NameValueCollection()
+                {
+                    { "myImageData", base64Image }
+                });
+
+
+                }
+
             }
         }
 
@@ -51,5 +68,6 @@ namespace BackendAPI.Networking.Implementation
         {
             return new SlotImageChangeChunkPacket();
         }
+      
     }
 }

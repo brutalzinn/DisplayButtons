@@ -1607,7 +1607,7 @@ namespace DisplayButtons.Forms
             if (con != null)
             {
 
-                var packet = new SlotUniversalChangeChunkPacket();
+                var packet = new DeckItemChangeAllImagePack();
 
                 List<IDeckItem> items = folder.GetDeckItems();
 
@@ -1633,11 +1633,11 @@ namespace DisplayButtons.Forms
                     packet.AddToQueue(folder.GetItemIndex(item), item.GetDeckDefaultLayer);
 
                 }
-
-                con.SendPacket(packet);
-                //  con.SendPacket(packet_label);
-                //    con.SendPacket(packet_label);
-                var clearPacket = new SlotImageClearChunkPacket();
+                Wrapper.events.Trigger("deckitemallitemchanged", packet);
+              //con.SendPacket(packet);
+              //  con.SendPacket(packet_label);
+              //    con.SendPacket(packet_label);
+              var clearPacket = new DeckItemClearAllImagePack();
                 //  var clearPacket_labels = new SlotLabelButtonClearChunkPacket();
                 for (int i = 1; i < MainForm.Instance.CurrentDevice.CurrentProfile.Matriz.Calc + 1; i++)
                 {
@@ -1649,7 +1649,7 @@ namespace DisplayButtons.Forms
                 }
 
 
-                con.SendPacket(clearPacket);
+                Wrapper.events.Trigger("deckitemclearallitempacket", packet);
 
                 //    con.SendPacket(clearPacket_labels);
             }
