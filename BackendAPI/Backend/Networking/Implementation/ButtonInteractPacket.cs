@@ -7,27 +7,22 @@ using BackendAPI.Networking.IO;
 using BackendAPI.Networking.Attributes;
 using BackendAPI.Networking.TcpLib;
 using BackendAPI.Utils;
+using BackendAPI.Sdk;
 
 namespace BackendAPI.Networking.Implementation
 {
     [Architecture(PacketArchitecture.ClientToServer)]
     public class ButtonInteractPacket : INetworkPacket
     {
-        public ButtonAction PerformedAction { get; set; }
+        public ButtonShapes.ButtonAction PerformedAction { get; set; }
         public int SlotID { get; set; }
-        public enum ButtonAction
-        {
-            None = -1,
-            ButtonClick = 0,
-            ButtonDown = 1,
-            ButtonUp = 2
-        }
+    
 
         public override void FromInputStream(DataInputStream reader)
         {
             int actionID = reader.ReadInt();
             try {
-                PerformedAction = (ButtonAction)actionID;
+                PerformedAction = (ButtonShapes.ButtonAction)actionID;
                 SlotID = reader.ReadInt();
             } catch (Exception) {
                 //Ignore malformed packet
@@ -38,7 +33,7 @@ namespace BackendAPI.Networking.Implementation
         public override void Execute(ConnectionState state)
         {
             var device = DevicePersistManager.GetDeckDeviceFromConnectionGuid(state.ConnectionGuid);
-            if (PerformedAction != ButtonAction.ButtonClick)
+            if (PerformedAction != ButtonShapes.ButtonAction.ButtonClick)
                 device.OnButtonInteraction(PerformedAction, SlotID);
         }
   

@@ -1,6 +1,7 @@
 ﻿
 
 using BackendAPI.Networking.Implementation;
+using BackendAPI.Sdk;
 using BackendAPI.Utils;
 using SharpAdbClient;
 using System;
@@ -18,14 +19,14 @@ namespace BackendAPI.Objects
 
         public class ButtonInteractionEventArgs : EventArgs
         {
-            public ButtonInteractionEventArgs(int slotID, ButtonInteractPacket.ButtonAction performedAction)
+            public ButtonInteractionEventArgs(int slotID, ButtonShapes.ButtonAction performedAction)
             {
                 SlotID = slotID;
                 PerformedAction = performedAction;
             }
 
             public int SlotID { get; set; }
-            public ButtonInteractPacket.ButtonAction PerformedAction { get; set; }
+            public ButtonShapes.ButtonAction PerformedAction { get; set; }
         }
 
 
@@ -33,7 +34,7 @@ namespace BackendAPI.Objects
         /// Called to signal to subscribers that a button was interacted with
         /// </summary>
         public event EventHandler<ButtonInteractionEventArgs> ButtonInteraction;
-        public virtual void OnButtonInteraction(ButtonInteractPacket.ButtonAction performedAction, int slotID)
+        public virtual void OnButtonInteraction(ButtonShapes.ButtonAction performedAction, int slotID)
         {
             var eh = ButtonInteraction;
 

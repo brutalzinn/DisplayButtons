@@ -227,7 +227,10 @@ namespace DisplayButtons.Forms
         public void StartupMethods()
         {
 
-         
+            DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
+
+            DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
+
             StartUsbMode();
 
 
@@ -621,9 +624,6 @@ namespace DisplayButtons.Forms
         public void StartUsbMode()
         {
 
-            DevicePersistManager.DeviceConnected += DevicePersistManager_DeviceConnected;
-
-            DevicePersistManager.DeviceDisconnected += DevicePersistManager_DeviceDisconnected;
 
 
         }
@@ -1551,7 +1551,7 @@ namespace DisplayButtons.Forms
                         {
                             if (item is DynamicBackItem backItem)
                             {
-                                if (e.PerformedAction != ButtonInteractPacket.ButtonAction.ButtonUp) return;
+                                if (e.PerformedAction != ButtonShapes.ButtonAction.ButtonUp) return;
                                 //Navigate one up!
                                 device.CurrentProfile.Currentfolder = device.CurrentProfile.Currentfolder.GetParent();
                                 SendItemsToDevice(CurrentDevice, device.CurrentProfile.Currentfolder);
@@ -1565,17 +1565,17 @@ namespace DisplayButtons.Forms
                         {
                             switch (e.PerformedAction)
                             {
-                                case ButtonInteractPacket.ButtonAction.ButtonDown:
+                                case ButtonShapes.ButtonAction.ButtonDown:
                                     deckItem.DeckAction.OnButtonDown(device);
                                     break;
 
-                                case ButtonInteractPacket.ButtonAction.ButtonUp:
+                                case ButtonShapes.ButtonAction.ButtonUp:
                                     deckItem.DeckAction.OnButtonUp(device);
                                     break;
                             }
                         }
                     }
-                    else if (item is DynamicDeckFolder deckFolder && e.PerformedAction == ButtonInteractPacket.ButtonAction.ButtonUp)
+                    else if (item is DynamicDeckFolder deckFolder && e.PerformedAction == ButtonShapes.ButtonAction.ButtonUp)
                     {
                         device.CurrentProfile.Currentfolder = deckFolder;
                         //ignoreOnce.Add(new Tuple<Guid, int>(device.DeviceGuid, e.SlotID));
@@ -4033,18 +4033,11 @@ ActionImagePlaceHolder.Image = bmp;
             DevicePersistManager.IsDeviceTest = true;
 
             DevicePersistManager.DeviceTest = new DeckDevice(new Guid("161fb525-7004-4cb1-9487-6f5106af32da"), "Teste");
-           
-            CurrentDevice = DevicePersistManager.DeviceTest;
-           
-           //DevicePersistManager.DeviceTest = deckDevice;
+
+            //DevicePersistManager.DeviceTest = deckDevice;
+        CurrentDevice = DevicePersistManager.DeviceTest;
             DevicePersistManager.PersistDevice(DevicePersistManager.DeviceTest);
-           
-
-
-         
-            ProfileTestDeckHelper.SetupPerfil(DevicePersistManager.DeviceTest);
-
-    //        ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value, DevicePersistManager.DeviceTest);
+            // ProfileTestDeckHelper.SetupPerfil(DevicePersistManager.DeviceTest);
             DevicePersistManager.OnDeviceConnected(this, DevicePersistManager.DeviceTest);
         }
 
