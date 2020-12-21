@@ -18,41 +18,41 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Content\css\bootstrap-theme.css" />
-    <None Remove="Content\css\bootstrap-theme.min.css" />
-    <None Remove="Content\css\bootstrap.css" />
-    <None Remove="Content\css\bootstrap.min.css" />
-    <None Remove="Content\fonts\glyphicons-halflings-regular.svg" />
+    <None Remove="wwwroot\css\bootstrap-theme.css" />
+    <None Remove="wwwroot\css\bootstrap-theme.min.css" />
+    <None Remove="wwwroot\css\bootstrap.css" />
+    <None Remove="wwwroot\css\bootstrap.min.css" />
+    <None Remove="wwwroot\fonts\glyphicons-halflings-regular.svg" />
     <None Remove="Content\Index.html" />
-    <None Remove="Content\js\angular.min.js" />
-    <None Remove="Content\js\app.ts" />
-    <None Remove="Content\js\bootstrap.js" />
-    <None Remove="Content\js\bootstrap.min.js" />
-    <None Remove="Content\js\jquery-3.5.1.min.js" />
-    <None Remove="Content\js\npm.js" />
+    <None Remove="wwwroot\js\angular.min.js" />
+    <None Remove="wwwroot\js\app.ts" />
+    <None Remove="wwwroot\js\bootstrap.js" />
+    <None Remove="wwwroot\js\bootstrap.min.js" />
+    <None Remove="wwwroot\js\jquery-3.5.1.min.js" />
+    <None Remove="wwwroot\js\npm.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Content\css\bootstrap-theme.css" />
-    <Content Include="Content\css\bootstrap-theme.min.css" />
-    <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\Index.html">
+    <Content Include="wwwroot\css\bootstrap-theme.css" />
+    <Content Include="wwwroot\css\bootstrap-theme.min.css" />
+    <Content Include="wwwroot\css\bootstrap.css" />
+    <Content Include="wwwroot\css\bootstrap.min.css" />
+    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="wwwroot\Index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\js\angular.min.js">
+    <Content Include="wwwroot\js\angular.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\js\app.ts">
+    <Content Include="wwwroot\js\app.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\js\bootstrap.js" />
-    <Content Include="Content\js\bootstrap.min.js" />
-    <Content Include="Content\js\jquery-3.5.1.min.js">
+    <Content Include="wwwroot\js\bootstrap.js" />
+    <Content Include="wwwroot\js\bootstrap.min.js" />
+    <Content Include="wwwroot\js\jquery-3.5.1.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\js\npm.js" />
+    <Content Include="wwwroot\js\npm.js" />
   </ItemGroup>
   <ItemGroup>
 
@@ -63,6 +63,10 @@
 
 
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+
+
+
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
 
 
 
@@ -161,21 +165,27 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Content\js\angular.js">
+    <None Update="wwwroot\Default.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\js\app.component.ts">
+    <None Update="wwwroot\js\angular.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\js\app.module.ts">
+    <None Update="wwwroot\js\app.component.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\js\http-test.service.ts">
+    <None Update="wwwroot\js\app.module.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\js\rx.js">
+    <None Update="wwwroot\js\http-test.service.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="wwwroot\js\rx.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
   </ItemGroup>
 
 </Project>

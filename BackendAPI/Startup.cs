@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+
 namespace BackendAPI
 {
     public class Startup
@@ -15,6 +19,8 @@ namespace BackendAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDirectoryBrowser();
+
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -23,6 +29,9 @@ namespace BackendAPI
                 app.UseDeveloperExceptionPage();
             }
             app.UseMvc();
+            app.UseStaticFiles();
+    
+
         }
     }
 }
