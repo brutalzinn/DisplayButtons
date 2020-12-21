@@ -176,7 +176,8 @@ namespace DisplayButtons.Controls
                             if (state != null)
                             {
                                 //Send clear packet
-                                state.SendPacket(new SlotImageClearPacket(slot));
+                                var packet = new DeckItemClearSinglePacket(slot);
+                                Wrapper.events.Trigger("deckitemsingleclearpacket", packet);
                             }
                             return;
                         }
@@ -265,7 +266,8 @@ namespace DisplayButtons.Controls
                         if (value == null)
                         {
                             //Send clear packet
-                            state?.SendPacket(new SlotImageClearPacket(slot));
+                            var packet = new DeckItemClearSinglePacket(slot);
+                            Wrapper.events.Trigger("deckitemsingleclearpacket", packet);
                             return;
                         }
 

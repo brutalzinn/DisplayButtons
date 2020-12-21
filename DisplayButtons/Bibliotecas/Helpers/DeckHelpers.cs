@@ -25,8 +25,12 @@ namespace DisplayButtons.Helpers
         public static extern int GetDoubleClickTime();
         public static void ClearSingleItemToDevice(DeckDevice device, int slot)
         {
-            var con = device.GetConnection();
-            con.SendPacket(new SlotImageClearPacket(slot));
+            //    var con = device.GetConnection();
+            //  con.SendPacket(new SlotImageClearPacket(slot));
+            var packet = new DeckItemClearSinglePacket(slot);
+            Wrapper.events.Trigger("deckitemsingleclearpacket", packet);
+
+
 
         }
         public static void SendSingleItemToDevice(DeckDevice device, int slot, DeckItemMisc item)

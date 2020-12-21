@@ -10,6 +10,8 @@ using System.Text;
 using BackendAPI.Networking.TcpLib;
 using BackendAPI.Sdk;
 using BackendAPI.Objects;
+using BackendProxy;
+using BackendAPI.Events;
 
 namespace WebShard
 {
@@ -34,23 +36,7 @@ namespace WebShard
                 actionid = _actionid;
             }
         }
-        public ModelButtonImage buttonimage { get; set; }
-        public class ModelButtonImage
-        {
-            public IDictionary<int, DeckImage> toSend = new Dictionary<int, DeckImage>();
-            public int buttonid { get; set; }
-
-            public ModelButtonImage()
-            {
-
-            }
-
-            public ModelButtonImage(DeckImage img, int buttonid)
-            {
-                toSend.Add(buttonid, img);
-          
-            }
-        }
+    
         public ButtonShapes.ButtonAction PerformedAction { get; set; }
         public  HelloWorldController(IHttpRequestContext request)
         {
@@ -59,11 +45,39 @@ namespace WebShard
         }
         public IResponse getButtonImage()
         {
+            object result = null;
+            Wrapper.events.On("deckitemsinglechangepacket", (e) => {
+                // Cast event argrument to your event object
+                var obj = (DeckItemSinglePacket)e;
+      result = obj;
 
+             
+            });
+            Wrapper.events.On("deckitemallitemchanged", (e) => {
+                // Cast event argrument to your event object
+                var obj = (DeckItemChangeAllImagePack)e;
 
-            return new JsonResponse(buttonimage);
+                result = obj;
+
+            });
+            Wrapper.events.On("deckitemsingleclearpacket", (e) => {
+                // Cast event argrument to your event object
+                var obj = (DeckItemClearSinglePacket)e;
+
+                result = obj;
+
+            });
+            Wrapper.events.On("deckitemclearallitempacket", (e) => {
+                // Cast event argrument to your event object
+                var obj = (DeckItemClearAllImagePack)e;
+
+                result = obj;
+
+            });
+            return new JsonResponse(result);
+
         }
-            public IResponse ButtonClick(ModelButtonClick model)
+        public IResponse ButtonClick(ModelButtonClick model)
         {
 
 

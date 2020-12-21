@@ -31,6 +31,8 @@ using WebShard.Routing;
 
 using BackendAPI.Objects;
 using WebShard;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore;
 
 namespace DisplayButtons
 {
@@ -235,31 +237,13 @@ namespace DisplayButtons
                 Application.Run(firstRunForm);
                 if (!firstRunForm.FinishedSetup) return;
             }
-            //  EnsureBrowserEmulationEnabled("DisplayButtons.exe");
-
-
-
-            var app = new HttpApplication();
-            app.ControllerRegistry.Register<HelloWorldController>(); 
-       
-          
     
-            app.ControllerRegistry.Register<ResourcesController>();
-            //  app.RouteTable.Add("/{action?}", new { controller = "Test" });
-               app.RouteTable.Add(@"/{resourcePath:(css|js|fonts)}/{resourceName:[a-zA-Z][a-zA-Z0-9\.\-]*}", new { controller = "Resources" });
-     app.RouteTable.Add("/{action?}", new { controller = "HelloWorld" });  
- 
-            //      app.RouteTable.Add("/", new { action = new Func<IResponse>(() => new ContentResponse("Hello World!")) });
-
-       
-            var server = new HttpWebServer(app);
-
-            var th = new Thread(server.Start);
-            th.Start();
+     
 
 
             dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
 
+            CreateWebHostBuilder(args).Build().RunAsync();
 
             //   server.Stop();
             if (form.ShowDialog() == DialogResult.OK)
@@ -403,5 +387,8 @@ Application.Run(new MainForm());
             Trace.WriteLine("==================");
             Trace.WriteLine("");
         }
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+         WebHost.CreateDefaultBuilder(args)
+             .UseStartup<Startup>();
     }
 }
