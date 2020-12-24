@@ -184,7 +184,7 @@ namespace DisplayButtons.Forms
         {
 
             var keyInfo = new KeyInfoAppSettingsGlobal(ApplicationSettingsManager.Settings.keyBackFolder.ModifierKeys, ApplicationSettingsManager.Settings.keyBackFolder.Keys);
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
+            dynamic form = Activator.CreateInstance(DisplayButtons.Bibliotecas.Helpers.UsbMode.FindType("DisplayButtons.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
 
             var execAction = new AppSettings() as AppSettings;
             execAction.keyBackFolder = ApplicationSettingsManager.Settings.keyBackFolder;
@@ -207,7 +207,7 @@ namespace DisplayButtons.Forms
 
             
             var keyInfo = new KeyInfoAppSettingsGlobal(ApplicationSettingsManager.Settings.keyMainFolder.ModifierKeys, ApplicationSettingsManager.Settings.keyMainFolder.Keys);
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
+            dynamic form = Activator.CreateInstance(DisplayButtons.Bibliotecas.Helpers.UsbMode.FindType("DisplayButtons.Forms.ActionHelperForms.MagnetiteControlsSelector")) as Form;
 
             var execAction = new AppSettings() as AppSettings;
             execAction.keyMainFolder = ApplicationSettingsManager.Settings.keyMainFolder;

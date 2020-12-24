@@ -1,4 +1,5 @@
-﻿using BackendAPI.Networking;
+﻿using BackendAPI;
+using BackendAPI.Networking;
 using BackendAPI.Networking.Implementation;
 using BackendAPI.Networking.TcpLib;
 using BackendAPI.Utils;
@@ -16,7 +17,7 @@ using System.Timers;
 using System.Xml.Serialization;
 using static BackendAPI.Utils.DevicePersistManager;
 
-namespace BackendAPI.Objects
+namespace DisplayButtons.Bibliotecas.Helpers
 {
 
  

@@ -10,8 +10,8 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using SharpAdbClient;
 using DisplayButtons.Forms;
-using BackendAPI;
 using DisplayButtons;
+using BackendAPI;
 
 namespace Misc
 {
@@ -41,7 +41,7 @@ namespace Misc
             else
             {
 
-                var list = Program.device_list;
+                var list = DisplayButtons.Program.device_list;
                 result = new Size(Width * 2, Math.Max(controlSize * list.Count, controlSize) + 2);
 
             }
@@ -65,7 +65,7 @@ namespace Misc
             frm.Location = new Point(rect.Right - frm.Width, rect.Bottom);
             frm.Deactivate += (s, ee) => frm.Dispose();
             Size controlFinalSize = new Size(frm.DisplayRectangle.Width, controlSize);
-            if (Program.mode == 0)
+            if (DisplayButtons.Program.mode == 0)
             {
              
                 //Load devices
@@ -103,7 +103,7 @@ namespace Misc
             
                 //  var devices = AdbClient.Instance.GetDevices();
              
-                foreach (DeviceData device in Program.device_list)
+                foreach (DeviceData device in DisplayButtons.Program.device_list)
                 {
                     
                    
@@ -161,7 +161,7 @@ namespace Misc
                 int result = 0;
                 try
                 {
-                    if (Program.mode == 0)
+                    if (DisplayButtons.Program.mode == 0)
                     {
 
                          result = Initilizator.ServerThread.TcpServer?.Connections.OfType<ConnectionState>().Select(m => m.ConnectionGuid).Count(DevicePersistManager.IsDeviceConnected) ?? 0;
@@ -196,7 +196,7 @@ namespace Misc
 private void UpdateConnectedDevices()
         {
 
-            if (Program.mode == 0)
+            if (DisplayButtons.Program.mode == 0)
             {
 
 
@@ -261,8 +261,8 @@ private void UpdateConnectedDevices()
                         {
                             
                                 Debug.WriteLine("Device desconectada:" + item.DeviceName + " STATUS USB: " + item.DeviceUsb.State);
-                                Program.client.RemoveAllForwards(item.DeviceUsb);
-                                Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
+                            DisplayButtons.Program.client.RemoveAllForwards(item.DeviceUsb);
+                            DisplayButtons.Program.client.CreateForward(item.DeviceUsb, "tcp:5095", "tcp:5095", true);
                             //  Program.client.ExecuteRemoteCommand("am force-stop net.nickac.DisplayButtons", item.DeviceUsb, null);
                             //     Thread.Sleep(1400);
                             //      Program.client.ExecuteRemoteCommand("am start -a android.intent.action.VIEW -e mode 1 net.nickac.DisplayButtons/.MainActivity", item.DeviceUsb, null);

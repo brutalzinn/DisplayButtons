@@ -90,7 +90,7 @@ namespace DisplayButtons.Bibliotecas.DeckEvents
         // type = 1 is action
         public void ToExecuteFormGeneral(int type)
         {
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
+            dynamic form = Activator.CreateInstance(DisplayButtons.Bibliotecas.Helpers.UsbMode.FindType("DisplayButtons.Forms.EventSystem.EventCreateNew")) as Form;
 
             form.FillComboBox(type);
             if (form.ShowDialog() == DialogResult.OK)

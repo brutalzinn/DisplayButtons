@@ -36,7 +36,7 @@ namespace DisplayButtons.BackendAPI.Objects
         public void AddPerfil()
         {
 
-            dynamic form = Activator.CreateInstance(UsbMode.FindType("DisplayButtons.Forms.PerfilEditor")) as Form;
+            dynamic form = Activator.CreateInstance(DisplayButtons.Bibliotecas.Helpers.UsbMode.FindType("DisplayButtons.Forms.PerfilEditor")) as Form;
 
             if (form.ShowDialog() == DialogResult.OK)
             {
