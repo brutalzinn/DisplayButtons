@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UseWPF>true</UseWPF>
+   
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
@@ -61,7 +61,7 @@
 
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
 
-    <PackageReference Include="PresentationFramework" Version="4.6.0" />
+
 
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
 
@@ -162,11 +162,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Update="wwwroot\Default.aspx">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Default.cs</LastGenOutput>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="wwwroot\js\angular.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -185,9 +180,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>
