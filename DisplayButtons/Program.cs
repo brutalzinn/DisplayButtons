@@ -38,7 +38,7 @@ namespace DisplayButtons
 {
 
     
-   public static class Program
+    static class Program
     {
         
 

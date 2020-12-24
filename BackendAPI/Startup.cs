@@ -1,45 +1,36 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
-public class Startup
+namespace BackendAPI
 {
-    public Startup(IConfiguration configuration)
+    public class Startup
     {
-        Configuration = configuration;
-    }
-
-    public IConfiguration Configuration { get; }
-
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddRazorPages();
-    }
-
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        if (env.IsDevelopment())
+        public Startup(IConfiguration configuration)
         {
-            app.UseDeveloperExceptionPage();
+            Configuration = configuration;
         }
-        else
+        public IConfiguration Configuration { get; }
+        public void ConfigureServices(IServiceCollection services)
         {
-            app.UseExceptionHandler("/Error");
-            app.UseHsts();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
         }
-
-   //     app.UseHttpsRedirection();
-        app.UseStaticFiles();
-
-        app.UseRouting();
-
-        app.UseAuthorization();
-
-        app.UseEndpoints(endpoints =>
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            endpoints.MapRazorPages();
-        });
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseMvc();
+            app.UseStaticFiles();
+
+            app.UseFileServer(enableDirectoryBrowsing: true);
+        }
     }
 }
