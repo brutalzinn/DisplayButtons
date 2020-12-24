@@ -12,6 +12,7 @@ using SharpAdbClient;
 using DisplayButtons.Forms;
 using BackendAPI;
 using DisplayButtons;
+using Program = DisplayButtons.Program;
 
 namespace Misc
 {
@@ -65,7 +66,7 @@ namespace Misc
             frm.Location = new Point(rect.Right - frm.Width, rect.Bottom);
             frm.Deactivate += (s, ee) => frm.Dispose();
             Size controlFinalSize = new Size(frm.DisplayRectangle.Width, controlSize);
-            if (Program.mode == 0)
+            if (DisplayButtons.Program.mode == 0)
             {
              
                 //Load devices

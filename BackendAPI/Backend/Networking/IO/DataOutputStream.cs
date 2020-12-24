@@ -231,10 +231,10 @@ namespace BackendAPI.Networking.IO
         }
 
 
-        public unsafe static int FloatToUInt32Bits(float f)
-        {
-            return *(int*)&f;
-        }
+        //public unsafe static int FloatToUInt32Bits(float f)
+        //{
+        //    return *(int*)&f;
+        //}
 
         /**
         * Converts the float argument to an <code>int</code> using the
@@ -249,10 +249,10 @@ namespace BackendAPI.Networking.IO
         * @see        java.io.FilterOutputStream#out
         * @see        java.lang.Float#floatToIntBits(float)
         */
-        public void WriteFloat(float v)
-        {
-            WriteInt(FloatToUInt32Bits(v));
-        }
+        //public void WriteFloat(float v)
+        //{
+        //    WriteInt(FloatToUInt32Bits(v));
+        //}
 
         /**
         * Converts the double argument to a <code>long</code> using the
