@@ -7,13 +7,22 @@
     <OutputType>Library</OutputType>
     <Nullable>disable</Nullable>
     <RootNamespace>BackendAPI</RootNamespace>
+
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <MvcBuildViews>true</MvcBuildViews>
+
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>C:\Users\rober\Documents\ButtonDeck\bin\netcoreapp3.1\</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Content\**" />
+    <Content Remove="Content\**" />
+    <EmbeddedResource Remove="Content\**" />
+    <None Remove="Content\**" />
+  </ItemGroup>
 
 
 
@@ -127,10 +136,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-    <Folder Include="NovaPasta\" />
-    <Folder Include="Pages\Shared\" />
-  </ItemGroup>
-
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
 </Project>

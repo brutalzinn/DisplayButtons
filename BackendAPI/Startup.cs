@@ -25,9 +25,12 @@ namespace BackendAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0)  ;
             services.AddControllersWithViews();
-
+            services.AddRazorPages()
+   .AddRazorPagesOptions(options => {
+       options.RootDirectory = "/Pages";
+   }); ;
 
         }
 

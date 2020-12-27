@@ -135,9 +135,7 @@
     <Compile Update="Controls\DeckDeviceInformationControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Controls\ImageModernButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Update="Controls\ImageModernButton.cs" />
     <Compile Update="Controls\PlaceHolderTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
