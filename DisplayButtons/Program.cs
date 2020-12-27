@@ -33,6 +33,7 @@ using BackendAPI.Objects;
 using WebShard;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
+using Microsoft.Extensions.Hosting;
 
 namespace DisplayButtons
 {
@@ -242,6 +243,7 @@ namespace DisplayButtons
 
 
             dynamic form = Activator.CreateInstance(FindType("DisplayButtons.Forms.ActionHelperForms.MainFormMenuOption")) as Form;
+            Debug.WriteLine("DIRECTORY: " + Directory.GetCurrentDirectory());
 
             CreateWebHostBuilder(args).Build().RunAsync();
 
@@ -388,7 +390,9 @@ Application.Run(new MainForm());
             Trace.WriteLine("");
         }
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-         WebHost.CreateDefaultBuilder(args)
-             .UseStartup<Startup>();
+              WebHost.CreateDefaultBuilder(args)
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                  .UseStartup<Startup>();
     }
 }

@@ -175,6 +175,7 @@
   </ItemGroup>
   <PropertyGroup>
     <RestorePackagesPath>..\packages</RestorePackagesPath>
+    <StartupObject>DisplayButtons.Program</StartupObject>
       
   </PropertyGroup>
   <ItemGroup>

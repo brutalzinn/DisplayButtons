@@ -7,6 +7,7 @@
     <StartupObject></StartupObject>
     <OutputType>Library</OutputType>
     <Nullable>disable</Nullable>
+    <RootNamespace>BackendAPI</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -15,45 +16,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="BackendAPI\**" />
-    <EmbeddedResource Remove="BackendAPI\**" />
-    <None Remove="BackendAPI\**" />
+    <None Remove="Views\Index\Index.cshtml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="wwwroot\css\bootstrap-theme.css" />
-    <None Remove="wwwroot\css\bootstrap-theme.min.css" />
-    <None Remove="wwwroot\css\bootstrap.css" />
-    <None Remove="wwwroot\css\bootstrap.min.css" />
-    <None Remove="wwwroot\fonts\glyphicons-halflings-regular.svg" />
-    <None Remove="Content\Index.html" />
-    <None Remove="wwwroot\js\angular.min.js" />
-    <None Remove="wwwroot\js\app.ts" />
-    <None Remove="wwwroot\js\bootstrap.js" />
-    <None Remove="wwwroot\js\bootstrap.min.js" />
-    <None Remove="wwwroot\js\jquery-3.5.1.min.js" />
-    <None Remove="wwwroot\js\npm.js" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="wwwroot\css\bootstrap-theme.css" />
-    <Content Include="wwwroot\css\bootstrap-theme.min.css" />
-    <Content Include="wwwroot\css\bootstrap.css" />
-    <Content Include="wwwroot\css\bootstrap.min.css" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="wwwroot\js\angular.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="wwwroot\js\app.ts">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="wwwroot\js\bootstrap.js" />
-    <Content Include="wwwroot\js\bootstrap.min.js" />
-    <Content Include="wwwroot\js\jquery-3.5.1.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="wwwroot\js\npm.js" />
-  </ItemGroup>
+
+
   <ItemGroup>
 
 
@@ -165,24 +133,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Update="wwwroot\js\angular.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="wwwroot\js\app.component.ts">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="wwwroot\js\app.module.ts">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="wwwroot\js\http-test.service.ts">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="wwwroot\js\rx.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Content\" />
+    <Folder Include="NovaPasta\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
+    <Resource Include="Views\Index\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
