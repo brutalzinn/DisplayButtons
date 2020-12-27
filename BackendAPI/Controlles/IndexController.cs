@@ -5,7 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 
 using Microsoft.AspNetCore.Mvc;
-using _666.Pages;
+
 
 namespace myApp.Controllers
 {

@@ -26,7 +26,8 @@ namespace BackendAPI
         {
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
-          
+            services.AddControllersWithViews();
+
 
         }
 
@@ -37,12 +38,13 @@ namespace BackendAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseMvc();
             app.UseCors();
 
-
-            app.UseStaticFiles();
-            app.UseFileServer(enableDirectoryBrowsing: true);
+          
+           /// app.UseFileServer(enableDirectoryBrowsing: true);
         }
     }
 }

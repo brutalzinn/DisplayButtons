@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-   <EnableDefaultContentItems>false</EnableDefaultContentItems>
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject></StartupObject>
     <OutputType>Library</OutputType>
@@ -14,10 +13,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>C:\Users\rober\Documents\ButtonDeck\bin\netcoreapp3.1\</OutputPath>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Views\Index\Index.cshtml" />
-  </ItemGroup>
 
 
 
@@ -135,11 +130,7 @@
   <ItemGroup>
     <Folder Include="Content\" />
     <Folder Include="NovaPasta\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Index\Index.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Folder Include="Pages\Shared\" />
   </ItemGroup>
 
 </Project>
