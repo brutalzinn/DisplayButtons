@@ -33,7 +33,6 @@ using BackendAPI.Objects;
 using WebShard;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
-using Microsoft.Extensions.Hosting;
 
 namespace DisplayButtons
 {

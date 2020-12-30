@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "_666": {
+    "BackendAPI": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
