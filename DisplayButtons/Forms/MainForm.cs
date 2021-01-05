@@ -50,7 +50,7 @@ using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
 using BackendAPI.Sdk;
 using Cyotek.Windows.Forms;
 
-
+using BackendAPI;
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
 namespace DisplayButtons.Forms
@@ -894,9 +894,10 @@ namespace DisplayButtons.Forms
 
         
             panel_buttons.Controls.Clear();
+            Initilizator.ActualProfile = profile;
             //warning_label.Visible = true;
-         //   warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
-       //     panel1.Visible = false;
+            //   warning_label.Text = Texts.rm.GetString("BUTTONRELOADALL", Texts.cultereinfo);
+            //     panel1.Visible = false;
             Invoke(new Action(() =>
             {
                 List<Control> toAdd = new List<Control>();
@@ -1459,17 +1460,17 @@ namespace DisplayButtons.Forms
         }
         public void Start_configs()
         {
-
+ if (perfilselector.Items.Count == 0)
+            {
+                ProfileStaticHelper.SetupPerfil();
+            }
              if (Debugger.IsAttached && DevicePersistManager.IsDeviceTest)
                 {
 
                     ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value, DevicePersistManager.DeviceTest);
                 return;  
             }
-            if (perfilselector.Items.Count == 0)
-            {
-                ProfileStaticHelper.SetupPerfil();
-            }
+           
                 if (CurrentPerfil != null)
                 {
                

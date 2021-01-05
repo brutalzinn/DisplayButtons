@@ -21,7 +21,7 @@ namespace MyWinFormsApp.Controllers
 
             Debug.WriteLine("ACTION: " + action+ "Button id " + id);
             // DevicePersistManager.GetDeckDeviceFromConnectionGuid(DevicePersistManager.GuidsFromConnections)
-            DeckDevice device;
+            DeckDevice device = null;
             if (Debugger.IsAttached && DevicePersistManager.IsDeviceTest)
             {
                 device = DevicePersistManager.DeviceTest;
