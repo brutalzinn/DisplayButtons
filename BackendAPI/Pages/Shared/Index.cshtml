@@ -55,11 +55,27 @@
             background-color: rgb(189, 15, 15);
         }
 </style>
-<script>
+<script type="text/javascript">
 
+
+
+    function sendAjaxRequest(element, urlToSend, buttonaction) {
+        var clickedButton = element;
+        $.ajax({
+            type: "GET",
+            url: urlToSend,
+            data: { id: clickedButton.attr('value'), actionbutton: buttonaction },
+            success: function (result) {
+                console.log('deu certo');
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+
+    }
 
     
-
 </script>
 
 <div>
@@ -76,11 +92,11 @@
                 @for (int ic = 0; ic < Initilizator.ActualProfile.Matriz.Column; ic++)
                 {
 
-                <td>
-                    <button id="b1" type="button" onclick="parent.location='ButtonClick/@num.ToString()';return false;">
-                        <span>@num</span>
-                    </button>
-                </td>
+                    <td>
+                        <button id="b1" value="@num" type="button" onclick="sendAjaxRequest($(this), '/api/ButtonClick', 1)">
+                            <span>@num</span>
+                        </button>
+                    </td>
 
 
 

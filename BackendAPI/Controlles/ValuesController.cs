@@ -14,12 +14,12 @@ namespace MyWinFormsApp.Controllers
     {
         public ButtonShapes.ButtonAction PerformedAction { get; set; }
 
-        [HttpGet("{id}")]
-        public ActionResult Get(int id,int action = 1)
+        [HttpGet]
+        public ActionResult Get(int id,int actionbutton = 1)
         {
-            PerformedAction = (ButtonShapes.ButtonAction)action;
+            PerformedAction = (ButtonShapes.ButtonAction)actionbutton;
 
-            Debug.WriteLine("ACTION: " + action+ "Button id " + id);
+            Debug.WriteLine("ACTION: " + actionbutton + "Button id " + id);
             // DevicePersistManager.GetDeckDeviceFromConnectionGuid(DevicePersistManager.GuidsFromConnections)
             DeckDevice device = null;
             if (Debugger.IsAttached && DevicePersistManager.IsDeviceTest)
