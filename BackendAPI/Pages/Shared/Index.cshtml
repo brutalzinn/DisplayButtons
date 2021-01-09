@@ -1,5 +1,6 @@
 ﻿@page
 @using BackendAPI;
+@using BackendAPI.Objects;
 @model BackendAPI.Views.IndexModel
 
 <head>
@@ -57,6 +58,27 @@
 </style>
 <script type="text/javascript">
 
+    function atualizarDefinicao() {
+        $.ajax(
+            {
+                type: 'GET',
+                url: '/api/Button',
+                dataType: 'html',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    $('#definicaoArquitetura').html(data);
+                }
+            });
+    }
+
+    $(document).ready(function () {
+        setInterval(atualizarDefinicao, 3000);
+    });
+
+</script>
+<script type="text/javascript">
+
 
 
     function sendAjaxRequest(element, urlToSend, buttonaction) {
@@ -75,7 +97,7 @@
 
     }
 
-    
+
 </script>
 
 <div>
@@ -93,9 +115,11 @@
                 {
 
                     <td>
-                        <button id="b1" value="@num" type="button" onclick="sendAjaxRequest($(this), '/api/ButtonClick', 1)">
-                            <span>@num</span>
-                        </button>
+                        <div id="b1">
+                            <button id="@num" value="@num" type="button" onclick="sendAjaxRequest($(this), '/api/ButtonClick', 1)">
+                                <span>@num</span>
+                            </button>
+                        </div>
                     </td>
 
 
@@ -109,6 +133,15 @@
 
 
 
-
     </table>
+    <h3>Definição:</h3>
+
+    <div id="definicaoArquitetura">
+     
+    </div>
+
+    <input id="btnProximaDefinicao"
+           type="button"
+           value="Próxima Definição"
+           onclick="atualizarDefinicao();" />
 </div>

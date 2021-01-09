@@ -118,14 +118,13 @@ namespace DisplayButtons.BackendAPI.Objects
                 MainForm.Instance.Invoke(new Action(() =>
                 {
 
-                    var con = MainForm.Instance.CurrentDevice.GetConnection();
+                   
                 SelectPerfilMatriz(profile);
-                
-                DevicePersistManager.DeckDevicesFromConnection.FirstOrDefault().Value.CurrentProfile = profile;
+                    DevicePersistManager.DeviceTest.CurrentProfile = profile;
+            //    DevicePersistManager.DeckDevicesFromConnection.FirstOrDefault().Value.CurrentProfile = profile;
                 MainForm.Instance.MatrizGenerator(profile);
                   
-                var Matriz = new MatrizPacket(profile);
-                con.SendPacket(Matriz);
+             
 
                 MainForm.Instance.CurrentDevice.CurrentProfile.Currentfolder = profile.Mainfolder;
                

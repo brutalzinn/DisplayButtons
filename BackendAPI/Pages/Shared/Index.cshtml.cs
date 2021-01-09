@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BackendAPI.Objects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -13,7 +14,7 @@ namespace BackendAPI.Views
         public void OnGet()
         {
         }
-        public void Button()
+        public static void setButtonImage(int slot, DeckItemMisc item)
 
         {
 

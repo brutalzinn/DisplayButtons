@@ -1466,18 +1466,12 @@ namespace DisplayButtons.Forms
             }
              if (Debugger.IsAttached && DevicePersistManager.IsDeviceTest)
                 {
-
-                    ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value, DevicePersistManager.DeviceTest);
+              
+                ProfileTestDeckHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value, DevicePersistManager.DeviceTest);
                 return;  
             }
            
-                if (CurrentPerfil != null)
-                {
-               
-                
-                    ProfileStaticHelper.SelectCurrentDevicePerfil(CurrentPerfil.Value);
-                
-                }
+            
 
          
             if (ApplicationSettingsManager.Settings.isFolderBrowserEnabled)
@@ -4034,11 +4028,12 @@ ActionImagePlaceHolder.Image = bmp;
             DevicePersistManager.IsDeviceTest = true;
 
             DevicePersistManager.DeviceTest = new DeckDevice(new Guid("161fb525-7004-4cb1-9487-6f5106af32da"), "Teste");
-
             //DevicePersistManager.DeviceTest = deckDevice;
         CurrentDevice = DevicePersistManager.DeviceTest;
+           
             DevicePersistManager.PersistDevice(DevicePersistManager.DeviceTest);
-            // ProfileTestDeckHelper.SetupPerfil(DevicePersistManager.DeviceTest);
+
+             
             DevicePersistManager.OnDeviceConnected(this, DevicePersistManager.DeviceTest);
         }
 

@@ -23,6 +23,7 @@ using BackendAPI.Networking.Implementation;
 using BackendAPI.Objects.Implementation;
 using BackendAPI.Events;
 using BackendProxy;
+using BackendAPI.Views;
 
 namespace DisplayButtons.Controls
 {
@@ -216,6 +217,7 @@ namespace DisplayButtons.Controls
                                     CurrentItem = itemNew.GetDeckDefaultLayer
 
                                 };
+                               
                                 Wrapper.events.Trigger("deckitemsinglechangepacket", singlepacket);
                             }
                         }
