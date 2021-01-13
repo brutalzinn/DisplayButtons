@@ -1,14 +1,13 @@
 ﻿@page
-@using BackendAPI;
-@using Sharpy;
-@using BackendAPI.Objects;
-@using BackendProxy;
-@using BackendAPI.Events;
-@using System.Diagnostics;
-@using Microsoft.JSInterop;
-@using Microsoft.AspNetCore.Components;
+@using BackendAPI
+@using Sharpy
+@using BackendAPI.Objects
+@using BackendProxy
+@using BackendAPI.Events
+@using System.Diagnostics
+@using Microsoft.AspNetCore.Components
+@using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
-
 
 @model BackendAPI.Views.IndexModel
 
@@ -65,7 +64,15 @@
             background-color: rgb(189, 15, 15);
         }
 </style>
-<script type="text/javascript">
+<body>
+
+    <script type="text/javascript">
+
+        function ClearBackground(picID) {
+            console.log("cleaning packet");
+            var pic = document.getElementById(picID);
+            pic.src = "";
+        }
 
     function atualizarDefinicao() {
         $.ajax(
@@ -82,10 +89,47 @@
     }
 
     $(document).ready(function () {
-        //setInterval(atualizarDefinicao, 3000);
+               @{
+
+
+                       //setInterval(atualizarDefinicao, 3000);
+                       Wrapper.events.On("deckitemsingleclearpacket", (e) => {
+                           Debug.WriteLine("CLEANIG PACKET..");
+                           // Cast event argrument to your event object
+                           var obj = (DeckItemClearSinglePacket)e;
+
+
+                           // ClearBackground(obj.SlotID);
+                           JSRuntime.InvokeAsync<object>(
+                           "ClearBackground",
+                           obj.SlotID);
+
+                       });
+                       Wrapper.events.On("deckitemsinglechangepacket", (e) => {
+                           Debug.WriteLine("CHANGE PACKET..");
+                           // Cast event argrument to your event object
+                           var obj = (DeckItemSinglePacket)e;
+
+
+                           // ClearBackground(obj.SlotID);
+
+
+                           JSRuntime.InvokeAsync<int>(
+                               "ClearBackground",
+                               obj.ImageSlot);
+
+
+                       });
+                    
+
+
+
+        }
+
     });
 
-</script>
+    </script>
+</body>
 <script type="text/javascript">
 
 
@@ -105,58 +149,11 @@
         });
 
     }
-    function ClearBackground(picID) {
-        console.log("cleaning packet");
-        var pic = document.getElementById(picID);
-        pic.src = "";
-    }
+
 
 
 </script>
-@functions {
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            // call your JS here
-            // await JsRuntime.InvokeVoidAsync 
-
-            Wrapper.events.On("deckitemsingleclearpacket", (e) =>
-            {
-                Debug.WriteLine("CLEANIG PACKET..");
-                // Cast event argrument to your event object
-                var obj = (DeckItemClearSinglePacket)e;
-
-
-                // ClearBackground(obj.SlotID);
-                JSRuntime.InvokeAsync<object>(
-                      "ClearBackground",
-                      obj.SlotID);
-
-            });
-            Wrapper.events.On("deckitemsinglechangepacket", (e) =>
-            {
-                Debug.WriteLine("CHANGE PACKET..");
-                // Cast event argrument to your event object
-                var obj = (DeckItemSinglePacket)e;
-
-
-                // ClearBackground(obj.SlotID);
-
-
-                JSRuntime.InvokeAsync<int>(
-                   "ClearBackground",
-                   obj.ImageSlot);
-
-
-            });
-        }
-
-       
-    }
-}
-}
 
 <div>
     <table id="matrix">
@@ -166,29 +163,29 @@
         }
 
 
-        @for (int i = 0; i < Initilizator.ActualProfile.Matriz.Lin; i++)
-        {
+        @for (int i = 0; i<Initilizator.ActualProfile.Matriz.Lin; i++)
+                        {
 
-            <tr>
-                @for (int ic = 0; ic < Initilizator.ActualProfile.Matriz.Column; ic++)
-                {
+        <tr>
+            @for (int ic = 0; ic<Initilizator.ActualProfile.Matriz.Column; ic++)
+                                        {
 
-                    <td>
-                        <div id="b1">
-                            <button id="@num" value="@num" type="button" onclick="sendAjaxRequest($(this), '/api/ButtonClick', 1)">
-                                <span>@num</span>
-                            </button>
-                        </div>
-                    </td>
+            <td>
+                <div id="b1">
+                    <button id="@num" value="@num" type="button" onclick="sendAjaxRequest($(this), '/api/ButtonClick', 1)">
+                        <span>@num</span>
+                    </button>
+                </div>
+            </td>
 
 
 
-                    num++;
+                                            num++;
 
-                }
-            </tr>
+                                        }
+        </tr>
 
-        }
+}
 
 
 

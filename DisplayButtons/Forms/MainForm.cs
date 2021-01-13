@@ -3450,8 +3450,12 @@ ActionImagePlaceHolder.Image = bmp;
             
             installedPackages.ToList().ForEach(x =>
             {
+ if(x.GetFiles().Length == 0)
+                {
+                    return;
+                }
                 Dictionary<string, string> packageInfo = x.GetInfo();
-   
+             
                 if (packageInfo.Keys.Contains("EntryPoint") && packageInfo.Keys.Contains("Name")) {
                  
            
