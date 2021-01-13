@@ -1,6 +1,15 @@
 ﻿@page
 @using BackendAPI;
+@using Sharpy;
 @using BackendAPI.Objects;
+@using BackendProxy;
+@using BackendAPI.Events;
+@using System.Diagnostics;
+@using Microsoft.JSInterop;
+@using Microsoft.AspNetCore.Components;
+@inject IJSRuntime JSRuntime
+
+
 @model BackendAPI.Views.IndexModel
 
 <head>
@@ -73,7 +82,7 @@
     }
 
     $(document).ready(function () {
-        setInterval(atualizarDefinicao, 3000);
+        //setInterval(atualizarDefinicao, 3000);
     });
 
 </script>
@@ -96,14 +105,64 @@
         });
 
     }
+    function ClearBackground(picID) {
+        console.log("cleaning packet");
+        var pic = document.getElementById(picID);
+        pic.src = "";
+    }
 
 
 </script>
+@functions {
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // call your JS here
+            // await JsRuntime.InvokeVoidAsync 
+
+            Wrapper.events.On("deckitemsingleclearpacket", (e) =>
+            {
+                Debug.WriteLine("CLEANIG PACKET..");
+                // Cast event argrument to your event object
+                var obj = (DeckItemClearSinglePacket)e;
+
+
+                // ClearBackground(obj.SlotID);
+                JSRuntime.InvokeAsync<object>(
+                      "ClearBackground",
+                      obj.SlotID);
+
+            });
+            Wrapper.events.On("deckitemsinglechangepacket", (e) =>
+            {
+                Debug.WriteLine("CHANGE PACKET..");
+                // Cast event argrument to your event object
+                var obj = (DeckItemSinglePacket)e;
+
+
+                // ClearBackground(obj.SlotID);
+
+
+                JSRuntime.InvokeAsync<int>(
+                   "ClearBackground",
+                   obj.ImageSlot);
+
+
+            });
+        }
+
+       
+    }
+}
+}
 
 <div>
     <table id="matrix">
         @{
             int num = 0;
+
         }
 
 
@@ -137,7 +196,7 @@
     <h3>Definição:</h3>
 
     <div id="definicaoArquitetura">
-     
+
     </div>
 
     <input id="btnProximaDefinicao"

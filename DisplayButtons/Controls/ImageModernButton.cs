@@ -288,8 +288,7 @@ namespace DisplayButtons.Controls
                         }
                         if (Tag is IDeckItem itemNew)
                         {
-                            if (state != null)
-                            {
+                        
                              var singlepacket = new DeckItemSinglePacket(deckImage)
                                 {
                                     ImageSlot = slot,
@@ -299,7 +298,7 @@ namespace DisplayButtons.Controls
 
                                 Wrapper.events.Trigger("deckitemsinglechangepacket", singlepacket);
 
-                            }
+                            
                         }
                         if (Tag is DynamicDeckItem item)
                         {

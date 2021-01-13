@@ -50,7 +50,7 @@ using DisplayButtons.Bibliotecas.Helpers.ObjectsHelpers;
 using BackendAPI.Sdk;
 using Cyotek.Windows.Forms;
 
-using BackendAPI;
+
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 
 namespace DisplayButtons.Forms
