@@ -23,6 +23,21 @@
     <EmbeddedResource Remove="Content\**" />
     <None Remove="Content\**" />
   </ItemGroup>
+ 
+
+  <ItemGroup>
+    <Content Remove="wwwroot\lib\jquery\jquery.js" />
+  </ItemGroup>
+ 
+
+  <ItemGroup>
+    <None Include="wwwroot\JavaScript.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\lib\jquery\jquery.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 
 

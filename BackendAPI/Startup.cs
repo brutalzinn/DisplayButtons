@@ -26,7 +26,7 @@ namespace BackendAPI
         {
 
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +40,7 @@ namespace BackendAPI
             app.UseStaticFiles();
             app.UseMvc();
             app.UseCors();
+            
 
           
            /// app.UseFileServer(enableDirectoryBrowsing: true);

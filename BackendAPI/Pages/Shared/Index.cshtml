@@ -1,203 +1,25 @@
-﻿@page
-@using BackendAPI
-@using Sharpy
-@using BackendAPI.Objects
-@using BackendProxy
-@using BackendAPI.Events
-@using System.Diagnostics
-@using Microsoft.AspNetCore.Components
-@using Microsoft.JSInterop
-@inject IJSRuntime JSRuntime
+﻿@page "/";
+@namespace BackendAPI.Pages
 
-@model BackendAPI.Views.IndexModel
-
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<h2>AI MEU CHAPA, tu é fera</h2>
-<style>
-    div {
-        border: 1px solid blue;
-        text-align: center;
-    }
-
-    #matrix {
-        border: 1px solid red;
-        margin: 0 auto;
-        padding: 5px;
-    }
-
-        #matrix tr, td {
-            padding: 5px;
-        }
-
-        #matrix button {
-            height: 80px;
-            width: 150px;
-            border: none;
-            font-family: helvetica;
-            font-weight: bold;
-        }
-
-    #b1, #b3 {
-        background-color: rgba(255, 153, 51, 0.5);
-    }
-
-        #b1:hover, #b3:hover {
-            background-color: rgb(255, 153, 51);
-        }
-
-    #b2 {
-        background-color: rgba(15, 138, 15, 0.5);
-    }
-
-        #b2:hover {
-            background-color: rgb(15, 138, 15);
-        }
-
-
-    #b4 {
-        background-color: rgba(189, 15, 15, 0.6);
-    }
-
-        #b4:hover {
-            background-color: rgb(189, 15, 15);
-        }
-</style>
-<body>
-
-    <script type="text/javascript">
-
-        function ClearBackground(picID) {
-            console.log("cleaning packet");
-            var pic = document.getElementById(picID);
-            pic.src = "";
-        }
-
-    function atualizarDefinicao() {
-        $.ajax(
-            {
-                type: 'GET',
-                url: '/api/Button',
-                dataType: 'html',
-                cache: false,
-                async: true,
-                success: function (data) {
-                    $('#definicaoArquitetura').html(data);
-                }
-            });
-    }
-
-    $(document).ready(function () {
-               @{
-
-
-                       //setInterval(atualizarDefinicao, 3000);
-                       Wrapper.events.On("deckitemsingleclearpacket", (e) => {
-                           Debug.WriteLine("CLEANIG PACKET..");
-                           // Cast event argrument to your event object
-                           var obj = (DeckItemClearSinglePacket)e;
-
-
-                           // ClearBackground(obj.SlotID);
-                           JSRuntime.InvokeAsync<object>(
-                           "ClearBackground",
-                           obj.SlotID);
-
-                       });
-                       Wrapper.events.On("deckitemsinglechangepacket", (e) => {
-                           Debug.WriteLine("CHANGE PACKET..");
-                           // Cast event argrument to your event object
-                           var obj = (DeckItemSinglePacket)e;
-
-
-                           // ClearBackground(obj.SlotID);
-
-
-                           JSRuntime.InvokeAsync<int>(
-                               "ClearBackground",
-                               obj.ImageSlot);
-
-
-                       });
-                    
-
-
-
-        }
-
-    });
-
-    </script>
-</body>
-<script type="text/javascript">
-
-
-
-    function sendAjaxRequest(element, urlToSend, buttonaction) {
-        var clickedButton = element;
-        $.ajax({
-            type: "GET",
-            url: urlToSend,
-            data: { id: clickedButton.attr('value'), actionbutton: buttonaction },
-            success: function (result) {
-                console.log('deu certo');
-            },
-            error: function (result) {
-                alert('error');
-            }
-        });
-
-    }
-
-
-
-</script>
-
-
-<div>
-    <table id="matrix">
-        @{
-            int num = 0;
-
-        }
-
-
-        @for (int i = 0; i<Initilizator.ActualProfile.Matriz.Lin; i++)
-                        {
-
-        <tr>
-            @for (int ic = 0; ic<Initilizator.ActualProfile.Matriz.Column; ic++)
-                                        {
-
-            <td>
-                <div id="b1">
-                    <button id="@num" value="@num" type="button" onclick="sendAjaxRequest($(this), '/api/ButtonClick', 1)">
-                        <span>@num</span>
-                    </button>
-                </div>
-            </td>
-
-
-
-                                            num++;
-
-                                        }
-        </tr>
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
 }
+<!DOCTYPE html>
+<head>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/JavaScript.js"></script>
+
+</head>
+<html>
+<body>
+    <h1>Index testing</h1>
 
 
 
-    </table>
-    <h3>Definição:</h3>
+    <component type="typeof(BlazorServerSample.Pages.ButtonMatriz)" render-mode="ServerPrerendered" />
+    <component type="typeof(BlazorServerSample.Pages.App)" render-mode="Static" />
 
-    <div id="definicaoArquitetura">
 
-    </div>
-
-    <input id="btnProximaDefinicao"
-           type="button"
-           value="Próxima Definição"
-           onclick="atualizarDefinicao();" />
-</div>
+</body>
+</html>
