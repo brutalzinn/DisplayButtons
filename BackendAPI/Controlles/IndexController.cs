@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace myApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/")]
     [ApiController]
     public class IndexController : Controller
     {

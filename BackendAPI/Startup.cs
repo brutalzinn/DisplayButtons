@@ -35,15 +35,23 @@ namespace BackendAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+            } 
+         
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc();
             app.UseCors();
-            
+            app.UseMvc(routes =>
+            {
+                //Home
+                routes.MapRoute(
+                   name: "home",
+                   template: "{controller}/{action}/{id?}",
+                   defaults: new { controller = "Home", action = "Index" });
+            });
 
-          
-           /// app.UseFileServer(enableDirectoryBrowsing: true);
+
+            /// app.UseFileServer(enableDirectoryBrowsing: true);
         }
     }
 }

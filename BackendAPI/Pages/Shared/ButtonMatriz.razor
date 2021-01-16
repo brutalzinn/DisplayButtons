@@ -78,24 +78,25 @@
             @for (int i = 0; i < Initilizator.ActualProfile.Matriz.Lin; i++)
             {
 
-                <tr>
-                    @for (int ic = 0; ic < Initilizator.ActualProfile.Matriz.Column; ic++)
-                    {
+            <tr>
+                @for (int ic = 0; ic < Initilizator.ActualProfile.Matriz.Column; ic++)
+                {
 
-                        <td>
-                            <div id="b1">
-                                <button id="@num" value="@num" type="button" onclick="sendAjaxRequest($(this), '/api/ButtonClick', 1)">
-                                    <span>@num</span>
-                                </button>
-                            </div>
-                        </td>
+                    <td>
+                        <div id="b1">
+                            <button runat="server" id="@num" value="@num" type="button" onclick="sendAjaxRequest($(this), '/api/ButtonClick', 1)">
+                                <span>@num</span>
+                            </button>
+                        </div>
+                    </td>
+                
 
 
 
-                        num++;
+                    num++;
 
-                    }
-                </tr>
+                }
+            </tr>
 
             }
 
