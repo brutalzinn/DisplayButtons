@@ -15,10 +15,11 @@
 
 <button @onclick="WriteToConsole">Run</button>
 
-@code {
+@code{
 
     private async Task WriteToConsole()
     {
+        Debug.WriteLine("CALLED");
         await JSRuntime.InvokeAsync<int>(
                  "ClearBackground",
                  1);
@@ -28,7 +29,7 @@
 
     protected override  async Task OnAfterRenderAsync(bool test)
     {
-        StateHasChanged();
+        Debug.WriteLine("CALLLLED");
         //setInterval(atualizarDefinicao, 3000);
         Wrapper.events.On("deckitemsingleclearpacket", async  (e) =>
         {
