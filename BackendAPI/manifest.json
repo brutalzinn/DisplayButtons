@@ -1,0 +1,11 @@
+{
+  "config": {
+    "routerClass": "sap.ui.core.routing.Router",
+    "viewPath": "TestApp.view",
+    "viewType": "XML",
+    "clearControlAggregation": true,
+    "controlId": "Main",
+    "controlAggregation": "pages",
+    "transition": "slide"
+}
+}

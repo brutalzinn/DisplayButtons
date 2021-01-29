@@ -1,16 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace BackendAPI
+namespace BackendWebAssembly.Server
 {
     public class Startup
     {
@@ -22,10 +18,11 @@ namespace BackendAPI
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddControllersWithViews();
             services.AddRazorPages();
         }
 
@@ -35,23 +32,24 @@ namespace BackendAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            } 
-         
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-            app.UseMvc();
-            app.UseCors();
-            app.UseMvc(routes =>
+                app.UseWebAssemblyDebugging();
+            }
+            else
             {
-                //Home
-                routes.MapRoute(
-                   name: "home",
-                   template: "{controller}/{action}/{id?}",
-                   defaults: new { controller = "Home", action = "Index" });
+                app.UseExceptionHandler("/Error");
+            }
+
+            app.UseBlazorFrameworkFiles();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                endpoints.MapFallbackToFile("index.html");
             });
-
-
-            /// app.UseFileServer(enableDirectoryBrowsing: true);
         }
     }
 }
