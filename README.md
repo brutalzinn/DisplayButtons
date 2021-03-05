@@ -21,6 +21,7 @@ To use ButtonDeck, it is necessary to install the client on the Android device
 
 
 ## Contributors
- - [brutalzinn](https://www.github.com/brutalzinn/) - Sistema de plugins, eventos e reescrição de todo o projeto original.
- - [NickAcPT](https://github.com/NickAcPT) - Criador original do ButtonDeck
- - [MatthewHaskett](https://www.github.com/MatthewHaskett/) - Ajudou com o protocolo TCP.
+ - [brutalzinn](https://www.github.com/brutalzinn/) - System of plugins, events and rewriting of the entire original project.
+ - [NickAcPT](https://github.com/NickAcPT) - Original creator of ButtonDeck
+ - [MatthewHaskett](https://www.github.com/MatthewHaskett/) - Helped with the TCP protocol.
+
