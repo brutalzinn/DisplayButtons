@@ -6,7 +6,7 @@ This project is initialy a fork of the [NickAcPT] project (https://github.com/Ni
 
 This project consists of 5 divisions of responsibility in the same repository.
 
-BackendAPI - Responsible for the backend, and implementation of the interface for lua plugins
+BackendAPI - Responsible for the backend, and implementation of the interface for lua plugins,communication with extern api services(github and spotify)
 MoonSharpInterpreter - Lua interpreter used by the backend, to extend an application at the sandbox level.
 InterfaceDLL - Interface required to create plugins and external dependencies (DLLs) using C #
 NthMultiLanguage - External library for configuring multiple languages ​​in the frontend layer.
