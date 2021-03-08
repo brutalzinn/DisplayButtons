@@ -1,4 +1,4 @@
-# ButtonDeck-Windows
+# Display Buttons-Windows
 A simple way to run macros using your cell phone.
 
 This project is initialy a fork of the [NickAcPT] project (https://github.com/NickAcPT).com/NickAcPT)
@@ -11,17 +11,17 @@ MoonSharpInterpreter - Lua interpreter used by the backend, to extend an applica
 InterfaceDLL - Interface required to create plugins and external dependencies (DLLs) using C #
 NthMultiLanguage - External library for configuring multiple languages ​​in the frontend layer.
 ProxyBackend - Communication between Backend events and the frontend
-Setup - Creating the ButtonDeck installer
+Setup - Creating the Display Buttons installer
 DisplayButtons - Joining all other solutions.
 
-To use ButtonDeck, it is necessary to install the client on the Android device
+To use Display Buttons, it is necessary to install the client on the Android device
 
- [Client ButtonDeck] (https://github.com/brutalzinn/ButtonDeck-Android)
+ [Client Display Buttons] (https://github.com/brutalzinn/Display Buttons-Android)
 
 
 
 ## Contributors
  - [brutalzinn](https://www.github.com/brutalzinn/) - System of plugins, events and rewriting of the entire original project.
- - [NickAcPT](https://github.com/NickAcPT) - Original creator of ButtonDeck
+ - [NickAcPT](https://github.com/NickAcPT) - Original creator of Display Buttons
  - [MatthewHaskett](https://www.github.com/MatthewHaskett/) - Helped with the TCP protocol.
 
