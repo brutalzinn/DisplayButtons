@@ -16,7 +16,7 @@ DisplayButtons - Joining all other solutions.
 
 To use Display Buttons, it is necessary to install the client on the Android device
 
- [Client Display Buttons] (https://github.com/brutalzinn/Display Buttons-Android)
+ [Client Display Buttons] (https://github.com/brutalzinn/DisplayButtons-Android)
 
 
 
