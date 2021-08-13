@@ -1,7 +1,7 @@
 # Display Buttons-Windows
 A simple way to run macros using your cell phone.
 
-This project is initialy a fork of the [NickAcPT] project (https://github.com/NickAcPT).com/NickAcPT)
+This project is initialy a fork of the [NickAcPT] project (https://github.com/NickAcPT/ButtonDeck-Windows)
 
 
 This project consists of 5 divisions of responsibility in the same repository.
