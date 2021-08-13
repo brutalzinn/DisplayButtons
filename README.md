@@ -22,6 +22,6 @@ To use Display Buttons, it is necessary to install the client on the Android dev
 
 ## Contributors
  - [brutalzinn](https://www.github.com/brutalzinn/) - System of plugins, events and rewriting of the entire original project.
- - [NickAcPT](https://github.com/NickAcPT) - Original creator of Display Buttons
+ - [NickAcPT](https://github.com/NickAcPT) - Original creator of ButtonDeck. Original Creator of ButtonDeck. Original design that DisplayButtons is based on in the beginning
  - [MatthewHaskett](https://www.github.com/MatthewHaskett/) - Helped with the TCP protocol.
 
